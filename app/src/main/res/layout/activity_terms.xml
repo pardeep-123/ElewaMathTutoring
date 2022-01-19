@@ -20,6 +20,7 @@
             android:layout_marginLeft="@dimen/_20sdp"
             android:layout_marginRight="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/medium"
             android:textSize="14sp"
             android:textColor="@color/black"
             />

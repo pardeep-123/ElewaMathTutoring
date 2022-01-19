@@ -50,6 +50,7 @@
                     style="@style/Edittext"
                     android:layout_toRightOf="@+id/ivMailicon"
                     android:hint="@string/enter_email_address"
+                    android:fontFamily="@font/light"
                     android:inputType="textEmailAddress"
                     android:text="" />
             </RelativeLayout>
@@ -76,6 +77,7 @@
                     android:drawablePadding="@dimen/_10sdp"
                     android:hint="@string/enter_password"
                     android:inputType="textPassword"
+                    android:fontFamily="@font/light"
                     android:singleLine="true"
                     android:text="" />
             </RelativeLayout>
@@ -92,15 +94,17 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="20dp"
                     android:text="Forgot Password"
+                    android:fontFamily="@font/medium"
                     android:textSize="@dimen/_12ssp" />
             </RelativeLayout>
 
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnLogin"
                 style="@style/Button"
                 android:background="@drawable/bg_btn"
                 android:text="Login"
+                android:fontFamily="@font/bold"
                 android:textColor="@color/white" />
 
             <LinearLayout
@@ -126,6 +130,7 @@
                     android:layout_marginRight="10dp"
                     android:gravity="center"
                     android:text="or"
+                    android:fontFamily="@font/medium"
                     android:textColor="@color/editexthint"
                     android:textSize="16sp" />
 
@@ -179,11 +184,13 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:background="@drawable/create_new_acc_bg"
                 android:text="@string/create_an_account"
+                android:fontFamily="@font/bold"
                 android:textColor="@color/app"
                 android:textSize="14sp" />
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnGuest"
                 style="@style/Button"
+                android:fontFamily="@font/bold"
                 android:layout_marginBottom="@dimen/_20sdp"
                 android:background="@drawable/create_new_acc_bg"
                 android:text="@string/login_as_guest"

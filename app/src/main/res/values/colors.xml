@@ -8,8 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="app">#03afef</color>
+    <color name="applight">#7203AFEF</color>
     <color name="text">#AFAFAF</color>
     <color name="grey">#AFAFAF</color>
+    <color name="lightgrey">#FBF6F6</color>
     <color name="editexthint">#F2AFAFAF</color>
     <color name="editTextBackground">#F5F5F5</color>
 </resources>

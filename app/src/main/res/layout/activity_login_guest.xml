@@ -37,6 +37,7 @@
                 android:layout_marginTop="@dimen/_30sdp"
                 android:text="LOGIN AS GUEST"
                 android:textAllCaps="true"
+                android:fontFamily="@font/bold"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -57,6 +58,7 @@
                 <EditText
                     android:id="@+id/email_text"
                     style="@style/Edittext"
+                    android:fontFamily="@font/light"
                     android:layout_toRightOf="@+id/ivMailicon"
                     android:hint="@string/enter_email_address"
                     android:inputType="textEmailAddress"
@@ -85,6 +87,7 @@
                     android:drawablePadding="@dimen/_10sdp"
                     android:hint="@string/enter_password"
                     android:inputType="textPassword"
+                    android:fontFamily="@font/light"
                     android:singleLine="true"
                     android:text="" />
             </RelativeLayout>
