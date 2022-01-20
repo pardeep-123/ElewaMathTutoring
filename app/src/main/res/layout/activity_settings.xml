@@ -140,7 +140,7 @@
                 android:background="@color/editexthint" />
 
             <RelativeLayout
-                android:id="@+id/rlManageStripe"
+                android:id="@+id/rlWithdrawel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

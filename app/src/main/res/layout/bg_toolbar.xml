@@ -14,7 +14,7 @@
     <TextView
         style="@style/WrapTextView"
         android:layout_centerHorizontal="true"
-        android:id="@+id/tv_text"
+        android:id="@+id/tv_title"
         android:fontFamily="@font/bold"
         android:textColor="@color/white"
         android:textSize="@dimen/_14sdp"
