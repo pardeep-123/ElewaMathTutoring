@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:nestedScrollingEnabled="false"
+    tools:context=".Activity.TeacherOrTutor.AvailablityActivity">
+
+    <ImageView
+        android:id="@+id/ivBack"
+        style="@style/backIcon" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnConfirmSignUp"
+        android:layout_below="@id/ivBack">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:id="@+id/tvAvailibity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/aenirlsttd_black"
+                android:text="Availability"
+                android:textAllCaps="true"
+                android:textColor="@color/textcolor"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDatesAvailable"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvAvailibity"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:text="Dates Available"
+                android:textColor="@color/textLightBlue"
+                android:textSize="13sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_datesAvailable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvDatesAvailable"
+                android:layout_marginTop="10dp"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2" />
+
+            <TextView
+                android:id="@+id/tvTimeSlotsAvailable"
+                android:layout_width="match_parent"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:text="Time Slots Available"
+                android:layout_below="@+id/rv_datesAvailable"
+                android:textColor="@color/textLightBlue"
+                android:textSize="13sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_timeSlotsAvailable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTimeSlotsAvailable"
+                android:layout_marginTop="10dp"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2" />
+
+
+
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+    <androidx.appcompat.widget.AppCompatButton
+        style="@style/Button"
+        android:id="@+id/btnConfirmSignUp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:text="Confirm Signup"
+     />
+
+
+</RelativeLayout>

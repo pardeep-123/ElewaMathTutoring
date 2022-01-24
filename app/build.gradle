@@ -2,15 +2,20 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'com.google.gms.google-services'
+    id 'kotlin-kapt'
 }
 
 android {
-    compileSdk 31
-
+    compileSdkVersion 31
+    buildToolsVersion "30.0.3"
+    buildFeatures {
+        viewBinding = true
+    }
     defaultConfig {
         applicationId "com.elewamathtutoring"
-        minSdk 21
-        targetSdk 31
+        minSdkVersion 23
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
@@ -33,19 +38,105 @@ android {
 }
 
 dependencies {
-
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    testImplementation 'junit:junit:4.+'
+    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    implementation 'com.intuit.ssp:ssp-android:1.0.6'
-    implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'me.relex:circleindicator:2.1.4'
     implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:3.0.3'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.makeramen:roundedimageview:2.3.0'
+
+
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    // Alereter
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$interceptor_version"
+    implementation 'com.squareup.retrofit2:converter-scalars:2.4.0'
+    implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    //facebook
+    implementation 'com.facebook.android:facebook-android-sdk:5.15.3'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+    // progressview
+
+    implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
+    implementation 'com.romandanylyk:pageindicatorview:1.0.2'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
+
+    implementation "com.google.android.gms:play-services-places:17.0.0"
+
+    def camerax_version = "1.0.0-beta07"
+    implementation "androidx.camera:camera-camera2:$camerax_version"
+    implementation "androidx.camera:camera-lifecycle:$camerax_version"
+    implementation "androidx.camera:camera-view:1.0.0-alpha26"
+   // implementation 'com.google.firebase:firebase-crashlytics:18.1.0'
+
+    implementation 'com.applandeo:material-calendar-view:1.9.0-rc03'
+    //google integration
+    implementation 'com.google.android.gms:play-services-plus:17.0.0'
+    implementation 'com.google.android.gms:play-services-identity:17.0.1'
+    implementation 'com.google.gms:google-services:4.3.8'
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'// google login
+
+
+    //custom alert
+    implementation 'com.tapadoo.android:alerter:6.1.0'
+    //ViewModel LifeCycle
+  //  implementation 'android.arch.lifecycle:extensions:2.2.0'
+   // implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    //RxJava2
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+    //multidex
+    implementation 'androidx.multidex:multidex:2.0.1'
+    //firebase analytics
+
+    implementation 'com.google.firebase:firebase-core:19.0.0'
+    implementation 'com.google.firebase:firebase-analytics:19.0.0'
+    implementation 'com.google.firebase:firebase-messaging:21.1.0'
+    //facebook
+    implementation 'com.facebook.android:facebook-android-sdk:5.15.3'
+    implementation 'com.google.firebase:firebase-auth:21.0.1'
+    //location
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
+    //maps
+    implementation 'com.google.android.gms:play-services-maps:17.0.1'
+    implementation 'com.google.android.gms:play-services-places:17.0.0'
+    implementation 'com.google.android.libraries.places:places:2.4.0'
+    //easyutil
+    implementation 'com.github.Piashsarker:AndroidEasyUtils:1.0.0'
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    //camera-gallery open
+    implementation 'com.yanzhenjie:album:2.1.3'
+    //Dagger 2
+    implementation 'gun0912.ted:tedpermission:2.2.2'
+    //Dagger 2
+    implementation 'com.google.dagger:dagger-android-support:2.17'
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.17'
+//    /* Dagger2 - default dependency */
+    kapt 'com.google.dagger:dagger-compiler:2.17'
+    implementation 'gun0912.ted:tedpermission:2.2.2'
+    // Stripe Android SDK
+    implementation 'com.stripe:stripe-android:14.5.0'
+    //socket
+    implementation('io.socket:socket.io-client:1.0.0') {
+        exclude group: 'org.json', module: 'json'
+    }
+    //easyutil
+    implementation 'com.github.Piashsarker:AndroidEasyUtils:1.0.0'
+    //calander
+    implementation 'com.applandeo:material-calendar-view:1.7.0'
 }

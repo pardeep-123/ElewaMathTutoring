@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Activity.TeacherOrTutor.MainTeacherActivity">
+
+    <FrameLayout
+        android:id="@+id/container2"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tabs" />
+
+    <View
+        android:id="@+id/view_border"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="-5dp"
+        android:layout_alignBottom="@+id/container2"
+        android:background="@color/text" />
+
+    <LinearLayout
+        android:id="@+id/tabs"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <LinearLayout
+            android:id="@+id/llScheduleTab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivSchedule"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/calender_selected" />
+
+            <TextView
+                android:id="@+id/tvScheduleTab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:gravity="center"
+                android:text="Schedule"
+                android:textColor="@color/textcolor"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llRequestsTab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivRequests"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/requests_unselected" />
+
+            <TextView
+                android:id="@+id/tvRequestsTab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:gravity="center"
+                android:text="Requests"
+                android:textColor="@color/text"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llMessagesTab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivMessages"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/messages_unselected" />
+
+            <TextView
+                android:id="@+id/tvMessagesTab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:gravity="center"
+                android:text="Messages"
+                android:textColor="@color/text"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llProfileTab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/profile_unselected" />
+
+            <TextView
+                android:id="@+id/tvProfileTab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:gravity="center"
+                android:text="Profile"
+                android:textColor="@color/text"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

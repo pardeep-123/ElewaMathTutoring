@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tv_titleSession"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginLeft="10dp"
+        android:paddingLeft="@dimen/_5sdp"
+        android:layout_margin="@dimen/_5sdp"
+        android:layout_marginTop="14dp"
+        android:layout_marginRight="10dp"
+        android:fontFamily="@font/aenirlsttd_black"
+        android:text="Today's Session"
+        android:textAllCaps="true"
+        android:textColor="@color/textcolor"
+        android:textSize="14sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recycler_data"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_below="@+id/tv_titleSession">
+
+    </androidx.recyclerview.widget.RecyclerView>
+</RelativeLayout>

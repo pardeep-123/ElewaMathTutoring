@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:nestedScrollingEnabled="false"
+    tools:context=".Activity.TeacherOrTutor.TeachingInfoActivity">
+    <ImageView
+        android:id="@+id/ivBack"
+        style="@style/backIcon"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/backarrow"
+        app:tint="@color/black" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnNext"
+        android:layout_below="@+id/ivBack"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+
+            <TextView
+                android:id="@+id/tvAsk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ivBack"
+                android:layout_marginTop="14dp"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:text="Are you a certified teacher, a tutor or  speacialist?"
+                android:textColor="@color/textLightBlue"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardspinner"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_below="@+id/tvAsk"
+                app:cardCornerRadius="@dimen/_4sdp"
+                android:elevation="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:contentPadding="@dimen/_5sdp"
+                app:cardBackgroundColor="@color/grey">
+
+
+                <RelativeLayout
+                    android:id="@+id/rlChoose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <Spinner
+                        android:id="@+id/spinnerChoose"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@+id/ivChoose"
+                        android:background="@android:color/transparent"
+                        />
+
+
+                    <ImageView
+                        android:id="@+id/ivChoose"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/down_arrow" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/tvTeachingLevel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cardspinner"
+                android:layout_marginTop="20dp"
+                android:text="Teaching Level"
+                android:textColor="@color/textLightBlue"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_teachingLevel"
+                android:layout_marginLeft="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTeachingLevel"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <TextView
+                android:id="@+id/tvSpecialities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rv_teachingLevel"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:text="Specialities"
+                android:textColor="@color/textLightBlue"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edSpeacialities"
+                android:layout_width="match_parent"
+                android:overScrollMode="always"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
+android:inputType="textMultiLine"
+                android:layout_height="80dp"
+                android:layout_below="@+id/tvSpecialities"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:background="@drawable/edittext_bg"
+                android:gravity="start"
+                android:hint="Add Subjects, Seperated by commas"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/text"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvInPersonRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edSpeacialities"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:text="In-Person Rate"
+                android:textColor="@color/textLightBlue"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edInPersonRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvInPersonRate"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edittext_bg"
+                android:gravity="start"
+                android:inputType="number"
+                android:maxLength="6"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:singleLine="true"
+                android:hint="Enter in-person rate"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/text"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvVirtualRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edInPersonRate"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:text="Virtual Rate"
+                android:textColor="@color/textLightBlue"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edVirtualRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvVirtualRate"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edittext_bg"
+                android:gravity="start"
+                android:maxLength="6"
+                android:inputType="number"
+                android:hint="Enter Virtual Rate"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/text"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvCancelationPolicy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edVirtualRate"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:text="Cancellation Policy"
+                android:textColor="@color/textLightBlue"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edCancelationPolicy"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_below="@+id/tvCancelationPolicy"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edittext_bg"
+                android:gravity="start"
+                android:hint="Type here..."
+                android:fontFamily="@font/avenirlstd_roman"
+                android:padding="10dp"
+                android:inputType="textMultiLine"
+                android:textColor="@color/black"
+                android:textColorHint="@color/text"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edCancelationPolicy"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:text="Location"
+                android:textColor="@color/textLightBlue"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/edLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvLocation"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edittext_bg"
+                android:gravity="start"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:hint="Location"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/text"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNext"
+        style="@style/Button"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_bg_and_shape"
+        android:text="Next"
+        android:textColor="@color/white" />
+</RelativeLayout>

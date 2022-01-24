@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Activity.MyBankAccountsActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/textcolor"
+        android:gravity="center_vertical"
+
+        >
+
+        <ImageView
+            android:id="@+id/ivBack"
+            style="@style/backIcon"
+            app:tint="@color/white" />
+        <TextView
+            android:id="@+id/tvAppbarName"
+            style="@style/TextViewHeaderin60"
+            android:text="Add Bank Account"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_myBankAccounts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnAddNewAccount"
+        android:layout_below="@+id/rl1"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <Button
+        android:id="@+id/btnAddNewAccount"
+        style="@style/Button"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_bg_and_shape"
+        android:text="Add New Account"
+        android:textColor="@color/white" />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/whennodata"
+    android:layout_centerInParent="true"
+    android:textColor="@color/black"
+    android:textSize="@dimen/_14sdp"
+    android:visibility="gone"
+    android:text="No data found">
+
+</TextView>
+</RelativeLayout>

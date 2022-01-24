@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_5sdp"
+    android:id="@+id/rl_root"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/tick"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/uncheck" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/tick"
+        android:fontFamily="@font/avenirlstd_roman"
+        android:gravity="start"
+        android:paddingLeft="16dp"
+        android:text="Virtual learning"
+        android:textStyle="bold"
+        android:textColor="@color/text"
+        android:textSize="13sp" />
+</RelativeLayout>

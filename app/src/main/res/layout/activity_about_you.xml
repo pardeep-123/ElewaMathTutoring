@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Activity.TeacherOrTutor.AboutYouActivity">
+
+    <ImageView
+        android:id="@+id/ivBack"
+        style="@style/backIcon" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ivBack"
+        android:layout_above="@+id/btnNext"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rlPick"
+                android:layout_width="130dp"
+                android:layout_height="135sp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:elevation="20dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivProfileDesc"
+                        android:layout_width="@dimen/_110sdp"
+                        android:layout_height="@dimen/_110sdp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/profile_unselected"
+                        app:civ_border_color="@color/text"
+                        app:civ_border_width="0.5dp"
+                        app:civ_circle_background_color="#f6f6f6" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlProfileImage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="end">
+
+                    <ImageView
+                        android:id="@+id/ivAdd"
+                        android:layout_width="40dp"
+                        android:elevation="10dp"
+                        android:layout_centerInParent="true"
+                        android:layout_height="40dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/add" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:text="Name"
+                android:layout_below="@+id/rlPick"
+                android:textColor="@color/textLightBlue"
+                android:textSize="14sp" />
+
+            <RelativeLayout
+                android:id="@+id/relat_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/tvname"
+                android:background="@drawable/edittext_bg"
+                android:padding="8dp">
+
+
+
+                <ImageView
+                    android:id="@+id/ivPassword"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/user"
+                    app:tint="@color/text" />
+
+                <EditText
+                    android:id="@+id/text_teacher_name"
+                    style="@style/Edittext"
+                    android:layout_toRightOf="@+id/ivPassword"
+                    android:hint="Enter Name"
+                    android:inputType="textCapSentences"
+                    android:padding="10dp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvAboutYou"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relat_name"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:text="About You"
+                android:textColor="@color/textLightBlue"
+                android:textSize="14sp"
+                />
+
+            <EditText
+                android:id="@+id/edaboutyou"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_below="@+id/tvAboutYou"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:gravity="start"
+                android:hint="Type here..."
+                android:background="@drawable/edittext_bg"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/text"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvTeachingHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/edaboutyou"
+                android:text="Teaching History"
+                android:textColor="@color/textLightBlue"
+                android:textSize="14sp"
+                />
+
+            <EditText
+                android:id="@+id/edTeachingHistory"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_below="@+id/tvTeachingHistory"
+                android:layout_marginTop="10dp"
+                android:gravity="start"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:hint="Type here..."
+                android:background="@drawable/edittext_bg"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/text"
+                android:textSize="14sp" />
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        style="@style/Button"
+        android:id="@+id/btnNext"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:text="SAVE"
+        android:textAllCaps="false" />
+</RelativeLayout>

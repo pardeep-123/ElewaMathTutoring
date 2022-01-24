@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Activity.TeacherOrTutor.SubscriptionsActivity">
+
+    <ImageView
+        android:background="@drawable/background"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"/>
+
+    <ImageView
+        android:id="@+id/ivBack"
+      style="@style/backIcon"
+        android:src="@drawable/backarrow"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/tvSubscriptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivBack"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/aenirlsttd_black"
+        android:text="SUBSCRIPTIONS"
+        android:textColor="@color/white"
+        android:includeFontPadding="false"
+        android:textSize="30sp" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnChooseThisPlan"
+        android:layout_below="@+id/tvSubscriptions"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/background_roundedge">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:padding="25dp"
+                android:src="@drawable/splashimg" />
+
+            <LinearLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/logo"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_weight="0.8"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:id="@+id/sub_free"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_23sdp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvFree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/aenirlsttd_black"
+                        android:text="Free"
+                        android:textAllCaps="true"
+                        android:textColor="@color/textcolor"
+                        android:textSize="16sp" />
+
+                    <View
+                        android:id="@+id/barFree"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="@color/textcolor" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/sub_basic"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_23sdp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvBasic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/aenirlsttd_black"
+                        android:text="Basic"
+                        android:textAllCaps="true"
+                        android:textColor="@color/text"
+                        android:textSize="16sp" />
+                    <View
+                        android:id="@+id/barBasic"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="@color/text" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/sub_premium"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_23sdp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvPreminum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/aenirlsttd_black"
+                        android:text="Premium"
+                        android:textAllCaps="true"
+                        android:textColor="@color/text"
+                        android:textSize="16sp" />
+                    <View
+                        android:id="@+id/barPremium"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="@color/text" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlPremium"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tabs"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+            >
+
+                <LinearLayout
+                    android:id="@+id/llPremium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginRight="70dp"
+                    android:background="@drawable/background_grey"
+                    android:orientation="horizontal"
+                    android:padding="20dp"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/tv_price"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/aenirlsttd_black"
+                        android:gravity="end"
+                        android:text="0.00"
+                        android:textColor="@color/textcolor"
+                        android:textSize="30dp" />
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/avenirlstd_roman"
+                        android:gravity="start"
+                        android:text="/MONTH"
+                        android:textColor="@color/textcolor"
+                        android:textSize="18dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llAccess"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/llPremium"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="80dp">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/icon_awesome_check" />
+
+                    <TextView
+                        android:id="@+id/tv_titlesubscription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingRight="@dimen/_20sdp"
+                        android:fontFamily="@font/avenirlstd_roman"
+                        android:text="Pre-approved\nuniversity students."
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativ_premium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/llAccess">
+
+
+                <LinearLayout
+                    android:id="@+id/llAccess2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="80dp">
+
+                    <ImageView
+                        android:id="@+id/iv_nontime"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/ic_baseline_close_24"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_nontime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/avenirlstd_roman"
+                        android:gravity="start"
+                        android:text="Verify your profile with a \none-time"
+                        android:textColor="@color/lightgrey"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llAccess3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/llAccess2"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="80dp">
+
+                    <ImageView
+                        android:id="@+id/iv_bages"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/ic_baseline_close_24" />
+
+                    <TextView
+                        android:id="@+id/tv_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/avenirlstd_roman"
+                        android:gravity="center"
+                        android:text="Verified badge"
+                        android:textColor="@color/lightgrey"
+                        android:textSize="18sp" />z
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/llAccess3"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="80dp">
+
+                    <ImageView
+                        android:id="@+id/iv_addfree"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/ic_baseline_close_24" />
+
+                    <TextView
+                        android:id="@+id/tv_addfree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/avenirlstd_roman"
+                        android:gravity="center"
+                        android:text="Go Ad Free"
+                        android:textColor="@color/lightgrey"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+    <Button
+        android:id="@+id/btnChooseThisPlan"
+        style="@style/Button"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_bg_and_shape"
+        android:text="Choose this plan"
+        android:textColor="@color/white" />
+</RelativeLayout>

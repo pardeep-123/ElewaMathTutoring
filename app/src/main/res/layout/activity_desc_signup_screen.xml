@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".Activity.Auth.DescSignupScreen">
+
+    <ImageView
+        android:id="@+id/ivBack"
+        style="@style/backIcon"
+        android:layout_marginTop="40dp" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/_20sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_marginHorizontal="20dp"
+                android:padding="45dp"
+                android:src="@drawable/splashimg" />
+
+            <RelativeLayout
+                android:id="@+id/rl_im"
+                android:layout_width="145dp"
+                android:layout_height="145dp"
+                android:layout_gravity="center"
+                android:elevation="5dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivProfileSignUp"
+                        android:layout_width="135dp"
+                        android:layout_height="135dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/img"
+                        app:civ_border_color="@color/text"
+                        app:civ_border_width="0.5dp"
+                        app:civ_circle_background_color="#f6f6f6" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlProfileImage"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="5dp"
+
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="7dp"
+                    android:elevation="10dp"
+                    android:gravity="end">
+
+                    <ImageView
+                        android:id="@+id/ivAdd"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        android:contentDescription="@null"
+                        android:src="@drawable/add" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:text="Tell us what you're looking for"
+                android:textColor="@color/text"
+                android:textSize="13sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/edittext_bg">
+
+                <EditText
+                    android:id="@+id/edtDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toRightOf="@+id/ivMailicon"
+                    android:background="@null"
+                    android:fontFamily="@font/avenirlstd_roman"
+                    android:gravity="top"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:hint="@string/type_here"
+                    android:inputType="textMultiLine"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/editexthint"
+                    android:textSize="14sp" />
+            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/Button"
+                android:id="@+id/btnConfirmSignUp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="20dp"
+                android:text="Next"
+                />
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>

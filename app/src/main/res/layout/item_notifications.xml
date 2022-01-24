@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/_10sdp"
-    >
+    android:background="@color/white"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/lightgrey">
+        android:background="@color/notifications_background">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -20,7 +23,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:padding="10dp"
-                android:src="@drawable/notification" />
+                android:src="@drawable/mig" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -41,9 +44,9 @@
                         android:id="@+id/tvNotificationName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/medium"
+                        android:fontFamily="@font/avenirlstd_roman"
                         android:text="Anthony"
-                        android:textColor="@color/black"
+                        android:textColor="@color/gray969A9D"
                         android:textSize="13sp"
                         android:textStyle="bold" />
 
@@ -51,7 +54,7 @@
                         android:id="@+id/tvMessages"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/light"
+                        android:fontFamily="@font/avenirlstd_roman"
                         android:text="Anthony confirmed your session booking.You have been debited $50.00"
                         android:textColor="@color/text"
                         android:textSize="12dp" />
@@ -61,24 +64,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:orientation="vertical"
                     android:layout_weight="7">
 
                     <TextView
-                        android:id="@+id/tvDate"
+                        android:id="@+id/tvNotificationsTime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Sept 10, 2020"
-                        android:textColor="@color/text"
-                        android:textSize="10sp" />
-                    <TextView
-                        android:id="@+id/tvTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="05:11 PM"
-                        android:textColor="@color/text"
+                        android:textColor="@color/gray969A9D"
                         android:textSize="10sp" />
 
                 </LinearLayout>

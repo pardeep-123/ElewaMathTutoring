@@ -1,23 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context=".ui.PaymentInfoActivity">
-<include
-    android:id="@+id/toolbar"
-    layout="@layout/bg_toolbar"/>
+    tools:context=".Activity.PaymentInfoActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:background="@color/textcolor"
+
+        >
+
+        <ImageView
+            android:id="@+id/ivBack"
+            style="@style/backIcon"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="8dp"
+            app:tint="@color/white" />
+
+        <TextView
+           style="@style/TextViewHeader"
+            android:text="Payment Information"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+
+    </RelativeLayout>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:layout_below="@+id/toolbar">
+        android:layout_below="@+id/rl_toolbar">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_cards"
                 android:layout_width="match_parent"
@@ -26,15 +49,16 @@
                 android:layout_marginTop="5dp"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
             <TextView
+                android:id="@+id/whennodata"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/whennodata"
                 android:layout_centerInParent="true"
+                android:text="No card found"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"
-                android:visibility="gone"
-                android:text="No card found">
+                android:visibility="gone">
 
             </TextView>
 
@@ -56,7 +80,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/add" />
+                    android:src="@drawable/addcard" />
 
                 <TextView
                     android:id="@+id/tvAddNewCard"
@@ -65,25 +89,15 @@
                     android:layout_centerVertical="true"
                     android:layout_marginTop="30dp"
                     android:layout_toRightOf="@+id/add_img"
-                    android:fontFamily="@font/medium"
+                    android:fontFamily="@font/avenirlsttd_book"
                     android:gravity="center"
                     android:text="Add New Card"
-                    android:textColor="@color/black"
+                    android:textColor="@color/textcolor"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnPayNow"
-                style="@style/Button"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="@dimen/_20sdp"
-                android:layout_marginRight="@dimen/_20sdp"
-                android:layout_marginBottom="@dimen/_20sdp"
-                android:background="@drawable/bg_btn"
-                android:text="Pay Now" />
-
         </RelativeLayout>
-
     </androidx.core.widget.NestedScrollView>
+
 </RelativeLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="@dimen/_5sdp"
+    android:id="@+id/rl_root"
+    android:background="@color/editTextBackground">
+
+    <TextView
+        android:id="@+id/tv_resultname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/tick"
+        android:fontFamily="@font/avenirlstd_roman"
+        android:padding="10dp"
+        android:text="Virtual learning"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="13sp" />
+</RelativeLayout>

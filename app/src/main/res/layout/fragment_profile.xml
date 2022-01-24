@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragments.ProfileFragment">
+    android:background="@color/white"
+    tools:context=".Fragment.ProfileFragment">
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:weightSum="2">
 
@@ -26,19 +28,26 @@
                 android:layout_marginRight="15dp">
 
                 <ImageView
-                    android:id="@+id/ivSettings"
+                    android:id="@+id/ivNotification"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/settings" />
+                   android:layout_alignParentEnd="true"
+                    android:src="@drawable/bell" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Profile"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14sdp"
+                    android:fontFamily="@font/bold"/>
 
                 <ImageView
-                    android:id="@+id/ivBell"
+                    android:id="@+id/ivSetting"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/bell" />
+                    android:layout_alignParentStart="true"
+                    android:src="@drawable/setting" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -51,7 +60,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_width="90dp"
                     android:layout_height="90dp"
-                    android:src="@drawable/profile_img"
+                    android:src="@drawable/profile"
                     app:civ_border_color="@color/text"
                     app:civ_border_width="0.5dp"
                     app:civ_circle_background_color="#f6f6f6" />
@@ -69,7 +78,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/image_parent_image"
-                        android:fontFamily="@font/black"
+                        android:fontFamily="@font/aenirlsttd_black"
                         android:text="Jack"
                         android:textColor="@color/white"
                         android:textSize="16sp" />
@@ -80,7 +89,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:layout_toRightOf="@+id/image_parent_image"
-                        android:fontFamily="@font/light"
+                        android:fontFamily="@font/avenirlstd_roman"
                         android:text="Jack@gmail.com"
                         android:textColor="@color/white"
                         android:textSize="14dp" />
@@ -90,10 +99,10 @@
                         android:layout_width="160dp"
                         android:textStyle="bold"
                         android:textAllCaps="false"
-                        android:layout_height="wrap_content"
+                        android:layout_height="38dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/bg_editprofile"
-                        android:fontFamily="@font/mediumbg_editprofile.xml"
+                        android:fontFamily="@font/avenirlstd_roman"
                         android:text="Edit Profile"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
@@ -118,10 +127,10 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="10sp"
                     android:layout_marginRight="15dp"
-                    android:fontFamily="@font/black"
-                    android:text="About Amy"
+                    android:fontFamily="@font/aenirlsttd_black"
+                    android:text="About Jack"
                     android:textAllCaps="true"
-                    android:textColor="@color/black"
+                    android:textColor="@color/textcolor"
                     android:textSize="14dp" />
 
                 <TextView
@@ -130,6 +139,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
+                    android:text="@string/lorem_ipsum_dolor_sit_amet_consectetur_adipisicin"
                     android:layout_marginRight="15dp"
                     android:textColor="@color/text"
                     android:textSize="13sp" />
@@ -147,9 +157,9 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="15sp"
                     android:layout_marginRight="15dp"
-                    android:fontFamily="@font/black"
+                    android:fontFamily="@font/aenirlsttd_black"
                     android:text="PAST TEACHERS"
-                    android:textColor="@color/black"
+                    android:textColor="@color/textcolor"
                     android:textSize="14dp" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -163,5 +173,4 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>

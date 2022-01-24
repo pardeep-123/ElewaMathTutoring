@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Activity.ScheduleASession2Activity">
+    <RelativeLayout
+        android:id="@+id/rl1"
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:background="@color/textcolor">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            style="@style/backIcon"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="8dp"
+            app:tint="@color/white" />
+
+
+        <TextView
+            style="@style/TextViewHeader"
+            android:text="Schedule a Session"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tvConfirmSession"
+        android:layout_below="@+id/rl1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/edDes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:text="Tell a little about what you're looking for."
+                android:textColor="@color/text"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/etSchedule"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_below="@+id/edDes"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_greyfilled"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:gravity="start"
+                android:hint="Type here..."
+                android:imeOptions="actionDone"
+                android:padding="6dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/text"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvSchdule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etSchedule"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:text="Will this be in-person or virtual?"
+                android:textColor="@color/text"
+                android:textSize="13sp" />
+
+            <LinearLayout
+                android:id="@+id/ll1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSchdule"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RelativeLayout
+                    android:id="@+id/rlInPerson"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:padding="@dimen/_5sdp">
+
+                    <ImageView
+                        android:id="@+id/ivTickInPerson"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/tick_blue" />
+
+                    <TextView
+                        android:id="@+id/InPersonSession"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/ivTickInPerson"
+                        android:layout_toRightOf="@+id/tick"
+                        android:fontFamily="@font/avenirlstd_roman"
+                        android:gravity="center"
+                        android:text="In-Person Session"
+                        android:textColor="@color/text"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlVirtualLearning"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvSchdule"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:padding="@dimen/_5sdp">
+
+                    <ImageView
+                        android:id="@+id/ivTickVirtualLearning"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/uncheck" />
+
+                    <TextView
+                        android:id="@+id/virtualLearning"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/ivTickVirtualLearning"
+                        android:fontFamily="@font/avenirlstd_roman"
+                        android:gravity="center"
+                        android:text="Virtual learning"
+                        android:textColor="@color/text"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll1"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvSessionName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenirlstd_roman"
+                        android:text="Virtual Session"
+                        android:textAllCaps="true"
+                        android:textColor="@color/textcolor"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/avenirlstd_roman"
+                        android:text=""
+                        android:textColor="@color/text"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvSessionCost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="$20.00"
+                    android:textColor="@color/textcolor"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll2"
+                android:layout_marginTop="10dp"
+                android:text="The amount will be debited from your card on file once the teacher has confirmed the session."
+                android:textColor="@color/text" />
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/tvConfirmSession"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/background"
+        android:fontFamily="@font/aenirlsttd_black"
+        android:text="Confirm session"
+        android:textAllCaps="true"
+        android:textColor="@color/white" />
+</RelativeLayout>

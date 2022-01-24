@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Fragment.ScheduleFragment">
+
+    <RelativeLayout
+        android:id="@+id/myschedule_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/barcolor"
+
+        >
+
+        <ImageView
+            android:id="@+id/ivNotification"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="15dp"
+            android:src="@drawable/bell" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/aenirlsttd_black"
+            android:text="My Schedule"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/ivSetting"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            android:src="@drawable/setting" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/avenirlstd_roman"
+        android:gravity="center"
+        android:text="No Sessions Found"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:visibility="gone" />
+    <ScrollView
+        android:layout_below="@+id/myschedule_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_pending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginRight="14dp"
+                android:fontFamily="@font/aenirlsttd_black"
+                android:text="Pending"
+                android:textAllCaps="true"
+                android:textColor="@color/textcolor"
+                android:textSize="16sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_SchedulePending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:layout_below="@+id/tv_pending"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                app:reverseLayout="true"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <TextView
+                android:id="@+id/tvUpcomingSessions"
+                android:layout_width="402dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rv_SchedulePending"
+                android:layout_marginLeft="14dp"
+                android:visibility="gone"
+                android:layout_marginTop="14dp"
+                android:layout_marginRight="14dp"
+                android:fontFamily="@font/aenirlsttd_black"
+                android:text="Upcoming Sessions"
+                android:textAllCaps="true"
+                android:textColor="@color/textcolor"
+                android:textSize="16sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_UpcomingSessions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvUpcomingSessions"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:nestedScrollingEnabled="false"
+                android:orientation="vertical"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:reverseLayout="true" />
+
+            <TextView
+                android:id="@+id/tvUpcomingtoday"
+                android:layout_width="402dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rv_UpcomingSessions"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="14dp"
+                android:visibility="gone"
+                android:layout_marginRight="14dp"
+                android:fontFamily="@font/aenirlsttd_black"
+                android:text="Today Sessions"
+                android:textAllCaps="true"
+                android:textColor="@color/textcolor"
+                android:textSize="16sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_today"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvUpcomingtoday"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:nestedScrollingEnabled="false"
+                android:orientation="vertical"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:reverseLayout="true" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/tv_whennodata"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No data found!"
+        android:textSize="@dimen/_16sdp"
+        android:layout_centerInParent="true">
+
+    </TextView>
+</RelativeLayout>

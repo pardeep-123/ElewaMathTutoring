@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:background="@color/white"
+    android:layout_marginBottom="5dp"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:id="@+id/chatll1"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_34sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:background="@drawable/chat_background_white"
+        android:gravity="center|start"
+       >
+
+        <TextView
+            android:id="@+id/chat"
+            android:layout_marginRight="14dp"
+            android:layout_marginLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/avenirlstd_roman"
+            android:text="No prob!"
+            android:textColor="@color/text"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/time1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chatll1"
+        android:layout_alignStart="@+id/chatll1"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:fontFamily="@font/avenirlstd_roman"
+        android:text="18:05"
+
+        android:paddingLeft="@dimen/_5sdp"
+        android:textColor="@color/text"
+        android:textSize="10sp" />
+
+
+</RelativeLayout>

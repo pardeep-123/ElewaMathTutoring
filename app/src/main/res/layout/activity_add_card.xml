@@ -1,25 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.AddCardActivity">
+    tools:context=".Activity.AddCardActivity">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/bg_toolbar" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="500dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/background" />
+
+    <RelativeLayout
+        android:id="@+id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivBack">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:fontFamily="@font/aenirlsttd_black"
+            android:padding="14dp"
+            android:text="Enter Payment \nInformation"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="28dp" />
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/ivBack"
+       style="@style/backIcon"
+        app:tint="@color/white" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"
-        android:fillViewport="true">
+        android:layout_above="@+id/btnSubmit"
+        android:layout_below="@+id/text1"
+        android:background="@drawable/background_roundedge">
 
-        <LinearLayout
+        <RelativeLayout
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="100dp"
+                android:src="@drawable/splashimg" />
+
+            <View
+                android:background="@color/text"
+                android:layout_below="@+id/logo"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
             <RelativeLayout
                 android:id="@+id/rl1"
                 android:layout_width="match_parent"
@@ -33,9 +81,9 @@
                     android:id="@+id/tvName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/medium"
-                    android:text="Name on card"
-                    android:textColor="@color/black"
+                    android:fontFamily="@font/avenirlstd_roman"
+                    android:text="NAME ON CARD"
+                    android:textColor="@color/textcolor"
                     android:textSize="13sp" />
 
                 <EditText
@@ -59,6 +107,7 @@
                     android:textColorHint="@color/editexthint"
                     android:textSize="13sp" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/rl2"
                 android:layout_width="match_parent"
@@ -72,9 +121,9 @@
                     android:id="@+id/tvCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/medium"
-                    android:text="Card Number"
-                    android:textColor="@color/black"
+                    android:fontFamily="@font/avenirlstd_roman"
+                    android:text="CARD NUMBER"
+                    android:textColor="@color/textcolor"
                     android:textSize="13sp" />
 
                 <EditText
@@ -82,12 +131,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvCard"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@drawable/background_grey"
                     android:elevation="4dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/background_grey"
                     android:hint="CARD NUMBER"
                     android:inputType="number"
                     android:maxLength="16"
@@ -96,6 +142,7 @@
                     android:textColorHint="@color/editexthint"
                     android:textSize="13sp" />
             </RelativeLayout>
+
             <LinearLayout
                 android:id="@+id/ll2"
                 android:layout_width="match_parent"
@@ -117,21 +164,21 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/medium"
-                        android:text="Exp Date"
-                        android:textColor="@color/black"
+                        android:fontFamily="@font/avenirlstd_roman"
+                        android:text="EXP DATE"
+                        android:textColor="@color/textcolor"
                         android:textSize="13sp" />
 
                     <TextView
                         android:id="@+id/etExpDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
                         android:background="@drawable/background_grey"
                         android:clickable="false"
                         android:elevation="4dp"
+                        android:layout_margin="5dp"
                         android:focusable="false"
-                        android:fontFamily="@font/light"
+                        android:fontFamily="@font/avenirlstd_roman"
                         android:hint="MM/YYYY"
                         android:imeOptions="actionNext"
                         android:maxLines="1"
@@ -140,6 +187,7 @@
                         android:textColorHint="@color/text"
                         android:textSize="13sp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -151,77 +199,44 @@
                         android:id="@+id/et_cvv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/medium"
+                        android:fontFamily="@font/avenirlstd_roman"
+                        android:text="CVV"
                         android:inputType="number"
                         android:maxLength="4"
                         android:paddingLeft="10dp"
-                        android:text="CVV"
-                        android:textColor="@color/black"
+                        android:textColor="@color/textcolor"
                         android:textSize="13sp" />
 
                     <EditText
                         android:id="@+id/edCvv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:elevation="4dp"
                         android:layout_margin="5dp"
                         android:background="@drawable/background_grey"
-                        android:elevation="4dp"
-                        android:fontFamily="@font/light"
+                        android:fontFamily="@font/avenirlstd_roman"
                         android:hint="CVV"
                         android:imeOptions="actionDone"
                         android:inputType="numberPassword"
                         android:maxLength="4"
                         android:maxLines="1"
                         android:padding="10dp"
-                        android:textColor="@color/text"
+                        android:textColor="@color/textcolor"
                         android:textColorHint="@color/text"
                         android:textSize="13sp" />
                 </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_gravity="center"
-                android:orientation="horizontal">
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/payment_checkbox"
-                        android:id="@+id/ivOn"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/payment_checkbox1"
-                        android:visibility="gone"
-                        android:id="@+id/ivOf"/>
-                </RelativeLayout>
-                <androidx.appcompat.widget.AppCompatTextView
-                  style="@style/WrapTextView"
-                    android:text="Save this card and its details\nsecurely to my account"
-                    android:textColor="@color/black"
-                    android:layout_marginLeft="@dimen/_8sdp"
-                    android:textSize="@dimen/_12ssp"
-                    android:fontFamily="@font/light"/>
 
             </LinearLayout>
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnPayNow"
-                style="@style/Button"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="@dimen/_20sdp"
-                android:layout_marginRight="@dimen/_20sdp"
-                android:layout_marginBottom="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_40sdp"
-                android:background="@drawable/bg_btn"
-                android:textAllCaps="false"
-                android:text="Confirm Payment" />
-        </LinearLayout>
+
+
+        </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
+    <androidx.appcompat.widget.AppCompatButton
+        style="@style/Button"
+        android:id="@+id/btnSubmit"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:text="Submit"
+        android:textAllCaps="false" />
+
 </RelativeLayout>

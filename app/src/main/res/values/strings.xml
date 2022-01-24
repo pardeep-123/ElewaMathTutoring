@@ -1,25 +1,32 @@
 <resources>
     <string name="app_name">ElewaMathTutoring</string>
     <string name="skip">Skip</string>
+    <string name="welcome_to">WELCOME TO</string>
+    <string name="back">BACK</string>
+    <string name="skips">SKIP</string>
+    <string name="lorem_ipsum_dolor_sit_amet_consectetur_adipisicing_elit_sed_do_eiusmod_tempor_incididunt_ut_labore_et_dolore_magna_aliqua_quis_ipsum_suspendisse_ultrices_gravida_risus_commodo_viverra_maecenas_acuumsan_lacus_vel_facillisis_lorem_ipsum_dolor_sit_amet_consectetur_adipisicing_elit_sed_do_eiusmod_tempor_incididunt_ut_labore_et_dolore_magna_aliqua_quis_ipsum_suspendisse_ultrices_gravida_risus_commodo_viverra_maecenas_acuumsan_lacus_vel_facillisis_lorem_ipsum_dolor_sit_amet_consectetur_adipisicing_elit_sed_do_eiusmod_tempor_incididunt_ut_labore_et_dolore_magna_aliqua_quis_ipsum_suspendisse_ultrices_gravida_risus_commodo_viverra_maecenas_acuumsan_lacus_vel_facillisis_lorem_ipsum_dolor_sit_amet_consectetur_adipisicing_elit_sed_do_eiusmod_tempor_incididunt_ut_labore_et_dolore_magna_aliqua_quis_ipsum_suspendisse_ultrices_gravida_risus_commodo_viverra_maecenas_acuumsan_lacus_vel_facillisis">Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas acuumsan lacus vel facillisis.Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas acuumsan lacus vel facillisis.Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas acuumsan lacus vel facillisis.Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas acuumsan lacus vel facillisis.</string>
+    <string name="lorem_ipsum_dolor_sit_amet_consectetur_adipisicin">Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas acuumsan lacus vel facillisis.Lorem ipsum dolor sit amet consectetur adipisicing elit.</string>
 
+    <string name="welcome">Welcome</string>
+    <string name="welcomtext"><![CDATA[E Teacher connects students and teachers to learn & grow together, using both in-person teaching and E-learning.]]></string>
+    <string name="demand">On Demand Tutors</string>
+    <string name="demandtext">E Teacher matches students with qualified tutors to provide one-on-one teaching for all grades and ages.</string>
+    <string name="specialist">Specialist</string>
+    <string name="specialisttext">Elewa matches students with qualified specialist to teach private lessons such as art, music, or yoga. Education and behavioral\nspecialists are also available.</string>
     <string name="enter_email_address">Enter Email Address</string>
     <string name="enter_password">Enter Password</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="new_to_e_teacher">New to E Teacher?</string>
     <string name="enter_name">Enter Name</string>
-    <string name="enter_firstname">Enter First Name</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="type_here">Type here...</string>
-    <string name="login_as_guest">LOGIN AS GUEST</string>
-    <string name="create_an_account">Create An Account</string>
-    <string name="sign_up_as">Sign up as..</string>
-    <string name="tutor">Tutor</string>
-    <string name="terms_amp_condotions">
-        <u><![CDATA[Terms & Condotions]]></u></string>
+    <string name="Fogettext">Please enter the email address associated with your account. We will email you a link to reset your password.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_subject">Search by Subject</string>
     <string name="change_password">Change Password</string>
     <string name="manage_payment_information">Manage Payment Information</string>
+    <string name="manage_stripe_account">Manage Stripe Account</string>
     <string name="support">Support</string>
     <string name="about_us">About Us</string>
     <string name="privacy_policy">Privacy Policy</string>
@@ -28,8 +35,94 @@
     <string name="log_out">Log Out</string>
     <string name="delete_account">Delete Account</string>
     <string name="old_password">Old Password</string>
-    <string name="enter_new_password">Enter New Password</string>
     <string name="confirm_new_password">Confirm New Password</string>
-    <string name="new_password">New Password</string>
     <string name="enter_old_password">Enter Old Password</string>
+    <string name="enter_new_password">Enter New Password</string>
+    <string name="new_password">New Password</string>
+    <string name="dummytext">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce congue velit dui, ut egestas felis tristique nec. Proin rhoncus laoreet est ac faucibus. Etiam nec laoreet turpis, vel cursus magna. Nulla sagittis malesuada nulla sit amet facilisis. Integer vitae molestie dolor. Curabitur pretium libero porttitor, faucibus nunc non, scelerisque felis. Duis lacinia ligula et mauris fringilla convallis. Aenean lobortis quam lacus, at interdum urna rhoncus et. Fusce efficitur vestibulum mauris, ut accumsan lacus pretium vitae. Cras vestibulum, tortor vitae varius gravida, augue eros sodales libero, ut ultrices nunc arcu eget sem. Quisque vitae gravida lorem. Maecenas et porttitor lectus. Nam eget pharetra nisi. Donec ac placerat odio. Etiam feugiat, mauris id rutrum pharetra, odio erat convallis arcu, quis accumsan nulla odio consectetur massa. Cras bibendum, massa ut molestie dapibus, augue nunc faucibus urna, sed pulvinar magna nisl id tortor. Donec fermentum eleifend metus condimentum malesuada. Suspendisse egestas risus eu orci rutrum, a varius tortor pellentesque. Vestibulum viverra, felis condimentum eleifend posuere, lectus enim dignissim ipsum, non posuere ante ante quis nisl. Etiam ex sapien, accumsan ac lorem ullamcorper, fermentum fringilla nulla. Quisque gravida justo quis dolor dictum placerat. Proin quis interdum nibh. In ultricies consectetur vestibulum.</string>
+    <string name="sendfeedbacktext">Leave your feedback, suggestions, and issues for ElewaMathTutoring below. We\'d love to hear from you!</string>
+    <string name="start_typing">Start Typing...</string>
+    <string name="logout_desc">Are you sure you want to logout?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="are_you_sure_you_want_to_ndelete_account">Are you sure you want to delete account</string>
+    <string name="discover_teacher_tutors"><![CDATA[Teachers, Tutors& Specialists]]></string>
+    <string name="_30310">30310</string>
+    <string name="open_camera">Open Camera</string>
+    <string name="pick_from_gallery">Photo library</string>
+    <string name="add_new_bank"><u>Add New Bank</u></string>
+    <string name="your_reoccuring_payments_will_be_charged_to_this_card_a_receipt_and_conformation_email_will_be_send_to_this_email_you_provided_signing_up_n_nonce_your_background_check_has_been_completed_you_will_get_your_verfication_badge">Your Reoccuring Payments will be charged to this card. A receipt and conformation email will be send to this email you provided signing up.Once your background check has been completed you will get your verfication badge!</string>
+    <string name="teaching_info_rates"><![CDATA[Teaching Info & Rates]]></string>
+    <string name="we_ve_let_know_that_you_are_interested_once_they_have_confirmed_your_session_your_card_on_file_will_be_debited_for_100_00">We\'ve let Ryan know that you\'re interested.Once they\'ve confirmed your session, your card on file will be debited for <b>$100.00</b>.</string>
+    <string name="are_you_sure_you_want_to_delete_this_card">Are you sure you want to delete this card?</string>
+
+
+    <string name="no_internet_connection">No internet connection.</string>
+    <string name="error_empty_all_fields">Please fill all the fields</string>
+    <string name="error_enter_message">Please enter message</string>
+    <string name="error_empty_name">Please enter name</string>
+    <string name="error_empty_image">Please select image.</string>
+    <string name="error_empty_aboutyou">Please enter about you.</string>
+    <string name="error_empty_email">Please enter email.</string>
+    <string name="error_empty_specialities">Please enter specialities.</string>
+    <string name="error_empty_teachinglevel">Please enter teaching level.</string>
+    <string name="error_empty_choose_certified">Please choose certified acher, a totor or specialist.</string>
+    <string name="error_empty_password">Please enter password.</string>
+
+    <string name="error_empty_description">Please enter description.</string>
+
+    <string name="error_cardnumber">Please enter card number</string>
+    <string name="error_valid_cardnumber">Please enter valid card number</string>
+    <string name="error_expiry_date">Please select card expiry date</string>
+    <string name="please_enter_nameon_card">Please enter name.</string>
+    <string name="please_enter_cvv">Please enter cvv.</string>
+    <string name="please_enter_valid_cvv">Please enter valid cvv.</string>
+
+    <string name="error_ifsc">Please enter valid ifsc code</string>
+    <string name="errorEnter_ifsc">Please enter  ifsc code</string>
+    <string name="error_branch">Please enter bank branch</string>
+    <string name="error_account">Please enter account number</string>
+    <string name="error_acNumber">Please enter valid account number</string>
+    <string name="error_Confirm_acNumber">Please enter 16 digits confirm account number</string>
+    <string name="error_HolderNumber">Please enter account holder name</string>
+    <string name="error_Confirm_accountNumber">Please enter confirm account number</string>
+    <string name="error_mismatch_account_number">Account number and confirm account number does not match.</string>
+    <string name="Select_Location">Please select location</string>
+
+    <string name="error_">Error!</string>
+    <string name="retry">Retry</string>
+    <string name="session_expired">Session Expired</string>
+    <string name="unable_to_connect_server">Unable to connect to server.</string>
+
+    <string name="Pleseenter_password">Please enter password</string>
+    <string name="Pleseenter_new_password">Please new enter password</string>
+    <string name="Plese_enterConfirm_password">Please enter confirm password</string>
+    <string name="Please_select_date">Please select at least one day.</string>
+    <string name="Please_select_time">Please select at least one time slot.</string>
+    <string name="Please_select_Valid_endtime">Please select valid end time! end date not smaller then start date</string>
+    <string name="please_enter_valid_email_address">Please enter valid email address.</string>
+    <string name="please_enter_teacherhistory">Please enter teacher history.</string>
+    <string name="please_enter_cancelation_policy">Please enter cancellation policy.</string>
+    <string name="please_enter_in_person_rate">Please enter in-person rate.</string>
+    <string name="please_enter_virtual_rate">Please enter virtual rate.</string>
+    <string name="please_enter_aboutyou">Please enter about you</string>
+    <string name="Old_and_newpassword_areSane">New and Confirm password should be same</string>
+    <string name="error_mismatch_password">Password doesn\'t match.</string>
+    <string name="error_accpet_terms_conditions1">Please accept the terms and conditions. </string>
+    <string name="error_phonenumber_Notlessthen10">Phone number cannot be less than 10 digit. </string>
+    <string name="your_payment_has_been_done_successfully">Your payment has been done successfully</string>
+    <string name="google_maps_key">AIzaSyDQWqIXO-sNuMWupJ7cNNItMhR4WOkzXDE</string>
+    <string name="facebook_app_id">581512162846074</string>
+    <string name="fb_login_protocol_scheme">fb581512162846074</string>
+    <string name="add_bank_account">Add Bank Account</string>
+
+    <string name="terms_amp_condotions">
+        <u><![CDATA[Terms & Condotions]]></u></string>
+
+    <string name="heading1">Heading1</string>
+    <string name="heading2">Heading2</string>
+    <string name="heading3">Heading3</string>
+    <string name="page1">Mauris libero, condimentum quis magna at, consectetur rutrum  sapien.Sed pellentesque auctor tortor, ut molestie ligula bibendum elementum.</string>
+    <string name="login_as_guest">LOGIN AS GUEST</string>
+    <string name="create_an_account">Create An Account</string>
 </resources>

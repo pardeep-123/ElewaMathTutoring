@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:elevation="2dp"
+    android:layout_margin="10dp"
+    android:background="@drawable/background_unselected"
+    android:padding="5dp">
+
+    <com.chauthai.swipereveallayout.SwipeRevealLayout
+        android:id="@+id/swipeRevealLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        app:dragEdge="right"
+        app:mode="same_level">
+
+
+        <RelativeLayout
+            android:id="@+id/rlDeleteCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="80dp"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/background_red"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:gravity="center"
+                android:text="Delete"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+        </RelativeLayout>
+        ///////////////////////////////////////////////////////////////
+
+        <RelativeLayout
+            android:id="@+id/rel_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toStartOf="@+id/llEdit"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/avenirlstd_roman"
+                    android:text="Name"
+                    android:textColor="#979797"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvVisa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvName"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/avenirlstd_roman"
+                    android:text="Visa XXXX XXXX XXXX 4242"
+                    android:textColor="#979797"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:padding="5dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:padding="1dp"
+                    android:src="@drawable/edit" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </com.chauthai.swipereveallayout.SwipeRevealLayout>
+</RelativeLayout>

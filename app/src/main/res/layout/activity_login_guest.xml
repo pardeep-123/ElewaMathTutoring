@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".ui.LoginGuestActivity">
+    android:layout_height="match_parent">
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
+        layout="@layout/toolbar"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar">
+        android:layout_below="@id/toolbar"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,13 +28,11 @@
                 android:padding="40dp"
                 android:src="@drawable/logo_popup" />
 
-
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/WrapTextView"
                 android:layout_marginTop="@dimen/_30sdp"
                 android:text="LOGIN AS GUEST"
                 android:textAllCaps="true"
-                android:fontFamily="@font/bold"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -47,7 +42,6 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/edittext_bg"
                 android:paddingHorizontal="@dimen/_10sdp">
-
                 <ImageView
                     android:id="@+id/ivMailicon"
                     android:layout_width="20dp"
@@ -58,40 +52,33 @@
                 <EditText
                     android:id="@+id/email_text"
                     style="@style/Edittext"
-                    android:fontFamily="@font/light"
                     android:layout_toRightOf="@+id/ivMailicon"
                     android:hint="@string/enter_email_address"
                     android:inputType="textEmailAddress"
                     android:text="" />
             </RelativeLayout>
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:background="@drawable/edittext_bg"
                 android:paddingHorizontal="@dimen/_10sdp">
-
                 <ImageView
                     android:id="@+id/ivPassword"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
                     android:src="@drawable/lock" />
-
                 <EditText
                     android:id="@+id/password_text"
                     style="@style/Edittext"
                     android:layout_toRightOf="@+id/ivPassword"
-                    android:drawableEnd="@drawable/password"
                     android:drawablePadding="@dimen/_10sdp"
                     android:hint="@string/enter_password"
                     android:inputType="textPassword"
-                    android:fontFamily="@font/light"
                     android:singleLine="true"
                     android:text="" />
             </RelativeLayout>
-
             <Button
                 android:id="@+id/btnLogin"
                 style="@style/Button"
@@ -99,10 +86,6 @@
                 android:background="@drawable/bg_btn"
                 android:text="Login"
                 android:textColor="@color/white" />
-
         </LinearLayout>
     </ScrollView>
-
-
-
 </RelativeLayout>

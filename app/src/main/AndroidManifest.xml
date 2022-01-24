@@ -2,64 +2,201 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.elewamathtutoring">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
+        android:name=".Util.App"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.ElewaMathTutoring">
+        android:theme="@style/Theme.default"
+        android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.WithdrawelActivity"
+            android:name=".Activity.Chat.mathChat.MathPersonChatActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.AddCardActivity"
+            android:name=".Activity.Chat.mathChat.MathChatActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.PaymentInfoActivity"
-            android:exported="false" />
+            android:name=".Activity.ParentOrStudent.Viewall_trangection"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="android.webkit.WebView.EnableSafeBrowsing"
+            android:value="false" />
+
         <activity
-            android:name=".ui.ChangePasswordActivity"
-            android:exported="false" />
+            android:name=".Activity.ParentOrStudent.ReceiptActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.SettingsActivity"
-            android:exported="false" />
+            android:name=".Activity.TeacherOrTutor.RequestsActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.NotificationActivity"
-            android:exported="false" />
+            android:name=".Activity.Chat.Chat_Activity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name=".ui.EditProfileActivity"
-            android:exported="false" />
+            android:name=".Activity.ParentOrStudent.UpcomingDetailsActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.HomeActivity"
-            android:exported="false" />
+            android:name=".Activity.TeacherOrTutor.EditYourProfileActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.TermsActivity"
-            android:exported="false" />
+            android:name=".Activity.TeacherOrTutor.MainTeacherActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.SignupActivity"
-            android:exported="false" />
+            android:name=".Util.Location.MyNewMapActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.SignupAsActivity"
-            android:exported="false" />
+            android:name=".Activity.TeacherOrTutor.SubscriptionsActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.LoginGuestActivity"
-            android:exported="false" />
+            android:name=".Activity.TeacherOrTutor.AvailablityActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.LoginActivity"
-            android:exported="false" />
+            android:name=".Activity.TeacherOrTutor.TeachingInfoActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.SplashActivity"
-            android:exported="false" />
+            android:name=".Activity.TeacherOrTutor.AboutYouActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.MainActivity"
-            android:exported="true">
+            android:name=".Activity.NotificationsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.ScheduleASession2Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.ScheduleASessionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Auth.LoginGuestActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.TeacherDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.MyBankAccountsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.AddBankAccountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.WithdrawalActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.AddCardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.PaymentInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.SendFeedback"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.PrivacyPolicy"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.ChangePassword"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.EditProfile"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Auth.ForgotPassword"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".Activity.Auth.DescSignupScreen"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".Activity.Auth.SignUp"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysVisible" />
+        <activity
+            android:name=".Activity.Auth.SignUpAs"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Auth.IntroSlider"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Auth.LoginScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Auth.SplashActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <service
+            android:name=".Util.fcm.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
 
 </manifest>

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Activity.AddBankAccountActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/textcolor"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            style="@style/backIcon"
+            app:tint="@color/white" />
+
+
+        <TextView
+            android:id="@+id/tvHearder"
+            style="@style/TextViewHeaderin60"
+            android:text="@string/add_bank_account"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnAddBankAccountSave"
+        android:layout_below="@+id/rl1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <RelativeLayout
+                android:id="@+id/rl2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:id="@+id/tvIFSC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/avenirlstd_roman"
+                    android:text="IFSC Code"
+                    android:textColor="@color/editprofilebutton"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/ifscCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvIFSC"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edittext_bg"
+                    android:fontFamily="@font/avenirlstd_roman"
+                    android:hint="Enter ifsc Code"
+                    android:maxLength="11"
+                    android:padding="16dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/text"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rl2"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:id="@+id/tvBankBranch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/avenirlstd_roman"
+                    android:text="Bank Branch"
+                    android:textColor="@color/editprofilebutton"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/branch"
+                    android:layout_width="match_parent"
+                    android:singleLine="true"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvBankBranch"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edittext_bg"
+                    android:fontFamily="@font/avenirlstd_roman"
+                    android:hint="Enter bank branch"
+                    android:padding="16dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/text"
+                    android:textSize="13sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rl3"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:id="@+id/tvAccountNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/avenirlstd_roman"
+                    android:text="Account Number"
+                    android:textColor="@color/editprofilebutton"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/acNumber"
+                    android:layout_width="match_parent"
+                    android:singleLine="true"
+                    android:inputType="number"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvAccountNumber"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edittext_bg"
+                    android:fontFamily="@font/avenirlstd_roman"
+                    android:hint="Enter account number"
+                    android:padding="16dp"
+                    android:maxLength="20"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/text"
+                    android:textSize="13sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rl4"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:id="@+id/tvCAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/avenirlstd_roman"
+                    android:text="Confirm Account Number"
+                    android:textColor="@color/editprofilebutton"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/cacNumber"
+                    android:maxLength="20"
+                    android:layout_width="match_parent"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvCAccount"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edittext_bg"
+                    android:fontFamily="@font/avenirlstd_roman"
+                    android:hint="Enter confirm account number"
+                    android:padding="16dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/text"
+                    android:textSize="13sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rl5"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:id="@+id/tvAccHolder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/avenirlstd_roman"
+                    android:text="Account Holder Name"
+                    android:textColor="@color/editprofilebutton"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/acHolderName"
+                    android:layout_width="match_parent"
+                    android:singleLine="true"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvAccHolder"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edittext_bg"
+                    android:fontFamily="@font/avenirlstd_roman"
+                    android:hint="Enter account holder name"
+                    android:padding="16dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/text"
+                    android:textSize="13sp" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+    <androidx.appcompat.widget.AppCompatButton
+        style="@style/Button"
+        android:id="@+id/btnAddBankAccountSave"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_margin="@dimen/_10sdp"
+        android:text="Save"
+        android:textAllCaps="false" />
+
+</RelativeLayout>

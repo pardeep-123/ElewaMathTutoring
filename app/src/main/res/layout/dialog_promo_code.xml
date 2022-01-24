@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_roundedges"
+        android:padding="30dp">
+
+        <TextView
+            android:id="@+id/tvPromoCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/aenirlsttd_black"
+            android:gravity="center"
+            android:text="Promo Code"
+            android:textAllCaps="true"
+            android:textColor="@color/textcolor"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edPromoCode"
+            android:layout_width="match_parent"
+            android:inputType="textCapCharacters"
+            android:background="@drawable/edittext_bg"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvPromoCode"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginTop="20dp"
+            android:hint="Enter your promo code"
+            android:textSize="14sp"
+            android:imeOptions="actionDone"
+            android:textColor="@color/black"
+            android:textColorHint="@color/text"
+            android:fontFamily="@font/avenirlstd_roman"
+            android:padding="15dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnContinue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edPromoCode"
+            android:layout_margin="18dp"
+            android:background="@drawable/button_bg_and_shape"
+            android:fontFamily="@font/avenirlstd_roman"
+            android:text="Continue"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+    </RelativeLayout>
+</RelativeLayout>
