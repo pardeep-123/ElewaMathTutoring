@@ -19,6 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
+            android:layout_marginLeft="@dimen/_7sdp"
             android:layout_centerInParent="true"
             android:src="@drawable/back_arrow_white" />
 
@@ -64,11 +65,140 @@
         android:layout_height="match_parent"
         android:layout_below="@id/rlToolbar"
         android:fillViewport="true">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="@dimen/_130sdp"
+                    android:layout_height="@dimen/_130sdp"
+
+                    android:src="@drawable/profile" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/WrapTextView"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/black"
+                    android:paddingLeft="@dimen/_20sdp"
+                    android:text="Jackson"
+                    android:textColor="@color/app"
+                    android:textSize="@dimen/_16sdp" />
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/home_listcardview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:elevation="@dimen/_2sdp"
+                android:gravity="center"
+                app:cardCornerRadius="8dp"
+                app:contentPadding="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_20sdp">
+
+                    <ImageView
+                        android:id="@+id/ivEmoji"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/emoji" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvText"
+                        style="@style/WrapTextView"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/medium"
+                        android:text="Waiting for Jackson to accept invitation."
+                        android:textSize="@dimen/_12sdp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rv_chat"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
+                />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+    <RelativeLayout
+        android:id="@+id/rlChat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="@color/editextbg"
+        android:padding="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_roundedges">
+
+
+            <EditText
+                android:id="@+id/Et_chat_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toStartOf="@+id/llbtns"
+                android:layout_toRightOf="@+id/llbtns"
+                android:background="@android:color/transparent"
+                android:hint="Type your message here..."
+                android:maxLines="3"
+                android:padding="10dp"
+                android:paddingLeft="10dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/text"
+                android:textSize="13sp" />
+            <LinearLayout
+                android:id="@+id/llbtns"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/ivAttanchment"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="5dp"
+                    android:src="@drawable/attachement" />
+                <ImageView
+                    android:id="@+id/ivSendBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="5dp"
+                    android:src="@drawable/send" />
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
 </RelativeLayout>

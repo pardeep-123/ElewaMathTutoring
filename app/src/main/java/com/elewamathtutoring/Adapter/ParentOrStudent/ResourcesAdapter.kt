@@ -11,13 +11,10 @@ import com.elewamathtutoring.Activity.AddCardActivity
 import com.elewamathtutoring.Activity.Chat.mathChat.MathPersonChatActivity
 import com.elewamathtutoring.Models.Notifications.Body
 import com.elewamathtutoring.R
-import com.elewamathtutoring.Util.constant.Constants
-import com.elewamathtutoring.Util.helper.extensions.getPrefrence
-import kotlinx.android.synthetic.main.item_math_chat.view.*
 
 //, listNotifications: ArrayList<Body>
-class MathChatAdapter(c: Context) :
-    RecyclerView.Adapter<MathChatAdapter.ViewHolder>() {
+class ResourcesAdapter(c: Context) :
+    RecyclerView.Adapter<ResourcesAdapter.ViewHolder>() {
     var ctn = c
    // var list = listNotifications
 
@@ -26,7 +23,7 @@ class MathChatAdapter(c: Context) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(ctn).inflate(R.layout.item_math_chat, parent, false)
+        val view = LayoutInflater.from(ctn).inflate(R.layout.item_resources, parent, false)
         return ViewHolder(view)
     }
 
@@ -36,11 +33,11 @@ class MathChatAdapter(c: Context) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemView.home_listcardview.setOnClickListener {
+      /*  holder.itemView.home_listcardview.setOnClickListener {
             var intent = Intent(ctn, MathPersonChatActivity::class.java)
             ctn.startActivity(intent)
         }
-
+*/
      /*   holder.itemView.tvMessages.text = list.get(position).message
         try {
             holder.itemView.tvNotificationsTime.text = Constants.ConvertTimeStampToDate(list.get(position).createdAt.toLong(),"EEE dd, yyyy")

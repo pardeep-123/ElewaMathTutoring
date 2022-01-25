@@ -5,8 +5,7 @@
     <string name="back">BACK</string>
     <string name="skips">SKIP</string>
     <string name="lorem_ipsum_dolor_sit_amet_consectetur_adipisicing_elit_sed_do_eiusmod_tempor_incididunt_ut_labore_et_dolore_magna_aliqua_quis_ipsum_suspendisse_ultrices_gravida_risus_commodo_viverra_maecenas_acuumsan_lacus_vel_facillisis_lorem_ipsum_dolor_sit_amet_consectetur_adipisicing_elit_sed_do_eiusmod_tempor_incididunt_ut_labore_et_dolore_magna_aliqua_quis_ipsum_suspendisse_ultrices_gravida_risus_commodo_viverra_maecenas_acuumsan_lacus_vel_facillisis_lorem_ipsum_dolor_sit_amet_consectetur_adipisicing_elit_sed_do_eiusmod_tempor_incididunt_ut_labore_et_dolore_magna_aliqua_quis_ipsum_suspendisse_ultrices_gravida_risus_commodo_viverra_maecenas_acuumsan_lacus_vel_facillisis_lorem_ipsum_dolor_sit_amet_consectetur_adipisicing_elit_sed_do_eiusmod_tempor_incididunt_ut_labore_et_dolore_magna_aliqua_quis_ipsum_suspendisse_ultrices_gravida_risus_commodo_viverra_maecenas_acuumsan_lacus_vel_facillisis">Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas acuumsan lacus vel facillisis.Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas acuumsan lacus vel facillisis.Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas acuumsan lacus vel facillisis.Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas acuumsan lacus vel facillisis.</string>
-    <string name="lorem_ipsum_dolor_sit_amet_consectetur_adipisicin">Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas acuumsan lacus vel facillisis.Lorem ipsum dolor sit amet consectetur adipisicing elit.</string>
-
+    <string name="lorem_ipsum_dolor_sit_amet_consectetur_adipisicin">Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="welcome">Welcome</string>
     <string name="welcomtext"><![CDATA[E Teacher connects students and teachers to learn & grow together, using both in-person teaching and E-learning.]]></string>
     <string name="demand">On Demand Tutors</string>
@@ -68,16 +67,13 @@
     <string name="error_empty_teachinglevel">Please enter teaching level.</string>
     <string name="error_empty_choose_certified">Please choose certified acher, a totor or specialist.</string>
     <string name="error_empty_password">Please enter password.</string>
-
     <string name="error_empty_description">Please enter description.</string>
-
     <string name="error_cardnumber">Please enter card number</string>
     <string name="error_valid_cardnumber">Please enter valid card number</string>
     <string name="error_expiry_date">Please select card expiry date</string>
     <string name="please_enter_nameon_card">Please enter name.</string>
     <string name="please_enter_cvv">Please enter cvv.</string>
     <string name="please_enter_valid_cvv">Please enter valid cvv.</string>
-
     <string name="error_ifsc">Please enter valid ifsc code</string>
     <string name="errorEnter_ifsc">Please enter  ifsc code</string>
     <string name="error_branch">Please enter bank branch</string>

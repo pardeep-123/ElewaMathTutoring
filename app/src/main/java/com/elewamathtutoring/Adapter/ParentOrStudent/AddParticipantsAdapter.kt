@@ -16,17 +16,16 @@ import com.elewamathtutoring.Util.helper.extensions.getPrefrence
 import kotlinx.android.synthetic.main.item_math_chat.view.*
 
 //, listNotifications: ArrayList<Body>
-class MathChatAdapter(c: Context) :
-    RecyclerView.Adapter<MathChatAdapter.ViewHolder>() {
+class AddParticipantsAdapter(c: Context) :
+    RecyclerView.Adapter<AddParticipantsAdapter.ViewHolder>() {
     var ctn = c
    // var list = listNotifications
-
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+   class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(ctn).inflate(R.layout.item_math_chat, parent, false)
+        val view = LayoutInflater.from(ctn).inflate(R.layout.item_add_participants, parent, false)
         return ViewHolder(view)
     }
 

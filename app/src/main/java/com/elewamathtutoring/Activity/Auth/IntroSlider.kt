@@ -44,9 +44,9 @@ class IntroSlider : AppCompatActivity() {
         tvBack = findViewById(R.id.tvBack)
         tvSkip = findViewById(R.id.tvSkip)
 
-        list.add(R.drawable.path)
-        list.add(R.drawable.path2)
-        list.add(R.drawable.path3)
+        list.add(R.drawable.icon01)
+        list.add(R.drawable.icon02)
+        list.add(R.drawable.icon03)
 
         text = ArrayList()
         text!!.add(R.string.heading1)

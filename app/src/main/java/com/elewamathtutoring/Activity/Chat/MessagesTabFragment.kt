@@ -46,17 +46,21 @@ class MessagesTabFragment : Fragment() ,View.OnClickListener,  SocketManagernewe
     }
 
     private fun onClicks() {
-        v.rootView.ivNotification.setOnClickListener(this)
+      //  v.rootView.ivNotification.setOnClickListener(this)
         v.rootView.ivSetting.setOnClickListener(this)
+        v.rootView.btnCreateGroup.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v!!.id) {
-            R.id.ivNotification -> {
+           /* R.id.ivNotification -> {
                 startActivity(Intent(context, NotificationsActivity::class.java))
-            }
+            }*/
             R.id.ivSetting -> {
                 startActivity(Intent(context, SettingActivity::class.java))
+            }
+            R.id.btnCreateGroup -> {
+                startActivity(Intent(context, StudyGroupActivity::class.java))
             }
         }
     }

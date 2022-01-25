@@ -20,7 +20,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.elewamathtutoring.Activity.Chat.mathChat.MathChatActivity
 import com.elewamathtutoring.Activity.NotificationsActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResoucesActivity
 import com.elewamathtutoring.Activity.SettingActivity
 import com.elewamathtutoring.Adapter.FilterOptions2Adapter
 import com.elewamathtutoring.Adapter.ParentOrStudent.FilterOptionsAdapter
@@ -99,7 +101,12 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
         ivNotification.setOnClickListener {
             startActivity(Intent(context, NotificationsActivity::class.java))
         }
-
+        rlMathChatRoom.setOnClickListener {
+            startActivity(Intent(context, MathChatActivity::class.java))
+        }
+        rlResources.setOnClickListener {
+            startActivity(Intent(context, ResoucesActivity::class.java))
+        }
         ivSetting = view.findViewById(R.id.ivSetting)
         ivSetting.setOnClickListener {
          val intent = Intent(requireContext(), SettingActivity::class.java)

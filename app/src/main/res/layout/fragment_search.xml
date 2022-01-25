@@ -125,8 +125,8 @@
                 android:layout_centerInParent="true"
                 android:drawableLeft="@drawable/mathchatroom"
                 android:drawablePadding="@dimen/_10sdp"
-                android:text=" Math Chat Room"
                 android:fontFamily="@font/medium"
+                android:text=" Math Chat Room"
                 android:textColor="@color/white" />
         </RelativeLayout>
     </LinearLayout>

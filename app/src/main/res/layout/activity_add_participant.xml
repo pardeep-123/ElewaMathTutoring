@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context=".Activity.Chat.mathChat.MathChatActivity">
+    tools:context=".Activity.Chat.AddParticipantActivity">
 
     <RelativeLayout
         android:id="@+id/rlToolbar"
@@ -20,18 +20,29 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/_7sdp"
             android:src="@drawable/back_arrow_white" />
 
         <TextView
+            android:id="@+id/tvUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginTop="25dp"
             android:fontFamily="@font/avenirlstd_roman"
             android:gravity="center"
-            android:text="Math Chat Room"
+            android:text="Add participants"
             android:textColor="@color/white"
             android:textSize="20dp" />
+
+        <ImageView
+            android:layout_width="@dimen/_17sdp"
+            android:layout_height="@dimen/_17sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:src="@drawable/filter_icon" />
+
     </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -43,15 +54,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            android:layout_marginTop="@dimen/_10sdp"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/rlSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_20sdp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
                 android:background="@drawable/search_bg"
                 android:padding="13dp">
 
@@ -81,15 +93,31 @@
                     android:textSize="16sp" />
             </RelativeLayout>
 
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/WrapTextView"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:fontFamily="@font/medium"
+                android:text="Select up to 30 participants"
+                android:textColor="@color/red"
+                android:textSize="@dimen/_12sdp" />
+
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_chat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_20sdp"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="2" />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnAdd"
+                style="@style/Button"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/_20sdp"
+                android:text="Add"
+                android:textAllCaps="false" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

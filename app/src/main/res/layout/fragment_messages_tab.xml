@@ -12,14 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@color/barcolor"
-
         >
 
         <ImageView
-            android:id="@+id/ivNotification"
+            android:id="@+id/ivSetting"
+
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="15dp"
             android:layout_marginBottom="15dp"
@@ -37,10 +37,11 @@
             android:textSize="16sp" />
 
         <ImageView
-            android:id="@+id/ivSetting"
+            android:id="@+id/ivNotification"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_alignParentEnd="true"
+            android:visibility="gone"
+            android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="15dp"
@@ -55,6 +56,7 @@
         android:layout_marginTop="5dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
     <RelativeLayout
         android:id="@+id/rel_nomessage"
         android:layout_width="match_parent"
@@ -62,18 +64,17 @@
         android:layout_centerInParent="true"
         android:gravity="center"
         android:visibility="visible">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:textColor="@color/black"
-            android:text="No new message right now">
+            android:text="No new message right now"
+            android:textColor="@color/black">
 
         </TextView>
     </RelativeLayout>
-
-
     <ProgressBar
         android:id="@+id/progresschat"
         android:layout_gravity="center"
@@ -83,4 +84,16 @@
         android:layout_centerInParent="true"
         android:indeterminateTint="@color/blue"
         />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCreateGroup"
+        style="@style/Button"
+        android:background="@drawable/bg_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:fontFamily="@font/bold"
+        android:text="Create a Study Group"
+        android:textAllCaps="false"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:textColor="@color/white" />
 </RelativeLayout>

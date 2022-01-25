@@ -22,6 +22,21 @@
         android:theme="@style/Theme.default"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activity.Chat.AddParticipantActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Chat.StudyGroupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.ParentOrStudent.resources.ResoucesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Chat.mathChat.AudioCallActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Chat.mathChat.VideoCallActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.Chat.mathChat.MathPersonChatActivity"
             android:exported="false" />
         <activity
