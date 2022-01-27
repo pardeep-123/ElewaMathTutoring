@@ -3,6 +3,7 @@ package com.elewamathtutoring.Activity.Auth
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -64,11 +65,11 @@ class IntroSlider : AppCompatActivity() {
 
 
         }
+
         tvBack.setOnClickListener {
             if (mPager!!.currentItem == 0) {
               //  finish()
                 finishAffinity()
-
             } else {
                 mPager!!.setCurrentItem((mPager!!.currentItem - 1))
 
@@ -95,12 +96,17 @@ class IntroSlider : AppCompatActivity() {
                 positionOffset: Float,
                 positionOffsetPixels: Int
             ) {
-                if(mPager!!.currentItem == 2)
+                if (mPager!!.currentItem==0){
+                    tvBack.visibility=View.INVISIBLE
+                }
+               else if(mPager!!.currentItem == 2)
                 {
                   //  btnNext.text = "Get Started"
                     btnNext.text = "Next"
+                    tvBack.visibility=View.VISIBLE
                 }
                 else{
+                    tvBack.visibility=View.VISIBLE
                     btnNext.text = "Next"
                 }
 

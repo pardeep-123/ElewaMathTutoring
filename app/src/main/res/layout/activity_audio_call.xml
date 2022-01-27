@@ -20,7 +20,7 @@
         android:padding="@dimen/_10sdp"
         android:src="@drawable/video_call_close" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -33,16 +33,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:src="@drawable/camera_back"
+            android:layout_marginLeft="@dimen/_50sdp"
+            android:layout_alignParentStart="true"
+         android:layout_centerVertical="true"
+            android:src="@drawable/mic2"
             />
 
         <ImageView
             android:id="@+id/ivCut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/_50sdp"
             android:padding="@dimen/_10sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:src="@drawable/mic" />
-    </LinearLayout>
+            android:src="@drawable/phone2" />
+    </RelativeLayout>
 </RelativeLayout>

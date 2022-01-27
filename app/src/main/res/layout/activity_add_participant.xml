@@ -31,11 +31,12 @@
             android:layout_marginTop="25dp"
             android:fontFamily="@font/avenirlstd_roman"
             android:gravity="center"
-            android:text="Add participants"
+            android:text="Add Participants"
             android:textColor="@color/white"
             android:textSize="20dp" />
 
         <ImageView
+            android:id="@+id/ivFilter"
             android:layout_width="@dimen/_17sdp"
             android:layout_height="@dimen/_17sdp"
             android:layout_alignParentEnd="true"
@@ -105,12 +106,12 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_chat"
+                android:id="@+id/rv_add_participants"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnAdd"
                 style="@style/Button"

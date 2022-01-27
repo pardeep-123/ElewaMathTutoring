@@ -92,6 +92,8 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
         getdata_toselected_certified.add("2")
         getdata_toselected_certified.add("3")
 
+        searchHomeAdapter = SearchHomeAdapter(requireContext())
+        recycler_Homesearch.adapter = searchHomeAdapter
        // checkPermissionLocation(requireActivity())
 
        /* rl2.setOnClickListener {
@@ -308,9 +310,9 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
 
                     if(Searchtext.isEmpty())
                     {
-                        recycler_Homesearch.setLayoutManager(GridLayoutManager(context, 2))
+                        /*recycler_Homesearch.setLayoutManager(GridLayoutManager(context, 2))
                         searchHomeAdapter = SearchHomeAdapter(requireContext(), Search_teacher)
-                        recycler_Homesearch.adapter = searchHomeAdapter
+                        recycler_Homesearch.adapter = searchHomeAdapter*/
                     }
                     else
                     {

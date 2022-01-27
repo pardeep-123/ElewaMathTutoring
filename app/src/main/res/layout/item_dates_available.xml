@@ -23,7 +23,7 @@
             android:layout_centerInParent="true"
             android:fontFamily="@font/aenirlsttd_black"
             android:gravity="center"
-            android:text="Sunday"
+            android:text="6:00 PM - 5:00 PM"
             android:textColor="@color/textcolor"
             android:textSize="14sp" />
 

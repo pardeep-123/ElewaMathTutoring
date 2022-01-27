@@ -13,6 +13,8 @@ import android.widget.RelativeLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.elewamathtutoring.Activity.Chat.Chat_Activity
+import com.elewamathtutoring.Activity.Chat.mathChat.MathPersonChatActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.ReceiptActivity
 import com.elewamathtutoring.Models.Teacher_details.Model_teacherdetails
 import com.elewamathtutoring.R
@@ -41,7 +43,7 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
         sharedPrefUtil = SharedPrefUtil(this)
 
         onClicks()
-        Techerdetailapi()
+        //Techerdetailapi()
         if (intent.getStringExtra("Type").equals("schedule")) {
             btnScheduleSession.visibility = View.GONE
 
@@ -61,20 +63,24 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
     }
 
     private fun onClicks() {
-        options.setOnClickListener(this)
+       // options.setOnClickListener(this)
         btnScheduleSession.setOnClickListener(this)
         btnReschedule.setOnClickListener(this)
         btnviewreciept.setOnClickListener(this)
         ivBack.setOnClickListener(this)
+        llChat.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v!!.id) {
-            R.id.options -> {
+            /*R.id.options -> {
                 setPopUpWindow()
-            }
+            }*/
             R.id.ivBack -> {
                 finish()
+            }  R.id.llChat -> {
+            var intent = Intent(this, MathPersonChatActivity::class.java)
+            startActivity(intent)
             }
             R.id.btnScheduleSession -> {
                 var intent = Intent(this, ScheduleASessionActivity::class.java)
@@ -158,11 +164,11 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
                    tv_parentteacherlevel.text = s.substring(0, s.length -1)
 
                     tvparentSpecialized.text=liveData.data.body.specialties
-                    tv_teacher_CancelationPolicy.text=liveData.data.body.cancellationPolicy
+                  //  tv_teacher_CancelationPolicy.text=liveData.data.body.cancellationPolicy
                     tv_teacher_AboutUser.text=liveData.data.body.about
                     tv_teacher_TeachingHistory.text=liveData.data.body.teachingHistory
-                    tv_teacher_virtual.text=(Constants.Currency+liveData.data.body.virtualRate.toString())+".00/Hr"
-                    tv_teacher_inprice.text=Constants.Currency+liveData.data.body.InPersonRate.toString()+".00/Hr"
+                //    tv_teacher_virtual.text=(Constants.Currency+liveData.data.body.virtualRate.toString())+".00/Hr"
+                 //   tv_teacher_inprice.text=Constants.Currency+liveData.data.body.InPersonRate.toString()+".00/Hr"
 
                 }
                 else if (liveData.data is Commontoall) {

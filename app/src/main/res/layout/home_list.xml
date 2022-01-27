@@ -45,11 +45,11 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/aenirlsttd_black"
+                    android:fontFamily="@font/bold"
                     android:gravity="end"
                     android:padding="4dp"
                     android:text="Alexander G."
-                    android:textColor="@color/textcolor"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -71,22 +71,21 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/avenirlsttd_book"
                 android:gravity="center"
-                android:text="TEACHER"
-                android:textAllCaps="true"
+                android:text="Teacher"
                 android:textColor="@color/textcolor"
-                android:textSize="14sp" />
+                android:textSize="11sp" />
 
             <TextView
                 android:id="@+id/tv_level"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/avenirlstd_roman"
+                android:fontFamily="@font/light"
                 android:gravity="center"
                 android:padding="2dp"
                 android:singleLine="true"
-                android:text=""
-                android:textColor="@color/text"
+                android:text="High School Level"
+                android:textColor="@color/black"
                 android:textSize="11sp" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

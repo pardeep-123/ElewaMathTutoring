@@ -11,18 +11,18 @@
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
-            android:padding="6dp"
             android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
+            android:padding="6dp"
             android:src="@drawable/splashimg" />
 
         <View
-            android:layout_below="@+id/logo"
-            android:background="@color/text"
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"/>
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/logo"
+            android:background="@color/text" />
 
         <TextView
             android:id="@+id/tvPromoCode"
@@ -30,33 +30,34 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/logo"
             android:layout_marginTop="20dp"
-            android:textStyle="bold"
             android:fontFamily="@font/avenirlstd_roman"
             android:gravity="center"
             android:text="Thanks for booking\nRyan!"
             android:textAllCaps="true"
             android:textColor="@color/textcolor"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/edPromoCode"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvPromoCode"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
             android:fontFamily="@font/avenirlstd_roman"
-            android:padding="10dp"
             android:gravity="center"
+            android:padding="10dp"
             android:text="@string/we_ve_let_know_that_you_are_interested_once_they_have_confirmed_your_session_your_card_on_file_will_be_debited_for_100_00"
             android:textColor="@color/text"
             android:textSize="13sp" />
+
         <Button
             android:id="@+id/btnThanksContinue"
+            style="@style/Button"
             android:layout_below="@+id/edPromoCode"
             android:layout_marginHorizontal="60dp"
-            style="@style/Button"
             android:layout_marginBottom="30dp"
             android:background="@drawable/button_bg_and_shape"
             android:text="Continue"

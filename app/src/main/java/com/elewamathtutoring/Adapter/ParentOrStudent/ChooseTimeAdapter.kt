@@ -11,14 +11,14 @@ import com.elewamathtutoring.Models.Teacher_details.Body
 import com.elewamathtutoring.R
 import kotlinx.android.synthetic.main.item_dates_available.view.*
 import kotlin.collections.ArrayList
+//     chooseTimeList: ArrayList<Body>,
+//  var  scheduleASessionActivity: ScheduleASessionActivity
 
 class ChooseTimeAdapter(
-    c: Context,
-    chooseTimeList: ArrayList<Body>,
-  var  scheduleASessionActivity: ScheduleASessionActivity
+    c: Context
 ) : RecyclerView.Adapter<ChooseTimeAdapter.ViewHolder>() {
     var ctn = c
-    var list = chooseTimeList
+   // var list = chooseTimeList
     var selectedtme_position=ArrayList<String>()
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -31,11 +31,11 @@ class ChooseTimeAdapter(
 
     override fun getItemCount(): Int {
         //  return  list.get(0).time_slots.size
-        return 3
+        return 9
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemView.dayofweek.text = list.get(0).time_slots.get(position).startTime+"-"+list.get(0).time_slots.get(position).endTime
+       /* holder.itemView.dayofweek.text = list.get(0).time_slots.get(position).startTime+"-"+list.get(0).time_slots.get(position).endTime
 
 
         if(list.get(0).time_slots.get(position).check==true)
@@ -60,6 +60,6 @@ class ChooseTimeAdapter(
                 notifyItemChanged(position)
             }
 
-        }
+        }*/
     }
 }

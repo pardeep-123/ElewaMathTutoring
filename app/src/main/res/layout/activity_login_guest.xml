@@ -69,13 +69,15 @@
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
                     android:src="@drawable/lock" />
+
                 <EditText
                     android:id="@+id/password_text"
                     style="@style/Edittext"
                     android:layout_toRightOf="@+id/ivPassword"
-                    android:drawablePadding="@dimen/_10sdp"
                     android:hint="@string/enter_password"
                     android:inputType="textPassword"
+                    android:drawableEnd="@drawable/password"
+                    android:drawablePadding="@dimen/_10sdp"
                     android:singleLine="true"
                     android:text="" />
             </RelativeLayout>

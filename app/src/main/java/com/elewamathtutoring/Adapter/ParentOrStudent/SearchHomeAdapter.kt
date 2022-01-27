@@ -13,9 +13,9 @@ import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
 import kotlinx.android.synthetic.main.home_list.view.*
 import kotlin.collections.ArrayList
-
+// var list: ArrayList<Body>,
 class SearchHomeAdapter(
-    c: Context, var list: ArrayList<Body>,
+    c: Context
 ) : RecyclerView.Adapter<SearchHomeAdapter.MyHolder>() {
     var ctn = c
 
@@ -27,7 +27,7 @@ class SearchHomeAdapter(
     }
 
     override fun onBindViewHolder(holder: MyHolder, position: Int) {
-        holder.itemView.tvItemName.text=list.get(0).data.get(position).name
+       /* holder.itemView.tvItemName.text=list.get(0).data.get(position).name
         holder.itemView.tvPostion.text= Constants.isCertifiedOrtutor(list.get(0).data.get(position).isCertifiedOrtutor)
         Glide.with(ctn).load(list.get(0).data.get(position).image).placeholder(R.drawable.profile_unselected).into(holder.itemView.ivTeacher)
 
@@ -45,8 +45,13 @@ class SearchHomeAdapter(
             intent.putExtra("teacher_id",""+list.get(0).data.get(position).id.toString())
             intent.putExtra("Type","searchhome")
             ctn.startActivity(intent)
-        }
+        }*/
           //  ctn.startActivity(Intent(ctn,TeacherDetailsActivity::class.java)) }
+        holder.itemView.home_listcardview.setOnClickListener {
+            var intent = Intent(ctn, TeacherDetailsActivity::class.java)
+            intent.putExtra("Type","searchhome")
+            ctn.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {

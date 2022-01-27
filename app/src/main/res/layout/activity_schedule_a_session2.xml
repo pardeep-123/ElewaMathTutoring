@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".Activity.ScheduleASession2Activity">
+
     <RelativeLayout
         android:id="@+id/rl1"
         android:layout_width="match_parent"
-        android:layout_height="95dp"
+        android:layout_height="50dp"
         android:background="@color/textcolor">
 
         <ImageView
@@ -65,12 +66,20 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/text"
                 android:textSize="13sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey"
+                android:id="@+id/view"
+                android:layout_below="@+id/etSchedule"
+                android:layout_marginTop="@dimen/_5sdp"/>
 
+<!--
             <TextView
                 android:id="@+id/tvSchdule"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/etSchedule"
+                android:layout_below="@+id/view"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/avenirlstd_roman"
                 android:text="Will this be in-person or virtual?"
@@ -145,13 +154,13 @@
                         android:textSize="13sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
-            </LinearLayout>
+            </LinearLayout>-->
 
             <LinearLayout
                 android:id="@+id/ll2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ll1"
+                android:layout_below="@+id/view"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal"
                 android:weightSum="2">
@@ -167,9 +176,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/avenirlstd_roman"
-                        android:text="Virtual Session"
-                        android:textAllCaps="true"
-                        android:textColor="@color/textcolor"
+                        android:text="Amount"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <TextView
@@ -178,7 +187,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/avenirlstd_roman"
-                        android:text=""
+                        android:text="2 hours @ $53/hr"
                         android:textColor="@color/text"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -189,8 +198,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="$20.00"
-                    android:textColor="@color/textcolor"
+                    android:text="$20"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -211,9 +220,12 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/background"
+        android:background="@drawable/bg_btn"
         android:fontFamily="@font/aenirlsttd_black"
-        android:text="Confirm session"
-        android:textAllCaps="true"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:text="Confirm Session"
+        android:textAllCaps="false"
         android:textColor="@color/white" />
 </RelativeLayout>

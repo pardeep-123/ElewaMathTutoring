@@ -11,7 +11,7 @@
         android:id="@+id/ll1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#3B3E78"
+        android:background="@color/app"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -23,13 +23,25 @@
                 android:id="@+id/ivBack"
                 style="@style/backIcon"
                 app:tint="@color/white" />
+            <TextView
+                android:id="@+id/tvUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:gravity="center"
+                android:text="Booking"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
 
             <ImageView
                 android:id="@+id/options"
-                android:layout_centerVertical="true"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:visibility="gone"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:padding="8dp"
                 android:src="@drawable/options"
                 app:tint="@color/white" />
@@ -64,7 +76,8 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/ivtecher_image"
                     android:fontFamily="@font/aenirlsttd_black"
-                    android:text=""
+                    android:text="Alexanders"
+                    android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
@@ -75,7 +88,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_toRightOf="@+id/ivtecher_image"
                     android:fontFamily="@font/avenirlstd_roman"
-                    android:text=""
+                    android:text="Teacher, High School Level"
                     android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textSize="13sp" />
@@ -106,7 +119,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="2dp"
-                        android:text=""
+                        android:text="High School Algebra"
                         android:textColor="@color/white"
                         android:textSize="10sp" />
                 </LinearLayout>
@@ -123,15 +136,31 @@
         android:weightSum="10">
 
         <LinearLayout
+            android:id="@+id/llChat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="5"
+            android:background="@drawable/bg_btn"
             android:gravity="center"
+            android:layout_marginStart="@dimen/_5sdp"
             android:orientation="vertical"
-            android:padding="14dp">
+            android:padding="12dp">
 
             <TextView
+                android:id="@+id/tvPersonRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableStart="@drawable/msg_white"
+                android:drawablePadding="@dimen/_5sdp"
+                android:drawableTint="@color/white"
+                android:fontFamily="@font/bold"
+                android:gravity="center"
+                android:text="MESSAGE"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+            <!--<TextView
                 android:id="@+id/tvPersonRate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -150,14 +179,10 @@
                 android:fontFamily="@font/aenirlsttd_black"
                 android:text=""
                 android:textColor="@color/textcolor"
-                android:textSize="18sp" />
+                android:textSize="18sp" />-->
 
         </LinearLayout>
 
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="match_parent"
-            android:background="@color/text" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -165,7 +190,29 @@
             android:layout_weight="5"
             android:orientation="vertical"
             android:padding="14dp">
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/bold"
+                android:gravity="top"
+                android:textAllCaps="true"
+                android:text="Hourly Price"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tvHourlyPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:fontFamily="@font/bold"
+                android:gravity="end"
+                android:layout_marginEnd="@dimen/_25sdp"
+                android:textAllCaps="true"
+                android:text="$23/Hr"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <!--
             <TextView
                 android:id="@+id/tvVirtualRate"
                 android:layout_width="match_parent"
@@ -187,7 +234,7 @@
                 android:gravity="center"
                 android:text=""
                 android:textColor="@color/textcolor"
-                android:textSize="18sp" />
+                android:textSize="18sp" />-->
         </LinearLayout>
     </LinearLayout>
 
@@ -212,7 +259,7 @@
             android:orientation="vertical">
 
 
-            <LinearLayout
+          <!--  <LinearLayout
                 android:id="@+id/ll3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -239,7 +286,7 @@
                     android:textColor="@color/text"
                     android:textSize="13sp" />
 
-            </LinearLayout>
+            </LinearLayout>-->
 
             <LinearLayout
                 android:id="@+id/ll4"
@@ -250,23 +297,38 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
                 android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_about"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/aenirlsttd_black"
-                    android:text="About"
-                    android:textAllCaps="true"
-                    android:textColor="@color/textcolor"
-                    android:textSize="16sp" />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_about"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/aenirlsttd_black"
+                        android:text="About "
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/tvAboutUserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/aenirlsttd_black"
+                        android:text="Alexanders"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+
 
                 <TextView
                     android:id="@+id/tv_teacher_AboutUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-
+android:text="@string/lorem_ipsum_dolor_sit_amet_consectetur_adipisicin"
                     android:textColor="@color/text"
                     android:textSize="13sp" />
 
@@ -288,7 +350,7 @@
                     android:fontFamily="@font/aenirlsttd_black"
                     android:text="Teaching History"
                     android:textAllCaps="true"
-                    android:textColor="@color/textcolor"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -297,6 +359,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:textColor="@color/text"
+                    android:text="@string/lorem_ipsum_dolor_sit_amet_consectetur_adipisicin"
                     android:textSize="13sp" />
 
             </LinearLayout>
@@ -315,26 +378,34 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/background"
+            android:background="@drawable/bg_btn"
             android:fontFamily="@font/aenirlsttd_black"
             android:text="ScheDule A Session"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="13sp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnReschedule"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/background"
+            android:background="@drawable/bg_btn"
             android:fontFamily="@font/aenirlsttd_black"
             android:text="Reschedule"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="13sp"
-            android:visibility="gone" />
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:visibility="gone"
+       />
 
         <TextView
             android:id="@+id/btnviewreciept"

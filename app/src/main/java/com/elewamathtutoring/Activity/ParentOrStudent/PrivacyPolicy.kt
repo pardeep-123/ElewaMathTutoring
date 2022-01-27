@@ -27,7 +27,8 @@ class PrivacyPolicy : AppCompatActivity(), Observer<RestObservable> {
         window.statusBarColor = Color.TRANSPARENT;
         val intent = intent
         val text = intent.getStringExtra("key")
-        //tvAppbarName.setText(text)
+     //  tvAppbarName.setText(text)
+        tvTitle.setText(text)
         api()
         ivBack.setOnClickListener {
             onBackPressed()

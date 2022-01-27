@@ -10,7 +10,7 @@
     <RelativeLayout
         android:id="@+id/rlToolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:background="@color/app"
         android:padding="@dimen/_5sdp">
 

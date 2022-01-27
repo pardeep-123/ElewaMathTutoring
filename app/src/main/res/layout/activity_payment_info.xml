@@ -10,7 +10,7 @@
     <RelativeLayout
         android:id="@+id/rl_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="95dp"
+        android:layout_height="50dp"
         android:background="@color/textcolor"
 
         >
@@ -24,7 +24,7 @@
             app:tint="@color/white" />
 
         <TextView
-           style="@style/TextViewHeader"
+            style="@style/TextViewHeader"
             android:text="Payment Information"
             android:textColor="@color/white"
             android:textSize="16sp" />
