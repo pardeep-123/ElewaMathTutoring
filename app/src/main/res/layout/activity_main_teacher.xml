@@ -44,7 +44,7 @@
                 android:id="@+id/ivSchedule"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/calender_selected" />
+                android:src="@drawable/booking" />
 
             <TextView
                 android:id="@+id/tvScheduleTab"
@@ -53,7 +53,7 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/avenirlstd_roman"
                 android:gravity="center"
-                android:text="Schedule"
+                android:text="Bookings"
                 android:textColor="@color/textcolor"
                 android:textSize="13sp" />
 
@@ -72,7 +72,6 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/requests_unselected" />
-
             <TextView
                 android:id="@+id/tvRequestsTab"
                 android:layout_width="match_parent"
@@ -83,9 +82,7 @@
                 android:text="Requests"
                 android:textColor="@color/text"
                 android:textSize="13sp" />
-
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/llMessagesTab"
             android:layout_width="match_parent"

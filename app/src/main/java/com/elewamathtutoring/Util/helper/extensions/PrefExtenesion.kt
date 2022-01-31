@@ -13,8 +13,8 @@ fun savePrefrence(key: String, value: Any) {
         is Int -> editor.putInt(key, value as Int)
     }
     editor.apply()
-}
 
+}
 fun saveTokenPrefrence(key: String, value: Any) {
     val preference = App.application.applicationContext.getSharedPreferences("E_Teacher", 0)
     val editor = preference.edit()

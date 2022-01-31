@@ -56,7 +56,7 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener , Observer<Re
     private fun onClicks() {
         v.rootView.ivSetting.setOnClickListener(this)
         v.rootView.llEditProfileInformation.setOnClickListener(this)
-        v.rootView.llUpgradeYourProfile.setOnClickListener(this)
+       // v.rootView.llUpgradeYourProfile.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -70,9 +70,9 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener , Observer<Re
                 startActivity(intent)
 
             }
-            R.id.llUpgradeYourProfile -> {
+       /*     R.id.llUpgradeYourProfile -> {
                 startActivity(Intent(context, SubscriptionsActivity::class.java))
-            }
+            }*/
         }
     }
     override fun onChanged(liveData: RestObservable?) {
@@ -82,19 +82,19 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener , Observer<Re
                     profilelist.addAll(listOf(liveData.data.body))
                     text_teacher_name.text=liveData.data.body.name
                     data = profilelist.get(0).teachingLevel.toString()
-                    text_teacher_spicel.text=liveData.data.body.specialties
+                   // text_teacher_spicel.text=liveData.data.body.specialties
                     text_parent_spicilty.text=isCertifiedOrtutor(liveData.data.body.isCertifiedOrtutor)
                     text_teacher_CancelationPolicy.text=liveData.data.body.cancellationPolicy
                     text_teacher_AboutUser.text=liveData.data.body.about
-                    text_teacher_TeachingHistory.text=liveData.data.body.teachingHistory
-                    text_teacher_virtual.text=(Constants.Currency+liveData.data.body.virtualRate.toString())+".00/Hr"
+                 //   text_teacher_TeachingHistory.text=liveData.data.body.teachingHistory
+                    //text_teacher_virtual.text=(Constants.Currency+liveData.data.body.virtualRate.toString())+".00/Hr"
                     text_teacher_inprice.text=Constants.Currency+liveData.data.body.InPersonRate.toString()+".00/Hr"
                     Glide.with(contex).load(liveData.data.body.image).placeholder(R.drawable.profile_unselected).into(image_teacher_image)
                     api_techinglevel()
                 }
                else if (liveData.data is Model_teacher_level)
                {
-                   text_teacher_category.text=""
+                 /*  text_teacher_category.text=""
                    var words= ArrayList<String>()
                    try
                    {
@@ -116,7 +116,7 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener , Observer<Re
                        }
                    }
                    var s = text_teacher_category.text.toString()
-                   text_teacher_category.text = s.substring(0, s.length -1)
+                   text_teacher_category.text = s.substring(0, s.length -1)*/
                 }
             }
             Status.ERROR -> {

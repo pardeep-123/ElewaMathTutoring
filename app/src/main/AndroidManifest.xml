@@ -22,6 +22,15 @@
         android:theme="@style/Theme.default"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activity.Auth.AvilabililtyActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Auth.SignupTeacher2Activity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Auth.SignupTeacherActivity"
+            android:exported="true" />
+        <activity
             android:name=".Activity.Chat.AddParticipantActivity"
             android:exported="false" />
         <activity

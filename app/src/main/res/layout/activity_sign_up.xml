@@ -63,14 +63,13 @@
 
                 <EditText
                     android:id="@+id/edtName"
+                    style="@style/Edittext"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    style="@style/Edittext"
-                    android:maxLength="25"
                     android:layout_toRightOf="@+id/ivName"
                     android:hint="@string/enter_name"
                     android:inputType="textCapSentences"
-                    />
+                    android:maxLength="25" />
             </RelativeLayout>
 
             <TextView
@@ -217,12 +216,12 @@
     </androidx.core.widget.NestedScrollView>
 
     <Button
-        style="@style/Button"
         android:id="@+id/btnNext"
+        style="@style/Button"
         android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
         android:text="Next"
         android:textColor="@color/white" />
 

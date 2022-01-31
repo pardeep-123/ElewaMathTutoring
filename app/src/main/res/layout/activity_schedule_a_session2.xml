@@ -220,11 +220,11 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/bg_btn"
-        android:fontFamily="@font/aenirlsttd_black"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"
         android:layout_marginBottom="@dimen/_20sdp"
+        android:background="@drawable/bg_btn"
+        android:fontFamily="@font/aenirlsttd_black"
         android:text="Confirm Session"
         android:textAllCaps="false"
         android:textColor="@color/white" />

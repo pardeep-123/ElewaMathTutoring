@@ -7,37 +7,59 @@
     android:background="@color/white"
     android:nestedScrollingEnabled="false"
     tools:context=".Activity.TeacherOrTutor.TeachingInfoActivity">
-    <ImageView
-        android:id="@+id/ivBack"
-        style="@style/backIcon"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/backarrow"
-        app:tint="@color/black" />
+
+    <RelativeLayout
+        android:id="@+id/rlToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/app"
+        android:padding="@dimen/_5sdp">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:padding="@dimen/_10sdp"
+            android:src="@drawable/back_arrow_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/avenirlstd_roman"
+            android:gravity="center"
+            android:text="Sign Up"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/btnNext"
-        android:layout_below="@+id/ivBack"
+        android:layout_below="@+id/rlToolbar"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+            android:layout_marginRight="20dp"
+            android:orientation="vertical">
 
 
             <TextView
                 android:id="@+id/tvAsk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ivBack"
+
                 android:layout_marginTop="14dp"
                 android:fontFamily="@font/avenirlstd_roman"
-                android:text="Are you a certified teacher, a tutor or  speacialist?"
+                android:text="What is your education level?"
                 android:textColor="@color/textLightBlue"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -47,18 +69,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_below="@+id/tvAsk"
-                app:cardCornerRadius="@dimen/_4sdp"
-                android:elevation="@dimen/_4sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                app:contentPadding="@dimen/_5sdp"
-                app:cardBackgroundColor="@color/grey">
+                android:elevation="@dimen/_4sdp"
+                app:cardBackgroundColor="@color/grey"
+                app:cardCornerRadius="@dimen/_4sdp"
+                app:contentPadding="@dimen/_5sdp">
 
 
                 <RelativeLayout
                     android:id="@+id/rlChoose"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
 
                     <Spinner
                         android:id="@+id/spinnerChoose"
@@ -66,8 +87,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_toStartOf="@+id/ivChoose"
-                        android:background="@android:color/transparent"
-                        />
+                        android:background="@android:color/transparent" />
 
 
                     <ImageView
@@ -76,11 +96,61 @@
                         android:layout_height="14dp"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/_10sdp"
                         android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/_10sdp"
                         android:src="@drawable/down_arrow" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tvInPersonRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edSpeacialities"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:text="Majors"
+                android:textColor="@color/textLightBlue"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edInPersonRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvInPersonRate"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edittext_bg"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:gravity="start"
+                android:hint="Enter here"
+                android:inputType="number"
+                android:maxLength="6"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/text"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/tvEducationCertificate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edSpeacialities"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:text="Education Certificate"
+                android:textColor="@color/textLightBlue"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvUploadImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
             <TextView
                 android:id="@+id/tvTeachingLevel"
                 android:layout_width="match_parent"
@@ -95,10 +165,10 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_teachingLevel"
-                android:layout_marginLeft="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvTeachingLevel"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
@@ -118,60 +188,31 @@
             <EditText
                 android:id="@+id/edSpeacialities"
                 android:layout_width="match_parent"
-                android:overScrollMode="always"
-                android:scrollbarStyle="insideInset"
-                android:scrollbars="vertical"
-android:inputType="textMultiLine"
                 android:layout_height="80dp"
                 android:layout_below="@+id/tvSpecialities"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/avenirlstd_roman"
                 android:background="@drawable/edittext_bg"
+                android:fontFamily="@font/avenirlstd_roman"
                 android:gravity="start"
                 android:hint="Add Subjects, Seperated by commas"
+                android:inputType="textMultiLine"
+                android:overScrollMode="always"
                 android:padding="10dp"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
                 android:textColor="@color/black"
                 android:textColorHint="@color/text"
                 android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/tvInPersonRate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/edSpeacialities"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/avenirlstd_roman"
-                android:text="In-Person Rate"
-                android:textColor="@color/textLightBlue"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/edInPersonRate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvInPersonRate"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/edittext_bg"
-                android:gravity="start"
-                android:inputType="number"
-                android:maxLength="6"
-                android:fontFamily="@font/avenirlstd_roman"
-                android:singleLine="true"
-                android:hint="Enter in-person rate"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/text"
-                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tvVirtualRate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/edInPersonRate"
+                android:layout_below="@+id/edSpeacialities"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/avenirlstd_roman"
-                android:text="Virtual Rate"
+                android:text="Hourly Price"
                 android:textColor="@color/textLightBlue"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -183,11 +224,11 @@ android:inputType="textMultiLine"
                 android:layout_below="@+id/tvVirtualRate"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/edittext_bg"
-                android:gravity="start"
-                android:maxLength="6"
-                android:inputType="number"
-                android:hint="Enter Virtual Rate"
                 android:fontFamily="@font/avenirlstd_roman"
+                android:gravity="start"
+                android:hint="Enter Hourly Price"
+                android:inputType="number"
+                android:maxLength="6"
                 android:padding="10dp"
                 android:singleLine="true"
                 android:textColor="@color/black"
@@ -213,11 +254,11 @@ android:inputType="textMultiLine"
                 android:layout_below="@+id/tvCancelationPolicy"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/edittext_bg"
+                android:fontFamily="@font/avenirlstd_roman"
                 android:gravity="start"
                 android:hint="Type here..."
-                android:fontFamily="@font/avenirlstd_roman"
-                android:padding="10dp"
                 android:inputType="textMultiLine"
+                android:padding="10dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/text"
                 android:textSize="14sp" />
@@ -241,23 +282,24 @@ android:inputType="textMultiLine"
                 android:layout_below="@+id/tvLocation"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/edittext_bg"
-                android:gravity="start"
                 android:fontFamily="@font/avenirlstd_roman"
+                android:gravity="start"
                 android:hint="Location"
                 android:padding="10dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/text"
                 android:textSize="14sp" />
 
-        </RelativeLayout>
+            <Button
+                android:id="@+id/btnNext"
+                style="@style/Button"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:text="Next"
+                android:textColor="@color/white" />
+        </LinearLayout>
     </ScrollView>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnNext"
-        style="@style/Button"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/button_bg_and_shape"
-        android:text="Next"
-        android:textColor="@color/white" />
+
 </RelativeLayout>

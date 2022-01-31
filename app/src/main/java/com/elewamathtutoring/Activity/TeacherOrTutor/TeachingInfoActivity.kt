@@ -63,8 +63,9 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener , Observe
         onClicks()
         Constants.scrollEditText(edSpeacialities)
         Constants.scrollEditText(edCancelationPolicy)
-        handel_add_Edit()
+       // handel_add_Edit()
         spinnerChoose()
+        rv_teachingLevel.adapter = TeachingLevelAdapter(this, list, this)
 
     }
 
@@ -112,7 +113,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener , Observe
         ivBack.setOnClickListener(this)
         btnNext.setOnClickListener(this)
         edLocation.setOnClickListener(this)
-       api()
+     //  api()
     }
 
     private fun spinnerChoose() {
@@ -161,7 +162,8 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener , Observe
                 finish()
             }
             R.id.btnNext -> {
-                if (intent.getStringExtra("key").equals("signup")) {
+                startActivity(Intent(this, AvailablityActivity::class.java))
+              /*  if (intent.getStringExtra("key").equals("signup")) {
                     if (validator.Teachercompleteprofile(
                             this,
                             CertifiedAs,
@@ -239,7 +241,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener , Observe
                         )
                         baseViewModel.getCommonResponse().observe(this, this)
                     }
-                }
+                }*/
             }
             R.id.edLocation -> {
                 if (Helper.checkLocPermission(this@TeachingInfoActivity)) {
@@ -256,12 +258,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener , Observe
                 if (liveData.data is Model_teacher_level) {
                     list = ArrayList()
                     list.addAll(liveData.data.body)
-                    rv_teachingLevel.adapter = TeachingLevelAdapter(
-                        this,
-                        list,
-                        teachinglevel,
-                        this
-                    )
+               //     rv_teachingLevel.adapter = TeachingLevelAdapter(this, list, teachinglevel, this)
                 }
                 else  if(liveData.data is Commontoall)
                 {

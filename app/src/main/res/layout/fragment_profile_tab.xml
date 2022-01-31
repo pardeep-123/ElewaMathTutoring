@@ -12,24 +12,44 @@
         android:id="@+id/llToolbar"
         android:layout_width="match_parent"
         android:layout_height="225dp"
-
-        android:background="@drawable/background"
+        android:background="@color/app"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="15dp">
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_alignParentStart="true">
 
-            <ImageView
-                android:id="@+id/ivNotification"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_alignParentLeft="true"
-                android:src="@drawable/bell"
-                android:visibility="gone" />
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/WrapTextView"
+        android:fontFamily="@font/medium"
+        android:text="Online"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12sdp" />
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/iv_notification_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:thumb="@drawable/notification_thumb_selector"
+        app:track="@drawable/notification_track_selector" />
+
+</LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/WrapTextView"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/bold"
+                android:text="Profile"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14sdp" />
 
             <ImageView
                 android:id="@+id/ivSetting"
@@ -38,6 +58,12 @@
                 android:layout_alignParentRight="true"
                 android:src="@drawable/setting" />
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@color/white" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -65,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/image_teacher_image"
                     android:fontFamily="@font/aenirlsttd_black"
-                    android:text=""
+                    android:text="Dr. Nanad"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
@@ -76,21 +102,32 @@
                     android:layout_marginTop="5dp"
                     android:layout_toRightOf="@+id/image_teacher_image"
                     android:fontFamily="@font/avenirlstd_roman"
-                    android:text=""
+                    android:text="Fitness Instructors"
                     android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textSize="13sp" />
-
-                <TextView
+                <Button
+                    android:id="@+id/btnEditProfile"
+                    android:layout_width="160dp"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    android:layout_height="38dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_editprofile"
+                    android:fontFamily="@font/avenirlstd_roman"
+                    android:text="Edit Profile"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+             <!--   <TextView
                     android:id="@+id/text_teacher_category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/avenirlstd_roman"
                     android:text=""
                     android:textColor="@color/text"
-                    android:textSize="13sp" />
+                    android:textSize="13sp" />-->
 
-                <RelativeLayout
+           <!--     <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -117,7 +154,7 @@
                         android:textSize="12sp" />
 
 
-                </RelativeLayout>
+                </RelativeLayout>-->
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
@@ -135,8 +172,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="5"
             android:layout_margin="10dp"
+            android:layout_weight="5"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -147,8 +184,9 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/aenirlsttd_black"
                 android:gravity="center"
-                android:text="In-Person Rate"
-                android:textColor="@color/text"
+                android:text="Hourly Price"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
                 android:textSize="13sp" />
 
             <TextView
@@ -156,10 +194,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:fontFamily="@font/aenirlsttd_black"
+                android:fontFamily="@font/light"
                 android:text="$50.00/Hr"
-                android:textColor="@color/textcolor"
-                android:textSize="16sp" />
+                android:textColor="@color/text"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -167,37 +205,6 @@
             android:layout_width="0.8dp"
             android:layout_height="match_parent"
             android:background="@color/text" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:layout_margin="10dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tvVirtualRate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/aenirlsttd_black"
-                android:gravity="center"
-                android:text="Virtual Rate"
-                android:textColor="@color/text"
-                android:textSize="13sp" />
-
-            <TextView
-                android:id="@+id/text_teacher_virtual"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/aenirlsttd_black"
-                android:gravity="center"
-                android:text="$50.00/Hr"
-                android:textColor="@color/textcolor"
-                android:textSize="16sp" />
-        </LinearLayout>
     </LinearLayout>
 
 
@@ -205,10 +212,8 @@
         android:id="@+id/view1"
         android:layout_width="match_parent"
         android:layout_height="0.8dp"
-       android:layout_below="@+id/ll2"
+        android:layout_below="@+id/ll2"
         android:background="@color/text" />
-
-
 
 
     <androidx.core.widget.NestedScrollView
@@ -221,8 +226,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="@dimen/_5sdp">
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginRight="20dp">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/llEditProfileInformation"
@@ -249,7 +254,7 @@
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/profile_selected" />
+                            android:src="@drawable/menu" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -257,11 +262,11 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="14dp"
                             android:layout_marginRight="10dp"
-                            android:textStyle="bold"
                             android:fontFamily="@font/avenirlstd_roman"
                             android:text="Edit Profile Information"
                             android:textColor="@color/black"
-                            android:textSize="13sp" />
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -280,12 +285,15 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <LinearLayout
+         <!--   <LinearLayout
                 android:id="@+id/llUpgradeYourProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/llEditProfileInformation"
-                android:layout_margin="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/background_blue"
                 android:orientation="horizontal"
                 android:padding="20dp"
@@ -307,12 +315,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="14dp"
-                        android:textStyle="bold"
                         android:layout_marginRight="10dp"
                         android:fontFamily="@font/avenirlstd_roman"
                         android:text="Upgrade Your Profile"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -328,13 +336,13 @@
                         android:layout_gravity="center"
                         android:src="@drawable/arrow" />
                 </LinearLayout>
-            </LinearLayout>
+            </LinearLayout>-->
 
             <TextView
                 android:id="@+id/tv_CancelationPolicy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/llUpgradeYourProfile"
+                android:layout_below="@+id/llEditProfileInformation"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/aenirlsttd_black"
                 android:text="Cancelation Policy"
@@ -372,6 +380,7 @@
                 android:textColor="@color/text"
                 android:textSize="13sp" />
 
+<!--
 
             <TextView
                 android:id="@+id/tv_TeachingHistory"
@@ -388,12 +397,13 @@
             <TextView
                 android:id="@+id/text_teacher_TeachingHistory"
                 android:layout_width="match_parent"
-                android:layout_marginBottom="10dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_TeachingHistory"
                 android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
                 android:textColor="@color/text"
                 android:textSize="13sp" />
+-->
 
 
         </RelativeLayout>

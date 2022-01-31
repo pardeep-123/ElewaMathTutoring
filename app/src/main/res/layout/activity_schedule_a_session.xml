@@ -109,7 +109,7 @@
                             android:fontFamily="@font/aenirlsttd_black"
                             android:gravity="center"
                             android:text="6:00 AM - 8:00 PM"
-                            android:textColor="@color/textcolor"
+                            android:textColor="@color/black"
                             android:textSize="14sp" />
 
                     </RelativeLayout>

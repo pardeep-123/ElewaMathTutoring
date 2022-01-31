@@ -61,7 +61,7 @@ var address=""
         {
 
         }
-        else
+      /*  else
         {
             profilelist = (intent.getSerializableExtra("list_model") as java.util.ArrayList<Body>?)!!
 
@@ -75,7 +75,7 @@ var address=""
             val words2: ArrayList<String> = data2.split(",") as ArrayList<String>
             Selctedarray_time=words2
             btnConfirmSignUp.text="SAVE"
-        }
+        }*/
 
         onClicks()
         setAdapters()
@@ -104,7 +104,9 @@ var address=""
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.btnConfirmSignUp -> {
-                if (validator.Teacherdelectdatetime(this, Array_date, Array_time)) {
+                startActivity(Intent(this, MainTeacherActivity::class.java))
+                finishAffinity()
+          /*      if (validator.Teacherdelectdatetime(this, Array_date, Array_time)) {
 
                     if (intent.getStringExtra("key").equals("nonedit")) {
 
@@ -172,7 +174,7 @@ var address=""
                                 Array_time.toString().replace("[", "").replace("]", "").replace(" ", ""), true)
                             baseViewModel.getCommonResponse().observe(this, this)
                     }
-                }
+                }*/
             }
             R.id.ivBack -> {
                 finish()
@@ -207,13 +209,15 @@ var address=""
                     )
                     savePrefrence(Constants.Social_login, "False")
                     savePrefrence(Constants.user_type, liveData.data.body.userType.toString())
-                    if (liveData.data.body.userType == 1) {
+                    startActivity(Intent(this, MainTeacherActivity::class.java))
+                    finishAffinity()
+                    /*if (liveData.data.body.userType == 1) {
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     } else {
                         startActivity(Intent(this, SubscriptionsActivity::class.java))
                         finish()
-                    }
+                    }*/
                 }
                 else  if(liveData.data is Commontoall)
                 {

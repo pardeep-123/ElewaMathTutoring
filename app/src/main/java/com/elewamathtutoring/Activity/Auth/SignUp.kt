@@ -15,6 +15,7 @@ import com.elewamathtutoring.Util.Validator
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.Util.helper.extensions.getPrefrence
+import com.elewamathtutoring.Util.helper.extensions.savePrefrence
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
@@ -33,12 +34,20 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
         App.getinstance().getmydicomponent().inject(this)
         ivBack.setOnClickListener(this)
         btnNext.setOnClickListener(this)
+
+
+
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btnNext -> {
-                startActivity(Intent(this, MainActivity::class.java))
+                if( intent.getStringExtra("signup").equals("teacher")){
+                    startActivity(Intent(this, SignupTeacherActivity::class.java))
+                }else{
+                    startActivity(Intent(this, MainActivity::class.java))
+                }
+
                 /*    if (validator.signUpValid(this,  edtName.text.toString(), edtEmail.text.toString(),editPassword.text.toString(),editConfirmPassword.text.toString())) {
                         baseViewModel.checkEmail(this,  edtEmail.text.toString(), true)
                         baseViewModel.getCommonResponse().observe(this, this)

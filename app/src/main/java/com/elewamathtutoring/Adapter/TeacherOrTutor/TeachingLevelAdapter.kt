@@ -11,11 +11,11 @@ import com.riseball.interface_base.Teachinglevel_interface
 import kotlinx.android.synthetic.main.item_filteroptions.view.*
 import java.lang.Exception
 import kotlin.collections.ArrayList
-
+// var teachinglevel: ArrayList<String>,
 class TeachingLevelAdapter(
     conx: Context,
     mylist: ArrayList<Body>,
-    var teachinglevel: ArrayList<String>,
+
     var teachingInfoActivity: Teachinglevel_interface
 ) :
     RecyclerView.Adapter<TeachingLevelAdapter.ViewHolder>() {
@@ -39,9 +39,9 @@ class TeachingLevelAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int)
     {
-        holder.itemView.name.text = list.get(position).level.toString()
+//        holder.itemView.name.text = list.get(position).level.toString()
 
-        try {
+       /* try {
             for(i in 0 until  teachinglevel.size)
             {
                 if(teachinglevel.get(i).equals(list.get(position).id.toString()))
@@ -53,17 +53,19 @@ class TeachingLevelAdapter(
         }
         catch (e:Exception)
         {
-        }
+        }*/
+
+
         holder.itemView.setOnClickListener {
             if (holder.itemView.tick.getDrawable().getConstantState() == ctn.getResources().getDrawable( R.drawable.uncheck).getConstantState())
             {
                 holder.itemView.tick.setImageResource(R.drawable.tick_blue)
-                Level_list.add(list.get(position).id.toString())
+              //  Level_list.add(list.get(position).id.toString())
             }
             else
             {
                 holder.itemView.tick.setImageResource(R.drawable.uncheck)
-                Level_list.remove(list.get(position).id.toString())
+               // Level_list.remove(list.get(position).id.toString())
             }
             Teacher_level(Level_list)
         }

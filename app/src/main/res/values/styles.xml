@@ -54,8 +54,6 @@
 
 
     <style name="Button">
-
-
         <item name="android:layout_marginTop">20dp</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:fontFamily">@font/aenirlsttd_black</item>

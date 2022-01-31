@@ -121,4 +121,5 @@
     <string name="page1">Mauris libero, condimentum quis magna at, consectetur rutrum  sapien.Sed pellentesque auctor tortor, ut molestie ligula bibendum elementum.</string>
     <string name="login_as_guest">LOGIN AS GUEST</string>
     <string name="create_an_account">Create An Account</string>
+    <string name="edit_your_profile">Edit Your Profile</string>
 </resources>

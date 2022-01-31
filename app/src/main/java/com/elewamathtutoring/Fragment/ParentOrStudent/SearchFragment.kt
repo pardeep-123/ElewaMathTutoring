@@ -301,7 +301,7 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
                 if (liveData.data is Model_teacher_level) {
                     teacherlevel = ArrayList()
                     teacherlevel.addAll(liveData.data.body)
-                    rv_filterOptions1.adapter = TeachingLevelAdapter(requireContext(), teacherlevel, getdata_toselected_level,this)
+                   // rv_filterOptions1.adapter = TeachingLevelAdapter(requireContext(), teacherlevel, getdata_toselected_level,this)
                 }
                 else if (liveData.data is Model_search)
                 {

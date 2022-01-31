@@ -30,10 +30,12 @@ class SignUpAs : AppCompatActivity(),View.OnClickListener {
         llStudent.setOnClickListener(this)
         llTeacher.setOnClickListener(this)
     /* l1.setOnClickListener {
+    ///////////////////student
             savePrefrence(Constants.user_type, "2")
             startActivity(Intent(this@SignUpAs, LoginScreen::class.java))
         }
         l2.setOnClickListener {
+        ////////////teacher
             savePrefrence(Constants.user_type, "1")
             startActivity(Intent(this@SignUpAs, LoginScreen::class.java))
         }*/
@@ -44,9 +46,13 @@ class SignUpAs : AppCompatActivity(),View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id) {
              R.id.llStudent -> {
+               //  savePrefrence(Constants.user_type, "2")
                 startActivity(Intent(this, SignUp::class.java))
             } R.id.llTeacher -> {
-                startActivity(Intent(this, SignUp::class.java))
+           // savePrefrence(Constants.user_type, "1")
+                startActivity(Intent(this, SignUp::class.java)
+                    .putExtra("signup","teacher")
+                )
             }
         }
     }

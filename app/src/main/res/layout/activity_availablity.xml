@@ -8,38 +8,60 @@
     android:nestedScrollingEnabled="false"
     tools:context=".Activity.TeacherOrTutor.AvailablityActivity">
 
-    <ImageView
-        android:id="@+id/ivBack"
-        style="@style/backIcon" />
+    <RelativeLayout
+        android:id="@+id/rlToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/app"
+        android:padding="@dimen/_5sdp">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:padding="@dimen/_10sdp"
+            android:src="@drawable/back_arrow_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/avenirlstd_roman"
+            android:gravity="center"
+            android:text="Availability"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+    </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/btnConfirmSignUp"
-        android:layout_below="@id/ivBack">
+        android:layout_below="@id/rlToolbar">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp">
+            android:layout_marginRight="20dp"
+            android:orientation="vertical">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvAvailibity"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/aenirlsttd_black"
+                android:fontFamily="@font/bold"
                 android:text="Availability"
-                android:textAllCaps="true"
-                android:textColor="@color/textcolor"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
 
             <TextView
                 android:id="@+id/tvDatesAvailable"
-                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvAvailibity"
@@ -47,7 +69,8 @@
                 android:fontFamily="@font/avenirlstd_roman"
                 android:text="Dates Available"
                 android:textColor="@color/textLightBlue"
-                android:textSize="13sp" />
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_datesAvailable"
@@ -62,14 +85,14 @@
             <TextView
                 android:id="@+id/tvTimeSlotsAvailable"
                 android:layout_width="match_parent"
-                android:textStyle="bold"
-                android:layout_marginTop="20dp"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/rv_datesAvailable"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/avenirlstd_roman"
                 android:text="Time Slots Available"
-                android:layout_below="@+id/rv_datesAvailable"
                 android:textColor="@color/textLightBlue"
-                android:textSize="13sp" />
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_timeSlotsAvailable"
@@ -81,18 +104,51 @@
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="2" />
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp">
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvSlot"
+                    style="@style/WrapTextView"
+                    android:layout_alignParentStart="true"
+                    android:drawableRight="@drawable/freeslot"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:text="Free Slot" />
 
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/iv_notification_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:thumb="@drawable/notification_thumb_selector"
+                    app:track="@drawable/notification_track_selector" />
+            </RelativeLayout>
 
-        </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvFreeSlot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <Button
+                android:id="@+id/btnConfirmSignUp"
+                style="@style/Button"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:text="Confirm Sign Up"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-    <androidx.appcompat.widget.AppCompatButton
-        style="@style/Button"
-        android:id="@+id/btnConfirmSignUp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
-        android:text="Confirm Signup"
-     />
+
 
 
 </RelativeLayout>
