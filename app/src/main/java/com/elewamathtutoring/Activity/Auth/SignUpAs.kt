@@ -12,6 +12,7 @@ import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.SharedPrefUtil
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.extensions.savePrefrence
+import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.activity_sign_up_as.*
 
 class SignUpAs : AppCompatActivity(),View.OnClickListener {
@@ -46,12 +47,14 @@ class SignUpAs : AppCompatActivity(),View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id) {
              R.id.llStudent -> {
-               //  savePrefrence(Constants.user_type, "2")
-                startActivity(Intent(this, SignUp::class.java))
+                 savePrefrence(Constants.user_type, "2")
+                startActivity(Intent(this, LoginScreen::class.java)
+                    .putExtra("Name", "Student")
+                )
             } R.id.llTeacher -> {
-           // savePrefrence(Constants.user_type, "1")
-                startActivity(Intent(this, SignUp::class.java)
-                    .putExtra("signup","teacher")
+                savePrefrence(Constants.user_type, "1")
+                startActivity(Intent(this, LoginScreen::class.java)
+                    .putExtra("Name","Tutor")
                 )
             }
         }

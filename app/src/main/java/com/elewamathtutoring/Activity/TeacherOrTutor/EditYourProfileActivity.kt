@@ -29,10 +29,7 @@ class EditYourProfileActivity : AppCompatActivity(), View.OnClickListener,
         llTeachingInfoRates.setOnClickListener(this)
         llAvailability.setOnClickListener(this)
         ivBack.setOnClickListener(this)
-
-
     }
-
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.llAboutYou -> {
@@ -49,8 +46,9 @@ class EditYourProfileActivity : AppCompatActivity(), View.OnClickListener,
             }
             R.id.llAvailability -> {
                 val intentt = Intent(this, AvailablityActivity::class.java)
-                intentt.putExtra("list_model", intent.getSerializableExtra("list_model"))
-                intentt.putExtra("key", profilelist)
+                intentt.putExtra("key", "available")
+                /*intentt.putExtra("list_model", intent.getSerializableExtra("list_model"))
+                intentt.putExtra("key", profilelist)*/
                 startActivity(intentt)
             }
             R.id.ivBack -> {
@@ -64,9 +62,7 @@ class EditYourProfileActivity : AppCompatActivity(), View.OnClickListener,
                 if (liveData.data is Model_login) {
                     profilelist.clear()
                     profilelist.addAll(listOf(liveData.data.body))
-                  
                 }
-               
             }
             Status.ERROR -> {
                 if (liveData.error is Model_login)
@@ -78,7 +74,6 @@ class EditYourProfileActivity : AppCompatActivity(), View.OnClickListener,
             }
         }
     }
-
     override fun onResume() {
         super.onResume()
         baseViewModel.get_profile(this, getPrefrence(Constants.user_type, ""), true)

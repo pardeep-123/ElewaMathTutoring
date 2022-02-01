@@ -30,7 +30,7 @@ class DatesAvailableAdapter(
 
     override fun getItemCount(): Int {
            // return list.size
-        return 3
+        return 7
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

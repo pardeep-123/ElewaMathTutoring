@@ -61,7 +61,7 @@ class IntroSlider : AppCompatActivity() {
 
 
         tvSkip.setOnClickListener {
-            startActivity(Intent(this@IntroSlider, LoginScreen::class.java))
+            startActivity(Intent(this@IntroSlider, SignUpAs::class.java))
 
 
         }
@@ -79,7 +79,7 @@ class IntroSlider : AppCompatActivity() {
         btnNext.setOnClickListener {
 
             if (mPager!!.currentItem == 2) {
-                startActivity(Intent(this@IntroSlider, LoginScreen::class.java))
+                startActivity(Intent(this@IntroSlider, SignUpAs::class.java))
 
             } else {
                 mPager!!.setCurrentItem((mPager!!.currentItem + 1))

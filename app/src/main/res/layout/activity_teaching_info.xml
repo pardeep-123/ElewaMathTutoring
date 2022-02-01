@@ -32,7 +32,7 @@
             android:layout_marginTop="25dp"
             android:fontFamily="@font/avenirlstd_roman"
             android:gravity="center"
-            android:text="Sign Up"
+            android:text="Teaching info &amp; Rates"
             android:textColor="@color/white"
             android:textSize="20dp" />
     </RelativeLayout>

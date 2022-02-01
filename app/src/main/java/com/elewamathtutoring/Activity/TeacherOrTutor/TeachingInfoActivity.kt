@@ -120,9 +120,12 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener , Observe
         val spinner1: Spinner = findViewById(R.id.spinnerChoose)
         var spinnerlist: ArrayList<String> = ArrayList()
         spinnerlist.add("")
-        spinnerlist.add("Certified Teacher")
-        spinnerlist.add("Tutor")
-        spinnerlist.add("Specialist")
+        spinnerlist.add("Below high school")
+        spinnerlist.add("High school diploma")
+        spinnerlist.add("Bachlor's degree")
+        spinnerlist.add("Bachlor's degree")
+        spinnerlist.add("Master's degree")
+        spinnerlist.add("PHD")
 
         val list: ArrayAdapter<String> = ArrayAdapter<String>(
             this,

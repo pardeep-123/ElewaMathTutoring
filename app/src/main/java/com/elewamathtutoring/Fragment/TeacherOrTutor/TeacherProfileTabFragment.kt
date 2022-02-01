@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.SettingActivity
+import com.elewamathtutoring.Activity.TeacherOrTutor.AboutYouActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.EditYourProfileActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.SubscriptionsActivity
 import com.elewamathtutoring.Models.Login.Body
@@ -45,30 +46,32 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener , Observer<Re
 
         return v
     }
-
     private fun api()
     {
         baseViewModel.get_profile(requireActivity(), getPrefrence(Constants.user_type, ""), true)
         baseViewModel.getCommonResponse().observe(requireActivity(), this)
-
     }
-
     private fun onClicks() {
         v.rootView.ivSetting.setOnClickListener(this)
         v.rootView.llEditProfileInformation.setOnClickListener(this)
+        v.rootView.btnEditProfile.setOnClickListener(this)
        // v.rootView.llUpgradeYourProfile.setOnClickListener(this)
     }
-
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.ivSetting -> {
-                startActivity(Intent(context, SettingActivity::class.java))
+                startActivity(Intent(context, SettingActivity::class.java)
+                    .putExtra("setting","managePayment")
+                )
             }
             R.id.llEditProfileInformation -> {
                 val intent = Intent(contex, EditYourProfileActivity::class.java)
                 intent.putExtra("list_model",profilelist )
                 startActivity(intent)
-
+            }
+            R.id.btnEditProfile -> {
+                val intent = Intent(contex, AboutYouActivity::class.java)
+                startActivity(intent)
             }
        /*     R.id.llUpgradeYourProfile -> {
                 startActivity(Intent(context, SubscriptionsActivity::class.java))
@@ -129,10 +132,8 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener , Observer<Re
             }
         }
     }
-
     private fun api_techinglevel() {
         baseViewModel.teacher_level(requireActivity(), false)
-
     }
 
     override fun onResume() {

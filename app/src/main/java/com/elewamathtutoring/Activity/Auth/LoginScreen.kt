@@ -59,6 +59,11 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
       //  googleHelper = GoogleHelper(this, this)
         allClickListeners()
        // initFbSignin()
+        if( intent.getStringExtra("Name").equals("Tutor")){
+            btnGuest.visibility=View.GONE
+
+
+        }
     }
 
     fun allClickListeners()
@@ -76,7 +81,13 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
         when(v.id){
             R.id.btnCreate->
             {
-                startActivity(Intent(this, SignUpAs::class.java))
+                if( intent.getStringExtra("Name").equals("Tutor")){
+                    startActivity(Intent(this, SignUp::class.java)
+                        .putExtra("Name","Tutor"))
+                }else {
+                    startActivity(
+                        Intent(this, SignUp::class.java))
+                }
             }
           /*  R.id.googleBtn-> {
                 progressBar.visibility=View.VISIBLE
@@ -106,8 +117,15 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
 
             }*/
             R.id.btnLogin-> {
-                startActivity(Intent(this, MainActivity::class.java))
-                finishAffinity()
+
+                if( intent.getStringExtra("Name").equals("Tutor")){
+                    startActivity(Intent(this, MainTeacherActivity::class.java))
+                    finishAffinity()
+                }else {
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finishAffinity()
+                }
+
 
                /* val email = email_text.text.toString().trim()
                 val password = password_text.text.toString().trim()

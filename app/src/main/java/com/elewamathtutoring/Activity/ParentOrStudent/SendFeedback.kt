@@ -56,9 +56,10 @@ class SendFeedback : AppCompatActivity(),View.OnClickListener, Observer<RestObse
                 selectImage()
             }*/
             R.id.btnSendFeedBack -> {
-                if (validator.contactUs(this, firstimage, cs_message.text.toString())) {
+                api()
+             /*   if (validator.contactUs(this, firstimage, cs_message.text.toString())) {
                     api()
-                }
+                }*/
             }
         }
     }

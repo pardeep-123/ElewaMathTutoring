@@ -31,32 +31,29 @@
         android:textColor="@color/white"
         android:textSize="@dimen/_14sdp" />
 </RelativeLayout>
-
-
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/_100sdp"
         android:layout_below="@+id/toolbar"
         android:layout_marginTop="35dp"
-        android:padding="30dp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/splashimg" />
-
 
     <androidx.cardview.widget.CardView
         android:id="@+id/llAboutYou"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/logo"
-        android:layout_marginHorizontal="@dimen/_10sdp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="@dimen/_20sdp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/rectangle"
-        android:elevation="3dp"
         android:backgroundTint="@color/app"
+        android:elevation="3dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/_8sdp"
         app:contentPaddingBottom="45dp"
@@ -66,8 +63,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center">
 
 
             <TextView
@@ -91,12 +88,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/llAboutYou"
-        android:layout_marginHorizontal="@dimen/_10sdp"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/app"
-
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/rectangle"
         android:elevation="3dp"
@@ -133,14 +128,15 @@
         android:id="@+id/llAvailability"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_10sdp"
         android:layout_below="@+id/llTeachingInfoRates"
-        android:elevation="3dp"
-        android:layout_margin="10dp"
-        android:backgroundTint="@color/app"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/rectangle"
-        app:cardCornerRadius="@dimen/_8sdp"
+        android:backgroundTint="@color/app"
+        android:elevation="3dp"
         app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/_8sdp"
         app:contentPaddingBottom="45dp"
         app:contentPaddingTop="45dp">
 

@@ -25,7 +25,6 @@ class MainTeacherActivity : AppCompatActivity(), View.OnClickListener {
         llRequestsTab.setOnClickListener(this)
         llMessagesTab.setOnClickListener(this)
         llProfileTab.setOnClickListener(this)
-
         switchFragment(R.id.container2, ScheduleTabFragment())
     }
 
@@ -34,7 +33,7 @@ class MainTeacherActivity : AppCompatActivity(), View.OnClickListener {
         when (v!!.id) {
 
             R.id.llScheduleTab -> {
-                ivSchedule.setImageResource(R.drawable.calender_selected)
+                ivSchedule.setImageResource(R.drawable.booking)
                 ivRequests.setImageResource(R.drawable.requests_unselected)
                 ivMessages.setImageResource(R.drawable.messages_unselected)
                 ivProfile.setImageResource(R.drawable.profile_unselected)
@@ -46,14 +45,12 @@ class MainTeacherActivity : AppCompatActivity(), View.OnClickListener {
                 if (f !is ScheduleTabFragment) {
                     switchFragment(R.id.container2, ScheduleTabFragment())
                 }
-
             }
             R.id.llRequestsTab -> {
                 ivSchedule.setImageResource(R.drawable.calender_unselected)
-                ivRequests.setImageResource(R.drawable.requests_selected)
+                ivRequests.setImageResource(R.drawable.req_app)
                 ivMessages.setImageResource(R.drawable.messages_unselected)
                 ivProfile.setImageResource(R.drawable.profile_unselected)
-
                 tvScheduleTab.setTextColor(ContextCompat.getColor(this, R.color.text))
                 tvRequestsTab.setTextColor(ContextCompat.getColor(this, R.color.textcolor))
                 tvMessagesTab.setTextColor(ContextCompat.getColor(this, R.color.text))
@@ -61,19 +58,16 @@ class MainTeacherActivity : AppCompatActivity(), View.OnClickListener {
                 if (f !is RequestsTabFragment) {
                     switchFragment(R.id.container2, RequestsTabFragment())
                 }
-
             }
             R.id.llMessagesTab -> {
                 ivSchedule.setImageResource(R.drawable.calender_unselected)
                 ivRequests.setImageResource(R.drawable.requests_unselected)
-                ivMessages.setImageResource(R.drawable.message_selected)
+                ivMessages.setImageResource(R.drawable.msg_app)
                 ivProfile.setImageResource(R.drawable.profile_unselected)
-
                 tvScheduleTab.setTextColor(ContextCompat.getColor(this, R.color.text))
                 tvRequestsTab.setTextColor(ContextCompat.getColor(this, R.color.text))
                 tvMessagesTab.setTextColor(ContextCompat.getColor(this, R.color.textcolor))
                 tvProfileTab.setTextColor(ContextCompat.getColor(this, R.color.text))
-
                 if (f !is MessagesTabFragment)
                 {
                     switchFragment(R.id.container2, MessagesTabFragment())
@@ -84,20 +78,17 @@ class MainTeacherActivity : AppCompatActivity(), View.OnClickListener {
                 ivSchedule.setImageResource(R.drawable.calender_unselected)
                 ivRequests.setImageResource(R.drawable.requests_unselected)
                 ivMessages.setImageResource(R.drawable.messages_unselected)
-                ivProfile.setImageResource(R.drawable.profile_selected)
-
+                ivProfile.setImageResource(R.drawable.menu)
                 tvScheduleTab.setTextColor(ContextCompat.getColor(this, R.color.text))
                 tvRequestsTab.setTextColor(ContextCompat.getColor(this, R.color.text))
                 tvMessagesTab.setTextColor(ContextCompat.getColor(this, R.color.text))
                 tvProfileTab.setTextColor(ContextCompat.getColor(this, R.color.textcolor))
-
                 if (f !is TeacherProfileTabFragment) {
                     switchFragment(R.id.container2, TeacherProfileTabFragment())
                 }
             }
         }
     }
-
     protected fun switchFragment(main_frame: Int, fragment: Fragment?) {
         val fragmentTransaction: FragmentTransaction =
             supportFragmentManager.beginTransaction()

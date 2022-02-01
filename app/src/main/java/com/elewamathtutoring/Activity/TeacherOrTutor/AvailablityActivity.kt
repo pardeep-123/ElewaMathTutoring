@@ -61,6 +61,7 @@ var address=""
         {
 
         }
+
       /*  else
         {
             profilelist = (intent.getSerializableExtra("list_model") as java.util.ArrayList<Body>?)!!
@@ -92,8 +93,6 @@ var address=""
         list.add(DatesAvailableModel("Friday"))
         list.add(DatesAvailableModel("Saturday"))
         rv_datesAvailable.adapter = DatesAvailableAdapter(list, Selctedarray_date,this@AvailablityActivity)
-
-
     }
 
     private fun onClicks() {
@@ -104,8 +103,15 @@ var address=""
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.btnConfirmSignUp -> {
-                startActivity(Intent(this, MainTeacherActivity::class.java))
-                finishAffinity()
+
+                if(intent.getStringExtra("key").equals("available"))
+                {
+finish()
+                }
+                else {
+                    startActivity(Intent(this, MainTeacherActivity::class.java))
+                    finishAffinity()
+                }
           /*      if (validator.Teacherdelectdatetime(this, Array_date, Array_time)) {
 
                     if (intent.getStringExtra("key").equals("nonedit")) {

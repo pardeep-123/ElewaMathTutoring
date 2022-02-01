@@ -11,19 +11,35 @@
         android:id="@+id/schedule_toolbar"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@color/barcolor"
+        android:background="@color/barcolor">
 
-        >
-
-        <ImageView
-            android:id="@+id/ivNotification"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+       <!-- <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="15dp"
-            android:layout_marginBottom="15dp"
-            android:src="@drawable/bell" />
+            android:layout_centerVertical="true"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/WrapTextView"
+                android:text="Available"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp" />
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/iv_notification_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:thumb="@drawable/notification_thumb_selector"
+                app:track="@drawable/notification_track_selector" />
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/WrapTextView"
+                android:text="Occupied"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp" />
+
+
+        </LinearLayout>-->
 
         <TextView
             android:layout_width="wrap_content"
@@ -203,17 +219,18 @@
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
             </RelativeLayout>
+
             <TextView
                 android:id="@+id/tv_whennodata"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="No list found!"
                 android:layout_below="@+id/calenderView_rl"
-                android:visibility="gone"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:text="No list found!"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"
-                android:layout_marginTop="@dimen/_30sdp"
-                android:layout_centerHorizontal="true">
+                android:visibility="gone">
 
             </TextView>
 

@@ -105,26 +105,32 @@ class SettingActivity : AppCompatActivity(), Observer<RestObservable> {
         rlSendFeedback.setOnClickListener {
             val intent = Intent(this, SendFeedback::class.java)
             startActivity(intent)
-
         }
-        rlManagePayment.setOnClickListener {
-            val intent = Intent(this, PaymentInfoActivity::class.java)
-            startActivity(intent)
 
-        }
         rlLogOut.setOnClickListener {
             showPoupLogout()
-
         }
         rlDeleteAccount.setOnClickListener {
             showPoupupDelete()
-
         }
         tvWithdrawal.setOnClickListener {
             val intent = Intent(this, WithdrawalActivity::class.java)
             startActivity(intent)
         }
+        if( intent.getStringExtra("setting").equals("managePayment")){
+            rlManagePayment.visibility=View.GONE
+            viewManagment.visibility=View.GONE
+        }
+        else
+        {
+            rlManagePayment.visibility=View.VISIBLE
+            viewManagment.visibility=View.VISIBLE
+            rlManagePayment.setOnClickListener {
+                val intent = Intent(this, PaymentInfoActivity::class.java)
+                startActivity(intent)
 
+            }
+        }
         //  clickHandle()
     }
 

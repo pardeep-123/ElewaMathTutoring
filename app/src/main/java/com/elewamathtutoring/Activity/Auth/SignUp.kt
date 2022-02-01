@@ -34,15 +34,12 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
         App.getinstance().getmydicomponent().inject(this)
         ivBack.setOnClickListener(this)
         btnNext.setOnClickListener(this)
-
-
-
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btnNext -> {
-                if( intent.getStringExtra("signup").equals("teacher")){
+                if( intent.getStringExtra("Name").equals("Tutor")){
                     startActivity(Intent(this, SignupTeacherActivity::class.java))
                 }else{
                     startActivity(Intent(this, MainActivity::class.java))

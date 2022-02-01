@@ -48,7 +48,7 @@ class AboutYouActivity : AppCompatActivity(), View.OnClickListener  , Observer<R
         scrollEditText(edaboutyou)
         scrollEditText(edTeachingHistory)
 
-        if(intent.getStringExtra("key")!!.equals("signup"))
+      /*  if(intent.getStringExtra("key")!!.equals("signup"))
         {
             tvname.visibility=View.GONE
             relat_name.visibility=View.GONE
@@ -72,7 +72,7 @@ class AboutYouActivity : AppCompatActivity(), View.OnClickListener  , Observer<R
                 .placeholder(R.drawable.profile_unselected)
                 .into(ivProfileDesc)
             btnNext.text="SAVE"
-        }
+        }*/
     }
 
     override fun onClick(v: View?) {
@@ -81,7 +81,7 @@ class AboutYouActivity : AppCompatActivity(), View.OnClickListener  , Observer<R
                 selectImage()
             }
             R.id.btnNext -> {
-                if (intent.getStringExtra("key").equals("signup")) {
+               /* if (intent.getStringExtra("key").equals("signup")) {
                     if (validator.Teacheraboutus(this, firstimage, edaboutyou.text.toString(),
                             edTeachingHistory.text.toString(), text_teacher_name.text.toString(), "add")) {
                         val password = intent.getStringExtra("password").toString()
@@ -113,7 +113,8 @@ class AboutYouActivity : AppCompatActivity(), View.OnClickListener  , Observer<R
                         )
                         baseViewModel.getCommonResponse().observe(this, this)
                     }
-                }
+                }*/
+                finish()
             }
             R.id.ivBack -> {
                 finish()
