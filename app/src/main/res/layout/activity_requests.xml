@@ -12,14 +12,14 @@
         android:id="@+id/llToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#3B3E78"
+        android:background="@color/app"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:background="#3B3E78"
+            android:background="@color/app"
             android:layout_marginTop="10dp"
             android:layout_marginRight="5dp">
 
@@ -56,7 +56,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivProfileSignUp"
                 android:layout_width="100dp"
-                android:layout_height="80dp"
+                android:layout_height="100dp"
                 android:src="@drawable/profile"
                 app:civ_border_color="@color/text"
                 app:civ_border_width="0.5dp"
@@ -76,6 +76,7 @@
                     android:layout_toRightOf="@+id/ivProfileSignUp"
                     android:fontFamily="@font/aenirlsttd_black"
                     android:textColor="@color/white"
+                    android:text="Rohan singh"
                     android:textSize="18sp" />
 
                 <TextView
@@ -85,6 +86,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_toRightOf="@+id/ivProfileSignUp"
                     android:fontFamily="@font/avenirlstd_roman"
+                    android:text="rohan@yopmal.com"
 
                     android:textColor="@color/text"
                     android:textSize="13sp" />
@@ -101,8 +103,7 @@
                         android:layout_height="40dp"
                         android:layout_alignParentStart="true"
                         android:layout_marginRight="10dp"
-                        android:background="@drawable/button_bg_and_shape"
-                        android:backgroundTint="#7374A8">
+                        android:background="@drawable/bg_editprofile">
 
                         <ImageView
                             android:id="@+id/ivMessage"
@@ -159,10 +160,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/aenirlsttd_black"
+                android:fontFamily="@font/medium"
                 android:gravity="center"
-                android:text="IN-PERSON SESSION"
-                android:textColor="@color/textcolor"
+                android:text="LEARNING"
+                android:textColor="@color/black"
                 android:textSize="13sp" />
 
             <TextView
@@ -170,8 +171,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:fontFamily="@font/avenirlsttd_book"
+                android:fontFamily="@font/medium"
                 android:gravity="center"
+                android:text="Requsted 2/2/2022"
                 android:paddingHorizontal="@dimen/_5sdp"
                 android:textColor="@color/textLightBlue"
                 android:textSize="14sp" />
@@ -198,11 +200,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/aenirlsttd_black"
+                android:fontFamily="@font/medium"
                 android:gravity="center"
-                android:text=""
+                android:text="wed,feb 21"
                 android:textAllCaps="true"
-                android:textColor="@color/textcolor"
+                android:textColor="@color/black"
                 android:textSize="13sp" />
 
             <TextView
@@ -211,7 +213,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                android:fontFamily="@font/avenirlsttd_book"
+                android:fontFamily="@font/medium"
+                android:text="2:00 PM - 4:00 PM"
                 android:gravity="center"
                 android:textColor="@color/textLightBlue"
                 android:textSize="14sp" />
@@ -227,8 +230,7 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="279dp"
-        android:layout_above="@+id/btnLL"
+        android:layout_height="match_parent"
         android:layout_below="@+id/view1"
         android:layout_marginTop="2dp">
 
@@ -241,19 +243,35 @@
             android:padding="10dp">
 
 
-
-            <TextView
-                android:id="@+id/tv_inquiry"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/view1"
                 android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-                android:fontFamily="@font/aenirlsttd_black"
-                android:text="INQUIRY"
-                android:textAllCaps="true"
-                android:textColor="@color/textcolor"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_inquiry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/view1"
+                    android:fontFamily="@font/aenirlsttd_black"
+                    android:text="ABOUT "
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/view1"
+                    android:fontFamily="@font/aenirlsttd_black"
+                    android:text="Rohan"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tv_inq"
@@ -261,14 +279,13 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvInquiry"
                 android:layout_marginTop="5dp"
-                android:padding="10dp"
-                android:text="bdhede d eh de dh edh"
-                android:background="@drawable/border_grey"
                 android:fontFamily="@font/avenirlstd_roman"
+                android:padding="10dp"
+                android:text="@string/lorem_ipsum_dolor_sit_amet_consectetur_adipisicin"
                 android:textColor="@color/text"
                 android:textSize="13sp" />
 
-            <TextView
+            <!--    <TextView
                 android:id="@+id/tv_AboutUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -296,55 +313,106 @@
     android:layout_marginTop="@dimen/_5sdp"
     android:background="@color/gray969A9D">
 
-</View>
+</View>-->
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/WrapTextView"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/medium"
+                android:text="Price"
+                android:textColor="@color/black" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/WrapTextView"
+                    android:layout_alignParentStart="true"
+                    android:fontFamily="@font/light"
+                    android:text="Amount (2 hours)"
+                    android:textColor="@color/black" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/WrapTextView"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/light"
+                    android:text="$20"
+                    android:textColor="@color/black" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/WrapTextView"
+                    android:layout_alignParentStart="true"
+                    android:fontFamily="@font/light"
+                    android:text="Commission Fee"
+                    android:textColor="@color/black" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/WrapTextView"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/light"
+                    android:text="$5"
+                    android:textColor="@color/black" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/WrapTextView"
+                    android:layout_alignParentStart="true"
+                    android:fontFamily="@font/medium"
+                    android:text="Amount Received"
+                    android:textColor="@color/app" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/WrapTextView"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/medium"
+                    android:text="$15"
+                    android:textColor="@color/app" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/llAcceptOffer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <Button
+                    android:id="@+id/btnAcceptOffer"
+                    style="@style/Button"
+
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/_14sdp"
+                    android:background="@drawable/bg_btn"
+                    android:text="Accept"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/btnReject"
+                    style="@style/ButtonBG"
+                    android:layout_marginBottom="10dp"
+                    android:textAllCaps="false"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textSize="@dimen/_14sdp"
+                    android:background="@drawable/bg_btn"
+                    android:text="Reject"
+                    android:backgroundTint="@color/orange"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <LinearLayout
-        android:id="@+id/btnLL"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/llAcceptOffer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="vertical"
-            android:visibility="visible">
-
-            <Button
-                android:id="@+id/btnAcceptOffer"
-                style="@style/Button"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="10dp"
-                android:textAllCaps="false"
-                android:textSize="@dimen/_14sdp"
-                android:background="@drawable/button_bg_and_shape"
-                android:text="Accept Offer"
-                android:textColor="@color/white" />
-
-
-            <TextView
-                android:id="@+id/btnDenyOffer"
-                android:layout_width="170dp"
-                android:layout_height="45dp"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="center"
-                android:layout_marginBottom="30sp"
-                android:background="@drawable/background_red_border"
-                android:text="Deny Offer"
-                android:fontFamily="@font/aenirlsttd_black"
-                android:textAllCaps="false"
-                android:gravity="center"
-                android:textColor="@color/red"
-                android:textSize="15sp" />
-        </LinearLayout>
-
-
-    </LinearLayout>
-
 
 </RelativeLayout>

@@ -47,19 +47,18 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
 
         if (intent.getStringExtra("from").equals("Sessions")) {
             btnAcceptOffer.setText("Complete Offer")
-            btnDenyOffer.setText("Cancel Session")
+           // btnDenyOffer.setText("Cancel Session")
             tv_inq.visibility=View.GONE
             tv_inquiry.visibility=View.GONE
         }
         else {
             btnAcceptOffer.setText("Accept Offers")
-            btnDenyOffer.setText("Deny Offers")
+           // btnDenyOffer.setText("Deny Offers")
             tv_inq.visibility=View.VISIBLE
             tv_inquiry.visibility=View.VISIBLE
         }
         api()
     }
-
     private fun api() {
         baseViewModel.sessionDetails(this, true, intent.getStringExtra("id").toString())
         baseViewModel.getCommonResponse().observe(this, this)
@@ -69,8 +68,9 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
     private fun clicks() {
         ivPopupOptions.setOnClickListener(this)
         btnAcceptOffer.setOnClickListener(this)
-        btnDenyOffer.setOnClickListener(this)
+     //   btnDenyOffer.setOnClickListener(this)
         ivRequestsBack.setOnClickListener(this)
+        btnReject.setOnClickListener(this)
         rlMessageButton.setOnClickListener(this)
 
     }
@@ -99,10 +99,16 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
                     change_oderstatus("1")
                 }
             }
-            R.id.btnDenyOffer -> {
+          /*  R.id.btnDenyOffer -> {
+                Logout_Alert()
+
+            }*/
+                 R.id.btnReject -> {
                 Logout_Alert()
 
             }
+
+
             R.id.ivRequestsBack -> {
                 finish()
             }
@@ -115,7 +121,7 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
 
         val builder = let { AlertDialog.Builder(it) }
         if (builder != null) {
-            builder.setTitle("Cancel Session")
+            builder.setTitle("Cancel Request")
         }
         if (builder != null) {
             builder.setMessage("Are you sure you want to cancel?")
@@ -200,16 +206,16 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
             Status.SUCCESS -> {
                 if (liveData.data is Model_session_detail) {
                     tvRequestsName.text=liveData.data.body.Student.name
-                    tv_AboutUser.text="About "+liveData.data.body.Student.name
+                   // tv_AboutUser.text="About "+liveData.data.body.Student.name
                     tv_inquiry.text=liveData.data.body.Student.name+"'s INQUIRY"
                     tv_requestemail.text=liveData.data.body.Student.email
-                    tv_aboutparent.text=liveData.data.body.Student.about
+                  //  tv_aboutparent.text=liveData.data.body.Student.about
                     receiverId= liveData.data.body.userId.toString()
                     chatUserName= liveData.data.body.Student.name.toString()
 
                     if(liveData.data.body.status==2||liveData.data.body.status==3||liveData.data.body.status==4||liveData.data.body.status==6)
                     {
-                        btnLL.visibility=View.GONE
+                     //   btnLL.visibility=View.GONE
                     }
 
                     val dateParser = SimpleDateFormat("yyyy-MM-dd")

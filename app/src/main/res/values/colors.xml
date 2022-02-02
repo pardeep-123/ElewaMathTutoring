@@ -23,5 +23,6 @@
     <color name="editTextBackground">#F5F5F5</color>
     <color name="textLightBlue">#BC787AA1</color>
     <color name="lightgrey">#BCCACACA</color>
+    <color name="orange">#FF9800</color>
 
 </resources>

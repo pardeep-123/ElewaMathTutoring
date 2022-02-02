@@ -87,8 +87,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="15dp"
-                    android:thumb="@drawable/notification_thumb_selector"
-                    app:track="@drawable/notification_track_selector" />
+                    android:thumb="@drawable/notification_thumb_selector2"
+                    app:track="@drawable/notification_track_selector2" />
             </RelativeLayout>
 
             <View

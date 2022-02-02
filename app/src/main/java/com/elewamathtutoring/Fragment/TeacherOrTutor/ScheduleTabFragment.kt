@@ -1,11 +1,14 @@
 package com.elewamathtutoring.Fragment.TeacherOrTutor
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -41,26 +44,24 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
     var title = ArrayList<String>()
     var upcomming = ArrayList<Body>()
     var apitype="withoutdate"
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         v = inflater.inflate(R.layout.fragment_schedule_tab, container, false)
         onClicks()
         calenderView()
         return v
     }
-
-
     private fun calenderView() {
         v.rootView.calenderView.setOnDayClickListener(object : OnDayClickListener {
+            @SuppressLint("SimpleDateFormat")
             override fun onDayClick(eventDay: EventDay) {
                 val clickedDayCalendar = eventDay.calendar
-
                 val dateParser = SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy")
                 val date = dateParser.parse(clickedDayCalendar.time.toString())
-                val dateFormatter = SimpleDateFormat("YYYY-MM-dd")
+                val dateFormatter = SimpleDateFormat("yyyy-MM-dd")
                 val sdfDestinationMM = SimpleDateFormat("MMMM")
                 val sdfDestinationMMonth = SimpleDateFormat("MM")
                 val sdfDestinationdd = SimpleDateFormat("dd")
@@ -70,14 +71,12 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
                         .toString() + ", " + sdfDestinationyyyy.format(date).toString()
 
                calenderClickApi(sdfDestinationyyyy.format(date).toString() + "-" + sdfDestinationMMonth.format(date).toString() + "-" + sdfDestinationdd.format(date).toString())
-
             }
         })
 
         DatePickerBuilder(requireContext(), this)
             .pagesColor(R.color.textcolor)
     }
-
     private fun calenderClickApi(date: String)
     {
         if(date.equals(""))
@@ -91,8 +90,7 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
         baseViewModel.listViewSession(requireActivity(), true, date)
         baseViewModel.getCommonResponse().observe(requireActivity(), this)
     }
-
-
+    @RequiresApi(Build.VERSION_CODES.N)
     private fun onClicks() {
       /*  v.rootView.ivNotification.setOnClickListener {
             startActivity(Intent(context, NotificationsActivity::class.java))
@@ -101,12 +99,10 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
             startActivity(Intent(context, SettingActivity::class.java))
         }
         v.rootView.schedule_listView.setOnClickListener {
-
             calenderView_rl.visibility = View.GONE
             listView_rl.visibility = View.VISIBLE
             tvListView.setTextColor(ContextCompat.getColor(requireContext(), R.color.textcolor))
             tvCalenderView.setTextColor(ContextCompat.getColor(requireContext(), R.color.text))
-
             barListView.setBackgroundColor(
                 ContextCompat.getColor(
                     requireContext(),
@@ -119,7 +115,6 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
                     R.color.text
                 )
             )
-
             selectedTab = "ListView"
         }
         v.rootView.schedule_calenderView.setOnClickListener {
@@ -134,19 +129,15 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
             barCalenderView.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.textcolor))
             selectedTab = "CalenderView"
             val c = Calendar.getInstance().time
-            val df = SimpleDateFormat("YYYY-MM-dd", Locale.getDefault())
+            val df = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             calenderClickApi(df.format(c).toString())
         }
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         calenderClickApi("")
     }
-
     override fun onSelect(calendar: List<Calendar>) {
-
     }
-
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
@@ -199,7 +190,6 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
                     {
                         tv_whennodata.visibility=View.GONE
                     }
-
                     if(upcomming.size!=0)
                     {
                         title.add("UPCOMING SESSIONS")
@@ -217,10 +207,7 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
             }
         }
     }
-
     private fun setCalenderAdapter(listSession: ArrayList<Body>) {
         v.rootView.rv_calenderViewList.adapter = SessionsAdapter(requireContext(), listSession)
     }
-
-
 }

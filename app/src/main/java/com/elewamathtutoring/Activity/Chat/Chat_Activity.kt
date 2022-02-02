@@ -2,6 +2,7 @@ package com.elewamathtutoring.Activity.Chat
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.elewamathtutoring.Activity.Chat.chatModel.Chat_list_bothside
+import com.elewamathtutoring.Activity.Chat.mathChat.AudioCallActivity
+import com.elewamathtutoring.Activity.Chat.mathChat.VideoCallActivity
 import com.elewamathtutoring.Activity.Chat.socket.SocketManagernewew
 import com.elewamathtutoring.Activity.Chat.socket.SocketManagernewew.Companion.GET_CHAT_LISTNER_ONE_TO_ONE
 import com.elewamathtutoring.Activity.Chat.socket.SocketManagernewew.Companion.SEND_MESSAGE_LISTNER
@@ -49,6 +52,8 @@ class Chat_Activity :AppCompatActivity(), View.OnClickListener, SocketManagernew
         socketManager = App.getinstance().getSocketManagernn()
         socketManager!!.init()
         ivBack.setOnClickListener(this)
+        ivVideoCall.setOnClickListener(this)
+        ivVoiceCall.setOnClickListener(this)
 
         receiverId=intent.getStringExtra("receiverId").toString()
         MY_CHAT("t")
@@ -204,6 +209,12 @@ class Chat_Activity :AppCompatActivity(), View.OnClickListener, SocketManagernew
         when (p0!!.id) {
             R.id.ivBack -> {
                 onBackPressed()
+            }
+            R.id.ivVideoCall -> {
+                startActivity(Intent(c,VideoCallActivity::class.java))
+            }
+            R.id.ivVoiceCall -> {
+                startActivity(Intent(c,AudioCallActivity::class.java))
             }
         }
     }

@@ -37,24 +37,20 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
     ): View {
         v = inflater.inflate(R.layout.fragment_requests_tab, container, false)
         onClicks()
-
         return v
     }
-
     private fun api() {
         baseViewModel.PastTeacher(requireActivity(), "0,2,3,4,5,6", true)
         baseViewModel.getCommonResponse().observe(requireActivity(), this)
     }
-
-    override fun onResume()
-    {
+    override fun onResume() {
         super.onResume()
-        api()
+        v.rootView.rv_newRequests.adapter = SchedulePendingAdapter(requireContext())
+       // api()
     }
     private fun onClicks() {
         v.rootView.ivSetting.setOnClickListener(this)
     }
-
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.ivSetting -> {
@@ -62,7 +58,6 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
             }
         }
     }
-
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
@@ -76,7 +71,6 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
                         } else {
                             val c = Calendar.getInstance().time
                             val df = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault())
-
                             val date1: Date
                             val date2: Date
                             val dates = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
@@ -85,10 +79,8 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
                             val difference = Math.abs(date2.time - date1.time)
                             val differenceDates = difference / (24 * 60 * 60 * 1000)
                             val hours = difference / (1000 * 60 * 60)
-
                             val diffHours = java.lang.Long.toString(differenceDates)
                             Log.e("checkEndDate", "dayDifference--  "+df.format(c).toString()+"--"+Constants.ConvertTimeStampToDate(liveData.data.body.get(i).createdAt.toLong(),"yyyy-MM-dd hh:mm:ss")+"----"+ hours)
-
                             if (hours > 24) {
                                 Log.e("checkmydates", "=====" + differenceDates.toString())
                                 Inwaiting.add(liveData.data.body[i])
@@ -98,7 +90,6 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
                             }
                         }
                     }
-
                     if (Pastreq.size == 0) {
                         tvPastRequests.visibility = View.GONE
                         rv_PastRequests.visibility = View.GONE
@@ -106,7 +97,6 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
                         tvPastRequests.visibility = View.VISIBLE
                         rv_PastRequests.visibility = View.VISIBLE
                     }
-
                     if (Inwaiting.size == 0) {
                         recy_watingonans.visibility = View.GONE
                         tv_wating.visibility = View.GONE
@@ -114,7 +104,6 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
                         recy_watingonans.visibility = View.VISIBLE
                         tv_wating.visibility = View.VISIBLE
                     }
-
                     if (Newreq.size == 0) {
                         tvNewRequests.visibility = View.GONE
                         rv_newRequests.visibility = View.GONE
@@ -127,18 +116,15 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
                     } else {
                         tv_whennodata.visibility = View.GONE
                     }
-                    v.rootView.rv_newRequests.adapter = SchedulePendingAdapter(
-                        requireContext(),
-                        Newreq
-                    )
-                    v.rootView.rv_PastRequests.adapter = SchedulePendingAdapter(
+                   // v.rootView.rv_newRequests.adapter = SchedulePendingAdapter(requireContext(), Newreq)
+                    /*v.rootView.rv_PastRequests.adapter = SchedulePendingAdapter(
                         requireContext(),
                         Pastreq
                     )
                     v.rootView.recy_watingonans.adapter = SchedulePendingAdapter(
                         requireContext(),
                         Inwaiting
-                    )
+                    )*/
                 }
             }
             Status.ERROR -> {
@@ -149,6 +135,5 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
             else -> {
             }
         }
-
     }
 }

@@ -21,12 +21,12 @@
         android:textSize="14sp" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/recycler_data"
+        android:layout_below="@+id/tv_titleSession"
         android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_below="@+id/tv_titleSession">
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
     </androidx.recyclerview.widget.RecyclerView>
 </RelativeLayout>

@@ -34,7 +34,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/aenirlsttd_black"
-            android:text="My Schedule"
+            android:text="Booking"
             android:textColor="@color/white"
             android:textSize="16sp" />
 
