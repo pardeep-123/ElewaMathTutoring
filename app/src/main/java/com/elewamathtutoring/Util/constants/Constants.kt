@@ -29,7 +29,7 @@ import java.util.*
 class Constants {
     var Notification_chat = "Notification_chat"
     companion object {
-
+      //  http://3.141.207.49
         const val BASE_URL = "http://3.141.207.49/api/"//live
         const val SOCKET_BASE_URL = "http://3.141.207.49"//live
 

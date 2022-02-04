@@ -13,6 +13,7 @@ import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.elewamathtutoring.Adapter.TeacherOrTutor.EducationCertificateAdapter
 import com.elewamathtutoring.Adapter.TeacherOrTutor.TeachingLevelAdapter
 import com.elewamathtutoring.Models.Login.Model_login
 import com.elewamathtutoring.Models.Teacher_level.Body
@@ -66,17 +67,15 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener , Observe
        // handel_add_Edit()
         spinnerChoose()
         rv_teachingLevel.adapter = TeachingLevelAdapter(this, list, this)
-
+        rvUploadImage.adapter = EducationCertificateAdapter(this)
     }
 
 
-    private fun handel_add_Edit()
-    {
+    private fun handel_add_Edit() {
         if(intent.getStringExtra("key").equals("signup"))
         {
         }
-        else
-        {
+        else {
             profilelist = (intent.getSerializableExtra("list_model") as java.util.ArrayList<com.elewamathtutoring.Models.Login.Body>?)!!
 
             edSpeacialities.setText(profilelist.get(0).specialties.toString())

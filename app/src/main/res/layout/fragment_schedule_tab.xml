@@ -131,6 +131,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="visible">
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_listView"
                     android:layout_width="match_parent"
@@ -138,6 +139,52 @@
                     android:layout_marginTop="10dp"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                <RelativeLayout
+                    android:id="@+id/rlResources"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_below="@+id/rv_listView"
+                    android:background="@drawable/bg_btn">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:drawableLeft="@drawable/resources"
+                        android:fontFamily="@font/medium"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:text="Resources"
+                        android:textSize="16dp"
+                        app:fontFamily="@font/bold"
+                        android:textColor="@color/white" />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rlMathChatRoom"
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/rlResources"
+                    android:layout_height="55dp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:background="@drawable/bg_btn">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:drawableLeft="@drawable/mathchatroom"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:fontFamily="@font/medium"
+                        android:text=" Math Chat Room"
+                        android:textSize="16dp"
+                        app:fontFamily="@font/bold"
+                        android:textColor="@color/white" />
+                </RelativeLayout>
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/calenderView_rl"

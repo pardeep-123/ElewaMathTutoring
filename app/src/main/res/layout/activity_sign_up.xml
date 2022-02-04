@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/avenirlstd_roman"
                 android:text="Name"
-                android:textColor="@color/textLightBlue"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
 
 
@@ -75,12 +75,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-               
                 android:layout_marginTop="15dp"
-            
                 android:fontFamily="@font/avenirlstd_roman"
                 android:text="Email Address"
-                android:textColor="@color/textLightBlue"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
 
             <RelativeLayout
@@ -118,7 +116,7 @@
             
                 android:fontFamily="@font/avenirlstd_roman"
                 android:text="Password"
-                android:textColor="@color/textLightBlue"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
 
             <RelativeLayout
@@ -156,14 +154,13 @@
             
                 android:fontFamily="@font/avenirlstd_roman"
                 android:text="Confirm Password"
-                android:textColor="@color/textLightBlue"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="@dimen/_20sdp"
                 android:background="@drawable/edittext_bg"
                 android:padding="8dp">
 
@@ -189,11 +186,23 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/ivOf2"
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:src="@drawable/checkbox" />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/ivOf"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/checkbox2" />
+
+                    <ImageView
+                        android:id="@+id/ivOn"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/checkbox"
+                        android:visibility="gone" />
+                </RelativeLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/WrapTextView"

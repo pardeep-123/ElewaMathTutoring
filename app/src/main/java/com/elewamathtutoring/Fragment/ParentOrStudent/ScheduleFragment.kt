@@ -74,7 +74,6 @@ class ScheduleFragment : Fragment() , Observer<RestObservable> {
                  {
                      tvUpcomingSessions.visibility=View.GONE
                  }
-
                  if(liveData.data.body.Today_sessions.size!=0)
                     {
                         v.rootView.rv_today.adapter = UpcomingSessionsAdapter(requireContext(),pendinglist ,3)
@@ -83,7 +82,6 @@ class ScheduleFragment : Fragment() , Observer<RestObservable> {
                  {
                      tvUpcomingtoday.visibility=View.GONE
                  }
-
                     if(liveData.data.body.Today_sessions.size==0&&liveData.data.body.Upcoming_sessions.size==0&&liveData.data.body.Pending_sessions.size==0)
                     {
                         tv_whennodata.visibility=View.VISIBLE

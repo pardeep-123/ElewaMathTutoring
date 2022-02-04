@@ -73,7 +73,6 @@ class MainTeacherActivity : AppCompatActivity(), View.OnClickListener {
                     switchFragment(R.id.container2, MessagesTabFragment())
                 }
             }
-
             R.id.llProfileTab -> {
                 ivSchedule.setImageResource(R.drawable.calender_unselected)
                 ivRequests.setImageResource(R.drawable.requests_unselected)

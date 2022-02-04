@@ -34,6 +34,8 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
         App.getinstance().getmydicomponent().inject(this)
         ivBack.setOnClickListener(this)
         btnNext.setOnClickListener(this)
+        ivOf.setOnClickListener(this)
+        ivOn.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -44,7 +46,6 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
                 }else{
                     startActivity(Intent(this, MainActivity::class.java))
                 }
-
                 /*    if (validator.signUpValid(this,  edtName.text.toString(), edtEmail.text.toString(),editPassword.text.toString(),editConfirmPassword.text.toString())) {
                         baseViewModel.checkEmail(this,  edtEmail.text.toString(), true)
                         baseViewModel.getCommonResponse().observe(this, this)
@@ -56,6 +57,14 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
             }
             R.id.tvTerms -> {
                 startActivity(Intent(this, PrivacyPolicy::class.java))
+            }
+            R.id.ivOf -> {
+                ivOn.visibility = View.VISIBLE
+                ivOf.visibility = View.GONE
+            }
+            R.id.ivOn -> {
+                ivOn.visibility = View.GONE
+                ivOf.visibility = View.VISIBLE
             }
         }
     }

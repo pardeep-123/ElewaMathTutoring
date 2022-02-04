@@ -343,6 +343,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_CancelationPolicy"
                 android:layout_marginTop="5dp"
+                android:fontFamily="@font/light"
                 android:text="@string/lorem_ipsum_dolor_sit_amet_consectetur_adipisicin"
                 android:textColor="@color/text"
                 android:textSize="13sp" />
@@ -365,6 +366,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_AboutUser"
                 android:layout_marginTop="5dp"
+                android:fontFamily="@font/light"
                 android:text="@string/lorem_ipsum_dolor_sit_amet_consectetur_adipisicin"
                 android:textColor="@color/text"
                 android:textSize="13sp" />

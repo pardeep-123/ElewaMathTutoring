@@ -52,12 +52,14 @@
                 android:layout_gravity="center">
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivImage"
                     android:layout_width="@dimen/_110sdp"
                     android:layout_height="@dimen/_110sdp"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:src="@drawable/edit_profile_teacher" />
 
-                <androidx.constraintlayout.utils.widget.ImageFilterButton
+                <ImageView
+                   android:id="@+id/add_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -66,14 +68,14 @@
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:src="@drawable/edit_profile_plus" />
             </RelativeLayout>
-
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
-                android:fontFamily="@font/bold"
+                android:textColor="@color/black"
+                android:fontFamily="@font/medium"
                 android:text="About You"
                 android:textSize="@dimen/_12sdp" />
 
@@ -89,12 +91,11 @@
                     android:id="@+id/cs_message"
                     android:layout_width="match_parent"
                     android:layout_height="140dp"
-                    android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_toRightOf="@+id/ivMailicon"
                     android:background="@null"
-                    android:fontFamily="@font/avenirlstd_roman"
+                    android:fontFamily="@font/light"
                     android:gravity="top"
                     android:hint="Type here..."
                     android:inputType="textMultiLine"
@@ -110,7 +111,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
-                android:fontFamily="@font/bold"
+                android:fontFamily="@font/medium"
+                android:textColor="@color/black"
                 android:text="Teaching History"
                 android:textSize="@dimen/_12sdp" />
 
@@ -121,18 +123,16 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/edittext_bg">
-
                 <EditText
                     android:id="@+id/et_teaching"
                     android:layout_width="match_parent"
                     android:layout_height="140dp"
-                    android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_toRightOf="@+id/ivMailicon"
                     android:background="@null"
-                    android:fontFamily="@font/avenirlstd_roman"
                     android:gravity="top"
+                    android:fontFamily="@font/light"
                     android:hint="Type here..."
                     android:inputType="textMultiLine"
                     android:padding="10dp"
@@ -140,7 +140,6 @@
                     android:textColorHint="@color/editexthint"
                     android:textSize="13sp" />
             </LinearLayout>
-
             <Button
                 android:id="@+id/btnNext"
                 style="@style/Button"

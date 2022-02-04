@@ -56,13 +56,11 @@
                 android:id="@+id/tvAsk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="14dp"
-                android:fontFamily="@font/avenirlstd_roman"
+                android:fontFamily="@font/medium"
                 android:text="What is your education level?"
-                android:textColor="@color/textLightBlue"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textColor="@color/black"
+                android:textSize="14sp"/>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardspinner"
@@ -108,11 +106,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/edSpeacialities"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/avenirlstd_roman"
+                android:fontFamily="@font/medium"
                 android:text="Majors"
-                android:textColor="@color/textLightBlue"
+                android:textColor="@color/black"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                 />
 
             <EditText
                 android:id="@+id/edInPersonRate"
@@ -131,17 +129,18 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/text"
                 android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/tvEducationCertificate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/edSpeacialities"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/avenirlstd_roman"
+                android:fontFamily="@font/medium"
                 android:text="Education Certificate"
-                android:textColor="@color/textLightBlue"
+                android:textColor="@color/black"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+              />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvUploadImage"
@@ -157,10 +156,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/cardspinner"
                 android:layout_marginTop="20dp"
+            android:fontFamily="@font/medium"
                 android:text="Teaching Level"
-                android:textColor="@color/textLightBlue"
+                android:textColor="@color/black"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+               />
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -179,11 +179,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rv_teachingLevel"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/avenirlstd_roman"
+                android:fontFamily="@font/medium"
                 android:text="Specialities"
-                android:textColor="@color/textLightBlue"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textColor="@color/black"
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/edSpeacialities"
@@ -211,11 +210,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/edSpeacialities"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/avenirlstd_roman"
+                android:fontFamily="@font/medium"
                 android:text="Hourly Price"
-                android:textColor="@color/textLightBlue"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textColor="@color/black"
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/edVirtualRate"
@@ -241,11 +239,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/edVirtualRate"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/avenirlstd_roman"
+                android:fontFamily="@font/medium"
                 android:text="Cancellation Policy"
-                android:textColor="@color/textLightBlue"
+                android:textColor="@color/black"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                />
 
             <EditText
                 android:id="@+id/edCancelationPolicy"
@@ -269,11 +267,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/edCancelationPolicy"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/avenirlstd_roman"
+                android:fontFamily="@font/medium"
                 android:text="Location"
-                android:textColor="@color/textLightBlue"
+                android:textColor="@color/black"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                />
 
             <TextView
                 android:id="@+id/edLocation"

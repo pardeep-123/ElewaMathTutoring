@@ -2,21 +2,14 @@ package com.elewamathtutoring.Adapter.ParentOrStudent
 
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.util.Log
 import android.view.*
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.elewamathtutoring.Activity.TeacherDetailsActivity
 import com.elewamathtutoring.Fragment.ProfileFragment
-import com.elewamathtutoring.Models.TeacherRequestsList.Body
+
 import com.elewamathtutoring.R
-import com.elewamathtutoring.Util.constant.Constants
-import kotlinx.android.synthetic.main.dialog_complete.*
-import kotlinx.android.synthetic.main.item_schedule_pending.view.*
-import java.text.SimpleDateFormat
+
 
 class PastTeacherAdapter(
     c: Context,
@@ -26,17 +19,14 @@ class PastTeacherAdapter(
     var ctn = c
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(ctn).inflate(R.layout.item_schedule_pending, parent, false)
+        val view = LayoutInflater.from(ctn).inflate(R.layout.item_past_teacher, parent, false)
         return ViewHolder(view)
     }
-
     override fun getItemCount(): Int {
        // return listdata.size
         return 3
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
        /* holder.itemView.tvItemName.setText(listdata.get(position).teacher.name)
         holder.itemView.tvItemType.setText(Constants.isCertifiedOrtutor(listdata.get(position).teacher.isCertifiedOrtutor))
@@ -74,22 +64,19 @@ class PastTeacherAdapter(
         val completeDialog = Dialog(ctn)
         completeDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         completeDialog.setContentView(R.layout.dialog_complete)
-
         completeDialog.window!!.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT
         )
-
         completeDialog.window!!.setGravity(Gravity.CENTER)
         completeDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        completeDialog.complete_Yes.setOnClickListener {
+       /* completeDialog.complete_Yes.setOnClickListener {
             profileFragment.apicomplete(id)
             completeDialog.dismiss()
         }
         completeDialog.complete_No.setOnClickListener {
             completeDialog.dismiss()
-        }
+        }*/
 
         completeDialog.setCancelable(true)
         completeDialog.setCanceledOnTouchOutside(true)

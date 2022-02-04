@@ -47,13 +47,11 @@ class MessageAdapter(var context: Context, var orderDetailForMapResponse: ArrayL
 
     override fun getItemCount(): Int
     {
-       // return orderDetailForMapResponse.size
+      return orderDetailForMapResponse.size
 
-        return 3
+      //  return 3
     }
-
     inner class MessageHolder(view: View) : RecyclerView.ViewHolder(view) {
-
     }
     fun convertTimestampToDate(timestamp: Long, dateFormateStyle: String): String {
         val calendar = Calendar.getInstance()
