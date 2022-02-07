@@ -16,16 +16,16 @@
         <ImageView
             android:id="@+id/ivBack"
             style="@style/backIcon"
-            android:layout_marginStart="@dimen/_10sdp"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginBottom="8dp"
             app:tint="@color/white" />
 
         <TextView
             style="@style/TextViewHeader"
-            android:text="Edit Profile"
             android:fontFamily="@font/bold"
+            android:text="Edit Profile"
             android:textSize="@dimen/_14sdp" />
     </RelativeLayout>
 
@@ -39,7 +39,6 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-
             android:orientation="vertical"
             android:layout_height="wrap_content">
 
@@ -68,24 +67,12 @@
                         app:civ_border_color="@color/text"
                         app:civ_border_width="0.5dp"
                         app:civ_circle_background_color="#f6f6f6" />
-
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/rlProfileImage"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentBottom="true"
-                    android:gravity="end">
-
                     <ImageView
                         android:id="@+id/ivAdd"
                         android:layout_width="40dp"
                         android:elevation="10dp"
-                        android:layout_centerInParent="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
                         android:layout_height="40dp"
                         android:contentDescription="@null"
                         android:src="@drawable/add" />
@@ -100,7 +87,7 @@
                 android:fontFamily="@font/avenirlstd_roman"
                 android:text="Name"
                 android:layout_below="@+id/rlPick"
-                android:textColor="@color/textLightBlue"
+                android:textColor="@color/darkgrey"
                 android:textSize="14sp" />
 
             <RelativeLayout
@@ -140,7 +127,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/avenirlstd_roman"
                 android:text="About You"
-                android:textColor="@color/textLightBlue"
+                android:textColor="@color/darkgrey"
                 android:textSize="14sp"
                 />
 
@@ -166,7 +153,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_below="@+id/edaboutyou"
                 android:text="Teaching History"
-                android:textColor="@color/textLightBlue"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:textColor="@color/darkgrey"
                 android:textSize="14sp"
                 />
 
@@ -193,7 +181,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:text="SAVE"
+                android:text="Save"
                 android:textAllCaps="false" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

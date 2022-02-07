@@ -106,7 +106,7 @@
                     android:layout_marginRight="20dp"
                     android:fontFamily="@font/avenirlstd_roman"
                     android:text="Name"
-                    android:textColor="@color/text"
+                    android:textColor="@color/darkgrey"
                     android:textSize="13sp" />
 
 
@@ -155,7 +155,7 @@
                     android:layout_marginRight="20dp"
                     android:fontFamily="@font/avenirlstd_roman"
                     android:text="Tell us about you're looking for"
-                    android:textColor="@color/text"
+                    android:textColor="@color/darkgrey"
                     android:textSize="13sp" />
 
                 <LinearLayout

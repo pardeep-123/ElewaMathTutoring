@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_30sdp"
             android:layout_marginRight="15dp">
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -246,8 +246,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="14dp"
-                            android:layout_marginRight="10dp"
+                         android:layout_marginStart="@dimen/_5sdp"
                             android:fontFamily="@font/avenirlstd_roman"
                             android:text="Edit Profile Information"
                             android:textAllCaps="true"
@@ -334,7 +333,7 @@
                 android:fontFamily="@font/aenirlsttd_black"
                 android:text="Cancelation Policy"
                 android:textAllCaps="true"
-                android:textColor="@color/textcolor"
+                android:textColor="@color/black"
                 android:textSize="13sp" />
 
             <TextView
@@ -357,7 +356,7 @@
                 android:fontFamily="@font/aenirlsttd_black"
                 android:text="About User"
                 android:textAllCaps="true"
-                android:textColor="@color/textcolor"
+                android:textColor="@color/black"
                 android:textSize="13sp" />
 
             <TextView

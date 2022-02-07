@@ -117,7 +117,6 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
 
             }*/
             R.id.btnLogin-> {
-
                 if( intent.getStringExtra("Name").equals("Tutor")){
                     startActivity(Intent(this, MainTeacherActivity::class.java))
                     finishAffinity()
@@ -125,8 +124,6 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
                     startActivity(Intent(this, MainActivity::class.java))
                     finishAffinity()
                 }
-
-
                /* val email = email_text.text.toString().trim()
                 val password = password_text.text.toString().trim()
                 if (validator.loginValid(this, email, password))
