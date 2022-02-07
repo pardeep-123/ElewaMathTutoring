@@ -61,7 +61,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
             android:src="@drawable/search"
-            app:tint="#DEDEDE" />
+            app:tint="@color/darkgrey" />
 
         <EditText
             android:id="@+id/edtSearch"
@@ -73,7 +73,7 @@
             android:layout_toRightOf="@+id/ivName"
             android:background="@null"
             android:fontFamily="@font/avenirlstd_roman"
-            android:hint="@string/enter_subject"
+            android:hint="Search..."
             android:imeOptions="actionDone"
             android:inputType="text"
             android:textColor="@color/black"

@@ -49,9 +49,9 @@
                 android:id="@+id/rlSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="15dp"
-                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_10sdp"
                 android:background="@drawable/search_bg"
                 android:padding="13dp">
 
@@ -61,7 +61,8 @@
                     android:layout_height="25dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
-                    android:src="@drawable/search" />
+                    android:src="@drawable/search"
+                    app:tint="@color/darkgrey" />
 
                 <EditText
                     android:id="@+id/edtSearch"
@@ -85,9 +86,9 @@
                 android:id="@+id/rv_chat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_10sdp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="2" />
         </LinearLayout>

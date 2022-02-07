@@ -74,11 +74,11 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:layout_marginBottom">15dp</item>
-        <item name="android:fontFamily">@font/aenirlsttd_black</item>
+        <item name="android:fontFamily">@font/bold</item>
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">@dimen/_14sdp</item>
     </style>
     <style name="TextViewHeaderin60">
         <item name="android:textColor">@color/white</item>

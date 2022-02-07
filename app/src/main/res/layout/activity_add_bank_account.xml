@@ -23,9 +23,8 @@
         <TextView
             android:id="@+id/tvHearder"
             style="@style/TextViewHeaderin60"
-            android:text="@string/add_bank_account"
             android:layout_centerVertical="true"
-            />
+            android:text="@string/add_bank_account" />
     </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -55,7 +54,7 @@
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/avenirlstd_roman"
                     android:text="IFSC Code"
-                    android:textColor="@color/editprofilebutton"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
                 <EditText
@@ -90,7 +89,7 @@
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/avenirlstd_roman"
                     android:text="Bank Branch"
-                    android:textColor="@color/editprofilebutton"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
                 <EditText
@@ -125,7 +124,7 @@
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/avenirlstd_roman"
                     android:text="Account Number"
-                    android:textColor="@color/editprofilebutton"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
                 <EditText
@@ -162,7 +161,7 @@
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/avenirlstd_roman"
                     android:text="Confirm Account Number"
-                    android:textColor="@color/editprofilebutton"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
                 <EditText
@@ -199,7 +198,7 @@
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/avenirlstd_roman"
                     android:text="Account Holder Name"
-                    android:textColor="@color/editprofilebutton"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
                 <EditText

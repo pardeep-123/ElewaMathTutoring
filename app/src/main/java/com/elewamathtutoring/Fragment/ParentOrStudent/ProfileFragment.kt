@@ -62,7 +62,6 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
             startActivity(Intent(context, NotificationsActivity::class.java))
         }
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btnEditProfile = view.findViewById(R.id.btnedtProfile)
@@ -72,9 +71,7 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
             intent.putExtra("ProfileList",list)*/
             startActivity(intent)
         }
-
     }
-
     private fun api() {
         baseViewModel.get_profile(requireActivity(), getPrefrence(Constants.user_type, ""), true)
         baseViewModel.getCommonResponse().observe(requireActivity(), this)

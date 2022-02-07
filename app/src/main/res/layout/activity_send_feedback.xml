@@ -16,7 +16,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:padding="@dimen/_5sdp"
             android:background="@color/app">
             <ImageView
@@ -24,19 +24,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/back_arrow_white"
-                android:layout_centerInParent="true"
-                android:layout_alignParentStart="true"/>
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="8dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
                 android:layout_marginTop="25dp"
-                android:fontFamily="@font/avenirlstd_roman"
+                android:fontFamily="@font/bold"
+                android:layout_centerInParent="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="8dp"
                 android:gravity="center"
                 android:text="Send Feedback"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="@dimen/_14sdp" />
         </RelativeLayout>
 
         <ScrollView
@@ -63,6 +67,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="40dp"
                     android:gravity="center"
+                    android:fontFamily="@font/light"
                     android:justificationMode="inter_word"
                     android:text="@string/sendfeedbacktext"
                     android:textColor="@color/gray969A9D"

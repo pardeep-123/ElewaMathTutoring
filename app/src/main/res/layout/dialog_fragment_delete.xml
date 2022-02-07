@@ -14,11 +14,11 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
+        android:fontFamily="@font/aenirlsttd_black"
         android:gravity="center"
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
-        android:text="ETEACHER"
-        android:fontFamily="@font/aenirlsttd_black"
+        android:text="Elewa Math Tutoring"
         android:textColor="@color/black"
         android:textSize="16sp" />
 
@@ -30,13 +30,13 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
+        android:fontFamily="@font/avenirlstd_roman"
         android:gravity="center"
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
         android:text="@string/are_you_sure_you_want_to_ndelete_account"
         android:textColor="@color/black"
-        android:textSize="16sp"
-        android:fontFamily="@font/avenirlstd_roman"/>
+        android:textSize="16sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,6 +55,7 @@
             android:background="@drawable/background_blue"
             android:text="@string/no"
             android:textAllCaps="false"
+            android:fontFamily="@font/bold"
             android:textColor="@color/white"
             android:layout_marginRight="10dp" />
 
@@ -65,6 +66,7 @@
             android:layout_gravity="center"
             android:background="@drawable/background_blue"
             android:text="@string/yes"
+            android:fontFamily="@font/bold"
             android:textAllCaps="false"
             android:textColor="@color/white"/>
     </LinearLayout>

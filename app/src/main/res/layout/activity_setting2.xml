@@ -24,8 +24,7 @@
 
         <TextView
             style="@style/TextViewHeader"
-            android:text="Settings"
-             />
+            android:text="Settings" />
     </RelativeLayout>
 
     <ScrollView
