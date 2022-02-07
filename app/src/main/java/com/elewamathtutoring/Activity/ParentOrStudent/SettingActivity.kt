@@ -43,25 +43,18 @@ class SettingActivity : AppCompatActivity(), Observer<RestObservable> {
         window.decorView.systemUiVisibility =
             (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
         window.statusBarColor = Color.TRANSPARENT;
-
-
         if(getPrefrence(Constants.Social_login, "").equals("True"))
         {
             tvChangePassword.visibility=View.GONE
         }
-
-        if(getPrefrence(Constants.notificationStatus,"").toString().equals("1"))
-        {
+        if(getPrefrence(Constants.notificationStatus,"").toString().equals("1")) {
             Log.e("checklog", "onnnnnnnnnnnnnn")
             status="0"
             iv_notification_switch.setChecked(true);
-        }
-        else
-        {
+        } else {
             status="1"
             iv_notification_switch.setChecked(false);
         }
-
         iv_notification_switch.setOnClickListener {
             if (iv_notification_switch!!.isChecked) {
                 iv_notification_switch.setChecked(true);
@@ -74,7 +67,6 @@ class SettingActivity : AppCompatActivity(), Observer<RestObservable> {
                 call_notification_on_offApi("0")
             }
         }
-
         ivBack.setOnClickListener {
             onBackPressed()
         }
@@ -82,7 +74,6 @@ class SettingActivity : AppCompatActivity(), Observer<RestObservable> {
             val intent = Intent(this, ChangePassword::class.java)
             startActivity(intent)
         }
-
         rlAbout.setOnClickListener {
             val intent = Intent(this, PrivacyPolicy::class.java)
             intent.putExtra("key", message1)
@@ -94,7 +85,6 @@ class SettingActivity : AppCompatActivity(), Observer<RestObservable> {
             intent.putExtra("key", message2)
             intent.putExtra("type", "3")
             startActivity(intent)
-
         }
         rlTermsService.setOnClickListener {
             val intent = Intent(this, PrivacyPolicy::class.java)
@@ -106,7 +96,6 @@ class SettingActivity : AppCompatActivity(), Observer<RestObservable> {
             val intent = Intent(this, SendFeedback::class.java)
             startActivity(intent)
         }
-
         rlLogOut.setOnClickListener {
             showPoupLogout()
         }
@@ -120,66 +109,49 @@ class SettingActivity : AppCompatActivity(), Observer<RestObservable> {
         if( intent.getStringExtra("setting").equals("managePayment")){
             rlManagePayment.visibility=View.GONE
             viewManagment.visibility=View.GONE
-        }
-        else
-        {
+        } else {
             rlManagePayment.visibility=View.VISIBLE
             viewManagment.visibility=View.VISIBLE
             rlManagePayment.setOnClickListener {
                 val intent = Intent(this, PaymentInfoActivity::class.java)
                 startActivity(intent)
-
             }
         }
         //  clickHandle()
     }
-
     private fun showPoupupDelete() {
         val logoutDialog = Dialog(context)
         logoutDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         logoutDialog.setContentView(R.layout.dialog_fragment_delete)
-
         logoutDialog.window!!.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT)
-
         logoutDialog.window!!.setGravity(Gravity.CENTER)
         // addPostDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
         val btn_Done = logoutDialog.findViewById<Button>(R.id.btnYes)
         val btnNo = logoutDialog.findViewById<Button>(R.id.btnNo)
-
-
         logoutDialog.setCancelable(true)
         logoutDialog.setCanceledOnTouchOutside(true)
         btn_Done.setOnClickListener {
             baseViewModel.Delete_account(this, getPrefrence(Constants.user_type,""),true)
             baseViewModel.getCommonResponse().observe(this, this)
-
         }
         btnNo.setOnClickListener {
             logoutDialog.dismiss()
         }
         logoutDialog.show()
-
     }
-
     private fun showPoupLogout() {
         val logoutDialog = Dialog(context)
         logoutDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         logoutDialog.setContentView(R.layout.dialog_fragment_logout)
-
         logoutDialog.window!!.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT)
-
         logoutDialog.window!!.setGravity(Gravity.CENTER)
         // addPostDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
         val btn_Done = logoutDialog.findViewById<Button>(R.id.btnYes)
         val btnNo = logoutDialog.findViewById<Button>(R.id.btnNo)
-
-
         logoutDialog.setCancelable(true)
         logoutDialog.setCanceledOnTouchOutside(true)
         btn_Done.setOnClickListener {
@@ -192,7 +164,6 @@ class SettingActivity : AppCompatActivity(), Observer<RestObservable> {
         }
         logoutDialog.show()
     }
-
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
@@ -217,8 +188,7 @@ class SettingActivity : AppCompatActivity(), Observer<RestObservable> {
             }
         }
     }
-    fun call_notification_on_offApi(status:String)
-    {
+    fun call_notification_on_offApi(status:String) {
         baseViewModel.call_notification_on_offApi(this,  status,  true)
         baseViewModel.getCommonResponse().observe(this, this)
     }

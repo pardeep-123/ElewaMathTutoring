@@ -32,7 +32,7 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener , Observer<Re
     lateinit var v: View
     lateinit var contex: Context
     var profilelist=ArrayList<Body>()
-    var  data=""
+    var data=""
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
 
 
