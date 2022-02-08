@@ -48,7 +48,7 @@ class SignUpAs : AppCompatActivity(),View.OnClickListener {
         when(v?.id) {
              R.id.llStudent -> {
                  savePrefrence(Constants.user_type, "2")
-                startActivity(Intent(this, LoginScreen::class.java)
+                 startActivity(Intent(this, LoginScreen::class.java)
                     .putExtra("Name", "Student")
                 )
             } R.id.llTeacher -> {

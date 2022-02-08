@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.elewamathtutoring.Activity.Chat.mathChat.MathPersonChatActivity
 import com.elewamathtutoring.R
 import kotlinx.android.synthetic.main.item_add_participants.view.*
+import kotlinx.android.synthetic.main.item_filteroptions.view.*
 
 
 //, listNotifications: ArrayList<Body>
@@ -27,10 +28,21 @@ class AddParticipantsAdapter(c: Context) :
 
     override fun getItemCount(): Int {
        // return list.size
-        return 3
+        return 5
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+        /*holder.itemView.setOnClickListener {
+            if (holder.itemView.tick.getDrawable().getConstantState() == ctn.getResources().getDrawable( R.drawable.uncheck).getConstantState()) {
+                holder.itemView.tick.setImageResource(R.drawable.checkbox)
+                //  Level_list.add(list.get(position).id.toString())
+            }
+            else {
+                holder.itemView.tick.setImageResource(R.drawable.uncheck)
+                // Level_list.remove(list.get(position).id.toString())
+            }
+        }*/
      /*   holder.itemView.rlLayout.setOnClickListener {
             var intent = Intent(ctn, MathPersonChatActivity::class.java)
             ctn.startActivity(intent)

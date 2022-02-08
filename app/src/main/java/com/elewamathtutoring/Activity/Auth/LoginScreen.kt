@@ -124,10 +124,9 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
                     startActivity(Intent(this, MainActivity::class.java))
                     finishAffinity()
                 }
-               /* val email = email_text.text.toString().trim()
+              /*  val email = email_text.text.toString().trim()
                 val password = password_text.text.toString().trim()
-                if (validator.loginValid(this, email, password))
-                {
+                if (validator.loginValid(this, email, password)) {
                     baseViewModel.Userlogin(this,  email, password, Constants.DEVICE_TYPE_VALUE,  true)
                     baseViewModel.getCommonResponse().observe(this, this)
                 }*/
@@ -139,10 +138,7 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
                 startActivity(Intent(this, LoginGuestActivity::class.java))
             }
 
-           /* R.id.tvNeweTeacher->{
-                savePrefrence(Constants.user_type, "2")
-                startActivity(Intent(this, SignUp::class.java))
-            }*/
+
 
         }
     }
@@ -264,31 +260,31 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
                         savePrefrence(Constants.Social_login, "False")
                         savePrefrence(Constants.user_type, liveData.data.body.userType.toString())
                         Constants.USER_IDValue=liveData.data.body.id.toString()
-                        if (liveData.data.body.isBuyPlan == 0&&liveData.data.body.userType == 2)
+                        /*if (liveData.data.body.isBuyPlan == 0&&liveData.data.body.userType == 2)
                         {
                             startActivity(Intent(this, SubscriptionsActivity::class.java))
                             finishAffinity()
                         }
                         else
-                        {
+                        {*/
                             if (liveData.data.body.userType == 1)
+                            {
+                                startActivity(Intent(this, MainTeacherActivity::class.java))
+                                finishAffinity()
+
+                            }
+                            else
                             {
                                 startActivity(Intent(this, MainActivity::class.java))
                                 finishAffinity()
                             }
-                            else
-                            {
-                                startActivity(Intent(this, MainTeacherActivity::class.java))
-                                finishAffinity()
-                            }
-                        }
+                       // }
                     }
                     else if(Api_type.equals("checksocialId"))
                     {
                     }
                 }
-            else if(liveData.data is Commontoall)
-                {
+            else if(liveData.data is Commontoall) {
                     savePrefrence(Constants.Social_login, "True")
                     if(liveData.data.message.equals("Sorry There is no user with this socialId."))
                     {

@@ -85,14 +85,15 @@ var address=""
 
     private fun setAdapters()
     {
-        list.add(DatesAvailableModel("Sunday"))
         list.add(DatesAvailableModel("Monday"))
         list.add(DatesAvailableModel("Tuesday"))
         list.add(DatesAvailableModel("Wednesday"))
         list.add(DatesAvailableModel("Thursday"))
         list.add(DatesAvailableModel("Friday"))
         list.add(DatesAvailableModel("Saturday"))
+        list.add(DatesAvailableModel("Sunday"))
         rv_datesAvailable.adapter = DatesAvailableAdapter(list, Selctedarray_date,this@AvailablityActivity)
+     /*   rvFreeSlot.adapter = DatesAvailableAdapter(list, Selctedarray_date,this@AvailablityActivity)*/
     }
 
     private fun onClicks() {

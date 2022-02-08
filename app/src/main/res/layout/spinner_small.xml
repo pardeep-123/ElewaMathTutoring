@@ -10,7 +10,7 @@
     android:paddingHorizontal="@dimen/_5sdp"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
-    android:fontFamily="@font/light"
+    android:fontFamily="@font/avenirlstd_roman"
     android:textColor="@color/black"
     android:textSize="14dp">
 

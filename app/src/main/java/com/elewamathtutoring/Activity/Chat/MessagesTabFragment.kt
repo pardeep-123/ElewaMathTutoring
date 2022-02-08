@@ -68,8 +68,7 @@ class MessagesTabFragment : Fragment() ,View.OnClickListener,  SocketManagernewe
     override fun onResponse(event: String, vararg args: Any) {
         when (event) {
             CHAT_LISTING_LISTNER -> {
-                try
-                {
+                try {
                     requireActivity().runOnUiThread(Runnable {
                         progresschat.visibility=View.GONE
                         val data = args.get(0) as JSONArray

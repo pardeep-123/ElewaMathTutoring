@@ -12,7 +12,7 @@
 
     <item android:state_checked="true">
         <shape android:shape="rectangle">
-            <solid android:color="@color/editextbg"/>
+            <solid android:color="@color/app"/>
             <corners android:radius="100sp"/>
         </shape>
     </item>

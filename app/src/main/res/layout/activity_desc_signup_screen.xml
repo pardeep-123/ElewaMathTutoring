@@ -124,6 +124,8 @@
                 android:id="@+id/btnConfirmSignUp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="20dp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_20sdp"
                 android:text="Next"
                 />
 

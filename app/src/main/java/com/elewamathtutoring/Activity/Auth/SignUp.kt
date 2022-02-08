@@ -46,11 +46,11 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
                 }else{
                     startActivity(Intent(this, MainActivity::class.java))
                 }
-                /*    if (validator.signUpValid(this,  edtName.text.toString(), edtEmail.text.toString(),editPassword.text.toString(),editConfirmPassword.text.toString())) {
-                        baseViewModel.checkEmail(this,  edtEmail.text.toString(), true)
-                        baseViewModel.getCommonResponse().observe(this, this)
-
-                    }*/
+//                    if (validator.signUpValid(this,  edtName.text.toString(), edtEmail.text.toString(),editPassword.text.toString(),editConfirmPassword.text.toString())) {
+//                        baseViewModel.checkEmail(this,  edtEmail.text.toString(), true)
+//                        baseViewModel.getCommonResponse().observe(this, this)
+//
+//                    }
             }
             R.id.ivBack -> {
                 onBackPressed()
@@ -72,18 +72,23 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
         when (liveData!!.status) {
             Status.SUCCESS -> {
                 if (liveData.data is Commontoall) {
-                    if (getPrefrence(Constants.user_type, "").equals("1")) {
+                    if( getPrefrence(Constants.user_type, "").equals("1")){
+                        startActivity(Intent(this, SignupTeacherActivity::class.java))
+                    }else{
+                        startActivity(Intent(this, MainActivity::class.java))
+                    }
+                   /* if (getPrefrence(Constants.user_type, "").equals("1")) {
                         intent = Intent(this, DescSignupScreen::class.java)
                         // student
                     } else {
                         // Teacher
                         intent = Intent(this, AboutYouActivity::class.java)
                         intent.putExtra("key", "signup")
-                    }
-                    intent.putExtra("Name", edtName.text.toString())
+                    }*/
+                 /*   intent.putExtra("Name", edtName.text.toString())
                     intent.putExtra("email", edtEmail.text.toString())
                     intent.putExtra("password", editPassword.text.toString())
-                    startActivity(intent)
+                    startActivity(intent)*/
                 } else {
                 }
             }

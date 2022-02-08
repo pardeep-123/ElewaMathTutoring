@@ -29,16 +29,13 @@ android:id="@+id/rlLayout"
     android:layout_alignParentEnd="true"
     android:layout_centerInParent="true"
     android:layout_marginEnd="@dimen/_10sdp">
+
     <ImageView
-        android:id="@+id/ivOn"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:src="@drawable/checkbox"/>
-     <ImageView
         android:id="@+id/ivOf"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:src="@drawable/checkbox2"/>
+        android:src="@drawable/checkbox2"
+       />
 
 
 </RelativeLayout>

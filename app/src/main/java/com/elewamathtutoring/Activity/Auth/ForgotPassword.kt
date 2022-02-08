@@ -31,7 +31,7 @@ class ForgotPassword : AppCompatActivity(), View.OnClickListener, Observer<RestO
         w.setFlags(
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-        );
+        )
         App.getinstance().getmydicomponent().inject(this)
         allClickListeners()
     }
@@ -46,12 +46,12 @@ class ForgotPassword : AppCompatActivity(), View.OnClickListener, Observer<RestO
                     onBackPressed()
                 }
                 R.id.btn_forgetPassword->{
-                    finish()
-                   /* if (validator.Emailvalidation(this, email_text.text.toString()))
+                  //  finish()
+                    if (validator.Emailvalidation(this, email_text.text.toString()))
                     {
                         baseViewModel.forgetPassword(this,  email_text.text.toString().trim(), true)
                         baseViewModel.getCommonResponse().observe(this, this)
-                    }*/
+                    }
                 }
             }
         }

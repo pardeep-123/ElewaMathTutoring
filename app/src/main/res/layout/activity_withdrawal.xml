@@ -264,10 +264,9 @@
                 android:layout_marginRight="14dp"
                 android:background="@drawable/button_bg_and_shape"
                 android:text="Withdraw Now"
+                android:fontFamily="@font/bold"
                 android:textAllCaps="true"
                 android:textColor="@color/white" />
-
-
             <ImageView
                 android:id="@+id/iconBox"
                 android:layout_width="80dp"
@@ -278,7 +277,6 @@
                 android:padding="10dp"
                 android:src="@drawable/cube"
                 android:visibility="gone" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

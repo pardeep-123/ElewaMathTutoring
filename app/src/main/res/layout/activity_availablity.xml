@@ -30,11 +30,11 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginTop="25dp"
-            android:fontFamily="@font/avenirlstd_roman"
+            android:fontFamily="@font/bold"
             android:gravity="center"
             android:text="Availability"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="@dimen/_14sdp" />
     </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/medium"
+                android:fontFamily="@font/bold"
                 android:text="Availability"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp" />
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvAvailibity"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/avenirlstd_roman"
+                android:fontFamily="@font/medium"
                 android:text="Dates Available"
                 android:textColor="@color/black"
                 android:textSize="13sp"
@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rv_datesAvailable"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/avenirlstd_roman"
+                android:fontFamily="@font/medium"
                 android:text="Time Slots Available"
                 android:textColor="@color/black"
                 android:textSize="13sp"
@@ -113,10 +113,11 @@
                     android:id="@+id/tvSlot"
                     style="@style/WrapTextView"
                     android:layout_alignParentStart="true"
-                    android:textColor="@color/black"
                     android:drawableRight="@drawable/freeslot"
                     android:drawablePadding="@dimen/_5sdp"
-                    android:text="Free Slot" />
+                    android:text="Free Slot"
+                    android:fontFamily="@font/medium"
+                    android:textColor="@color/black" />
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/iv_notification_switch"
@@ -126,8 +127,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="15dp"
-                    android:thumb="@drawable/notification_thumb_selector"
-                    app:track="@drawable/notification_track_selector" />
+                    android:thumb="@drawable/notification_thumb_selector2"
+                    app:track="@drawable/notification_track_selector2" />
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView

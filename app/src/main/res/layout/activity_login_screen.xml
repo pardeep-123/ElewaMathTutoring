@@ -47,7 +47,7 @@
                     android:id="@+id/email_text"
                     style="@style/Edittext"
                     android:layout_toRightOf="@+id/ivMailicon"
-                    android:fontFamily="@font/light"
+                    android:fontFamily="@font/avenirlstd_roman"
                     android:hint="@string/enter_email_address"
                     android:inputType="textEmailAddress"
                     android:text="" />
@@ -75,7 +75,7 @@
                     android:layout_toRightOf="@+id/ivPassword"
                     android:drawableEnd="@drawable/password"
                     android:drawablePadding="@dimen/_10sdp"
-                    android:fontFamily="@font/light"
+                    android:fontFamily="@font/avenirlstd_roman"
                     android:hint="@string/enter_password"
                     android:inputType="textPassword"
                     android:singleLine="true"

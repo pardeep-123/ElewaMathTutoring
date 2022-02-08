@@ -29,11 +29,11 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginTop="25dp"
-            android:fontFamily="@font/avenirlstd_roman"
+            android:fontFamily="@font/bold"
             android:gravity="center"
             android:text="Create a Study Group"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="@dimen/_14sdp" />
 
     </RelativeLayout>
 
@@ -48,18 +48,20 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/_20sdp"
         android:layout_marginRight="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_10sdp"
         android:orientation="vertical">
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="@dimen/_110sdp"
             android:layout_height="@dimen/_110sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:src="@drawable/create_group_img"
+            android:id="@+id/group_img"
             android:layout_gravity="center"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_45sdp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:background="@drawable/edittext_bg"
+
             android:paddingHorizontal="@dimen/_10sdp">
 
             <EditText
