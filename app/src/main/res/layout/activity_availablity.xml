@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginTop="25dp"
-            android:fontFamily="@font/bold"
+            android:fontFamily="@font/medium"
             android:gravity="center"
             android:text="Availability"
             android:textColor="@color/white"

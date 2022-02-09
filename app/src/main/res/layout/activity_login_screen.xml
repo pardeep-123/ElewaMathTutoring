@@ -94,7 +94,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="20dp"
                     android:fontFamily="@font/medium"
-                    android:text="Forgot Password"
+                    android:text="Forgot Password?"
                     android:textSize="@dimen/_12sdp" />
             </RelativeLayout>
 

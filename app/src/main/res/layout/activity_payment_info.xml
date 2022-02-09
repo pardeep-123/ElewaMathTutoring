@@ -20,20 +20,20 @@
             style="@style/backIcon"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="8dp"
             android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginBottom="8dp"
             app:tint="@color/white" />
 
         <TextView
             style="@style/TextViewHeader"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/medium"
             android:text="Payment Information"
             android:textColor="@color/white"
-            android:fontFamily="@font/bold"
             android:textSize="@dimen/_14sdp" />
 
 
     </RelativeLayout>
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -79,10 +79,11 @@
 
                 <ImageView
                     android:id="@+id/add_img"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/addcard" />
+                    android:src="@drawable/addcard"
+                    app:tint="@color/black" />
 
                 <TextView
                     android:id="@+id/tvAddNewCard"
@@ -91,12 +92,12 @@
                     android:layout_centerVertical="true"
                     android:layout_marginTop="30dp"
                     android:layout_toRightOf="@+id/add_img"
-                    android:fontFamily="@font/avenirlsttd_book"
+                    android:fontFamily="@font/bold"
                     android:gravity="center"
                     android:text="Add New Card"
-                    android:textColor="@color/textcolor"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    />
             </RelativeLayout>
 
         </RelativeLayout>

@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/_5sdp"
             android:src="@drawable/back_arrow_white" />
 
         <TextView
@@ -27,16 +28,17 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginTop="25dp"
-            android:fontFamily="@font/avenirlstd_roman"
+            android:fontFamily="@font/medium"
             android:gravity="center"
             android:text="Math Chat Room"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="@dimen/_14sdp" />
     </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/btnCreateGroup"
         android:layout_below="@id/rlToolbar"
         android:fillViewport="true">
 
@@ -57,12 +59,12 @@
 
                 <ImageView
                     android:id="@+id/ivName"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
-                    android:src="@drawable/search"
-                    app:tint="@color/darkgrey" />
+                    android:src="@drawable/search_1"
+                    app:tint="@color/black" />
 
                 <EditText
                     android:id="@+id/edtSearch"
@@ -76,7 +78,7 @@
                     android:fontFamily="@font/avenirlstd_roman"
                     android:hint="Search..."
                     android:imeOptions="actionDone"
-                    android:inputType="text"
+                    android:inputType="textCapWords"
                     android:textColor="@color/black"
                     android:textColorHint="@color/editexthint"
                     android:textSize="16sp" />
@@ -91,6 +93,20 @@
                 android:layout_marginRight="@dimen/_10sdp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="2" />
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCreateGroup"
+        style="@style/Button"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:background="@drawable/bg_btn"
+        android:fontFamily="@font/bold"
+        android:text="Create a Study Group"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
 </RelativeLayout>

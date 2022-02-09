@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="160dp"
         android:padding="35dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:src="@drawable/splashimg" />
 
     <TextView
@@ -27,18 +27,20 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:fontFamily="@font/avenirlstd_roman"
+        android:fontFamily="@font/medium"
         android:gravity="center"
-        android:text="SIGN UP AS"
-        android:textColor="@color/textcolor"
-        android:textSize="20sp"
+        android:text="SIGN UP AS..."
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
         android:textStyle="bold" />
 
                 <LinearLayout
                     android:id="@+id/llStudent"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_120sdp"
-                    android:background="@drawable/radius_background"
+                    android:background="@drawable/background_blue"
+                    android:layout_height="@dimen/_130sdp"
+               android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
                     android:layout_gravity="center"
                     android:gravity="center">
 
@@ -46,20 +48,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/aenirlsttd_black"
+                        android:fontFamily="@font/medium"
                         android:gravity="center"
                         android:padding="40dp"
                         android:text="Student"
-                        android:textColor="@color/textcolor"
-                        android:textSize="20sp" />
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_18sdp" />
 
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/llTeacher"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/_40sdp"
-                    android:layout_height="@dimen/_120sdp"
-                    android:background="@drawable/radius_background"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:layout_height="@dimen/_130sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:background="@drawable/background_blue"
                     android:layout_gravity="center"
                     android:gravity="center">
 
@@ -67,12 +71,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/aenirlsttd_black"
+                        android:fontFamily="@font/medium"
                         android:gravity="center"
                         android:padding="40dp"
                         android:text="Tutor"
-                        android:textColor="@color/textcolor"
-                        android:textSize="20sp" />
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_18sdp" />
                 </LinearLayout>
 
         </LinearLayout>

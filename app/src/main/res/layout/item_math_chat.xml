@@ -5,7 +5,7 @@
     android:id="@+id/home_listcardview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="2dp"
+    android:layout_margin="5dp"
     android:gravity="center"
     app:cardCornerRadius="8dp"
     android:elevation="@dimen/_2sdp"
@@ -94,12 +94,15 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30sdp"
             android:background="@drawable/bg_btn">
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:drawableLeft="@drawable/mesg"
-                android:drawablePadding="@dimen/_10sdp"
+                android:drawablePadding="@dimen/_7sdp"
+                android:textSize="@dimen/_10sdp"
+                android:fontFamily="@font/bold"
                 android:text="MESSAGE"
                 android:textColor="@color/white" />
         </RelativeLayout>

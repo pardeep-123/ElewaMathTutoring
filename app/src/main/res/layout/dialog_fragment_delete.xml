@@ -12,23 +12,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="20dp"
-        android:fontFamily="@font/aenirlsttd_black"
-        android:gravity="center"
+        android:drawableStart="@drawable/close"
+        android:drawablePadding="@dimen/_8sdp"
+        android:fontFamily="@font/bold"
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
-        android:text="Elewa Math Tutoring"
+        android:text="Delete Account"
         android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:textSize="@dimen/_18sdp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/view"
+        android:layout_below="@+id/tvHeading"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@color/editexthint"
+/>
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvHeading"
+        android:layout_below="@id/view"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="@font/avenirlstd_roman"
         android:gravity="center"
@@ -42,33 +51,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvTitle"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:gravity="end"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnNo"
-            android:layout_width="100dp"
-            android:layout_height="35dp"
-            android:layout_gravity="center"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/background_blue"
-            android:text="@string/no"
-            android:textAllCaps="false"
-            android:fontFamily="@font/bold"
-            android:textColor="@color/white"
-            android:layout_marginRight="10dp" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:fontFamily="@font/medium"
+            android:padding="@dimen/_5sdp"
+            android:text="No"
+            android:textColor="@color/darkgrey"
+            android:textSize="@dimen/_14sdp" />
 
-        <Button
-            android:id="@+id/btnYes"
-            android:layout_width="100dp"
-            android:layout_height="35dp"
-            android:layout_gravity="center"
-            android:background="@drawable/background_blue"
-            android:text="@string/yes"
-            android:fontFamily="@font/bold"
-            android:textAllCaps="false"
-            android:textColor="@color/white"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvYes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:fontFamily="@font/medium"
+            android:padding="@dimen/_5sdp"
+            android:text="Yes"
+            android:textColor="@color/app"
+            android:textSize="@dimen/_14sdp" />
+
     </LinearLayout>
 
 </RelativeLayout>

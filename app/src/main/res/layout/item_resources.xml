@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/_10sdp"
-    android:background="@color/app">
+    android:background="@drawable/strok_bg"
+    android:backgroundTint="@color/app"
+  >
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/home_listcardview"
@@ -12,22 +14,21 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/_6sdp"
         android:elevation="@dimen/_2sdp"
-
         android:gravity="center"
-        app:cardCornerRadius="4dp"
+android:background="@drawable/strok_bg"
+        app:cardCornerRadius="8dp"
         app:contentPadding="1dp">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
-
             android:orientation="vertical">
-
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/avenirlstd_roman"
+                android:fontFamily="@font/bold"
+                android:maxLines="3"
+                android:textColor="@color/black"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:text="@string/lorem_ipsum_dolor_sit_amet_consectetur_adipisicin"
                 android:textSize="@dimen/_10sdp" />
@@ -38,6 +39,8 @@
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:autoLink="web"
+                android:textColorLink="@color/app"
+                android:fontFamily="@font/medium"
                 android:text="cqlsys.com"
                 android:textSize="@dimen/_10sdp" />
 
@@ -52,24 +55,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_btn"
 
-                        >
                         <androidx.appcompat.widget.AppCompatTextView
                             style="@style/WrapTextView"
                             android:text="Document"
                             android:drawableLeft="@drawable/document"
                             android:textColor="@color/white"
-                            android:padding="@dimen/_10sdp"
-                            android:drawablePadding="@dimen/_5sdp"
+                            android:background="@drawable/bg_btn"
+                            android:paddingStart="@dimen/_11sdp"
+                            android:paddingEnd="@dimen/_11sdp"
+                            android:paddingTop="@dimen/_9sdp"
+                            android:paddingBottom="@dimen/_9sdp"
+                            android:layout_marginStart="@dimen/_2sdp"
+                            android:drawablePadding="@dimen/_7sdp"
                             android:textSize="@dimen/_10sdp"
                             android:fontFamily="@font/medium"
                             />
 
-                    </LinearLayout>
 
                     <ImageView
                         android:id="@+id/ivDownload"
@@ -95,14 +97,14 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/medium"
                             android:text="Category:"
-                            android:textSize="@dimen/_12sdp"
+                            android:textSize="@dimen/_9sdp"
                             android:textColor="@color/black" />
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/medium"
                             android:text="Books"
-                            android:textSize="@dimen/_10sdp"
+                            android:textSize="@dimen/_8sdp"
                             android:textColor="@color/app" />
                     </LinearLayout>
                     <LinearLayout
@@ -115,13 +117,13 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/medium"
                             android:text="Author:"
-                            android:textSize="@dimen/_12sdp"
+                            android:textSize="@dimen/_9sdp"
                             android:textColor="@color/black" />
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/medium"
-                            android:textSize="@dimen/_10sdp"
+                            android:textSize="@dimen/_8sdp"
                             android:text="John m."
 
                             android:textColor="@color/app" />

@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="25dp"
-                android:fontFamily="@font/bold"
+                android:fontFamily="@font/medium"
                 android:gravity="center"
                 android:text="Edit Profile"
                 android:textAllCaps="false"
@@ -53,8 +53,8 @@
 
 
                 <RelativeLayout
-                    android:layout_width="100dp"
-                    android:layout_height="80dp"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
                     android:layout_gravity="center"
                     android:layout_marginTop="30dp">
 
@@ -66,8 +66,8 @@
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/ivProfileSignUp"
-                            android:layout_width="110dp"
-                            android:layout_height="110dp"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="@dimen/_90sdp"
                             android:layout_centerInParent="true"
                             android:src="@drawable/profile"
                             app:civ_border_color="@color/text"
@@ -79,8 +79,8 @@
 
                     <RelativeLayout
                         android:id="@+id/rlProfileImage"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"
@@ -138,7 +138,7 @@
                         android:layout_toRightOf="@+id/ivName"
                         android:background="@null"
                         android:fontFamily="@font/avenirlstd_roman"
-                        android:hint="@string/enter_name"
+                        android:hint="Enter First Name"
                         android:inputType="text"
                         android:textColor="@color/black"
                         android:textColorHint="@color/editexthint"

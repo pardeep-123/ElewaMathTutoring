@@ -12,6 +12,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.elewamathtutoring.Activity.Auth.SignUpAs
@@ -128,15 +129,15 @@ class SettingActivity : AppCompatActivity(), Observer<RestObservable> {
             WindowManager.LayoutParams.WRAP_CONTENT)
         logoutDialog.window!!.setGravity(Gravity.CENTER)
         // addPostDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        val btn_Done = logoutDialog.findViewById<Button>(R.id.btnYes)
-        val btnNo = logoutDialog.findViewById<Button>(R.id.btnNo)
+        val tvYes = logoutDialog.findViewById<AppCompatTextView>(R.id.tvYes)
+        val tvNo = logoutDialog.findViewById<AppCompatTextView>(R.id.tvNo)
         logoutDialog.setCancelable(true)
         logoutDialog.setCanceledOnTouchOutside(true)
-        btn_Done.setOnClickListener {
+        tvYes.setOnClickListener {
             baseViewModel.Delete_account(this, getPrefrence(Constants.user_type,""),true)
             baseViewModel.getCommonResponse().observe(this, this)
         }
-        btnNo.setOnClickListener {
+        tvNo.setOnClickListener {
             logoutDialog.dismiss()
         }
         logoutDialog.show()

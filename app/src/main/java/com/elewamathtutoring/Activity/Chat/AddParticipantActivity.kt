@@ -1,6 +1,7 @@
 package com.elewamathtutoring.Activity.Chat
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -11,7 +12,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
 import android.widget.RelativeLayout
+import com.elewamathtutoring.Activity.AddBankAccountActivity
 import com.elewamathtutoring.Adapter.ParentOrStudent.AddParticipantsAdapter
+import com.elewamathtutoring.MainActivity
 
 import com.elewamathtutoring.R
 import kotlinx.android.synthetic.main.activity_add_participant.*
@@ -36,7 +39,7 @@ class AddParticipantActivity : AppCompatActivity(), View.OnClickListener {
         val inflater =
             applicationContext?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.popup_add_participants, null)
-        popupWindow = PopupWindow(view, 350, RelativeLayout.LayoutParams.WRAP_CONTENT, true)
+        popupWindow = PopupWindow(view, 450, RelativeLayout.LayoutParams.WRAP_CONTENT, true)
         ivFilter.setOnClickListener {
             popupWindow?.showAsDropDown(it, 150, 48)
             applyDim(viewGroup, 0.5f)
@@ -75,7 +78,8 @@ class AddParticipantActivity : AppCompatActivity(), View.OnClickListener {
                 finish()
             }
             R.id.btnAdd -> {
-                finish()
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
             }
             R.id.ivFilter -> {
                 setPopUpWindow()

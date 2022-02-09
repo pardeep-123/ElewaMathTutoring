@@ -19,13 +19,19 @@
         <ImageView
             android:id="@+id/ivBack"
             style="@style/backIcon"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginBottom="8dp"
+            android:layout_centerVertical="true"
             app:tint="@color/white" />
+
         <TextView
             android:id="@+id/tvAppbarName"
             style="@style/TextViewHeaderin60"
-            android:text="Add Bank Account"
             android:layout_centerVertical="true"
-            />
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/medium"
+            android:text="Add Bank Account"
+            android:textSize="@dimen/_14sdp" />
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView

@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/ivNotification"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="15dp"
@@ -28,16 +28,17 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
-            android:fontFamily="@font/aenirlsttd_black"
-            android:text="Find a Teacher"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/medium"
+            android:text="Find a Tutor"
+
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="@dimen/_14sdp" />
 
         <ImageView
             android:id="@+id/ivSetting"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="15dp"
@@ -56,12 +57,12 @@
 
         <ImageView
             android:id="@+id/ivName"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
-            android:src="@drawable/search"
-            app:tint="@color/darkgrey" />
+            android:src="@drawable/search_1"
+            app:tint="@color/black" />
 
         <EditText
             android:id="@+id/edtSearch"
@@ -72,10 +73,11 @@
             android:layout_marginRight="5dp"
             android:layout_toRightOf="@+id/ivName"
             android:background="@null"
+
             android:fontFamily="@font/avenirlstd_roman"
             android:hint="Search..."
             android:imeOptions="actionDone"
-            android:inputType="text"
+            android:inputType="textCapWords"
             android:textColor="@color/black"
             android:textColorHint="@color/editexthint"
             android:textSize="14sp" />
@@ -95,7 +97,7 @@
         <RelativeLayout
             android:id="@+id/rlResources"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_height="@dimen/_33sdp"
             android:layout_weight="1"
             android:layout_marginRight="@dimen/_3sdp"
             android:background="@drawable/bg_btn">
@@ -105,16 +107,17 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:drawableLeft="@drawable/resources"
+                android:drawablePadding="@dimen/_7sdp"
                 android:fontFamily="@font/medium"
-                android:drawablePadding="@dimen/_10sdp"
                 android:text="Resources"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp" />
 
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/rlMathChatRoom"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_height="@dimen/_33sdp"
             android:layout_weight="1"
             android:layout_marginLeft="@dimen/_3sdp"
             android:background="@drawable/bg_btn">
@@ -124,10 +127,11 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:drawableLeft="@drawable/mathchatroom"
-                android:drawablePadding="@dimen/_10sdp"
+                android:drawablePadding="@dimen/_7sdp"
                 android:fontFamily="@font/medium"
                 android:text=" Math Chat Room"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp" />
         </RelativeLayout>
     </LinearLayout>
     <RelativeLayout
@@ -155,7 +159,6 @@
                     android:layout_marginLeft="-2dp"
                     android:layout_centerVertical="true"
                     android:src="@drawable/location" />
-
                 <TextView
                     android:id="@+id/tvloc"
                     android:layout_width="wrap_content"
@@ -164,11 +167,10 @@
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/ivloc"
                     android:fontFamily="@font/avenirlstd_roman"
-                    android:textAllCaps="true"
                     android:text="303210"
-                    android:textColor="@color/textcolor"
+                    android:textAllCaps="true"
+                    android:textColor="@color/darkgrey"
                     android:textSize="12sp" />
-
             </RelativeLayout>
         </LinearLayout>
 
@@ -187,7 +189,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:padding="5dp"
-                android:src="@drawable/filter" />
+                android:src="@drawable/filter"
+                app:tint="@color/black" />
 
             <TextView
                 android:id="@+id/tvfilter"
@@ -196,8 +199,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/ivfilter"
-                android:text="Filter"
                 android:fontFamily="@font/medium"
+                android:text="Filter"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -208,7 +211,6 @@
         android:layout_below="@+id/rel_filter"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_10sdp"
         tools:context=".MainActivity">
 
@@ -222,7 +224,7 @@
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
                 app:spanCount="2"
-                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_marginHorizontal="@dimen/_13sdp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 android:orientation="vertical"
                 />

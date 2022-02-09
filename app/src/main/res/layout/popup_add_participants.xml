@@ -22,7 +22,7 @@
             style="@style/MatchTextView"
             android:layout_below="@id/tvEdit"
             android:layout_marginTop="@dimen/_7sdp"
-            android:text="Student"
+            android:text="Students"
             android:textColor="@color/black" />
         <TextView
             android:id="@+id/tvAll"

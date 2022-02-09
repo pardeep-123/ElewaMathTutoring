@@ -13,74 +13,57 @@
         android:background="@color/white">
 
 
-        <RelativeLayout
-            android:id="@+id/relat_iv"
+    <RelativeLayout
+        android:id="@+id/relat_iv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivMessageImage"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/profile" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/ivMessageImage"
+            android:orientation="horizontal"
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/ivMessageImage"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_alignParentStart="true"
-                android:padding="10dp"
-                android:src="@drawable/mig" />
+            android:weightSum="10">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/ivMessageImage"
-                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="3dp">
 
-                android:weightSum="10">
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/tvMessageUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="3dp"
-                    android:orientation="vertical">
+                    android:fontFamily="@font/medium"
+                    android:text="Eric Miller"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sdp" />
 
-                    <TextView
-                        android:id="@+id/tvMessageUser"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/aenirlsttd_black"
-                        android:text="Eric Miller"
-                        android:textColor="@color/gray969A9D"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:id="@+id/tvMessage"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/avenirlstd_roman"
-                        android:lines="2"
-                        android:padding="2dp"
-                        android:text="@string/lorem_ipsum_dolor_sit_amet_consectetur_adipisicin"
-                        android:textColor="@color/text"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/tvMessage"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_weight="9"
-                    android:gravity="center|end">
-
-                    <ImageView
-                        android:id="@+id/ivArrow"
-                        android:layout_width="14dp"
-                        android:layout_height="14dp"
-                        android:src="@drawable/forwardarrow" />
-
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/light"
+                    android:lines="2"
+                    android:padding="2dp"
+                    android:text="@string/lorem_ipsum_dolor_sit_amet_consectetur_adipisicin"
+                    android:textColor="@color/darkgrey"
+                    android:textSize="12sp" />
             </LinearLayout>
-        </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
         <View
             android:layout_below="@+id/relat_iv"
             android:layout_width="match_parent"

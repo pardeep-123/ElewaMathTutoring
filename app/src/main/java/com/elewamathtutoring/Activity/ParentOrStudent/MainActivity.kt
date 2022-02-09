@@ -39,8 +39,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 if (f !is SearchFragment) {
                     switchFragment(R.id.rframe, SearchFragment())
                 }
-
-
             }
             R.id.menu_profile -> if (f !is ProfileFragment) {
                 Log.d("CLICKED", "PROFILE")
@@ -48,14 +46,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 if (f !is ProfileFragment) {
                     switchFragment(R.id.rframe, ProfileFragment())
                 }
-
             }
             R.id.media_schedule -> if (f !is ScheduleFragment) {
                 Log.d("CLICKED", "SCHEDULE")
                 if (f !is ScheduleFragment) {
                     switchFragment(R.id.rframe, ScheduleFragment())
                 }
-
             }
             R.id.menu_message -> if (f !is MessagesTabFragment) {
                 Log.d("CLICKED", "MESSAGE")
@@ -65,7 +61,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             }
         }
         return true
-
     }
     protected fun switchFragment(main_frame: Int, fragment: Fragment?) {
         val fragmentTransaction: FragmentTransaction =

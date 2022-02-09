@@ -24,7 +24,7 @@
 
         <TextView
             style="@style/TextViewHeader"
-            android:fontFamily="@font/bold"
+            android:fontFamily="@font/medium"
             android:text="Edit Profile"
             android:textSize="@dimen/_14sdp" />
     </RelativeLayout>

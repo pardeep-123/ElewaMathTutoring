@@ -13,6 +13,7 @@ import android.text.SpannableString
 import android.view.Gravity
 import android.view.Window
 import android.view.WindowManager
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -28,6 +29,7 @@ import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import kotlinx.android.synthetic.main.activity_add_card.*
 import kotlinx.android.synthetic.main.dialog_booking_thanks.*
+import kotlinx.android.synthetic.main.dialog_delete.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -35,7 +37,8 @@ import javax.inject.Inject
 
 class AddCardActivity : AppCompatActivity() ,
     Observer<RestObservable> {
-    var contxt: Context =this
+     lateinit var contxt: Context
+    lateinit var dialog: Dialog
     @Inject
     lateinit var validator: Validator
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
@@ -50,6 +53,7 @@ class AddCardActivity : AppCompatActivity() ,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_card)
+        contxt=this
         shared = SharedPrefUtil(this)
         App.getinstance().getmydicomponent().inject(this)
         onClicks()
@@ -83,7 +87,7 @@ class AddCardActivity : AppCompatActivity() ,
 
     private fun onClicks() {
         btnSubmit.setOnClickListener{
-            if (intent.getStringExtra("type")!!.equals("edit")) {
+           /* if (intent.getStringExtra("type")!!.equals("edit")) {
                 if (validator.addcard(this, edNameOfCard.text.toString(), etCard.text.toString(), etExpDate.text.toString(), edCvv.text.toString()))
                 {
                     baseViewModel.editCard(this, etCard.text.toString(), year, month, edNameOfCard.text.toString(), edCvv.text.toString(), "1", type_Add_edit, intent.getStringExtra("card_id").toString(), true)
@@ -97,7 +101,8 @@ class AddCardActivity : AppCompatActivity() ,
                     baseViewModel.addcard(this, etCard.text.toString(), year, month, edNameOfCard.text.toString(), edCvv.text.toString(), "1", type_Add_edit, true)
                     baseViewModel.getCommonResponse().observe(this, this)
                 }
-            }
+            }*/
+            ThanksDialog()
         }
         ivBack.setOnClickListener { finish() }
         etExpDate.setOnClickListener {
@@ -213,5 +218,25 @@ class AddCardActivity : AppCompatActivity() ,
             else -> {}
         }
     }
+    fun ThanksDialog() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_booking_thanks)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window!!.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        dialog.setCancelable(false)
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.window!!.setGravity(Gravity.CENTER)
 
+        val btnThanksContinue = dialog.findViewById<Button>(R.id.btnThanksContinue)
+        btnThanksContinue.setOnClickListener {
+           dialog.dismiss()
+            startActivity(Intent(this, MainActivity::class.java)
+                .putExtra("addCard","booking"))
+        }
+        dialog.show()
+    }
 }

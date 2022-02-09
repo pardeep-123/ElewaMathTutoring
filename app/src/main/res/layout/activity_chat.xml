@@ -16,7 +16,6 @@
             android:id="@+id/ivBack"
             style="@style/backIcon"
             android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="8dp"
             app:tint="@color/white" />
@@ -24,12 +23,16 @@
         <TextView
             android:id="@+id/tv_name"
             style="@style/TextViewHeader"
-            android:text="Rohan" />
+            android:fontFamily="@font/medium"
+            android:text="Rohan"
+            android:layout_marginBottom="8dp"
+            android:textSize="@dimen/_14sdp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:fontFamily="@font/medium"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="8dp"
@@ -37,15 +40,15 @@
 
             <ImageView
                 android:id="@+id/ivVideoCall"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:src="@drawable/video_call" />
 
             <ImageView
                 android:id="@+id/ivVoiceCall"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:src="@drawable/voice_call" />
 
@@ -92,8 +95,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:layout_toStartOf="@+id/ivSendBtn"
-                android:layout_toRightOf="@+id/ivSendBtn"
+                android:layout_toStartOf="@+id/ll"
+                android:layout_toRightOf="@+id/ll"
                 android:background="@android:color/transparent"
                 android:hint="Type your message here..."
                 android:maxLines="3"
@@ -104,16 +107,33 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/text"
                 android:textSize="13sp" />
+<LinearLayout
+    android:id="@+id/ll"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_centerVertical="true"
+    android:layout_marginRight="@dimen/_10sdp"
+    android:orientation="horizontal">
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:id="@+id/ivAttachment"
+        android:layout_marginEnd="5dp"
+        android:padding="@dimen/_5sdp"
+        android:src="@drawable/attachement"/>
 
-            <ImageView
-                android:id="@+id/ivSendBtn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:padding="5dp"
-                android:src="@drawable/send_symbol" />
+
+    <ImageView
+        android:id="@+id/ivSendBtn"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:padding="5dp"
+        android:layout_marginStart="5dp"
+        android:src="@drawable/send_symbol"
+        app:tint="@color/app" />
+</LinearLayout>
+
         </RelativeLayout>
     </RelativeLayout>
 

@@ -16,12 +16,12 @@ import com.elewamathtutoring.Util.constant.Constants
 import kotlinx.android.synthetic.main.item_schedule_pending.view.*
 import kotlinx.android.synthetic.main.item_schedule_pending.view.tvItemName
 import java.text.SimpleDateFormat
-
-class UpcomingSessionsAdapter(c: Context, pendinglist: ArrayList<Body>, i: Int) :
+//pendinglist: ArrayList<Body>, i: Int
+class UpcomingSessionsAdapter(c: Context) :
     RecyclerView.Adapter<UpcomingSessionsAdapter.ViewHolder>() {
     var ctn = c
-    var type = i
-    var list = pendinglist
+ /*   var type = i
+    var list = pendinglist*/
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -49,7 +49,7 @@ class UpcomingSessionsAdapter(c: Context, pendinglist: ArrayList<Body>, i: Int) 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-   try {
+ /*  try {
        val dateParser = SimpleDateFormat("yyyy-MM-dd")
         if(type==1)
         {
@@ -88,16 +88,16 @@ class UpcomingSessionsAdapter(c: Context, pendinglist: ArrayList<Body>, i: Int) 
 }catch (e:Exception)
 {
 
-}
+}*/
         holder.itemView.schedulePendingRoot.setOnClickListener {
-            if(type==2)
-            {
+            /*if(type==2)
+            {*/
                 val intent = Intent(ctn, TeacherDetailsActivity::class.java)
-                intent.putExtra("teacher_id", list.get(0).Upcoming_sessions[position].Teacher.id.toString())
-                intent.putExtra("session_id", list.get(0).Upcoming_sessions[position].id.toString())
+               // intent.putExtra("teacher_id", list.get(0).Upcoming_sessions[position].Teacher.id.toString())
+              //  intent.putExtra("session_id", list.get(0).Upcoming_sessions[position].id.toString())
                 intent.putExtra("Type","schedule")
                 ctn.startActivity(intent)
-            }
+            //}
         }
     }
 }

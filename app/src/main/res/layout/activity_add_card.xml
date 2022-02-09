@@ -12,18 +12,23 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
         android:background="@color/textcolor">
+
         <ImageView
             android:id="@+id/ivBack"
             style="@style/backIcon"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginBottom="8dp"
             app:tint="@color/white" />
+
         <TextView
             style="@style/TextViewHeader"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/medium"
             android:text="Payment Information"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="@dimen/_14sdp" />
     </RelativeLayout>
 
 
@@ -50,7 +55,7 @@
                     android:id="@+id/tvName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/avenirlstd_roman"
+                    android:fontFamily="@font/bold"
                     android:text="Name on Card"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
@@ -91,7 +96,7 @@
                     android:id="@+id/tvCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/avenirlstd_roman"
+                    android:fontFamily="@font/bold"
                     android:text="Card Number"
                     android:textColor="@color/black"
                     android:textSize="13sp" />
@@ -134,7 +139,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/avenirlstd_roman"
+                        android:fontFamily="@font/bold"
                         android:text="Exp Date"
                         android:textColor="@color/black"
                         android:textSize="13sp" />
@@ -148,7 +153,7 @@
                         android:elevation="4dp"
                         android:layout_margin="5dp"
                         android:focusable="false"
-                        android:fontFamily="@font/avenirlstd_roman"
+                        android:fontFamily="@font/bold"
                         android:hint="MM/YYYY"
                         android:imeOptions="actionNext"
                         android:maxLines="1"
@@ -169,7 +174,7 @@
                         android:id="@+id/et_cvv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/avenirlstd_roman"
+                        android:fontFamily="@font/bold"
                         android:text="CVV"
                         android:inputType="number"
                         android:maxLength="4"
@@ -184,7 +189,7 @@
                         android:elevation="4dp"
                         android:layout_margin="5dp"
                         android:background="@drawable/background_grey"
-                        android:fontFamily="@font/avenirlstd_roman"
+                        android:fontFamily="@font/bold"
                         android:hint="CVV"
                         android:imeOptions="actionDone"
                         android:inputType="numberPassword"
@@ -227,7 +232,8 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/WrapTextView"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="@dimen/_11sdp"
+                    android:textColor="@color/black"
                     android:text="Save this card and its details\nsecurly to my account"/>
 
             </LinearLayout>
@@ -242,7 +248,7 @@
                 android:layout_marginTop="@dimen/_40sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:layout_marginBottom="20dp"
-                android:text="Submit"
+                android:text="Confirm Payment"
                 android:textAllCaps="false" />
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>

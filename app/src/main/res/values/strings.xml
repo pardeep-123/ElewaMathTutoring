@@ -39,12 +39,12 @@
     <string name="enter_new_password">Enter New Password</string>
     <string name="new_password">New Password</string>
     <string name="dummytext">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce congue velit dui, ut egestas felis tristique nec. Proin rhoncus laoreet est ac faucibus. Etiam nec laoreet turpis, vel cursus magna. Nulla sagittis malesuada nulla sit amet facilisis. Integer vitae molestie dolor. Curabitur pretium libero porttitor, faucibus nunc non, scelerisque felis. Duis lacinia ligula et mauris fringilla convallis. Aenean lobortis quam lacus, at interdum urna rhoncus et. Fusce efficitur vestibulum mauris, ut accumsan lacus pretium vitae. Cras vestibulum, tortor vitae varius gravida, augue eros sodales libero, ut ultrices nunc arcu eget sem. Quisque vitae gravida lorem. Maecenas et porttitor lectus. Nam eget pharetra nisi. Donec ac placerat odio. Etiam feugiat, mauris id rutrum pharetra, odio erat convallis arcu, quis accumsan nulla odio consectetur massa. Cras bibendum, massa ut molestie dapibus, augue nunc faucibus urna, sed pulvinar magna nisl id tortor. Donec fermentum eleifend metus condimentum malesuada. Suspendisse egestas risus eu orci rutrum, a varius tortor pellentesque. Vestibulum viverra, felis condimentum eleifend posuere, lectus enim dignissim ipsum, non posuere ante ante quis nisl. Etiam ex sapien, accumsan ac lorem ullamcorper, fermentum fringilla nulla. Quisque gravida justo quis dolor dictum placerat. Proin quis interdum nibh. In ultricies consectetur vestibulum.</string>
-    <string name="sendfeedbacktext">Leave your feedback, suggestions, and issues for ElewaMathTutoring below. We\'d love to hear from you!</string>
+    <string name="sendfeedbacktext">Leave your feedback, suggestions, and issues for math below. We\'d love to hear from you!</string>
     <string name="start_typing">Start Typing...</string>
     <string name="logout_desc">Are you sure you want to logout?</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
-    <string name="are_you_sure_you_want_to_ndelete_account">Are you sure you want to delete account</string>
+    <string name="are_you_sure_you_want_to_ndelete_account">Are you sure you want to delete my account?</string>
     <string name="discover_teacher_tutors"><![CDATA[Teachers, Tutors& Specialists]]></string>
     <string name="_30310">30310</string>
     <string name="open_camera">Open Camera</string>
@@ -113,7 +113,7 @@
     <string name="add_bank_account">Add Bank Account</string>
 
     <string name="terms_amp_condotions">
-        <u><![CDATA[Terms & Condotions]]></u></string>
+        <u><![CDATA[Terms & Conditions.]]></u></string>
 
     <string name="heading1">Heading1</string>
     <string name="heading2">Heading2</string>

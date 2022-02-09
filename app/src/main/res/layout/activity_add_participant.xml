@@ -29,11 +29,11 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginTop="25dp"
-            android:fontFamily="@font/avenirlstd_roman"
+            android:fontFamily="@font/medium"
             android:gravity="center"
             android:text="Add Participants"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="@dimen/_14sdp" />
 
         <ImageView
             android:id="@+id/ivFilter"
@@ -70,11 +70,12 @@
 
                 <ImageView
                     android:id="@+id/ivName"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
-                    android:src="@drawable/search" />
+                    android:src="@drawable/search"
+                    app:tint="@color/black" />
 
                 <EditText
                     android:id="@+id/edtSearch"
@@ -102,7 +103,7 @@
                 android:fontFamily="@font/medium"
                 android:text="Select up to 30 participants"
                 android:textColor="@color/red"
-                android:textSize="@dimen/_12sdp" />
+                android:textSize="@dimen/_10sdp" />
 
 
             <androidx.recyclerview.widget.RecyclerView

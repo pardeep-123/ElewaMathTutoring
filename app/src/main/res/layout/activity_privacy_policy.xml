@@ -19,8 +19,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="8dp"
+            android:padding="@dimen/_5sdp"
             android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginBottom="8dp"
             android:src="@drawable/back_arrow_white" />
 
         <TextView
@@ -30,7 +31,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
             android:layout_marginBottom="8dp"
-            android:fontFamily="@font/bold"
+            android:fontFamily="@font/medium"
             android:gravity="center"
             android:text="Privacy Policy"
             android:textColor="@color/white"

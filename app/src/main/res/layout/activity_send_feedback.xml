@@ -26,6 +26,7 @@
                 android:src="@drawable/back_arrow_white"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_alignParentStart="true"
+                android:padding="@dimen/_5sdp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="8dp"/>
 
@@ -34,9 +35,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerInParent="true"
-                android:layout_marginTop="25dp"
                 android:layout_marginBottom="8dp"
-                android:fontFamily="@font/bold"
+                android:fontFamily="@font/medium"
                 android:gravity="center"
                 android:text="Send Feedback"
                 android:textColor="@color/white"
@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginRight="40dp"
                     android:gravity="center"
                     android:fontFamily="@font/light"

@@ -95,7 +95,6 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
         searchHomeAdapter = SearchHomeAdapter(requireContext())
         recycler_Homesearch.adapter = searchHomeAdapter
        // checkPermissionLocation(requireActivity())
-
        /* rl2.setOnClickListener {
             teachinglevel()
             filterDialog()

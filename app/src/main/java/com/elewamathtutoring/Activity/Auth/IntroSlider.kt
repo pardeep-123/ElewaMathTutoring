@@ -104,6 +104,7 @@ class IntroSlider : AppCompatActivity() {
                   //  btnNext.text = "Get Started"
                     btnNext.text = "Next"
                     tvBack.visibility=View.VISIBLE
+                    tvSkip.visibility=View.GONE
                 }
                 else{
                     tvBack.visibility=View.VISIBLE

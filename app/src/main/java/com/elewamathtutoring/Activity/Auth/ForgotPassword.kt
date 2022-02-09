@@ -17,6 +17,7 @@ import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import com.pawskeeper.Modecommon.Commontoall
 import kotlinx.android.synthetic.main.activity_forgot_password.*
+import kotlinx.android.synthetic.main.toolbar.*
 import javax.inject.Inject
 
 class ForgotPassword : AppCompatActivity(), View.OnClickListener, Observer<RestObservable> {

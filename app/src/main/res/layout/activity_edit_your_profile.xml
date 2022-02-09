@@ -26,8 +26,8 @@
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/WrapTextView"
         android:layout_centerInParent="true"
-        android:fontFamily="@font/bold"
         android:text="Edit Your Profile"
+        android:fontFamily="@font/medium"
         android:textColor="@color/white"
         android:textSize="@dimen/_14sdp" />
 </RelativeLayout>
