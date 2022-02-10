@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".Activity.PrivacyPolicy">
+    tools:context=".Activity.ParentOrStudent.privacy.PrivacyPolicy">
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -52,9 +52,6 @@ class SendFeedback : AppCompatActivity(),View.OnClickListener, Observer<RestObse
             R.id.ivBack -> {
                 onBackPressed()
             }
-           /* R.id.ivProfileSignUp -> {
-                selectImage()
-            }*/
             R.id.btnSendFeedBack -> {
                 api()
              /*   if (validator.contactUs(this, firstimage, cs_message.text.toString())) {
@@ -64,9 +61,8 @@ class SendFeedback : AppCompatActivity(),View.OnClickListener, Observer<RestObse
         }
     }
 
-    fun api()
-    {
-        baseViewModel.Contact_us(this, firstimage, cs_message.text.toString(), true)
+    fun api() {
+        baseViewModel.SendFeedback(this, cs_message.text.toString(), true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
 

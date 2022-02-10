@@ -76,7 +76,7 @@ class EditYourProfileActivity : AppCompatActivity(), View.OnClickListener,
     }
     override fun onResume() {
         super.onResume()
-        baseViewModel.get_profile(this, getPrefrence(Constants.user_type, ""), true)
+        baseViewModel.get_profile(this, true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
-}
+}//  baseViewModel.get_profile(this, getPrefrence(Constants.user_type, ""), true)

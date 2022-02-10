@@ -1,5 +1,11 @@
 package com.elewamathtutoring.api
 
+import com.elewamathtutoring.Activity.Auth.login.LoginResponse
+import com.elewamathtutoring.Activity.Auth.signup.SignUpResponse
+import com.elewamathtutoring.Activity.ParentOrStudent.editProfile.EditProfileResponse
+import com.elewamathtutoring.Activity.ParentOrStudent.privacy.PrivacyResponse
+import com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword.ChangePasswordResponse
+import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfileResponse
 import com.elewamathtutoring.Models.Add_Card.Model_addcards
 import com.elewamathtutoring.Models.BankAccountsModel.Model_BankAccount
 import com.elewamathtutoring.Models.Card_listing.Model_cardlisting
@@ -29,7 +35,7 @@ interface RestApiInterface {
 //    @POST(upload)
 //    fun images(@Part image: MultipartBody.Part): Observable<Model_UploadImage>
 
-    @FormUrlEncoded
+ /*   @FormUrlEncoded
     @POST("signin")
     fun Userlogin(
         @Field("userType") userType: String,
@@ -37,7 +43,14 @@ interface RestApiInterface {
         @Field("password") password: String,
         @Field("deviceType") device_type: String,
         @Field("deviceToken") device_token: String?
-    ): Observable<Model_login>
+    ): Observable<Model_login>*/
+ @FormUrlEncoded
+    @POST("signin")
+    fun Userlogin(
+     @Field("email") email: String,
+     @Field("password") password: String,
+
+ ): Observable<LoginResponse>
 
    @FormUrlEncoded
     @POST("withdrawlAmount")
@@ -49,8 +62,9 @@ interface RestApiInterface {
 
     @FormUrlEncoded
     @POST("change_password")
-    fun change_password(@Field("oldPassword") oldPassword: String,
-        @Field("newPassword") newPassword: String): Observable<Commontoall>
+    fun change_password(
+        @Field("oldPassword") oldPassword: String,
+        @Field("newPassword") newPassword: String): Observable<ChangePasswordResponse>
 
 
     @GET("NotificationList")
@@ -113,8 +127,6 @@ interface RestApiInterface {
     fun call_notification_on_offApi(@Field("notificationStatus") notificationStatus: String,
         @Field("userType") userType: String
     ): Observable<Commontoall2>
-
-
 
     @FormUrlEncoded
     @POST("add_bank")
@@ -192,8 +204,11 @@ interface RestApiInterface {
     fun deletecard(@Field("cardId") cardId: String): Observable<Commontoall>
 
      @FormUrlEncoded
-    @PUT("checkEmail")
-    fun checkEmail(@Field("email") email: String): Observable<Commontoall>
+    @POST("signup")
+    fun signUpApi(@Field("email") email: String,
+                  @Field("name") name: String,
+         @Field("password") password: String
+     ): Observable<SignUpResponse>
 
     @FormUrlEncoded
     @POST("Delete_Bank")
@@ -212,13 +227,15 @@ interface RestApiInterface {
     fun sessionDetails(@Field("sessionId") sessionId: String): Observable<Model_session_detail>
 
     @FormUrlEncoded
-    @PUT("web_Data")
-    fun tearmcondition_aboutus_privacypolicy(@Field("type") type: String): Observable<Model_webview>
+    @POST("get_content")
+    fun tearmcondition_aboutus_privacypolicy(@Field("type") type: String): Observable<PrivacyResponse>
 
-
-    @FormUrlEncoded
+/*    @FormUrlEncoded
     @PUT("get_profile")
-    fun get_profile(@Field("userType") userType: String): Observable<Model_login>
+    fun get_profile(@Field("userType") userType: String): Observable<ProfileResponse>*/
+
+@GET("get_profile")
+fun get_profile(): Observable<ProfileResponse>
 
     @FormUrlEncoded
     @POST("forgotPassword")
@@ -279,12 +296,12 @@ interface RestApiInterface {
     ): Observable<Model_login>
 
     @Multipart
-    @POST("ParentEditProfile")
+    @POST("editProfile")
     fun editParentProfile(
         @Part image: MultipartBody.Part?,
         @Part("name") name: RequestBody,
         @Part("about") about: RequestBody
-    ): Observable<Model_login>
+    ): Observable<EditProfileResponse>
 
     @Multipart
     @POST("EditTeacherBasicProfile")
@@ -365,11 +382,10 @@ interface RestApiInterface {
         @Part("deviceToken") deviceToken: RequestBody
     ): Observable<Model_login>
 
-    @Multipart
+    @FormUrlEncoded
     @POST("send_feedback")
-    fun Contact_us(
-        @Part images: MultipartBody.Part?,
-        @Part("message") message: RequestBody
+    fun sendFeedback(
+        @Field("message") message: String
     ): Observable<Commontoall>
 
 }

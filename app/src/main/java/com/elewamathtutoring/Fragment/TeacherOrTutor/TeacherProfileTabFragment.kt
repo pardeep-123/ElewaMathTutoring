@@ -48,8 +48,8 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener , Observer<Re
     }
     private fun api()
     {
-        baseViewModel.get_profile(requireActivity(), getPrefrence(Constants.user_type, ""), true)
-        baseViewModel.getCommonResponse().observe(requireActivity(), this)
+      /*  baseViewModel.get_profile(requireActivity(), getPrefrence(Constants.user_type, ""), true)
+        baseViewModel.getCommonResponse().observe(requireActivity(), this)*/
     }
     private fun onClicks() {
         v.rootView.ivSetting.setOnClickListener(this)

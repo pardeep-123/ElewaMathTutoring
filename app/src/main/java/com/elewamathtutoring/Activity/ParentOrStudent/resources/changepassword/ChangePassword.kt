@@ -1,4 +1,4 @@
-package com.elewamathtutoring.Activity
+package com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
@@ -38,11 +38,11 @@ class ChangePassword : AppCompatActivity() , View.OnClickListener, Observer<Rest
                 onBackPressed()
             }
             R.id.btnChangePassword -> {
-                finish()
-                /*if (validator.Change_Password(this, cs_oldpassword.text.toString(),cs_newpassword.text.toString(),confirm_passw.text.toString())) {
+              //  finish()
+                if (validator.Change_Password(this, cs_oldpassword.text.toString(),cs_newpassword.text.toString(),confirm_passw.text.toString())) {
                     baseViewModel.Change_Password(this,cs_oldpassword.text.toString(),cs_newpassword.text.toString(),true)
                     baseViewModel.getCommonResponse().observe(this, this)
-                }*/
+                }
             }
         }
     }
@@ -50,13 +50,13 @@ class ChangePassword : AppCompatActivity() , View.OnClickListener, Observer<Rest
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
-                if (liveData.data is Commontoall) {
+                if (liveData.data is ChangePasswordResponse) {
                     Helper.showSuccessToast(this, liveData.data.message)
                     finish()
                 }
             }
             Status.ERROR -> {
-                if (liveData.error is Commontoall)
+                if (liveData.error is ChangePasswordResponse)
                     Helper.showSuccessToast(this, liveData.error.message)
             }
             else -> {

@@ -1,4 +1,4 @@
-package com.elewamathtutoring.Activity.Auth
+package com.elewamathtutoring.Activity.Auth.signup
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,8 +6,8 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.elewamathtutoring.Activity.PrivacyPolicy
-import com.elewamathtutoring.Activity.TeacherOrTutor.AboutYouActivity
+import com.elewamathtutoring.Activity.Auth.SignupTeacherActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.privacy.PrivacyPolicy
 import com.elewamathtutoring.MainActivity
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.App
@@ -15,11 +15,9 @@ import com.elewamathtutoring.Util.Validator
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.Util.helper.extensions.getPrefrence
-import com.elewamathtutoring.Util.helper.extensions.savePrefrence
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
-import com.pawskeeper.Modecommon.Commontoall
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import javax.inject.Inject
 
@@ -41,16 +39,16 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btnNext -> {
-                if( intent.getStringExtra("Name").equals("Tutor")){
+                /*if( intent.getStringExtra("Name").equals("Tutor")){
                     startActivity(Intent(this, SignupTeacherActivity::class.java))
                 }else{
                     startActivity(Intent(this, MainActivity::class.java))
-                }
-//                    if (validator.signUpValid(this,  edtName.text.toString(), edtEmail.text.toString(),editPassword.text.toString(),editConfirmPassword.text.toString())) {
-//                        baseViewModel.checkEmail(this,  edtEmail.text.toString(), true)
-//                        baseViewModel.getCommonResponse().observe(this, this)
-//
-//                    }
+                }*/
+                    if (validator.signUpValid(this,  edtName.text.toString(), edtEmail.text.toString(),editPassword.text.toString(),editConfirmPassword.text.toString())) {
+                       baseViewModel.signUpApi(this,  edtEmail.text.toString(),edtName.text.toString(),editPassword.text.toString(), true)
+                       baseViewModel.getCommonResponse().observe(this, this)
+
+                   }
             }
             R.id.ivBack -> {
                 onBackPressed()
@@ -71,8 +69,8 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
-                if (liveData.data is Commontoall) {
-                    if( getPrefrence(Constants.user_type, "").equals("1")){
+                if (liveData.data is SignUpResponse) {
+                    if( getPrefrence(Constants.user_type, "").equals("2")){
                         startActivity(Intent(this, SignupTeacherActivity::class.java))
                     }else{
                         startActivity(Intent(this, MainActivity::class.java))
@@ -85,7 +83,7 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
                         intent = Intent(this, AboutYouActivity::class.java)
                         intent.putExtra("key", "signup")
                     }*/
-                 /*   intent.putExtra("Name", edtName.text.toString())
+                  /*  intent.putExtra("name", edtName.text.toString())
                     intent.putExtra("email", edtEmail.text.toString())
                     intent.putExtra("password", editPassword.text.toString())
                     startActivity(intent)*/
@@ -94,7 +92,7 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
             }
 
             Status.ERROR -> {
-                if (liveData.error is Commontoall)
+                if (liveData.error is SignUpResponse)
                     Helper.showSuccessToast(this, liveData.error.message)
             }
             else -> {

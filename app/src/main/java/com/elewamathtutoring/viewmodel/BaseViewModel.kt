@@ -43,7 +43,7 @@ class BaseViewModel : ViewModel() {
     @SuppressLint("CheckResult")
     fun checkSocialLoginExists(activity: Activity, socialid: String,socialType: String, isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
-            apiService.checkSocialLoginExists(socialid,socialType,  Constants.Android_devicetype,
+            apiService.checkSocialLoginExists(socialid,socialType,  Constants.deviceType,
                ""+ FirebaseInstanceId.getInstance().getToken(),getPrefrence(Constants.user_type, ""))
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
@@ -71,18 +71,11 @@ class BaseViewModel : ViewModel() {
         activity: Activity,
         email: String,
         password: String,
-        deviceType: String,
         isDialogShow: Boolean
     ) {
         if (Helper.isNetworkConnected(activity)) {
             Log.e("checkmyauth", "----" + FirebaseInstanceId.getInstance().getToken())
-            apiService.Userlogin(
-                getPrefrence(Constants.user_type, ""),
-                email,
-                password,
-                Constants.Android_devicetype,
-                FirebaseInstanceId.getInstance().getToken()
-            )
+            apiService.Userlogin(email, password)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -91,7 +84,6 @@ class BaseViewModel : ViewModel() {
                 ?.subscribe(
                     { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
                     {
-
                         mResponse.value = RestObservable.error(activity, it)
                     })
         } else {
@@ -99,7 +91,7 @@ class BaseViewModel : ViewModel() {
                 activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
-                        Userlogin(activity, email, password, deviceType, isDialogShow)
+                        Userlogin(activity, email, password, isDialogShow)
                     }
                 })
         }
@@ -163,12 +155,9 @@ class BaseViewModel : ViewModel() {
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
                         Change_Password(activity, oldpassword, newpassword, true)
-                    }
-                })
+                    } })
         }
-
     }
-
     @SuppressLint("CheckResult")
     fun notifications(
         activity: Activity,
@@ -215,12 +204,9 @@ class BaseViewModel : ViewModel() {
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
                         notifications(activity,  true)
-                    }
-                })
+                    } })
         }
-
     }
-
     @SuppressLint("CheckResult")
     fun Delete_account(activity: Activity, user_type: String, isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
@@ -714,9 +700,11 @@ class BaseViewModel : ViewModel() {
         }
     }
     @SuppressLint("CheckResult")
-    fun checkEmail(activity: Activity, email: String, isDialogShow: Boolean) {
+    fun signUpApi(activity: Activity, email: String,name: String,password: String,
+
+                  isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
-            apiService.checkEmail(email)
+            apiService.signUpApi(email,name,password)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -731,7 +719,7 @@ class BaseViewModel : ViewModel() {
                 activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
-                        checkEmail(activity, email, isDialogShow)
+                        signUpApi(activity, email,name,password, isDialogShow)
                     }
                 })
         }
@@ -862,9 +850,9 @@ class BaseViewModel : ViewModel() {
     }
 
     @SuppressLint("CheckResult")
-    fun get_profile(activity: Activity, user_type: String, isDialogShow: Boolean) {
+    fun get_profile(activity: Activity, isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
-            apiService.get_profile(user_type)
+            apiService.get_profile()
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -881,7 +869,7 @@ class BaseViewModel : ViewModel() {
                 activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
-                        get_profile(activity, user_type, isDialogShow)
+                        get_profile(activity, isDialogShow)
                     }
                 })
         }
@@ -1184,16 +1172,13 @@ class BaseViewModel : ViewModel() {
                 })
         }
     }
-
     @SuppressLint("CheckResult")
     fun editParentProfile(
         activity: Activity,
         imageUrl: String,
         firstName: String,
         about: String,
-        isDialogShow: Boolean
-    ) {
-
+        isDialogShow: Boolean) {
         var newFile: File? = null
         var imageFileBody: MultipartBody.Part? = null
         if (imageUrl != "") {
@@ -1206,7 +1191,6 @@ class BaseViewModel : ViewModel() {
             } else {
                 mediaType = "image/jpeg".toMediaTypeOrNull()
             }
-
             val requestBody: RequestBody = newFile.asRequestBody(mediaType)
             imageFileBody = MultipartBody.Part.createFormData("image", newFile.name, requestBody)
         }
@@ -1581,32 +1565,12 @@ class BaseViewModel : ViewModel() {
     }
 
     @SuppressLint("CheckResult")
-    fun Contact_us(
-        activity: Activity, imageUrl: String, message: String,
+    fun SendFeedback(
+        activity: Activity, message: String,
         isDialogShow: Boolean
     ) {
-
-        var newFile: File? = null
-        var imageFileBody: MultipartBody.Part? = null
-        if (imageUrl != "") {
-            newFile = File(imageUrl)
-        }
-        if (newFile != null && newFile.exists() && !newFile.equals("")) {
-            val mediaType: MediaType?
-            if (imageUrl.endsWith("png")) {
-                mediaType = "image/png".toMediaTypeOrNull()
-            } else {
-                mediaType = "image/jpeg".toMediaTypeOrNull()
-            }
-
-            val requestBody: RequestBody = newFile.asRequestBody(mediaType)
-            imageFileBody = MultipartBody.Part.createFormData("images", newFile.name, requestBody)
-        }
-        val message_value: RequestBody =
-            RequestBody.create("text/plain".toMediaTypeOrNull(), message)
-
         if (Helper.isNetworkConnected(activity)) {
-            apiService.Contact_us(imageFileBody, message_value)
+            apiService.sendFeedback( message)
                 .subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -1621,7 +1585,7 @@ class BaseViewModel : ViewModel() {
                 activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
-                        Contact_us(activity, imageUrl, message, isDialogShow)
+                        SendFeedback(activity, message, isDialogShow)
                     }
                 })
         }

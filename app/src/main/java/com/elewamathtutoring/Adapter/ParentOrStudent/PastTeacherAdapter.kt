@@ -6,7 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.*
 import androidx.recyclerview.widget.RecyclerView
-import com.elewamathtutoring.Fragment.ProfileFragment
+import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfileFragment
 
 import com.elewamathtutoring.R
 

@@ -1,4 +1,4 @@
-package com.elewamathtutoring.Activity.Auth
+package com.elewamathtutoring.Activity.Auth.login
 
 import android.content.Context
 import android.content.Intent
@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.elewamathtutoring.Activity.Auth.DescSignupScreen
+import com.elewamathtutoring.Activity.Auth.ForgotPassword
+import com.elewamathtutoring.Activity.Auth.LoginGuestActivity
+import com.elewamathtutoring.Activity.Auth.signup.SignUp
 import com.elewamathtutoring.Activity.TeacherOrTutor.AboutYouActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.MainTeacherActivity
-import com.elewamathtutoring.Activity.TeacherOrTutor.SubscriptionsActivity
 import com.elewamathtutoring.MainActivity
 import com.elewamathtutoring.Models.Login.Model_login
 import com.elewamathtutoring.R
@@ -26,16 +28,8 @@ import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
-import com.facebook.GraphRequest
-import com.facebook.login.LoginManager
-import com.facebook.login.LoginResult
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.pawskeeper.Modecommon.Commontoall
 import kotlinx.android.synthetic.main.activity_login_screen.*
-import org.json.JSONException
-import java.lang.Exception
 import javax.inject.Inject
 
 class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObservable>{
@@ -117,19 +111,19 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
 
             }*/
             R.id.btnLogin-> {
-                if( intent.getStringExtra("Name").equals("Tutor")){
+               /* if( intent.getStringExtra("Name").equals("Tutor")){
                     startActivity(Intent(this, MainTeacherActivity::class.java))
                     finishAffinity()
                 }else {
                     startActivity(Intent(this, MainActivity::class.java))
                     finishAffinity()
-                }
-              /*  val email = email_text.text.toString().trim()
+                }*/
+                val email = email_text.text.toString().trim()
                 val password = password_text.text.toString().trim()
                 if (validator.loginValid(this, email, password)) {
-                    baseViewModel.Userlogin(this,  email, password, Constants.DEVICE_TYPE_VALUE,  true)
+                    baseViewModel.Userlogin(this,  email, password,true)
                     baseViewModel.getCommonResponse().observe(this, this)
-                }*/
+                }// Constants.DEVICE_TYPE_VALUE
             }
             R.id.tvForgotPassword->{
                 startActivity(Intent(this, ForgotPassword::class.java))
@@ -251,13 +245,13 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
-                if (liveData.data is Model_login) {
+                if (liveData.data is LoginResponse) {
                     if (Api_type.equals("login")) {
                         Log.e("DEVICETOCKEN", "" + liveData.data.body.token + " dT--" + liveData.data.body.deviceToken)
                         savePrefrence(Constants.AUTH_KEY, liveData.data.body.token.toString())
                         savePrefrence(Constants.USER_ID, liveData.data.body.id.toString())
                         savePrefrence(Constants.notificationStatus, liveData.data.body.notificationStatus.toString())
-                        savePrefrence(Constants.Social_login, "False")
+                      //  savePrefrence(Constants.Social_login, "False")
                         savePrefrence(Constants.user_type, liveData.data.body.userType.toString())
                         Constants.USER_IDValue=liveData.data.body.id.toString()
                         /*if (liveData.data.body.isBuyPlan == 0&&liveData.data.body.userType == 2)
@@ -267,7 +261,7 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
                         }
                         else
                         {*/
-                            if (liveData.data.body.userType == 1)
+                            if (liveData.data.body.userType == 2)
                             {
                                 startActivity(Intent(this, MainTeacherActivity::class.java))
                                 finishAffinity()

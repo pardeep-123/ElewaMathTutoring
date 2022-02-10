@@ -3,8 +3,9 @@ package com.elewamathtutoring.dagger
 import android.app.Application
 import com.elewamathtutoring.Activity.*
 import com.elewamathtutoring.Activity.Auth.ForgotPassword
-import com.elewamathtutoring.Activity.Auth.LoginScreen
-import com.elewamathtutoring.Activity.Auth.SignUp
+import com.elewamathtutoring.Activity.Auth.login.LoginScreen
+import com.elewamathtutoring.Activity.Auth.signup.SignUp
+import com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword.ChangePassword
 import com.elewamathtutoring.Activity.TeacherOrTutor.AboutYouActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.AvailablityActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfoActivity

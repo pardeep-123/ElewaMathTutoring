@@ -10,12 +10,13 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
-        tools:context=".Activity.EditProfile">
+        tools:context=".Activity.ParentOrStudent.editProfile.EditProfile">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_5sdp"
-            android:background="@color/app">
+            android:background="@color/app"
+            android:padding="@dimen/_5sdp">
 
             <ImageView
                 android:id="@+id/ivBack"
@@ -38,7 +39,6 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14sdp" />
         </RelativeLayout>
-
 
 
         <ScrollView
@@ -200,5 +200,6 @@
         android:layout_marginRight="@dimen/_20sdp"
         android:layout_marginBottom="20dp"
         android:text="Save"
+        android:textAllCaps="false"
         android:textColor="@color/white" />
 </RelativeLayout>

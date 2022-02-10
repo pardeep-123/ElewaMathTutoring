@@ -16,6 +16,8 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.elewamathtutoring.Activity.Auth.SignUpAs
+import com.elewamathtutoring.Activity.ParentOrStudent.privacy.PrivacyPolicy
+import com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword.ChangePassword
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper

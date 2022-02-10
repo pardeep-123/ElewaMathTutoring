@@ -1,4 +1,4 @@
-package com.elewamathtutoring.Activity
+package com.elewamathtutoring.Activity.ParentOrStudent.privacy
 
 import android.graphics.Color
 import android.os.Bundle

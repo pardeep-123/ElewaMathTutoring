@@ -67,7 +67,6 @@ class ForgotPassword : AppCompatActivity(), View.OnClickListener, Observer<RestO
                     {
                     }
                 }
-
                 Status.ERROR -> {
                     if (liveData.error is Commontoall)
                         Helper.showSuccessToast(this, liveData.error.message)

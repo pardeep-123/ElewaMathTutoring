@@ -30,10 +30,11 @@ class Constants {
     var Notification_chat = "Notification_chat"
     companion object {
       //  http://3.141.207.49
-        const val BASE_URL = "http://3.141.207.49/api/"//live
+       // const val BASE_URL = "http://3.141.207.49/api/"//live Eteacher
+        const val BASE_URL = "http://202.164.42.227:7552/api/"//live
         const val SOCKET_BASE_URL = "http://3.141.207.49"//live
 
-        //const val BASE_URL = "http://192.168.1.223:3100/"
+        //const val BASE_URL = "http://localhost:7552/api/"  local Math Tutoring
         const val SECURITY_KEY = "securitykey"
         const val IMAGE_URL = "http://3.141.207.49/uploads/users/"
         const val AUTH_KEY = "auth_key"
@@ -41,15 +42,15 @@ class Constants {
         lateinit var Notification_chat:String
         var USER_IDValue = "userId"
         const val SECURITY_KEY_VALUE = "eteacher007"
-        const val DEVICE_TYPE_VALUE = "2"
+        const val DEVICE_TYPE_VALUE = "1"
         const val USER_ID = "userid"
-        const val Android_devicetype = "2"
+        const val deviceType = "1"
         const val notificationStatus = "notificationStatus"
 
         //Api Constants
 
         const val name = "name"
-        const val user_type = "user_type"
+        const val user_type = "userType" // 1 for student and 2 for tutor
         const val password = "password"
         const val email = "email"
         const val Social_login = "socialLogin"
