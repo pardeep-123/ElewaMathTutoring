@@ -15,6 +15,7 @@ import com.elewamathtutoring.Util.Validator
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.Util.helper.extensions.getPrefrence
+import com.elewamathtutoring.Util.helper.extensions.savePrefrence
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
@@ -39,16 +40,16 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btnNext -> {
-                if( intent.getStringExtra("Name").equals("Tutor")){
+               /* if( intent.getStringExtra("Name").equals("Tutor")){
                     startActivity(Intent(this, SignupTeacherActivity::class.java))
                 }else{
                     startActivity(Intent(this, MainActivity::class.java))
-                }
-                  /*  if (validator.signUpValid(this,  edtName.text.toString(), edtEmail.text.toString(),editPassword.text.toString(),editConfirmPassword.text.toString())) {
+                }*/
+                    if (validator.signUpValid(this,  edtName.text.toString(), edtEmail.text.toString(),editPassword.text.toString(),editConfirmPassword.text.toString())) {
                        baseViewModel.signUpApi(this,  edtEmail.text.toString(),edtName.text.toString(),editPassword.text.toString(), true)
                        baseViewModel.getCommonResponse().observe(this, this)
 
-                   }*/
+                   }
             }
             R.id.ivBack -> {
                 onBackPressed()
@@ -70,6 +71,7 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
         when (liveData!!.status) {
             Status.SUCCESS -> {
                 if (liveData.data is SignUpResponse) {
+                    savePrefrence(Constants.AUTH_KEY, liveData.data.body.token.toString())
                     if( getPrefrence(Constants.user_type, "").equals("2")){
                         startActivity(Intent(this, SignupTeacherActivity::class.java))
                     }else{
