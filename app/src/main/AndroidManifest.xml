@@ -21,7 +21,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/Theme.default"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".Activity.ParentOrStudent.FilterActivity"
+            android:exported="true" />
         <activity
             android:name=".Activity.Auth.SignupTeacher2Activity"
             android:exported="true" />
@@ -131,7 +133,7 @@
             android:name=".Activity.ParentOrStudent.resources.changepassword.ChangePassword"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.SettingActivity"
+            android:name=".Activity.ParentOrStudent.settings.SettingActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.ParentOrStudent.editProfile.EditProfile"

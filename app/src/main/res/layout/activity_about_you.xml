@@ -44,8 +44,8 @@
 
             <RelativeLayout
                 android:id="@+id/rlPick"
-                android:layout_width="130dp"
-                android:layout_height="135sp"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
                 android:layout_marginTop="20dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
@@ -60,22 +60,23 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/ivProfileDesc"
-                        android:layout_width="@dimen/_110sdp"
-                        android:layout_height="@dimen/_110sdp"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_90sdp"
                         android:layout_centerInParent="true"
                         android:src="@drawable/profile_unselected"
                         app:civ_border_color="@color/text"
                         app:civ_border_width="0.5dp"
                         app:civ_circle_background_color="#f6f6f6" />
+
                     <ImageView
                         android:id="@+id/ivAdd"
-                        android:layout_width="40dp"
-                        android:elevation="10dp"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_height="40dp"
                         android:contentDescription="@null"
                         android:src="@drawable/add" />
+
                 </RelativeLayout>
             </RelativeLayout>
 

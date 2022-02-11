@@ -70,11 +70,11 @@
 
                 <ImageView
                     android:id="@+id/ivName"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
-                    android:src="@drawable/search"
+                    android:src="@drawable/search_1"
                     app:tint="@color/black" />
 
                 <EditText

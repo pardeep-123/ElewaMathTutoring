@@ -13,8 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.elewamathtutoring.Activity.Chat.chatModel.chatThreads.GetInboxMessageListResponse
 import com.elewamathtutoring.Activity.Chat.socket.SocketManagernewew
 import com.elewamathtutoring.Activity.Chat.socket.SocketManagernewew.Companion.CHAT_LISTING_LISTNER
-import com.elewamathtutoring.Activity.NotificationsActivity
-import com.elewamathtutoring.Activity.SettingActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.App
 import com.elewamathtutoring.Util.constant.Constants

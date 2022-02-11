@@ -1,12 +1,19 @@
 package com.elewamathtutoring.Activity.TeacherOrTutor
 
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -38,6 +45,8 @@ import kotlin.collections.ArrayList
 
 
 class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<RestObservable> {
+    lateinit var dialog:Dialog
+
     @Inject
     lateinit var validator: Validator
     var profilelist= java.util.ArrayList<com.elewamathtutoring.Models.Login.Body>()
@@ -101,6 +110,30 @@ var address=""
         ivBack.setOnClickListener(this)
     }
 
+
+    fun dialogAdmin() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_teacher_signupsuccessfully)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window!!.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        dialog.setCancelable(false)
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.window!!.setGravity(Gravity.CENTER)
+        dialog.show()
+        val btnOK = dialog.findViewById<Button>(R.id.btnOK)
+        btnOK.setOnClickListener {
+            dialog.dismiss()
+            startActivity(Intent(this, MainTeacherActivity::class.java))
+            finishAffinity()
+
+
+        }
+    }
+
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.btnConfirmSignUp -> {
@@ -110,8 +143,7 @@ var address=""
 finish()
                 }
                 else {
-                    startActivity(Intent(this, MainTeacherActivity::class.java))
-                    finishAffinity()
+                    dialogAdmin()
                 }
           /*      if (validator.Teacherdelectdatetime(this, Array_date, Array_time)) {
 

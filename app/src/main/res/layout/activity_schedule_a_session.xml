@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@color/textcolor">
+
         <ImageView
             android:id="@+id/ivBack"
             style="@style/backIcon"
@@ -21,12 +22,13 @@
         <TextView
             style="@style/TextViewHeader"
             android:text="Schedule a Session"
-            android:textSize="16sp" />
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/medium"
+            android:textSize="@dimen/_14sdp" />
     </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_below="@+id/rl1"
         android:layout_marginBottom="@dimen/_10sdp">
         <LinearLayout
@@ -63,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/simpleCalendarView"
                     android:layout_marginTop="5dp"
-                    android:text="You can select more than one adjacent slots if you'd like a longer session"
+                    android:text="You can select more than one adjacent slots if you'd like a longer session."
                     android:textColor="@color/text"
                     android:textSize="13sp" />
 
@@ -80,8 +82,10 @@
                     style="@style/WrapTextView"
                     android:text="Free Slot"
                     android:id="@+id/tvSlot"
-                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:drawablePadding="@dimen/_5sdp"
+                    android:fontFamily="@font/light"
+                    android:textSize="@dimen/_12sdp"
                     android:drawableRight="@drawable/freeslot"
                     />
 
@@ -121,8 +125,8 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnConfirmSession"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
+                    style="@style/Button"
+
                     android:layout_alignParentBottom="true"
                     android:background="@drawable/bg_btn"
                    android:layout_marginTop="@dimen/_20sdp"

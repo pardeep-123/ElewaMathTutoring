@@ -9,8 +9,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.elewamathtutoring.Activity.SettingActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
 import com.elewamathtutoring.Adapter.ParentOrStudent.SchedulePendingAdapter
+import com.elewamathtutoring.Adapter.TeacherOrTutor.RequestAdapter
 import com.elewamathtutoring.Models.TeacherRequestsList.Body
 import com.elewamathtutoring.Models.TeacherRequestsList.Model_TeacherRequestList
 import com.elewamathtutoring.R
@@ -45,7 +46,7 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
     }
     override fun onResume() {
         super.onResume()
-        v.rootView.rv_newRequests.adapter = SchedulePendingAdapter(requireContext())
+        v.rootView.rv_newRequests.adapter = RequestAdapter(requireContext())
        // api()
     }
     private fun onClicks() {

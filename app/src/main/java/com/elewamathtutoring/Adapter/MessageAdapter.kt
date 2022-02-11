@@ -47,9 +47,8 @@ class MessageAdapter(var context: Context, var orderDetailForMapResponse: ArrayL
 
     override fun getItemCount(): Int
     {
-      return orderDetailForMapResponse.size
-
-      //  return 3
+     // return orderDetailForMapResponse.size
+ return 3
     }
     inner class MessageHolder(view: View) : RecyclerView.ViewHolder(view) {
     }

@@ -79,7 +79,7 @@
         <Button
             android:id="@+id/btnNext"
             style="@style/Button"
-            android:layout_marginTop="@dimen/_60sdp"
+            android:layout_marginTop="@dimen/_90sdp"
             android:background="@drawable/bg_btn"
             android:text="Next"
             android:textColor="@color/white" />

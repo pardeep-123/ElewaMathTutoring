@@ -10,7 +10,7 @@
     <RelativeLayout
         android:id="@+id/rl1"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="80dp"
         android:background="@color/textcolor">
 
         <ImageView
@@ -18,6 +18,8 @@
             style="@style/backIcon"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:padding="@dimen/_5sdp"
             android:layout_marginBottom="8dp"
             app:tint="@color/white" />
 
@@ -25,7 +27,9 @@
         <TextView
             style="@style/TextViewHeader"
             android:text="Schedule a Session"
-            android:textSize="16sp" />
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/medium"
+            android:textSize="@dimen/_14sdp" />
     </RelativeLayout>
 
     <ScrollView
@@ -33,9 +37,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/tvConfirmSession"
         android:layout_below="@+id/rl1"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="20dp">
+        android:layout_marginTop="5dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -45,18 +47,22 @@
                 android:id="@+id/edDes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="20dp"
                 android:fontFamily="@font/avenirlstd_roman"
-                android:text="Tell a little about what you're looking for."
+                android:text="Tell Anthony a little about what you're looking for."
                 android:textColor="@color/text"
                 android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/etSchedule"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="@dimen/_150sdp"
                 android:layout_below="@+id/edDes"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
                 android:background="@drawable/background_greyfilled"
                 android:fontFamily="@font/avenirlstd_roman"
                 android:gravity="start"
@@ -66,15 +72,16 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/text"
                 android:textSize="13sp" />
+
             <View
+                android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/grey"
-                android:id="@+id/view"
                 android:layout_below="@+id/etSchedule"
-                android:layout_marginTop="@dimen/_5sdp"/>
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/editexthint" />
 
-<!--
+            <!--
             <TextView
                 android:id="@+id/tvSchdule"
                 android:layout_width="match_parent"
@@ -161,7 +168,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/view"
-                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="20dp"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -169,13 +178,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tvSessionName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/avenirlstd_roman"
+                        android:fontFamily="@font/medium"
                         android:text="Amount"
                         android:textAllCaps="false"
                         android:textColor="@color/black"
@@ -185,7 +195,6 @@
                         android:id="@+id/tvTime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:fontFamily="@font/avenirlstd_roman"
                         android:text="2 hours @ $53/hr"
                         android:textColor="@color/text"
@@ -197,6 +206,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/medium"
                     android:gravity="end"
                     android:text="$20"
                     android:textColor="@color/black"
@@ -207,7 +217,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ll2"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
                 android:text="The amount will be debited from your card on file once the teacher has confirmed the session."
                 android:textColor="@color/text" />
 
@@ -217,8 +229,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/tvConfirmSession"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
+        style="@style/Button"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"

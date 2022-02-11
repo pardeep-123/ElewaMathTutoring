@@ -111,19 +111,21 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
 
             }*/
             R.id.btnLogin-> {
-               /* if( intent.getStringExtra("Name").equals("Tutor")){
+                if( intent.getStringExtra("Name").equals("Tutor")){
                     startActivity(Intent(this, MainTeacherActivity::class.java))
                     finishAffinity()
                 }else {
                     startActivity(Intent(this, MainActivity::class.java))
                     finishAffinity()
-                }*/
-                val email = email_text.text.toString().trim()
+                }
+              /*  val email = email_text.text.toString().trim()
                 val password = password_text.text.toString().trim()
                 if (validator.loginValid(this, email, password)) {
                     baseViewModel.Userlogin(this,  email, password,true)
                     baseViewModel.getCommonResponse().observe(this, this)
-                }// Constants.DEVICE_TYPE_VALUE
+                }*/
+
+            // Constants.DEVICE_TYPE_VALUE
             }
             R.id.tvForgotPassword->{
                 startActivity(Intent(this, ForgotPassword::class.java))
@@ -249,6 +251,7 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
                     if (Api_type.equals("login")) {
                         Log.e("DEVICETOCKEN", "" + liveData.data.body.token + " dT--" + liveData.data.body.deviceToken)
                         savePrefrence(Constants.AUTH_KEY, liveData.data.body.token.toString())
+
                         savePrefrence(Constants.USER_ID, liveData.data.body.id.toString())
                         savePrefrence(Constants.notificationStatus, liveData.data.body.notificationStatus.toString())
                       //  savePrefrence(Constants.Social_login, "False")

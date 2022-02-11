@@ -50,8 +50,8 @@
 
         <ImageView
             android:id="@+id/ivSetting"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="15dp"
@@ -132,21 +132,32 @@
                 android:layout_height="match_parent"
                 android:visibility="visible">
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/ivTxt"
+                    style="@style/WrapTextView"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:fontFamily="@font/avenirlstd_roman"
+                    android:text="Todays's Bookings"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sdp" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_listView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_below="@+id/ivTxt"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
                 <RelativeLayout
                     android:id="@+id/rlResources"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
-                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:layout_below="@+id/rv_listView"
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_20sdp"
-                    android:layout_below="@+id/rv_listView"
+                    android:layout_marginEnd="@dimen/_20sdp"
                     android:background="@drawable/bg_btn">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -154,22 +165,23 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:drawableLeft="@drawable/resources"
-                        android:fontFamily="@font/medium"
                         android:drawablePadding="@dimen/_10sdp"
+                        android:fontFamily="@font/medium"
                         android:text="Resources"
+                        android:textColor="@color/white"
                         android:textSize="16dp"
-                        app:fontFamily="@font/bold"
-                        android:textColor="@color/white" />
+                        app:fontFamily="@font/bold" />
 
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:id="@+id/rlMathChatRoom"
                     android:layout_width="match_parent"
-                    android:layout_below="@id/rlResources"
                     android:layout_height="55dp"
-                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:layout_below="@id/rlResources"
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
                     android:layout_marginBottom="@dimen/_20sdp"
                     android:background="@drawable/bg_btn">
 
@@ -181,9 +193,9 @@
                         android:drawablePadding="@dimen/_10sdp"
                         android:fontFamily="@font/medium"
                         android:text=" Math Chat Room"
+                        android:textColor="@color/white"
                         android:textSize="16dp"
-                        app:fontFamily="@font/bold"
-                        android:textColor="@color/white" />
+                        app:fontFamily="@font/bold" />
                 </RelativeLayout>
             </RelativeLayout>
             <RelativeLayout

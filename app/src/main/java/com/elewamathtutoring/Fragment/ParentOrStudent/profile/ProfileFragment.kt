@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.ParentOrStudent.editProfile.EditProfile
 import com.elewamathtutoring.Activity.NotificationsActivity
-import com.elewamathtutoring.Activity.SettingActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
 import com.elewamathtutoring.Models.Login.Body
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
@@ -26,7 +26,6 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.ivNotification
 import kotlinx.android.synthetic.main.fragment_profile.view.ivSetting
 import kotlin.collections.ArrayList
-
 
 class ProfileFragment : Fragment(), Observer<RestObservable> {
     //var listdata= ArrayList<com.elewamathtutoring.Models.TeacherRequestsList.Body>()
@@ -95,7 +94,7 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
 
                     apiPastTeacher()
                 }
-             /*   else if (liveData.data is Model_TeacherRequestList) {
+               /* else if (liveData.data is Model_TeacherRequestList) {
                     listdata.clear()
                     listdata.addAll(liveData.data.body)
 

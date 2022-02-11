@@ -14,10 +14,12 @@ import com.elewamathtutoring.Util.constant.Constants
 import kotlinx.android.synthetic.main.item_schedule_pending.view.*
 import java.text.SimpleDateFormat
 
-class SessionsAdapter(c: Context, sessionlist: ArrayList<Body>) :
+class SessionsAdapter(c: Context,
+                  /*    sessionlist: ArrayList<Body>*/
+) :
     RecyclerView.Adapter<SessionsAdapter.ViewHolder>() {
     var ctn = c
-    var list = sessionlist
+  //  var list = sessionlist
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
@@ -29,7 +31,7 @@ class SessionsAdapter(c: Context, sessionlist: ArrayList<Body>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int)
     {
-        holder.itemView.tvItemName.text = list.get(position).Student.name
+   /*     holder.itemView.tvItemName.text = list.get(position).Student.name
         holder.itemView.tvItemType.setText(Constants.isCertifiedOrtutor(list.get(position).Teacher.isCertifiedOrtutor))
         holder.itemView.tv_start_endtime.text = list.get(position).timeslot.get(0).startTime +"-"+list.get(position).timeslot.get(0).endTime
         Glide.with(ctn).load(Constants.IMAGE_URL+list.get(position).Student.image).placeholder(R.drawable.profile_unselected).into(holder.itemView.ivImage)
@@ -44,7 +46,7 @@ class SessionsAdapter(c: Context, sessionlist: ArrayList<Body>) :
             intent.putExtra("from", "Sessions")
             intent.putExtra("id",list.get(position).id.toString())
             ctn.startActivity(intent)
-        }
+        }*/
     }
 
     override fun getItemCount(): Int {

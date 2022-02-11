@@ -10,10 +10,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.elewamathtutoring.Activity.SettingActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.AboutYouActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.EditYourProfileActivity
-import com.elewamathtutoring.Activity.TeacherOrTutor.SubscriptionsActivity
 import com.elewamathtutoring.Models.Login.Body
 import com.elewamathtutoring.Models.Login.Model_login
 import com.elewamathtutoring.Models.Teacher_level.Model_teacher_level
@@ -21,7 +20,6 @@ import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.constant.Constants.Companion.isCertifiedOrtutor
 import com.elewamathtutoring.Util.helper.Helper
-import com.elewamathtutoring.Util.helper.extensions.getPrefrence
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel

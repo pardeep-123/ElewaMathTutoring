@@ -15,6 +15,7 @@
             android:id="@+id/tvBooks"
             style="@style/MatchTextView"
             android:text="Books"
+            android:textSize="@dimen/_10sdp"
             android:textColor="@color/black" />
 
         <TextView
@@ -23,11 +24,13 @@
             android:layout_below="@id/tvEdit"
             android:layout_marginTop="@dimen/_7sdp"
             android:text="Old Exams"
+            android:textSize="@dimen/_10sdp"
             android:textColor="@color/black" />
         <TextView
             android:id="@+id/tvSolutionManuals"
             style="@style/MatchTextView"
             android:layout_below="@id/tvEdit"
+            android:textSize="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_7sdp"
             android:text="Solution Manuals"
             android:textColor="@color/black" />  <TextView
@@ -35,12 +38,14 @@
             style="@style/MatchTextView"
             android:layout_below="@id/tvEdit"
             android:layout_marginTop="@dimen/_7sdp"
+        android:textSize="@dimen/_10sdp"
             android:text="Solved Problems"
             android:textColor="@color/black" />  <TextView
             android:id="@+id/tvArticles"
             style="@style/MatchTextView"
             android:layout_below="@id/tvEdit"
             android:layout_marginTop="@dimen/_7sdp"
+        android:textSize="@dimen/_10sdp"
             android:text="Articles"
             android:textColor="@color/black" />
     </LinearLayout>

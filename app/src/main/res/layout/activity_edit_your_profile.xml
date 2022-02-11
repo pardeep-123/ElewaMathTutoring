@@ -10,9 +10,7 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:background="@color/app"
-    >
-
+    android:background="@color/app">
     <ImageView
         android:id="@+id/ivBack"
         android:layout_width="wrap_content"
@@ -88,12 +86,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/llAboutYou"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/app"
         android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="@dimen/_20sdp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/rectangle"
+        android:backgroundTint="@color/app"
         android:elevation="3dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/_8sdp"
@@ -131,6 +129,7 @@
         android:layout_below="@+id/llTeachingInfoRates"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/rectangle"
         android:backgroundTint="@color/app"

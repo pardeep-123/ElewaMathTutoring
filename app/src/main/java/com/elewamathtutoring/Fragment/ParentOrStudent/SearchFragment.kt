@@ -7,27 +7,23 @@ import android.graphics.drawable.ColorDrawable
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
-import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.elewamathtutoring.Activity.Chat.mathChat.MathChatActivity
 import com.elewamathtutoring.Activity.NotificationsActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.FilterActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResoucesActivity
-import com.elewamathtutoring.Activity.SettingActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
 import com.elewamathtutoring.Adapter.FilterOptions2Adapter
 import com.elewamathtutoring.Adapter.ParentOrStudent.FilterOptionsAdapter
 import com.elewamathtutoring.Adapter.SearchHomeAdapter
-import com.elewamathtutoring.Adapter.TeacherOrTutor.TeachingLevelAdapter
 import com.elewamathtutoring.Adapter.TeacherOrTutor.Teaching_searchresultAdapter
 import com.elewamathtutoring.Model.FilterOptions2Model
 import com.elewamathtutoring.Model.FilterOptionsModel
@@ -45,7 +41,6 @@ import com.riseball.interface_base.Teachinglevel_interface
 import kotlinx.android.synthetic.main.activity_teaching_info.*
 import kotlinx.android.synthetic.main.dialog_filter.*
 import kotlinx.android.synthetic.main.fragment_search.*
-import kotlinx.android.synthetic.main.fragment_search.rl2
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -107,6 +102,9 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
         }
         rlResources.setOnClickListener {
             startActivity(Intent(context, ResoucesActivity::class.java))
+        }
+        rlFilter.setOnClickListener {
+            startActivity(Intent(context, FilterActivity::class.java))
         }
         ivSetting = view.findViewById(R.id.ivSetting)
         ivSetting.setOnClickListener {

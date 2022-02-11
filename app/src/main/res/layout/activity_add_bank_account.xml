@@ -10,16 +10,16 @@
     <RelativeLayout
         android:id="@+id/rl1"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         android:background="@color/textcolor"
         android:gravity="center_vertical">
 
         <ImageView
             android:id="@+id/ivBack"
             style="@style/backIcon"
-            android:layout_marginBottom="8dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginBottom="8dp"
             app:tint="@color/white" />
 
 
@@ -27,8 +27,8 @@
             android:id="@+id/tvHearder"
             style="@style/TextViewHeaderin60"
             android:layout_centerVertical="true"
-            android:fontFamily="@font/medium"
             android:layout_marginBottom="8dp"
+            android:fontFamily="@font/medium"
             android:text="@string/add_bank_account" />
     </RelativeLayout>
 
@@ -67,7 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvIFSC"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:background="@drawable/edittext_bg"
                     android:fontFamily="@font/bold"
                     android:hint="Enter ifsc Code"
@@ -100,14 +100,14 @@
                 <EditText
                     android:id="@+id/branch"
                     android:layout_width="match_parent"
-                    android:singleLine="true"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvBankBranch"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:background="@drawable/edittext_bg"
                     android:fontFamily="@font/bold"
                     android:hint="Enter bank branch"
                     android:padding="16dp"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/text"
                     android:textSize="13sp" />
@@ -135,16 +135,16 @@
                 <EditText
                     android:id="@+id/acNumber"
                     android:layout_width="match_parent"
-                    android:singleLine="true"
-                    android:inputType="number"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvAccountNumber"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:background="@drawable/edittext_bg"
                     android:fontFamily="@font/bold"
                     android:hint="Enter account number"
-                    android:padding="16dp"
+                    android:inputType="number"
                     android:maxLength="20"
+                    android:padding="16dp"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/text"
                     android:textSize="13sp" />
@@ -177,7 +177,7 @@
                     android:singleLine="true"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvCAccount"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:background="@drawable/edittext_bg"
                     android:fontFamily="@font/bold"
                     android:hint="Enter confirm account number"
@@ -212,7 +212,7 @@
                     android:singleLine="true"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvAccHolder"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:background="@drawable/edittext_bg"
                     android:fontFamily="@font/bold"
                     android:hint="Enter account holder name"

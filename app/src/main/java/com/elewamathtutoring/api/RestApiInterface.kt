@@ -73,8 +73,14 @@ interface RestApiInterface {
     @GET("get_time_slots")
     fun get_time_slots(): Observable<Model_timeslots>
 
+/*
     @FormUrlEncoded
     @POST("delete_account")
+    fun Delete_account(@Field("usertype") usertype: String): Observable<Commontoall>
+
+*/
+
+    @DELETE("delete_account")
     fun Delete_account(@Field("usertype") usertype: String): Observable<Commontoall>
 
    @FormUrlEncoded
@@ -296,13 +302,12 @@ fun get_profile(): Observable<ProfileResponse>
     ): Observable<Model_login>
 
     @Multipart
-    @POST("editProfile")
+    @PUT("editProfile")
     fun editParentProfile(
         @Part image: MultipartBody.Part?,
         @Part("name") name: RequestBody,
         @Part("about") about: RequestBody
     ): Observable<EditProfileResponse>
-
     @Multipart
     @POST("EditTeacherBasicProfile")
     fun EditTeacherBasicProfile(

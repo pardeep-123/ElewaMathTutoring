@@ -44,7 +44,7 @@ class PrivacyPolicy : AppCompatActivity(), Observer<RestObservable> {
         override fun onChanged(liveData: RestObservable?) {
             when (liveData!!.status) {
                 Status.SUCCESS -> {
-                    if (liveData.data is Model_webview) {
+                    if (liveData.data is PrivacyResponse) {
                         val webview = findViewById<WebView>(R.id.tv_tctext) as WebView
                         webview.setBackgroundColor(Color.TRANSPARENT);
                         //  webview.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
@@ -52,7 +52,7 @@ class PrivacyPolicy : AppCompatActivity(), Observer<RestObservable> {
                     }
                 }
                 Status.ERROR -> {
-                    if (liveData.error is Model_webview)
+                    if (liveData.error is PrivacyResponse)
                         Helper.showSuccessToast(this, liveData.error.message)
                 }
                 else -> {

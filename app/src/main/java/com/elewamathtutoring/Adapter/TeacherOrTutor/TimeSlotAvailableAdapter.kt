@@ -58,7 +58,7 @@ class TimeSlotAvailableAdapter(
         else
         {
             holder.itemView.rlDatesAvailable.background = null
-            holder.itemView.dayofweek.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.textcolor))
+            holder.itemView.dayofweek.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.black))
         }
         availablityActivity.Selected_time(Array_time)
         holder.itemView.rlDatesAvailable.setOnClickListener {

@@ -425,7 +425,6 @@ class BaseViewModel : ViewModel() {
                     }
                 })
         }
-
     }
     @SuppressLint("CheckResult")
     fun PastTeacher(activity: Activity,status:String, isDialogShow: Boolean) {
@@ -1197,13 +1196,11 @@ class BaseViewModel : ViewModel() {
         val firstName_value: RequestBody =
             RequestBody.create("text/plain".toMediaTypeOrNull(), firstName)
         val about_value: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), about)
-
         if (Helper.isNetworkConnected(activity)) {
             apiService.editParentProfile(
                 imageFileBody,
                 firstName_value,
-                about_value
-            )
+                about_value)
                 .subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {

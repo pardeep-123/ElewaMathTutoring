@@ -1,5 +1,4 @@
 package com.elewamathtutoring.Activity.ParentOrStudent.editProfile
-
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
@@ -19,8 +18,6 @@ import com.yanzhenjie.album.Album
 import com.yanzhenjie.album.AlbumFile
 import com.yanzhenjie.album.api.widget.Widget
 import kotlinx.android.synthetic.main.activity_edit_profile.*
-
-
 class EditProfile : ImagePickerUtility(), Observer<RestObservable> {
     var firstimage = ""
     var oldImage = ""
@@ -34,13 +31,13 @@ class EditProfile : ImagePickerUtility(), Observer<RestObservable> {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
         scrollEditText(edtAboutYou)
-      /*  if (intent.getStringExtra("from").equals("EditProfile")) {
-          *//*  editProfilelist = intent.getSerializableExtra("ProfileList") as ArrayList<Body>
+     /*   if (intent.getStringExtra("from").equals("EditProfile")) {
+            editProfilelist = intent.getSerializableExtra("ProfileList") as ArrayList<Body>
             edtName.setText(editProfilelist.get(0).name)
             edtAboutYou.setText(editProfilelist.get(0).about)
             edtName.setText(intent.getStringExtra("username").toString())
             Glide.with(this).load(editProfilelist.get(0).image).into(ivProfileSignUp)
-*//*
+
         }*/
 
         edtName.setText(intent.getStringExtra("name").toString())
@@ -56,7 +53,6 @@ class EditProfile : ImagePickerUtility(), Observer<RestObservable> {
         }
         btnSave.setOnClickListener {
           api()
-
         }
     }
     private fun api() {
@@ -73,7 +69,6 @@ class EditProfile : ImagePickerUtility(), Observer<RestObservable> {
             }.onCancel {
             }.start()
     }
-
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
@@ -86,7 +81,6 @@ class EditProfile : ImagePickerUtility(), Observer<RestObservable> {
                 if (liveData.error is EditProfileResponse)
                     Helper.showSuccessToast(this, liveData.error.message)
             }
-
         }
     }
 }

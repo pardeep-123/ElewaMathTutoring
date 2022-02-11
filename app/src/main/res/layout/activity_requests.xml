@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:clickable="true">
 
 
     <LinearLayout
@@ -19,16 +19,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:background="@color/app"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="5dp">
+            android:layout_marginRight="5dp"
+            android:background="@color/app">
 
             <ImageView
                 android:id="@+id/ivRequestsBack"
-             style="@style/backIcon"
+                style="@style/backIcon"
                 android:layout_centerVertical="true"
                 android:src="@drawable/backarrow"
                 app:tint="@color/white" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/medium"
+                android:text="Detail"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14sdp" />
 
             <ImageView
                 android:id="@+id/ivNotification"
@@ -41,12 +50,18 @@
             <ImageView
                 android:id="@+id/ivPopupOptions"
                 android:layout_width="@dimen/_30sdp"
-                android:layout_centerVertical="true"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:padding="12dp"
                 android:src="@drawable/options" />
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@color/white" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -75,8 +90,8 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/ivProfileSignUp"
                     android:fontFamily="@font/aenirlsttd_black"
-                    android:textColor="@color/white"
                     android:text="Rohan singh"
+                    android:textColor="@color/white"
                     android:textSize="18sp" />
 
                 <TextView
@@ -156,9 +171,10 @@
 
             <TextView
                 android:id="@+id/tvPersonRate"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="start"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:fontFamily="@font/medium"
                 android:gravity="center"
                 android:text="LEARNING"
@@ -169,11 +185,11 @@
                 android:id="@+id/tv_requesteddate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/medium"
-                android:gravity="center"
                 android:text="Requsted 2/2/2022"
-                android:paddingHorizontal="@dimen/_5sdp"
                 android:textColor="@color/darkgrey"
                 android:textSize="14sp" />
 
@@ -213,8 +229,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/medium"
-                android:text="2:00 PM - 4:00 PM"
                 android:gravity="center"
+                android:text="2:00 PM - 4:00 PM"
                 android:textColor="@color/darkgrey"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -253,7 +269,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/view1"
-                    android:fontFamily="@font/aenirlsttd_black"
+                    android:fontFamily="@font/bold"
                     android:text="ABOUT "
                     android:textAllCaps="true"
                     android:textColor="@color/black"
@@ -264,7 +280,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/view1"
-                    android:fontFamily="@font/aenirlsttd_black"
+                    android:fontFamily="@font/bold"
                     android:text="Rohan"
                     android:textAllCaps="true"
                     android:textColor="@color/black"
@@ -277,9 +293,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvInquiry"
-                android:layout_marginTop="5dp"
+
                 android:fontFamily="@font/avenirlstd_roman"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:text="@string/lorem_ipsum_dolor_sit_amet_consectetur_adipisicin"
                 android:textColor="@color/text"
                 android:textSize="13sp" />
@@ -316,7 +332,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/WrapTextView"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:fontFamily="@font/medium"
+                android:fontFamily="@font/bold"
                 android:text="Price"
                 android:textColor="@color/black" />
 
@@ -391,23 +407,23 @@
                     android:id="@+id/btnAcceptOffer"
                     style="@style/Button"
 
-                    android:textAllCaps="false"
-                    android:textSize="@dimen/_14sdp"
                     android:background="@drawable/bg_btn"
                     android:text="Accept"
-                    android:textColor="@color/white" />
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14sdp" />
 
                 <Button
                     android:id="@+id/btnReject"
                     style="@style/ButtonBG"
-                    android:layout_marginBottom="10dp"
-                    android:textAllCaps="false"
                     android:layout_marginTop="@dimen/_20sdp"
-                    android:textSize="@dimen/_14sdp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/bg_btn"
-                    android:text="Reject"
                     android:backgroundTint="@color/orange"
-                    android:textColor="@color/white" />
+                    android:text="Reject"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14sdp" />
 
             </LinearLayout>
 

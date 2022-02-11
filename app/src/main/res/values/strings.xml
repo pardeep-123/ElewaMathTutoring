@@ -58,7 +58,7 @@
 
     <string name="no_internet_connection">No internet connection.</string>
     <string name="error_empty_all_fields">Please fill all the fields</string>
-    <string name="error_enter_message">Please enter message</string>
+    <string name="error_enter_message">Please enter Message</string>
     <string name="error_empty_name">Please enter name</string>
     <string name="error_empty_image">Please select image.</string>
     <string name="error_empty_aboutyou">Please enter about you.</string>
@@ -122,4 +122,5 @@
     <string name="login_as_guest">LOGIN AS GUEST</string>
     <string name="create_an_account">Create An Account</string>
     <string name="edit_your_profile">Edit Your Profile</string>
+    <string name="clear"><u>Clear</u></string>
 </resources>

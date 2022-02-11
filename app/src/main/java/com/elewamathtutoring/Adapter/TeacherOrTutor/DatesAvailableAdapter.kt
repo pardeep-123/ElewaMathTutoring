@@ -54,7 +54,7 @@ class DatesAvailableAdapter(
             }
            else
            {
-               holder.itemView.dayofweek.setTextColor(ContextCompat.getColor(holder.itemView.context,R.color.textcolor))
+               holder.itemView.dayofweek.setTextColor(ContextCompat.getColor(holder.itemView.context,R.color.black))
                holder.itemView.rlDatesAvailable.background = null
            }
         availablityActivity.Selected_date(Array_date)

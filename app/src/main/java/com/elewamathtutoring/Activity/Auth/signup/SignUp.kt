@@ -39,16 +39,16 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btnNext -> {
-                /*if( intent.getStringExtra("Name").equals("Tutor")){
+                if( intent.getStringExtra("Name").equals("Tutor")){
                     startActivity(Intent(this, SignupTeacherActivity::class.java))
                 }else{
                     startActivity(Intent(this, MainActivity::class.java))
-                }*/
-                    if (validator.signUpValid(this,  edtName.text.toString(), edtEmail.text.toString(),editPassword.text.toString(),editConfirmPassword.text.toString())) {
+                }
+                  /*  if (validator.signUpValid(this,  edtName.text.toString(), edtEmail.text.toString(),editPassword.text.toString(),editConfirmPassword.text.toString())) {
                        baseViewModel.signUpApi(this,  edtEmail.text.toString(),edtName.text.toString(),editPassword.text.toString(), true)
                        baseViewModel.getCommonResponse().observe(this, this)
 
-                   }
+                   }*/
             }
             R.id.ivBack -> {
                 onBackPressed()

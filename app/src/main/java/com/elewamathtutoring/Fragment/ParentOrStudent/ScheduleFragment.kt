@@ -8,8 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.elewamathtutoring.Activity.NotificationsActivity
-import com.elewamathtutoring.Activity.SettingActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
 import com.elewamathtutoring.Adapter.ParentOrTeacher.UpcomingSessionsAdapter
 
 import com.elewamathtutoring.Models.My_Schedule.Model_schedule
@@ -18,9 +17,7 @@ import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
-import kotlinx.android.synthetic.main.fragment_schedule.*
 import kotlinx.android.synthetic.main.fragment_schedule.view.*
-import kotlinx.android.synthetic.main.fragment_schedule.view.ivNotification
 import kotlinx.android.synthetic.main.fragment_schedule.view.ivSetting
 
 class ScheduleFragment : Fragment(), Observer<RestObservable> {

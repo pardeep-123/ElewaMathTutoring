@@ -46,15 +46,15 @@
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/WrapTextView"
                 android:layout_centerInParent="true"
-                android:fontFamily="@font/bold"
+                android:fontFamily="@font/medium"
                 android:text="Profile"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14sdp" />
 
             <ImageView
                 android:id="@+id/ivSetting"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/setting" />
         </RelativeLayout>
@@ -68,6 +68,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
             android:padding="10dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -93,6 +94,7 @@
                     android:layout_toRightOf="@+id/image_teacher_image"
                     android:fontFamily="@font/aenirlsttd_black"
                     android:text="Dr. Nanad"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 

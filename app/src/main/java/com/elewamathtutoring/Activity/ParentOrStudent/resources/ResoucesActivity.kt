@@ -40,7 +40,7 @@ class ResoucesActivity : AppCompatActivity(), View.OnClickListener {
         val inflater =
             applicationContext?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.popup_resouces, null)
-        popupWindow = PopupWindow(view, 550, RelativeLayout.LayoutParams.WRAP_CONTENT, true)
+        popupWindow = PopupWindow(view, 450, RelativeLayout.LayoutParams.WRAP_CONTENT, true)
         ivFilter.setOnClickListener {
             popupWindow?.showAsDropDown(it, 150, 48)
             applyDim(viewGroup, 0.5f)

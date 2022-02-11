@@ -17,8 +17,9 @@ import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.builders.DatePickerBuilder
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import com.applandeo.materialcalendarview.listeners.OnSelectDateListener
-import com.elewamathtutoring.Activity.NotificationsActivity
-import com.elewamathtutoring.Activity.SettingActivity
+import com.elewamathtutoring.Activity.Chat.mathChat.MathChatActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResoucesActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
 import com.elewamathtutoring.Adapter.TeacherOrTutor.Hadder_sessionsadapter
 import com.elewamathtutoring.Adapter.TeacherOrTutor.SessionsAdapter
 import com.elewamathtutoring.Models.ListView.Body
@@ -31,6 +32,7 @@ import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import kotlinx.android.synthetic.main.fragment_schedule_tab.*
 import kotlinx.android.synthetic.main.fragment_schedule_tab.view.*
+import kotlinx.android.synthetic.main.item_hadder.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -52,6 +54,13 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
         v = inflater.inflate(R.layout.fragment_schedule_tab, container, false)
         onClicks()
         calenderView()
+        v.rootView.rv_listView.adapter = SessionsAdapter(requireContext())
+        v.rootView.rlResources.setOnClickListener {
+            startActivity(Intent(context, ResoucesActivity::class.java))
+        }
+        v.rootView.rlMathChatRoom.setOnClickListener {
+            startActivity(Intent(context, MathChatActivity::class.java))
+        }
         return v
     }
     private fun calenderView() {
@@ -208,6 +217,8 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
         }
     }
     private fun setCalenderAdapter(listSession: ArrayList<Body>) {
-        v.rootView.rv_calenderViewList.adapter = SessionsAdapter(requireContext(), listSession)
+    //    v.rootView.rv_calenderViewList.adapter = SessionsAdapter(requireContext(), listSession)
     }
+
+
 }

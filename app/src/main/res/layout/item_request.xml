@@ -2,8 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/rv_background"
-   android:layout_marginBottom="@dimen/_10sdp">
+    android:layout_marginBottom="@dimen/_8sdp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_80sdp"
+        android:background="@drawable/rv_background">
+
         <RelativeLayout
             android:id="@+id/schedulePendingRoot"
             android:layout_width="match_parent"
@@ -39,7 +44,7 @@
                         android:id="@+id/tvItemName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/aenirlsttd_black"
+                        android:fontFamily="@font/bold"
                         android:text="James"
                         android:textColor="@color/black"
                         android:textSize="15sp" />
@@ -49,11 +54,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:fontFamily="@font/medium"
+                        android:fontFamily="@font/avenirlstd_roman"
                         android:text="Tutor"
                         android:textAllCaps="true"
                         android:textColor="@color/black"
-                        android:textSize="13sp"
+                        android:textSize="11sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -73,9 +78,9 @@
                         android:layout_marginTop="2dp"
                         android:fontFamily="@font/light"
                         android:gravity="end"
-                        android:text="WED SEPT 21"
+                        android:text="WED, SEPT 21"
                         android:textAllCaps="true"
-                        android:textColor="@color/black"
+                        android:textColor="@color/darkgrey"
                         android:textSize="11dp"
                         android:textStyle="bold" />
 
@@ -87,10 +92,48 @@
                         android:fontFamily="@font/light"
                         android:gravity="end"
                         android:text="2:00PM - 4:00PM"
-                        android:textColor="@color/black"
+                        android:textColor="@color/darkgrey"
                         android:textSize="11dp"
                         android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="bottom"
+
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnAccept"
+                android:layout_width="120dp"
+                android:layout_height="34dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/bg_btn"
+                android:fontFamily="@font/medium"
+                android:padding="5dp"
+                android:text="Accept"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnReject"
+                android:layout_width="120dp"
+                android:layout_height="34dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/bg_btn"
+                android:backgroundTint="@color/orange"
+                android:fontFamily="@font/medium"
+                android:padding="5dp"
+                android:text="Reject"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

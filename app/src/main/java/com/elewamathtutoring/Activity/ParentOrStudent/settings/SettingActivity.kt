@@ -1,4 +1,4 @@
-package com.elewamathtutoring.Activity
+package com.elewamathtutoring.Activity.ParentOrStudent.settings
 
 import android.app.Dialog
 import android.content.Context
@@ -18,6 +18,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.elewamathtutoring.Activity.Auth.SignUpAs
 import com.elewamathtutoring.Activity.ParentOrStudent.privacy.PrivacyPolicy
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword.ChangePassword
+import com.elewamathtutoring.Activity.PaymentInfoActivity
+import com.elewamathtutoring.Activity.SendFeedback
+import com.elewamathtutoring.Activity.WithdrawalActivity
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
@@ -35,7 +38,7 @@ import kotlinx.android.synthetic.main.activity_setting2.ivBack
 class SettingActivity : AppCompatActivity(), Observer<RestObservable> {
     var message1 = "About Us"
     var message2 = "Privacy Policy"
-    var message3 = "Terms & Conditions"
+    var message3 = "Terms of Service"
     var context: Context = this
     var status=""
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
@@ -136,8 +139,10 @@ class SettingActivity : AppCompatActivity(), Observer<RestObservable> {
         logoutDialog.setCancelable(true)
         logoutDialog.setCanceledOnTouchOutside(true)
         tvYes.setOnClickListener {
-            baseViewModel.Delete_account(this, getPrefrence(Constants.user_type,""),true)
+           /* baseViewModel.Delete_account(this, getPrefrence(Constants.user_type,""),true)
             baseViewModel.getCommonResponse().observe(this, this)
+*/
+            logoutDialog.dismiss()
         }
         tvNo.setOnClickListener {
             logoutDialog.dismiss()

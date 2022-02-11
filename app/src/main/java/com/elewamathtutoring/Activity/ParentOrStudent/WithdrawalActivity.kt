@@ -42,9 +42,6 @@ class WithdrawalActivity : AppCompatActivity(), Observer<RestObservable> {
         baseViewModel.Get_Wallet(this,  true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
-
-
-
     private fun onClicks() {
         rl_Bank.setOnClickListener {
             startActivity(
