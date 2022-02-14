@@ -19,7 +19,9 @@ class Validator {
         val matcher = pattern.matcher(password)
         return !matcher.matches()
     }
-
+    fun checkStringNull(string: String?): Boolean {
+        return string == null || string == "null" || string.isEmpty()
+    }
     /****
      * Email Valid
      */

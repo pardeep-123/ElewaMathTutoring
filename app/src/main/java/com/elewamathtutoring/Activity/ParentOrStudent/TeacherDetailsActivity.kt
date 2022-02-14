@@ -91,8 +91,8 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
 
             R.id.btnviewreciept -> {
                 val intentt = Intent(this, ReceiptActivity::class.java)
-                intentt.putExtra("listdata", teacherdetails)
-                intentt.putExtra("session_id", intent.getStringExtra("session_id").toString())
+               // intentt.putExtra("listdata", teacherdetails)
+               // intentt.putExtra("session_id", intent.getStringExtra("session_id").toString())
                 startActivity(intentt)
             }
         }

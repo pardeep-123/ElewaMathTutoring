@@ -723,6 +723,37 @@ class BaseViewModel : ViewModel() {
                 })
         }
     }
+     @SuppressLint("CheckResult")
+    fun signUpTeacherApi(activity: Activity,
+                  isDialogShow: Boolean,
+                         map: HashMap<String, String>,) {
+        if (Helper.isNetworkConnected(activity)) {
+            apiService.signUpTeacherApi(map)
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    { mResponse.value = RestObservable.error(activity, it) }
+                )
+        } else {
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        signUpTeacherApi(activity, isDialogShow, map)
+                    }
+                })
+        }
+    }
+
+
+
+
+
+
 
     @SuppressLint("CheckResult")
     fun deleteBank(activity: Activity, bank_id: String, isDialogShow: Boolean) {

@@ -18,7 +18,7 @@
         android:gravity="center"
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
-        android:text="Elewa Math Tutoring"
+        android:text="Telemath"
         android:textColor="@color/black"
         android:textSize="16sp" />
 

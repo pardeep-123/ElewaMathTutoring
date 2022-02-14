@@ -23,34 +23,44 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".Activity.ParentOrStudent.FilterActivity"
+            android:launchMode="singleTop"
             android:exported="true" />
         <activity
             android:name=".Activity.Auth.SignupTeacher2Activity"
+            android:launchMode="singleTop"
             android:exported="true" />
         <activity
             android:name=".Activity.Auth.SignupTeacherActivity"
+            android:launchMode="singleTop"
             android:exported="true" />
         <activity
             android:name=".Activity.Chat.AddParticipantActivity"
+            android:launchMode="singleTop"
             android:exported="false" />
         <activity
             android:name=".Activity.Chat.StudyGroupActivity"
+            android:launchMode="singleTop"
             android:exported="false" />
         <activity
             android:name=".Activity.ParentOrStudent.resources.ResoucesActivity"
+            android:launchMode="singleTop"
             android:exported="false" />
         <activity
             android:name=".Activity.Chat.mathChat.AudioCallActivity"
+            android:launchMode="singleTop"
             android:exported="false" />
         <activity
             android:name=".Activity.Chat.mathChat.VideoCallActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".Activity.Chat.mathChat.MathPersonChatActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".Activity.Chat.mathChat.MathChatActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".Activity.ParentOrStudent.Viewall_trangection"
             android:screenOrientation="portrait" />

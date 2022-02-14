@@ -36,7 +36,7 @@ class Constants {
 
         //const val BASE_URL = "http://localhost:7552/api/"  local Math Tutoring
         const val SECURITY_KEY = "securitykey"
-        const val IMAGE_URL = "http://3.141.207.49/uploads/users/"
+        const val IMAGE_URL = "http://202.164.42.227/:7552/uploads/users/"
         const val AUTH_KEY = "token"
         const val Currency = "$"
         lateinit var Notification_chat:String

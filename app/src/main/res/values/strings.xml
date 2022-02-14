@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ElewaMathTutoring</string>
+    <string name="app_name">Telemath</string>
     <string name="skip">Skip</string>
     <string name="welcome_to">WELCOME TO</string>
     <string name="back">BACK</string>
@@ -9,9 +9,9 @@
     <string name="welcome">Welcome</string>
     <string name="welcomtext"><![CDATA[E Teacher connects students and teachers to learn & grow together, using both in-person teaching and E-learning.]]></string>
     <string name="demand">On Demand Tutors</string>
-    <string name="demandtext">E Teacher matches students with qualified tutors to provide one-on-one teaching for all grades and ages.</string>
+    <string name="demandtext">Telemath matches students with qualified tutors to provide one-on-one teaching for all grades and ages.</string>
     <string name="specialist">Specialist</string>
-    <string name="specialisttext">Elewa matches students with qualified specialist to teach private lessons such as art, music, or yoga. Education and behavioral\nspecialists are also available.</string>
+    <string name="specialisttext">Telemath matches students with qualified specialist to teach private lessons such as art, music, or yoga. Education and behavioral\nspecialists are also available.</string>
     <string name="enter_email_address">Enter Email Address</string>
     <string name="enter_password">Enter Password</string>
     <string name="forgot_password">Forgot Password?</string>
@@ -62,6 +62,7 @@
     <string name="error_empty_name">Please enter name</string>
     <string name="error_empty_image">Please select image.</string>
     <string name="error_empty_aboutyou">Please enter about you.</string>
+    <string name="error_validemail">Please enter valid email.</string>
     <string name="error_empty_email">Please enter email.</string>
     <string name="error_empty_specialities">Please enter specialities.</string>
     <string name="error_empty_teachinglevel">Please enter teaching level.</string>
@@ -123,4 +124,5 @@
     <string name="create_an_account">Create An Account</string>
     <string name="edit_your_profile">Edit Your Profile</string>
     <string name="clear"><u>Clear</u></string>
+    <string name="error_password_length">Password length should contain at least 6 characters</string>
 </resources>

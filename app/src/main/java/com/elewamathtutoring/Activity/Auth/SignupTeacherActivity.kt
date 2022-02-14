@@ -1,43 +1,93 @@
 package com.elewamathtutoring.Activity.Auth
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfoActivity
 import com.elewamathtutoring.R
+import com.elewamathtutoring.Util.App
+import com.elewamathtutoring.Util.Validator
+import com.elewamathtutoring.Util.helper.Helper
+import com.elewamathtutoring.viewmodel.BaseViewModel
 import com.yanzhenjie.album.Album
 import com.yanzhenjie.album.AlbumFile
 import com.yanzhenjie.album.api.widget.Widget
+import com.elewamathtutoring.network.RestObservable
+import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.activity_signup_teacher.*
+import kotlinx.android.synthetic.main.activity_signup_teacher.btnNext
+import kotlinx.android.synthetic.main.activity_signup_teacher.ivBack
+import java.util.*
+import javax.inject.Inject
 
-import java.util.ArrayList
+class SignupTeacherActivity : AppCompatActivity(), View.OnClickListener , Observer<RestObservable>{
+    var name = ""
+    var email = ""
+    var password = ""
 
-class SignupTeacherActivity : AppCompatActivity(), View.OnClickListener {
+    @Inject
+    lateinit var validator: Validator
+    val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
+
     private var mAlbumFiles = ArrayList<AlbumFile>()
     private var firstImage = ""
+    lateinit var context: Context
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup_teacher)
+        App.getinstance().getmydicomponent().inject(this)
+        context = this
         ivBack.setOnClickListener(this)
         btnNext.setOnClickListener(this)
         add_img.setOnClickListener(this)
 
+        name = intent.getStringExtra("name").toString()
+        email = intent.getStringExtra("email").toString()
+        password = intent.getStringExtra("password").toString()
+
+
     }
+
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btnNext -> {
-                startActivity(Intent(this, TeachingInfoActivity::class.java))
+                if (firstImage.isEmpty()) {
+                    Helper.showErrorAlert(this, context.getString(R.string.error_empty_image))
+                } else if (cs_message.text.toString().isEmpty()) {
+                    Helper.showErrorAlert(this, "Please enter about you.")
+                } else if (et_teaching.text.toString().isEmpty()) {
+                    Helper.showErrorAlert(this, "Please enter about your teaching history.")
+                }
+                else{
+                    startActivity(Intent(this, TeachingInfoActivity::class.java)
+                        .putExtra("name", name)
+                        .putExtra("email", email)
+                        .putExtra("password", password)
+                        .putExtra("image", firstImage)
+                        .putExtra("password", cs_message.text.toString())
+                        .putExtra("password", et_teaching.text.toString())
+
+                    )
+
+                }
+
+
+
             }
             R.id.ivBack -> {
-              finish()
+                finish()
             }
             R.id.add_img -> {
                 selectImage()
             }
         }
     }
+
     private fun selectImage() {
         Album.image(this).singleChoice().camera(true).columnCount(4).widget(
             Widget.newDarkBuilder(this).title(getString(R.string.app_name)).build()
@@ -49,4 +99,9 @@ class SignupTeacherActivity : AppCompatActivity(), View.OnClickListener {
             }.onCancel {
             }.start()
     }
+
+    override fun onChanged(t: RestObservable?) {
+
+    }
+
 }

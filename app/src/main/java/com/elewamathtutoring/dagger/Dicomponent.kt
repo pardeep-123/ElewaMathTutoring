@@ -3,6 +3,7 @@ package com.elewamathtutoring.dagger
 import android.app.Application
 import com.elewamathtutoring.Activity.*
 import com.elewamathtutoring.Activity.Auth.ForgotPassword
+import com.elewamathtutoring.Activity.Auth.SignupTeacherActivity
 import com.elewamathtutoring.Activity.Auth.login.LoginScreen
 import com.elewamathtutoring.Activity.Auth.signup.SignUp
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword.ChangePassword
@@ -29,6 +30,7 @@ interface Dicomponent {
     fun inject(changePassword: ChangePassword)
     fun inject(sendFeedback: SendFeedback)
     fun inject(forgotPassword: ForgotPassword)
+    fun inject(signupTeacherActivity: SignupTeacherActivity)
 
     @Component.Builder
     interface Builder {

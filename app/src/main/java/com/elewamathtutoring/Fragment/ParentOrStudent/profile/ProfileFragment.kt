@@ -47,8 +47,6 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
      //   v.rootView.rv_pastTeachers.adapter = PastTeacherAdapter(requireContext(),this@ProfileFragment)
         return v
     }
-
-
     private fun onClicks() {
         v.rootView.ivSetting.setOnClickListener {
             startActivity(Intent(context, SettingActivity::class.java))
@@ -66,7 +64,7 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
           //  intent.putExtra("ProfileList",list)
             i.putExtra("name", name)
             i.putExtra("about", about)
-            i.putExtra("image", Constants.IMAGE_URL + image)
+            i.putExtra("image", image)
             startActivity(i)
         }
     }
@@ -123,12 +121,10 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
             }
         }
     }
-
     override fun onResume() {
         super.onResume()
         api()
     }
-
     private fun apiPastTeacher() {
         baseViewModel.PastTeacher(requireActivity(), "2,3,4,5,6", true)
         baseViewModel.getCommonResponse().observe(requireActivity(), this)

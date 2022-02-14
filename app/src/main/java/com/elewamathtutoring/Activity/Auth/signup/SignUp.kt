@@ -20,13 +20,14 @@ import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import java.util.HashMap
 import javax.inject.Inject
 
 class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservable> {
     @Inject
     lateinit var validator: Validator
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
-
+ 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
@@ -45,11 +46,18 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
                 }else{
                     startActivity(Intent(this, MainActivity::class.java))
                 }*/
-                    if (validator.signUpValid(this,  edtName.text.toString(), edtEmail.text.toString(),editPassword.text.toString(),editConfirmPassword.text.toString())) {
-                       baseViewModel.signUpApi(this,  edtEmail.text.toString(),edtName.text.toString(),editPassword.text.toString(), true)
-                       baseViewModel.getCommonResponse().observe(this, this)
 
-                   }
+                if( getPrefrence(Constants.user_type, "").equals("2")){
+                    /*if (validator.signUpValid(this,  edtName.text.toString(), edtEmail.text.toString(),editPassword.text.toString(),editConfirmPassword.text.toString())) {
+                        baseViewModel.signUpTeacherApi(this,  edtEmail.text.toString(),edtName.text.toString(),editPassword.text.toString(), true)
+                        baseViewModel.getCommonResponse().observe(this, this)
+                    }*/
+                }else{
+                    if (validator.signUpValid(this,  edtName.text.toString(), edtEmail.text.toString(),editPassword.text.toString(),editConfirmPassword.text.toString())) {
+                        baseViewModel.signUpApi(this,  edtEmail.text.toString(),edtName.text.toString(),editPassword.text.toString(), true)
+                        baseViewModel.getCommonResponse().observe(this, this)
+                    }
+                }
             }
             R.id.ivBack -> {
                 onBackPressed()
@@ -71,7 +79,7 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
         when (liveData!!.status) {
             Status.SUCCESS -> {
                 if (liveData.data is SignUpResponse) {
-                    savePrefrence(Constants.AUTH_KEY, liveData.data.body.token.toString())
+                    savePrefrence(Constants.AUTH_KEY, liveData.data.body.token)
                     if( getPrefrence(Constants.user_type, "").equals("2")){
                         startActivity(Intent(this, SignupTeacherActivity::class.java))
                     }else{
@@ -85,14 +93,13 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
                         intent = Intent(this, AboutYouActivity::class.java)
                         intent.putExtra("key", "signup")
                     }*/
-                  /*  intent.putExtra("name", edtName.text.toString())
+                    intent.putExtra("name", edtName.text.toString())
                     intent.putExtra("email", edtEmail.text.toString())
                     intent.putExtra("password", editPassword.text.toString())
-                    startActivity(intent)*/
+                    startActivity(intent)
                 } else {
                 }
             }
-
             Status.ERROR -> {
                 if (liveData.error is SignUpResponse)
                     Helper.showSuccessToast(this, liveData.error.message)

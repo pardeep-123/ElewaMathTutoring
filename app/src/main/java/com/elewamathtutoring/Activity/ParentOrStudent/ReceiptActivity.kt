@@ -37,11 +37,11 @@ class ReceiptActivity : AppCompatActivity() ,View.OnClickListener, Observer<Rest
             (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
         window.statusBarColor = Color.TRANSPARENT;
 
-        Schedule = ((intent.getSerializableExtra("listdata") as ArrayList<com.elewamathtutoring.Models.Teacher_details.Body>?)!!)
-        var pozitiondata=Schedule.get(0)
+        //Schedule = ((intent.getSerializableExtra("listdata") as ArrayList<com.elewamathtutoring.Models.Teacher_details.Body>?)!!)
+       // var pozitiondata=Schedule.get(0)
 
-        api()
-        tv_name.text=pozitiondata.name
+       // api()
+    /*    tv_name.text=pozitiondata.name
         tvSpecialized.text=pozitiondata.specialties
         Glide.with(this).load(pozitiondata.image).placeholder(R.drawable.profile_unselected).into(iv_techerprofile)
         tv_tutor.setText(Constants.isCertifiedOrtutor(pozitiondata.isCertifiedOrtutor))
@@ -54,7 +54,7 @@ class ReceiptActivity : AppCompatActivity() ,View.OnClickListener, Observer<Rest
         var s =tv_parentteacherlevelp.text.toString()
         tv_parentteacherlevelp.text = s.substring(0, s.length -1)
 
-
+*/
         clicks()
     }
 

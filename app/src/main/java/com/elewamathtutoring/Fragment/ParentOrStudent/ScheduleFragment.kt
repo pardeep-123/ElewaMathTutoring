@@ -1,5 +1,4 @@
 package com.elewamathtutoring.Fragment
-
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -19,7 +18,6 @@ import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import kotlinx.android.synthetic.main.fragment_schedule.view.*
 import kotlinx.android.synthetic.main.fragment_schedule.view.ivSetting
-
 class ScheduleFragment : Fragment(), Observer<RestObservable> {
     lateinit var v: View
     var pendinglist = ArrayList<com.elewamathtutoring.Models.My_Schedule.Body>()
@@ -45,12 +43,10 @@ class ScheduleFragment : Fragment(), Observer<RestObservable> {
             )
         }
     }
-
     private fun api() {
         baseViewModel.parentSchedulingList(requireActivity(), true)
         baseViewModel.getCommonResponse().observe(requireActivity(), this)
     }
-
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
@@ -91,5 +87,4 @@ class ScheduleFragment : Fragment(), Observer<RestObservable> {
             }
         }
     }
-
 }

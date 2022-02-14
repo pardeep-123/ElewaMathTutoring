@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/ivtecher_image"
                     android:fontFamily="@font/aenirlsttd_black"
-                    android:text="Alexanders"
+                    android:text="James"
                     android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textSize="16sp" />

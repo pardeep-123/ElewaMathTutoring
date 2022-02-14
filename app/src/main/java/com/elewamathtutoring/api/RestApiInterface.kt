@@ -2,6 +2,7 @@ package com.elewamathtutoring.api
 
 import com.elewamathtutoring.Activity.Auth.login.LoginResponse
 import com.elewamathtutoring.Activity.Auth.signup.SignUpResponse
+import com.elewamathtutoring.Activity.Auth.signup.TeacherSignupResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.editProfile.EditProfileResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.privacy.PrivacyResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword.ChangePasswordResponse
@@ -35,24 +36,24 @@ interface RestApiInterface {
 //    @POST(upload)
 //    fun images(@Part image: MultipartBody.Part): Observable<Model_UploadImage>
 
- /*   @FormUrlEncoded
+    /*   @FormUrlEncoded
+       @POST("signin")
+       fun Userlogin(
+           @Field("userType") userType: String,
+           @Field("email") email: String,
+           @Field("password") password: String,
+           @Field("deviceType") device_type: String,
+           @Field("deviceToken") device_token: String?
+       ): Observable<Model_login>*/
+    @FormUrlEncoded
     @POST("signin")
     fun Userlogin(
-        @Field("userType") userType: String,
         @Field("email") email: String,
         @Field("password") password: String,
-        @Field("deviceType") device_type: String,
-        @Field("deviceToken") device_token: String?
-    ): Observable<Model_login>*/
- @FormUrlEncoded
-    @POST("signin")
-    fun Userlogin(
-     @Field("email") email: String,
-     @Field("password") password: String,
 
- ): Observable<LoginResponse>
+        ): Observable<LoginResponse>
 
-   @FormUrlEncoded
+    @FormUrlEncoded
     @POST("withdrawlAmount")
     fun withdrawlAmount(
         @Field("UserType") userType: String,
@@ -64,7 +65,8 @@ interface RestApiInterface {
     @POST("change_password")
     fun change_password(
         @Field("oldPassword") oldPassword: String,
-        @Field("newPassword") newPassword: String): Observable<ChangePasswordResponse>
+        @Field("newPassword") newPassword: String
+    ): Observable<ChangePasswordResponse>
 
 
     @GET("NotificationList")
@@ -83,23 +85,31 @@ interface RestApiInterface {
     @DELETE("delete_account")
     fun Delete_account(@Field("usertype") usertype: String): Observable<Commontoall>
 
-   @FormUrlEncoded
+    @FormUrlEncoded
     @PUT("promocode_exist")
     fun promocode_exist(@Field("code") code: String): Observable<Commontoall>
 
     @FormUrlEncoded
     @POST("buy_plan")
-    fun buy_plan(@Field("type") type: String,@Field("price") price: String,@Field("name") name: String
-                 ,@Field("duration") duration: String ,@Field("planId") planId: String,@Field("planExpiryDate") planExpiryDate: String):
+    fun buy_plan(
+        @Field("type") type: String,
+        @Field("price") price: String,
+        @Field("name") name: String,
+        @Field("duration") duration: String,
+        @Field("planId") planId: String,
+        @Field("planExpiryDate") planExpiryDate: String
+    ):
             Observable<Model_login>
 
-   @FormUrlEncoded
+    @FormUrlEncoded
     @POST("checkSocialLoginExists")
-    fun checkSocialLoginExists(@Field("socialid") socialid: String,
-                               @Field("socialType") socialType: String,
-                               @Field("device_type") device_type: String,
-                               @Field("device_token") device_token: String,
-                               @Field("userType") userType: String): Observable<Commontoall>
+    fun checkSocialLoginExists(
+        @Field("socialid") socialid: String,
+        @Field("socialType") socialType: String,
+        @Field("device_type") device_type: String,
+        @Field("device_token") device_token: String,
+        @Field("userType") userType: String
+    ): Observable<Commontoall>
 
     @FormUrlEncoded
     @PUT("logout")
@@ -117,20 +127,25 @@ interface RestApiInterface {
     //date:2021-04-28
     @FormUrlEncoded
     @POST("book_Session")
-    fun book_Session(@Field("teacherId") teacherId: String,@Field("availability") availability: String,
-               @Field("time") time: String, @Field("About") About: String,
-               @Field("personVirtual") personVirtual: String, @Field("Hour") Hour: String,
-               @Field("perHour") perHour: String, @Field("Total") Total: String,
-                @Field("cardId") cardId: String, @Field("date") date: String): Observable<Commontoall2>
+    fun book_Session(
+        @Field("teacherId") teacherId: String, @Field("availability") availability: String,
+        @Field("time") time: String, @Field("About") About: String,
+        @Field("personVirtual") personVirtual: String, @Field("Hour") Hour: String,
+        @Field("perHour") perHour: String, @Field("Total") Total: String,
+        @Field("cardId") cardId: String, @Field("date") date: String
+    ): Observable<Commontoall2>
 
-     @FormUrlEncoded
+    @FormUrlEncoded
     @POST("change_session_status")
-    fun change_session_status(@Field("sessionStatus") sessionStatus: String,
-                              @Field("sessionId") sessionId: String): Observable<Commontoall>
+    fun change_session_status(
+        @Field("sessionStatus") sessionStatus: String,
+        @Field("sessionId") sessionId: String
+    ): Observable<Commontoall>
 
     @FormUrlEncoded
     @POST("update_notifications_status")
-    fun call_notification_on_offApi(@Field("notificationStatus") notificationStatus: String,
+    fun call_notification_on_offApi(
+        @Field("notificationStatus") notificationStatus: String,
         @Field("userType") userType: String
     ): Observable<Commontoall2>
 
@@ -148,11 +163,17 @@ interface RestApiInterface {
 
     @FormUrlEncoded
     @PUT("PastTeacher")
-    fun PastTeacher(@Field("status") status: String,@Field("userType") userType: String): Observable<Model_TeacherRequestList>
+    fun PastTeacher(
+        @Field("status") status: String,
+        @Field("userType") userType: String
+    ): Observable<Model_TeacherRequestList>
 
-  @FormUrlEncoded
+    @FormUrlEncoded
     @PUT("teachersDetails")
-    fun teachersDetails(@Header("security_key") security_key: String,@Field("teacher_id") teacher_id: String): Observable<Model_teacherdetails>
+    fun teachersDetails(
+        @Header("security_key") security_key: String,
+        @Field("teacher_id") teacher_id: String
+    ): Observable<Model_teacherdetails>
 
     @FormUrlEncoded
     @POST("Edit_bank")
@@ -209,24 +230,39 @@ interface RestApiInterface {
     @PUT("deleteCard")
     fun deletecard(@Field("cardId") cardId: String): Observable<Commontoall>
 
-     @FormUrlEncoded
+    @FormUrlEncoded
     @POST("signup")
-    fun signUpApi(@Field("email") email: String,
-                  @Field("name") name: String,
-         @Field("password") password: String
-     ): Observable<SignUpResponse>
+    fun signUpApi(
+        @Field("email") email: String,
+        @Field("name") name: String,
+        @Field("password") password: String
+    ): Observable<SignUpResponse>
+
+
+    @FormUrlEncoded
+    @POST("TeacherSignup")
+    fun signUpTeacherApi(
+        @FieldMap map: HashMap<String, String>
+    ): Observable<TeacherSignupResponse>
+
 
     @FormUrlEncoded
     @POST("Delete_Bank")
     fun deleteBank(@Field("bankId") bankId: String): Observable<Commontoall>
 
-  @FormUrlEncoded
+    @FormUrlEncoded
     @POST("SetDefault_Bank")
-    fun SetDefault_Bank(@Field("bankId") bankId: String,@Field("isdefault") isdefault: String): Observable<Commontoall2>
+    fun SetDefault_Bank(
+        @Field("bankId") bankId: String,
+        @Field("isdefault") isdefault: String
+    ): Observable<Commontoall2>
 
-   @FormUrlEncoded
+    @FormUrlEncoded
     @POST("report")
-    fun report(@Field("comments") comments: String,@Field("teacherId") teacherId: String): Observable<Commontoall>
+    fun report(
+        @Field("comments") comments: String,
+        @Field("teacherId") teacherId: String
+    ): Observable<Commontoall>
 
     @FormUrlEncoded
     @PUT("session_Details")
@@ -240,8 +276,8 @@ interface RestApiInterface {
     @PUT("get_profile")
     fun get_profile(@Field("userType") userType: String): Observable<ProfileResponse>*/
 
-@GET("get_profile")
-fun get_profile(): Observable<ProfileResponse>
+    @GET("get_profile")
+    fun get_profile(): Observable<ProfileResponse>
 
     @FormUrlEncoded
     @POST("forgotPassword")
@@ -262,10 +298,17 @@ fun get_profile(): Observable<ProfileResponse>
 
     @FormUrlEncoded
     @PUT("seach_teachers")
-    fun seach_teachers(@Header("security_key") security_key: String,@Field("limit") limit: String,@Field("page") page: String,
-                       @Field("CertifiedAs") CertifiedAs: String,@Field("maximumDistance") maximumDistance: String
-                       ,@Field("searchText") searchText: String,
-                       @Field("teachingLevel") teachingLevel: String,@Field("lat") lat: String,@Field("lng") lng: String): Observable<Model_search>
+    fun seach_teachers(
+        @Header("security_key") security_key: String,
+        @Field("limit") limit: String,
+        @Field("page") page: String,
+        @Field("CertifiedAs") CertifiedAs: String,
+        @Field("maximumDistance") maximumDistance: String,
+        @Field("searchText") searchText: String,
+        @Field("teachingLevel") teachingLevel: String,
+        @Field("lat") lat: String,
+        @Field("lng") lng: String
+    ): Observable<Model_search>
 
     @FormUrlEncoded
     @PUT("Get_Wallet")
@@ -287,8 +330,7 @@ fun get_profile(): Observable<ProfileResponse>
     ): Observable<Model_login>
 
 
-
-      @Multipart
+    @Multipart
     @POST("ParentSocialSignup")
     fun ParentSocialSignup(
         @Part image: MultipartBody.Part?,
@@ -308,6 +350,7 @@ fun get_profile(): Observable<ProfileResponse>
         @Part("name") name: RequestBody,
         @Part("about") about: RequestBody
     ): Observable<EditProfileResponse>
+
     @Multipart
     @POST("EditTeacherBasicProfile")
     fun EditTeacherBasicProfile(
@@ -361,7 +404,7 @@ fun get_profile(): Observable<ProfileResponse>
     //timeSlot:1,3
     //socialId:1vgrnnjbkjgfdwetwye
     //socialType:1
-     @Multipart
+    @Multipart
     @POST("TeacherSocialSignup")
     fun TeacherSocialSignup(
         @Part image: MultipartBody.Part?,
