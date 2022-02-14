@@ -2,7 +2,6 @@ package com.elewamathtutoring.api
 
 import com.elewamathtutoring.Activity.Auth.login.LoginResponse
 import com.elewamathtutoring.Activity.Auth.signup.SignUpResponse
-import com.elewamathtutoring.Activity.Auth.signup.TeacherSignupResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.editProfile.EditProfileResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.privacy.PrivacyResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword.ChangePasswordResponse
@@ -21,7 +20,6 @@ import com.elewamathtutoring.Models.Teacher_details.Model_teacherdetails
 import com.elewamathtutoring.Models.Teacher_level.Model_teacher_level
 import com.elewamathtutoring.Models.Time_slots.Model_timeslots
 import com.elewamathtutoring.Models.Wallet.Model_wallet_amount_history
-import com.elewamathtutoring.Models.Webview.Model_webview
 import com.pawskeeper.Modecommon.Commontoall
 import com.pawskeeper.Modecommon.Commontoall2
 import io.reactivex.Observable
@@ -243,7 +241,7 @@ interface RestApiInterface {
     @POST("TeacherSignup")
     fun signUpTeacherApi(
         @FieldMap map: HashMap<String, String>
-    ): Observable<TeacherSignupResponse>
+    ): Observable<SignUpResponse>
 
 
     @FormUrlEncoded
