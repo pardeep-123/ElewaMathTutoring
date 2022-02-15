@@ -9,18 +9,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.AddCardActivity
 import com.elewamathtutoring.Activity.Chat.mathChat.MathPersonChatActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResourcesResponse
 import com.elewamathtutoring.Models.Notifications.Body
 import com.elewamathtutoring.R
+import kotlinx.android.synthetic.main.item_notifications.view.*
+import kotlinx.android.synthetic.main.item_notifications.view.tvMessages
+import kotlinx.android.synthetic.main.item_resources.view.*
 
 //, listNotifications: ArrayList<Body>
-class ResourcesAdapter(c: Context) :
+class ResourcesAdapter(var ctn: Context,
+                     var  list: ResourcesResponse
+) :
     RecyclerView.Adapter<ResourcesAdapter.ViewHolder>() {
-    var ctn = c
-   // var list = listNotifications
-
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    }
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(ctn).inflate(R.layout.item_resources, parent, false)
@@ -28,36 +29,15 @@ class ResourcesAdapter(c: Context) :
     }
 
     override fun getItemCount(): Int {
-       // return list.size
-        return 3
+     return list.body.size
+        //return 3
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-      /*  holder.itemView.home_listcardview.setOnClickListener {
-            var intent = Intent(ctn, MathPersonChatActivity::class.java)
-            ctn.startActivity(intent)
-        }
-*/
-     /*   holder.itemView.tvMessages.text = list.get(position).message
-        try {
-            holder.itemView.tvNotificationsTime.text = Constants.ConvertTimeStampToDate(list.get(position).createdAt.toLong(),"EEE dd, yyyy")
-
-        }catch (e:Exception)
-        {
-
-        }
-        if (getPrefrence(Constants.user_type, "").toString().equals("1")) {
-            holder.itemView.tvNotificationName.text =
-                list.get(position).sessionDetail.get(0).teacher.name
-           //holder.itemView.tvMessages.text = list.get(position).message
-            Glide.with(ctn).load(Constants.IMAGE_URL+list.get(position).sessionDetail.get(0).teacher.image)
-                .into(holder.itemView.ivNotifications);
-        } else {
-            holder.itemView.tvNotificationName.text =
-                list.get(position).sessionDetail.get(0).student.name
-            Glide.with(ctn).load(Constants.IMAGE_URL+list.get(position).sessionDetail.get(0).student.image)
-                .into(holder.itemView.ivNotifications);
-        }*/
+        holder.itemView.tvDescription.setText(list.body[position].text)
+        holder.itemView.tvlink.setText(list.body[position].link)
+        holder.itemView.tvCategory.setText(list.body[position].categoryName)
+        holder.itemView.tvAuthorName.setText(list.body[position].authname)
 
     }
 }

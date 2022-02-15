@@ -11,64 +11,56 @@ import com.riseball.interface_base.Teachinglevel_interface
 import kotlinx.android.synthetic.main.item_filteroptions.view.*
 import java.lang.Exception
 import kotlin.collections.ArrayList
-// var teachinglevel: ArrayList<String>,
-class TeachingLevelAdapter(
-    conx: Context,
-    mylist: ArrayList<Body>,
 
+//
+class TeachingLevelAdapter(
+    var ctn: Context,
+    var list: ArrayList<Body>,
+    var teachinglevel: ArrayList<String>,
     var teachingInfoActivity: Teachinglevel_interface
 ) :
     RecyclerView.Adapter<TeachingLevelAdapter.ViewHolder>() {
-    var ctn = conx
-    var list = mylist
-    var poz=-1
-    var Level_list=ArrayList<String>()
+    var poz = -1
+    var Level_list = ArrayList<String>()
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(ctn).inflate(R.layout.item_signupcheckbox, parent, false)
         return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-         //   return list.size
-        return 3
+        return list.size
+        // return 3
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int)
-    {
-//        holder.itemView.name.text = list.get(position).level.toString()
-
-       /* try {
-            for(i in 0 until  teachinglevel.size)
-            {
-                if(teachinglevel.get(i).equals(list.get(position).id.toString()))
-                {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.itemView.name.setText(list.get(position).level)
+        try {
+            for (i in 0 until teachinglevel.size) {
+                if (teachinglevel.get(i).equals(list.get(position).id.toString())) {
                     holder.itemView.tick.setImageResource(R.drawable.tick_blue)
                     Level_list.add(list.get(position).id.toString())
                 }
             }
+        } catch (e: Exception) {
         }
-        catch (e:Exception)
-        {
-        }*/
-
-
         holder.itemView.setOnClickListener {
-            if (holder.itemView.tick.getDrawable().getConstantState() == ctn.getResources().getDrawable( R.drawable.uncheck).getConstantState()) {
+            if (holder.itemView.tick.getDrawable().getConstantState() == ctn.getResources()
+                    .getDrawable(R.drawable.uncheck).getConstantState()
+            ) {
                 holder.itemView.tick.setImageResource(R.drawable.checkbox)
-              //  Level_list.add(list.get(position).id.toString())
-            }
-            else {
+                Level_list.add(list.get(position).id.toString())
+            } else {
                 holder.itemView.tick.setImageResource(R.drawable.uncheck)
-               // Level_list.remove(list.get(position).id.toString())
+                Level_list.remove(list.get(position).id.toString())
             }
-            Teacher_level(Level_list)
+          //  Teacher_level(Level_list)
         }
     }
-    fun Teacher_level(Level_list: ArrayList<String>) {
+
+  /*  fun Teacher_level(Level_list: ArrayList<String>) {
         teachingInfoActivity.Teachinglevel(Level_list)
-    }
+    }*/
 }

@@ -6,12 +6,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.TeachingInfoActivity
 import com.elewamathtutoring.Models.Login.Body
 import com.elewamathtutoring.Models.Login.Model_login
 import com.elewamathtutoring.R
-import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
-import com.elewamathtutoring.Util.helper.extensions.getPrefrence
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel

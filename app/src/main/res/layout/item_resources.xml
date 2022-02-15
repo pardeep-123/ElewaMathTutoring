@@ -21,6 +21,7 @@
                 android:layout_marginLeft="@dimen/_7sdp"
                 android:fontFamily="@font/medium"
                 android:maxLines="3"
+                android:id="@+id/tvDescription"
                 android:text="@string/lorem_ipsum_dolor_sit_amet_consectetur_adipisicin"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10sdp" />
@@ -31,6 +32,7 @@
                 android:layout_marginLeft="@dimen/_7sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:autoLink="web"
+                android:id="@+id/tvlink"
                 android:fontFamily="@font/medium"
                 android:text="cqlsys.com"
                 android:textColorLink="@color/app"
@@ -97,6 +99,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/medium"
                             android:text="Books"
+                            android:id="@+id/tvCategory"
                             android:textColor="@color/app"
                             android:textSize="@dimen/_8sdp" />
                     </LinearLayout>
@@ -121,7 +124,7 @@
                             android:fontFamily="@font/medium"
                             android:text="John m."
                             android:textColor="@color/app"
-
+android:id="@+id/tvAuthorName"
                             android:textSize="@dimen/_8sdp" />
                     </LinearLayout>
                 </LinearLayout>

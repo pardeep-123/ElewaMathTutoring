@@ -8,17 +8,21 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfoActivity
+import com.elewamathtutoring.Activity.Auth.signup.TeacherSignUpResponse
+import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.TeachingInfoActivity
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.App
 import com.elewamathtutoring.Util.Validator
+import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
+import com.elewamathtutoring.Util.helper.extensions.getPrefrence
+import com.elewamathtutoring.Util.helper.extensions.savePrefrence
+import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import com.yanzhenjie.album.Album
 import com.yanzhenjie.album.AlbumFile
 import com.yanzhenjie.album.api.widget.Widget
 import com.elewamathtutoring.network.RestObservable
-import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.activity_signup_teacher.*
 import kotlinx.android.synthetic.main.activity_signup_teacher.btnNext
 import kotlinx.android.synthetic.main.activity_signup_teacher.ivBack
@@ -29,6 +33,7 @@ class SignupTeacherActivity : AppCompatActivity(), View.OnClickListener , Observ
     var name = ""
     var email = ""
     var password = ""
+
 
     @Inject
     lateinit var validator: Validator
@@ -46,10 +51,10 @@ class SignupTeacherActivity : AppCompatActivity(), View.OnClickListener , Observ
         btnNext.setOnClickListener(this)
         add_img.setOnClickListener(this)
 
-        name = intent.getStringExtra("name").toString()
-        email = intent.getStringExtra("email").toString()
-        password = intent.getStringExtra("password").toString()
-
+        //edtName.setText(intent.getStringExtra("name").toString())
+            name = intent.getStringExtra("name").toString()
+            email = intent.getStringExtra("email").toString()
+            password = intent.getStringExtra("password").toString()
 
     }
 
@@ -64,20 +69,8 @@ class SignupTeacherActivity : AppCompatActivity(), View.OnClickListener , Observ
                     Helper.showErrorAlert(this, "Please enter about your teaching history.")
                 }
                 else{
-                    startActivity(Intent(this, TeachingInfoActivity::class.java)
-                        .putExtra("name", name)
-                        .putExtra("email", email)
-                        .putExtra("password", password)
-                        .putExtra("image", firstImage)
-                        .putExtra("password", cs_message.text.toString())
-                        .putExtra("password", et_teaching.text.toString())
-
-                    )
-
+                    apiSignupTutor()
                 }
-
-
-
             }
             R.id.ivBack -> {
                 finish()
@@ -99,9 +92,39 @@ class SignupTeacherActivity : AppCompatActivity(), View.OnClickListener , Observ
             }.onCancel {
             }.start()
     }
-
-    override fun onChanged(t: RestObservable?) {
-
+    fun apiSignupTutor(){
+            baseViewModel.signUpTeacherApi(this,firstImage,email,name,password,cs_message.text.toString(),et_teaching.text.toString(),true)
+            baseViewModel.getCommonResponse().observe(this, this)
     }
-
+    override fun onChanged(it: RestObservable?) {
+        when (it!!.status) {
+            Status.SUCCESS -> {
+                if (it.data is TeacherSignUpResponse) {
+                    savePrefrence(Constants.AUTH_KEY, it.data.body.token)
+                    if (getPrefrence(Constants.user_type, "").equals("2")) {
+                        startActivity(Intent(this, TeachingInfoActivity::class.java))
+                    }
+                    /* if (getPrefrence(Constants.user_type, "").equals("1")) {
+                         intent = Intent(this, DescSignupScreen::class.java)
+                         // student
+                     } else {
+                         // Teacher
+                         intent = Intent(this, AboutYouActivity::class.java)
+                         intent.putExtra("key", "signup")
+                     }*/
+                    /*    intent.putExtra("name", edtName.text.toString())
+                        intent.putExtra("email", edtEmail.text.toString())
+                        intent.putExtra("password", editPassword.text.toString())
+                        startActivity(intent)*/
+                } else {
+                }
+            }
+            Status.ERROR -> {
+                if (it.error is TeacherSignUpResponse)
+                    Helper.showSuccessToast(this, it.error.message)
+            }
+            else -> {
+            }
+        }
+    }
 }

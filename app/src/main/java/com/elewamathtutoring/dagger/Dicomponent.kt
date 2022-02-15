@@ -6,10 +6,11 @@ import com.elewamathtutoring.Activity.Auth.ForgotPassword
 import com.elewamathtutoring.Activity.Auth.SignupTeacherActivity
 import com.elewamathtutoring.Activity.Auth.login.LoginScreen
 import com.elewamathtutoring.Activity.Auth.signup.SignUp
+import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResoucesActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword.ChangePassword
 import com.elewamathtutoring.Activity.TeacherOrTutor.AboutYouActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.AvailablityActivity
-import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfoActivity
+import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.TeachingInfoActivity
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import dagger.BindsInstance
 import dagger.Component
@@ -31,6 +32,7 @@ interface Dicomponent {
     fun inject(sendFeedback: SendFeedback)
     fun inject(forgotPassword: ForgotPassword)
     fun inject(signupTeacherActivity: SignupTeacherActivity)
+    fun inject(resoucesActivity: ResoucesActivity)
 
     @Component.Builder
     interface Builder {

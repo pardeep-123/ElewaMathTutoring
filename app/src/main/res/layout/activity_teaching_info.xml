@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:nestedScrollingEnabled="false"
-    tools:context=".Activity.TeacherOrTutor.TeachingInfoActivity">
+    tools:context=".Activity.TeacherOrTutor.TeachingInfo.TeachingInfoActivity">
 
     <RelativeLayout
         android:id="@+id/rlToolbar"
@@ -109,7 +109,7 @@
                  />
 
             <EditText
-                android:id="@+id/edInPersonRate"
+                android:id="@+id/etMajors"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvInPersonRate"
@@ -211,7 +211,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/edVirtualRate"
+                android:id="@+id/edPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvVirtualRate"

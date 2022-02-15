@@ -25,7 +25,7 @@ public class SharedPrefUtil {
     public static final String LATITUDE = "latitude";
     public static final String LONGITUDE = "longitude";
     public static final String LOCATON = "location";
-
+    public static final String FCM = "fcm_token";
     public static final String PHONE_NUMBER = "phone_number";
     public static final String COUNTRY_CODE = "country_code";
     public static final String CITY = "city";
@@ -38,6 +38,7 @@ public class SharedPrefUtil {
      * Name of the preference file
      */
     private static final String APP_PREFS = "application_preferences";
+    private static final String APP_PREFS_REMEMBER = "application_preferences";
     private Context mContext;
     private static SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
@@ -48,13 +49,23 @@ public class SharedPrefUtil {
         mSharedPreferences = mContext.getSharedPreferences(APP_PREFS, Context.MODE_PRIVATE);
     }
 
+    public static SharedPrefUtil getInstance() {
+        if (instance == null) {
+            instance = new SharedPrefUtil(MyApplication.Companion.getInstance());
+        }
+        return instance;
+    }
+
     public static void init(Context context) {
         if (instance == null) {
             instance = new SharedPrefUtil(context);
         }
     }
 
-
+    public void SharedPrefUtilRemember(Context mContext) {
+        this.mContext = mContext;
+        mSharedPreferences = mContext.getSharedPreferences(APP_PREFS_REMEMBER, Context.MODE_PRIVATE);
+    }
     /**
      * Save a string into shared preference
      *
@@ -352,7 +363,16 @@ public class SharedPrefUtil {
         mSharedPreferences = mContext.getSharedPreferences(APP_PREFS, Context.MODE_PRIVATE);
         return mSharedPreferences.getString(LOCATON, "");
     }
+    public void saveFcmToken(String value) {
+        mEditor = mSharedPreferences.edit();
+        mEditor.putString(FCM, value);
+        mEditor.apply();
+    }
 
+    public String getFcmToken() {
+        mSharedPreferences = mContext.getSharedPreferences(APP_PREFS, Context.MODE_PRIVATE);
+        return mSharedPreferences.getString(FCM, "");
+    }
 
     public void savePhone(String phone) {
         mEditor = mSharedPreferences.edit();

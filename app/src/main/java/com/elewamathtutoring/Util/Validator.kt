@@ -77,6 +77,60 @@ class Validator {
         }
         return check
     }
+  fun signUpTeacherValid(
+        context: Activity,
+        fullname: String,
+        email: String,
+        password: String,
+        confirmPassword: String
+    ): Boolean {
+        var check = false
+     if (fullname.isEmpty()) {
+            Helper.showErrorAlert(context, context.getString(R.string.error_empty_name))
+        }
+     else if (email.isEmpty()) {
+            Helper.showErrorAlert(context, context.getString(R.string.error_empty_email))
+        }
+     else if (!email.isEmpty() && !isValidEmail(email)) {
+            Helper.showErrorAlert(context, context.getString(R.string.please_enter_valid_email_address))
+        }
+       else if (password.isEmpty()) {
+           Helper.showErrorAlert(context, context.getString(R.string.Pleseenter_password))
+       }
+     else if (password.length < 6) {
+            Helper.showErrorAlert(context, "Password length should contain at least 6 characters")
+        }
+       else if (confirmPassword.isEmpty()) {
+           Helper.showErrorAlert(context, context.getString(R.string.Plese_enterConfirm_password))
+       }
+    /* else if (confirmPassword.length < 6) {
+            Helper.showErrorAlert(context, "Confirm password length should contain at least 6 characters")
+        }*/
+       else if (confirmPassword != password) {
+           Helper.showErrorAlert(context, context.getString(R.string.error_mismatch_password))
+       }
+      else {
+            check = true
+        }
+        return check
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     // update Page validation

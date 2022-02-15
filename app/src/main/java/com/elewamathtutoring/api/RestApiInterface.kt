@@ -2,9 +2,13 @@ package com.elewamathtutoring.api
 
 import com.elewamathtutoring.Activity.Auth.login.LoginResponse
 import com.elewamathtutoring.Activity.Auth.signup.SignUpResponse
+import com.elewamathtutoring.Activity.Auth.signup.TeacherSignUpResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.editProfile.EditProfileResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.privacy.PrivacyResponse
+import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResourcesResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword.ChangePasswordResponse
+import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.TeachinInfoResponse
+import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.TeachingLevelResponse
 import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfileResponse
 import com.elewamathtutoring.Models.Add_Card.Model_addcards
 import com.elewamathtutoring.Models.BankAccountsModel.Model_BankAccount
@@ -237,11 +241,42 @@ interface RestApiInterface {
     ): Observable<SignUpResponse>
 
 
-    @FormUrlEncoded
+    @Multipart
     @POST("TeacherSignup")
     fun signUpTeacherApi(
-        @FieldMap map: HashMap<String, String>
-    ): Observable<SignUpResponse>
+        @Part image: MultipartBody.Part?,
+        @Part("name") name: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part("about") about: RequestBody,
+        @Part("TeachingHistory") TeachingHistory: RequestBody,
+        @Part("deviceType") deviceType: RequestBody,
+        @Part("deviceToken") deviceToken: RequestBody,
+    ): Observable<TeacherSignUpResponse>
+
+
+  @Multipart
+    @POST("TeacherInfo")
+    fun teachingInfoApi(
+        @Part certificate_images:  ArrayList<MultipartBody.Part>,
+        @Part("educationLevel") educationLevel: RequestBody,
+        @Part("majors") majors: RequestBody,
+        @Part("teachingLevel") teachingLevel: RequestBody,
+        @Part("specialties") specialties: RequestBody,
+        @Part("hourlyPrice") hourlyPrice: RequestBody,
+        @Part("cancelPolicy") cancelPolicy: RequestBody,
+        @Part("address") address: RequestBody,
+        @Part("latitude") latitude: RequestBody,
+        @Part("longitude") longitude: RequestBody,
+    ): Observable<TeachinInfoResponse>
+
+
+
+
+
+
+
+
 
 
     @FormUrlEncoded
@@ -277,6 +312,9 @@ interface RestApiInterface {
     @GET("get_profile")
     fun get_profile(): Observable<ProfileResponse>
 
+  @GET("resources")
+    fun get_resources(): Observable<ResourcesResponse>
+
     @FormUrlEncoded
     @POST("forgotPassword")
     fun forgetPassword(@Field("email") email: String): Observable<Commontoall?>
@@ -288,7 +326,7 @@ interface RestApiInterface {
     fun parentSchedulingList(): Observable<Model_schedule>
 
     @GET("Get_teaching_level")
-    fun teacher_level(): Observable<Model_teacher_level>
+    fun teacher_level(): Observable<TeachingLevelResponse>
 
     @FormUrlEncoded
     @PUT("All_Sessions_list_with_dates")

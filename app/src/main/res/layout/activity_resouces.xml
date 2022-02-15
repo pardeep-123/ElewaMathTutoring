@@ -61,6 +61,18 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="vertical"
             android:id="@+id/rvResources"/>
+        <TextView
+            android:id="@+id/tvNoData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_14sdp"
+            android:textColor="@color/black"
+            android:text="No data found!"
+          android:layout_gravity="center"
+            android:visibility="gone"
+            android:gravity="center"
+            android:layout_centerInParent="true">
+        </TextView>
     </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </RelativeLayout>
