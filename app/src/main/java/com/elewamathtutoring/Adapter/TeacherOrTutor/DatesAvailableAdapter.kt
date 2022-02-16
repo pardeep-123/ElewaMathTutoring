@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.elewamathtutoring.Activity.TeacherOrTutor.AvailablityActivity
+import com.elewamathtutoring.Activity.TeacherOrTutor.availability.AvailablityActivity
 import com.elewamathtutoring.Model.DatesAvailableModel
 import com.elewamathtutoring.R
 import kotlinx.android.synthetic.main.item_dates_available.view.*
@@ -29,8 +29,7 @@ class DatesAvailableAdapter(
     }
 
     override fun getItemCount(): Int {
-           // return list.size
-        return 7
+          return list.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

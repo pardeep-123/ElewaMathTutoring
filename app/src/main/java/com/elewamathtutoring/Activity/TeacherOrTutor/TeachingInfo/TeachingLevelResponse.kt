@@ -4,7 +4,7 @@ data class TeachingLevelResponse(
     val status: Boolean, // true
     val code: Int, // 200
     val message: String, // Get Teaching level successfully.
-    val body: List<Body>
+    val body: ArrayList<Body>
 ) {
     data class Body(
         val id: Int, // 1

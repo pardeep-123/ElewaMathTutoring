@@ -1,5 +1,6 @@
 package com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.location.Address
@@ -13,14 +14,10 @@ import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
-import com.elewamathtutoring.Activity.TeacherOrTutor.AvailablityActivity
+import com.elewamathtutoring.Activity.TeacherOrTutor.availability.AvailablityActivity
 import com.elewamathtutoring.Adapter.ClickCallBack
 import com.elewamathtutoring.Adapter.TeacherOrTutor.EducationCertificateAdapter
 import com.elewamathtutoring.Adapter.TeacherOrTutor.TeachingLevelAdapter
-import com.elewamathtutoring.Models.Login.Model_login
-import com.elewamathtutoring.Models.Teacher_level.Body
-import com.elewamathtutoring.Models.Teacher_level.Model_teacher_level
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.App
 import com.elewamathtutoring.Util.Location.MyNewMapActivity
@@ -60,9 +57,10 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
     var timeSlot = ""
     var availability = ""
     private val requestCodes = 11
-    var list = ArrayList<Body>()
+    var list = ArrayList<TeachingLevelResponse.Body>()
     private var mAlbumFiles: java.util.ArrayList<AlbumFile> = java.util.ArrayList()
     val imageList = ArrayList<String>()
+    var educationCertificateAdapter:EducationCertificateAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,8 +71,10 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
         Constants.scrollEditText(edCancelationPolicy)
         // handel_add_Edit()
         spinnerChoose()
-       // rv_teachingLevel.adapter = TeachingLevelAdapter(this, list, teachinglevel, this)
-        rvUploadImage.adapter = EducationCertificateAdapter(imageList, this)
+        // rv_teachingLevel.adapter = TeachingLevelAdapter(this, list, teachinglevel, this)
+       educationCertificateAdapter = EducationCertificateAdapter(imageList, this)
+                        rvUploadImage.adapter = educationCertificateAdapter
+
     }
 
 
@@ -83,13 +83,11 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
         } else {
             profilelist =
                 (intent.getSerializableExtra("list_model") as java.util.ArrayList<com.elewamathtutoring.Models.Login.Body>?)!!
-
             edSpeacialities.setText(profilelist.get(0).specialties.toString())
             certifiedChoose = profilelist.get(0).isCertifiedOrtutor
             //  edInPersonRate.setText(profilelist.get(0).InPersonRate.toString())
             //  edVirtualRate.setText(profilelist.get(0).virtualRate.toString())
             edCancelationPolicy.setText(profilelist.get(0).cancellationPolicy.toString())
-
             latitude = profilelist.get(0).latitude.toString()
             longitude = profilelist.get(0).longitude.toString()
             availability = profilelist.get(0).availability.toString()
@@ -102,21 +100,17 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
                 val str = num.split("").toTypedArray()
                 teachinglevel = str.toList() as ArrayList<String>
             }
-
             //  teachinglevel = profilelist.get(0).teachingLevel.toString()
-
             getLocation(latitude, longitude)
             btnNext.text = "SAVE"
         }
     }
-
     private fun onClicks() {
         ivBack.setOnClickListener(this)
         btnNext.setOnClickListener(this)
         edLocation.setOnClickListener(this)
         api()
     }
-
     private fun spinnerChoose() {
         val spinner1: Spinner = findViewById(R.id.spinnerChoose)
         var spinnerlist: ArrayList<String> = ArrayList()
@@ -127,7 +121,6 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
         spinnerlist.add("Bachlor's degree")
         spinnerlist.add("Master's degree")
         spinnerlist.add("PHD")
-
         val list: ArrayAdapter<String> = ArrayAdapter<String>(
             this,
             R.layout.spinner_small,
@@ -139,7 +132,6 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             spinner1.setSelection(certifiedChoose)
         } catch (e: Exception) {
         }
-
         spinner1.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 adapterView: AdapterView<*>,
@@ -150,101 +142,19 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
 
                 Log.e("datacheckit", "----" + jj.toString())
                 CertifiedAs = jj.toString()
-
             }
-
             override fun onNothingSelected(adapterView: AdapterView<*>?) {
                 // text1.text = ""
             }
         })
     }
-
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.ivBack -> {
                 finish()
             }
             R.id.btnNext -> {
-                startActivity(Intent(this, AvailablityActivity::class.java))
-                /*  if (intent.getStringExtra("key").equals("signup")) {
-                      if (validator.Teachercompleteprofile(
-                              this,
-                              CertifiedAs,
-                              edSpeacialities.text.toString(),
-                              edInPersonRate.text.toString(),
-                              edVirtualRate.text.toString(),
-                              edCancelationPolicy.text.toString(),
-                              address,
-                              teachinglevel.toString()
-                          )
-                      ) {
-                          val password = intent.getStringExtra("password").toString()
-                          val email = intent.getStringExtra("email").toString()
-                          val Name = intent.getStringExtra("Name").toString()
-                          val firstimage = intent.getStringExtra("Image").toString()
-                          val about_teacher = intent.getStringExtra("about_teacher").toString()
-                          val teacher_history = intent.getStringExtra("teacher_history").toString()
-
-                          val intent = Intent(this, AvailablityActivity::class.java)
-                          intent.putExtra("key", "nonedit")
-                          intent.putExtra("password", password)
-                          intent.putExtra("email", email)
-                          intent.putExtra("Name", Name)
-                          intent.putExtra("Image", firstimage)
-                          intent.putExtra("socialId", intent.getStringExtra("socialId").toString())
-                          intent.putExtra("socialtype", intent.getStringExtra("socialtype").toString())
-                          intent.putExtra("about_teacher", about_teacher)
-                          intent.putExtra("teacher_history", teacher_history)
-                          intent.putExtra("specialties", edSpeacialities.text.toString())
-                          intent.putExtra("inPersonRate", edInPersonRate.text.toString())
-                          intent.putExtra("VirtualRate", edVirtualRate.text.toString())
-                          intent.putExtra("cancelPolicy", edCancelationPolicy.text.toString())
-                          intent.putExtra("CertifiedAs", CertifiedAs)
-                          intent.putExtra(
-                              "teachinglevel", teachinglevel.toString().replace("[", "").replace(
-                                  "]",
-                                  ""
-                              ).replace(" ", "")
-                          )
-                          intent.putExtra("address", address)
-                          intent.putExtra("latitude", latitude)
-                          intent.putExtra("longitude", longitude)
-                          startActivity(intent)
-                      }
-                  } else {
-                      if (validator.Teachercompleteprofile(
-                              this,
-                              CertifiedAs,
-                              edSpeacialities.text.toString(),
-                              edInPersonRate.text.toString(),
-                              edVirtualRate.text.toString(),
-                              edCancelationPolicy.text.toString(),
-                              address,
-                              teachinglevel.toString()
-                          )
-                      ) {
-
-                          baseViewModel.EditTeacherProfileProfile(
-                              this,
-                              teachinglevel.toString().replace("[", "").replace("]", "").replace(
-                                  " ",
-                                  ""
-                              ),
-                              edSpeacialities.text.toString(),
-                              edInPersonRate.text.toString(),
-                              edCancelationPolicy.text.toString(),
-                              edVirtualRate.text.toString(),
-                              CertifiedAs,
-                              address,
-                              latitude,
-                              longitude,
-                              availability,
-                              timeSlot,
-                              true
-                          )
-                          baseViewModel.getCommonResponse().observe(this, this)
-                      }
-                  }*/
+                apiTeachingInfo()
             }
             R.id.edLocation -> {
                 if (Helper.checkLocPermission(this@TeachingInfoActivity)) {
@@ -260,30 +170,40 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             Status.SUCCESS -> {
                 if (liveData.data is TeachingLevelResponse) {
                     list = ArrayList()
-                   // list.addAll(liveData.data.body)
-                         rv_teachingLevel.adapter = TeachingLevelAdapter(this, list, teachinglevel, this)
+                    list.addAll(liveData.data.body)
+                    rv_teachingLevel.adapter = TeachingLevelAdapter(this, list, teachinglevel, this)
+
+                 /*   educationCertificateAdapter = EducationCertificateAdapter(imageList, this)
+                    rvUploadImage.adapter = educationCertificateAdapter*/
+
                 } else if (liveData.data is Commontoall) {
                     Helper.showSuccessToast(this, liveData.data.message)
                     finish()
-                } else {
+                }
+
+
+                if (liveData.data is TeachinInfoResponse) {
+
+                    startActivity(Intent(this, AvailablityActivity::class.java))
                 }
             }
 
             Status.ERROR -> {
-                if (liveData.error is Model_login)
+                if (liveData.error is TeachingLevelResponse)
                     Helper.showSuccessToast(this, liveData.error.message)
             }
             else -> {
-                if (liveData.error is Model_login)
+                if (liveData.error is TeachingLevelResponse)
                     Helper.showSuccessToast(this, liveData.error.message)
             }
         }
     }
-/*    fun apiTeachingInfo(){
-        //et_teaching.text.toString(),
-        baseViewModel.teachingInfoApi(this,imageList,CertifiedAs,etMajors.text.toString(),teachinglevel,edSpeacialities.text.toString(),edPrice.text.toString(),edCancelationPolicy.text.toString(),edLocation.text.toString(),true)
+
+    fun apiTeachingInfo() {
+        baseViewModel.teachingInfoApi(this, imageList, CertifiedAs, etMajors.text.toString(),
+            teachinglevel.toString(), edSpeacialities.text.toString(), edPrice.text.toString(), edCancelationPolicy.text.toString(), edLocation.text.toString(), latitude,longitude,true)
         baseViewModel.getCommonResponse().observe(this, this)
-    }*/
+    }
 
     override fun onActivityResult(resrequestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(resrequestCode, resultCode, data)
@@ -296,17 +216,14 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             }
         }
     }
-
     fun api() {
         baseViewModel.teacher_level(this, true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
-
     override fun Teachinglevel(level: ArrayList<String>) {
         teachinglevel.clear()
         teachinglevel.addAll(level)
     }
-
     fun getLocation(latitude: String, longitude: String) {
         val geocoder: Geocoder
         val addresses: List<Address>
@@ -328,15 +245,20 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
     }
 
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun selectImage() {
         Album.image(this).multipleChoice().camera(true).columnCount(4).widget(
             Widget.newDarkBuilder(this).title(getString(R.string.app_name)).build()
         )
             .onResult { result ->
-                mAlbumFiles.addAll(result)
-                Glide.with(this).load(result[0].path).into(ivDocuments)
-                firstimage = result[0].path
+                result.forEach {
+                    imageList.add(it.path)
+                    educationCertificateAdapter?.notifyDataSetChanged()
+                }
+
             }.onCancel {
             }.start()
     }
+
+
 }

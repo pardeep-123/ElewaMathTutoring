@@ -199,6 +199,16 @@ class BaseViewModel : ViewModel() {
 
     }
 
+
+
+
+
+
+
+
+
+
+
     @SuppressLint("CheckResult")
     fun get_time_slots(activity: Activity, isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
@@ -769,6 +779,35 @@ class BaseViewModel : ViewModel() {
                 })
         }
     }
+
+
+  @SuppressLint("CheckResult")
+    fun TeacherAvailability(activity: Activity, availability: String,timeSlot: String, isDialogShow: Boolean) {
+        if (Helper.isNetworkConnected(activity)) {
+            apiService.TeacherAvailability(availability,timeSlot)
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    { mResponse.value = RestObservable.error(activity, it) }
+                )
+        } else {
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        TeacherAvailability(activity, availability,timeSlot, isDialogShow)
+                    }
+                })
+        }
+    }
+
+
+
+
 
     @SuppressLint("CheckResult")
     fun signUpApi(
@@ -1688,19 +1727,16 @@ class BaseViewModel : ViewModel() {
                 }
 
                 val requestBody: RequestBody = newFile.asRequestBody(mediaType)
-                imageFileBody!!.add(MultipartBody.Part.createFormData("image", newFile.name, requestBody))
+                imageFileBody!!.add(MultipartBody.Part.createFormData("certificate_images", newFile.name, requestBody))
             }
         }
 
         val education_Level: RequestBody =
             RequestBody.create("text/plain".toMediaTypeOrNull(), educationLevel)
         val majorss: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), majors)
-        val teachingLevel_value: RequestBody =
-            RequestBody.create("text/plain".toMediaTypeOrNull(), teachingLevel)
-        val specialties_value: RequestBody =
-            RequestBody.create("text/plain".toMediaTypeOrNull(), specialties)
-        val hourly_Price: RequestBody =
-            RequestBody.create("text/plain".toMediaTypeOrNull(), hourlyPrice)
+        val teachingLevel_value: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), teachingLevel)
+        val specialties_value: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), specialties)
+        val hourly_Price: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), hourlyPrice)
         val cancelPolicy_value: RequestBody =
             RequestBody.create("text/plain".toMediaTypeOrNull(), cancelPolicy)
         val address_value: RequestBody =

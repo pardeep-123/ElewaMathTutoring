@@ -5,36 +5,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.TeachingLevelResponse
 import com.elewamathtutoring.Models.Teacher_level.Body
 import com.elewamathtutoring.R
 import com.riseball.interface_base.Teachinglevel_interface
 import kotlinx.android.synthetic.main.item_filteroptions.view.*
 import java.lang.Exception
 import kotlin.collections.ArrayList
-
 //
 class TeachingLevelAdapter(
     var ctn: Context,
-    var list: ArrayList<Body>,
+    var list: ArrayList<TeachingLevelResponse.Body>,
     var teachinglevel: ArrayList<String>,
     var teachingInfoActivity: Teachinglevel_interface
 ) :
     RecyclerView.Adapter<TeachingLevelAdapter.ViewHolder>() {
     var poz = -1
     var Level_list = ArrayList<String>()
-
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(ctn).inflate(R.layout.item_signupcheckbox, parent, false)
         return ViewHolder(view)
     }
-
     override fun getItemCount(): Int {
         return list.size
         // return 3
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.name.setText(list.get(position).level)
         try {
@@ -59,7 +56,6 @@ class TeachingLevelAdapter(
           //  Teacher_level(Level_list)
         }
     }
-
   /*  fun Teacher_level(Level_list: ArrayList<String>) {
         teachingInfoActivity.Teachinglevel(Level_list)
     }*/

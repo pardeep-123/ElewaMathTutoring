@@ -37,15 +37,23 @@ class EducationCertificateAdapter(val list: ArrayList<String>,    var clickCallB
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(position)
-        holder.itemView.rvGallery.setOnClickListener {
-            clickCallBack.onItemClick(position, "gellery")
-        }
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(pos: Int) {
             if (pos != 0) {
+                itemView.llCamera.visibility=View.GONE
                 Glide.with(ctn).load(list[pos - 1]).into(itemView.ivDocuments)
+            } else{
+                itemView.llCamera.visibility=View.VISIBLE
+            }
+
+            itemView.rvGallery.setOnClickListener {
+                if (pos == 0){
+
+                    clickCallBack.onItemClick(pos, "gellery")
+
+                }
             }
         }
     }

@@ -95,7 +95,7 @@
             android:name=".Activity.TeacherOrTutor.SubscriptionsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.TeacherOrTutor.AvailablityActivity"
+            android:name=".Activity.TeacherOrTutor.availability.AvailablityActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.TeacherOrTutor.TeachingInfo.TeachingInfoActivity"

@@ -9,6 +9,8 @@ import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResourcesRespons
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword.ChangePasswordResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.TeachinInfoResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.TeachingLevelResponse
+import com.elewamathtutoring.Activity.TeacherOrTutor.availability.AvailabilityResponse
+import com.elewamathtutoring.Activity.TeacherOrTutor.availability.TimeSlotsResponse
 import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfileResponse
 import com.elewamathtutoring.Models.Add_Card.Model_addcards
 import com.elewamathtutoring.Models.BankAccountsModel.Model_BankAccount
@@ -75,7 +77,7 @@ interface RestApiInterface {
     fun notifications(): Observable<Model_Notifications>
 
     @GET("get_time_slots")
-    fun get_time_slots(): Observable<Model_timeslots>
+    fun get_time_slots(): Observable<TimeSlotsResponse>
 
 /*
     @FormUrlEncoded
@@ -256,7 +258,7 @@ interface RestApiInterface {
 
 
   @Multipart
-    @POST("TeacherInfo")
+    @PUT("TeacherInfo")
     fun teachingInfoApi(
         @Part certificate_images:  ArrayList<MultipartBody.Part>,
         @Part("educationLevel") educationLevel: RequestBody,
@@ -270,6 +272,12 @@ interface RestApiInterface {
         @Part("longitude") longitude: RequestBody,
     ): Observable<TeachinInfoResponse>
 
+    @FormUrlEncoded
+    @PUT("TeacherAvailability")
+    fun TeacherAvailability(
+        @Field("availability") availability: String,
+        @Field("timeSlot") timeSlot: String
+    ): Observable<AvailabilityResponse>
 
 
 

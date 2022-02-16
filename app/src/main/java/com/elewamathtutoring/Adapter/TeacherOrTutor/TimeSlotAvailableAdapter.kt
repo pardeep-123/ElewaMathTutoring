@@ -5,24 +5,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.elewamathtutoring.Activity.TeacherOrTutor.AvailablityActivity
-import com.elewamathtutoring.Models.Time_slots.Body
+import com.elewamathtutoring.Activity.TeacherOrTutor.availability.AvailablityActivity
+import com.elewamathtutoring.Activity.TeacherOrTutor.availability.TimeSlotsResponse
 import com.elewamathtutoring.R
 import kotlinx.android.synthetic.main.item_dates_available.view.*
 
 class TimeSlotAvailableAdapter(
-    list: ArrayList<Body>,
-   var Selctedarray_time: ArrayList<String>,
+   var list: ArrayList<TimeSlotsResponse.Body>,
+    var Selctedarray_time: ArrayList<String>,
     var availablityActivity: AvailablityActivity
+
 ) :
     RecyclerView.Adapter<TimeSlotAvailableAdapter.ViewHolder>() {
-    var arrayList = list
+
     var Array_time=ArrayList<String>()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(parent.context)
@@ -33,21 +32,21 @@ class TimeSlotAvailableAdapter(
     }
 
     override fun getItemCount(): Int {
-         //   return arrayList.size
-        return 3
+        return list.size
+
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var timeSlotsAvailableModel = arrayList[position]
+        var timeSlotsAvailableModel = list[position]
         holder.itemView.dayofweek.text = timeSlotsAvailableModel.startTime+"-"+timeSlotsAvailableModel.endTime
 
 
         for(i in 0 until Selctedarray_time.size)
         {
-            if(arrayList.get(position).id.toString().equals(Selctedarray_time.get(i)))
+            if(list.get(position).id.toString().equals(Selctedarray_time.get(i)))
             {
                 timeSlotsAvailableModel.check =true
-                Array_time.add(arrayList.get(position).id.toString())
+                Array_time.add(list.get(position).id.toString())
             }
         }
 

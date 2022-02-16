@@ -7,6 +7,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.TeachingInfoActivity
+import com.elewamathtutoring.Activity.TeacherOrTutor.availability.AvailablityActivity
 import com.elewamathtutoring.Models.Login.Body
 import com.elewamathtutoring.Models.Login.Model_login
 import com.elewamathtutoring.R

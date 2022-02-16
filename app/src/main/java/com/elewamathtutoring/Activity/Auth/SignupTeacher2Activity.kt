@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.elewamathtutoring.Activity.TeacherOrTutor.AvailablityActivity
+import com.elewamathtutoring.Activity.TeacherOrTutor.availability.AvailablityActivity
 import com.elewamathtutoring.R
 import kotlinx.android.synthetic.main.activity_signup_teacher2.*
 

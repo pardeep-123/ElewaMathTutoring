@@ -9,7 +9,7 @@ import com.elewamathtutoring.Activity.Auth.signup.SignUp
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResoucesActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword.ChangePassword
 import com.elewamathtutoring.Activity.TeacherOrTutor.AboutYouActivity
-import com.elewamathtutoring.Activity.TeacherOrTutor.AvailablityActivity
+import com.elewamathtutoring.Activity.TeacherOrTutor.availability.AvailablityActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.TeachingInfoActivity
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import dagger.BindsInstance
