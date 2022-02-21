@@ -14,6 +14,8 @@ import com.elewamathtutoring.Activity.Auth.LoginGuestActivity
 import com.elewamathtutoring.Activity.Auth.signup.SignUp
 import com.elewamathtutoring.Activity.TeacherOrTutor.AboutYouActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.MainTeacherActivity
+import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.TeachingInfoActivity
+import com.elewamathtutoring.Activity.TeacherOrTutor.availability.AvailablityActivity
 import com.elewamathtutoring.MainActivity
 import com.elewamathtutoring.Models.Login.Model_login
 import com.elewamathtutoring.R
@@ -53,7 +55,7 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
       //  googleHelper = GoogleHelper(this, this)
         allClickListeners()
        // initFbSignin()
-        if( intent.getStringExtra("Name").equals("Tutor")){
+        if(intent.getStringExtra("Name").equals("Tutor")){
             btnGuest.visibility=View.GONE
 
 
@@ -266,8 +268,18 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
                         {*/
                             if (liveData.data.body.userType == 2)
                             {
-                                startActivity(Intent(this, MainTeacherActivity::class.java))
-                                finishAffinity()
+                                if(liveData.data.body.isTechingInfo==0){
+                                    startActivity(Intent(this, TeachingInfoActivity::class.java))
+                                }else{
+                                    if(liveData.data.body.IsAvailable==0){
+                                        startActivity(Intent(this, AvailablityActivity::class.java))
+
+                                    }else{
+                                        startActivity(Intent(this, MainTeacherActivity::class.java))
+                                        finishAffinity()
+                                    }
+                                }
+
 
                             }
                             else
@@ -275,11 +287,9 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
                                 startActivity(Intent(this, MainActivity::class.java))
                                 finishAffinity()
                             }
-                       // }
+
                     }
-                    else if(Api_type.equals("checksocialId"))
-                    {
-                    }
+
                 }
             else if(liveData.data is Commontoall) {
                     savePrefrence(Constants.Social_login, "True")

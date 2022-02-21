@@ -30,15 +30,15 @@ class Hadder_sessionsadapter(
         holder.itemView.tv_titleSession.text = title.get(position)
         if(title.get(position).equals("TODAY'S SESSIONS")) {
             upcomming.reverse()
-        //   holder.itemView.recycler_data.adapter = SessionsAdapter(ctn, today)
+          holder.itemView.recycler_data.adapter = SessionsAdapter(ctn, today)
         } else {
             upcomming.reverse()
-      // holder.itemView.recycler_data.adapter = SessionsAdapter(ctn, upcomming)
+      holder.itemView.recycler_data.adapter = SessionsAdapter(ctn, upcomming)
         }
-        //holder.itemView.tvItemType.text = list.get(0).body.get(position).
+      //holder.itemView.tvItemType.text = list.get(0).body.get(position).
     }
     override fun getItemCount(): Int {
-        //return title.size
-        return 3
+       return title.size
+
     }
 }

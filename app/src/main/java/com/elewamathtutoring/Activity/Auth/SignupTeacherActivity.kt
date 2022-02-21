@@ -34,7 +34,6 @@ class SignupTeacherActivity : AppCompatActivity(), View.OnClickListener , Observ
     var email = ""
     var password = ""
 
-
     @Inject
     lateinit var validator: Validator
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
@@ -51,7 +50,6 @@ class SignupTeacherActivity : AppCompatActivity(), View.OnClickListener , Observ
         btnNext.setOnClickListener(this)
         add_img.setOnClickListener(this)
 
-        //edtName.setText(intent.getStringExtra("name").toString())
             name = intent.getStringExtra("name").toString()
             email = intent.getStringExtra("email").toString()
             password = intent.getStringExtra("password").toString()
@@ -93,7 +91,7 @@ class SignupTeacherActivity : AppCompatActivity(), View.OnClickListener , Observ
             }.start()
     }
     fun apiSignupTutor(){
-            baseViewModel.signUpTeacherApi(this,firstImage,email,name,password,cs_message.text.toString(),et_teaching.text.toString(),true)
+            baseViewModel.signUpTeacherApi(this,firstImage,name,email,password,cs_message.text.toString(),et_teaching.text.toString(),true)
             baseViewModel.getCommonResponse().observe(this, this)
     }
     override fun onChanged(it: RestObservable?) {

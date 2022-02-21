@@ -126,6 +126,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <RelativeLayout
                 android:id="@+id/listView_rl"
                 android:layout_width="match_parent"
@@ -139,7 +140,8 @@
                     android:fontFamily="@font/avenirlstd_roman"
                     android:text="Todays's Bookings"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_14sdp" />
+                    android:textSize="@dimen/_14sdp"
+                    android:visibility="gone" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_listView"
@@ -154,6 +156,7 @@
                     android:id="@+id/rlResources"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
+
                     android:layout_below="@+id/rv_listView"
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_20sdp"
@@ -179,10 +182,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_below="@id/rlResources"
+
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_20sdp"
-                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
                     android:background="@drawable/bg_btn">
 
                     <androidx.appcompat.widget.AppCompatTextView

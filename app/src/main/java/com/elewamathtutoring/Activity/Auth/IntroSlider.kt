@@ -62,8 +62,6 @@ class IntroSlider : AppCompatActivity() {
 
         tvSkip.setOnClickListener {
             startActivity(Intent(this@IntroSlider, SignUpAs::class.java))
-
-
         }
 
         tvBack.setOnClickListener {

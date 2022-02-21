@@ -22,6 +22,7 @@ import com.elewamathtutoring.Activity.PaymentInfoActivity
 import com.elewamathtutoring.Activity.SendFeedback
 import com.elewamathtutoring.Activity.WithdrawalActivity
 import com.elewamathtutoring.R
+import com.elewamathtutoring.Util.SharedPrefUtil
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.Util.helper.extensions.clearPrefrences
@@ -41,11 +42,15 @@ class SettingActivity : AppCompatActivity(), Observer<RestObservable> {
     var message3 = "Terms of Service"
     var context: Context = this
     var status=""
+    lateinit var shared: SharedPrefUtil
+
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting2)
+        shared = SharedPrefUtil(this)
+
         window.decorView.systemUiVisibility =
             (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
         window.statusBarColor = Color.TRANSPARENT;
@@ -172,12 +177,15 @@ class SettingActivity : AppCompatActivity(), Observer<RestObservable> {
         }
         logoutDialog.show()
     }
+
+
+
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
-                if (liveData.data is Commontoall)
-                {
+                if (liveData.data is Commontoall) {
                     clearPrefrences()
+                    shared.isLogin = false
                     startActivity(Intent(this, SignUpAs::class.java))
                 }
                 else if (liveData.data is Commontoall2)

@@ -8,9 +8,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.elewamathtutoring.Activity.Auth.SignupTeacherActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.privacy.PrivacyPolicy
+import com.elewamathtutoring.Activity.TeacherOrTutor.MainTeacherActivity
 import com.elewamathtutoring.MainActivity
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.App
+import com.elewamathtutoring.Util.SharedPrefUtil
 import com.elewamathtutoring.Util.Validator
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
@@ -27,10 +29,13 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
     @Inject
     lateinit var validator: Validator
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
+    lateinit var shared: SharedPrefUtil
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
+        shared = SharedPrefUtil(this)
+
         App.getinstance().getmydicomponent().inject(this)
         ivBack.setOnClickListener(this)
         btnNext.setOnClickListener(this)
@@ -49,7 +54,7 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
 
                 if (getPrefrence(Constants.user_type, "").equals("1")) {
                     if (validator.signUpValid(this, edtName.text.toString(), edtEmail.text.toString(), editPassword.text.toString(), editConfirmPassword.text.toString())) {
-                        baseViewModel.signUpApi(this, edtEmail.text.toString(), edtName.text.toString(), editPassword.text.toString(), true)
+                        baseViewModel.signUpApi(this,  edtName.text.toString(),edtEmail.text.toString(), editPassword.text.toString(),"1", true)
                         baseViewModel.getCommonResponse().observe(this, this)
                     }
                 } else {
@@ -59,6 +64,7 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
                             .putExtra("email", edtEmail.text.toString())
                             .putExtra("password", editPassword.text.toString())
                     )
+                    finish()
                 }
             }
             R.id.ivBack -> {
@@ -77,15 +83,19 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
             }
         }
     }
-
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
                 if (liveData.data is SignUpResponse) {
-                    savePrefrence(Constants.AUTH_KEY, liveData.data.body.token)
                     if (getPrefrence(Constants.user_type, "").equals("1")) {
+                        savePrefrence("userType", "1")
+                        shared.isLogin = true
+                        savePrefrence(Constants.AUTH_KEY, liveData.data.body.token)
                         startActivity(Intent(this, MainActivity::class.java))
                     } else {
+                        savePrefrence("userType", "2")
+                        savePrefrence(Constants.AUTH_KEY, liveData.data.body.token)
+                        startActivity(Intent(this, MainTeacherActivity::class.java))
                     }
                  /*
                     intent.putExtra("name", edtName.text.toString())

@@ -12,6 +12,7 @@ import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.TeachingLevelR
 import com.elewamathtutoring.Activity.TeacherOrTutor.availability.AvailabilityResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.availability.TimeSlotsResponse
 import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfileResponse
+import com.elewamathtutoring.Fragment.TeacherOrTutor.request.RequestListResponse
 import com.elewamathtutoring.Models.Add_Card.Model_addcards
 import com.elewamathtutoring.Models.BankAccountsModel.Model_BankAccount
 import com.elewamathtutoring.Models.Card_listing.Model_cardlisting
@@ -237,9 +238,10 @@ interface RestApiInterface {
     @FormUrlEncoded
     @POST("signup")
     fun signUpApi(
-        @Field("email") email: String,
         @Field("name") name: String,
-        @Field("password") password: String
+        @Field("email") email: String,
+        @Field("password") password: String,
+        @Field("role") role: String
     ): Observable<SignUpResponse>
 
 
@@ -320,6 +322,11 @@ interface RestApiInterface {
     @GET("get_profile")
     fun get_profile(): Observable<ProfileResponse>
 
+     @GET("TeacherRequestList")
+    fun TeacherRequestList(): Observable<RequestListResponse>
+
+
+
   @GET("resources")
     fun get_resources(): Observable<ResourcesResponse>
 
@@ -337,7 +344,7 @@ interface RestApiInterface {
     fun teacher_level(): Observable<TeachingLevelResponse>
 
     @FormUrlEncoded
-    @PUT("All_Sessions_list_with_dates")
+    @POST("All_Sessions_list_with_dates")
     fun listViewSession(@Field("date") date: String): Observable<Model_myschdeullist>
 
     @FormUrlEncoded

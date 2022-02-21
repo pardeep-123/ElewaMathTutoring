@@ -61,12 +61,10 @@ class TimeSlotAvailableAdapter(
         }
         availablityActivity.Selected_time(Array_time)
         holder.itemView.rlDatesAvailable.setOnClickListener {
-            if (timeSlotsAvailableModel.check)
-            {
+            if (timeSlotsAvailableModel.check) {
                 timeSlotsAvailableModel.check = false
                 Array_time.remove(timeSlotsAvailableModel.id.toString())
                 Selctedarray_time.remove(timeSlotsAvailableModel.id.toString())
-
                 availablityActivity.Selected_time(Array_time)
                 notifyItemChanged(position)
             }
@@ -75,7 +73,6 @@ class TimeSlotAvailableAdapter(
                 timeSlotsAvailableModel.check = true
                 Array_time.add(timeSlotsAvailableModel.id.toString())
                 Selctedarray_time.add(timeSlotsAvailableModel.id.toString())
-
                 availablityActivity.Selected_time(Array_time)
                 notifyItemChanged(position)
             }

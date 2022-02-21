@@ -6,10 +6,13 @@ data class LoginResponse(
     val message: String, // User logged in successfully.
     val body: Body
 ) {
+
     data class Body(
         val id: Int, // 241
         val name: String, // aaa
         val userType: Int, // 1
+        val isTechingInfo: Int, // 1
+        val IsAvailable: Int, // 1
         val image: String,
         val address: String,
         val email: String, // a@a.a

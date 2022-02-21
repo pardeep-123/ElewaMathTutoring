@@ -1,4 +1,4 @@
-package com.elewamathtutoring.Fragment.TeacherOrTutor
+package com.elewamathtutoring.Fragment.TeacherOrTutor.request
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,8 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
 import com.elewamathtutoring.Adapter.ParentOrStudent.SchedulePendingAdapter
 import com.elewamathtutoring.Adapter.TeacherOrTutor.RequestAdapter
-import com.elewamathtutoring.Models.TeacherRequestsList.Body
-import com.elewamathtutoring.Models.TeacherRequestsList.Model_TeacherRequestList
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
@@ -28,9 +26,9 @@ import kotlin.collections.ArrayList
 
 class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObservable> {
     lateinit var v: View
-    var Pastreq= ArrayList<Body>()
-    var Newreq= ArrayList<Body>()
-    var Inwaiting= ArrayList<Body>()
+    var Pastreq= ArrayList<RequestListResponse.Body>()
+    var Newreq= ArrayList<RequestListResponse.Body>()
+    var Inwaiting= ArrayList<RequestListResponse.Body>()
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,13 +39,13 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
         return v
     }
     private fun api() {
-        baseViewModel.PastTeacher(requireActivity(), "0,2,3,4,5,6", true)
+        baseViewModel.TeacherRequestList(requireActivity(),  true)
         baseViewModel.getCommonResponse().observe(requireActivity(), this)
     }
     override fun onResume() {
         super.onResume()
         v.rootView.rv_newRequests.adapter = RequestAdapter(requireContext())
-       // api()
+        api()
     }
     private fun onClicks() {
         v.rootView.ivSetting.setOnClickListener(this)
@@ -62,7 +60,7 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
-                if (liveData.data is Model_TeacherRequestList) {
+                if (liveData.data is RequestListResponse) {
                     Pastreq.clear()
                     Inwaiting.clear()
                     Newreq.clear()
@@ -117,19 +115,13 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
                     } else {
                         tv_whennodata.visibility = View.GONE
                     }
-                   // v.rootView.rv_newRequests.adapter = SchedulePendingAdapter(requireContext(), Newreq)
-                    /*v.rootView.rv_PastRequests.adapter = SchedulePendingAdapter(
-                        requireContext(),
-                        Pastreq
-                    )
-                    v.rootView.recy_watingonans.adapter = SchedulePendingAdapter(
-                        requireContext(),
-                        Inwaiting
-                    )*/
+                   v.rootView.rv_newRequests.adapter = SchedulePendingAdapter(requireContext(), Newreq)
+                    v.rootView.rv_PastRequests.adapter = SchedulePendingAdapter(requireContext(), Pastreq)
+                    v.rootView.recy_watingonans.adapter = SchedulePendingAdapter(requireContext(), Inwaiting)
                 }
             }
             Status.ERROR -> {
-                if (liveData.error is Model_TeacherRequestList) {
+                if (liveData.error is RequestListResponse) {
                     Helper.showSuccessToast(requireContext(), liveData.error.message)
                 }
             }

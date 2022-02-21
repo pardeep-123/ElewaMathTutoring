@@ -811,12 +811,11 @@ class BaseViewModel : ViewModel() {
 
     @SuppressLint("CheckResult")
     fun signUpApi(
-        activity: Activity, email: String, name: String, password: String,
-
+        activity: Activity, name: String, email: String, password: String, role: String,
         isDialogShow: Boolean
     ) {
         if (Helper.isNetworkConnected(activity)) {
-            apiService.signUpApi(email, name, password)
+            apiService.signUpApi( name,email, password,role)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -831,7 +830,7 @@ class BaseViewModel : ViewModel() {
                 activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
-                        signUpApi(activity, email, name, password, isDialogShow)
+                        signUpApi(activity, name,email, password,role, isDialogShow)
                     }
                 })
         }
@@ -878,7 +877,7 @@ class BaseViewModel : ViewModel() {
 
         if (Helper.isNetworkConnected(activity)) {
             apiService.signUpTeacherApi(
-                imageFileBody, emaill, namee, passwordd, aboutt, teachingHistoryy,
+                imageFileBody,  namee, emaill,passwordd, aboutt, teachingHistoryy,
                 device_type_value, token_valuee
             )
                 ?.subscribeOn(Schedulers.io())
@@ -898,8 +897,9 @@ class BaseViewModel : ViewModel() {
                         signUpTeacherApi(
                             activity,
                             imageUrl,
-                            email,
+
                             name,
+                            email,
                             password,
                             about,
                             TeachingHistory,
@@ -1062,6 +1062,46 @@ class BaseViewModel : ViewModel() {
                 })
         }
     }
+
+    @SuppressLint("CheckResult")
+    fun TeacherRequestList(activity: Activity, isDialogShow: Boolean) {
+        if (Helper.isNetworkConnected(activity)) {
+            apiService.TeacherRequestList()
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    {
+
+                        mResponse.value = RestObservable.error(activity, it)
+                    })
+        } else {
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        TeacherRequestList(activity, isDialogShow)
+                    }
+                })
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     @SuppressLint("CheckResult")

@@ -18,6 +18,7 @@ import com.elewamathtutoring.MainActivity
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.SharedPrefUtil
 import com.elewamathtutoring.Util.constant.Constants
+import com.elewamathtutoring.Util.helper.extensions.getPrefrence
 import com.elewamathtutoring.Util.helper.extensions.savePrefrence
 import com.elewamathtutoring.Util.helper.extensions.savePrefrencewelcome
 
@@ -38,23 +39,26 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         shared = SharedPrefUtil(this)
         Handler(Looper.getMainLooper()).postDelayed({
-           /* if (SharedPrefUtil.getInstance().isLogin) {
-               *//* if ( savePrefrence(Constants.user_type, "1")){
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finishAffinity()
-                }else{
-                    startActivity(Intent(this, MainTeacherActivity::class.java))
-                    finishAffinity()
-                }*//*
-                startActivity(Intent(this, MainActivity::class.java))
-                finishAffinity()
+            if(shared.isLogin!=null){
+                if (shared.isLogin) {
+                    if (getPrefrence("userType", "").equals("1")){
+                        startActivity(Intent(this, MainActivity::class.java))
+                        finishAffinity()
+                    }else{
+                        startActivity(Intent(this, MainTeacherActivity::class.java))
+                        finishAffinity()
+                    }
+                    /*startActivity(Intent(this, MainActivity::class.java))
+                    finishAffinity()*/
 
-            } else {
-                val i = Intent(context, IntroSlider::class.java)
-                startActivity(i)
-            }*/
-            val i = Intent(context, IntroSlider::class.java)
-            startActivity(i)
+                } else {
+                    val i = Intent(context, IntroSlider::class.java)
+                    startActivity(i)
+                }
+            }
+
+           /* val i = Intent(context, IntroSlider::class.java)
+            startActivity(i)*/
         }, 1000)
 
     }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Fragment.TeacherOrTutor.RequestsTabFragment">
+    tools:context=".Fragment.TeacherOrTutor.request.RequestsTabFragment">
 
     <RelativeLayout
         android:id="@+id/schedule_toolbar"

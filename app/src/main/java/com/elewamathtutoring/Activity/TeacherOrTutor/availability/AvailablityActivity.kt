@@ -28,6 +28,7 @@ import com.elewamathtutoring.Util.App
 import com.elewamathtutoring.Util.Validator
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
+import com.elewamathtutoring.Util.helper.extensions.getPrefrence
 import com.elewamathtutoring.Util.helper.extensions.savePrefrence
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
@@ -68,7 +69,6 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
         if (intent.getStringExtra("key").equals("nonedit")) {
 
         }
-
         /*  else
           {
               profilelist = (intent.getSerializableExtra("list_model") as java.util.ArrayList<Body>?)!!
@@ -84,7 +84,6 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
               Selctedarray_time=words2
               btnConfirmSignUp.text="SAVE"
           }*/
-
         onClicks()
         setAdapters()
 
@@ -106,13 +105,14 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
         ivBack.setOnClickListener(this)
     }
 
-
     fun apiTimeSlot() {
         baseViewModel.get_time_slots(this, true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
      fun apiTeacherAvailability() {
-        baseViewModel.get_time_slots(this, true)
+        baseViewModel.TeacherAvailability(this,
+            Array_date.toString().replace("[", "").replace("]", "").replace(" ", ""),
+            Array_time.toString().replace("[", "").replace("]", "").replace(" ", ""), true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
 
@@ -143,17 +143,16 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.btnConfirmSignUp -> {
-
                 if (intent.getStringExtra("key").equals("available")) {
                     finish()
                 } else {
                     dialogAdmin()
                 }
-                /*      if (validator.Teacherdelectdatetime(this, Array_date, Array_time)) {
-
+                      if (validator.Teacherdelectdatetime(this, Array_date, Array_time)) {
+/*
                           if (intent.getStringExtra("key").equals("nonedit")) {
 
-                              if(getPrefrence(Constants.Social_login, "").equals("True"))
+                             *//* if(getPrefrence(Constants.Social_login, "").equals("True"))
                               {
                                   baseViewModel.TeacherSocialSignup(this, intent.getStringExtra("Image").toString(),  intent.getStringExtra("socialId").toString(),
                                       intent.getStringExtra("socialtype").toString(),
@@ -177,9 +176,10 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
                                           .replace(" ", ""), true
                                   )
                               }
-                              else {
+                              else {*//*
 
-                                  baseViewModel.signas_teacher(this, intent.getStringExtra("Image").toString(),
+                                  baseViewModel.signas_teacher(this,
+                                      intent.getStringExtra("Image").toString(),
                                       intent.getStringExtra("Name").toString(),
                                       intent.getStringExtra("email").toString(),
                                       intent.getStringExtra("password").toString(),
@@ -194,16 +194,15 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
                                       intent.getStringExtra("address").toString(),
                                       intent.getStringExtra("latitude").toString(),
                                       intent.getStringExtra("longitude").toString(),
-                                      Array_date.toString().replace("[", "").replace("]", "")
-                                          .replace(" ", ""),
-                                      Array_time.toString().replace("[", "").replace("]", "")
-                                          .replace(" ", ""), true
-                                  )
-                              }
+                                      Array_date.toString().replace("[", "").replace("]", "").replace(" ", ""),
+                                      Array_time.toString().replace("[", "").replace("]", "").replace(" ", ""), true)
+                              }*/
+                          baseViewModel.TeacherAvailability(this,
+                              Array_date.toString().replace("[", "").replace("]", "").replace(" ", ""),
+                              Array_time.toString().replace("[", "").replace("]", "").replace(" ", ""), true)
                               baseViewModel.getCommonResponse().observe(this, this)
                           }
-                          else
-                          {
+                          /*else {
 
                                   baseViewModel.EditTeacherProfileProfile(this,
                                       profilelist.get(0).teachingLevel,   profilelist.get(0).specialties,profilelist.get(0).InPersonRate.toString()
@@ -216,9 +215,9 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
                                       Array_date.toString().replace("[", "").replace("]", "").replace(" ", ""),
                                       Array_time.toString().replace("[", "").replace("]", "").replace(" ", ""), true)
                                   baseViewModel.getCommonResponse().observe(this, this)
-                          }
-                      }*/
-            }
+                          }*/
+                      }
+
             R.id.ivBack -> {
                 finish()
             }
