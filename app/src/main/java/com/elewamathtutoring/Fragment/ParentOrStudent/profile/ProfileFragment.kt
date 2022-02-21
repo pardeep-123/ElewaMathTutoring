@@ -23,8 +23,10 @@ import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import com.pawskeeper.Modecommon.Commontoall
 import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.fragment_profile.text_parent_about
 import kotlinx.android.synthetic.main.fragment_profile.view.ivNotification
 import kotlinx.android.synthetic.main.fragment_profile.view.ivSetting
+import kotlinx.android.synthetic.main.fragment_profile_tab.*
 import kotlin.collections.ArrayList
 
 class ProfileFragment : Fragment(), Observer<RestObservable> {
@@ -80,6 +82,7 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
                    // list.addAll(listOf(liveData.data.body))
                     text_parent_name.text = liveData.data.body.name
                     text_parent_email.text = liveData.data.body.email
+                    text_teacher_inprice.text = liveData.data.body.email
                     text_parent_about.text = liveData.data.body.about
                     Glide.with(contex).load(liveData.data.body.image)
                         .placeholder(R.drawable.profile_unselected).into(image_parent_image)

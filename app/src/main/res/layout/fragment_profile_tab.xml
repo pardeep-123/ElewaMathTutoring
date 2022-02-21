@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/llToolbar"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="230dp"
         android:background="@color/app"
         android:orientation="vertical">
 
@@ -91,10 +91,10 @@
                     android:id="@+id/text_teacher_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_toRightOf="@+id/image_teacher_image"
                     android:fontFamily="@font/aenirlsttd_black"
                     android:text="Dr. Nanad"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
@@ -198,7 +198,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/light"
-                android:text="$50.00/Hr"
                 android:textColor="@color/text"
                 android:textSize="12sp" />
 

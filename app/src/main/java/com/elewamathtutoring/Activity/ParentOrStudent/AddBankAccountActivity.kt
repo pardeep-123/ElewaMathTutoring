@@ -65,10 +65,7 @@ class AddBankAccountActivity : AppCompatActivity(), View.OnClickListener,
                         branch.text.toString(),
                         acNumber.text.toString(),
                         cacNumber.text.toString(),
-                        acHolderName.text.toString()
-                    )
-                ) {
-
+                        acHolderName.text.toString())) {
                     CallApi(current_id)
                 } else {
                     Log.e("fnjn", "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")

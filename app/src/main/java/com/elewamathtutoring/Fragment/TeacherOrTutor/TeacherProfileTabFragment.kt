@@ -1,5 +1,6 @@
 package com.elewamathtutoring.Fragment.TeacherOrTutor
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,10 +12,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
-import com.elewamathtutoring.Activity.TeacherOrTutor.AboutYouActivity
+import com.elewamathtutoring.Activity.TeacherOrTutor.editProfile.AboutYouActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.EditYourProfileActivity
+import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfileResponse
 import com.elewamathtutoring.Models.Login.Body
-import com.elewamathtutoring.Models.Login.Model_login
 import com.elewamathtutoring.Models.Teacher_level.Model_teacher_level
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
@@ -33,7 +34,10 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener , Observer<Re
     var data=""
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
 
-
+    var image = ""
+    var name = ""
+    var about = ""
+    var teachingHistory = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,13 +45,13 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener , Observer<Re
         v = inflater.inflate(R.layout.fragment_profile_tab, container, false)
         contex = activity as Context
         onClicks()
-
         return v
     }
     private fun api()
     {
-      /*  baseViewModel.get_profile(requireActivity(), getPrefrence(Constants.user_type, ""), true)
-        baseViewModel.getCommonResponse().observe(requireActivity(), this)*/
+        //, getPrefrence(Constants.user_type, "")
+        baseViewModel.get_profile(requireActivity(), true)
+        baseViewModel.getCommonResponse().observe(requireActivity(), this)
     }
     private fun onClicks() {
         v.rootView.ivSetting.setOnClickListener(this)
@@ -68,29 +72,36 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener , Observer<Re
                 startActivity(intent)
             }
             R.id.btnEditProfile -> {
-                val intent = Intent(contex, AboutYouActivity::class.java)
-                startActivity(intent)
+                val i = Intent(contex, AboutYouActivity::class.java)
+                i.putExtra("name", name)
+                i.putExtra("about", about)
+                i.putExtra("teachingHistory", teachingHistory)
+                i.putExtra("image", image)
+                startActivity(i)
             }
-       /*     R.id.llUpgradeYourProfile -> {
-                startActivity(Intent(context, SubscriptionsActivity::class.java))
-            }*/
         }
     }
+    @SuppressLint("SetTextI18n")
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
-                if (liveData.data is Model_login) {
-                    profilelist.addAll(listOf(liveData.data.body))
+                if (liveData.data is ProfileResponse) {
+                 //   profilelist.addAll(listOf(liveData.data.body))
                     text_teacher_name.text=liveData.data.body.name
-                    data = profilelist.get(0).teachingLevel.toString()
-                   // text_teacher_spicel.text=liveData.data.body.specialties
+                    text_parent_spicilty.text=liveData.data.body.specialties
                     text_parent_spicilty.text=isCertifiedOrtutor(liveData.data.body.isCertifiedOrtutor)
                     text_teacher_CancelationPolicy.text=liveData.data.body.cancellationPolicy
                     text_teacher_AboutUser.text=liveData.data.body.about
-                 //   text_teacher_TeachingHistory.text=liveData.data.body.teachingHistory
+                    // text_teacher_TeachingHistory.text=liveData.data.body.teachingHistory
                     //text_teacher_virtual.text=(Constants.Currency+liveData.data.body.virtualRate.toString())+".00/Hr"
                     text_teacher_inprice.text=Constants.Currency+liveData.data.body.InPersonRate.toString()+".00/Hr"
                     Glide.with(contex).load(liveData.data.body.image).placeholder(R.drawable.profile_unselected).into(image_teacher_image)
+
+                    name=liveData.data.body.name
+                    about=liveData.data.body.about
+                    teachingHistory=liveData.data.body.teachingHistory
+                    image=liveData.data.body.image
+
                     api_techinglevel()
                 }
                else if (liveData.data is Model_teacher_level)
@@ -121,7 +132,7 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener , Observer<Re
                 }
             }
             Status.ERROR -> {
-                if (liveData.error is Model_login)
+                if (liveData.error is ProfileResponse)
                 {
                     Helper.showSuccessToast(requireContext(), liveData.error.message)
                 }

@@ -12,7 +12,7 @@ import com.elewamathtutoring.Activity.Auth.DescSignupScreen
 import com.elewamathtutoring.Activity.Auth.ForgotPassword
 import com.elewamathtutoring.Activity.Auth.LoginGuestActivity
 import com.elewamathtutoring.Activity.Auth.signup.SignUp
-import com.elewamathtutoring.Activity.TeacherOrTutor.AboutYouActivity
+import com.elewamathtutoring.Activity.TeacherOrTutor.editProfile.AboutYouActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.MainTeacherActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.TeachingInfoActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.availability.AvailablityActivity
@@ -21,6 +21,7 @@ import com.elewamathtutoring.Models.Login.Model_login
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.App
 import com.elewamathtutoring.Util.GoogleHelper
+import com.elewamathtutoring.Util.SharedPrefUtil
 import com.elewamathtutoring.Util.Validator
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
@@ -47,10 +48,14 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
     var  Api_type="login"
     lateinit var context: Context
     var callbackManager: CallbackManager? = null
+    lateinit var shared: SharedPrefUtil
+
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_screen)
+        shared = SharedPrefUtil(this)
+
         App.getinstance().getmydicomponent().inject(this)
       //  googleHelper = GoogleHelper(this, this)
         allClickListeners()
@@ -253,7 +258,7 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
                     if (Api_type.equals("login")) {
                         Log.e("DEVICETOCKEN", "" + liveData.data.body.token + " dT--" + liveData.data.body.deviceToken)
                         savePrefrence(Constants.AUTH_KEY, liveData.data.body.token.toString())
-
+                        shared.isLogin = true
                         savePrefrence(Constants.USER_ID, liveData.data.body.id.toString())
                         savePrefrence(Constants.notificationStatus, liveData.data.body.notificationStatus.toString())
                       //  savePrefrence(Constants.Social_login, "False")

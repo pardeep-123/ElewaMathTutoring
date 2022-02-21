@@ -11,6 +11,7 @@ import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.TeachinInfoRes
 import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.TeachingLevelResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.availability.AvailabilityResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.availability.TimeSlotsResponse
+import com.elewamathtutoring.Activity.TeacherOrTutor.editProfile.EditTeacherProfileResponse
 import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfileResponse
 import com.elewamathtutoring.Fragment.TeacherOrTutor.request.RequestListResponse
 import com.elewamathtutoring.Models.Add_Card.Model_addcards
@@ -87,9 +88,14 @@ interface RestApiInterface {
 
 */
 
-    @DELETE("delete_account")
-    fun Delete_account(@Field("usertype") usertype: String): Observable<Commontoall>
 
+    @HTTP(method = "DELETE", path = "delete_account", hasBody = false)
+    fun Delete_account(
+    ): Observable<Commontoall>
+
+   /* @DELETE("delete_account")
+    fun Delete_account(@Field("usertype") usertype: String): Observable<Commontoall>
+*/
     @FormUrlEncoded
     @PUT("promocode_exist")
     fun promocode_exist(@Field("code") code: String): Observable<Commontoall>
@@ -403,13 +409,13 @@ interface RestApiInterface {
     ): Observable<EditProfileResponse>
 
     @Multipart
-    @POST("EditTeacherBasicProfile")
+    @PUT("EditTeacherBasicProfile")
     fun EditTeacherBasicProfile(
         @Part image: MultipartBody.Part?,
         @Part("name") name: RequestBody,
         @Part("about") about: RequestBody,
         @Part("TeachingHistory") TeachingHistory: RequestBody
-    ): Observable<Model_login>
+    ): Observable<EditTeacherProfileResponse>
 
     @Multipart
     @POST("TeacherSignup")

@@ -1,7 +1,6 @@
-package com.elewamathtutoring.Activity.TeacherOrTutor
+package com.elewamathtutoring.Activity.TeacherOrTutor.editProfile
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -22,9 +21,7 @@ import com.yanzhenjie.album.Album
 import com.yanzhenjie.album.AlbumFile
 import com.yanzhenjie.album.api.widget.Widget
 import kotlinx.android.synthetic.main.activity_about_you.*
-import kotlinx.android.synthetic.main.activity_about_you.text_teacher_name
-import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.android.synthetic.main.fragment_profile_tab.*
+
 import java.util.*
 import javax.inject.Inject
 
@@ -32,6 +29,7 @@ import javax.inject.Inject
 class AboutYouActivity : AppCompatActivity(), View.OnClickListener  , Observer<RestObservable> {
     private var mAlbumFiles: ArrayList<AlbumFile> = ArrayList()
     var firstimage=""
+    var oldImage = ""
     var profilelist=ArrayList<Body>()
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     @Inject
@@ -41,12 +39,19 @@ class AboutYouActivity : AppCompatActivity(), View.OnClickListener  , Observer<R
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about_you)
         App.getinstance().getmydicomponent().inject(this)
-
         ivBack.setOnClickListener(this)
         btnNext.setOnClickListener(this)
         rlPick.setOnClickListener(this)
         scrollEditText(edaboutyou)
         scrollEditText(edTeachingHistory)
+
+        text_teacher_name.setText(intent.getStringExtra("name").toString())
+        edaboutyou.setText(intent.getStringExtra("about").toString())
+        edTeachingHistory.setText(intent.getStringExtra("teachingHistory").toString())
+        oldImage = intent.getStringExtra("image").toString()
+        Glide.with(this).load(intent.getStringExtra("image").toString())
+            .placeholder(R.drawable.placeholder_image).into(ivProfileDesc)
+
 
       /*  if(intent.getStringExtra("key")!!.equals("signup"))
         {
@@ -81,6 +86,7 @@ class AboutYouActivity : AppCompatActivity(), View.OnClickListener  , Observer<R
                 selectImage()
             }
             R.id.btnNext -> {
+                api()
                /* if (intent.getStringExtra("key").equals("signup")) {
                     if (validator.Teacheraboutus(this, firstimage, edaboutyou.text.toString(),
                             edTeachingHistory.text.toString(), text_teacher_name.text.toString(), "add")) {
@@ -114,12 +120,16 @@ class AboutYouActivity : AppCompatActivity(), View.OnClickListener  , Observer<R
                         baseViewModel.getCommonResponse().observe(this, this)
                     }
                 }*/
-                finish()
+
             }
             R.id.ivBack -> {
                 finish()
             }
         }
+    }
+    private fun api() {
+        baseViewModel.EditTeacherBasicProfile(this, firstimage, text_teacher_name.text.toString(), edaboutyou.text.toString(),edTeachingHistory.text.toString(), true)
+        baseViewModel.getCommonResponse().observe(this, this)
     }
     private fun selectImage() {
         Album.image(this).singleChoice().camera(true).columnCount(4).widget(
@@ -140,13 +150,13 @@ class AboutYouActivity : AppCompatActivity(), View.OnClickListener  , Observer<R
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
-                if (liveData.data is Model_login) {
+                if (liveData.data is EditTeacherProfileResponse) {
                     Helper.showSuccessToast(this, liveData.data.message)
                     finish()
                 }
             }
             Status.ERROR -> {
-                if (liveData.error is Model_login)
+                if (liveData.error is EditTeacherProfileResponse)
                     Helper.showSuccessToast(this, liveData.error.message)
             }
             else -> {

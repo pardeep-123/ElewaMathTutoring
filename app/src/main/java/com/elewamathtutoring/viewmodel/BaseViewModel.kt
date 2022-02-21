@@ -236,7 +236,7 @@ class BaseViewModel : ViewModel() {
     @SuppressLint("CheckResult")
     fun Delete_account(activity: Activity, user_type: String, isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
-            apiService.Delete_account(user_type)
+            apiService.Delete_account()
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -840,8 +840,8 @@ class BaseViewModel : ViewModel() {
     fun signUpTeacherApi(
         activity: Activity,
         imageUrl: String,
-        email: String,
         name: String,
+        email: String,
         password: String,
         about: String,
         TeachingHistory: String,
@@ -864,8 +864,9 @@ class BaseViewModel : ViewModel() {
         }
         val device_type_value: RequestBody =
             RequestBody.create("text/plain".toMediaTypeOrNull(), Constants.DEVICE_TYPE_VALUE)
-        val emaill: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), email)
+
         val namee: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), name)
+        val emaill: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), email)
         val passwordd: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), password)
         val aboutt: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), about)
         val teachingHistoryy: RequestBody =
@@ -897,7 +898,6 @@ class BaseViewModel : ViewModel() {
                         signUpTeacherApi(
                             activity,
                             imageUrl,
-
                             name,
                             email,
                             password,
@@ -1535,10 +1535,7 @@ class BaseViewModel : ViewModel() {
     }
 
     @SuppressLint("CheckResult")
-    fun EditTeacherBasicProfile(
-        activity: Activity, imageUrl: String, history: String, firstName: String, about: String,
-        isDialogShow: Boolean
-    ) {
+    fun EditTeacherBasicProfile(activity: Activity, imageUrl: String, name: String, about: String, history: String, isDialogShow: Boolean) {
 
         var newFile: File? = null
         var imageFileBody: MultipartBody.Part? = null
@@ -1556,11 +1553,9 @@ class BaseViewModel : ViewModel() {
             val requestBody: RequestBody = newFile.asRequestBody(mediaType)
             imageFileBody = MultipartBody.Part.createFormData("image", newFile.name, requestBody)
         }
-        val firstName_value: RequestBody =
-            RequestBody.create("text/plain".toMediaTypeOrNull(), firstName)
+        val firstName_value: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), name)
         val about_value: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), about)
-        val history_value: RequestBody =
-            RequestBody.create("text/plain".toMediaTypeOrNull(), history)
+        val history_value: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), history)
 
 
         if (Helper.isNetworkConnected(activity)) {
@@ -1587,7 +1582,7 @@ class BaseViewModel : ViewModel() {
                         EditTeacherBasicProfile(
                             activity,
                             imageUrl,
-                            firstName,
+                            name,
                             about,
                             history,
                             isDialogShow

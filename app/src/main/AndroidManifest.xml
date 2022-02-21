@@ -101,7 +101,7 @@
             android:name=".Activity.TeacherOrTutor.TeachingInfo.TeachingInfoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.TeacherOrTutor.AboutYouActivity"
+            android:name=".Activity.TeacherOrTutor.editProfile.AboutYouActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.NotificationsActivity"

@@ -10,9 +10,9 @@
     <FrameLayout
         android:id="@+id/container2"
         android:layout_width="match_parent"
-        android:layout_marginBottom="5dp"
         android:layout_height="match_parent"
-        android:layout_above="@+id/tabs" />
+        android:layout_above="@+id/tabs"
+        android:layout_marginBottom="5dp" />
 
     <View
         android:id="@+id/view_border"

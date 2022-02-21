@@ -144,10 +144,9 @@ class SettingActivity : AppCompatActivity(), Observer<RestObservable> {
         logoutDialog.setCancelable(true)
         logoutDialog.setCanceledOnTouchOutside(true)
         tvYes.setOnClickListener {
-           /* baseViewModel.Delete_account(this, getPrefrence(Constants.user_type,""),true)
+            baseViewModel.Delete_account(this, getPrefrence(Constants.user_type,""),true)
             baseViewModel.getCommonResponse().observe(this, this)
-*/
-            logoutDialog.dismiss()
+           // logoutDialog.dismiss()
         }
         tvNo.setOnClickListener {
             logoutDialog.dismiss()
