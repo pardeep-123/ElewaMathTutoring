@@ -152,56 +152,63 @@
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-                <RelativeLayout
-                    android:id="@+id/rlResources"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
-
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/rv_listView"
-                    android:layout_marginStart="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:layout_marginEnd="@dimen/_20sdp"
-                    android:background="@drawable/bg_btn">
+android:layout_marginTop="@dimen/_250sdp"
+                    android:orientation="vertical">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:drawableLeft="@drawable/resources"
-                        android:drawablePadding="@dimen/_10sdp"
-                        android:fontFamily="@font/medium"
-                        android:text="Resources"
-                        android:textColor="@color/white"
-                        android:textSize="16dp"
-                        app:fontFamily="@font/bold" />
+                    <RelativeLayout
+                        android:id="@+id/rlResources"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:background="@drawable/bg_btn">
 
-                </RelativeLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:drawableLeft="@drawable/resources"
+                            android:drawablePadding="@dimen/_10sdp"
+                            android:fontFamily="@font/medium"
+                            android:text="Resources"
+                            android:textColor="@color/white"
+                            android:textSize="16dp"
+                            app:fontFamily="@font/bold" />
 
-                <RelativeLayout
-                    android:id="@+id/rlMathChatRoom"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:layout_below="@id/rlResources"
+                    </RelativeLayout>
 
-                    android:layout_marginStart="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_20sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:background="@drawable/bg_btn">
+                    <RelativeLayout
+                        android:id="@+id/rlMathChatRoom"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:background="@drawable/bg_btn">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:drawableLeft="@drawable/mathchatroom"
-                        android:drawablePadding="@dimen/_10sdp"
-                        android:fontFamily="@font/medium"
-                        android:text=" Math Chat Room"
-                        android:textColor="@color/white"
-                        android:textSize="16dp"
-                        app:fontFamily="@font/bold" />
-                </RelativeLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:drawableLeft="@drawable/mathchatroom"
+                            android:drawablePadding="@dimen/_10sdp"
+                            android:fontFamily="@font/medium"
+                            android:text=" Math Chat Room"
+                            android:textColor="@color/white"
+                            android:textSize="16dp"
+                            app:fontFamily="@font/bold" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/calenderView_rl"
                 android:layout_width="match_parent"
@@ -280,9 +287,11 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/_30sdp"
                 android:text="No list found!"
+                android:layout_centerVertical="true"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"
-                android:visibility="gone">
+                android:visibility="gone"
+            >
 
             </TextView>
         </RelativeLayout>

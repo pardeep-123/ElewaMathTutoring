@@ -69,7 +69,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
         onClicks()
         Constants.scrollEditText(edSpeacialities)
         Constants.scrollEditText(edCancelationPolicy)
-        // handel_add_Edit()
+        handel_add_Edit()
         spinnerChoose()
         // rv_teachingLevel.adapter = TeachingLevelAdapter(this, list, teachinglevel, this)
        educationCertificateAdapter = EducationCertificateAdapter(imageList, this)
@@ -105,12 +105,14 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             btnNext.text = "SAVE"
         }
     }
+
     private fun onClicks() {
         ivBack.setOnClickListener(this)
         btnNext.setOnClickListener(this)
         edLocation.setOnClickListener(this)
         api()
     }
+
     private fun spinnerChoose() {
         val spinner1: Spinner = findViewById(R.id.spinnerChoose)
         var spinnerlist: ArrayList<String> = ArrayList()
@@ -121,11 +123,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
         spinnerlist.add("Bachlor's degree")
         spinnerlist.add("Master's degree")
         spinnerlist.add("PHD")
-        val list: ArrayAdapter<String> = ArrayAdapter<String>(
-            this,
-            R.layout.spinner_small,
-            spinnerlist
-        )
+        val list: ArrayAdapter<String> = ArrayAdapter<String>(this, R.layout.spinner_small, spinnerlist)
         list.setDropDownViewResource(R.layout.spinner_small)
         spinner1.setAdapter(list)
         try {
@@ -216,7 +214,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             }
         }
     }
-    fun api() {
+    fun api() {1
         baseViewModel.teacher_level(this, true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
@@ -244,7 +242,6 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
         }
     }
 
-
     @SuppressLint("NotifyDataSetChanged")
     private fun selectImage() {
         Album.image(this).multipleChoice().camera(true).columnCount(4).widget(
@@ -259,6 +256,4 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             }.onCancel {
             }.start()
     }
-
-
 }

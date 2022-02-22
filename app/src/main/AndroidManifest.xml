@@ -83,7 +83,7 @@
             android:name=".Activity.ParentOrStudent.UpcomingDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.TeacherOrTutor.EditYourProfileActivity"
+            android:name=".Activity.TeacherOrTutor.edit.EditYourProfileActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.TeacherOrTutor.MainTeacherActivity"
@@ -122,7 +122,7 @@
             android:name=".Activity.MyBankAccountsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.AddBankAccountActivity"
+            android:name=".Activity.ParentOrStudent.addBAnk.AddBankAccountActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.WithdrawalActivity"

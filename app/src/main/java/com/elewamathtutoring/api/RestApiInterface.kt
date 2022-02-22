@@ -3,6 +3,7 @@ package com.elewamathtutoring.api
 import com.elewamathtutoring.Activity.Auth.login.LoginResponse
 import com.elewamathtutoring.Activity.Auth.signup.SignUpResponse
 import com.elewamathtutoring.Activity.Auth.signup.TeacherSignUpResponse
+import com.elewamathtutoring.Activity.ParentOrStudent.addBAnk.AddBankResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.editProfile.EditProfileResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.privacy.PrivacyResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResourcesResponse
@@ -10,9 +11,10 @@ import com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword.C
 import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.TeachinInfoResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.TeachingLevelResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.availability.AvailabilityResponse
+import com.elewamathtutoring.Activity.TeacherOrTutor.availability.EditAvailabilityResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.availability.TimeSlotsResponse
+import com.elewamathtutoring.Activity.TeacherOrTutor.edit.EditResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.editProfile.EditTeacherProfileResponse
-import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfileResponse
 import com.elewamathtutoring.Fragment.TeacherOrTutor.request.RequestListResponse
 import com.elewamathtutoring.Models.Add_Card.Model_addcards
 import com.elewamathtutoring.Models.BankAccountsModel.Model_BankAccount
@@ -25,8 +27,6 @@ import com.elewamathtutoring.Models.Notifications.Model_Notifications
 import com.elewamathtutoring.Models.Search.Model_search
 import com.elewamathtutoring.Models.Session_detail.Model_session_detail
 import com.elewamathtutoring.Models.Teacher_details.Model_teacherdetails
-import com.elewamathtutoring.Models.Teacher_level.Model_teacher_level
-import com.elewamathtutoring.Models.Time_slots.Model_timeslots
 import com.elewamathtutoring.Models.Wallet.Model_wallet_amount_history
 import com.pawskeeper.Modecommon.Commontoall
 import com.pawskeeper.Modecommon.Commontoall2
@@ -161,15 +161,14 @@ interface RestApiInterface {
     ): Observable<Commontoall2>
 
     @FormUrlEncoded
-    @POST("add_bank")
+    @POST("bank")
     fun add_bank(
         @Field("bankbranch") bankbranch: String,
         @Field("accountNo") accountNo: String,
         @Field("accountHolder") accountHolder: String,
         @Field("ifscCode") ifscCode: String,
-
         @Field("bankType") bankType: String?
-    ): Observable<Commontoall>
+    ): Observable<AddBankResponse>
 
 
     @FormUrlEncoded
@@ -186,8 +185,11 @@ interface RestApiInterface {
         @Field("teacher_id") teacher_id: String
     ): Observable<Model_teacherdetails>
 
+
+
+    // @Field("bankId") bankId: String,     @Field("bankType") bankType: String?
     @FormUrlEncoded
-    @POST("Edit_bank")
+    @POST("bank")
     fun edit_bank(
         @Field("bankId") bankId: String,
         @Field("bankbranch") bankbranch: String,
@@ -195,7 +197,7 @@ interface RestApiInterface {
         @Field("accountHolder") accountHolder: String,
         @Field("ifscCode") ifscCode: String,
         @Field("bankType") bankType: String?
-    ): Observable<Commontoall>
+    ): Observable<AddBankResponse>
 
     @FormUrlEncoded
     @POST("add_card")
@@ -220,6 +222,21 @@ interface RestApiInterface {
         @Field("cvv") cvv: String?,
         @Field("card_id") card_id: String?
     ): Observable<Model_addcards>
+
+
+
+    @FormUrlEncoded
+    @PUT("EditTeacherAvailablity")
+    fun EditTeacherAvailablity(
+        @Field("availability") availability: String,
+        @Field("timeslot") timeslot: String,
+    ): Observable<EditAvailabilityResponse>
+
+
+
+
+
+
 
     @FormUrlEncoded
     @POST("EditTeacherProfileProfile")
@@ -287,14 +304,6 @@ interface RestApiInterface {
         @Field("timeSlot") timeSlot: String
     ): Observable<AvailabilityResponse>
 
-
-
-
-
-
-
-
-
     @FormUrlEncoded
     @POST("Delete_Bank")
     fun deleteBank(@Field("bankId") bankId: String): Observable<Commontoall>
@@ -326,11 +335,10 @@ interface RestApiInterface {
     fun get_profile(@Field("userType") userType: String): Observable<ProfileResponse>*/
 
     @GET("get_profile")
-    fun get_profile(): Observable<ProfileResponse>
+    fun get_profile(): Observable<EditResponse>
 
      @GET("TeacherRequestList")
     fun TeacherRequestList(): Observable<RequestListResponse>
-
 
 
   @GET("resources")

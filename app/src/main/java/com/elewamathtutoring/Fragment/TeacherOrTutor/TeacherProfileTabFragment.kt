@@ -12,10 +12,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
+import com.elewamathtutoring.Activity.TeacherOrTutor.edit.EditResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.editProfile.AboutYouActivity
-import com.elewamathtutoring.Activity.TeacherOrTutor.EditYourProfileActivity
-import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfileResponse
-import com.elewamathtutoring.Models.Login.Body
+import com.elewamathtutoring.Activity.TeacherOrTutor.edit.EditYourProfileActivity
 import com.elewamathtutoring.Models.Teacher_level.Model_teacher_level
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
@@ -27,10 +26,11 @@ import com.elewamathtutoring.viewmodel.BaseViewModel
 import kotlinx.android.synthetic.main.fragment_profile_tab.*
 import kotlinx.android.synthetic.main.fragment_profile_tab.view.*
 
+
 class TeacherProfileTabFragment : Fragment(), View.OnClickListener , Observer<RestObservable> {
     lateinit var v: View
     lateinit var contex: Context
-    var profilelist=ArrayList<Body>()
+    var profilelist=ArrayList<EditResponse.Body>()
     var data=""
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
 
@@ -85,8 +85,8 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener , Observer<Re
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
-                if (liveData.data is ProfileResponse) {
-                 //   profilelist.addAll(listOf(liveData.data.body))
+                if (liveData.data is EditResponse) {
+                 profilelist.addAll(listOf(liveData.data.body))
                     text_teacher_name.text=liveData.data.body.name
                     text_parent_spicilty.text=liveData.data.body.specialties
                     text_parent_spicilty.text=isCertifiedOrtutor(liveData.data.body.isCertifiedOrtutor)
@@ -132,7 +132,7 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener , Observer<Re
                 }
             }
             Status.ERROR -> {
-                if (liveData.error is ProfileResponse)
+                if (liveData.error is EditResponse)
                 {
                     Helper.showSuccessToast(requireContext(), liveData.error.message)
                 }

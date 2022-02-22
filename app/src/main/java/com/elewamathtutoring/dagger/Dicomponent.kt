@@ -6,6 +6,7 @@ import com.elewamathtutoring.Activity.Auth.ForgotPassword
 import com.elewamathtutoring.Activity.Auth.SignupTeacherActivity
 import com.elewamathtutoring.Activity.Auth.login.LoginScreen
 import com.elewamathtutoring.Activity.Auth.signup.SignUp
+import com.elewamathtutoring.Activity.ParentOrStudent.addBAnk.AddBankAccountActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResoucesActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword.ChangePassword
 import com.elewamathtutoring.Activity.TeacherOrTutor.editProfile.AboutYouActivity

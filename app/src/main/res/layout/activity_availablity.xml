@@ -131,12 +131,34 @@
                     android:thumb="@drawable/notification_thumb_selector2"
                     app:track="@drawable/notification_track_selector2" />
             </RelativeLayout>
-
+            <RelativeLayout
+                android:id="@+id/rlChoose"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_5sdp">
+                <Spinner
+                    android:id="@+id/spinnerFreeSlot"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@+id/ivChoose"
+                    android:background="@android:color/transparent" />
+                <ImageView
+                    android:id="@+id/ivChoose"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:src="@drawable/down_arrow" />
+            </RelativeLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvFreeSlot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
+                android:visibility="gone"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 

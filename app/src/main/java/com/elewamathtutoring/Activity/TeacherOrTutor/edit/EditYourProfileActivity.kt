@@ -1,4 +1,4 @@
-package com.elewamathtutoring.Activity.TeacherOrTutor
+package com.elewamathtutoring.Activity.TeacherOrTutor.edit
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_edit_your_profile.*
 
 class EditYourProfileActivity : AppCompatActivity(), View.OnClickListener,
     Observer<RestObservable> {
-    var profilelist=ArrayList<Body>()
+    var profilelist=ArrayList<EditResponse.Body>()
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,21 +35,21 @@ class EditYourProfileActivity : AppCompatActivity(), View.OnClickListener,
         when (v!!.id) {
             R.id.llAboutYou -> {
                 val intentt = Intent(this, AboutYouActivity::class.java)
-                intentt.putExtra("key", "editprofile")
+               intentt.putExtra("key", "editprofile")
                 intentt.putExtra("list_model", profilelist)
                 startActivity(intentt)
             }
             R.id.llTeachingInfoRates -> {
                 val intentt = Intent(this, TeachingInfoActivity::class.java)
-                intentt.putExtra("key", "editprofile")
+                intentt.putExtra("key", "editrofile")
                 intentt.putExtra("list_model", profilelist)
                 startActivity(intentt)
             }
             R.id.llAvailability -> {
                 val intentt = Intent(this, AvailablityActivity::class.java)
-                intentt.putExtra("key", "available")
-                /*intentt.putExtra("list_model", intent.getSerializableExtra("list_model"))
-                intentt.putExtra("key", profilelist)*/
+                intentt.putExtra("key", "editrofile")
+                intentt.putExtra("list_model", intent.getSerializableExtra("list_model"))
+
                 startActivity(intentt)
             }
             R.id.ivBack -> {
@@ -60,13 +60,13 @@ class EditYourProfileActivity : AppCompatActivity(), View.OnClickListener,
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
-                if (liveData.data is Model_login) {
+                if (liveData.data is EditResponse) {
                     profilelist.clear()
                     profilelist.addAll(listOf(liveData.data.body))
                 }
             }
             Status.ERROR -> {
-                if (liveData.error is Model_login)
+                if (liveData.error is EditResponse)
                 {
                     Helper.showSuccessToast(this, liveData.error.message)
                 }

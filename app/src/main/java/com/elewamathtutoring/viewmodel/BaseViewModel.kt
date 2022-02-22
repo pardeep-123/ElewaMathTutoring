@@ -609,8 +609,7 @@ class BaseViewModel : ViewModel() {
         issave: String,
         type: String,
         idd: String,
-        isDialogShow: Boolean
-    ) {
+        isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
 
             //edit
@@ -647,6 +646,59 @@ class BaseViewModel : ViewModel() {
                 })
         }
     }
+
+@SuppressLint("CheckResult")
+    fun EditTeacherAvailablity(
+        activity: Activity,
+        availability: String,
+        timeslot: String,
+
+        isDialogShow: Boolean) {
+        if (Helper.isNetworkConnected(activity)) {
+
+            //edit
+            apiService.EditTeacherAvailablity(availability, timeslot)
+
+
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    { mResponse.value = RestObservable.error(activity, it) }
+                )
+        } else {
+            Helper.showNoInternetAlert(activity, activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        EditTeacherAvailablity(
+                            activity,
+                            availability, timeslot,
+                            isDialogShow
+                        )
+                    }
+                })
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @SuppressLint("CheckResult")
     fun bankAccounts(activity: Activity, isDialogShow: Boolean) {

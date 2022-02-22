@@ -7,7 +7,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.*
 import androidx.recyclerview.widget.RecyclerView
-import com.elewamathtutoring.Activity.AddBankAccountActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.addBAnk.AddBankAccountActivity
 import com.elewamathtutoring.Activity.MyBankAccountsActivity
 import com.elewamathtutoring.Models.BankAccountsModel.Body
 import com.elewamathtutoring.R

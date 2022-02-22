@@ -1,4 +1,4 @@
-package com.elewamathtutoring.Activity
+package com.elewamathtutoring.Activity.ParentOrStudent.addBAnk
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
@@ -91,16 +91,17 @@ class AddBankAccountActivity : AppCompatActivity(), View.OnClickListener,
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
-                if (liveData.data is Commontoall) {
+                if (liveData.data is AddBankResponse) {
                     Helper.showSuccessToast(this, liveData.data.message.toString())
                     finish()
                 }
             }
             Status.ERROR -> {
-                if (liveData.error is Commontoall)
+                if (liveData.error is AddBankResponse)
                     Helper.showSuccessToast(this, liveData.error.toString())
             }
             else -> {
+
             }
         }
     }

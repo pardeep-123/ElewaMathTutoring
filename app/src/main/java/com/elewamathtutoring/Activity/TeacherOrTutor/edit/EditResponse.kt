@@ -1,24 +1,23 @@
-package com.elewamathtutoring.Activity.TeacherOrTutor.availability
+package com.elewamathtutoring.Activity.TeacherOrTutor.edit
 
-data class AvailabilityResponse(
+import java.io.Serializable
+
+data class EditResponse(
     val status: Boolean, // true
     val code: Int, // 200
-    val message: String, // updated data successfully.
+    val message: String, // Profile get successfully.
     val body: Body
-) {
+):Serializable {
     data class Body(
         val id: Int, // 316
         val name: String, // rg
         val userType: Int, // 2
         val image: String, // http://202.164.42.227:7552/uploads/users/1645521975AndroidTest (1).pdf
-        val address: String, // dds
         val email: String, // nihal22@gmail.com
         val about: String, // fdg
         val teachingHistory: String, // fddfggff
         val isCertifiedOrtutor: Int, // 0
         val isBuyPlan: Int, // 0
-        val planId: Int, // 0
-        val planExpiryDate: String,
         val teachingLevel: String, // 2,5
         val specialties: String, // bjfbj,fbb
         val InPersonRate: Int, // 0
@@ -34,15 +33,18 @@ data class AvailabilityResponse(
         val SocialType: Int, // 0
         val SocialId: String,
         val status: Int, // 1
-        val hourlyPrice: Int, // 3
-        val majors: String, // er
-        val educationLevel: String, // ree
-        val isapproval: Int, // 2
-        val free_slots: String,
-        val isTechingInfo: Int, // 1
-        val IsAvailable: Int, // 1
-        val time_slots: List<TimeSlot>
-    ) {
+        val teaching_level: List<TeachingLevel>,
+        val time_slots: List<TimeSlot>,
+        val certificate_images: List<CertificateImage>
+    ):Serializable {
+        data class TeachingLevel(
+            val id: Int, // 2
+            val level: String, // Middle School Level
+            val status: Int, // 1
+            val createdAt: String, // 2021-01-22T05:01:00.000Z
+            val updatedAt: String // 2021-03-30T13:14:08.000Z
+        ):Serializable
+
         data class TimeSlot(
             val id: Int, // 5
             val startTime: String, // 4:00 AM
@@ -50,6 +52,14 @@ data class AvailabilityResponse(
             val status: Int, // 1
             val createdAt: Int, // 1611491609
             val updatedAt: Int // 0
-        )
+        ):Serializable
+
+        data class CertificateImage(
+            val id: Int, // 56
+            val user_id: Int, // 316
+            val images: String, // 1645525299button (1).png
+            val createdAt: String, // 2022-02-22T10:21:38.000Z
+            val updatedAt: String // 2022-02-22T10:21:38.000Z
+        ):Serializable
     }
 }
