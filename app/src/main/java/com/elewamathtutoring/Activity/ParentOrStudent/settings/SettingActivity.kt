@@ -20,7 +20,7 @@ import com.elewamathtutoring.Activity.ParentOrStudent.privacy.PrivacyPolicy
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword.ChangePassword
 import com.elewamathtutoring.Activity.PaymentInfoActivity
 import com.elewamathtutoring.Activity.SendFeedback
-import com.elewamathtutoring.Activity.WithdrawalActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.wallet.WithdrawalActivity
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.SharedPrefUtil
 import com.elewamathtutoring.Util.constant.Constants

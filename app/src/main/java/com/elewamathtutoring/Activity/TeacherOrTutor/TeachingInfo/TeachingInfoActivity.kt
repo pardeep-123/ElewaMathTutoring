@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.elewamathtutoring.Activity.TeacherOrTutor.availability.AvailablityActivity
+import com.elewamathtutoring.Activity.TeacherOrTutor.edit.EditResponse
 import com.elewamathtutoring.Adapter.ClickCallBack
 import com.elewamathtutoring.Adapter.TeacherOrTutor.EducationCertificateAdapter
 import com.elewamathtutoring.Adapter.TeacherOrTutor.TeachingLevelAdapter
@@ -34,6 +35,7 @@ import com.yanzhenjie.album.AlbumFile
 import com.yanzhenjie.album.api.widget.Widget
 import kotlinx.android.synthetic.main.activity_teaching_info.*
 import kotlinx.android.synthetic.main.item_education_certificaate.*
+import kotlinx.android.synthetic.main.spinner_small.*
 
 import java.util.*
 import javax.inject.Inject
@@ -44,7 +46,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
     Teachinglevel_interface, ClickCallBack {
     @Inject
     lateinit var validator: Validator
-    var profilelist = java.util.ArrayList<com.elewamathtutoring.Models.Login.Body>()
+    var profilelist = java.util.ArrayList<EditResponse.Body>()
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     val context: Context = this
     var firstimage = ""
@@ -76,17 +78,15 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
                         rvUploadImage.adapter = educationCertificateAdapter
 
     }
-
-
     private fun handel_add_Edit() {
         if (intent.getStringExtra("key").equals("signup")) {
         } else {
             profilelist =
-                (intent.getSerializableExtra("list_model") as java.util.ArrayList<com.elewamathtutoring.Models.Login.Body>?)!!
+                (intent.getSerializableExtra("list_model") as java.util.ArrayList<EditResponse.Body>?)!!
             edSpeacialities.setText(profilelist.get(0).specialties.toString())
             certifiedChoose = profilelist.get(0).isCertifiedOrtutor
-            //  edInPersonRate.setText(profilelist.get(0).InPersonRate.toString())
-            //  edVirtualRate.setText(profilelist.get(0).virtualRate.toString())
+            etMajors.setText(profilelist.get(0).InPersonRate.toString())
+            edPrice.setText(profilelist.get(0).virtualRate.toString())
             edCancelationPolicy.setText(profilelist.get(0).cancellationPolicy.toString())
             latitude = profilelist.get(0).latitude.toString()
             longitude = profilelist.get(0).longitude.toString()
@@ -100,19 +100,17 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
                 val str = num.split("").toTypedArray()
                 teachinglevel = str.toList() as ArrayList<String>
             }
-            //  teachinglevel = profilelist.get(0).teachingLevel.toString()
+           // teachinglevel = profilelist.get(0).teachingLevel.toString()
             getLocation(latitude, longitude)
             btnNext.text = "SAVE"
         }
     }
-
     private fun onClicks() {
         ivBack.setOnClickListener(this)
         btnNext.setOnClickListener(this)
         edLocation.setOnClickListener(this)
         api()
     }
-
     private fun spinnerChoose() {
         val spinner1: Spinner = findViewById(R.id.spinnerChoose)
         var spinnerlist: ArrayList<String> = ArrayList()
@@ -142,7 +140,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
                 CertifiedAs = jj.toString()
             }
             override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                // text1.text = ""
+              //  text1.text = ""
             }
         })
     }
@@ -151,8 +149,32 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             R.id.ivBack -> {
                 finish()
             }
-            R.id.btnNext -> {
+          /*  R.id.btnNext -> {
                 apiTeachingInfo()
+            }*/
+            R.id.btnNext -> {
+                if (intent.getStringExtra("key").equals("signup")) {
+                    apiTeachingInfo()
+                } else {
+                        baseViewModel.EditTeacherProfileProfile(
+                            this,
+                            teachinglevel.toString().replace("[", "").replace("]", "").replace(
+                                " ",
+                                ""
+                            ),
+                            CertifiedAs ,
+                            etMajors.text.toString(),
+                            edSpeacialities.text.toString(),
+                            edCancelationPolicy.text.toString(),
+                            firstimage,
+                            address,
+                            latitude,
+                            longitude,
+                            true
+                        )
+                        baseViewModel.getCommonResponse().observe(this, this)
+                    }
+
             }
             R.id.edLocation -> {
                 if (Helper.checkLocPermission(this@TeachingInfoActivity)) {
@@ -162,7 +184,6 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             }
         }
     }
-
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
@@ -174,24 +195,20 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
                  /*   educationCertificateAdapter = EducationCertificateAdapter(imageList, this)
                     rvUploadImage.adapter = educationCertificateAdapter*/
 
-                } else if (liveData.data is Commontoall) {
+                } else if (liveData.data is EditTeachingInfoResponse) {
                     Helper.showSuccessToast(this, liveData.data.message)
                     finish()
                 }
-
-
                 if (liveData.data is TeachinInfoResponse) {
-
                     startActivity(Intent(this, AvailablityActivity::class.java))
                 }
             }
-
             Status.ERROR -> {
                 if (liveData.error is TeachingLevelResponse)
                     Helper.showSuccessToast(this, liveData.error.message)
             }
             else -> {
-                if (liveData.error is TeachingLevelResponse)
+                if (liveData.error is EditTeachingInfoResponse)
                     Helper.showSuccessToast(this, liveData.error.message)
             }
         }
@@ -214,7 +231,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             }
         }
     }
-    fun api() {1
+    fun api() {
         baseViewModel.teacher_level(this, true)
         baseViewModel.getCommonResponse().observe(this, this)
     }

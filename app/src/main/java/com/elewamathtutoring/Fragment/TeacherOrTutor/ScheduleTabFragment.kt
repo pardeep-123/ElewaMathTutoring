@@ -59,7 +59,8 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
             startActivity(Intent(context, ResoucesActivity::class.java))
         }
         v.rootView.rlMathChatRoom.setOnClickListener {
-            startActivity(Intent(context, MathChatActivity::class.java))
+            startActivity(Intent(context, MathChatActivity::class.java)
+                .putExtra("tutor","mathChat"))
         }
         return v
     }
@@ -105,7 +106,8 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
             startActivity(Intent(context, NotificationsActivity::class.java))
         }*/
         v.rootView.ivSetting.setOnClickListener {
-            startActivity(Intent(context, SettingActivity::class.java))
+            startActivity(Intent(context, SettingActivity::class.java)
+                .putExtra("setting","managePayment"))
         }
         v.rootView.schedule_listView.setOnClickListener {
             calenderView_rl.visibility = View.GONE

@@ -9,12 +9,12 @@ import android.view.*
 import androidx.recyclerview.widget.RecyclerView
 import com.elewamathtutoring.Activity.ParentOrStudent.addBAnk.AddBankAccountActivity
 import com.elewamathtutoring.Activity.MyBankAccountsActivity
-import com.elewamathtutoring.Models.BankAccountsModel.Body
+import com.elewamathtutoring.Activity.ParentOrStudent.wallet.BankListingResponse
 import com.elewamathtutoring.R
 import kotlinx.android.synthetic.main.dialog_delete.*
 import kotlinx.android.synthetic.main.item_banklist.view.*
 
-class MyBankAccountsAdapter(c: Context, bankList: ArrayList<Body>, activity: MyBankAccountsActivity) :
+class MyBankAccountsAdapter(c: Context, bankList: ArrayList<BankListingResponse.Body>, activity: MyBankAccountsActivity) :
     RecyclerView.Adapter<MyBankAccountsAdapter.ViewHolder>() {
     var ctn = c
     var list = bankList
@@ -30,8 +30,8 @@ class MyBankAccountsAdapter(c: Context, bankList: ArrayList<Body>, activity: MyB
     }
 
     override fun getItemCount(): Int {
-        //return list.size
-        return 3
+      return list.size
+
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

@@ -8,6 +8,9 @@ import com.elewamathtutoring.Activity.ParentOrStudent.editProfile.EditProfileRes
 import com.elewamathtutoring.Activity.ParentOrStudent.privacy.PrivacyResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResourcesResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword.ChangePasswordResponse
+import com.elewamathtutoring.Activity.ParentOrStudent.wallet.BankListingResponse
+import com.elewamathtutoring.Activity.ParentOrStudent.wallet.response.WalletGetResponse
+import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.EditTeachingInfoResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.TeachinInfoResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.TeachingLevelResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.availability.AvailabilityResponse
@@ -60,9 +63,10 @@ interface RestApiInterface {
         ): Observable<LoginResponse>
 
     @FormUrlEncoded
+// @Field("UserType") userType: String,
     @POST("withdrawlAmount")
     fun withdrawlAmount(
-        @Field("UserType") userType: String,
+
         @Field("amount") amount: String,
         @Field("bankId") bankId: String
     ): Observable<Commontoall>
@@ -232,27 +236,21 @@ interface RestApiInterface {
         @Field("timeslot") timeslot: String,
     ): Observable<EditAvailabilityResponse>
 
-
-
-
-
-
-
     @FormUrlEncoded
-    @POST("EditTeacherProfileProfile")
+    @PUT("EditTeacheringinfo")
     fun EditTeacherProfileProfile(
         @Field("teachingLevel") teachingLevel: String,
+        @Field("educationLevel") educationLevel: String,
+        @Field("majors") majors: String,
         @Field("specialties") specialties: String,
-        @Field("inPersonRate") inPersonRate: String,
         @Field("cancelPolicy") cancelPolicy: String,
-        @Field("VirtualRate") VirtualRate: String,
-        @Field("CertifiedAs") CertifiedAs: String,
+        @Field("certificate_images") certificate_images: String,
         @Field("address") address: String,
         @Field("latitude") latitude: String,
         @Field("longitude") longitude: String,
-        @Field("availability") availability: String,
-        @Field("timeslot") timeSlot: String,
-    ): Observable<Commontoall>
+    ): Observable<EditTeachingInfoResponse>
+
+
 
     @FormUrlEncoded
     @PUT("deleteCard")
@@ -304,9 +302,14 @@ interface RestApiInterface {
         @Field("timeSlot") timeSlot: String
     ): Observable<AvailabilityResponse>
 
+  /*  @FormUrlEncoded
+    @POST("bank")
+    fun deleteBank(@Field("bankId") bankId: String): Observable<Commontoall>*/
+
     @FormUrlEncoded
-    @POST("Delete_Bank")
+    @HTTP(method = "DELETE", path = "bank", hasBody = true)
     fun deleteBank(@Field("bankId") bankId: String): Observable<Commontoall>
+
 
     @FormUrlEncoded
     @POST("SetDefault_Bank")
@@ -374,13 +377,13 @@ interface RestApiInterface {
         @Field("lat") lat: String,
         @Field("lng") lng: String
     ): Observable<Model_search>
+//@Field("UserType") UserType: String
 
-    @FormUrlEncoded
-    @PUT("Get_Wallet")
-    fun Get_Wallet(@Field("UserType") UserType: String): Observable<Model_wallet_amount_history>
+    @GET("Get_Wallet")
+    fun Get_Wallet(): Observable<WalletGetResponse>
 
-    @GET("Bank_listing")
-    fun bankAccounts(): Observable<Model_BankAccount>
+    @GET("bank")
+    fun bankAccounts(): Observable<BankListingResponse>
 
     @Multipart
     @POST("parentSignup")

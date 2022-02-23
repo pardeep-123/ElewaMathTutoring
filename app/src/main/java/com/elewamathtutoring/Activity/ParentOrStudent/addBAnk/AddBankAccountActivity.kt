@@ -68,7 +68,7 @@ class AddBankAccountActivity : AppCompatActivity(), View.OnClickListener,
                         acHolderName.text.toString())) {
                     CallApi(current_id)
                 } else {
-                    Log.e("fnjn", "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
+                    Log.e("tt", "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
                 }
             }
             R.id.ivBack -> {

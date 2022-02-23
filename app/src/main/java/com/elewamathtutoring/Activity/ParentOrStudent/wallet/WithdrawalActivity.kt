@@ -1,5 +1,6 @@
-package com.elewamathtutoring.Activity
+package com.elewamathtutoring.Activity.ParentOrStudent.wallet
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -7,12 +8,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.elewamathtutoring.Activity.MyBankAccountsActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.Viewall_trangection
 import com.elewamathtutoring.Activity.ParentOrStudent.addBAnk.AddBankAccountActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.wallet.response.Body
+import com.elewamathtutoring.Activity.ParentOrStudent.wallet.response.WalletGetResponse
 import com.elewamathtutoring.Adapter.ParentOrStudent.TransactionAdapter
 import com.elewamathtutoring.Models.BankAccountsModel.Model_BankAccount
-import com.elewamathtutoring.Models.Wallet.Body
-import com.elewamathtutoring.Models.Wallet.Model_wallet_amount_history
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
@@ -21,8 +23,8 @@ import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import com.pawskeeper.Modecommon.Commontoall
 import kotlinx.android.synthetic.main.activity_withdrawal.*
-import kotlinx.android.synthetic.main.activity_withdrawal.ivBack
 import kotlinx.android.synthetic.main.item_transfer_to_bank.*
+
 
 class WithdrawalActivity : AppCompatActivity(), Observer<RestObservable> {
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
@@ -38,7 +40,6 @@ class WithdrawalActivity : AppCompatActivity(), Observer<RestObservable> {
         onClicks()
         walletapi()
     }
-
     private fun walletapi() {
         baseViewModel.Get_Wallet(this,  true)
         baseViewModel.getCommonResponse().observe(this, this)
@@ -76,28 +77,26 @@ class WithdrawalActivity : AppCompatActivity(), Observer<RestObservable> {
             {
                 Helper.showErrorAlert(this, "Please select bank account")
             }
-            else
-            {
+            else {
                 baseViewModel.withdrawlAmount(this, tvAmount.text.toString(),selectedBank_id,true)
                 baseViewModel.getCommonResponse().observe(this, this)
             }
         }
-
-
         rlSelectBank.setOnClickListener {
             val intent = Intent(this, MyBankAccountsActivity::class.java)
             startActivityForResult(intent, 11)
         }
-
+        tvTo.setOnClickListener {
+            val intent = Intent(this, MyBankAccountsActivity::class.java)
+            startActivityForResult(intent, 11)
+        }
         tvAddNewBank.setOnClickListener {
             startActivity(Intent(this, AddBankAccountActivity::class.java))
         }
-
         relative_selectBank.setOnClickListener {
             val intent = Intent(this, MyBankAccountsActivity::class.java)
             startActivityForResult(intent, 11)
         }
-
         tvViewAll.setOnClickListener {
             intent = Intent(this, Viewall_trangection::class.java)
         intent.putExtra("listof_trangection", wallat_list)
@@ -105,42 +104,32 @@ class WithdrawalActivity : AppCompatActivity(), Observer<RestObservable> {
         }
         ivBack.setOnClickListener { finish() }
     }
-
+    @SuppressLint("SetTextI18n")
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
-                if (liveData.data is Model_wallet_amount_history)
-                {
-                    if(liveData.data.body.TotalAmount.walletAmount.equals(""))
-                    {
+                if (liveData.data is WalletGetResponse) {
+                    wallat_list.add(liveData.data.body)
+                    if(liveData.data.body.TotalAmount.walletAmount.equals("")) {
                         tvBalance.text=Constants.Currency+"0.00"
                     }
-                    else
-                    {
+                    else{
                         amount=liveData.data.body.TotalAmount.walletAmount.toDouble()
                         tvBalance.text=Constants.Currency+liveData.data.body.TotalAmount.walletAmount
                     }
-                    wallat_list.addAll(listOf(liveData.data.body))
-
-                    if(wallat_list.get(0).wallet_history.size==0)
-                    {
+                    if(wallat_list.get(0).wallet_history.size==0) {
                         trangectiojnlist.visibility=View.GONE
-                    }
-                    else
-                    {
+                    } else {
                         rv_transactionList.adapter=TransactionAdapter(this,wallat_list,"showonly5")
                         trangectiojnlist.visibility=View.VISIBLE
                     }
                     apibankAccounts()
                 }
                 else if (liveData.data is Model_BankAccount) {
-
-                    if(liveData.data.body.size==0)
-                    {
+                    if(liveData.data.body.size==0){
                         relative_selectBank.visibility=View.GONE
                         rl_Bank.visibility=View.VISIBLE
-                    }else
-                    {
+                    }else {
                         relative_selectBank.visibility=View.VISIBLE
                         tvAddNewBank.visibility=View.VISIBLE
                         rl_Bank.visibility=View.GONE
@@ -153,15 +142,13 @@ class WithdrawalActivity : AppCompatActivity(), Observer<RestObservable> {
                 {
                 }
             }
-
             Status.ERROR -> {
-                if (liveData.error is Model_wallet_amount_history)
+                if (liveData.error is WalletGetResponse)
                     Helper.showSuccessToast(this, liveData.error.message)
             }
             else -> {
             }
         }
-
     }
     override fun onActivityResult(resrequestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(resrequestCode, resultCode, data)
@@ -171,6 +158,7 @@ class WithdrawalActivity : AppCompatActivity(), Observer<RestObservable> {
             val lastFourDigits = data.getStringExtra("accountno").toString().substring(data.getStringExtra("accountno").toString().length - 4)
             tv_accountno.setText("XXXX XXXX XXXX "+lastFourDigits)
             rlSelectBank.visibility=View.VISIBLE
+            tvAddNewBank.visibility=View.VISIBLE
             rl_Bank.visibility=View.GONE
             relative_selectBank.visibility=View.GONE
         }

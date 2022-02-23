@@ -38,14 +38,15 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
         onClicks()
         return v
     }
-    private fun api() {
-        baseViewModel.TeacherRequestList(requireActivity(),  true)
-        baseViewModel.getCommonResponse().observe(requireActivity(), this)
-    }
+
     override fun onResume() {
         super.onResume()
         v.rootView.rv_newRequests.adapter = RequestAdapter(requireContext())
         api()
+    }
+    private fun api() {
+        baseViewModel.TeacherRequestList(requireActivity(),  true)
+        baseViewModel.getCommonResponse().observe(requireActivity(), this)
     }
     private fun onClicks() {
         v.rootView.ivSetting.setOnClickListener(this)
@@ -53,7 +54,8 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.ivSetting -> {
-                startActivity(Intent(context, SettingActivity::class.java))
+                startActivity(Intent(context, SettingActivity::class.java)
+                    .putExtra("setting","managePayment"))
             }
         }
     }

@@ -23,9 +23,17 @@ class MathChatActivity : AppCompatActivity(), View.OnClickListener {
         rv_chat.setOnClickListener(this)
         ivBack.setOnClickListener(this)
         btnCreateGroup.setOnClickListener(this)
+        rlTutor.setOnClickListener(this)
+        rlStudent.setOnClickListener(this)
 
         mathChatAdapter = MathChatAdapter(this)
         rv_chat.adapter = mathChatAdapter
+
+        if( intent.getStringExtra("tutor").equals("mathChat")){
+            llBtns.visibility=View.VISIBLE
+        }else{
+            llBtns.visibility=View.GONE
+        }
     }
 
     override fun onClick(p0: View?) {
@@ -34,6 +42,12 @@ class MathChatActivity : AppCompatActivity(), View.OnClickListener {
                finish()
             }
             R.id.btnCreateGroup->{
+                startActivity(Intent(context, StudyGroupActivity::class.java))
+            }
+            R.id.rlTutor->{
+                startActivity(Intent(context, StudyGroupActivity::class.java))
+            }
+            R.id.rlStudent->{
                 startActivity(Intent(context, StudyGroupActivity::class.java))
             }
         }

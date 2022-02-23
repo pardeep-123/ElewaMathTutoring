@@ -44,12 +44,14 @@
         android:layout_below="@+id/rlToolbar"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tvAsk"
                 android:layout_width="match_parent"
@@ -58,7 +60,7 @@
                 android:fontFamily="@font/medium"
                 android:text="What is your education level?"
                 android:textColor="@color/black"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardspinner"
@@ -70,6 +72,7 @@
                 app:cardBackgroundColor="@color/grey"
                 app:cardCornerRadius="@dimen/_4sdp"
                 app:contentPadding="@dimen/_5sdp">
+
                 <RelativeLayout
                     android:id="@+id/rlChoose"
                     android:layout_width="match_parent"
@@ -105,8 +108,7 @@
                 android:fontFamily="@font/medium"
                 android:text="Majors"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                 />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/etMajors"
@@ -134,8 +136,7 @@
                 android:fontFamily="@font/medium"
                 android:text="Education Certificate"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-              />
+                android:textSize="14sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvUploadImage"
@@ -151,11 +152,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/cardspinner"
                 android:layout_marginTop="20dp"
-            android:fontFamily="@font/medium"
+                android:fontFamily="@font/medium"
                 android:text="Teaching Level"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-               />
+                android:textSize="14sp" />
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -237,8 +237,7 @@
                 android:fontFamily="@font/medium"
                 android:text="Cancellation Policy"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/edCancelationPolicy"
@@ -265,8 +264,7 @@
                 android:fontFamily="@font/medium"
                 android:text="Location"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/edLocation"

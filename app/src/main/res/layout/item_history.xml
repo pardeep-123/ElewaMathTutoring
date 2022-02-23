@@ -34,6 +34,15 @@
                     android:text="Jul 11, 2020"
                     android:textColor="@color/black"
                     android:textSize="11sp" />
+ <TextView
+                    android:id="@+id/tvTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+     android:layout_marginStart="@dimen/_5sdp"
+                    android:fontFamily="@font/avenirlstd_roman"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="11sp" />
 
 
             </LinearLayout>
@@ -54,8 +63,8 @@
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:fontFamily="@font/avenirlstd_roman"
-                        android:text="Send to"
                         android:paddingLeft="5dp"
+                        android:text="Send to"
                         android:textColor="@color/black"
                         android:textSize="11sp" />
 
@@ -69,20 +78,19 @@
                             android:id="@+id/ivBankLogo"
                             android:layout_width="30dp"
                             android:layout_height="25dp"
-                            android:src="@drawable/hdfc"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:layout_marginStart="5dp"
-                            android:layout_marginLeft="10dp" />
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/hdfc" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_toRightOf="@+id/ivBankLogo"
                             android:orientation="vertical"
-                            android:visibility="gone"
-                            android:padding="5dp">
-
+                            android:padding="5dp"
+                            android:visibility="gone">
                             <TextView
                                 android:id="@+id/tvBankName"
                                 android:layout_width="match_parent"
@@ -91,37 +99,30 @@
                                 android:text="HDFC Bank Account"
                                 android:textColor="@color/black"
                                 android:textSize="11sp" />
-
                             <TextView
                                 android:id="@+id/tvAccountNo"
-                                android:layout_marginTop="2dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
                                 android:fontFamily="@font/avenirlstd_roman"
                                 android:text="xxxx xxxx xxxx 4242"
                                 android:textColor="@color/text"
                                 android:textSize="11sp" />
-
                         </LinearLayout>
                     </RelativeLayout>
                 </RelativeLayout>
-
             </LinearLayout>
-
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="7">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="3dp">
-
                 <TextView
                     android:id="@+id/tv_amount"
                     android:layout_width="match_parent"
@@ -135,7 +136,6 @@
                     android:text="-$100.00"
                     android:textColor="@color/textcolor"
                     android:textSize="14sp" />
-
                 <TextView
                     android:id="@+id/tv_status"
                     android:layout_width="match_parent"
@@ -151,11 +151,4 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-    </RelativeLayout>
 </RelativeLayout>

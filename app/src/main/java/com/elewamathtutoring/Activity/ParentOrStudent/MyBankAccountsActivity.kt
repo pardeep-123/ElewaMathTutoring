@@ -8,9 +8,8 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.elewamathtutoring.Activity.ParentOrStudent.addBAnk.AddBankAccountActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.wallet.BankListingResponse
 import com.elewamathtutoring.Adapter.MyBankAccountsAdapter
-import com.elewamathtutoring.Models.BankAccountsModel.Model_BankAccount
-import com.elewamathtutoring.Models.BankAccountsModel.Body
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.api.Status
@@ -23,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_my_bank_accounts.*
 import kotlin.collections.ArrayList
 
 class MyBankAccountsActivity : AppCompatActivity(), Observer<RestObservable> {
-    var banksList = ArrayList<Body>()
+    var banksList = ArrayList<BankListingResponse.Body>()
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +43,7 @@ class MyBankAccountsActivity : AppCompatActivity(), Observer<RestObservable> {
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
-                if (liveData.data is Model_BankAccount) {
+                if (liveData.data is BankListingResponse) {
                     banksList.clear()
                     banksList.addAll(liveData.data.body)
                     rv_myBankAccounts.adapter = MyBankAccountsAdapter(this, banksList, this@MyBankAccountsActivity)
@@ -65,7 +64,7 @@ class MyBankAccountsActivity : AppCompatActivity(), Observer<RestObservable> {
                 }
             }
             Status.ERROR -> {
-                if (liveData.error is Model_BankAccount) {
+                if (liveData.error is BankListingResponse) {
                     Helper.showSuccessToast(this, liveData.error.message)
                 }
                 if (liveData.error is Commontoall) {
@@ -75,11 +74,8 @@ class MyBankAccountsActivity : AppCompatActivity(), Observer<RestObservable> {
             }
             else -> {
             }
-
-
         }
     }
-
     fun deleteBank(bank_id: String) {
         baseViewModel.deleteBank(this, bank_id, true)
         baseViewModel.getCommonResponse().observe(this, this)

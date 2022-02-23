@@ -84,6 +84,57 @@
                     android:textSize="16sp" />
             </RelativeLayout>
 
+            <LinearLayout
+                android:id="@+id/llBtns"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_margin="@dimen/_5sdp"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RelativeLayout
+                    android:id="@+id/rlTutor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_btn">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/WrapTextView"
+                        android:layout_centerInParent="true"
+                        android:drawableStart="@drawable/math_chat"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:fontFamily="@font/bold"
+                        android:text="Tutor"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12sdp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlStudent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_btn_white">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/WrapTextView"
+                        android:layout_centerInParent="true"
+                        android:drawableStart="@drawable/math_chat"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:fontFamily="@font/bold"
+                        android:text="Student"
+                        android:textColor="@color/app"
+                        android:textSize="@dimen/_12sdp"
+                        app:drawableTint="@color/app" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_chat"
                 android:layout_width="match_parent"

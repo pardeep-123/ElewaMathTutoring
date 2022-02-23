@@ -22,6 +22,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import retrofit2.http.Field
 import java.io.File
 import javax.inject.Inject
 
@@ -116,7 +117,7 @@ class BaseViewModel : ViewModel() {
         if (Helper.isNetworkConnected(activity)) {
             Log.e("checkmyauth", "----" + FirebaseInstanceId.getInstance().getToken())
             apiService.withdrawlAmount(
-                getPrefrence(Constants.user_type, ""),
+               // getPrefrence(Constants.user_type, ""),
                 amount,
                 bankId
             )
@@ -683,31 +684,11 @@ class BaseViewModel : ViewModel() {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @SuppressLint("CheckResult")
     fun bankAccounts(activity: Activity, isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
-
             //edit
             apiService.bankAccounts()
-
-
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -732,22 +713,21 @@ class BaseViewModel : ViewModel() {
     fun EditTeacherProfileProfile(
         activity: Activity,
         teachingLevel: String,
+        educationLevel: String,
+        majors: String,
         specialties: String,
-        inPersonRate: String,
         cancelPolicy: String,
-        VirtualRate: String,
-        CertifiedAs: String,
+        certificate_images: String,
         address: String,
         latitude: String,
         longitude: String,
-        availability: String,
-        timeSlot: String,
+
         isDialogShow: Boolean
     ) {
         if (Helper.isNetworkConnected(activity)) {
             apiService.EditTeacherProfileProfile(
-                teachingLevel, specialties, inPersonRate, cancelPolicy,
-                VirtualRate, CertifiedAs, address, latitude, longitude, availability, timeSlot
+                teachingLevel,educationLevel,majors, specialties, cancelPolicy,certificate_images,
+               address, latitude, longitude
             )
 
                 ?.subscribeOn(Schedulers.io())
@@ -766,18 +746,8 @@ class BaseViewModel : ViewModel() {
                     override fun onRetryApi() {
                         EditTeacherProfileProfile(
                             activity,
-                            teachingLevel,
-                            specialties,
-                            inPersonRate,
-                            cancelPolicy,
-                            VirtualRate,
-                            CertifiedAs,
-                            address,
-                            latitude,
-                            longitude,
-                            availability,
-                            timeSlot,
-                            isDialogShow
+                            teachingLevel,educationLevel,majors, specialties, cancelPolicy,certificate_images,
+                            address, latitude, longitude,true
                         )
                     }
                 })
@@ -1346,7 +1316,8 @@ class BaseViewModel : ViewModel() {
     @SuppressLint("CheckResult")
     fun Get_Wallet(activity: Activity, isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
-            apiService.Get_Wallet(getPrefrence(Constants.user_type, ""))
+            apiService.Get_Wallet()
+                    //getPrefrence(Constants.user_type, "")
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {

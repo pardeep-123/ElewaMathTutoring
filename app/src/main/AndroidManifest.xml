@@ -125,7 +125,7 @@
             android:name=".Activity.ParentOrStudent.addBAnk.AddBankAccountActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.WithdrawalActivity"
+            android:name=".Activity.ParentOrStudent.wallet.WithdrawalActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.AddCardActivity"

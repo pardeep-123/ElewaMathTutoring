@@ -47,6 +47,7 @@
                     android:background="@color/editexthint"
                     android:fontFamily="@font/avenirlstd_roman"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:text="Edit"
                     android:textColor="@color/black"
                     android:textSize="13sp" />
