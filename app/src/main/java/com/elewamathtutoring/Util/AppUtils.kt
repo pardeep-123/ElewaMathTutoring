@@ -18,9 +18,10 @@ class AppUtils {
         }
 
         //--------------------------Date ----------------------//
-        fun dateInString(timeInMillis: Long, format: String): String {
+        fun secondsToTimeStamp(seconds: Long, format: String): String {
             val sdf = SimpleDateFormat(format, Locale.getDefault())
-            return sdf.format(timeInMillis)
+            val milliSeconds = seconds*1000
+            return sdf.format(milliSeconds)
         }
 
         //--------------------------Layout blur ----------------------//

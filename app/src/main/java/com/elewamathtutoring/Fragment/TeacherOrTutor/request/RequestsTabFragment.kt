@@ -10,8 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
+import com.elewamathtutoring.Adapter.ClickCallBack
 import com.elewamathtutoring.Adapter.ParentOrStudent.SchedulePendingAdapter
 import com.elewamathtutoring.Adapter.TeacherOrTutor.RequestAdapter
+import com.elewamathtutoring.Fragment.TeacherOrTutor.request.RequestListResponse.*
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
@@ -24,11 +26,12 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObservable> {
+class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObservable>,
+    ClickCallBack {
     lateinit var v: View
-    var Pastreq= ArrayList<RequestListResponse.Body>()
-    var Newreq= ArrayList<RequestListResponse.Body>()
-    var Inwaiting= ArrayList<RequestListResponse.Body>()
+    var Pastreq= ArrayList<Body>()
+    var Newreq= ArrayList<Body>()
+    var Inwaiting= ArrayList<Body>()
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,7 +69,7 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
                     Pastreq.clear()
                     Inwaiting.clear()
                     Newreq.clear()
-                    for (i in 0 until liveData.data.body.size) {
+                    for (i in liveData.data.body.indices) {
                         if (liveData.data.body.get(i).status != 0) {
                             Pastreq.add(liveData.data.body[i])
                         } else {
@@ -117,9 +120,9 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
                     } else {
                         tv_whennodata.visibility = View.GONE
                     }
-                   v.rootView.rv_newRequests.adapter = SchedulePendingAdapter(requireContext(), Newreq)
-                    v.rootView.rv_PastRequests.adapter = SchedulePendingAdapter(requireContext(), Pastreq)
-                    v.rootView.recy_watingonans.adapter = SchedulePendingAdapter(requireContext(), Inwaiting)
+                   v.rootView.rv_newRequests.adapter = SchedulePendingAdapter(requireContext(), Newreq,this)
+                    v.rootView.rv_PastRequests.adapter = SchedulePendingAdapter(requireContext(), Pastreq,this)
+                    v.rootView.recy_watingonans.adapter = SchedulePendingAdapter(requireContext(), Inwaiting,this)
                 }
             }
             Status.ERROR -> {
@@ -130,5 +133,21 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
             else -> {
             }
         }
+    }
+
+    override fun onItemClick(pos: Int, value: String) {
+        when (value) {
+            "accept" -> {
+
+            }
+            "reject" -> {
+
+            }
+        }
+    }
+
+    fun apiAccept(status:String){
+       // baseViewModel.requestAccept(requireActivity(),  status,intent.getStringExtra("id").toString(),true)
+        baseViewModel.getCommonResponse().observe(requireActivity(), this)
     }
 }

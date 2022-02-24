@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.elewamathtutoring.Activity.Chat.MessagesTabFragment
 import com.elewamathtutoring.Fragment.TeacherOrTutor.TeacherProfileTabFragment
 import com.elewamathtutoring.Fragment.TeacherOrTutor.request.RequestsTabFragment
-import com.elewamathtutoring.Fragment.TeacherOrTutor.ScheduleTabFragment
+import com.elewamathtutoring.Fragment.TeacherOrTutor.bookings.ScheduleTabFragment
 import com.elewamathtutoring.R
 import kotlinx.android.synthetic.main.activity_main_teacher.*
 

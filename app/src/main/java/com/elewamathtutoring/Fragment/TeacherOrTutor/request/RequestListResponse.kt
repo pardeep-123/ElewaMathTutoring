@@ -1,38 +1,36 @@
 package com.elewamathtutoring.Fragment.TeacherOrTutor.request
 
-import java.io.Serializable
-
 data class RequestListResponse(
     val status: Boolean, // true
     val code: Int, // 200
     val message: String, // Session request listed successfully.
     val body: List<Body>
-):Serializable {
+) {
     data class Body(
-        val id: Int, // 7
-        val userId: Int, // 234
-        val teacherId: Int, // 234
-        val paidStatus: Int, // 1
+        val id: Int, // 11
+        val userId: Int, // 262
+        val teacherId: Int, // 321
+        val paidStatus: Int, // 0
         val booking_type: Int, // 0
-        val payment_type: Int, // 1
-        val about: String, // heyy
+        val payment_type: Int, // 0
+        val about: String, // Ddddddd
         val personVirtual: Int, // 1
-        val availability: String, // 2,3
-        val date: String, // 2021-02-01
-        val time: String, // 1,2
-        val hours: Int, // 2
-        val perHour: Int, // 25
-        val total: Int, // 50
-        val adminCommision: String, // 5
-        val cardId: Int, // 1
+        val availability: String, // 7
+        val date: String, // 1645698254
+        val time: String, // 1
+        val hours: Int, // 1
+        val perHour: Int, // 4
+        val total: Int, // 4
+        val adminCommision: String, // 2
+        val cardId: Int, // 19
         val status: Int, // 0
         val createdAt: Int, // 1970
         val updated: Int, // 0
         val updatedAt: Int, // 2021
         val timeslot: List<Timeslot>,
-        val Teacher: ReqTeacher,
-        val Student: ReqStudent
-    ) :Serializable{
+        val Teacher: Teacher1,
+        val Student: Student1
+    ) {
         data class Timeslot(
             val id: Int, // 1
             val startTime: String, // 12:00 AM
@@ -40,59 +38,59 @@ data class RequestListResponse(
             val status: Int, // 1
             val createdAt: Int, // 1610092025
             val updatedAt: Int // 0
-        ):Serializable
+        )
 
-        data class ReqTeacher(
-            val id: Int, // 234
-            val name: String, // Hamza Asif
-            val userType: Int, // 1
-            val image: String, // http://202.164.42.227:7552/uploads/users/1637766265swift_file11_24_21_20:04:24.17.jpeg
-            val address: String,
-            val email: String, // hayanshyk@gmail.com
-            val about: String, // Cvh
-            val teachingHistory: String,
+        data class Teacher1(
+            val id: Int, // 321
+            val name: String, // rg
+            val userType: Int, // 2
+            val image: String, // http://202.164.42.227:7552/uploads/users/164562280120220105_150447086_fef2148118f24efae02f5eb75ac3e84e.jpg
+            val address: String, // sdsds
+            val email: String, // nihal23@gmail.com
+            val about: String, // fdgfddddddddddddddddddddddddddddddddddddd
+            val teachingHistory: String, // fddfggff
             val isCertifiedOrtutor: Int, // 0
             val isBuyPlan: Int, // 0
             val planId: Int, // 0
             val planExpiryDate: String,
-            val teachingLevel: String,
-            val specialties: String,
+            val teachingLevel: String, // 1,2
+            val specialties: String, // eee
             val InPersonRate: Int, // 0
             val virtualRate: Int, // 0
-            val cancellationPolicy: String,
-            val availability: String,
-            val available_slots: String,
+            val cancellationPolicy: String, // rerte
+            val availability: String, // 1,2,5
+            val available_slots: String, // 5,8,9
             val notificationStatus: Int, // 1
-            val latitude: String,
-            val longitude: String,
-            val deviceType: Int, // 1
-            val deviceToken: String, // 123
-            val SocialType: Int, // 2
-            val SocialId: String, // 104176091516440845425
-            val status: Int, // 0
-            val hourlyPrice: Int, // 0
-            val majors: String,
-            val educationLevel: String,
-            val isapproval: Int, // 0
-            val free_slots: String, // 1,2
-            val isTechingInfo: Int, // 0
-            val IsAvailable: Int // 0
-        ):Serializable
+            val latitude: String, // 2123412
+            val longitude: String, // 423423
+            val deviceType: Int, // 0
+            val deviceToken: String,
+            val SocialType: Int, // 0
+            val SocialId: String,
+            val status: Int, // 1
+            val hourlyPrice: Int, // 3
+            val majors: String, // er
+            val educationLevel: String, // wqw
+            val isapproval: Int, // 2
+            val free_slots: String,
+            val isTechingInfo: Int, // 1
+            val IsAvailable: Int // 1
+        )
 
-        data class ReqStudent(
-            val id: Int, // 234
-            val name: String, // Hamza Asif
+        data class Student1(
+            val id: Int, // 262
+            val name: String, // Hdhd
             val userType: Int, // 1
-            val image: String, // http://202.164.42.227:7552/uploads/users/1637766265swift_file11_24_21_20:04:24.17.jpeg
+            val image: String,
             val address: String,
-            val email: String, // hayanshyk@gmail.com
-            val about: String, // Cvh
+            val email: String, // hhwh@yopmail.com
+            val about: String,
             val notificationStatus: Int, // 1
-            val deviceType: Int, // 1
-            val deviceToken: String, // 123
-            val SocialType: Int, // 2
-            val SocialId: String, // 104176091516440845425
-            val status: Int // 0
-        ):Serializable
+            val deviceType: Int, // 0
+            val deviceToken: String,
+            val SocialType: Int, // 0
+            val SocialId: String,
+            val status: Int // 1
+        )
     }
 }

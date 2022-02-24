@@ -19,27 +19,31 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:orientation="vertical">
-
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivTeacher"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/profile"
-                />
-        </LinearLayout>
-
+                android:src="@drawable/profile" />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/ivMsg"
+                android:layout_centerVertical="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/chat_msg" />
+        </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp">
-
             <TextView
-                android:id="@+id/tvItemName"
+                android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -50,19 +54,15 @@
                 android:text="Jackson"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp" />
-
             <ImageView
                 android:id="@+id/check"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_centerVertical="true"
                 android:visibility="gone"
-                android:layout_toEndOf="@+id/tvItemName"
+                android:layout_toEndOf="@+id/tvName"
                 android:src="@drawable/checked" />
-
         </RelativeLayout>
-
-
         <TextView
             android:id="@+id/tvPostion"
             android:layout_width="match_parent"
@@ -70,10 +70,10 @@
             android:layout_gravity="center"
             android:fontFamily="@font/avenirlsttd_book"
             android:gravity="center"
-            android:visibility="gone"
             android:text="TEACHER"
             android:textAllCaps="true"
             android:textColor="@color/textcolor"
+            android:visibility="gone"
             android:textSize="14sp" />
 
         <TextView
@@ -84,9 +84,10 @@
             android:fontFamily="@font/avenirlstd_roman"
             android:gravity="center"
             android:padding="2dp"
-            android:singleLine="true"
-            android:text=""
             android:visibility="gone"
+            android:singleLine="true"
+            android:text="jhghgfhj"
+
             android:textColor="@color/text"
             android:textSize="11sp" />
         <RelativeLayout

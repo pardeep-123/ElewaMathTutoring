@@ -1,4 +1,4 @@
-package com.elewamathtutoring.Fragment.TeacherOrTutor
+package com.elewamathtutoring.Fragment.TeacherOrTutor.bookings
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -32,11 +32,9 @@ import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import kotlinx.android.synthetic.main.fragment_schedule_tab.*
 import kotlinx.android.synthetic.main.fragment_schedule_tab.view.*
-import kotlinx.android.synthetic.main.item_hadder.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-
 
 class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObservable> {
     lateinit var v: View
@@ -102,9 +100,6 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
     }
     @RequiresApi(Build.VERSION_CODES.N)
     private fun onClicks() {
-      /*  v.rootView.ivNotification.setOnClickListener {
-            startActivity(Intent(context, NotificationsActivity::class.java))
-        }*/
         v.rootView.ivSetting.setOnClickListener {
             startActivity(Intent(context, SettingActivity::class.java)
                 .putExtra("setting","managePayment"))
@@ -129,13 +124,10 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
             selectedTab = "ListView"
         }
         v.rootView.schedule_calenderView.setOnClickListener {
-
             calenderView_rl.visibility = View.VISIBLE
             listView_rl.visibility = View.GONE
-
             tvListView.setTextColor(ContextCompat.getColor(requireContext(), R.color.text))
             tvCalenderView.setTextColor(ContextCompat.getColor(requireContext(), R.color.textcolor))
-
             barListView.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.text))
             barCalenderView.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.textcolor))
             selectedTab = "CalenderView"
@@ -152,6 +144,7 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
+
                 if (liveData.data is Model_myschdeullist) {
                     if(apitype.equals("withdate"))
                     {
@@ -165,9 +158,7 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
                             tv_whennodata.visibility=View.VISIBLE
                         }
                     }
-                    else
-                    {
-
+                    else {
                     upcomming.clear()
                     today.clear()
                     title.clear()
@@ -177,28 +168,23 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
 
                     for (i in 0 until liveData.data.body.size) {
                         // date
-                        if(Constants.ConvertTimeStampToDate(liveData.data.body.get(i).createdAt.toLong(), "EEE, MMM yyyy").toString().equals(formattedDate))
-                        {
+                        if(Constants.ConvertTimeStampToDate(liveData.data.body.get(i).createdAt.toLong(), "EEE, MMM yyyy").toString().equals(formattedDate)) {
                             Log.e("checkbody","----data")
                             today.add(liveData.data.body.get(i))
                         }
-                        else
-                        {
+                        else {
                             Log.e("checkbody","----upcomming")
                             upcomming.add(liveData.data.body.get(i))
                         }
                     }
-
                     if(today.size!=0)
                     {
                         title.add("TODAY'S SESSIONS")
                     }
-                    if(today.size==0&&upcomming.size==0)
-                    {
+                    if(today.size==0&&upcomming.size==0) {
                         tv_whennodata.visibility=View.VISIBLE
                     }
-                    else
-                    {
+                    else {
                         tv_whennodata.visibility=View.GONE
                     }
                     if(upcomming.size!=0)
@@ -206,7 +192,7 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
                         title.add("UPCOMING SESSIONS")
                     }
                         Log.e("checkbody","----upcomming"+upcomming.size+"---"+today.size)
-                        v.rootView.rv_listView.adapter = Hadder_sessionsadapter(requireContext(), today,upcomming,title)
+                    v.rootView.rv_listView.adapter = Hadder_sessionsadapter(requireContext(), today,upcomming,title)
                     }
                 }
             }
@@ -221,6 +207,5 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
     private fun setCalenderAdapter(listSession: ArrayList<Body>) {
        v.rootView.rv_calenderViewList.adapter = SessionsAdapter(requireContext(), listSession)
     }
-
 
 }

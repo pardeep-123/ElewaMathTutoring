@@ -708,6 +708,31 @@ class BaseViewModel : ViewModel() {
                 })
         }
     }
+ @SuppressLint("CheckResult")
+    fun getTeacherStudentList(activity: Activity,
+                              userType: String,
+                              isDialogShow: Boolean) {
+        if (Helper.isNetworkConnected(activity)) {
+            apiService.getTeacherStudentList(userType)
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    { mResponse.value = RestObservable.error(activity, it) }
+                )
+        } else {
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        getTeacherStudentList(activity,userType, isDialogShow)
+                    }
+                })
+        }
+    }
 
     @SuppressLint("CheckResult")
     fun EditTeacherProfileProfile(
@@ -1226,6 +1251,36 @@ class BaseViewModel : ViewModel() {
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
                         sessionDetails(activity, isDialogShow, id)
+                    }
+                })
+        }
+    }
+
+
+      @SuppressLint("CheckResult")
+    fun requestAccept(activity: Activity,
+                      status:String,
+                      sessionId: String,
+                      isDialogShow: Boolean) {
+        if (Helper.isNetworkConnected(activity)) {
+            apiService.requestAccept(status,sessionId)
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    {
+
+                        mResponse.value = RestObservable.error(activity, it)
+                    })
+        } else {
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        requestAccept(activity,status,sessionId, isDialogShow)
                     }
                 })
         }

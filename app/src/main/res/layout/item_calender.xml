@@ -164,7 +164,7 @@ android:layout_margin="@dimen/_10sdp"
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_80sdp">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -175,7 +175,6 @@ android:layout_margin="@dimen/_10sdp"
             android:id="@+id/schedulePendingRoot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
             android:gravity="center">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -268,6 +267,7 @@ android:layout_margin="@dimen/_10sdp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:gravity="bottom"
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatButton

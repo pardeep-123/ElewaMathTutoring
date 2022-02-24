@@ -3,6 +3,7 @@ package com.elewamathtutoring.api
 import com.elewamathtutoring.Activity.Auth.login.LoginResponse
 import com.elewamathtutoring.Activity.Auth.signup.SignUpResponse
 import com.elewamathtutoring.Activity.Auth.signup.TeacherSignUpResponse
+import com.elewamathtutoring.Activity.Chat.mathChat.MathChatResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.addBAnk.AddBankResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.editProfile.EditProfileResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.privacy.PrivacyResponse
@@ -20,7 +21,6 @@ import com.elewamathtutoring.Activity.TeacherOrTutor.edit.EditResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.editProfile.EditTeacherProfileResponse
 import com.elewamathtutoring.Fragment.TeacherOrTutor.request.RequestListResponse
 import com.elewamathtutoring.Models.Add_Card.Model_addcards
-import com.elewamathtutoring.Models.BankAccountsModel.Model_BankAccount
 import com.elewamathtutoring.Models.Card_listing.Model_cardlisting
 import com.elewamathtutoring.Models.ListView.Model_myschdeullist
 import com.elewamathtutoring.Models.Login.Model_login
@@ -30,7 +30,6 @@ import com.elewamathtutoring.Models.Notifications.Model_Notifications
 import com.elewamathtutoring.Models.Search.Model_search
 import com.elewamathtutoring.Models.Session_detail.Model_session_detail
 import com.elewamathtutoring.Models.Teacher_details.Model_teacherdetails
-import com.elewamathtutoring.Models.Wallet.Model_wallet_amount_history
 import com.pawskeeper.Modecommon.Commontoall
 import com.pawskeeper.Modecommon.Commontoall2
 import io.reactivex.Observable
@@ -343,6 +342,12 @@ interface RestApiInterface {
      @GET("TeacherRequestList")
     fun TeacherRequestList(): Observable<RequestListResponse>
 
+    @FormUrlEncoded
+    @PUT("acceptReject")
+    fun requestAccept(@Field("status") status: String,
+                      @Field("sessionId") sessionId: String):
+            Observable<Commontoall?>
+
 
   @GET("resources")
     fun get_resources(): Observable<ResourcesResponse>
@@ -385,6 +390,14 @@ interface RestApiInterface {
     @GET("bank")
     fun bankAccounts(): Observable<BankListingResponse>
 
+/* @GET("getTeacherStudentList?userType=2")
+    fun getTeacherStudentList(): Observable<MathChatResponse>*/
+
+    @GET("getTeacherStudentList")
+    fun getTeacherStudentList(@Query ("userType")userType : String): Observable<MathChatResponse?>?
+
+
+
     @Multipart
     @POST("parentSignup")
     fun signinUser(
@@ -396,7 +409,6 @@ interface RestApiInterface {
         @Part("deviceType") deviceType: RequestBody,
         @Part("deviceToken") deviceToken: RequestBody
     ): Observable<Model_login>
-
 
     @Multipart
     @POST("ParentSocialSignup")

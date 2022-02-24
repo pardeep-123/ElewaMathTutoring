@@ -103,6 +103,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/WrapTextView"
+                        android:id="@+id/tvTutor"
                         android:layout_centerInParent="true"
                         android:drawableStart="@drawable/math_chat"
                         android:drawablePadding="@dimen/_5sdp"
@@ -120,9 +121,9 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_btn_white">
-
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/WrapTextView"
+                        android:id="@+id/tvStudent"
                         android:layout_centerInParent="true"
                         android:drawableStart="@drawable/math_chat"
                         android:drawablePadding="@dimen/_5sdp"
@@ -130,7 +131,7 @@
                         android:text="Student"
                         android:textColor="@color/app"
                         android:textSize="@dimen/_12sdp"
-                        app:drawableTint="@color/app" />
+                  />
                 </RelativeLayout>
 
             </LinearLayout>

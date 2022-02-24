@@ -6,16 +6,24 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.elewamathtutoring.Activity.Chat.StudyGroupActivity
-import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResoucesActivity
 import com.elewamathtutoring.Adapter.ParentOrStudent.MathChatAdapter
-import com.elewamathtutoring.Adapter.SearchHomeAdapter
 import com.elewamathtutoring.R
 import kotlinx.android.synthetic.main.activity_math_chat.*
-import kotlinx.android.synthetic.main.fragment_search.*
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.elewamathtutoring.Util.helper.Helper
+import com.elewamathtutoring.api.Status
+import com.elewamathtutoring.network.RestObservable
+import com.elewamathtutoring.viewmodel.BaseViewModel
+import kotlinx.android.synthetic.main.activity_math_chat.ivBack
 
-class MathChatActivity : AppCompatActivity(), View.OnClickListener {
+class MathChatActivity : AppCompatActivity(), View.OnClickListener, Observer<RestObservable> {
     lateinit var context:Context
+    var userType = ""
+    var type = ""
+    var aboutResponse: MathChatResponse? = null
     lateinit var mathChatAdapter: MathChatAdapter
+    val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_math_chat)
@@ -25,9 +33,8 @@ class MathChatActivity : AppCompatActivity(), View.OnClickListener {
         btnCreateGroup.setOnClickListener(this)
         rlTutor.setOnClickListener(this)
         rlStudent.setOnClickListener(this)
+        apibankAccounts("2")
 
-        mathChatAdapter = MathChatAdapter(this)
-        rv_chat.adapter = mathChatAdapter
 
         if( intent.getStringExtra("tutor").equals("mathChat")){
             llBtns.visibility=View.VISIBLE
@@ -45,11 +52,39 @@ class MathChatActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(Intent(context, StudyGroupActivity::class.java))
             }
             R.id.rlTutor->{
-                startActivity(Intent(context, StudyGroupActivity::class.java))
+                tvTutor.setTextColor(getResources().getColor(R.color.white))
+                tvStudent.setTextColor(getResources().getColor(R.color.app))
+                rlTutor.setBackgroundResource(R.drawable.bg_btn)
+                rlStudent.setBackgroundResource(R.drawable.bg_btn_white)
+                apibankAccounts("2")
             }
             R.id.rlStudent->{
-                startActivity(Intent(context, StudyGroupActivity::class.java))
+                tvTutor.setTextColor(getResources().getColor(R.color.app))
+                tvStudent.setTextColor(getResources().getColor(R.color.white))
+                rlTutor.setBackgroundResource(R.drawable.bg_btn_white)
+                rlStudent.setBackgroundResource(R.drawable.bg_btn)
+                apibankAccounts("1")
             }
+        }
+    }
+    fun apibankAccounts(userType: String) {
+        this.userType=userType
+        baseViewModel.getTeacherStudentList(this, userType,true)
+        baseViewModel.getCommonResponse().observe(this, this)
+    }
+    override fun onChanged(it: RestObservable?) {
+        when (it!!.status) {
+            Status.SUCCESS -> {
+                if (it.data is MathChatResponse) {
+                    aboutResponse=it.data
+                  rv_chat.adapter = MathChatAdapter(this, aboutResponse!!, userType)
+                }
+            }
+            Status.ERROR -> {
+                if (it.error is MathChatResponse)
+                    Helper.showSuccessToast(this, it.error.message)
+            }
+            else -> {}
         }
     }
 }
