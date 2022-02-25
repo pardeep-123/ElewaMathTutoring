@@ -6,11 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.elewamathtutoring.Activity.Chat.mathChat.MathPersonChatActivity
-import com.elewamathtutoring.Activity.TeacherOrTutor.RequestsActivity
+import com.elewamathtutoring.Activity.TeacherOrTutor.request.RequestsActivity
 import com.elewamathtutoring.R
-import kotlinx.android.synthetic.main.item_add_participants.view.*
-import kotlinx.android.synthetic.main.item_filteroptions.view.*
 
 
 //, listNotifications: ArrayList<Body>

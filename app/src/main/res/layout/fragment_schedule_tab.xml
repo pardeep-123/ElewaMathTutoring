@@ -6,13 +6,11 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".Fragment.TeacherOrTutor.bookings.ScheduleTabFragment">
-
     <RelativeLayout
         android:id="@+id/schedule_toolbar"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@color/barcolor">
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,15 +18,12 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="15dp"
             android:layout_marginBottom="15dp"
-
             android:orientation="horizontal">
-
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/WrapTextView"
                 android:text="Available"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12sdp" />
-
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/iv_notification_switch"
                 android:layout_width="wrap_content"
@@ -37,7 +32,6 @@
                 android:layout_marginEnd="@dimen/_4sdp"
                 android:thumb="@drawable/notification_thumb_selector"
                 app:track="@drawable/notification_track_selector" />
-
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/WrapTextView"
                 android:text="Occupied"

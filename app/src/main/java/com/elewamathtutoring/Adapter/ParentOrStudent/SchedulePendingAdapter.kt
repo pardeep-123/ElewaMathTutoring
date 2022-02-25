@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.elewamathtutoring.Activity.TeacherOrTutor.RequestsActivity
+import com.elewamathtutoring.Activity.TeacherOrTutor.request.RequestsActivity
 import com.elewamathtutoring.Adapter.ClickCallBack
 import com.elewamathtutoring.Fragment.TeacherOrTutor.request.RequestListResponse
 import com.elewamathtutoring.R

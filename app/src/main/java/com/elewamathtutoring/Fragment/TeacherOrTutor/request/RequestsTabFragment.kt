@@ -32,6 +32,7 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
     var Pastreq= ArrayList<Body>()
     var Newreq= ArrayList<Body>()
     var Inwaiting= ArrayList<Body>()
+    var aboutResponse: RequestListResponse? = null
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,6 +67,7 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
         when (liveData!!.status) {
             Status.SUCCESS -> {
                 if (liveData.data is RequestListResponse) {
+                    aboutResponse=liveData.data
                     Pastreq.clear()
                     Inwaiting.clear()
                     Newreq.clear()
@@ -138,16 +140,20 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
     override fun onItemClick(pos: Int, value: String) {
         when (value) {
             "accept" -> {
-
+                apiAccept("1",aboutResponse!!.body[pos].Student.id.toString())
             }
             "reject" -> {
-
+                apiReject(aboutResponse!!.body[pos].Student.id.toString(),"3")
             }
         }
     }
 
-    fun apiAccept(status:String){
-       // baseViewModel.requestAccept(requireActivity(),  status,intent.getStringExtra("id").toString(),true)
+    fun apiAccept(status:String,id:String){
+        baseViewModel.requestAccept(requireActivity(),  status,id,true)
+        baseViewModel.getCommonResponse().observe(requireActivity(), this)
+    }
+    fun apiReject(id:String,status:String){
+        baseViewModel.requestReject(requireActivity(),id,status,true)
         baseViewModel.getCommonResponse().observe(requireActivity(), this)
     }
 }

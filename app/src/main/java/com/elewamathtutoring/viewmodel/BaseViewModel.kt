@@ -22,7 +22,6 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
-import retrofit2.http.Field
 import java.io.File
 import javax.inject.Inject
 
@@ -737,33 +736,68 @@ class BaseViewModel : ViewModel() {
     @SuppressLint("CheckResult")
     fun EditTeacherProfileProfile(
         activity: Activity,
+        certificate_images: ArrayList<String>,
         teachingLevel: String,
         educationLevel: String,
         majors: String,
         specialties: String,
         cancelPolicy: String,
-        certificate_images: String,
         address: String,
         latitude: String,
         longitude: String,
-
         isDialogShow: Boolean
     ) {
-        if (Helper.isNetworkConnected(activity)) {
-            apiService.EditTeacherProfileProfile(
-                teachingLevel,educationLevel,majors, specialties, cancelPolicy,certificate_images,
-               address, latitude, longitude
-            )
+        var imageFileBody:  ArrayList<MultipartBody.Part> ?= ArrayList()
 
-                ?.subscribeOn(Schedulers.io())
-                ?.observeOn(AndroidSchedulers.mainThread())
-                ?.doOnSubscribe {
-                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+        certificate_images.forEach {imageUrl->
+            var newFile: File? = null
+            if (imageUrl != "") {
+                newFile = File(imageUrl)
+            }
+            if (newFile != null && newFile.exists() && !newFile.equals("")) {
+                val mediaType: MediaType?
+                if (imageUrl.endsWith("png")) {
+                    mediaType = "image/png".toMediaTypeOrNull()
+                } else {
+                    mediaType = "image/jpeg".toMediaTypeOrNull()
                 }
-                ?.subscribe(
-                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
-                    { mResponse.value = RestObservable.error(activity, it) }
+
+                val requestBody: RequestBody = newFile.asRequestBody(mediaType)
+                imageFileBody!!.add(MultipartBody.Part.createFormData("certificate_images", newFile.name, requestBody))
+            }
+        }
+        val teachingLevel_value1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), teachingLevel)
+        val education_Level1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), educationLevel)
+        val majorss1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), majors)
+        val specialties_value1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), specialties)
+        val cancelPolicy_value1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), cancelPolicy)
+        val address_value1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), address)
+        val latitude_value1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), latitude)
+        val longitude_value1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), longitude)
+        if (Helper.isNetworkConnected(activity)) {
+            if (imageFileBody != null) {
+                apiService.EditTeacherProfileProfile(
+                    imageFileBody,
+                    teachingLevel_value1,
+                    education_Level1,
+                    majorss1,
+                    specialties_value1,
+                    cancelPolicy_value1,
+                    address_value1,
+                    latitude_value1,
+                    longitude_value1
                 )
+
+                    ?.subscribeOn(Schedulers.io())
+                    ?.observeOn(AndroidSchedulers.mainThread())
+                    ?.doOnSubscribe {
+                        mResponse.value = RestObservable.loading(activity, isDialogShow)
+                    }
+                    ?.subscribe(
+                        { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                        { mResponse.value = RestObservable.error(activity, it) }
+                    )
+            }
         } else {
             Helper.showNoInternetAlert(activity,
                 activity.getString(R.string.no_internet_connection),
@@ -771,8 +805,16 @@ class BaseViewModel : ViewModel() {
                     override fun onRetryApi() {
                         EditTeacherProfileProfile(
                             activity,
-                            teachingLevel,educationLevel,majors, specialties, cancelPolicy,certificate_images,
-                            address, latitude, longitude,true
+                            certificate_images,
+                            teachingLevel,
+                            educationLevel,
+                            majors,
+                            specialties,
+                            cancelPolicy,
+                            address,
+                            latitude,
+                            longitude,
+                            isDialogShow
                         )
                     }
                 })
@@ -1229,11 +1271,10 @@ class BaseViewModel : ViewModel() {
                 })
         }
     }
-
     @SuppressLint("CheckResult")
-    fun sessionDetails(activity: Activity, isDialogShow: Boolean, id: String) {
+    fun sessionDetails(activity: Activity, isDialogShow: Boolean, sessionId: String) {
         if (Helper.isNetworkConnected(activity)) {
-            apiService.sessionDetails(id)
+            apiService.sessionDetails(sessionId)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -1250,7 +1291,7 @@ class BaseViewModel : ViewModel() {
                 activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
-                        sessionDetails(activity, isDialogShow, id)
+                        sessionDetails(activity, isDialogShow, sessionId)
                     }
                 })
         }
@@ -1281,6 +1322,35 @@ class BaseViewModel : ViewModel() {
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
                         requestAccept(activity,status,sessionId, isDialogShow)
+                    }
+                })
+        }
+    }
+
+      @SuppressLint("CheckResult")
+    fun requestReject(activity: Activity,
+                      sessionId: String,
+                      status: String,
+                      isDialogShow: Boolean) {
+        if (Helper.isNetworkConnected(activity)) {
+            apiService.requestReject(sessionId,status)
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    {
+
+                        mResponse.value = RestObservable.error(activity, it)
+                    })
+        } else {
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        requestReject(activity,sessionId, status, isDialogShow)
                     }
                 })
         }
@@ -1810,7 +1880,7 @@ class BaseViewModel : ViewModel() {
 
     @SuppressLint("CheckResult")
     fun teachingInfoApi(
-        activity: Activity,
+  activity: Activity,
         certificate_images: ArrayList<String>,
         educationLevel: String,
         majors: String,

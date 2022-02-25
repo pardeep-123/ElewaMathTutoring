@@ -49,14 +49,14 @@ class Chat_Activity :AppCompatActivity(), View.OnClickListener, SocketManagernew
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
-        socketManager = App.getinstance().getSocketManagernn()
-        socketManager!!.init()
+      //  socketManager = App.getinstance().getSocketManagernn()
+       // socketManager!!.init()
         ivBack.setOnClickListener(this)
         ivVideoCall.setOnClickListener(this)
         ivVoiceCall.setOnClickListener(this)
 
         receiverId=intent.getStringExtra("receiverId").toString()
-        MY_CHAT("t")
+      //  MY_CHAT("t")
         init()
     }
 
@@ -96,14 +96,14 @@ class Chat_Activity :AppCompatActivity(), View.OnClickListener, SocketManagernew
     override fun onDestroy() {
         super.onDestroy()
         Constants.Notification_chat=""
-        socketManager!!.onDisconnect()
+    //    socketManager!!.onDisconnect()
     }
 
     override fun onStart()
     {
         super.onStart()
-        socketManager!!.unRegister(this)
-        socketManager!!.onRegister(this)
+      //  socketManager!!.unRegister(this)
+     //   socketManager!!.onRegister(this)
     }
 
     override fun onStop() {

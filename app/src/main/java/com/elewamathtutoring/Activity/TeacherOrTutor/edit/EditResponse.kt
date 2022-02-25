@@ -7,18 +7,19 @@ data class EditResponse(
     val code: Int, // 200
     val message: String, // Profile get successfully.
     val body: Body
-):Serializable {
+) :Serializable{
     data class Body(
-        val id: Int, // 316
+        val id: Int, // 321
         val name: String, // rg
         val userType: Int, // 2
-        val image: String, // http://202.164.42.227:7552/uploads/users/1645521975AndroidTest (1).pdf
-        val email: String, // nihal22@gmail.com
-        val about: String, // fdg
+        val image: String, // http://202.164.42.227:7552/uploads/users/164562280120220105_150447086_fef2148118f24efae02f5eb75ac3e84e.jpg
+        val email: String, // nihal23@gmail.com
+        val about: String, // fdgfddddddddddddddddddddddddddddddddddddd
         val teachingHistory: String, // fddfggff
         val isCertifiedOrtutor: Int, // 0
         val isBuyPlan: Int, // 0
         val teachingLevel: String, // 2,5
+        val educationLevel: String, // ree
         val specialties: String, // bjfbj,fbb
         val InPersonRate: Int, // 0
         val virtualRate: Int, // 0
@@ -26,17 +27,17 @@ data class EditResponse(
         val availability: String, // 1,2,5
         val available_slots: String, // 5,8,9
         val notificationStatus: Int, // 1
-        val latitude: String, // 1000038
-        val longitude: String, // 384735
-        val deviceType: Int, // 1
-        val deviceToken: String, // abcdefghijklmnopqrstuvwxyz
+        val latitude: String, // 30.7046
+        val longitude: String, // 76.7179
+        val deviceType: Int, // 0
+        val deviceToken: String,
         val SocialType: Int, // 0
         val SocialId: String,
         val status: Int, // 1
         val teaching_level: List<TeachingLevel>,
         val time_slots: List<TimeSlot>,
         val certificate_images: List<CertificateImage>
-    ):Serializable {
+    ) :Serializable{
         data class TeachingLevel(
             val id: Int, // 2
             val level: String, // Middle School Level
@@ -55,11 +56,11 @@ data class EditResponse(
         ):Serializable
 
         data class CertificateImage(
-            val id: Int, // 56
-            val user_id: Int, // 316
-            val images: String, // 1645525299button (1).png
-            val createdAt: String, // 2022-02-22T10:21:38.000Z
-            val updatedAt: String // 2022-02-22T10:21:38.000Z
+            val id: Int, // 76
+            val user_id: Int, // 321
+            val images: String, // 1645770982arrow.png
+            val createdAt: String, // 2022-02-25T06:36:22.000Z
+            val updatedAt: String // 2022-02-25T06:36:22.000Z
         ):Serializable
     }
 }

@@ -1,5 +1,6 @@
-package com.elewamathtutoring.Activity.TeacherOrTutor
+package com.elewamathtutoring.Activity.TeacherOrTutor.request
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -27,9 +28,7 @@ import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import com.pawskeeper.Modecommon.Commontoall
-
 import kotlinx.android.synthetic.main.activity_requests.*
-import kotlinx.android.synthetic.main.activity_requests.ivProfileSignUp
 import kotlinx.android.synthetic.main.dialog_report.*
 import kotlinx.android.synthetic.main.report_popup.view.*
 import java.text.SimpleDateFormat
@@ -40,16 +39,16 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     var receiverId=""
     var chatUserName=""
+    var id=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_requests)
         clicks()
 
         if (intent.getStringExtra("from").equals("Sessions")) {
-            btnAcceptOffer.setText("Complete Offer")
+            btnAcceptOffer.setText("Cancel Booking")
            // btnDenyOffer.setText("Cancel Session")
-            tv_inq.visibility=View.GONE
-            tv_inquiry.visibility=View.GONE
+
         }
         else {
             btnAcceptOffer.setText("Accept Offers")
@@ -60,6 +59,8 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
         api()
     }
     private fun api() {
+//        /intent.getStringExtra("id").toString()
+       // this.id=id
         baseViewModel.sessionDetails(this, true, intent.getStringExtra("id").toString())
         baseViewModel.getCommonResponse().observe(this, this)
     }
@@ -88,8 +89,9 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
                 startActivity(i)
             }
             R.id.btnAcceptOffer -> {
-                //     0=pending,1=accepted,2=completed,3 =cancel , 4 = cancelbyuser
+              //old E-Teacher  //     0=pending,1=accepted,2=completed,3 =cancel , 4 = cancelbyuser
 
+             //   0=pending,1=accepted,2=complete,3 =cancelbyteacher , 5 = deny session , 6= UserCompleted
                 if(btnAcceptOffer.text.toString().equals("Complete Offer"))
                 {
                     change_oderstatus("2")
@@ -148,8 +150,7 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
         }
     }
 
-    private fun setPopUpWindow()
-    {
+    private fun setPopUpWindow() {
         val viewGroup: ViewGroup = window.decorView.rootView as ViewGroup
         val inflater =
             applicationContext?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -201,22 +202,42 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
 
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onChanged(liveData: RestObservable) {
         when (liveData.status) {
             Status.SUCCESS -> {
-                if (liveData.data is Model_session_detail) {
+                if (liveData.data is RequestDetailResponse) {
                     tvRequestsName.text=liveData.data.body.Student.name
-                   // tv_AboutUser.text="About "+liveData.data.body.Student.name
-                    tv_inquiry.text=liveData.data.body.Student.name+"'s INQUIRY"
+                    tvAmount.text=liveData.data.body.Student.name
+                    tvCommision.text=liveData.data.body.Student.name
+                    tvAmtReceived.text=liveData.data.body.Student.name
+
+                    tv_inquiry.text="About "+liveData.data.body.Student.name
+                    tv_inq.text="About "+liveData.data.body.Student.about
                     tv_requestemail.text=liveData.data.body.Student.email
                   //  tv_aboutparent.text=liveData.data.body.Student.about
                     receiverId= liveData.data.body.userId.toString()
+                    chatUserName= liveData.data.body.Student.name.toString()
                     chatUserName= liveData.data.body.Student.name.toString()
 
                     if(liveData.data.body.status==2||liveData.data.body.status==3||liveData.data.body.status==4||liveData.data.body.status==6)
                     {
                      //   btnLL.visibility=View.GONE
                     }
+                    if(liveData.data.body.status==0){
+                        btnAcceptOffer.visibility=View.VISIBLE
+                        btnReject.visibility=View.VISIBLE
+                    } else if(liveData.data.body.status==1){
+                        btnAcceptOffer.visibility=View.GONE
+
+                        btnReject.visibility=View.VISIBLE
+                    }else if(liveData.data.body.status==3){
+                        btnAcceptOffer.visibility=View.VISIBLE
+                        btnAcceptOffer.setText("Cancel Booking")
+                        btnReject.visibility=View.GONE
+                    }
+
+
 
                     val dateParser = SimpleDateFormat("yyyy-MM-dd")
                     val date = dateParser.parse(liveData.data.body.date)
@@ -226,8 +247,7 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
                     tv_requesteddate.text=Orderstatus(liveData.data.body.status)+" "+ConvertTimeStampToDate(liveData.data.body.updated.toLong(),"MM/dd/YY")
                     tv_inq.text=liveData.data.body.about
                     Glide.with(this).load(Constants.IMAGE_URL+liveData.data.body.Student.image).placeholder(R.drawable.profile_unselected).into(ivProfileSignUp)
-                    tv_requested_startendtime.text=liveData.data.body.timeslot.get(0).startTime+" - "+
-                            liveData.data.body.timeslot.get(0).endTime
+                    tv_requested_startendtime.text=liveData.data.body.timeslot.get(0).startTime+" - "+ liveData.data.body.timeslot.get(0).endTime
                 }
               else if (liveData.data is Commontoall) {
                     Helper.showSuccessToast(this, liveData.data.message)
@@ -235,7 +255,7 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
                 }
             }
             Status.ERROR -> {
-                if (liveData.error is Model_session_detail)
+                if (liveData.error is RequestDetailResponse)
                 {
                     Helper.showSuccessToast(this, liveData.error.message)
                 }

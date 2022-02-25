@@ -73,7 +73,7 @@
             android:name=".Activity.ParentOrStudent.ReceiptActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.TeacherOrTutor.RequestsActivity"
+            android:name=".Activity.TeacherOrTutor.request.RequestsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.Chat.Chat_Activity"

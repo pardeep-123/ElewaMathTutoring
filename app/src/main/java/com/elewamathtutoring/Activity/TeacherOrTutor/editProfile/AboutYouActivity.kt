@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.elewamathtutoring.Activity.TeacherOrTutor.edit.EditResponse
 import com.elewamathtutoring.Models.Login.Body
 import com.elewamathtutoring.Models.Login.Model_login
 import com.elewamathtutoring.R
@@ -26,15 +27,16 @@ import java.util.*
 import javax.inject.Inject
 
 
-class AboutYouActivity : AppCompatActivity(), View.OnClickListener  , Observer<RestObservable> {
+class AboutYouActivity : AppCompatActivity(), View.OnClickListener, Observer<RestObservable> {
     private var mAlbumFiles: ArrayList<AlbumFile> = ArrayList()
-    var firstimage=""
+    var firstimage = ""
     var oldImage = ""
-    var profilelist=ArrayList<Body>()
+    var profilelist = ArrayList<EditResponse.Body>()
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
+
     @Inject
     lateinit var validator: Validator
-    val context:Context=this
+    val context: Context = this
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about_you)
@@ -45,39 +47,24 @@ class AboutYouActivity : AppCompatActivity(), View.OnClickListener  , Observer<R
         scrollEditText(edaboutyou)
         scrollEditText(edTeachingHistory)
 
-        text_teacher_name.setText(intent.getStringExtra("name").toString())
-        edaboutyou.setText(intent.getStringExtra("about").toString())
-        edTeachingHistory.setText(intent.getStringExtra("teachingHistory").toString())
-        oldImage = intent.getStringExtra("image").toString()
-        Glide.with(this).load(intent.getStringExtra("image").toString())
-            .placeholder(R.drawable.placeholder_image).into(ivProfileDesc)
-
-
-      /*  if(intent.getStringExtra("key")!!.equals("signup"))
-        {
-            tvname.visibility=View.GONE
-            relat_name.visibility=View.GONE
-            try {
-                Glide.with(this).load(intent.getStringExtra("image").toString())
-                    .placeholder(R.drawable.profile_unselected).into(ivProfileDesc)
-                firstimage=intent.getStringExtra("image").toString()
-            }
-            catch (e:Exception)
-            {
-            }
-        }
-        else
-        {
-            profilelist = (intent.getSerializableExtra("list_model") as ArrayList<Body>?)!!
+        if (intent.getSerializableExtra("list_model") != null) {
+            profilelist =
+                (intent.getSerializableExtra("list_model") as ArrayList<EditResponse.Body>?)!!
             text_teacher_name.setText(profilelist.get(0).name.toString())
             edaboutyou.setText(profilelist.get(0).about.toString())
             edTeachingHistory.setText(profilelist.get(0).teachingHistory.toString())
-            Glide.with(context)
-                .load(profilelist.get(0).image)
-                .placeholder(R.drawable.profile_unselected)
-                .into(ivProfileDesc)
-            btnNext.text="SAVE"
-        }*/
+            oldImage = intent.getStringExtra("image").toString()
+            Glide.with(context).load(profilelist.get(0).image)
+                .placeholder(R.drawable.profile_unselected).into(ivProfileDesc)
+            //  btnNext.text="SAVE"
+        } else {
+            text_teacher_name.setText(intent.getStringExtra("name").toString())
+            edaboutyou.setText(intent.getStringExtra("about").toString())
+            edTeachingHistory.setText(intent.getStringExtra("teachingHistory").toString())
+            oldImage = intent.getStringExtra("image").toString()
+            Glide.with(this).load(intent.getStringExtra("image").toString())
+                .placeholder(R.drawable.placeholder_image).into(ivProfileDesc)
+        }
     }
 
     override fun onClick(v: View?) {
@@ -87,39 +74,39 @@ class AboutYouActivity : AppCompatActivity(), View.OnClickListener  , Observer<R
             }
             R.id.btnNext -> {
                 api()
-               /* if (intent.getStringExtra("key").equals("signup")) {
-                    if (validator.Teacheraboutus(this, firstimage, edaboutyou.text.toString(),
-                            edTeachingHistory.text.toString(), text_teacher_name.text.toString(), "add")) {
-                        val password = intent.getStringExtra("password").toString()
-                        val email = intent.getStringExtra("email").toString()
-                        val Name = intent.getStringExtra("Name").toString()
+                /* if (intent.getStringExtra("key").equals("signup")) {
+                     if (validator.Teacheraboutus(this, firstimage, edaboutyou.text.toString(),
+                             edTeachingHistory.text.toString(), text_teacher_name.text.toString(), "add")) {
+                         val password = intent.getStringExtra("password").toString()
+                         val email = intent.getStringExtra("email").toString()
+                         val Name = intent.getStringExtra("Name").toString()
 
-                        val intent = Intent(this, TeachingInfoActivity::class.java)
-                        intent.putExtra("key", "signup")
-                        intent.putExtra("password", password)
-                        intent.putExtra("email", email)
-                        intent.putExtra("Name", Name)
-                        intent.putExtra("Image", firstimage)
-                        intent.putExtra("socialId", intent.getStringExtra("socialId").toString())
-                        intent.putExtra("socialtype", intent.getStringExtra("socialtype").toString())
-                        intent.putExtra("about_teacher", edaboutyou.text.toString())
-                        intent.putExtra("teacher_history", edTeachingHistory.text.toString())
-                        startActivity(intent)
-                    }
-                }
-                else {
-                    if (validator.Teacheraboutus(this, firstimage, edaboutyou.text.toString(), edTeachingHistory.text.toString(), text_teacher_name.text.toString(), "edit")) {
-                        baseViewModel.EditTeacherBasicProfile(
-                            this,
-                            firstimage,
-                            edTeachingHistory.text.toString(),
-                            text_teacher_name.text.toString(),
-                            edaboutyou.text.toString(),
-                            true
-                        )
-                        baseViewModel.getCommonResponse().observe(this, this)
-                    }
-                }*/
+                         val intent = Intent(this, TeachingInfoActivity::class.java)
+                         intent.putExtra("key", "signup")
+                         intent.putExtra("password", password)
+                         intent.putExtra("email", email)
+                         intent.putExtra("Name", Name)
+                         intent.putExtra("Image", firstimage)
+                         intent.putExtra("socialId", intent.getStringExtra("socialId").toString())
+                         intent.putExtra("socialtype", intent.getStringExtra("socialtype").toString())
+                         intent.putExtra("about_teacher", edaboutyou.text.toString())
+                         intent.putExtra("teacher_history", edTeachingHistory.text.toString())
+                         startActivity(intent)
+                     }
+                 }
+                 else {
+                     if (validator.Teacheraboutus(this, firstimage, edaboutyou.text.toString(), edTeachingHistory.text.toString(), text_teacher_name.text.toString(), "edit")) {
+                         baseViewModel.EditTeacherBasicProfile(
+                             this,
+                             firstimage,
+                             edTeachingHistory.text.toString(),
+                             text_teacher_name.text.toString(),
+                             edaboutyou.text.toString(),
+                             true
+                         )
+                         baseViewModel.getCommonResponse().observe(this, this)
+                     }
+                 }*/
 
             }
             R.id.ivBack -> {
@@ -127,10 +114,19 @@ class AboutYouActivity : AppCompatActivity(), View.OnClickListener  , Observer<R
             }
         }
     }
+
     private fun api() {
-        baseViewModel.EditTeacherBasicProfile(this, firstimage, text_teacher_name.text.toString(), edaboutyou.text.toString(),edTeachingHistory.text.toString(), true)
+        baseViewModel.EditTeacherBasicProfile(
+            this,
+            firstimage,
+            text_teacher_name.text.toString(),
+            edaboutyou.text.toString(),
+            edTeachingHistory.text.toString(),
+            true
+        )
         baseViewModel.getCommonResponse().observe(this, this)
     }
+
     private fun selectImage() {
         Album.image(this).singleChoice().camera(true).columnCount(4).widget(
             Widget.newDarkBuilder(this).title(getString(R.string.app_name)).build()

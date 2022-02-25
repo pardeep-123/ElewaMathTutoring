@@ -1,6 +1,5 @@
 package com.elewamathtutoring.Activity.TeacherOrTutor.availability
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -9,18 +8,12 @@ import android.graphics.drawable.ColorDrawable
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.elewamathtutoring.Activity.TeacherOrTutor.MainTeacherActivity
@@ -28,11 +21,8 @@ import com.elewamathtutoring.Activity.TeacherOrTutor.edit.EditResponse
 import com.elewamathtutoring.Adapter.TeacherOrTutor.DatesAvailableAdapter
 import com.elewamathtutoring.Adapter.TeacherOrTutor.TimeSlotAvailableAdapter
 import com.elewamathtutoring.Model.DatesAvailableModel
-import com.elewamathtutoring.Models.Login.Model_login
-import com.elewamathtutoring.Models.Time_slots.Model_timeslots
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.App
-import com.elewamathtutoring.Util.CommonMethods
 import com.elewamathtutoring.Util.Validator
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
@@ -72,7 +62,7 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
         }
           else {
               profilelist = (intent.getSerializableExtra("list_model") as java.util.ArrayList<EditResponse.Body>?)!!
-              getLocation(profilelist.get(0).latitude,profilelist.get(0).longitude)
+//              getLocation(profilelist.get(0).latitude,profilelist.get(0).longitude)
               val data = profilelist.get(0).availability.toString()
               val words: ArrayList<String> = data.split(",") as ArrayList<String>
               Selctedarray_date=words

@@ -81,7 +81,6 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
                calenderClickApi(sdfDestinationyyyy.format(date).toString() + "-" + sdfDestinationMMonth.format(date).toString() + "-" + sdfDestinationdd.format(date).toString())
             }
         })
-
         DatePickerBuilder(requireContext(), this)
             .pagesColor(R.color.textcolor)
     }

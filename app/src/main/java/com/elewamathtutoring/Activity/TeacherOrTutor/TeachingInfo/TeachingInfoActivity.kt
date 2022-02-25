@@ -28,7 +28,6 @@ import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
-import com.pawskeeper.Modecommon.Commontoall
 import com.riseball.interface_base.Teachinglevel_interface
 import com.yanzhenjie.album.Album
 import com.yanzhenjie.album.AlbumFile
@@ -157,16 +156,15 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
                     apiTeachingInfo()
                 } else {
                         baseViewModel.EditTeacherProfileProfile(
-                            this,
+                            this,imageList,
                             teachinglevel.toString().replace("[", "").replace("]", "").replace(
                                 " ",
                                 ""
                             ),
-                            CertifiedAs ,
                             etMajors.text.toString(),
                             edSpeacialities.text.toString(),
                             edCancelationPolicy.text.toString(),
-                            firstimage,
+                            edCancelationPolicy.text.toString(),
                             address,
                             latitude,
                             longitude,
@@ -245,8 +243,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
         geocoder = Geocoder(this, Locale.getDefault())
         addresses = geocoder.getFromLocation(latitude.toDouble(), longitude.toDouble(), 1)
         // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-        val addres: String =
-            addresses[0].getAddressLine(0) // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+        val addres: String = addresses[0].getAddressLine(0) // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
         address = addres
         edLocation.text = (addres)
     }

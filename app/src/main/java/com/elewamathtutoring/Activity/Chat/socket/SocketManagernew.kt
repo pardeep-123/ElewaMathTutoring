@@ -100,7 +100,7 @@ import java.util.*
                     val user_id: Int = Constants.USER_IDValue.toInt()
                     if (user_id > 0) {
                       val jsonObject = JSONObject()
-                      jsonObject.put("userId", user_id)
+                      jsonObject.put("userId", 0)
                       sendDataToServer(CONNECT_USER, jsonObject)
                       Log.e("Socketdfdfd", "===!connected===Donee=")
                       for (observer in observerList!!) {

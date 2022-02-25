@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.elewamathtutoring.Activity.TeacherOrTutor.RequestsActivity
+import com.elewamathtutoring.Activity.TeacherOrTutor.request.RequestsActivity
 import com.elewamathtutoring.Models.ListView.Body
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.AppUtils
 import com.elewamathtutoring.Util.constant.Constants
-import kotlinx.android.synthetic.main.item_schedule_pending.view.*
-import java.text.SimpleDateFormat
+import kotlinx.android.synthetic.main.item_calender.view.*
+
 
 class SessionsAdapter(c: Context, sessionlist: ArrayList<Body>) :
     RecyclerView.Adapter<SessionsAdapter.ViewHolder>() {
@@ -24,7 +24,7 @@ class SessionsAdapter(c: Context, sessionlist: ArrayList<Body>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(ctn).inflate(R.layout.item_schedule_pending, parent, false)
+        val view = LayoutInflater.from(ctn).inflate(R.layout.item_calender, parent, false)
         return ViewHolder(view)
     }
 

@@ -101,7 +101,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_toRightOf="@+id/ivProfileSignUp"
                     android:fontFamily="@font/avenirlstd_roman"
-                    android:text="rohan@yopmal.com"
+
                     android:textColor="@color/white"
                     android:textSize="13sp" />
 
@@ -275,17 +275,6 @@
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/tvUserName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/view1"
-                    android:fontFamily="@font/bold"
-                    android:text="Rohan"
-                    android:textAllCaps="true"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
             </LinearLayout>
 
             <TextView
@@ -350,6 +339,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/WrapTextView"
+                    android:id="@+id/tvAmount"
                     android:layout_alignParentEnd="true"
                     android:fontFamily="@font/light"
                     android:text="$20"
@@ -370,6 +360,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/WrapTextView"
+                    android:id="@+id/tvCommision"
                     android:layout_alignParentEnd="true"
                     android:fontFamily="@font/light"
                     android:text="$5"
@@ -390,6 +381,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/WrapTextView"
+                    android:id="@+id/tvAmtReceived"
                     android:layout_alignParentEnd="true"
                     android:fontFamily="@font/medium"
                     android:text="$15"
@@ -406,7 +398,6 @@
                 <Button
                     android:id="@+id/btnAcceptOffer"
                     style="@style/Button"
-
                     android:background="@drawable/bg_btn"
                     android:text="Accept"
                     android:textAllCaps="false"

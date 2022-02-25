@@ -19,6 +19,7 @@ import com.elewamathtutoring.Activity.TeacherOrTutor.availability.EditAvailabili
 import com.elewamathtutoring.Activity.TeacherOrTutor.availability.TimeSlotsResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.edit.EditResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.editProfile.EditTeacherProfileResponse
+import com.elewamathtutoring.Activity.TeacherOrTutor.request.RequestDetailResponse
 import com.elewamathtutoring.Fragment.TeacherOrTutor.request.RequestListResponse
 import com.elewamathtutoring.Models.Add_Card.Model_addcards
 import com.elewamathtutoring.Models.Card_listing.Model_cardlisting
@@ -235,20 +236,37 @@ interface RestApiInterface {
         @Field("timeslot") timeslot: String,
     ): Observable<EditAvailabilityResponse>
 
+/*
     @FormUrlEncoded
     @PUT("EditTeacheringinfo")
     fun EditTeacherProfileProfile(
-        @Field("teachingLevel") teachingLevel: String,
-        @Field("educationLevel") educationLevel: String,
-        @Field("majors") majors: String,
-        @Field("specialties") specialties: String,
-        @Field("cancelPolicy") cancelPolicy: String,
-        @Field("certificate_images") certificate_images: String,
-        @Field("address") address: String,
+        @Field("teachingLevel") teachingLevel: ArrayList<MultipartBody.Part>?,
+        @Field("educationLevel") educationLevel: RequestBody,
+        @Field("majors") majors: RequestBody,
+        @Field("specialties") specialties: RequestBody,
+        @Field("cancelPolicy") cancelPolicy: RequestBody,
+        @Field("certificate_images") certificate_images: RequestBody,
+        @Field("address") address: RequestBody,
         @Field("latitude") latitude: String,
         @Field("longitude") longitude: String,
     ): Observable<EditTeachingInfoResponse>
 
+*/
+
+
+    @Multipart
+    @PUT("EditTeacheringinfo")
+    fun EditTeacherProfileProfile(
+        @Part certificate_images:  ArrayList<MultipartBody.Part>,
+        @Part("teachingLevel") teachingLevel: RequestBody,
+        @Part("educationLevel") educationLevel: RequestBody,
+        @Part("majors") majors: RequestBody,
+        @Part("specialties") specialties: RequestBody,
+        @Part("cancelPolicy") cancelPolicy: RequestBody,
+        @Part("address") address: RequestBody,
+        @Part("latitude") latitude: RequestBody,
+        @Part("longitude") longitude: RequestBody,
+    ): Observable<EditTeachingInfoResponse>
 
 
     @FormUrlEncoded
@@ -324,9 +342,8 @@ interface RestApiInterface {
         @Field("teacherId") teacherId: String
     ): Observable<Commontoall>
 
-    @FormUrlEncoded
-    @PUT("session_Details")
-    fun sessionDetails(@Field("sessionId") sessionId: String): Observable<Model_session_detail>
+    @GET("session_Details")
+    fun sessionDetails( @Query ("sessionId")sessionId : String): Observable<RequestDetailResponse>
 
     @FormUrlEncoded
     @POST("get_content")
@@ -348,6 +365,14 @@ interface RestApiInterface {
                       @Field("sessionId") sessionId: String):
             Observable<Commontoall?>
 
+  @FormUrlEncoded
+    @PUT("cancelBooking")
+    fun requestReject(
+                      @Field("sessionId") sessionId: String,
+      @Field("status") status: String
+  ):
+            Observable<Commontoall?>
+
 
   @GET("resources")
     fun get_resources(): Observable<ResourcesResponse>
@@ -366,7 +391,7 @@ interface RestApiInterface {
     fun teacher_level(): Observable<TeachingLevelResponse>
 
     @FormUrlEncoded
-    @POST("All_Sessions_list_with_dates")
+    @POST("All_Sessions_list")
     fun listViewSession(@Field("date") date: String): Observable<Model_myschdeullist>
 
     @FormUrlEncoded

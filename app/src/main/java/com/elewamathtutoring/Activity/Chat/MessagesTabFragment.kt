@@ -144,7 +144,7 @@ class MessagesTabFragment : Fragment() ,View.OnClickListener,  SocketManagernewe
     }
     override fun onDestroy() {
         super.onDestroy()
-        socketManager!!.onDisconnect()
+    //    socketManager!!.onDisconnect()
     }
     private fun getChatData()
     {
@@ -168,10 +168,10 @@ class MessagesTabFragment : Fragment() ,View.OnClickListener,  SocketManagernewe
     override fun onStart()
     {
         super.onStart()
-        socketManager!!.onRegister(this)
+     //   socketManager!!.onRegister(this)
     }
     override fun onResume() {
         super.onResume()
-        getChatData()
+     //   getChatData()
     }
 }

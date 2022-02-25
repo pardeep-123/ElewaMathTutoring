@@ -33,7 +33,6 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener , Observer<Re
     var profilelist=ArrayList<EditResponse.Body>()
     var data=""
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
-
     var image = ""
     var name = ""
     var about = ""
@@ -77,6 +76,7 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener , Observer<Re
                 i.putExtra("about", about)
                 i.putExtra("teachingHistory", teachingHistory)
                 i.putExtra("image", image)
+                //i.putExtra("list",profilelist )
                 startActivity(i)
             }
         }

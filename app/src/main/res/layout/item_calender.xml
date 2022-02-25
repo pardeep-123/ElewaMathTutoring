@@ -208,6 +208,7 @@ android:layout_margin="@dimen/_10sdp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/bold"
                         android:text="James"
+                        android:layout_marginTop="2dp"
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 

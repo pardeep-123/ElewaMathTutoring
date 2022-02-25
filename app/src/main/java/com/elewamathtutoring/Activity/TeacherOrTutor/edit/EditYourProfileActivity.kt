@@ -35,7 +35,7 @@ class EditYourProfileActivity : AppCompatActivity(), View.OnClickListener,
         when (v!!.id) {
             R.id.llAboutYou -> {
                 val intentt = Intent(this, AboutYouActivity::class.java)
-               intentt.putExtra("key", "editprofile")
+//               intentt.putExtra("key", "editprofile")
                 intentt.putExtra("list_model", profilelist)
                 startActivity(intentt)
             }
