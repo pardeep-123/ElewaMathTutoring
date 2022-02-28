@@ -49,11 +49,11 @@ class SignupTeacherActivity : AppCompatActivity(), View.OnClickListener , Observ
         ivBack.setOnClickListener(this)
         btnNext.setOnClickListener(this)
         add_img.setOnClickListener(this)
-
+        if(intent.getStringExtra("signup")!!.equals("teacher")) {
             name = intent.getStringExtra("name").toString()
             email = intent.getStringExtra("email").toString()
             password = intent.getStringExtra("password").toString()
-
+        }
     }
 
     override fun onClick(v: View?) {
@@ -100,7 +100,8 @@ class SignupTeacherActivity : AppCompatActivity(), View.OnClickListener , Observ
                 if (it.data is TeacherSignUpResponse) {
                     savePrefrence(Constants.AUTH_KEY, it.data.body.token)
                     if (getPrefrence(Constants.user_type, "").equals("2")) {
-                        startActivity(Intent(this, TeachingInfoActivity::class.java))
+                        startActivity(Intent(this, TeachingInfoActivity::class.java)
+                            .putExtra("signup","teacher"))
                     }
                     /* if (getPrefrence(Constants.user_type, "").equals("1")) {
                          intent = Intent(this, DescSignupScreen::class.java)

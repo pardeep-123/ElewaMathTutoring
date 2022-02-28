@@ -30,7 +30,7 @@ import kotlinx.android.synthetic.main.fragment_profile_tab.*
 import kotlin.collections.ArrayList
 
 class ProfileFragment : Fragment(), Observer<RestObservable> {
-    //var listdata= ArrayList<com.elewamathtutoring.Models.TeacherRequestsList.Body>()
+   var listdata= ArrayList<com.elewamathtutoring.Models.TeacherRequestsList.Body>()
     var name = ""
     var about = ""
     var image = ""
@@ -38,7 +38,7 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
     lateinit var contex: Context
     lateinit var btnEditProfile: Button
     lateinit var v: View
-    var list = ArrayList<Body>()
+    var list = ArrayList<ProfileResponse.Body>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -79,7 +79,13 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
         when (liveData!!.status) {
             Status.SUCCESS -> {
                 if (liveData.data is ProfileResponse) {
-                   // list.addAll(listOf(liveData.data.body))
+                    list.addAll(listOf(liveData.data.body))
+
+
+                    name=liveData.data.body.name
+                    about=liveData.data.body.about
+                    image=liveData.data.body.image
+
                     text_parent_name.text = liveData.data.body.name
                     text_parent_email.text = liveData.data.body.email
                     text_teacher_inprice.text = liveData.data.body.email
@@ -88,9 +94,6 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
                         .placeholder(R.drawable.profile_unselected).into(image_parent_image)
                     text_parent_titelname.text = "About " + liveData.data.body.name
 
-                    name=liveData.data.body.name
-                    about=liveData.data.body.about
-                    image=liveData.data.body.image
 
 
                     apiPastTeacher()
@@ -134,7 +137,7 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
     }
      fun apicomplete(id: Int) {
          baseViewModel.change_session_status(requireActivity(), "6",id.toString(),true)
-        // baseViewModel.getCommonResponse().observe(requireActivity(), this)
+        baseViewModel.getCommonResponse().observe(requireActivity(), this)
 
      }
 }

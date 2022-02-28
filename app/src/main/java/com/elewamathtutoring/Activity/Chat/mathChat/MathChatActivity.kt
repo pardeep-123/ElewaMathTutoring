@@ -18,8 +18,8 @@ import com.elewamathtutoring.viewmodel.BaseViewModel
 import kotlinx.android.synthetic.main.activity_math_chat.ivBack
 
 class MathChatActivity : AppCompatActivity(), View.OnClickListener, Observer<RestObservable> {
-    lateinit var context:Context
-    var userType = ""
+    lateinit var context: Context
+    var viewType = ""
     var type = ""
     var aboutResponse: MathChatResponse? = null
     lateinit var mathChatAdapter: MathChatAdapter
@@ -27,64 +27,72 @@ class MathChatActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_math_chat)
-        context=this
+        context = this
         rv_chat.setOnClickListener(this)
         ivBack.setOnClickListener(this)
         btnCreateGroup.setOnClickListener(this)
         rlTutor.setOnClickListener(this)
         rlStudent.setOnClickListener(this)
-        apibankAccounts("2")
 
 
-        if( intent.getStringExtra("tutor").equals("mathChat")){
-            llBtns.visibility=View.VISIBLE
-        }else{
-            llBtns.visibility=View.GONE
+
+        if (intent.getStringExtra("tutor").equals("mathChat")) {
+            llBtns.visibility = View.VISIBLE
+            apibankAccounts("2")
+            viewType = "2"
+        } else {
+            llBtns.visibility = View.GONE
+            apibankAccounts("2")
+            viewType = "1"
         }
     }
 
     override fun onClick(p0: View?) {
-        when(p0?.id){
-            R.id.ivBack->{
-               finish()
+        when (p0?.id) {
+            R.id.ivBack -> {
+                finish()
             }
-            R.id.btnCreateGroup->{
+            R.id.btnCreateGroup -> {
                 startActivity(Intent(context, StudyGroupActivity::class.java))
             }
-            R.id.rlTutor->{
+            R.id.rlTutor -> {
                 tvTutor.setTextColor(getResources().getColor(R.color.white))
                 tvStudent.setTextColor(getResources().getColor(R.color.app))
                 rlTutor.setBackgroundResource(R.drawable.bg_btn)
                 rlStudent.setBackgroundResource(R.drawable.bg_btn_white)
                 apibankAccounts("2")
+                viewType = "2"
             }
-            R.id.rlStudent->{
+            R.id.rlStudent -> {
                 tvTutor.setTextColor(getResources().getColor(R.color.app))
                 tvStudent.setTextColor(getResources().getColor(R.color.white))
                 rlTutor.setBackgroundResource(R.drawable.bg_btn_white)
                 rlStudent.setBackgroundResource(R.drawable.bg_btn)
                 apibankAccounts("1")
+                viewType = "1"
             }
         }
     }
+
     fun apibankAccounts(userType: String) {
-        this.userType=userType
-        baseViewModel.getTeacherStudentList(this, userType,true)
+        baseViewModel.getTeacherStudentList(this, userType, true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
+
     override fun onChanged(it: RestObservable?) {
         when (it!!.status) {
             Status.SUCCESS -> {
                 if (it.data is MathChatResponse) {
-                    aboutResponse=it.data
-                  rv_chat.adapter = MathChatAdapter(this, aboutResponse!!, userType)
+                    aboutResponse = it.data
+                    rv_chat.adapter = MathChatAdapter(this, aboutResponse!!, viewType)
                 }
             }
             Status.ERROR -> {
                 if (it.error is MathChatResponse)
                     Helper.showSuccessToast(this, it.error.message)
             }
-            else -> {}
+            else -> {
+            }
         }
     }
 }

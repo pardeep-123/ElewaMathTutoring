@@ -36,34 +36,27 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
     lateinit var sharedPrefUtil: SharedPrefUtil
     var teacherdetails = ArrayList<com.elewamathtutoring.Models.Teacher_details.Body>()
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
-
+    var id = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_teacher_details)
         sharedPrefUtil = SharedPrefUtil(this)
-
         onClicks()
-        //Techerdetailapi()
+        api()
         if (intent.getStringExtra("Type").equals("schedule")) {
             btnScheduleSession.visibility = View.GONE
 
             btnviewreciept.visibility = View.VISIBLE
-        }
-        else if(intent.getStringExtra("Type").equals("PastTecher"))
-        {
+        } else if (intent.getStringExtra("Type").equals("PastTecher")) {
             btnScheduleSession.visibility = View.VISIBLE
             btnScheduleSession.setText("Reschedule")
-        }
-        else
-        {
+        } else {
             btnScheduleSession.visibility = View.VISIBLE
-
         }
-
     }
 
     private fun onClicks() {
-       // options.setOnClickListener(this)
+        options.setOnClickListener(this)
         btnScheduleSession.setOnClickListener(this)
         btnReschedule.setOnClickListener(this)
         btnviewreciept.setOnClickListener(this)
@@ -73,26 +66,25 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
 
     override fun onClick(v: View?) {
         when (v!!.id) {
-            /*R.id.options -> {
+            R.id.options -> {
                 setPopUpWindow()
-            }*/
+            }
             R.id.ivBack -> {
                 finish()
-            }  R.id.llChat -> {
-            var intent = Intent(this, MathPersonChatActivity::class.java)
-            startActivity(intent)
+            }
+            R.id.llChat -> {
+                var intent = Intent(this, MathPersonChatActivity::class.java)
+                startActivity(intent)
             }
             R.id.btnScheduleSession -> {
                 var intent = Intent(this, ScheduleASessionActivity::class.java)
-                intent.putExtra("teacher_detail",teacherdetails)
+                intent.putExtra("teacher_detail", teacherdetails)
                 startActivity(intent)
-
             }
-
             R.id.btnviewreciept -> {
                 val intentt = Intent(this, ReceiptActivity::class.java)
-               // intentt.putExtra("listdata", teacherdetails)
-               // intentt.putExtra("session_id", intent.getStringExtra("session_id").toString())
+                // intentt.putExtra("listdata", teacherdetails)
+                // intentt.putExtra("session_id", intent.getStringExtra("session_id").toString())
                 startActivity(intentt)
             }
         }
@@ -116,12 +108,14 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
         }
 
     }
-
     private fun dialogReport() {
         val reportDialog = Dialog(this)
         reportDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         reportDialog.setContentView(R.layout.dialog_report)
-        reportDialog.window!!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
+        reportDialog.window!!.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
 
         reportDialog.report_cancel.setOnClickListener {
             reportDialog.cancel()
@@ -130,7 +124,12 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
         }
         reportDialog.report_Submit.setOnClickListener {
 
-            baseViewModel.report(this, reportDialog.etText.text.toString(), intent.getStringExtra("teacher_id").toString(),true)
+            baseViewModel.report(
+                this,
+                reportDialog.etText.text.toString(),
+                intent.getStringExtra("teacher_id").toString(),
+                true
+            )
             baseViewModel.getCommonResponse().observe(this, this)
             reportDialog.cancel()
             myPopupWindow!!.dismiss()
@@ -150,40 +149,37 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
             Status.SUCCESS -> {
                 if (liveData.data is Model_teacherdetails) {
                     teacherdetails.addAll(listOf(liveData.data.body))
-                    Glide.with(this).load(liveData.data.body.image).placeholder(R.drawable.profile_unselected).into(ivtecher_image)
+                    Glide.with(this).load(liveData.data.body.image)
+                        .placeholder(R.drawable.profile_unselected).into(ivtecher_image)
                     tv_techername.setText(liveData.data.body.name)
-                    tv_about.setText("About "+liveData.data.body.name)
-                    tv_teachercertified.text= Constants.isCertifiedOrtutor(liveData.data.body.isCertifiedOrtutor)
+                    tv_about.setText("About " + liveData.data.body.name)
+                    tv_teachercertified.text =
+                        Constants.isCertifiedOrtutor(liveData.data.body.isCertifiedOrtutor)
 
-                    for(i in 0 until liveData.data.body.teaching_level.size)
-                    {
-                        var data=liveData.data.body.teaching_level.get(i).level+","
-                       tv_parentteacherlevel.text= tv_parentteacherlevel.text.toString()+data
+                    for (i in 0 until liveData.data.body.teaching_level.size) {
+                        var data = liveData.data.body.teaching_level.get(i).level + ","
+                        tv_parentteacherlevel.text = tv_parentteacherlevel.text.toString() + data
                     }
-                    var s =tv_parentteacherlevel.text.toString()
-                   tv_parentteacherlevel.text = s.substring(0, s.length -1)
+                    var s = tv_parentteacherlevel.text.toString()
+                    tv_parentteacherlevel.text = s.substring(0, s.length - 1)
 
-                    tvparentSpecialized.text=liveData.data.body.specialties
-                  //  tv_teacher_CancelationPolicy.text=liveData.data.body.cancellationPolicy
-                    tv_teacher_AboutUser.text=liveData.data.body.about
-                    tv_teacher_TeachingHistory.text=liveData.data.body.teachingHistory
-                //    tv_teacher_virtual.text=(Constants.Currency+liveData.data.body.virtualRate.toString())+".00/Hr"
-                 //   tv_teacher_inprice.text=Constants.Currency+liveData.data.body.InPersonRate.toString()+".00/Hr"
+                    tvparentSpecialized.text = liveData.data.body.specialties
+                    //  tv_teacher_CancelationPolicy.text=liveData.data.body.cancellationPolicy
+                    tv_teacher_AboutUser.text = liveData.data.body.about
+                    tv_teacher_TeachingHistory.text = liveData.data.body.teachingHistory
+                    //    tv_teacher_virtual.text=(Constants.Currency+liveData.data.body.virtualRate.toString())+".00/Hr"
+                    //   tv_teacher_inprice.text=Constants.Currency+liveData.data.body.InPersonRate.toString()+".00/Hr"
 
-                }
-                else if (liveData.data is Commontoall) {
+                } else if (liveData.data is Commontoall) {
                     finish()
-                }
-                else
-                {
+                } else {
                 }
             }
 
             Status.ERROR -> {
                 if (liveData.error is Model_teacherdetails) {
                     Helper.showSuccessToast(this, liveData.error.message)
-                }
-                else if (liveData.error is Commontoall) {
+                } else if (liveData.error is Commontoall) {
                     Helper.showSuccessToast(this, liveData.error.message)
                 }
             }
@@ -193,10 +189,12 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
             }
         }
     }
-
-    fun  Techerdetailapi()
-    {
-        baseViewModel.teachersDetails(this,intent.getStringExtra("teacher_id").toString(),true )
+    /*  fun  Techerdetailapi(){
+          baseViewModel.teachersDetails(this,intent.getStringExtra("teacher_id").toString(),true )
+          baseViewModel.getCommonResponse().observe(this, this)
+      }*/
+    private fun api() {
+        baseViewModel.sessionDetails(this, true, intent.getStringExtra("id").toString())
         baseViewModel.getCommonResponse().observe(this, this)
     }
 }

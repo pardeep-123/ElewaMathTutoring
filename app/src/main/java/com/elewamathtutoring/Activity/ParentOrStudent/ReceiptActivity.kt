@@ -40,7 +40,7 @@ class ReceiptActivity : AppCompatActivity() ,View.OnClickListener, Observer<Rest
         //Schedule = ((intent.getSerializableExtra("listdata") as ArrayList<com.elewamathtutoring.Models.Teacher_details.Body>?)!!)
        // var pozitiondata=Schedule.get(0)
 
-       // api()
+        api()
     /*    tv_name.text=pozitiondata.name
         tvSpecialized.text=pozitiondata.specialties
         Glide.with(this).load(pozitiondata.image).placeholder(R.drawable.profile_unselected).into(iv_techerprofile)

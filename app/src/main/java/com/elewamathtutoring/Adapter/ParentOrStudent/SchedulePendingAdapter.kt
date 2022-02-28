@@ -40,7 +40,7 @@ class SchedulePendingAdapter(c: Context, s: ArrayList<RequestListResponse.Body>,
 
         Glide.with(ctn).load(Constants.IMAGE_URL+list.get(position).Student.image)
             .placeholder(R.drawable.profile_unselected).into(holder.itemView.ivImage)
-        holder.itemView.tvItemDate.text=AppUtils.secondsToTimeStamp(list.get(position).date.toLong(),"EEE, MMM dd")
+      //   holder.itemView.tvItemDate.text=AppUtils.secondsToTimeStamp(list.get(position).date.toLong(),"EEE, MMM dd")
 
         holder.itemView.setOnClickListener {
             val intent = Intent(ctn, RequestsActivity::class.java)

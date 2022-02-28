@@ -73,7 +73,6 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
         ivRequestsBack.setOnClickListener(this)
         btnReject.setOnClickListener(this)
         rlMessageButton.setOnClickListener(this)
-
     }
 
 

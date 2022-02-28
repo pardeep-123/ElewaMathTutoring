@@ -1,11 +1,13 @@
 package com.elewamathtutoring.Fragment.ParentOrStudent.profile
 
+import java.io.Serializable
+
 data class ProfileResponse(
     val status: Boolean, // true
     val code: Int, // 200
     val message: String, // Profile get successfully.
     val body: Body
-) {
+):Serializable {
     data class Body(
         val id: Int, // 241
         val name: String, // aaa
@@ -31,5 +33,5 @@ data class ProfileResponse(
         val SocialType: Int, // 0
         val SocialId: String,
         val status: Int // 1
-    )
+    ):Serializable
 }

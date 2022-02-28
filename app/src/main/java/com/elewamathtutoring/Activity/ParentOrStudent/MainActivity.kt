@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfileFragment
-import com.elewamathtutoring.Fragment.ScheduleFragment
+import com.elewamathtutoring.Fragment.ParentOrStudent.booking.ScheduleFragment
 import com.elewamathtutoring.Fragment.SearchFragment
 import com.elewamathtutoring.Activity.Chat.MessagesTabFragment
 

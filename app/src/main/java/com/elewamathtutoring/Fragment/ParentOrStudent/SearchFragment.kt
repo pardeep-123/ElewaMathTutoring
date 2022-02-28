@@ -87,8 +87,8 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
         getdata_toselected_certified.add("2")
         getdata_toselected_certified.add("3")
 
-        searchHomeAdapter = SearchHomeAdapter(requireContext())
-        recycler_Homesearch.adapter = searchHomeAdapter
+   /*     searchHomeAdapter = SearchHomeAdapter(requireContext())
+        recycler_Homesearch.adapter = searchHomeAdapter*/
        // checkPermissionLocation(requireActivity())
        /* rl2.setOnClickListener {
             teachinglevel()
@@ -98,7 +98,8 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
             startActivity(Intent(context, NotificationsActivity::class.java))
         }
         rlMathChatRoom.setOnClickListener {
-            startActivity(Intent(context, MathChatActivity::class.java))
+            startActivity(Intent(context, MathChatActivity::class.java)
+                .putExtra("user","mathChatRoom"))
         }
         rlResources.setOnClickListener {
             startActivity(Intent(context, ResoucesActivity::class.java))

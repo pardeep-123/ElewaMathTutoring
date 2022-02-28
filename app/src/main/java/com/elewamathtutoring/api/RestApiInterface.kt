@@ -17,19 +17,18 @@ import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.TeachingLevelR
 import com.elewamathtutoring.Activity.TeacherOrTutor.availability.AvailabilityResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.availability.EditAvailabilityResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.availability.TimeSlotsResponse
-import com.elewamathtutoring.Activity.TeacherOrTutor.edit.EditResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.editProfile.EditTeacherProfileResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.request.RequestDetailResponse
+import com.elewamathtutoring.Fragment.ParentOrStudent.booking.UserBookingListResponse
+import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfileResponse
 import com.elewamathtutoring.Fragment.TeacherOrTutor.request.RequestListResponse
 import com.elewamathtutoring.Models.Add_Card.Model_addcards
 import com.elewamathtutoring.Models.Card_listing.Model_cardlisting
 import com.elewamathtutoring.Models.ListView.Model_myschdeullist
 import com.elewamathtutoring.Models.Login.Model_login
-import com.elewamathtutoring.Models.My_Schedule.Model_schedule
 import com.elewamathtutoring.Models.TeacherRequestsList.Model_TeacherRequestList
 import com.elewamathtutoring.Models.Notifications.Model_Notifications
 import com.elewamathtutoring.Models.Search.Model_search
-import com.elewamathtutoring.Models.Session_detail.Model_session_detail
 import com.elewamathtutoring.Models.Teacher_details.Model_teacherdetails
 import com.pawskeeper.Modecommon.Commontoall
 import com.pawskeeper.Modecommon.Commontoall2
@@ -188,10 +187,7 @@ interface RestApiInterface {
         @Header("security_key") security_key: String,
         @Field("teacher_id") teacher_id: String
     ): Observable<Model_teacherdetails>
-
-
-
-    // @Field("bankId") bankId: String,     @Field("bankType") bankType: String?
+   // @Field("bankId") bankId: String,     @Field("bankType") bankType: String?
     @FormUrlEncoded
     @POST("bank")
     fun edit_bank(
@@ -354,7 +350,7 @@ interface RestApiInterface {
     fun get_profile(@Field("userType") userType: String): Observable<ProfileResponse>*/
 
     @GET("get_profile")
-    fun get_profile(): Observable<EditResponse>
+    fun get_profile(): Observable<ProfileResponse>
 
      @GET("TeacherRequestList")
     fun TeacherRequestList(): Observable<RequestListResponse>
@@ -384,8 +380,8 @@ interface RestApiInterface {
     @GET("card_listing")
     fun card_listing(): Observable<Model_cardlisting>
 
-    @GET("parentSchedulingList")
-    fun parentSchedulingList(): Observable<Model_schedule>
+    @GET("userBookingList")
+    fun parentSchedulingList(): Observable<UserBookingListResponse>
 
     @GET("Get_teaching_level")
     fun teacher_level(): Observable<TeachingLevelResponse>

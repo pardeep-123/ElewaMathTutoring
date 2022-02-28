@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Fragment.ScheduleFragment">
+    tools:context=".Fragment.ParentOrStudent.booking.ScheduleFragment">
 
     <RelativeLayout
         android:id="@+id/myschedule_toolbar"
@@ -73,13 +73,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="14dp"
                 android:layout_marginTop="14dp"
+                android:visibility="gone"
                 android:layout_marginRight="14dp"
                 android:fontFamily="@font/aenirlsttd_black"
                 android:text="Pending"
                 android:textAllCaps="true"
                 android:textColor="@color/textcolor"
-                android:textSize="16sp"
-              />
+                android:textSize="16sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_SchedulePending"

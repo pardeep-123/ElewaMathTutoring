@@ -57,14 +57,16 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
                         baseViewModel.signUpApi(this,  edtName.text.toString(),edtEmail.text.toString(), editPassword.text.toString(),"1", true)
                         baseViewModel.getCommonResponse().observe(this, this)
                     }
-                } else {
-                    startActivity(
-                        Intent(this, SignupTeacherActivity::class.java)
-                            .putExtra("name", edtName.text.toString())
-                            .putExtra("email", edtEmail.text.toString())
-                            .putExtra("password", editPassword.text.toString())
-                    )
-                    finish()
+                } else   if (getPrefrence(Constants.user_type, "").equals("2")){
+                    if (validator.signUpValid(this, edtName.text.toString(), edtEmail.text.toString(), editPassword.text.toString(), editConfirmPassword.text.toString())) {
+                        startActivity(
+                            Intent(this, SignupTeacherActivity::class.java)
+                                .putExtra("signup","teacher")
+                                .putExtra("name", edtName.text.toString())
+                                .putExtra("email", edtEmail.text.toString())
+                                .putExtra("password", editPassword.text.toString())
+                        )
+                    }
                 }
             }
             R.id.ivBack -> {
