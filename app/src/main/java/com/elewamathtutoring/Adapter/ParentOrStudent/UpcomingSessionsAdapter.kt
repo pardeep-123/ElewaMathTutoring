@@ -1,5 +1,6 @@
 package com.elewamathtutoring.Adapter.ParentOrTeacher
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -51,6 +52,7 @@ class UpcomingSessionsAdapter(
         return  list.size
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
    try {
        val dateParser = SimpleDateFormat("yyyy-MM-dd")
@@ -87,16 +89,14 @@ class UpcomingSessionsAdapter(
 
         }
 
-}catch (e:Exception)
-{
+}catch (e:Exception) {
 
 }
         holder.itemView.schedulePendingRoot.setOnClickListener {
-            if(type==2)
-            {
+            if(type==2) {
                 val intent = Intent(ctn, TeacherDetailsActivity::class.java)
-                intent.putExtra("teacher_id", list.get(0).Today_sessions[position].Teacher.id.toString())
-                intent.putExtra("session_id", list.get(0).Today_sessions[position].id.toString())
+                intent.putExtra("teacher_id", list.get(0).Upcoming_sessions[position].Teacher.id.toString())
+                intent.putExtra("session_id", list.get(0).Upcoming_sessions[position].id.toString())
                 intent.putExtra("Type","schedule")
                 ctn.startActivity(intent)
             }

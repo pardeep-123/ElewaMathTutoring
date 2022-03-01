@@ -15,6 +15,7 @@ import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.edit.EditResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.editProfile.AboutYouActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.edit.EditYourProfileActivity
+import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfileResponse
 import com.elewamathtutoring.Models.Teacher_level.Model_teacher_level
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
@@ -26,12 +27,11 @@ import com.elewamathtutoring.viewmodel.BaseViewModel
 import kotlinx.android.synthetic.main.fragment_profile_tab.*
 import kotlinx.android.synthetic.main.fragment_profile_tab.view.*
 
-
-class TeacherProfileTabFragment : Fragment(), View.OnClickListener , Observer<RestObservable> {
+class TeacherProfileTabFragment : Fragment(), View.OnClickListener, Observer<RestObservable> {
     lateinit var v: View
     lateinit var contex: Context
-    var profilelist=ArrayList<EditResponse.Body>()
-    var data=""
+    var profilelist = ArrayList<EditResponse.Body>()
+    var data = ""
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     var image = ""
     var name = ""
@@ -46,28 +46,31 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener , Observer<Re
         onClicks()
         return v
     }
-    private fun api()
-    {
+
+    private fun api() {
         //, getPrefrence(Constants.user_type, "")
-        baseViewModel.get_profile(requireActivity(), true)
+        baseViewModel.getProfile(requireActivity(), true)
         baseViewModel.getCommonResponse().observe(requireActivity(), this)
     }
+
     private fun onClicks() {
         v.rootView.ivSetting.setOnClickListener(this)
         v.rootView.llEditProfileInformation.setOnClickListener(this)
         v.rootView.btnEditProfile.setOnClickListener(this)
-       // v.rootView.llUpgradeYourProfile.setOnClickListener(this)
+        // v.rootView.llUpgradeYourProfile.setOnClickListener(this)
     }
+
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.ivSetting -> {
-                startActivity(Intent(context, SettingActivity::class.java)
-                    .putExtra("setting","managePayment")
+                startActivity(
+                    Intent(context, SettingActivity::class.java)
+                        .putExtra("setting", "managePayment")
                 )
             }
             R.id.llEditProfileInformation -> {
                 val intent = Intent(contex, EditYourProfileActivity::class.java)
-                intent.putExtra("list_model",profilelist )
+                intent.putExtra("list_model", profilelist)
                 startActivity(intent)
             }
             R.id.btnEditProfile -> {
@@ -81,59 +84,32 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener , Observer<Re
             }
         }
     }
+
     @SuppressLint("SetTextI18n")
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
                 if (liveData.data is EditResponse) {
-                 profilelist.addAll(listOf(liveData.data.body))
-                    text_teacher_name.text=liveData.data.body.name
-                    text_parent_spicilty.text=liveData.data.body.specialties
-                    text_parent_spicilty.text=isCertifiedOrtutor(liveData.data.body.isCertifiedOrtutor)
-                    text_teacher_CancelationPolicy.text=liveData.data.body.cancellationPolicy
-                    text_teacher_AboutUser.text=liveData.data.body.about
-                    // text_teacher_TeachingHistory.text=liveData.data.body.teachingHistory
-                    //text_teacher_virtual.text=(Constants.Currency+liveData.data.body.virtualRate.toString())+".00/Hr"
-                    text_teacher_inprice.text=Constants.Currency+liveData.data.body.InPersonRate.toString()+".00/Hr"
-                    Glide.with(contex).load(liveData.data.body.image).placeholder(R.drawable.profile_unselected).into(image_teacher_image)
+                    profilelist.addAll(listOf(liveData.data.body))
+                    text_teacher_name.text = liveData.data.body.name
+                    text_parent_spicilty.text = liveData.data.body.specialties
+                    text_parent_spicilty.text =
+                        isCertifiedOrtutor(liveData.data.body.isCertifiedOrtutor)
+                    text_teacher_CancelationPolicy.text = liveData.data.body.cancellationPolicy
+                    text_teacher_AboutUser.text = liveData.data.body.about
+                    text_teacher_inprice.text =
+                        Constants.Currency + liveData.data.body.InPersonRate.toString() + ".00/Hr"
+                    Glide.with(contex).load(liveData.data.body.image)
+                        .placeholder(R.drawable.profile_unselected).into(image_teacher_image)
 
-                    name=liveData.data.body.name
-                    about=liveData.data.body.about
-                    teachingHistory=liveData.data.body.teachingHistory
-                    image=liveData.data.body.image
-
-                    api_techinglevel()
-                }
-               else if (liveData.data is Model_teacher_level)
-               {
-                 /*  text_teacher_category.text=""
-                   var words= ArrayList<String>()
-                   try
-                   {
-                       words= data.split(",") as ArrayList<String>
-                   }
-                   catch(e:Exception)
-                   {
-                        words= data.split("") as ArrayList<String>
-                   }
-
-                   for(i in 0 until words.size) {
-                       for (j in 0 until liveData.data.body.size)
-                       {
-                           if (words.get(i).toInt() == liveData.data.body.get(j).id)
-                           {
-                               var data=liveData.data.body.get(j).level+","
-                               text_teacher_category.text=text_teacher_category.text.toString()+data
-                           }
-                       }
-                   }
-                   var s = text_teacher_category.text.toString()
-                   text_teacher_category.text = s.substring(0, s.length -1)*/
+                    name = liveData.data.body.name
+                    about = liveData.data.body.about
+                    teachingHistory = liveData.data.body.teachingHistory
+                    image = liveData.data.body.image
                 }
             }
             Status.ERROR -> {
-                if (liveData.error is EditResponse)
-                {
+                if (liveData.error is EditResponse) {
                     Helper.showSuccessToast(requireContext(), liveData.error.message)
                 }
             }
@@ -141,10 +117,6 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener , Observer<Re
             }
         }
     }
-    private fun api_techinglevel() {
-        baseViewModel.teacher_level(requireActivity(), false)
-    }
-
     override fun onResume() {
         super.onResume()
         api()

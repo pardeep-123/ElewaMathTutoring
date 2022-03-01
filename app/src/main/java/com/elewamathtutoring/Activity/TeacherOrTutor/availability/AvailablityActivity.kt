@@ -55,13 +55,9 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_availablity)
         App.getinstance().getmydicomponent().inject(this)
-
         apiTimeSlot()
         if (intent.extras!=null) {
-            if (intent.getStringExtra("signup").equals("teacher")) {
-
-
-            } else {
+            if (intent.getStringExtra("signup").equals("editrofile")) {
                 profilelist =
                     (intent.getSerializableExtra("list_model") as java.util.ArrayList<EditResponse.Body>?)!!
 //              getLocation(profilelist.get(0).latitude,profilelist.get(0).longitude)
@@ -123,9 +119,6 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.btnConfirmSignUp -> {
-                if (intent.getStringExtra("key").equals("editprofile")) {
-                    finish()
-                }
                 if (validator.Teacherdelectdatetime(this, Array_date, Array_time)) {
                     if (intent.getStringExtra("signup").equals("teacher")) {
                         baseViewModel.TeacherAvailability(
@@ -169,11 +162,6 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
             Status.SUCCESS -> {
                 if (liveData.data is AvailabilityResponse) {
                     Helper.showSuccessToast(this, liveData.data.message)
-               /*     Log.e(
-                        "DEVICETOCKEN",
-                        "" + liveData.data.body.token + " dT--" + liveData.data.body.deviceToken
-                    )
-                    savePrefrence(Constants.AUTH_KEY, liveData.data.body.token)*/
                     savePrefrence(Constants.USER_ID, liveData.data.body.id.toString())
                     Constants.USER_IDValue = liveData.data.body.id.toString()
                     savePrefrence(Constants.notificationStatus, liveData.data.body.notificationStatus.toString())
@@ -185,10 +173,14 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
                 } else if (liveData.data is EditResponse) {
                     Helper.showSuccessToast(this, liveData.data.message)
                     finish()
-                } else if (liveData.data is TimeSlotsResponse) {
+                } else if (liveData.data is EditAvailabilityResponse) {
+                    Helper.showSuccessToast(this, liveData.data.message)
+                    finish()
+                }
+
+                 if (liveData.data is TimeSlotsResponse) {
                     timeSlotList.addAll(liveData.data.body)
                     rv_timeSlotsAvailable.adapter = TimeSlotAvailableAdapter(timeSlotList, Selctedarray_time, this@AvailablityActivity)
-                } else {
                 }
             }
 

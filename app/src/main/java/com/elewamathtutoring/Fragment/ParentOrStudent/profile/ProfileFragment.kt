@@ -1,5 +1,6 @@
 package com.elewamathtutoring.Fragment.ParentOrStudent.profile
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -24,8 +25,7 @@ import com.elewamathtutoring.viewmodel.BaseViewModel
 import com.pawskeeper.Modecommon.Commontoall
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.text_parent_about
-import kotlinx.android.synthetic.main.fragment_profile.view.ivNotification
-import kotlinx.android.synthetic.main.fragment_profile.view.ivSetting
+import kotlinx.android.synthetic.main.fragment_profile.view.*
 import kotlinx.android.synthetic.main.fragment_profile_tab.*
 import kotlin.collections.ArrayList
 
@@ -56,58 +56,41 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
         v.rootView.ivNotification.setOnClickListener {
             startActivity(Intent(context, NotificationsActivity::class.java))
         }
+        v.rootView.btnedtProfile.setOnClickListener {
+            startActivity(Intent(context, EditProfile::class.java)
+                .putExtra("name", name)
+            .putExtra("about", about)
+            .putExtra("image", image)
+            )
+        }
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        btnEditProfile = view.findViewById(R.id.btnedtProfile)
-        btnEditProfile.setOnClickListener {
-            val i = Intent(requireContext(), EditProfile::class.java)
-         //   i.putExtra("from","EditProfile")
-          //  intent.putExtra("ProfileList",list)
-            i.putExtra("name", name)
-            i.putExtra("about", about)
-            i.putExtra("image", image)
-            startActivity(i)
-        }
+
     }
-    private fun api() {
+    private fun apiProfile() {
         baseViewModel.get_profile(requireActivity(), true)
         baseViewModel.getCommonResponse().observe(requireActivity(), this)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
                 if (liveData.data is ProfileResponse) {
                     list.addAll(listOf(liveData.data.body))
-
-
-                    name=liveData.data.body.name
-                    about=liveData.data.body.about
-                    image=liveData.data.body.image
-
                     text_parent_name.text = liveData.data.body.name
                     text_parent_email.text = liveData.data.body.email
-                    text_teacher_inprice.text = liveData.data.body.email
                     text_parent_about.text = liveData.data.body.about
                     Glide.with(contex).load(liveData.data.body.image)
                         .placeholder(R.drawable.profile_unselected).into(image_parent_image)
                     text_parent_titelname.text = "About " + liveData.data.body.name
 
-
-
-                    apiPastTeacher()
+                    name=liveData.data.body.name
+                    about=liveData.data.body.about
+                    image=liveData.data.body.image
+                    //apiPastTeacher()
                 }
-               /* else if (liveData.data is Model_TeacherRequestList) {
-                    listdata.clear()
-                    listdata.addAll(liveData.data.body)
-
-                v.rootView.rv_pastTeachers.adapter = PastTeacherAdapter(requireContext(),listdata,this@ProfileFragment)
-                    if(listdata.size==0)
-                    {
-                        tv_pasttecher.visibility=View.GONE
-                    }
-                }*/
                 else if (liveData.data is Commontoall) {
                     apiPastTeacher()
                     Helper.showSuccessToast(requireContext(), liveData.data.message)
@@ -129,7 +112,7 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
     }
     override fun onResume() {
         super.onResume()
-        api()
+        apiProfile()
     }
     private fun apiPastTeacher() {
         baseViewModel.PastTeacher(requireActivity(), "2,3,4,5,6", true)

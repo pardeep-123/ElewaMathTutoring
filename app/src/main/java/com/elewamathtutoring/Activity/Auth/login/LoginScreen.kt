@@ -274,13 +274,15 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
                             if (liveData.data.body.userType == 2)
                             {
                                 if(liveData.data.body.isTechingInfo==0){
-                                    startActivity(Intent(this, TeachingInfoActivity::class.java))
+                                    startActivity(Intent(this, TeachingInfoActivity::class.java)
+                                        .putExtra("signup","teacher"))
                                 }else{
                                     if(liveData.data.body.IsAvailable==0){
                                         startActivity(Intent(this, AvailablityActivity::class.java))
 
                                     }else{
-                                        startActivity(Intent(this, MainTeacherActivity::class.java))
+                                        startActivity(Intent(this, MainTeacherActivity::class.java)
+                                            .putExtra("signup","teacher"))
                                         finishAffinity()
                                     }
                                 }

@@ -1152,6 +1152,38 @@ class BaseViewModel : ViewModel() {
         }
     }
 
+      @SuppressLint("CheckResult")
+    fun getProfile(activity: Activity, isDialogShow: Boolean) {
+        if (Helper.isNetworkConnected(activity)) {
+            apiService.getProfile()
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    {
+
+                        mResponse.value = RestObservable.error(activity, it)
+                    })
+        } else {
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        getProfile(activity, isDialogShow)
+                    }
+                })
+        }
+    }
+
+
+
+
+
+
+
     @SuppressLint("CheckResult")
     fun TeacherRequestList(activity: Activity, isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
@@ -1177,21 +1209,6 @@ class BaseViewModel : ViewModel() {
                 })
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @SuppressLint("CheckResult")
     fun get_resources(activity: Activity, isDialogShow: Boolean) {

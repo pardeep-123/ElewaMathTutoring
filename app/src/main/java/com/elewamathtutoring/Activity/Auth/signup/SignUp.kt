@@ -51,7 +51,6 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
                  }else{
                      startActivity(Intent(this, MainActivity::class.java))
                  }*/
-
                 if (getPrefrence(Constants.user_type, "").equals("1")) {
                     if (validator.signUpValid(this, edtName.text.toString(), edtEmail.text.toString(), editPassword.text.toString(), editConfirmPassword.text.toString())) {
                         baseViewModel.signUpApi(this,  edtName.text.toString(),edtEmail.text.toString(), editPassword.text.toString(),"1", true)

@@ -17,6 +17,7 @@ import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.TeachingLevelR
 import com.elewamathtutoring.Activity.TeacherOrTutor.availability.AvailabilityResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.availability.EditAvailabilityResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.availability.TimeSlotsResponse
+import com.elewamathtutoring.Activity.TeacherOrTutor.edit.EditResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.editProfile.EditTeacherProfileResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.request.RequestDetailResponse
 import com.elewamathtutoring.Fragment.ParentOrStudent.booking.UserBookingListResponse
@@ -351,6 +352,12 @@ interface RestApiInterface {
 
     @GET("get_profile")
     fun get_profile(): Observable<ProfileResponse>
+
+    @GET("get_profile")
+    fun getProfile(): Observable<EditResponse>
+
+
+
 
      @GET("TeacherRequestList")
     fun TeacherRequestList(): Observable<RequestListResponse>

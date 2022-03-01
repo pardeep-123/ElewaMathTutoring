@@ -95,11 +95,30 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:orientation="horizontal">
         <RelativeLayout
+            android:id="@+id/rlMathChatRoom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/_3sdp"
+            android:background="@drawable/bg_btn">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:drawableLeft="@drawable/mathchatroom"
+                android:drawablePadding="@dimen/_4sdp"
+                android:fontFamily="@font/medium"
+                android:text=" Math Chat Room"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp" />
+        </RelativeLayout>
+        <RelativeLayout
             android:id="@+id/rlResources"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30sdp"
             android:layout_weight="1"
-            android:layout_marginRight="@dimen/_3sdp"
+            android:layout_marginStart="@dimen/_3sdp"
             android:background="@drawable/bg_btn">
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -113,25 +132,6 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12sdp" />
 
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/rlMathChatRoom"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_weight="1"
-            android:layout_marginLeft="@dimen/_3sdp"
-            android:background="@drawable/bg_btn">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:drawableLeft="@drawable/mathchatroom"
-                android:drawablePadding="@dimen/_4sdp"
-                android:fontFamily="@font/medium"
-                android:text=" Math Chat Room"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_12sdp" />
         </RelativeLayout>
     </LinearLayout>
     <RelativeLayout
@@ -147,7 +147,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@+id/rl2"
+
             android:orientation="vertical">
             <RelativeLayout
                 android:layout_width="wrap_content"

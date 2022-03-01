@@ -1,5 +1,6 @@
 package com.elewamathtutoring.Activity
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -16,6 +17,7 @@ import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.Chat.Chat_Activity
 import com.elewamathtutoring.Activity.Chat.mathChat.MathPersonChatActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.ReceiptActivity
+import com.elewamathtutoring.Activity.TeacherOrTutor.request.RequestDetailResponse
 import com.elewamathtutoring.Models.Teacher_details.Model_teacherdetails
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.SharedPrefUtil
@@ -34,7 +36,7 @@ import kotlinx.android.synthetic.main.report_popup.view.*
 class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observer<RestObservable> {
     var myPopupWindow: PopupWindow? = null
     lateinit var sharedPrefUtil: SharedPrefUtil
-    var teacherdetails = ArrayList<com.elewamathtutoring.Models.Teacher_details.Body>()
+    var teacherdetails = ArrayList<RequestDetailResponse.Body>()
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     var id = ""
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,10 +44,9 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
         setContentView(R.layout.activity_teacher_details)
         sharedPrefUtil = SharedPrefUtil(this)
         onClicks()
-        api()
+        apiTecherdetail()
         if (intent.getStringExtra("Type").equals("schedule")) {
             btnScheduleSession.visibility = View.GONE
-
             btnviewreciept.visibility = View.VISIBLE
         } else if (intent.getStringExtra("Type").equals("PastTecher")) {
             btnScheduleSession.visibility = View.VISIBLE
@@ -54,7 +55,6 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
             btnScheduleSession.visibility = View.VISIBLE
         }
     }
-
     private fun onClicks() {
         options.setOnClickListener(this)
         btnScheduleSession.setOnClickListener(this)
@@ -63,7 +63,6 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
         ivBack.setOnClickListener(this)
         llChat.setOnClickListener(this)
     }
-
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.options -> {
@@ -83,13 +82,12 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
             }
             R.id.btnviewreciept -> {
                 val intentt = Intent(this, ReceiptActivity::class.java)
-                // intentt.putExtra("listdata", teacherdetails)
-                // intentt.putExtra("session_id", intent.getStringExtra("session_id").toString())
+                intentt.putExtra("listdata", teacherdetails)
+                intentt.putExtra("session_id", intent.getStringExtra("session_id").toString())
                 startActivity(intentt)
             }
         }
     }
-
     private fun setPopUpWindow() {
 
         val viewGroup: ViewGroup = window.decorView.rootView as ViewGroup
@@ -108,6 +106,7 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
         }
 
     }
+
     private fun dialogReport() {
         val reportDialog = Dialog(this)
         reportDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -124,8 +123,7 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
         }
         reportDialog.report_Submit.setOnClickListener {
 
-            baseViewModel.report(
-                this,
+            baseViewModel.report(this,
                 reportDialog.etText.text.toString(),
                 intent.getStringExtra("teacher_id").toString(),
                 true
@@ -144,32 +142,36 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
 
 
     }
+
+    @SuppressLint("SetTextI18n")
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
-                if (liveData.data is Model_teacherdetails) {
+                if (liveData.data is RequestDetailResponse) {
                     teacherdetails.addAll(listOf(liveData.data.body))
-                    Glide.with(this).load(liveData.data.body.image)
+                    Glide.with(this).load(liveData.data.body.Teacher.image)
                         .placeholder(R.drawable.profile_unselected).into(ivtecher_image)
-                    tv_techername.setText(liveData.data.body.name)
-                    tv_about.setText("About " + liveData.data.body.name)
-                    tv_teachercertified.text =
-                        Constants.isCertifiedOrtutor(liveData.data.body.isCertifiedOrtutor)
+                    tv_techername.setText(liveData.data.body.Teacher.name)
+                    tvparentSpecialized.text = liveData.data.body.Teacher.specialties
+                    tv_teachercertified.text = Constants.isCertifiedOrtutor(liveData.data.body.Teacher.isCertifiedOrtutor)
+                    tvHourlyPrice.setText(liveData.data.body.Teacher.hourlyPrice.toString())
+                    tv_about.setText("About " + liveData.data.body.Teacher.name)
+                    tv_teacher_AboutUser.setText(liveData.data.body.Teacher.about)
+                    tv_teacher_TeachingHistory.text = liveData.data.body.Teacher.teachingHistory
 
-                    for (i in 0 until liveData.data.body.teaching_level.size) {
-                        var data = liveData.data.body.teaching_level.get(i).level + ","
-                        tv_parentteacherlevel.text = tv_parentteacherlevel.text.toString() + data
-                    }
+
+/*
+                       for (i in 0 until liveData.data.body.teaching_level.size) {
+                           var data = liveData.data.body.teaching_level.get(i).level + ","
+                           tv_parentteacherlevel.text = tv_parentteacherlevel.text.toString() + data
+                       }*/
                     var s = tv_parentteacherlevel.text.toString()
                     tv_parentteacherlevel.text = s.substring(0, s.length - 1)
 
-                    tvparentSpecialized.text = liveData.data.body.specialties
+
                     //  tv_teacher_CancelationPolicy.text=liveData.data.body.cancellationPolicy
-                    tv_teacher_AboutUser.text = liveData.data.body.about
-                    tv_teacher_TeachingHistory.text = liveData.data.body.teachingHistory
                     //    tv_teacher_virtual.text=(Constants.Currency+liveData.data.body.virtualRate.toString())+".00/Hr"
                     //   tv_teacher_inprice.text=Constants.Currency+liveData.data.body.InPersonRate.toString()+".00/Hr"
-
                 } else if (liveData.data is Commontoall) {
                     finish()
                 } else {
@@ -177,7 +179,7 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
             }
 
             Status.ERROR -> {
-                if (liveData.error is Model_teacherdetails) {
+                if (liveData.error is RequestDetailResponse) {
                     Helper.showSuccessToast(this, liveData.error.message)
                 } else if (liveData.error is Commontoall) {
                     Helper.showSuccessToast(this, liveData.error.message)
@@ -189,12 +191,12 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
             }
         }
     }
-    /*  fun  Techerdetailapi(){
-          baseViewModel.teachersDetails(this,intent.getStringExtra("teacher_id").toString(),true )
-          baseViewModel.getCommonResponse().observe(this, this)
-      }*/
-    private fun api() {
-        baseViewModel.sessionDetails(this, true, intent.getStringExtra("id").toString())
+    fun Techerdetailapi() {
+        baseViewModel.teachersDetails(this, intent.getStringExtra("teacher_id").toString(), true)
+        baseViewModel.getCommonResponse().observe(this, this)
+    }
+    private fun apiTecherdetail() {
+        baseViewModel.sessionDetails(this, true, intent.getStringExtra("session_id").toString())
         baseViewModel.getCommonResponse().observe(this, this)
     }
 }

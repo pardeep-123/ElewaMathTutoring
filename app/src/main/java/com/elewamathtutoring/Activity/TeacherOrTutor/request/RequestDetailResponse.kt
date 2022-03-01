@@ -1,11 +1,13 @@
 package com.elewamathtutoring.Activity.TeacherOrTutor.request
 
+import java.io.Serializable
+
 data class RequestDetailResponse(
     val status: Boolean, // true
     val code: Int, // 200
     val message: String, // Get session detail successfully.
     val body: Body
-) {
+):Serializable {
     data class Body(
         val id: Int, // 13
         val userId: Int, // 264
@@ -30,7 +32,7 @@ data class RequestDetailResponse(
         val timeslot: List<Timeslot>,
         val Teacher: Teacher1,
         val Student: Student1
-    ) {
+    ):Serializable {
         data class Timeslot(
             val id: Int, // 1
             val startTime: String, // 12:00 AM
@@ -38,7 +40,7 @@ data class RequestDetailResponse(
             val status: Int, // 1
             val createdAt: Int, // 1610092025
             val updatedAt: Int // 0
-        )
+        ):Serializable
 
         data class Teacher1(
             val id: Int, // 321
@@ -75,7 +77,7 @@ data class RequestDetailResponse(
             val free_slots: String,
             val isTechingInfo: Int, // 1
             val IsAvailable: Int // 1
-        )
+        ):Serializable
 
         data class Student1(
             val id: Int, // 264
@@ -91,6 +93,6 @@ data class RequestDetailResponse(
             val SocialType: Int, // 0
             val SocialId: String,
             val status: Int // 1
-        )
+        ):Serializable
     }
 }

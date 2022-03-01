@@ -36,20 +36,19 @@ class EditYourProfileActivity : AppCompatActivity(), View.OnClickListener,
             R.id.llAboutYou -> {
                 val intentt = Intent(this, AboutYouActivity::class.java)
 //               intentt.putExtra("key", "editprofile")
-                intentt.putExtra("list_model", profilelist)
+                intentt.putExtra("list_model", intent.getSerializableExtra("list_model"))
                 startActivity(intentt)
             }
             R.id.llTeachingInfoRates -> {
-                val intentt = Intent(this, TeachingInfoActivity::class.java)
-                intentt.putExtra("key", "editrofile")
-                intentt.putExtra("list_model", profilelist)
+              val intentt = Intent(this, TeachingInfoActivity::class.java)
+                intentt.putExtra("signup", "editrofile")
+                intentt.putExtra("list_model", intent.getSerializableExtra("list_model"))
                 startActivity(intentt)
             }
             R.id.llAvailability -> {
                 val intentt = Intent(this, AvailablityActivity::class.java)
-                intentt.putExtra("key", "editrofile")
+              intentt.putExtra("signup", "editrofile")
                 intentt.putExtra("list_model", intent.getSerializableExtra("list_model"))
-
                 startActivity(intentt)
             }
             R.id.ivBack -> {
@@ -80,4 +79,4 @@ class EditYourProfileActivity : AppCompatActivity(), View.OnClickListener,
         baseViewModel.get_profile(this, true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
-}//  baseViewModel.get_profile(this, getPrefrence(Constants.user_type, ""), true)
+}

@@ -99,23 +99,13 @@ class SignupTeacherActivity : AppCompatActivity(), View.OnClickListener , Observ
             Status.SUCCESS -> {
                 if (it.data is TeacherSignUpResponse) {
                     savePrefrence(Constants.AUTH_KEY, it.data.body.token)
+                    savePrefrence(Constants.USER_ID, it.data.body.id.toString())
                     if (getPrefrence(Constants.user_type, "").equals("2")) {
-                        startActivity(Intent(this, TeachingInfoActivity::class.java)
-                            .putExtra("signup","teacher"))
+                        startActivity(
+                            Intent(this, TeachingInfoActivity::class.java)
+                                .putExtra("signup", "teacher")
+                        )
                     }
-                    /* if (getPrefrence(Constants.user_type, "").equals("1")) {
-                         intent = Intent(this, DescSignupScreen::class.java)
-                         // student
-                     } else {
-                         // Teacher
-                         intent = Intent(this, AboutYouActivity::class.java)
-                         intent.putExtra("key", "signup")
-                     }*/
-                    /*    intent.putExtra("name", edtName.text.toString())
-                        intent.putExtra("email", edtEmail.text.toString())
-                        intent.putExtra("password", editPassword.text.toString())
-                        startActivity(intent)*/
-                } else {
                 }
             }
             Status.ERROR -> {

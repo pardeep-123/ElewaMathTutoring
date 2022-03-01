@@ -33,7 +33,6 @@ class AboutYouActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
     var oldImage = ""
     var profilelist = ArrayList<EditResponse.Body>()
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
-
     @Inject
     lateinit var validator: Validator
     val context: Context = this
@@ -48,16 +47,16 @@ class AboutYouActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
         scrollEditText(edTeachingHistory)
 
         if (intent.getSerializableExtra("list_model") != null) {
-            profilelist =
-                (intent.getSerializableExtra("list_model") as ArrayList<EditResponse.Body>?)!!
-            text_teacher_name.setText(profilelist.get(0).name.toString())
-            edaboutyou.setText(profilelist.get(0).about.toString())
-            edTeachingHistory.setText(profilelist.get(0).teachingHistory.toString())
+            profilelist = (intent.getSerializableExtra("list_model") as ArrayList<EditResponse.Body>?)!!
+            text_teacher_name.setText(profilelist[0].name.toString())
+            edaboutyou.setText(profilelist[0].about.toString())
+            edTeachingHistory.setText(profilelist[0].teachingHistory.toString())
             oldImage = intent.getStringExtra("image").toString()
-            Glide.with(context).load(profilelist.get(0).image)
+            Glide.with(context).load(profilelist[0].image)
                 .placeholder(R.drawable.profile_unselected).into(ivProfileDesc)
             //  btnNext.text="SAVE"
         } else {
+
             text_teacher_name.setText(intent.getStringExtra("name").toString())
             edaboutyou.setText(intent.getStringExtra("about").toString())
             edTeachingHistory.setText(intent.getStringExtra("teachingHistory").toString())
@@ -74,40 +73,6 @@ class AboutYouActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
             }
             R.id.btnNext -> {
                 api()
-                /* if (intent.getStringExtra("key").equals("signup")) {
-                     if (validator.Teacheraboutus(this, firstimage, edaboutyou.text.toString(),
-                             edTeachingHistory.text.toString(), text_teacher_name.text.toString(), "add")) {
-                         val password = intent.getStringExtra("password").toString()
-                         val email = intent.getStringExtra("email").toString()
-                         val Name = intent.getStringExtra("Name").toString()
-
-                         val intent = Intent(this, TeachingInfoActivity::class.java)
-                         intent.putExtra("key", "signup")
-                         intent.putExtra("password", password)
-                         intent.putExtra("email", email)
-                         intent.putExtra("Name", Name)
-                         intent.putExtra("Image", firstimage)
-                         intent.putExtra("socialId", intent.getStringExtra("socialId").toString())
-                         intent.putExtra("socialtype", intent.getStringExtra("socialtype").toString())
-                         intent.putExtra("about_teacher", edaboutyou.text.toString())
-                         intent.putExtra("teacher_history", edTeachingHistory.text.toString())
-                         startActivity(intent)
-                     }
-                 }
-                 else {
-                     if (validator.Teacheraboutus(this, firstimage, edaboutyou.text.toString(), edTeachingHistory.text.toString(), text_teacher_name.text.toString(), "edit")) {
-                         baseViewModel.EditTeacherBasicProfile(
-                             this,
-                             firstimage,
-                             edTeachingHistory.text.toString(),
-                             text_teacher_name.text.toString(),
-                             edaboutyou.text.toString(),
-                             true
-                         )
-                         baseViewModel.getCommonResponse().observe(this, this)
-                     }
-                 }*/
-
             }
             R.id.ivBack -> {
                 finish()
