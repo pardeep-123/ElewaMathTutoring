@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.elewamathtutoring.Fragment.SearchFragment
+import com.elewamathtutoring.Fragment.ParentOrStudent.search.SearchFragment
 import com.elewamathtutoring.Model.FilterOptions2Model
 import com.elewamathtutoring.R
 import kotlinx.android.synthetic.main.item_filteroptions.view.*
@@ -17,7 +17,7 @@ class FilterOptions2Adapter(
     c: Context,
     filterList: ArrayList<FilterOptions2Model>,
     var searchFragment: SearchFragment,
-   var selected_certified: ArrayList<String>
+    var selected_certified: ArrayList<String>
 ) :
     RecyclerView.Adapter<FilterOptions2Adapter.ViewHolder>() {
     var ctn = c

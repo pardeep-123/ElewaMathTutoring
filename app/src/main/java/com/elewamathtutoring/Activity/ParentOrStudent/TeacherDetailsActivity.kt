@@ -14,7 +14,6 @@ import android.widget.RelativeLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.elewamathtutoring.Activity.Chat.Chat_Activity
 import com.elewamathtutoring.Activity.Chat.mathChat.MathPersonChatActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.ReceiptActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.request.RequestDetailResponse
@@ -32,6 +31,7 @@ import com.pawskeeper.Modecommon.Commontoall
 import kotlinx.android.synthetic.main.activity_teacher_details.*
 import kotlinx.android.synthetic.main.dialog_report.*
 import kotlinx.android.synthetic.main.report_popup.view.*
+
 
 class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observer<RestObservable> {
     var myPopupWindow: PopupWindow? = null
@@ -104,9 +104,7 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
         myPopupWindow?.setOnDismissListener {
             clearDim(viewGroup)
         }
-
     }
-
     private fun dialogReport() {
         val reportDialog = Dialog(this)
         reportDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -122,7 +120,6 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
 
         }
         reportDialog.report_Submit.setOnClickListener {
-
             baseViewModel.report(this,
                 reportDialog.etText.text.toString(),
                 intent.getStringExtra("teacher_id").toString(),
@@ -154,10 +151,10 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
                     tv_techername.setText(liveData.data.body.Teacher.name)
                     tvparentSpecialized.text = liveData.data.body.Teacher.specialties
                     tv_teachercertified.text = Constants.isCertifiedOrtutor(liveData.data.body.Teacher.isCertifiedOrtutor)
-                    tvHourlyPrice.setText(liveData.data.body.Teacher.hourlyPrice.toString())
                     tv_about.setText("About " + liveData.data.body.Teacher.name)
                     tv_teacher_AboutUser.setText(liveData.data.body.Teacher.about)
-                    tv_teacher_TeachingHistory.text = liveData.data.body.Teacher.teachingHistory
+                    tvTime.text= liveData.data.body.timeslot.get(0).startTime+" - "+liveData.data.body.timeslot.get(0).endTime
+                   tv_teacher_TeachingHistory.text = liveData.data.body.Teacher.teachingHistory
 
 
 /*

@@ -42,7 +42,6 @@ class MathChatAdapter(c: Context, var list: MathChatResponse, var type: String) 
             Glide.with(holder.itemView.context)
                 .load(Constants.IMAGE_URL + list.body[position].image)
                 .placeholder(R.drawable.placeholder_image).into(holder.itemView.ivTeacher)
-            holder.itemView.tvName.setText(list.body[position].name)
             holder.itemView.tvPostion.visibility = View.GONE
             holder.itemView.tv_level.visibility = View.GONE
             holder.itemView.ivMsg.visibility = View.GONE

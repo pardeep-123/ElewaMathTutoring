@@ -198,6 +198,7 @@
             android:orientation="vertical"
             android:padding="10dp">
             <TextView
+                android:id="@+id/tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -208,7 +209,7 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
             <TextView
-                android:id="@+id/tvHourlyPrice"
+                android:id="@+id/tvTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"

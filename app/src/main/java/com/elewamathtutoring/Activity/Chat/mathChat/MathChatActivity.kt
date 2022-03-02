@@ -38,11 +38,11 @@ class MathChatActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
 
         if (intent.getStringExtra("tutor").equals("mathChat")) {
             llBtns.visibility = View.VISIBLE
-            apibankAccounts("2")
+            apiTeacherStudentList("2")
             viewType = "2"
         } else {
             llBtns.visibility = View.GONE
-            apibankAccounts("2")
+            apiTeacherStudentList("2")
             viewType = "1"
         }
     }
@@ -60,7 +60,7 @@ class MathChatActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
                 tvStudent.setTextColor(getResources().getColor(R.color.app))
                 rlTutor.setBackgroundResource(R.drawable.bg_btn)
                 rlStudent.setBackgroundResource(R.drawable.bg_btn_white)
-                apibankAccounts("2")
+                apiTeacherStudentList("2")
                 viewType = "2"
             }
             R.id.rlStudent -> {
@@ -68,13 +68,13 @@ class MathChatActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
                 tvStudent.setTextColor(getResources().getColor(R.color.white))
                 rlTutor.setBackgroundResource(R.drawable.bg_btn_white)
                 rlStudent.setBackgroundResource(R.drawable.bg_btn)
-                apibankAccounts("1")
+                apiTeacherStudentList("1")
                 viewType = "1"
             }
         }
     }
 
-    fun apibankAccounts(userType: String) {
+    fun apiTeacherStudentList(userType: String) {
         baseViewModel.getTeacherStudentList(this, userType, true)
         baseViewModel.getCommonResponse().observe(this, this)
     }

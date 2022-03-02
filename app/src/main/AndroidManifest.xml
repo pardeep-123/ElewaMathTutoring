@@ -128,10 +128,10 @@
             android:name=".Activity.ParentOrStudent.wallet.WithdrawalActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.AddCardActivity"
+            android:name=".Activity.ParentOrStudent.add_card.AddCardActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.PaymentInfoActivity"
+            android:name=".Activity.ParentOrStudent.payment.PaymentInfoActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.SendFeedback"

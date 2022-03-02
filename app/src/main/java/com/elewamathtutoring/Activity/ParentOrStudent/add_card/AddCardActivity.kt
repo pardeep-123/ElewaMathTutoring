@@ -1,4 +1,4 @@
-package com.elewamathtutoring.Activity
+package com.elewamathtutoring.Activity.ParentOrStudent.add_card
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.text.Html
 import android.text.SpannableString
 import android.view.Gravity
+import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
@@ -29,14 +30,13 @@ import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import kotlinx.android.synthetic.main.activity_add_card.*
 import kotlinx.android.synthetic.main.dialog_booking_thanks.*
-import kotlinx.android.synthetic.main.dialog_delete.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
 class AddCardActivity : AppCompatActivity() ,
-    Observer<RestObservable> {
+    Observer<RestObservable>,View.OnClickListener {
      lateinit var contxt: Context
     lateinit var dialog: Dialog
     @Inject
@@ -57,13 +57,13 @@ class AddCardActivity : AppCompatActivity() ,
         shared = SharedPrefUtil(this)
         App.getinstance().getmydicomponent().inject(this)
         onClicks()
+        ivOn.setOnClickListener(this)
+        ivOf.setOnClickListener(this)
         current_year = Calendar.getInstance().get(Calendar.YEAR)
         yearArray = arrayOfNulls<String>(future_year)
-
         for (i in 0 until future_year) {
             yearArray[i] = (current_year + i).toString()
         }
-
         if (intent.getStringExtra("type").equals("edit")) {
             type_Add_edit="2"
             year=intent.getStringExtra("expiry_year").toString()
@@ -87,27 +87,40 @@ class AddCardActivity : AppCompatActivity() ,
 
     private fun onClicks() {
         btnSubmit.setOnClickListener{
-           /* if (intent.getStringExtra("type")!!.equals("edit")) {
+            if (intent.getStringExtra("type")!!.equals("edit")) {
                 if (validator.addcard(this, edNameOfCard.text.toString(), etCard.text.toString(), etExpDate.text.toString(), edCvv.text.toString()))
                 {
                     baseViewModel.editCard(this, etCard.text.toString(), year, month, edNameOfCard.text.toString(), edCvv.text.toString(), "1", type_Add_edit, intent.getStringExtra("card_id").toString(), true)
                     baseViewModel.getCommonResponse().observe(this, this)
                 }
             }
-            else
-            {
-                if (validator.addcard(this, edNameOfCard.text.toString(), etCard.text.toString(), etExpDate.text.toString(), edCvv.text.toString()))
-                {
-                    baseViewModel.addcard(this, etCard.text.toString(), year, month, edNameOfCard.text.toString(), edCvv.text.toString(), "1", type_Add_edit, true)
-                    baseViewModel.getCommonResponse().observe(this, this)
+            else {
+                if (validator.addcard(this, edNameOfCard.text.toString(), etCard.text.toString(), etExpDate.text.toString(), edCvv.text.toString())) {
+                    if (ivOf.visibility == View.VISIBLE) {
+                        Helper.showErrorAlert(this, "Please select save this card and its details securely to my account")
+                    } else {
+                        baseViewModel.addcard(
+                            this,
+                            etCard.text.toString(),
+                            year,
+                            month,
+                            edNameOfCard.text.toString(),
+                            edCvv.text.toString(),
+                            "1",
+                            type_Add_edit,
+                            true
+                        )
+                        baseViewModel.getCommonResponse().observe(this, this)
+                    }
                 }
-            }*/
-            ThanksDialog()
+            }
+
         }
         ivBack.setOnClickListener { finish() }
         etExpDate.setOnClickListener {
             openMonth()
         }
+
     }
 
     private fun ThanksForBookingDialog() {
@@ -135,7 +148,8 @@ class AddCardActivity : AppCompatActivity() ,
 
         filterDialog.btnThanksContinue.setOnClickListener {
             filterDialog.dismiss()
-            startActivity(Intent(this, MainActivity::class.java))
+           // startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
 
 
@@ -197,7 +211,7 @@ class AddCardActivity : AppCompatActivity() ,
         when (liveData!!.status) {
             Status.SUCCESS ->
             {
-                if (liveData.data is Model_addcards)
+                if (liveData.data is AddCardResponse)
                 {
                     Helper.showSuccessToast(this, liveData.data.message.toString())
                     if(intent.getStringExtra("from").equals("Search"))
@@ -206,6 +220,7 @@ class AddCardActivity : AppCompatActivity() ,
                     }
                     else
                     {
+                       // ThanksDialog()
                         ThanksForBookingDialog()
                     }
 
@@ -213,7 +228,8 @@ class AddCardActivity : AppCompatActivity() ,
             }
             Status.ERROR ->
             {
-                if (liveData.error is Model_addcards) Helper.showSuccessToast(this, liveData.error.toString())
+                if (liveData.error is AddCardResponse)
+                    Helper.showSuccessToast(this, liveData.error.toString())
             }
             else -> {}
         }
@@ -238,5 +254,17 @@ class AddCardActivity : AppCompatActivity() ,
                 .putExtra("addCard","booking"))
         }
         dialog.show()
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0?.id){
+            R.id.ivOn ->{
+                ivOn.visibility=View.GONE
+                ivOf.visibility=View.VISIBLE
+            } R.id.ivOf ->{
+                ivOf.visibility=View.GONE
+                ivOn.visibility=View.VISIBLE
+            }
+        }
     }
 }

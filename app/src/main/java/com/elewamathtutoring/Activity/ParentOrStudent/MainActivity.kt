@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfileFragment
 import com.elewamathtutoring.Fragment.ParentOrStudent.booking.ScheduleFragment
-import com.elewamathtutoring.Fragment.SearchFragment
+import com.elewamathtutoring.Fragment.ParentOrStudent.search.SearchFragment
 import com.elewamathtutoring.Activity.Chat.MessagesTabFragment
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         window.statusBarColor = Color.TRANSPARENT;
         bottomBar = findViewById(R.id.bottomNav)
         bottomBar.setOnNavigationItemSelectedListener(this)
-        switchFragment(R.id.rframe,SearchFragment())
+        switchFragment(R.id.rframe, SearchFragment())
     }
 
 

@@ -5,7 +5,9 @@ import com.elewamathtutoring.Activity.Auth.signup.SignUpResponse
 import com.elewamathtutoring.Activity.Auth.signup.TeacherSignUpResponse
 import com.elewamathtutoring.Activity.Chat.mathChat.MathChatResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.addBAnk.AddBankResponse
+import com.elewamathtutoring.Activity.ParentOrStudent.add_card.AddCardResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.editProfile.EditProfileResponse
+import com.elewamathtutoring.Activity.ParentOrStudent.payment.CardListingResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.privacy.PrivacyResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResourcesResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword.ChangePasswordResponse
@@ -21,6 +23,7 @@ import com.elewamathtutoring.Activity.TeacherOrTutor.edit.EditResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.editProfile.EditTeacherProfileResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.request.RequestDetailResponse
 import com.elewamathtutoring.Fragment.ParentOrStudent.booking.UserBookingListResponse
+import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfilResponse
 import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfileResponse
 import com.elewamathtutoring.Fragment.TeacherOrTutor.request.RequestListResponse
 import com.elewamathtutoring.Models.Add_Card.Model_addcards
@@ -201,7 +204,7 @@ interface RestApiInterface {
     ): Observable<AddBankResponse>
 
     @FormUrlEncoded
-    @POST("add_card")
+    @POST("card")
     fun addcard(
         @Field("card_number") card_number: String,
         @Field("expiry_year") expiry_year: String,
@@ -209,7 +212,7 @@ interface RestApiInterface {
         @Field("holder_name") holder_name: String,
         @Field("isSave") isSave: String,
         @Field("cvv") cvv: String?
-    ): Observable<Model_addcards>
+    ): Observable<AddCardResponse>
 
 
     @FormUrlEncoded
@@ -222,7 +225,7 @@ interface RestApiInterface {
         @Field("isSave") isSave: String,
         @Field("cvv") cvv: String?,
         @Field("card_id") card_id: String?
-    ): Observable<Model_addcards>
+    ): Observable<AddCardResponse>
 
 
 
@@ -265,10 +268,20 @@ interface RestApiInterface {
         @Part("longitude") longitude: RequestBody,
     ): Observable<EditTeachingInfoResponse>
 
+/*
 
     @FormUrlEncoded
-    @PUT("deleteCard")
+    @DELETE("deleteCard")
     fun deletecard(@Field("cardId") cardId: String): Observable<Commontoall>
+*/
+
+
+    @FormUrlEncoded
+    @HTTP(method = "DELETE", path = "card", hasBody = true)
+    fun deletecard(
+        @Field("cardId") cardId: String
+    ): Observable<Commontoall>
+
 
     @FormUrlEncoded
     @POST("signup")
@@ -351,7 +364,7 @@ interface RestApiInterface {
     fun get_profile(@Field("userType") userType: String): Observable<ProfileResponse>*/
 
     @GET("get_profile")
-    fun get_profile(): Observable<ProfileResponse>
+    fun get_profile(): Observable<ProfilResponse>
 
     @GET("get_profile")
     fun getProfile(): Observable<EditResponse>
@@ -384,8 +397,8 @@ interface RestApiInterface {
     @POST("forgotPassword")
     fun forgetPassword(@Field("email") email: String): Observable<Commontoall?>
 
-    @GET("card_listing")
-    fun card_listing(): Observable<Model_cardlisting>
+    @GET("card")
+    fun card_listing(): Observable<CardListingResponse>
 
     @GET("userBookingList")
     fun parentSchedulingList(): Observable<UserBookingListResponse>

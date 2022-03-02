@@ -41,7 +41,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,7 +48,6 @@
                 android:layout_marginRight="10dp"
                 android:layout_toStartOf="@+id/llEdit"
                 android:orientation="vertical">
-
                 <TextView
                     android:id="@+id/tvName"
                     android:layout_width="match_parent"
@@ -70,9 +68,22 @@
                     android:textColor="#979797"
                     android:textSize="13sp" />
             </LinearLayout>
-
             <LinearLayout
                 android:id="@+id/llEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:visibility="gone"
+                android:padding="5dp">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:padding="1dp"
+                    android:src="@drawable/edit" />
+
+            </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/llSelect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -82,9 +93,15 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:padding="1dp"
-                    android:src="@drawable/edit" />
-
-            </LinearLayout>
+                    android:id="@+id/ivOn"
+                    android:src="@drawable/payment_checkfill" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:padding="1dp"
+                    android:id="@+id/ivOf"
+                    android:src="@drawable/payment_checkunfill" />
+            </RelativeLayout>
         </RelativeLayout>
     </com.chauthai.swipereveallayout.SwipeRevealLayout>
 </RelativeLayout>

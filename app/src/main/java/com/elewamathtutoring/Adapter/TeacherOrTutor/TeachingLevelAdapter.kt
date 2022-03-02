@@ -37,7 +37,7 @@ class TeachingLevelAdapter(
         try {
             for (i in 0 until teachinglevel.size) {
                 if (teachinglevel.get(i).equals(list.get(position).id.toString())) {
-                    holder.itemView.tick.setImageResource(R.drawable.tick_blue)
+                    holder.itemView.tick.setImageResource(R.drawable.checkbox)
                     Level_list.add(list.get(position).id.toString())
                 }
             }

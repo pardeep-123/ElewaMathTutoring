@@ -1,4 +1,4 @@
-package com.elewamathtutoring.Fragment
+package com.elewamathtutoring.Fragment.ParentOrStudent.search
 
 import android.app.Dialog
 import android.content.Intent
@@ -17,6 +17,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.elewamathtutoring.Activity.Chat.mathChat.MathChatActivity
+import com.elewamathtutoring.Activity.Chat.mathChat.MathChatResponse
 import com.elewamathtutoring.Activity.NotificationsActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.FilterActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResoucesActivity
@@ -24,12 +25,9 @@ import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
 import com.elewamathtutoring.Adapter.FilterOptions2Adapter
 import com.elewamathtutoring.Adapter.ParentOrStudent.FilterOptionsAdapter
 import com.elewamathtutoring.Adapter.SearchHomeAdapter
-import com.elewamathtutoring.Adapter.TeacherOrTutor.Teaching_searchresultAdapter
 import com.elewamathtutoring.Model.FilterOptions2Model
 import com.elewamathtutoring.Model.FilterOptionsModel
 import com.elewamathtutoring.Models.Search.Model_search
-import com.elewamathtutoring.Models.Teacher_level.Body
-import com.elewamathtutoring.Models.Teacher_level.Model_teacher_level
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.CheckLocationActivity
 import com.elewamathtutoring.Util.Location.MyNewMapActivity
@@ -46,7 +44,7 @@ import kotlin.collections.ArrayList
 
 
 class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teachinglevel_interface {
-    var teacherlevel = ArrayList<Body>()
+    var teacherlevel = ArrayList<MathChatResponse.Body>()
     var Search_teacher = ArrayList<com.elewamathtutoring.Models.Search.Body>()
     var Search_data = ArrayList<com.elewamathtutoring.Models.Search.Body>()
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
@@ -70,6 +68,7 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
     var Filter_address = ""
     var Filter_lat = ""
     var Filter_long = ""
+    var viewType = ""
     var currentPage = 0
     private val requestCodes = 11
     override fun onCreateView(
@@ -296,21 +295,22 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
-                if (liveData.data is Model_teacher_level) {
-                    teacherlevel = ArrayList()
+                if (liveData.data is MathChatResponse) {
+                   // teacherlevel = ArrayList()
                     teacherlevel.addAll(liveData.data.body)
+
+                    recycler_Homesearch.adapter = SearchHomeAdapter(requireContext(), teacherlevel)
                    // rv_filterOptions1.adapter = TeachingLevelAdapter(requireContext(), teacherlevel, getdata_toselected_level,this)
                 }
-                else if (liveData.data is Model_search)
-                {
+                /*else if (liveData.data is Model_search) {
                     Search_teacher.clear()
                     Search_teacher.addAll(listOf(liveData.data.body))
 
                     if(Searchtext.isEmpty())
                     {
-                        /*recycler_Homesearch.setLayoutManager(GridLayoutManager(context, 2))
+                        *//*recycler_Homesearch.setLayoutManager(GridLayoutManager(context, 2))
                         searchHomeAdapter = SearchHomeAdapter(requireContext(), Search_teacher)
-                        recycler_Homesearch.adapter = searchHomeAdapter*/
+                        recycler_Homesearch.adapter = searchHomeAdapter*//*
                     }
                     else
                     {
@@ -326,37 +326,36 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
                             recycler_searchdata.adapter= Teaching_searchresultAdapter(requireContext(), Search_data)
                         }
                     }
-                }
+                }*/
                 else
                 {
                 }
             }
-
             Status.ERROR -> {
-                if (liveData.error is Model_teacher_level) {
+                if (liveData.error is MathChatResponse) {
                     Helper.showSuccessToast(requireContext(), liveData.error.message)
                 } else if (liveData.error is Model_search) {
                     Helper.showSuccessToast(requireContext(), liveData.error.message)
                 }
             }
             else -> {
-                if (liveData.error is Model_teacher_level)
+                if (liveData.error is MathChatResponse)
                     Helper.showSuccessToast(requireContext(), liveData.error.message)
             }
         }
     }
-
-
     override fun Teachinglevel(level: ArrayList<String>) {
         selected_level.clear()
         selected_level.addAll(level)
     }
-
    fun cartified_as(cetcfied: ArrayList<String>) {
       selected_certified.clear()
       selected_certified.addAll(cetcfied)
     }
-
+    fun apiTeacherList(userType: String) {
+        baseViewModel.getTeacherStudentList(requireActivity(), userType, true)
+        baseViewModel.getCommonResponse().observe(this, this)
+    }
 
   fun  searchapi(limit: String, page: String, CertifiedAs: String, maximumDistance: String, searchText: String,
       teachingLevel: String, lat: String, lng: String, b: Boolean, ) {
@@ -368,5 +367,11 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
     fun teachinglevel() {
         baseViewModel.teacher_level(requireActivity(), false)
         baseViewModel.getCommonResponse().observe(requireActivity(), this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        apiTeacherList("1")
+        viewType = "1"
     }
 }

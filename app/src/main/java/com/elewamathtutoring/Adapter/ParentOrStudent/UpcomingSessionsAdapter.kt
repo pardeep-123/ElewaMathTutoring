@@ -3,7 +3,6 @@ package com.elewamathtutoring.Adapter.ParentOrTeacher
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,7 @@ import com.elewamathtutoring.Fragment.ParentOrStudent.booking.UserBookingListRes
 
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
-import kotlinx.android.synthetic.main.item_schedule_pending.view.*
+import kotlinx.android.synthetic.main.item_calender.view.*
 import java.text.SimpleDateFormat
 
 //pendinglist: ArrayList<Body>, i: Int
@@ -32,7 +31,7 @@ class UpcomingSessionsAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(ctn).inflate(R.layout.item_schedule_pending, parent, false)
+        val view = LayoutInflater.from(ctn).inflate(R.layout.item_calender, parent, false)
         return ViewHolder(view)
     }
 

@@ -6,15 +6,21 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.*
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfilResponse
 import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfileFragment
 
 import com.elewamathtutoring.R
+import com.elewamathtutoring.Util.constant.Constants
+import kotlinx.android.synthetic.main.item_past_teacher.view.*
+import java.text.SimpleDateFormat
 
 
 class PastTeacherAdapter(
     c: Context,
    /* var listdata: ArrayList<Body>,*/
-    var profileFragment: ProfileFragment
+    var profileFragment: ProfileFragment,
+    var list: ArrayList<ProfilResponse.Body.PastTeacher.Teacher>
 ) : RecyclerView.Adapter<PastTeacherAdapter.ViewHolder>() {
     var ctn = c
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -25,23 +31,22 @@ class PastTeacherAdapter(
     }
     override fun getItemCount(): Int {
        // return listdata.size
-        return 3
+        return list.size
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-       /* holder.itemView.tvItemName.setText(listdata.get(position).teacher.name)
-        holder.itemView.tvItemType.setText(Constants.isCertifiedOrtutor(listdata.get(position).teacher.isCertifiedOrtutor))
-        Log.e("checking_id","---"+listdata.get(position).id.toString()+"----"+listdata.get(position).teacher.name)
+        holder.itemView.tvItemName.setText(list[position].name)
+        holder.itemView.tvItemType.setText(Constants.isCertifiedOrtutor(list[position].isCertifiedOrtutor))
+      //  Log.e("checking_id","---"+listdata.get(position).id.toString()+"----"+listdata.get(position).teacher.name)
         //  holder.itemView.tv_start_endtime.text = listdata.get(position).timeslot.get(0).startTime +"-"+listdata.get(position).Pending_sessions[position].timeslot.get(0).endTime
-        Glide.with(ctn).load(Constants.IMAGE_URL+listdata.get(position).teacher.image).placeholder(R.drawable.profile_unselected).
+        Glide.with(ctn).load(Constants.IMAGE_URL+list[position].image).placeholder(R.drawable.profile_unselected).
         into(holder.itemView.ivImage)
-        val dateParser = SimpleDateFormat("yyyy-MM-dd")
-        val date = dateParser.parse(listdata.get(position).date)
+        /*val dateParser = SimpleDateFormat("yyyy-MM-dd")
+        val date = dateParser.parse(list[position].pastTeacher[position].date)
         val dateFormatter = SimpleDateFormat("EEE, MMM dd")
         holder.itemView.tvItemDate.text=dateFormatter.format(date).toString()
+        holder.itemView.tv_start_endtime.text=list[position].pastTeacher[position].time+" - "+list[position].pastTeacher[position].time*/
 
-        holder.itemView.tv_start_endtime.text=listdata.get(position).timeslot.get(0).startTime+" - "+listdata.get(position).timeslot.get(0).endTime
-
-        if(listdata.get(position).status==2)
+ /*       if(list[position].pastTeacher[position].status == 2)
         {
             holder.itemView.btnComplete.visibility=View.VISIBLE
         }

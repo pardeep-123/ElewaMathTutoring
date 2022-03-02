@@ -566,8 +566,6 @@ class BaseViewModel : ViewModel() {
             //edit
 
             apiService.addcard(etCardnumber, year, month, edNameOfCard, issave, cvv)
-
-
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -846,9 +844,9 @@ class BaseViewModel : ViewModel() {
     }
 
     @SuppressLint("CheckResult")
-    fun deletecard(activity: Activity, card_id: String, isDialogShow: Boolean) {
+    fun deletecard(activity: Activity, cardId: String, isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
-            apiService.deletecard(card_id)
+            apiService.deletecard(cardId)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -863,7 +861,7 @@ class BaseViewModel : ViewModel() {
                 activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
-                        deletecard(activity, card_id, isDialogShow)
+                        deletecard(activity, cardId, isDialogShow)
                     }
                 })
         }

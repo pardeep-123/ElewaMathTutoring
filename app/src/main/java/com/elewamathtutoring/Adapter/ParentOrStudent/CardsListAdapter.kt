@@ -6,17 +6,19 @@ import android.util.Log
 import android.view.*
 import androidx.recyclerview.widget.RecyclerView
 import com.chauthai.swipereveallayout.ViewBinderHelper
-import com.elewamathtutoring.Activity.AddCardActivity
-import com.elewamathtutoring.Activity.PaymentInfoActivity
-import com.elewamathtutoring.Models.Card_listing.Body
+import com.elewamathtutoring.Activity.ParentOrStudent.add_card.AddCardActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.payment.CardListingResponse
+import com.elewamathtutoring.Activity.ParentOrStudent.payment.PaymentInfoActivity
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.AppUtils.Companion.getCardType
 import kotlinx.android.synthetic.main.item_cards.view.*
-import java.util.*
+import kotlin.collections.ArrayList
 
-class CardsListAdapter(c: Context, var cardlist: ArrayList<Body>, var paymentInfoActivity: PaymentInfoActivity, var typescreen: String) :
+class CardsListAdapter(var ctn: Context,
+                       var cardlist: ArrayList<CardListingResponse.Body>,
+                       var paymentInfoActivity: PaymentInfoActivity,
+                       var typescreen: String) :
     RecyclerView.Adapter<CardsListAdapter.ViewHolder>() {
-    var ctn = c
     private val viewBinderHelper = ViewBinderHelper()
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -26,12 +28,9 @@ class CardsListAdapter(c: Context, var cardlist: ArrayList<Body>, var paymentInf
         val view = LayoutInflater.from(ctn).inflate(R.layout.item_cards, parent, false)
         return ViewHolder(view)
     }
-
     override fun getItemCount(): Int {
-       // return cardlist.size
-        return 3
+       return cardlist.size
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         viewBinderHelper.bind(holder.itemView.swipeRevealLayout, null);
         viewBinderHelper.setOpenOnlyOne(true)
@@ -64,7 +63,7 @@ class CardsListAdapter(c: Context, var cardlist: ArrayList<Body>, var paymentInf
         }
 
         holder.itemView.llEdit.setOnClickListener {
-            var intent = Intent(ctn,AddCardActivity::class.java)
+            var intent = Intent(ctn, AddCardActivity::class.java)
             intent.putExtra("type","edit")
             intent.putExtra("card_id",cardlist.get(position).id.toString())
             intent.putExtra("holder_name",cardlist.get(position).holder_name.toString())

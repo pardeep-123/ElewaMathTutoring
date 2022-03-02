@@ -15,9 +15,8 @@ import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.ParentOrStudent.editProfile.EditProfile
 import com.elewamathtutoring.Activity.NotificationsActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
-import com.elewamathtutoring.Models.Login.Body
+import com.elewamathtutoring.Adapter.ParentOrStudent.PastTeacherAdapter
 import com.elewamathtutoring.R
-import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
@@ -38,7 +37,7 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
     lateinit var contex: Context
     lateinit var btnEditProfile: Button
     lateinit var v: View
-    var list = ArrayList<ProfileResponse.Body>()
+    var list = ArrayList<ProfilResponse.Body.PastTeacher.Teacher>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,7 +45,7 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
         v = inflater.inflate(R.layout.fragment_profile, container, false)
         contex = activity as Context
         onClicks()
-     //   v.rootView.rv_pastTeachers.adapter = PastTeacherAdapter(requireContext(),this@ProfileFragment)
+     //
         return v
     }
     private fun onClicks() {
@@ -77,8 +76,8 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
-                if (liveData.data is ProfileResponse) {
-                    list.addAll(listOf(liveData.data.body))
+                if (liveData.data is ProfilResponse) {
+                    list.addAll(listOf(liveData.data.body.pastTeacher[0].teacher))
                     text_parent_name.text = liveData.data.body.name
                     text_parent_email.text = liveData.data.body.email
                     text_parent_about.text = liveData.data.body.about
@@ -89,6 +88,8 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
                     name=liveData.data.body.name
                     about=liveData.data.body.about
                     image=liveData.data.body.image
+
+                    v.rootView.rv_pastTeachers.adapter = PastTeacherAdapter(requireContext(),this@ProfileFragment,list)
                     //apiPastTeacher()
                 }
                 else if (liveData.data is Commontoall) {
@@ -97,7 +98,7 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
                 }
             }
             Status.ERROR -> {
-                if (liveData.error is ProfileResponse)
+                if (liveData.error is ProfilResponse)
                 {
                     Helper.showSuccessToast(requireContext(), liveData.error.message)
                 }

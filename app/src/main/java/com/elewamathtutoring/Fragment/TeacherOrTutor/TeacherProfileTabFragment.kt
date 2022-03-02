@@ -15,8 +15,6 @@ import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.edit.EditResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.editProfile.AboutYouActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.edit.EditYourProfileActivity
-import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfileResponse
-import com.elewamathtutoring.Models.Teacher_level.Model_teacher_level
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.constant.Constants.Companion.isCertifiedOrtutor

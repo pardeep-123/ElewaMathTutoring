@@ -162,7 +162,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/avenirlstd_roman"
-                        android:text="Tue, Jul 13, 2021"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -189,7 +189,7 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/avenirlstd_roman"
                         android:gravity="start"
-                        android:text="12:00 PM-1:00 PM"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -228,10 +228,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-
                         android:fontFamily="@font/aenirlsttd_black"
                         android:gravity="start"
-                        android:text="IN-PERSON SESSION"
+                        android:text="Hourly Price"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 

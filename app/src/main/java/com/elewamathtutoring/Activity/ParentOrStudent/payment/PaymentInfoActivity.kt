@@ -1,4 +1,4 @@
-package com.elewamathtutoring.Activity
+package com.elewamathtutoring.Activity.ParentOrStudent.payment
 
 import android.app.Dialog
 import android.content.Intent
@@ -14,10 +14,9 @@ import android.view.WindowManager
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.elewamathtutoring.Activity.ParentOrStudent.add_card.AddCardActivity
 import com.elewamathtutoring.Adapter.ParentOrStudent.CardsListAdapter
 import com.elewamathtutoring.MainActivity
-import com.elewamathtutoring.Models.Card_listing.Body
-import com.elewamathtutoring.Models.Card_listing.Model_cardlisting
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.App
 import com.elewamathtutoring.Util.helper.Helper
@@ -40,7 +39,7 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
     var finalvalue=""
     var perHour=""
     var value=0
-    var cardlist=ArrayList<Body>()
+    var cardlist=ArrayList<CardListingResponse.Body>()
   var typescreen=""
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,6 +69,11 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
 
 
         onClicks()
+       // api()
+    }
+
+    override fun onResume() {
+        super.onResume()
         api()
     }
 
@@ -86,7 +90,7 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
-                if (liveData.data is Model_cardlisting) {
+                if (liveData.data is CardListingResponse) {
                     cardlist.clear()
                     cardlist.addAll(liveData.data.body)
                     rv_cards.adapter = CardsListAdapter(this,cardlist,this@PaymentInfoActivity,typescreen)
@@ -103,8 +107,7 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
                 else if (liveData.data is Commontoall) {
                     api()
                 }
-                else if (liveData.data is Commontoall2)
-                {
+                else if (liveData.data is Commontoall2) {
                     val filterDialog = Dialog(this)
                     filterDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
                     filterDialog.setContentView(R.layout.dialog_booking_thanks)
@@ -127,7 +130,7 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
                 }
             }
             Status.ERROR -> {
-                if (liveData.error is Model_cardlisting)
+                if (liveData.error is CardListingResponse)
                 {
                     Helper.showSuccessToast(this, liveData.error.toString())
                 }
@@ -152,7 +155,7 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
             }
         }
     }
-     fun deleteDialog(card_id:String) {
+     fun deleteDialog(cardId:String) {
         val deleteDialog = Dialog(this)
         deleteDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         deleteDialog.setContentView(R.layout.dialog_delete)
@@ -169,7 +172,7 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
             deleteDialog.dismiss()
         }
         deleteDialog.btnDeleteYes.setOnClickListener {
-            baseViewModel.deletecard(this, card_id,true)
+            baseViewModel.deletecard(this, cardId,true)
             baseViewModel.getCommonResponse().observe(this, this)
 
             deleteDialog.dismiss()

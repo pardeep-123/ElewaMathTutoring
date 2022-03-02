@@ -184,5 +184,13 @@ object CommonMethods {
 
     }
 
+    //hh:mm a
+    fun convertOneFormatToAnother(eventDay:String,oldDateformat: String, newdateformat:String): String {
+        val clickedDayCalendar = eventDay
+        val dateParser = SimpleDateFormat(oldDateformat)
+        val date = dateParser.parse(clickedDayCalendar.toString())
+        val dateFormatter = SimpleDateFormat(newdateformat)
+        return  dateFormatter.format(date)
+    }
 
 }

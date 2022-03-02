@@ -1,7 +1,6 @@
 package com.elewamathtutoring.Activity.ParentOrStudent
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,7 +8,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.TeacherOrTutor.request.RequestDetailResponse
-import com.elewamathtutoring.Models.Session_detail.Model_session_detail
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
@@ -74,11 +72,12 @@ class ReceiptActivity : AppCompatActivity() ,View.OnClickListener, Observer<Rest
             Status.SUCCESS -> {
                 if (liveData.data is RequestDetailResponse) {
             tv_requested_startendtimeparent.text= liveData.data.body.timeslot.get(0).startTime+" - "+liveData.data.body.timeslot.get(0).endTime
-                    tv_impersonprice.text=Constants.Currency+ liveData.data.body.Teacher.InPersonRate.toString()+".00"
+                    tv_impersonprice.text=Constants.Currency+ liveData.data.body.Teacher.hourlyPrice.toString()+".00"
                     tv_price.text=Constants.Currency+ liveData.data.body.total.toString()+".00"
                     idper_hr.text="1 hour @ "+Constants.Currency+liveData.data.body.perHour+".00/hr"
-                   // val lastFourDigits = liveData.data.body.Card.card_number.substring(liveData.data.body.Card.card_number.length - 4)
-                  //  tv_cardnumber.text="Mastercard XXXX-XXXX-XXXX"+lastFourDigits
+                //   val lastFourDigits = PaymentMethod.Type.Card.card_number.substring(liveData.data.body.Card.card_number.length - 4)
+                 //  tv_cardnumber.text="Mastercard XXXX-XXXX-XXXX"+lastFourDigits
+
             val dateParser = SimpleDateFormat("yyyy-MM-dd")
             val date = dateParser.parse(liveData.data.body.date)
             val dateFormatter = SimpleDateFormat("EEE, MMM dd yyyy")
@@ -86,13 +85,11 @@ class ReceiptActivity : AppCompatActivity() ,View.OnClickListener, Observer<Rest
                 }
             }
             Status.ERROR -> {
-                if (liveData.error is RequestDetailResponse)
-                {
+                if (liveData.error is RequestDetailResponse) {
                     Helper.showSuccessToast(this, liveData.error.message)
                 }
             }
-            else -> {
-            }
+            else -> {}
         }
     }
     private fun api() {

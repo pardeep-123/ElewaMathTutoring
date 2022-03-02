@@ -6,10 +6,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.elewamathtutoring.Activity.ParentOrStudent.payment.PaymentInfoActivity
 import com.elewamathtutoring.Models.Teacher_details.Body
 import com.elewamathtutoring.R
-import com.elewamathtutoring.Util.constant.Constants
-import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import kotlinx.android.synthetic.main.activity_schedule_a_session2.*
 import java.util.*
