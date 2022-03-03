@@ -27,7 +27,7 @@ class ScheduleFragment : Fragment(), Observer<RestObservable> {
     ): View? {
         v = inflater.inflate(R.layout.fragment_schedule, container, false)
         onClicks()
-        v.rootView.rv_today.adapter = UpcomingSessionsAdapter(requireContext(), pendinglist, 3)
+
         return v
     }
     private fun onClicks() {

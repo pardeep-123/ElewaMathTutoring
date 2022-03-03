@@ -1,4 +1,4 @@
-package com.elewamathtutoring.Activity
+package com.elewamathtutoring.Activity.ParentOrStudent.teacherDetail
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.Chat.mathChat.MathPersonChatActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.ReceiptActivity
+import com.elewamathtutoring.Activity.ScheduleASessionActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.request.RequestDetailResponse
 import com.elewamathtutoring.Models.Teacher_details.Model_teacherdetails
 import com.elewamathtutoring.R
@@ -37,6 +38,7 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
     var myPopupWindow: PopupWindow? = null
     lateinit var sharedPrefUtil: SharedPrefUtil
     var teacherdetails = ArrayList<RequestDetailResponse.Body>()
+    var tutordetails = ArrayList<TeacherDetailResponse.Body>()
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     var id = ""
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,15 +46,20 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
         setContentView(R.layout.activity_teacher_details)
         sharedPrefUtil = SharedPrefUtil(this)
         onClicks()
-        apiTecherdetail()
+
         if (intent.getStringExtra("Type").equals("schedule")) {
             btnScheduleSession.visibility = View.GONE
             btnviewreciept.visibility = View.VISIBLE
-        } else if (intent.getStringExtra("Type").equals("PastTecher")) {
-            btnScheduleSession.visibility = View.VISIBLE
+            apiTecherdetail()
+
+        } else if (intent.getStringExtra("Type").equals("PastTeacher")) {
+            btnScheduleSession.visibility = View.GONE
+            btnviewreciept.visibility = View.VISIBLE
+            apiTecherdetail()
             btnScheduleSession.setText("Reschedule")
         } else {
             btnScheduleSession.visibility = View.VISIBLE
+            Techerdetailapi()
         }
     }
     private fun onClicks() {
@@ -77,7 +84,7 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
             }
             R.id.btnScheduleSession -> {
                 var intent = Intent(this, ScheduleASessionActivity::class.java)
-                intent.putExtra("teacher_detail", teacherdetails)
+                intent.putExtra("teacher_detail", tutordetails)
                 startActivity(intent)
             }
             R.id.btnviewreciept -> {
@@ -89,7 +96,6 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
         }
     }
     private fun setPopUpWindow() {
-
         val viewGroup: ViewGroup = window.decorView.rootView as ViewGroup
         val inflater =
             applicationContext?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -171,7 +177,19 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
                     //   tv_teacher_inprice.text=Constants.Currency+liveData.data.body.InPersonRate.toString()+".00/Hr"
                 } else if (liveData.data is Commontoall) {
                     finish()
-                } else {
+                }
+                else if (liveData.data is TeacherDetailResponse) {
+                    tutordetails.addAll(listOf(liveData.data.body))
+                    tv_techername.setText(liveData.data.body.name)
+                    tv_teachercertified.setText(liveData.data.body.teaching_level[0].level)
+                    tvparentSpecialized.setText(liveData.data.body.specialties)
+                    tvTime.setText("$"+liveData.data.body.InPersonRate.toString()+"/Hr")
+                    tv_about.setText("About " + liveData.data.body.name)
+                    tv_teacher_AboutUser.setText(liveData.data.body.about)
+                    tv_teacher_TeachingHistory.setText(liveData.data.body.teachingHistory)
+                }
+                else{
+
                 }
             }
 
@@ -183,7 +201,7 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
                 }
             }
             else -> {
-                if (liveData.error is Model_teacherdetails)
+                if (liveData.error is TeacherDetailResponse)
                     Helper.showSuccessToast(this, liveData.error.message)
             }
         }

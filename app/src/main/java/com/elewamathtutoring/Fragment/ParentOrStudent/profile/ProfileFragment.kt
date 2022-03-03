@@ -37,7 +37,7 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
     lateinit var contex: Context
     lateinit var btnEditProfile: Button
     lateinit var v: View
-    var list = ArrayList<ProfilResponse.Body.PastTeacher.Teacher>()
+    var list = ArrayList<ProfilResponse.Body.PastTeacher>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,12 +77,14 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
         when (liveData!!.status) {
             Status.SUCCESS -> {
                 if (liveData.data is ProfilResponse) {
-                    list.addAll(listOf(liveData.data.body.pastTeacher[0].teacher))
+                    list.clear()
+                    list.addAll(listOf(liveData.data.body.pastTeacher[0]))
                     text_parent_name.text = liveData.data.body.name
                     text_parent_email.text = liveData.data.body.email
                     text_parent_about.text = liveData.data.body.about
                     Glide.with(contex).load(liveData.data.body.image)
                         .placeholder(R.drawable.profile_unselected).into(image_parent_image)
+
                     text_parent_titelname.text = "About " + liveData.data.body.name
 
                     name=liveData.data.body.name
@@ -90,19 +92,10 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
                     image=liveData.data.body.image
 
                     v.rootView.rv_pastTeachers.adapter = PastTeacherAdapter(requireContext(),this@ProfileFragment,list)
-                    //apiPastTeacher()
-                }
-                else if (liveData.data is Commontoall) {
-                    apiPastTeacher()
-                    Helper.showSuccessToast(requireContext(), liveData.data.message)
                 }
             }
             Status.ERROR -> {
                 if (liveData.error is ProfilResponse)
-                {
-                    Helper.showSuccessToast(requireContext(), liveData.error.message)
-                }
-                else if (liveData.error is Commontoall)
                 {
                     Helper.showSuccessToast(requireContext(), liveData.error.message)
                 }

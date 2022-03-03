@@ -4,16 +4,20 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.applandeo.materialcalendarview.EventDay
+import com.applandeo.materialcalendarview.listeners.OnDayClickListener
+import com.elewamathtutoring.Activity.ParentOrStudent.teacherDetail.TeacherDetailResponse
 import com.elewamathtutoring.Adapter.ChooseTimeAdapter
-import com.elewamathtutoring.Models.Teacher_details.Body
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.helper.Helper
 import kotlinx.android.synthetic.main.activity_schedule_a_session.*
 import kotlinx.android.synthetic.main.activity_schedule_a_session.ivBack
 import kotlinx.android.synthetic.main.activity_teacher_details.*
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -26,7 +30,7 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener {
     private var thursday: Int = 0
     private var friday: Int = 0
     private var saturday: Int = 0
-    var profile = ArrayList<com.elewamathtutoring.Models.Teacher_details.Body>()
+    var profile = ArrayList<TeacherDetailResponse.Body>()
     var selectedtme ="false"
     var selectedDate =""
     var currentdateDate =""
@@ -38,14 +42,14 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_schedule_a_session)
         window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
         window.statusBarColor = Color.TRANSPARENT;
-        profile = ((intent.getSerializableExtra("teacher_detail") as ArrayList<Body>?)!!)
-      //  setChooseTimeAdapter()
+        profile = ((intent.getSerializableExtra("teacher_detail") as ArrayList<TeacherDetailResponse.Body>?)!!)
+    setChooseTimeAdapter()
         onClicks()
         val disable: MutableList<Date> = ArrayList()
-        rv_chooseTime.adapter = ChooseTimeAdapter(this)
+        rv_chooseTime.adapter = ChooseTimeAdapter(this, profile, this)
 
 
-        /*     val calendar = Calendar.getInstance()
+             val calendar = Calendar.getInstance()
              val min = Calendar.getInstance()
              min.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH) - 1)
              mCalendarView.setMinimumDate(min)
@@ -100,10 +104,10 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener {
                  {
                      calendarsarray.add(cal)
                  }
-             }*/
+             }
         setCalenderView()
 
-       /* mCalendarView.setOnDayClickListener(object : OnDayClickListener {
+        mCalendarView.setOnDayClickListener(object : OnDayClickListener {
             override fun onDayClick(eventDay: EventDay) {
                 //Tue Aug 31 00:00:00 GMT+05:30 2021
                     val dateParserr = SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy")
@@ -112,7 +116,7 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener {
                     selectedDate=dateFormatterz.format(Mydate)
 
             }
-        })*/
+        })
     }
 
     private fun onClicks()
@@ -121,10 +125,9 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener {
         ivBack.setOnClickListener(this)
     }
 
-    /*private fun setChooseTimeAdapter()
-    {
+    private fun setChooseTimeAdapter() {
         rv_chooseTime.adapter = ChooseTimeAdapter(this, profile, this@ScheduleASessionActivity)
-    }*/
+    }
     //time": "3-4-5-6,9"
 
     override fun onClick(v: View?) {
@@ -134,11 +137,11 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener {
                 intent.putExtra("teacher_detail", profile)
                 intent.putExtra("selecteddate", selectedDate)
                 startActivity(intent)
-              /*  for (i in 0 until profile.get(0).time_slots.size) {
+             /*   for (i in 0 until profile.get(0).time_slots.size) {
                     if (profile.get(0).time_slots.get(i).check == true) {
                         selectedtme = "true"
                     }
-                }
+                }*/
 
 
                  if(selectedDate.equals(""))
@@ -161,7 +164,7 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener {
                     intent.putExtra("teacher_detail", profile)
                     intent.putExtra("selecteddate", selectedDate)
                     startActivity(intent)
-                }*/
+                }
             }
             R.id.ivBack -> {
                 finish()

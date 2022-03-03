@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.Chat.mathChat.MathChatResponse
-import com.elewamathtutoring.Activity.TeacherDetailsActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.teacherDetail.TeacherDetailsActivity
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
 import kotlinx.android.synthetic.main.home_list.view.*
 import kotlin.collections.ArrayList
-// var list: ArrayList<Body>,
+
 class SearchHomeAdapter(
     c: Context,
    var list: ArrayList<MathChatResponse.Body>
@@ -44,17 +44,11 @@ class SearchHomeAdapter(
             intent.putExtra("Type","searchhome")
             ctn.startActivity(intent)
         }
-          //  ctn.startActivity(Intent(ctn,TeacherDetailsActivity::class.java)) }
-       /* holder.itemView.home_listcardview.setOnClickListener {
-            var intent = Intent(ctn, TeacherDetailsActivity::class.java)
-            intent.putExtra("Type","searchhome")
-            intent.putExtra("teacher_id", list[position].id.toString())
-            ctn.startActivity(intent)
-        }*/
+
     }
 
     override fun getItemCount(): Int {
-       // return list.get(0).data.size
+
         return list.size
     }
 

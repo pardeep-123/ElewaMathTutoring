@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.elewamathtutoring.Activity.TeacherDetailsActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.teacherDetail.TeacherDetailsActivity
 import com.elewamathtutoring.Fragment.ParentOrStudent.booking.UserBookingListResponse
 
 import com.elewamathtutoring.R

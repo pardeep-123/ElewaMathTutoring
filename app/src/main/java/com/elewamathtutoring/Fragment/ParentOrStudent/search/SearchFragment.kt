@@ -296,21 +296,21 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
         when (liveData!!.status) {
             Status.SUCCESS -> {
                 if (liveData.data is MathChatResponse) {
-                   // teacherlevel = ArrayList()
+                    teacherlevel = ArrayList()
                     teacherlevel.addAll(liveData.data.body)
 
                     recycler_Homesearch.adapter = SearchHomeAdapter(requireContext(), teacherlevel)
                    // rv_filterOptions1.adapter = TeachingLevelAdapter(requireContext(), teacherlevel, getdata_toselected_level,this)
                 }
-                /*else if (liveData.data is Model_search) {
+              /*  else if (liveData.data is Model_search) {
                     Search_teacher.clear()
                     Search_teacher.addAll(listOf(liveData.data.body))
 
                     if(Searchtext.isEmpty())
                     {
-                        *//*recycler_Homesearch.setLayoutManager(GridLayoutManager(context, 2))
+                        recycler_Homesearch.setLayoutManager(GridLayoutManager(context, 2))
                         searchHomeAdapter = SearchHomeAdapter(requireContext(), Search_teacher)
-                        recycler_Homesearch.adapter = searchHomeAdapter*//*
+                        recycler_Homesearch.adapter = searchHomeAdapter
                     }
                     else
                     {
@@ -356,22 +356,18 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
         baseViewModel.getTeacherStudentList(requireActivity(), userType, true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
-
   fun  searchapi(limit: String, page: String, CertifiedAs: String, maximumDistance: String, searchText: String,
       teachingLevel: String, lat: String, lng: String, b: Boolean, ) {
         baseViewModel.seach_teachers(requireActivity(), limit, page, CertifiedAs, maximumDistance, searchText, teachingLevel, lat, lng, b)
         baseViewModel.getCommonResponse().observe(requireActivity(), this)
-
     }
-
     fun teachinglevel() {
         baseViewModel.teacher_level(requireActivity(), false)
         baseViewModel.getCommonResponse().observe(requireActivity(), this)
     }
-
     override fun onResume() {
         super.onResume()
-        apiTeacherList("1")
+        apiTeacherList("2")
         viewType = "1"
     }
 }

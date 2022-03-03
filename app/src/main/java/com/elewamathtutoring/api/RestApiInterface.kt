@@ -11,6 +11,7 @@ import com.elewamathtutoring.Activity.ParentOrStudent.payment.CardListingRespons
 import com.elewamathtutoring.Activity.ParentOrStudent.privacy.PrivacyResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResourcesResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword.ChangePasswordResponse
+import com.elewamathtutoring.Activity.ParentOrStudent.teacherDetail.TeacherDetailResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.wallet.BankListingResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.wallet.response.WalletGetResponse
 import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.EditTeachingInfoResponse
@@ -186,11 +187,10 @@ interface RestApiInterface {
     ): Observable<Model_TeacherRequestList>
 
     @FormUrlEncoded
-    @PUT("teachersDetails")
+    @POST("teachersDetails")
     fun teachersDetails(
-        @Header("security_key") security_key: String,
         @Field("teacher_id") teacher_id: String
-    ): Observable<Model_teacherdetails>
+    ): Observable<TeacherDetailResponse>
    // @Field("bankId") bankId: String,     @Field("bankType") bankType: String?
     @FormUrlEncoded
     @POST("bank")

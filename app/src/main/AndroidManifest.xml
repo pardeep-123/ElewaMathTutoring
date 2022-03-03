@@ -116,7 +116,7 @@
             android:name=".Activity.Auth.LoginGuestActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.TeacherDetailsActivity"
+            android:name=".Activity.ParentOrStudent.teacherDetail.TeacherDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.MyBankAccountsActivity"

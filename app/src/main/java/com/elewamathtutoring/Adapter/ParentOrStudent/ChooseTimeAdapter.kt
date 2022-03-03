@@ -4,18 +4,18 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.elewamathtutoring.Activity.ParentOrStudent.teacherDetail.TeacherDetailResponse
 import com.elewamathtutoring.Activity.ScheduleASessionActivity
-import com.elewamathtutoring.Models.Teacher_details.Body
 import com.elewamathtutoring.R
-import kotlinx.android.synthetic.main.item_dates_available.view.*
 import kotlin.collections.ArrayList
 //     chooseTimeList: ArrayList<Body>,
 //  var  scheduleASessionActivity: ScheduleASessionActivity
 
 class ChooseTimeAdapter(
-    c: Context
+    c: Context,
+  var  profile: ArrayList<TeacherDetailResponse.Body>,
+    scheduleASessionActivity: ScheduleASessionActivity
 ) : RecyclerView.Adapter<ChooseTimeAdapter.ViewHolder>() {
     var ctn = c
    // var list = chooseTimeList

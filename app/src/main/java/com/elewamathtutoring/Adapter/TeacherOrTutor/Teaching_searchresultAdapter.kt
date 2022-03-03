@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.elewamathtutoring.Activity.TeacherDetailsActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.teacherDetail.TeacherDetailsActivity
 import com.elewamathtutoring.Models.Search.Body
 import com.elewamathtutoring.R
 import kotlinx.android.synthetic.main.item_searchresult.view.*
