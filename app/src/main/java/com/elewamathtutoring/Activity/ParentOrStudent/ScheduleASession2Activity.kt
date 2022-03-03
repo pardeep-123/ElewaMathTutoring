@@ -7,14 +7,17 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.elewamathtutoring.Activity.ParentOrStudent.payment.PaymentInfoActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.teacherDetail.TeacherDetailResponse
 import com.elewamathtutoring.Models.Teacher_details.Body
 import com.elewamathtutoring.R
+import com.elewamathtutoring.Util.constant.Constants
+import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import kotlinx.android.synthetic.main.activity_schedule_a_session2.*
 import java.util.*
 
 class ScheduleASession2Activity : AppCompatActivity(), View.OnClickListener {
-    var profile = ArrayList<Body>()
+    var profile = ArrayList<TeacherDetailResponse.Body>()
     var selectedprice=0
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     var perHour=""
@@ -27,21 +30,20 @@ class ScheduleASession2Activity : AppCompatActivity(), View.OnClickListener {
         window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
         window.statusBarColor = Color.TRANSPARENT;
         ivBack.setOnClickListener(this)
-      /*  rlInPerson.setOnClickListener(this)
-        rlVirtualLearning.setOnClickListener(this)*/
+     // rlInPerson.setOnClickListener(this)
+      //  rlVirtualLearning.setOnClickListener(this)
         tvConfirmSession.setOnClickListener(this)
-        profile = (intent.getSerializableExtra("teacher_detail") as ArrayList<Body>?)!!
+        profile = (intent.getSerializableExtra("teacher_detail") as ArrayList<TeacherDetailResponse.Body>?)!!
 
        /* for (i in 0 until profile.get(0).time_slots.size) {  // GET TOTAL SELECTED TIMESLOT
             if (profile.get(0).time_slots.get(i).check == true) {
                 selected_Timeslot++
             }
         }*/
-
-    /*    tvTime.text = selected_Timeslot.toString()+" hour @"+Constants.Currency+profile.get(0).InPersonRate.toString()+"/hr"
+        tvTime.text = selected_Timeslot.toString()+" hour @"+ Constants.Currency+profile.get(0).InPersonRate.toString()+"/hr"
         selectedprice = profile.get(0).InPersonRate
         val total=selected_Timeslot*profile.get(0).InPersonRate
-        tvSessionCost.text = Constants.Currency+total.toString()*/
+        tvSessionCost.text = Constants.Currency+total.toString()
 
     }
 
@@ -73,15 +75,15 @@ class ScheduleASession2Activity : AppCompatActivity(), View.OnClickListener {
                 tvSessionCost.text = Constants.Currency + total.toString()
             }*/
             R.id.tvConfirmSession -> {
-               /* if(etSchedule.text.toString().isEmpty())
+                if(etSchedule.text.toString().isEmpty())
                 {
                     Helper.showErrorAlert(this, "Please enter what you're looking for?")
                 }
                 else
                 {
                     booking()
-                }*/
-                booking()
+                }
+             //   booking()
             }
         }
     }

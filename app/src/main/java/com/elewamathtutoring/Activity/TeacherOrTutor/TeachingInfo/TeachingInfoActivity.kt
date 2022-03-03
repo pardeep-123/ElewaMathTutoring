@@ -62,7 +62,6 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
     private var mAlbumFiles: java.util.ArrayList<AlbumFile> = java.util.ArrayList()
     val imageList = ArrayList<String>()
     var educationCertificateAdapter: EducationCertificateAdapter? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_teaching_info)
@@ -75,7 +74,6 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
         educationCertificateAdapter = EducationCertificateAdapter(imageList, this)
         rvUploadImage.adapter = educationCertificateAdapter
     }
-
     private fun handel_add_Edit() {
         if (intent.getStringExtra("signup")!!.equals("editrofile")) {
             profilelist = (intent.getSerializableExtra("list_model") as java.util.ArrayList<EditResponse.Body>?)!!
@@ -100,14 +98,12 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             btnNext.text = "SAVE"
         }
     }
-
     private fun onClicks() {
         ivBack.setOnClickListener(this)
         btnNext.setOnClickListener(this)
         edLocation.setOnClickListener(this)
         apiTeacher_level()
     }
-
     private fun spinnerChoose() {
         val spinner1: Spinner = findViewById(R.id.spinnerChoose)
         var spinnerlist: ArrayList<String> = ArrayList()
@@ -140,7 +136,6 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             }
         })
     }
-
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.ivBack -> {
@@ -176,7 +171,6 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             }
         }
     }
-
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
@@ -204,7 +198,6 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             }
         }
     }
-
     fun apiTeachingInfo() {
         baseViewModel.teachingInfoApi(
             this,
@@ -218,11 +211,9 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             edLocation.text.toString(),
             latitude,
             longitude,
-            true
-        )
+            true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
-
     override fun onActivityResult(resrequestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(resrequestCode, resultCode, data)
         if (data != null) {
@@ -234,17 +225,14 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             }
         }
     }
-
     fun apiTeacher_level() {
         baseViewModel.teacher_level(this, true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
-
     override fun Teachinglevel(level: ArrayList<String>) {
         teachinglevel.clear()
         teachinglevel.addAll(level)
     }
-
     fun getLocation(latitude: String, longitude: String) {
         val geocoder: Geocoder
         val addresses: List<Address>
@@ -256,7 +244,6 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
         address = addres
         edLocation.text = (addres)
     }
-
     override fun onItemClick(pos: Int, value: String) {
         when (value) {
             "gellery" -> {
@@ -264,7 +251,6 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             }
         }
     }
-
     @SuppressLint("NotifyDataSetChanged")
     private fun selectImage() {
         Album.image(this).multipleChoice().camera(true).columnCount(4).widget(

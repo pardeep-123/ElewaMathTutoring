@@ -7,14 +7,12 @@
     android:background="@color/white"
     android:nestedScrollingEnabled="false"
     tools:context=".Activity.TeacherOrTutor.TeachingInfo.TeachingInfoActivity">
-
     <RelativeLayout
         android:id="@+id/rlToolbar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/app"
         android:padding="@dimen/_5sdp">
-
         <ImageView
             android:id="@+id/ivBack"
             android:layout_width="wrap_content"
@@ -25,7 +23,6 @@
             android:layout_marginLeft="@dimen/_5sdp"
             android:layout_marginBottom="10dp"
             android:src="@drawable/back_arrow_white" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,21 +34,18 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_14sdp" />
     </RelativeLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/rlToolbar"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:orientation="vertical">
-
             <TextView
                 android:id="@+id/tvAsk"
                 android:layout_width="match_parent"
@@ -61,7 +55,6 @@
                 android:text="What is your education level?"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardspinner"
                 android:layout_width="match_parent"
@@ -72,12 +65,10 @@
                 app:cardBackgroundColor="@color/grey"
                 app:cardCornerRadius="@dimen/_4sdp"
                 app:contentPadding="@dimen/_5sdp">
-
                 <RelativeLayout
                     android:id="@+id/rlChoose"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-
                     <Spinner
                         android:id="@+id/spinnerChoose"
                         android:layout_width="match_parent"
@@ -85,8 +76,6 @@
                         android:layout_centerVertical="true"
                         android:layout_toStartOf="@+id/ivChoose"
                         android:background="@android:color/transparent" />
-
-
                     <ImageView
                         android:id="@+id/ivChoose"
                         android:layout_width="14dp"
@@ -98,7 +87,6 @@
                         android:src="@drawable/down_arrow" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
-
             <TextView
                 android:id="@+id/tvInPersonRate"
                 android:layout_width="match_parent"
@@ -109,7 +97,6 @@
                 android:text="Majors"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
-
             <EditText
                 android:id="@+id/etMajors"
                 android:layout_width="match_parent"
@@ -145,7 +132,6 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
             <TextView
                 android:id="@+id/tvTeachingLevel"
                 android:layout_width="match_parent"
@@ -156,8 +142,6 @@
                 android:text="Teaching Level"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
-
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_teachingLevel"
                 android:layout_width="match_parent"
@@ -167,7 +151,6 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
             <TextView
                 android:id="@+id/tvSpecialities"
                 android:layout_width="match_parent"
@@ -178,7 +161,6 @@
                 android:text="Specialities"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
-
             <EditText
                 android:id="@+id/edSpeacialities"
                 android:layout_width="match_parent"
@@ -197,8 +179,6 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/text"
                 android:textSize="14sp" />
-
-
             <TextView
                 android:id="@+id/tvVirtualRate"
                 android:layout_width="match_parent"
@@ -209,7 +189,6 @@
                 android:text="Hourly Price"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
-
             <EditText
                 android:id="@+id/edPrice"
                 android:layout_width="match_parent"
@@ -227,7 +206,6 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/text"
                 android:textSize="14sp" />
-
             <TextView
                 android:id="@+id/tvCancelationPolicy"
                 android:layout_width="match_parent"

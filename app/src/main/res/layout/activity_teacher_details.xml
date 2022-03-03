@@ -61,8 +61,8 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivtecher_image"
                 android:layout_width="110dp"
-                android:layout_centerVertical="true"
                 android:layout_height="110dp"
+                android:layout_centerVertical="true"
                 android:src="@drawable/profile"
                 app:civ_border_color="@color/text"
                 app:civ_border_width="0.5dp"

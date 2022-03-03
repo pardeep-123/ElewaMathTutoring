@@ -187,6 +187,8 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
                     tv_about.setText("About " + liveData.data.body.name)
                     tv_teacher_AboutUser.setText(liveData.data.body.about)
                     tv_teacher_TeachingHistory.setText(liveData.data.body.teachingHistory)
+                 /*   Glide.with(this).load(liveData.data.body.image)
+                        .placeholder(R.drawable.profile_unselected).into(ivtecher_image)*/
                 }
                 else{
 

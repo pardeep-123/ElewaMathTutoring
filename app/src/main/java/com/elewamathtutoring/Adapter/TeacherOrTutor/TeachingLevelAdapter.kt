@@ -1,5 +1,4 @@
 package com.elewamathtutoring.Adapter.TeacherOrTutor
-
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -12,13 +11,11 @@ import com.riseball.interface_base.Teachinglevel_interface
 import kotlinx.android.synthetic.main.item_filteroptions.view.*
 import java.lang.Exception
 import kotlin.collections.ArrayList
-//
 class TeachingLevelAdapter(
     var ctn: Context,
     var list: ArrayList<TeachingLevelResponse.Body>,
     var teachinglevel: ArrayList<String>,
-    var teachingInfoActivity: Teachinglevel_interface
-) :
+    var teachingInfoActivity: Teachinglevel_interface) :
     RecyclerView.Adapter<TeachingLevelAdapter.ViewHolder>() {
     var poz = -1
     var Level_list = ArrayList<String>()
@@ -30,7 +27,7 @@ class TeachingLevelAdapter(
     }
     override fun getItemCount(): Int {
         return list.size
-        // return 3
+
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.name.setText(list.get(position).level)
@@ -53,7 +50,7 @@ class TeachingLevelAdapter(
                 holder.itemView.tick.setImageResource(R.drawable.uncheck)
                 Level_list.remove(list.get(position).id.toString())
             }
-          //  Teacher_level(Level_list)
+            //  Teacher_level(Level_list)
         }
     }
   /*  fun Teacher_level(Level_list: ArrayList<String>) {

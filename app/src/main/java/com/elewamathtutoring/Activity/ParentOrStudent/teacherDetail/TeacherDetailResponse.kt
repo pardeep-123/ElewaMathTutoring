@@ -1,11 +1,13 @@
 package com.elewamathtutoring.Activity.ParentOrStudent.teacherDetail
 
+import java.io.Serializable
+
 data class TeacherDetailResponse(
     val status: Boolean, // true
     val code: Int, // 200
     val message: String, // GEt teacher detail successfully
     val body: Body
-) {
+) :Serializable{
     data class Body(
         val id: Int, // 233
         val name: String, // Tayyab
@@ -34,13 +36,13 @@ data class TeacherDetailResponse(
         val available_slots: String, // 1,2,4
         val status: Int, // 1
         val teaching_level: List<TeachingLevel>
-    ) {
+    ):Serializable {
         data class TeachingLevel(
             val id: Int, // 3
             val level: String, // High School Level
             val status: Int, // 1
             val createdAt: String, // 2021-01-22T05:01:00.000Z
             val updatedAt: String // 2021-03-30T13:14:13.000Z
-        )
+        ):Serializable
     }
 }

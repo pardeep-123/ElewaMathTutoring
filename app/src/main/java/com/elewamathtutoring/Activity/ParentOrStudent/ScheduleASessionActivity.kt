@@ -21,7 +21,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-
 class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener {
     private var sunday: Int = 0
     private var monday: Int = 0
@@ -54,7 +53,6 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener {
              min.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH) - 1)
              mCalendarView.setMinimumDate(min)
 
-
              val words2: ArrayList<String> = profile.get(0).available_slots.split(",") as ArrayList<String>
              sunday = if (words2.contains("1")) 0 else Calendar.SUNDAY
              monday = if (words2.contains("2")) 0 else Calendar.MONDAY
@@ -81,32 +79,25 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener {
 
              val fmt = SimpleDateFormat("dd-MM-yyyy")
 
-             for (date in disable)
-             {
+             for (date in disable) {
                  val sdf = SimpleDateFormat("dd-MM-yyyy")
                  val date = sdf.parse(fmt.format(date))
                  val cal = Calendar.getInstance()
                  cal.time = date
-
-
                  val calendar = Calendar.getInstance()
                  val datee = calendar.time
                  val format = SimpleDateFormat("dd-MM-yyyy")
-
                  Log.e("checkmy", "---" +  fmt.format(date) + "ccc-----" + format.format(datee))
-                 if(fmt.format(date).equals(format.format(datee).toString()))
-                 {
+                 if(fmt.format(date).equals(format.format(datee).toString())) {
                      currentdateDate=format.format(datee).toString()
                      Currentdate_isdisable_date=true
                      Log.e("checkmy", "efdfhjbvhfbvhufbvhf")
                  }
-                 else
-                 {
+                 else {
                      calendarsarray.add(cal)
                  }
              }
         setCalenderView()
-
         mCalendarView.setOnDayClickListener(object : OnDayClickListener {
             override fun onDayClick(eventDay: EventDay) {
                 //Tue Aug 31 00:00:00 GMT+05:30 2021
@@ -119,8 +110,7 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener {
         })
     }
 
-    private fun onClicks()
-    {
+    private fun onClicks() {
         btnConfirmSession.setOnClickListener(this)
         ivBack.setOnClickListener(this)
     }
@@ -129,7 +119,6 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener {
         rv_chooseTime.adapter = ChooseTimeAdapter(this, profile, this@ScheduleASessionActivity)
     }
     //time": "3-4-5-6,9"
-
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.btnConfirmSession -> {
@@ -142,8 +131,6 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener {
                         selectedtme = "true"
                     }
                 }*/
-
-
                  if(selectedDate.equals(""))
                 {
                     Helper.showErrorAlert(this, "Please select date.")

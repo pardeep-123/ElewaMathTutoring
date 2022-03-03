@@ -12,13 +12,17 @@ import com.elewamathtutoring.Activity.ParentOrStudent.payment.PaymentInfoActivit
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.AppUtils.Companion.getCardType
 import kotlinx.android.synthetic.main.item_cards.view.*
+import kotlinx.android.synthetic.main.item_filteroptions.view.*
+import java.lang.Exception
 import kotlin.collections.ArrayList
 
 class CardsListAdapter(var ctn: Context,
                        var cardlist: ArrayList<CardListingResponse.Body>,
                        var paymentInfoActivity: PaymentInfoActivity,
-                       var typescreen: String) :
+                       var typescreen: String,
+                       var teachinglevel: ArrayList<String>) :
     RecyclerView.Adapter<CardsListAdapter.ViewHolder>() {
+    var Level_list = ArrayList<String>()
     private val viewBinderHelper = ViewBinderHelper()
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -72,7 +76,28 @@ class CardsListAdapter(var ctn: Context,
             intent.putExtra("expiry_year",cardlist.get(position).expiry_year.toString())
             ctn.startActivity(intent)
         }
+
+
+        try {
+            for (i in 0 until teachinglevel.size) {
+                if (teachinglevel.get(i).equals(cardlist[position].id.toString())) {
+                    holder.itemView.ivCheck.setImageResource(R.drawable.payment_checkfill)
+                    Level_list.add(cardlist.get(position).id.toString())
+                }
+            }
+        } catch (e: Exception) {
+        }
+        holder.itemView.setOnClickListener {
+            if (holder.itemView.ivCheck.getDrawable().getConstantState() == ctn.getResources()
+                    .getDrawable(R.drawable.payment_checkunfill).getConstantState()
+            ) {
+                holder.itemView.ivCheck.setImageResource(R.drawable.payment_checkfill)
+                Level_list.add(cardlist.get(position).id.toString())
+            } else {
+                holder.itemView.ivCheck.setImageResource(R.drawable.payment_checkunfill)
+                Level_list.remove(cardlist.get(position).id.toString())
+            }
+            //  Teacher_level(Level_list)
+        }
     }
-
-
 }

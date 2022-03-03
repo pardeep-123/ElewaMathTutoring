@@ -93,14 +93,9 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:padding="1dp"
-                    android:id="@+id/ivOn"
-                    android:src="@drawable/payment_checkfill" />
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:padding="1dp"
-                    android:id="@+id/ivOf"
+                    android:id="@+id/ivCheck"
                     android:src="@drawable/payment_checkunfill" />
+
             </RelativeLayout>
         </RelativeLayout>
     </com.chauthai.swipereveallayout.SwipeRevealLayout>

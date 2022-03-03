@@ -41,6 +41,7 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
     var value=0
     var cardlist=ArrayList<CardListingResponse.Body>()
   var typescreen=""
+    var teachinglevel = ArrayList<String>()
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,7 +94,7 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
                 if (liveData.data is CardListingResponse) {
                     cardlist.clear()
                     cardlist.addAll(liveData.data.body)
-                    rv_cards.adapter = CardsListAdapter(this,cardlist,this@PaymentInfoActivity,typescreen)
+                    rv_cards.adapter = CardsListAdapter(this,cardlist,this@PaymentInfoActivity,typescreen,  teachinglevel)
 
                   if(cardlist.size==0)
                   {
@@ -181,9 +182,7 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
     }
      fun ThanksForBookingDialog(cardid: String) {
          booking(cardid)
-
     }
-
     fun booking(cardid: String)
     {
         var selected = ""
@@ -298,7 +297,6 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
       //  val selectedperHour = perHour.substring(0, perHour.length-1).toString()
 
       Log.e("checkmylog","--"+selectedfinalvalue+"=perhour="+selectedperHour+"=time="+selecteddat+"cardid"+cardid+"---hr-"+selectedHours)
-
         baseViewModel.book_Session(this,profile.get(0).id.toString(),""+profile.get(0).time_slots.size.toString(),selecteddat,intent.getStringExtra("aboutdetail").toString()
             ,intent.getStringExtra("selected_Session").toString(),selectedHours,selectedperHour,selectedfinalvalue,cardid,intent.getStringExtra("selecteddate").toString(),true)
         baseViewModel.getCommonResponse().observe(this, this)
