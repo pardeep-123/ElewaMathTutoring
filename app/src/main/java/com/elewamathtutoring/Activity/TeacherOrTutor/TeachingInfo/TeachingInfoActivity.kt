@@ -19,6 +19,7 @@ import com.elewamathtutoring.Activity.TeacherOrTutor.edit.EditResponse
 import com.elewamathtutoring.Adapter.ClickCallBack
 import com.elewamathtutoring.Adapter.TeacherOrTutor.EducationCertificateAdapter
 import com.elewamathtutoring.Adapter.TeacherOrTutor.TeachingLevelAdapter
+import com.elewamathtutoring.Model.EducationLevel
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.App
 import com.elewamathtutoring.Util.Location.MyNewMapActivity
@@ -40,6 +41,9 @@ import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
+import com.elewamathtutoring.Activity.Chat.chatModel.User
+import com.elewamathtutoring.Model.ImageModel
+
 
 class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<RestObservable>,
     Teachinglevel_interface, ClickCallBack {
@@ -60,7 +64,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
     private val requestCodes = 11
     var list = ArrayList<TeachingLevelResponse.Body>()
     private var mAlbumFiles: java.util.ArrayList<AlbumFile> = java.util.ArrayList()
-    val imageList = ArrayList<String>()
+    val imageList = ArrayList<ImageModel>()
     var educationCertificateAdapter: EducationCertificateAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,10 +73,12 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
         onClicks()
         Constants.scrollEditText(edSpeacialities)
         Constants.scrollEditText(edCancelationPolicy)
-        handel_add_Edit()
+
         spinnerChoose()
         educationCertificateAdapter = EducationCertificateAdapter(imageList, this)
         rvUploadImage.adapter = educationCertificateAdapter
+
+        handel_add_Edit()
     }
     private fun handel_add_Edit() {
         if (intent.getStringExtra("signup")!!.equals("editrofile")) {
@@ -96,6 +102,16 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             }
             getLocation(latitude, longitude)
             btnNext.text = "SAVE"
+
+
+            profilelist[0].certificate_images.forEach { its->
+
+                imageList.add(ImageModel().also {
+                    it.image=its.images
+                    it.isGalleryAdded=false
+                })
+            }
+            educationCertificateAdapter!!.notifyDataSetChanged()
         }
     }
     private fun onClicks() {
@@ -106,20 +122,21 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
     }
     private fun spinnerChoose() {
         val spinner1: Spinner = findViewById(R.id.spinnerChoose)
-        var spinnerlist: ArrayList<String> = ArrayList()
-        spinnerlist.add("")
-        spinnerlist.add("Below high school")
-        spinnerlist.add("High school diploma")
-        spinnerlist.add("Bachlor's degree")
-        spinnerlist.add("Bachlor's degree")
-        spinnerlist.add("Master's degree")
-        spinnerlist.add("PHD")
-        val list: ArrayAdapter<String> =
-            ArrayAdapter<String>(this, R.layout.spinner_small, spinnerlist)
+        var spinnerlist: ArrayList<EducationLevel> = ArrayList()
+        spinnerlist.add(0,EducationLevel(""))
+        spinnerlist.add(1,EducationLevel("Below high school"))
+        spinnerlist.add(2,EducationLevel("High school diploma"))
+        spinnerlist.add(3,EducationLevel("Bachlor's degree"))
+        spinnerlist.add(4,EducationLevel("Bachlor's degree"))
+        spinnerlist.add(5,EducationLevel("Master's degree"))
+        spinnerlist.add(6,EducationLevel("PHD"))
+        val list: ArrayAdapter<EducationLevel> = ArrayAdapter<EducationLevel>(this, R.layout.spinner_small, spinnerlist)
         list.setDropDownViewResource(R.layout.spinner_small)
         spinner1.setAdapter(list)
         try {
-            spinner1.setSelection(certifiedChoose)
+//            spinner1.setSelection(certifiedChoose)
+         val data= spinnerlist.filter { it.educationName.toString()==profilelist[0].educationLevel }
+           spinner1.setSelection(spinnerlist.indexOf(data[0]))
         } catch (e: Exception) {
         }
         spinner1.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
@@ -129,8 +146,11 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
                 jj: Int,
                 l: Long
             ) {
-                Log.e("datacheckit", "----" + jj.toString())
-                CertifiedAs = jj.toString()
+                val selectedObject = spinner1.selectedItem as EducationLevel
+//                Log.e("datacheckit", "----" + jj.toString())
+//                CertifiedAs = jj.toString()
+                Log.e("datacheckit", "----" + selectedObject.educationName.toString())
+                CertifiedAs = selectedObject.educationName.toString()
             }
             override fun onNothingSelected(adapterView: AdapterView<*>?) {
             }
@@ -149,10 +169,11 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
                             " ",
                             ""
                         ),
+                        CertifiedAs,
                         etMajors.text.toString(),
                         edSpeacialities.text.toString(),
                         edCancelationPolicy.text.toString(),
-                        edCancelationPolicy.text.toString(),
+                        edPrice.text.toString(),
                         address,
                         latitude,
                         longitude,
@@ -257,8 +278,12 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             Widget.newDarkBuilder(this).title(getString(R.string.app_name)).build()
         )
             .onResult { result ->
-                result.forEach {
-                    imageList.add(it.path)
+                result.forEach {its ->
+
+                    imageList.add(ImageModel().also {
+                        it.image=its.path
+                        it.isGalleryAdded=true
+                    })
                     educationCertificateAdapter?.notifyDataSetChanged()
                 }
 

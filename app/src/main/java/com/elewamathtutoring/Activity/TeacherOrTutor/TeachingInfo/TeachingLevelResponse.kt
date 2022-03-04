@@ -5,7 +5,7 @@ data class TeachingLevelResponse(
     val code: Int, // 200
     val message: String, // Get Teaching level successfully.
     val body: ArrayList<Body>
-) {
+){
     data class Body(
         val id: Int, // 1
         val level: String, // Elementary School Level

@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.elewamathtutoring.Model.ImageModel
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.App
 import com.elewamathtutoring.Util.OnNoInternetConnectionListener
@@ -734,12 +735,13 @@ class BaseViewModel : ViewModel() {
     @SuppressLint("CheckResult")
     fun EditTeacherProfileProfile(
         activity: Activity,
-        certificate_images: ArrayList<String>,
+        certificate_images: ArrayList<ImageModel>,
         teachingLevel: String,
         educationLevel: String,
         majors: String,
         specialties: String,
         cancelPolicy: String,
+        hourlyPrice: String,
         address: String,
         latitude: String,
         longitude: String,
@@ -747,28 +749,32 @@ class BaseViewModel : ViewModel() {
     ) {
         var imageFileBody:  ArrayList<MultipartBody.Part> ?= ArrayList()
 
-        certificate_images.forEach {imageUrl->
+        certificate_images.forEach {it->
             var newFile: File? = null
-            if (imageUrl != "") {
-                newFile = File(imageUrl)
-            }
-            if (newFile != null && newFile.exists() && !newFile.equals("")) {
-                val mediaType: MediaType?
-                if (imageUrl.endsWith("png")) {
-                    mediaType = "image/png".toMediaTypeOrNull()
-                } else {
-                    mediaType = "image/jpeg".toMediaTypeOrNull()
+            if (it.isGalleryAdded){
+                if (it.image != "") {
+                    newFile = File(it.image)
                 }
+                if (newFile != null && newFile.exists() && !newFile.equals("")) {
+                    val mediaType: MediaType?
+                    if (it.image.endsWith("png")) {
+                        mediaType = "image/png".toMediaTypeOrNull()
+                    } else {
+                        mediaType = "image/jpeg".toMediaTypeOrNull()
+                    }
 
-                val requestBody: RequestBody = newFile.asRequestBody(mediaType)
-                imageFileBody!!.add(MultipartBody.Part.createFormData("certificate_images", newFile.name, requestBody))
+                    val requestBody: RequestBody = newFile.asRequestBody(mediaType)
+                    imageFileBody!!.add(MultipartBody.Part.createFormData("certificate_images", newFile.name, requestBody))
+                }
             }
+
         }
         val teachingLevel_value1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), teachingLevel)
         val education_Level1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), educationLevel)
         val majorss1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), majors)
         val specialties_value1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), specialties)
         val cancelPolicy_value1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), cancelPolicy)
+        val hourlyPrice1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), hourlyPrice)
         val address_value1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), address)
         val latitude_value1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), latitude)
         val longitude_value1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), longitude)
@@ -781,6 +787,7 @@ class BaseViewModel : ViewModel() {
                     majorss1,
                     specialties_value1,
                     cancelPolicy_value1,
+                    hourlyPrice1,
                     address_value1,
                     latitude_value1,
                     longitude_value1
@@ -809,6 +816,7 @@ class BaseViewModel : ViewModel() {
                             majors,
                             specialties,
                             cancelPolicy,
+                            hourlyPrice,
                             address,
                             latitude,
                             longitude,
@@ -1896,7 +1904,7 @@ class BaseViewModel : ViewModel() {
     @SuppressLint("CheckResult")
     fun teachingInfoApi(
   activity: Activity,
-        certificate_images: ArrayList<String>,
+        certificate_images: ArrayList<ImageModel>,
         educationLevel: String,
         majors: String,
         teachingLevel: String,
@@ -1910,23 +1918,26 @@ class BaseViewModel : ViewModel() {
     ) {
         var imageFileBody:  ArrayList<MultipartBody.Part> ?= ArrayList()
 
-        certificate_images.forEach {imageUrl->
+        certificate_images.forEach {it->
             var newFile: File? = null
 
-            if (imageUrl != "") {
-                newFile = File(imageUrl)
-            }
-            if (newFile != null && newFile.exists() && !newFile.equals("")) {
-                val mediaType: MediaType?
-                if (imageUrl.endsWith("png")) {
-                    mediaType = "image/png".toMediaTypeOrNull()
-                } else {
-                    mediaType = "image/jpeg".toMediaTypeOrNull()
+            if (it.isGalleryAdded){
+                if (it.image != "") {
+                    newFile = File(it.image)
                 }
+                if (newFile != null && newFile.exists() && !newFile.equals("")) {
+                    val mediaType: MediaType?
+                    if (it.image.endsWith("png")) {
+                        mediaType = "image/png".toMediaTypeOrNull()
+                    } else {
+                        mediaType = "image/jpeg".toMediaTypeOrNull()
+                    }
 
-                val requestBody: RequestBody = newFile.asRequestBody(mediaType)
-                imageFileBody!!.add(MultipartBody.Part.createFormData("certificate_images", newFile.name, requestBody))
+                    val requestBody: RequestBody = newFile.asRequestBody(mediaType)
+                    imageFileBody!!.add(MultipartBody.Part.createFormData("certificate_images", newFile.name, requestBody))
+                }
             }
+
         }
 
         val education_Level: RequestBody =

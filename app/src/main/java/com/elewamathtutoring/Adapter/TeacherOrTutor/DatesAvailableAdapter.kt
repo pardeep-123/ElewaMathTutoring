@@ -20,7 +20,6 @@ class DatesAvailableAdapter(
     var Array_date=ArrayList<String>()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

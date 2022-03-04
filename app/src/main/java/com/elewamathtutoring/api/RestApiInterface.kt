@@ -25,16 +25,12 @@ import com.elewamathtutoring.Activity.TeacherOrTutor.editProfile.EditTeacherProf
 import com.elewamathtutoring.Activity.TeacherOrTutor.request.RequestDetailResponse
 import com.elewamathtutoring.Fragment.ParentOrStudent.booking.UserBookingListResponse
 import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfilResponse
-import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfileResponse
 import com.elewamathtutoring.Fragment.TeacherOrTutor.request.RequestListResponse
-import com.elewamathtutoring.Models.Add_Card.Model_addcards
-import com.elewamathtutoring.Models.Card_listing.Model_cardlisting
 import com.elewamathtutoring.Models.ListView.Model_myschdeullist
 import com.elewamathtutoring.Models.Login.Model_login
 import com.elewamathtutoring.Models.TeacherRequestsList.Model_TeacherRequestList
 import com.elewamathtutoring.Models.Notifications.Model_Notifications
 import com.elewamathtutoring.Models.Search.Model_search
-import com.elewamathtutoring.Models.Teacher_details.Model_teacherdetails
 import com.pawskeeper.Modecommon.Commontoall
 import com.pawskeeper.Modecommon.Commontoall2
 import io.reactivex.Observable
@@ -263,6 +259,7 @@ interface RestApiInterface {
         @Part("majors") majors: RequestBody,
         @Part("specialties") specialties: RequestBody,
         @Part("cancelPolicy") cancelPolicy: RequestBody,
+        @Part("hourlyPrice") hourlyPrice: RequestBody,
         @Part("address") address: RequestBody,
         @Part("latitude") latitude: RequestBody,
         @Part("longitude") longitude: RequestBody,

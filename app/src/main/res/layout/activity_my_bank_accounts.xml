@@ -47,9 +47,9 @@
         android:id="@+id/btnAddNewAccount"
         style="@style/Button"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/button_bg_and_shape"
         android:text="Add New Account"
         android:textColor="@color/white" />

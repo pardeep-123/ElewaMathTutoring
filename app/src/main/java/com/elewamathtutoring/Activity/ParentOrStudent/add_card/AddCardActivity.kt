@@ -128,13 +128,9 @@ class AddCardActivity : AppCompatActivity() ,
         val filterDialog = Dialog(this)
         filterDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         filterDialog.setContentView(R.layout.dialog_booking_thanks)
-
         filterDialog.window!!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
-
         filterDialog.window!!.setGravity(Gravity.CENTER)
         filterDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-
         filterDialog.setCancelable(false)
         filterDialog.setCanceledOnTouchOutside(false)
 

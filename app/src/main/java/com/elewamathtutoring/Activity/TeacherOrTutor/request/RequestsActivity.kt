@@ -48,7 +48,6 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
         if (intent.getStringExtra("from").equals("Sessions")) {
             btnAcceptOffer.setText("Cancel Booking")
            // btnDenyOffer.setText("Cancel Session")
-
         }
         else {
             btnAcceptOffer.setText("Accept Offers")
@@ -236,8 +235,6 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
                         btnReject.visibility=View.GONE
                     }
 
-
-
                     val dateParser = SimpleDateFormat("yyyy-MM-dd")
                     val date = dateParser.parse(liveData.data.body.date)
                     val dateFormatter = SimpleDateFormat("EEE, MMM dd")
@@ -267,13 +264,9 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
             }
         }
     }
-
-
-   fun change_oderstatus(status:String)
-   {
+   fun change_oderstatus(status:String) {
        //sessionStatus,sessionId
        baseViewModel.change_session_status(this, status, intent.getStringExtra("id").toString(),true)
        baseViewModel.getCommonResponse().observe(this, this)
-
    }
 }

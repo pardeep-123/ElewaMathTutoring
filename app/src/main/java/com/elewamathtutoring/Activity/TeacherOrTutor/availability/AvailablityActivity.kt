@@ -23,6 +23,7 @@ import com.elewamathtutoring.Adapter.TeacherOrTutor.TimeSlotAvailableAdapter
 import com.elewamathtutoring.Model.DatesAvailableModel
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.App
+import com.elewamathtutoring.Util.SharedPrefUtil
 import com.elewamathtutoring.Util.Validator
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
@@ -51,15 +52,17 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
     var Selctedarray_date = ArrayList<String>()
     var Selctedarray_time = ArrayList<String>()
     var Array_time = ArrayList<String>()
+    lateinit var shared: SharedPrefUtil
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_availablity)
         App.getinstance().getmydicomponent().inject(this)
         apiTimeSlot()
+
         if (intent.extras!=null) {
             if (intent.getStringExtra("signup").equals("editrofile")) {
-                profilelist =
-                    (intent.getSerializableExtra("list_model") as java.util.ArrayList<EditResponse.Body>?)!!
+                profilelist = (intent.getSerializableExtra("list_model") as java.util.ArrayList<EditResponse.Body>?)!!
 //              getLocation(profilelist.get(0).latitude,profilelist.get(0).longitude)
                 val data = profilelist.get(0).availability.toString()
                 val words: ArrayList<String> = data.split(",") as ArrayList<String>
@@ -121,8 +124,7 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
             R.id.btnConfirmSignUp -> {
                 if (validator.Teacherdelectdatetime(this, Array_date, Array_time)) {
                     if (intent.getStringExtra("signup").equals("teacher")) {
-                        baseViewModel.TeacherAvailability(
-                            this,
+                        baseViewModel.TeacherAvailability(this,
                             Array_date.toString().replace("[", "").replace("]", "")
                                 .replace(" ", ""),
                             Array_time.toString().replace("[", "").replace("]", "")
@@ -162,6 +164,8 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
             Status.SUCCESS -> {
                 if (liveData.data is AvailabilityResponse) {
                     Helper.showSuccessToast(this, liveData.data.message)
+                   // savePrefrence(Constants.AUTH_KEY, liveData.data.body.token.toString())
+
                     savePrefrence(Constants.USER_ID, liveData.data.body.id.toString())
                     Constants.USER_IDValue = liveData.data.body.id.toString()
                     savePrefrence(Constants.notificationStatus, liveData.data.body.notificationStatus.toString())
@@ -177,13 +181,11 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
                     Helper.showSuccessToast(this, liveData.data.message)
                     finish()
                 }
-
                  if (liveData.data is TimeSlotsResponse) {
                     timeSlotList.addAll(liveData.data.body)
                     rv_timeSlotsAvailable.adapter = TimeSlotAvailableAdapter(timeSlotList, Selctedarray_time, this@AvailablityActivity)
                 }
             }
-
             Status.ERROR -> {
                 if (liveData.error is AvailabilityResponse) {
                     Helper.showSuccessToast(this, liveData.error.message)
@@ -192,7 +194,6 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
                 }
             }
             else -> {
-
             }
         }
     }
@@ -206,8 +207,5 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
         val addres: String =
             addresses[0].getAddressLine(0) // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
         address = addres
-
     }
-
-
 }

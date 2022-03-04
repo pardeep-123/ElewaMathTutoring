@@ -46,12 +46,9 @@ class WithdrawalActivity : AppCompatActivity(), Observer<RestObservable> {
     }
     private fun onClicks() {
         rl_Bank.setOnClickListener {
-            startActivity(
-                Intent(
-                    this,
-                    AddBankAccountActivity::class.java
-                )
-            )
+       //     startActivity(Intent(this, AddBankAccountActivity::class.java))
+            val intent = Intent(this, MyBankAccountsActivity::class.java)
+            startActivityForResult(intent, 11)
         }
         btnWithdrawalNow.setOnClickListener {
             if(tvAmount.text.toString().equals(""))

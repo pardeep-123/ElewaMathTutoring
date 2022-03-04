@@ -7,14 +7,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.elewamathtutoring.Adapter.ClickCallBack
+import com.elewamathtutoring.Model.ImageModel
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
+import com.elewamathtutoring.Util.constant.Constants.Companion.IMAGE_URL
 import kotlinx.android.synthetic.main.item_education_certificaate.view.*
 import kotlinx.android.synthetic.main.item_notifications.view.*
 import kotlin.collections.ArrayList
 
 // var teachinglevel: ArrayList<String>,
-class EducationCertificateAdapter(val list: ArrayList<String>,    var clickCallBack: ClickCallBack) :
+class EducationCertificateAdapter(val list: ArrayList<ImageModel>,    var clickCallBack: ClickCallBack) :
     RecyclerView.Adapter<EducationCertificateAdapter.ViewHolder>() {
     lateinit var ctn: Context
 
@@ -43,7 +45,13 @@ class EducationCertificateAdapter(val list: ArrayList<String>,    var clickCallB
         fun bind(pos: Int) {
             if (pos != 0) {
                 itemView.llCamera.visibility=View.GONE
-                Glide.with(ctn).load(list[pos - 1]).into(itemView.ivDocuments)
+                if (list[pos-1].isGalleryAdded){
+                    Glide.with(ctn).load(list[pos - 1].image).into(itemView.ivDocuments)
+
+                }else{
+
+                    Glide.with(ctn).load(IMAGE_URL+list[pos - 1].image).into(itemView.ivDocuments)
+                }
             } else{
                 itemView.llCamera.visibility=View.VISIBLE
             }

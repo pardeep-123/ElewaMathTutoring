@@ -1,5 +1,6 @@
 package com.elewamathtutoring.Adapter.TeacherOrTutor
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,6 +37,7 @@ class TimeSlotAvailableAdapter(
 
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var timeSlotsAvailableModel = list[position]
         holder.itemView.dayofweek.text = timeSlotsAvailableModel.startTime+"-"+timeSlotsAvailableModel.endTime
