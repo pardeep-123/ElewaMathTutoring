@@ -16,9 +16,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.Chat.mathChat.MathPersonChatActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.ReceiptActivity
-import com.elewamathtutoring.Activity.ScheduleASessionActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.session.ScheduleASessionActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.request.RequestDetailResponse
-import com.elewamathtutoring.Models.Teacher_details.Model_teacherdetails
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.SharedPrefUtil
 import com.elewamathtutoring.Util.constant.Constants
@@ -84,6 +83,7 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
             }
             R.id.btnScheduleSession -> {
                 var intent = Intent(this, ScheduleASessionActivity::class.java)
+                intent.putExtra("teacher_detail", teacherdetails)
                 intent.putExtra("teacher_detail", tutordetails)
                 startActivity(intent)
             }
@@ -142,10 +142,7 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
         reportDialog.setCancelable(true)
         reportDialog.setCanceledOnTouchOutside(true)
         reportDialog.show()
-
-
     }
-
     @SuppressLint("SetTextI18n")
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
@@ -161,8 +158,6 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
                     tv_teacher_AboutUser.setText(liveData.data.body.Teacher.about)
                     tvTime.text= liveData.data.body.timeslot.get(0).startTime+" - "+liveData.data.body.timeslot.get(0).endTime
                    tv_teacher_TeachingHistory.text = liveData.data.body.Teacher.teachingHistory
-
-
 /*
                        for (i in 0 until liveData.data.body.teaching_level.size) {
                            var data = liveData.data.body.teaching_level.get(i).level + ","
@@ -170,8 +165,6 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
                        }*/
                     var s = tv_parentteacherlevel.text.toString()
                     tv_parentteacherlevel.text = s.substring(0, s.length - 1)
-
-
                     //  tv_teacher_CancelationPolicy.text=liveData.data.body.cancellationPolicy
                     //    tv_teacher_virtual.text=(Constants.Currency+liveData.data.body.virtualRate.toString())+".00/Hr"
                     //   tv_teacher_inprice.text=Constants.Currency+liveData.data.body.InPersonRate.toString()+".00/Hr"
@@ -194,7 +187,6 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
 
                 }
             }
-
             Status.ERROR -> {
                 if (liveData.error is RequestDetailResponse) {
                     Helper.showSuccessToast(this, liveData.error.message)

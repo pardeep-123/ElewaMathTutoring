@@ -7,7 +7,7 @@ data class TeacherDetailResponse(
     val code: Int, // 200
     val message: String, // GEt teacher detail successfully
     val body: Body
-) :Serializable{
+):Serializable{
     data class Body(
         val id: Int, // 233
         val name: String, // Tayyab

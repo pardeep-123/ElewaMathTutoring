@@ -92,12 +92,10 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
         btnConfirmSignUp.setOnClickListener(this)
         ivBack.setOnClickListener(this)
     }
-
     fun apiTimeSlot() {
         baseViewModel.get_time_slots(this, true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
-
     fun dialogAdmin() {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -154,7 +152,8 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
         Array_date.addAll(date)
     }
 
-    fun Selected_time(time: ArrayList<String>) {
+    fun Selected_time(time: ArrayList<String>)
+    {
         Array_time.clear()
         Array_time.addAll(time)
     }
@@ -171,9 +170,7 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
                     savePrefrence(Constants.notificationStatus, liveData.data.body.notificationStatus.toString())
                     savePrefrence(Constants.Social_login, "False")
                     savePrefrence(Constants.user_type, liveData.data.body.userType.toString())
-
                     dialogAdmin()
-
                 } else if (liveData.data is EditResponse) {
                     Helper.showSuccessToast(this, liveData.data.message)
                     finish()
@@ -197,7 +194,6 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
             }
         }
     }
-
     fun getLocation(latitude: String, longitude: String) {
         val geocoder: Geocoder
         val addresses: List<Address>
@@ -208,4 +204,5 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
             addresses[0].getAddressLine(0) // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
         address = addres
     }
+
 }

@@ -11,6 +11,8 @@ import com.elewamathtutoring.Activity.ParentOrStudent.payment.CardListingRespons
 import com.elewamathtutoring.Activity.ParentOrStudent.privacy.PrivacyResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResourcesResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword.ChangePasswordResponse
+import com.elewamathtutoring.Activity.ParentOrStudent.session.ScheduleSessionResponse
+
 import com.elewamathtutoring.Activity.ParentOrStudent.teacherDetail.TeacherDetailResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.wallet.BankListingResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.wallet.response.WalletGetResponse
@@ -198,6 +200,21 @@ interface RestApiInterface {
         @Field("ifscCode") ifscCode: String,
         @Field("bankType") bankType: String?
     ): Observable<AddBankResponse>
+
+
+        @FormUrlEncoded
+    @POST("book_Session")
+    fun book_Session(
+        @Field("teacherId") teacherId: String,
+        @Field("About") About: String,
+        @Field("date") date: String,
+        @Field("times") times: String,
+        @Field("Hour") Hour: String
+    ): Observable<ScheduleSessionResponse>
+
+
+
+
 
     @FormUrlEncoded
     @POST("card")

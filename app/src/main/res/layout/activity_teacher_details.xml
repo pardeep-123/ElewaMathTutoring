@@ -6,14 +6,12 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".Activity.ParentOrStudent.teacherDetail.TeacherDetailsActivity">
-
     <LinearLayout
         android:id="@+id/ll1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/app"
         android:orientation="vertical">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -7,12 +7,15 @@ import android.graphics.drawable.ColorDrawable
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
+import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -112,7 +115,7 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
          startActivity(intent)
         }
 
-       /* edtSearch.addTextChangedListener(object : TextWatcher {
+      /*  edtSearch.addTextChangedListener(object : TextWatcher {
                     override fun afterTextChanged(s: Editable?) {
                     }
 
@@ -298,7 +301,7 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
                 if (liveData.data is MathChatResponse) {
                     teacherlevel = ArrayList()
                     teacherlevel.addAll(liveData.data.body)
-
+                    tvloc.setText(teacherlevel[0].address)
                     recycler_Homesearch.adapter = SearchHomeAdapter(requireContext(), teacherlevel)
                    // rv_filterOptions1.adapter = TeachingLevelAdapter(requireContext(), teacherlevel, getdata_toselected_level,this)
                 }

@@ -29,7 +29,7 @@ data class RequestDetailResponse(
         val createdAt: Int, // 1615802021
         val updated: Int, // 0
         val updatedAt: Int, // 0
-        val timeslot: List<Timeslot>,
+        val timeslot: ArrayList<Timeslot>,
         val Teacher: Teacher1,
         val Student: Student1
     ):Serializable {
@@ -39,9 +39,9 @@ data class RequestDetailResponse(
             val endTime: String, // 1:00 AM
             val status: Int, // 1
             val createdAt: Int, // 1610092025
-            val updatedAt: Int // 0
+            val updatedAt: Int, // 0
+            var check: Boolean = false
         ):Serializable
-
         data class Teacher1(
             val id: Int, // 321
             val name: String, // Shivali BVVNNNN
@@ -78,7 +78,6 @@ data class RequestDetailResponse(
             val isTechingInfo: Int, // 1
             val IsAvailable: Int // 1
         ):Serializable
-
         data class Student1(
             val id: Int, // 264
             val name: String, // Tutor

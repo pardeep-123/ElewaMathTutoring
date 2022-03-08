@@ -461,6 +461,47 @@ class BaseViewModel : ViewModel() {
 
     }
 
+     @SuppressLint("CheckResult")
+    fun book_Session(activity: Activity,
+                     teacherId: String,
+                     About: String,
+                     date: String,
+                     times: String,
+                     Hour: String,
+                     isDialogShow: Boolean) {
+        if (Helper.isNetworkConnected(activity)) {
+            apiService.book_Session(teacherId,About,date,times,Hour)
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    { mResponse.value = RestObservable.error(activity, it) }
+                )
+        } else {
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        book_Session(activity, teacherId,About,date,times,Hour, true)
+                    }
+                })
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
     @SuppressLint("CheckResult")
     fun addBank(
         activity: Activity,

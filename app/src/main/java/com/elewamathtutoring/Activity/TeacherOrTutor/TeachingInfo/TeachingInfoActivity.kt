@@ -49,9 +49,11 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
     Teachinglevel_interface, ClickCallBack {
     @Inject
     lateinit var validator: Validator
-    var profilelist = java.util.ArrayList<EditResponse.Body>()
+    var profilelist : ArrayList<EditResponse.Body> = ArrayList()
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     val context: Context = this
+    var spinnerlist: ArrayList<EducationLevel> = ArrayList()
+
     var firstimage = ""
     var latitude = ""
     var longitude = ""
@@ -77,40 +79,41 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
         spinnerChoose()
         educationCertificateAdapter = EducationCertificateAdapter(imageList, this)
         rvUploadImage.adapter = educationCertificateAdapter
-
         handel_add_Edit()
     }
+
     private fun handel_add_Edit() {
         if (intent.getStringExtra("signup")!!.equals("editrofile")) {
-            profilelist = (intent.getSerializableExtra("list_model") as java.util.ArrayList<EditResponse.Body>?)!!
-            edSpeacialities.setText(profilelist.get(0).specialties.toString())
-            certifiedChoose = profilelist.get(0).isCertifiedOrtutor
-            etMajors.setText(profilelist.get(0).InPersonRate.toString())
-            edPrice.setText(profilelist.get(0).virtualRate.toString())
-            edCancelationPolicy.setText(profilelist.get(0).cancellationPolicy.toString())
-            latitude = profilelist.get(0).latitude.toString()
-            longitude = profilelist.get(0).longitude.toString()
-            availability = profilelist.get(0).availability.toString()
-            timeSlot = profilelist.get(0).available_slots.toString()
-            val num = profilelist.get(0).teachingLevel.toString()
+            profilelist =
+                intent.extras?.get("list_model") as ArrayList<EditResponse.Body>
+            edSpeacialities.setText(profilelist[0].specialties)
+            certifiedChoose = profilelist[0].isCertifiedOrtutor!!
+            etMajors.setText(profilelist[0].InPersonRate.toString())
+            edPrice.setText(profilelist[0].virtualRate.toString())
+            edCancelationPolicy.setText(profilelist[0].cancellationPolicy)
+            latitude = profilelist.get(0).latitude
+            longitude = profilelist.get(0).longitude
+            availability = profilelist.get(0).availability
+            timeSlot = profilelist.get(0).available_slots
+            val num = profilelist[0].teachingLevel
             try {
-                val str = num.split(",").toTypedArray()
-                teachinglevel = str.toList() as ArrayList<String>
+                val str = num?.split(",")?.toTypedArray()
+                teachinglevel = str?.toList() as ArrayList<String>
             } catch (e: Exception) {
-                val str = num.split("").toTypedArray()
-                teachinglevel = str.toList() as ArrayList<String>
+                val str = num?.split("")?.toTypedArray()
+                teachinglevel = str?.toList() as ArrayList<String>
             }
             getLocation(latitude, longitude)
             btnNext.text = "SAVE"
-
-
-            profilelist[0].certificate_images.forEach { its->
-
+            profilelist[0].certificate_images?.forEach { its ->
                 imageList.add(ImageModel().also {
-                    it.image=its.images
-                    it.isGalleryAdded=false
+                    it.image = its.images
+                    it.isGalleryAdded = false
                 })
             }
+            val data =
+                spinnerlist.filter { it.educationName.toString() == profilelist[0].educationLevel }
+            spinnerChoose.setSelection(spinnerlist.indexOf(data[0]))
             educationCertificateAdapter!!.notifyDataSetChanged()
         }
     }
@@ -122,21 +125,23 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
     }
     private fun spinnerChoose() {
         val spinner1: Spinner = findViewById(R.id.spinnerChoose)
-        var spinnerlist: ArrayList<EducationLevel> = ArrayList()
-        spinnerlist.add(0,EducationLevel(""))
-        spinnerlist.add(1,EducationLevel("Below high school"))
-        spinnerlist.add(2,EducationLevel("High school diploma"))
-        spinnerlist.add(3,EducationLevel("Bachlor's degree"))
-        spinnerlist.add(4,EducationLevel("Bachlor's degree"))
-        spinnerlist.add(5,EducationLevel("Master's degree"))
-        spinnerlist.add(6,EducationLevel("PHD"))
-        val list: ArrayAdapter<EducationLevel> = ArrayAdapter<EducationLevel>(this, R.layout.spinner_small, spinnerlist)
+
+        spinnerlist.add(0, EducationLevel(""))
+        spinnerlist.add(1, EducationLevel("Below high school"))
+        spinnerlist.add(2, EducationLevel("High school diploma"))
+        spinnerlist.add(3, EducationLevel("Bachlor's degree"))
+        spinnerlist.add(4, EducationLevel("Bachlor's degree"))
+        spinnerlist.add(5, EducationLevel("Master's degree"))
+        spinnerlist.add(6, EducationLevel("PHD"))
+        val list: ArrayAdapter<EducationLevel> =
+            ArrayAdapter<EducationLevel>(this, R.layout.spinner_small, spinnerlist)
         list.setDropDownViewResource(R.layout.spinner_small)
         spinner1.setAdapter(list)
         try {
-//            spinner1.setSelection(certifiedChoose)
-         val data= spinnerlist.filter { it.educationName.toString()==profilelist[0].educationLevel }
-           spinner1.setSelection(spinnerlist.indexOf(data[0]))
+           spinner1.setSelection(certifiedChoose)
+            val data =
+                spinnerlist.filter { it.educationName.toString() == profilelist[0].educationLevel }
+            spinner1.setSelection(spinnerlist.indexOf(data[0]))
         } catch (e: Exception) {
         }
         spinner1.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
@@ -150,12 +155,14 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
 //                Log.e("datacheckit", "----" + jj.toString())
 //                CertifiedAs = jj.toString()
                 Log.e("datacheckit", "----" + selectedObject.educationName.toString())
-                CertifiedAs = selectedObject.educationName.toString()
+                CertifiedAs = selectedObject.educationName
             }
+
             override fun onNothingSelected(adapterView: AdapterView<*>?) {
             }
         })
     }
+
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.ivBack -> {
@@ -163,12 +170,9 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             }
             R.id.btnNext -> {
                 if (intent.getStringExtra("signup").equals("editrofile")) {
-                    baseViewModel.EditTeacherProfileProfile(
-                        this, imageList,
-                        teachinglevel.toString().replace("[", "").replace("]", "").replace(
+                    baseViewModel.EditTeacherProfileProfile(this, imageList, teachinglevel.toString().replace("[", "").replace("]", "").replace(
                             " ",
-                            ""
-                        ),
+                            ""),
                         CertifiedAs,
                         etMajors.text.toString(),
                         edSpeacialities.text.toString(),
@@ -192,6 +196,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             }
         }
     }
+
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
@@ -219,6 +224,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             }
         }
     }
+
     fun apiTeachingInfo() {
         baseViewModel.teachingInfoApi(
             this,
@@ -232,9 +238,11 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             edLocation.text.toString(),
             latitude,
             longitude,
-            true)
+            true
+        )
         baseViewModel.getCommonResponse().observe(this, this)
     }
+
     override fun onActivityResult(resrequestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(resrequestCode, resultCode, data)
         if (data != null) {
@@ -246,14 +254,17 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             }
         }
     }
+
     fun apiTeacher_level() {
         baseViewModel.teacher_level(this, true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
+
     override fun Teachinglevel(level: ArrayList<String>) {
         teachinglevel.clear()
         teachinglevel.addAll(level)
     }
+
     fun getLocation(latitude: String, longitude: String) {
         val geocoder: Geocoder
         val addresses: List<Address>
@@ -278,15 +289,13 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             Widget.newDarkBuilder(this).title(getString(R.string.app_name)).build()
         )
             .onResult { result ->
-                result.forEach {its ->
-
+                result.forEach { its ->
                     imageList.add(ImageModel().also {
-                        it.image=its.path
-                        it.isGalleryAdded=true
+                        it.image = its.path
+                        it.isGalleryAdded = true
                     })
                     educationCertificateAdapter?.notifyDataSetChanged()
                 }
-
             }.onCancel {
             }.start()
     }

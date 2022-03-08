@@ -110,7 +110,7 @@
             android:name=".Activity.ScheduleASession2Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.ScheduleASessionActivity"
+            android:name=".Activity.ParentOrStudent.session.ScheduleASessionActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.Auth.LoginGuestActivity"

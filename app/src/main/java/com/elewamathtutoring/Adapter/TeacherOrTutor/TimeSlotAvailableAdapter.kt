@@ -34,7 +34,6 @@ class TimeSlotAvailableAdapter(
 
     override fun getItemCount(): Int {
         return list.size
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -45,14 +44,17 @@ class TimeSlotAvailableAdapter(
 
         for(i in 0 until Selctedarray_time.size)
         {
-            if(list.get(position).id.toString().equals(Selctedarray_time.get(i)))
+            if(list[position].id.toString().equals(Selctedarray_time.get(i)))
             {
-                timeSlotsAvailableModel.check =true
-                Array_time.add(list.get(position).id.toString())
+                for (i in 0 until list.size){
+                    list[position].check =true
+                }
+
+              //  Array_time.add(list.get(position).id.toString())
             }
         }
 
-        if (timeSlotsAvailableModel.check) {
+        if ( list[position].check) {
             holder.itemView.rlDatesAvailable.setBackgroundResource(R.drawable.background_blue)
             holder.itemView.dayofweek.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
         }
@@ -63,21 +65,33 @@ class TimeSlotAvailableAdapter(
         }
         availablityActivity.Selected_time(Array_time)
         holder.itemView.rlDatesAvailable.setOnClickListener {
-            if (timeSlotsAvailableModel.check) {
-                timeSlotsAvailableModel.check = false
-                Array_time.remove(timeSlotsAvailableModel.id.toString())
-                Selctedarray_time.remove(timeSlotsAvailableModel.id.toString())
-                availablityActivity.Selected_time(Array_time)
-                notifyItemChanged(position)
+            if(list[position].check){
+                list[position].check=false
+                Selctedarray_time.remove(list[position].id.toString())
+            }else{
+
+                list[position].check=true
+
             }
-            else
-            {
-                timeSlotsAvailableModel.check = true
-                Array_time.add(timeSlotsAvailableModel.id.toString())
-                Selctedarray_time.add(timeSlotsAvailableModel.id.toString())
-                availablityActivity.Selected_time(Array_time)
-                notifyItemChanged(position)
-            }
+
+            notifyDataSetChanged()
+
+
+            /*  if (timeSlotsAvailableModel.check) {
+                  timeSlotsAvailableModel.check = !timeSlotsAvailableModel.check
+                  Array_time.removeAt(position)
+                  Selctedarray_time.removeAt(position)
+               //   availablityActivity.Selected_time(list)
+
+              }
+              else
+              {
+                  timeSlotsAvailableModel.check = true
+                  Array_time.add(timeSlotsAvailableModel.id.toString())
+                  Selctedarray_time.add(timeSlotsAvailableModel.id.toString())
+                  availablityActivity.Selected_time(Array_time)
+                  notifyDataSetChanged()
+              }*/
         }
     }
 }

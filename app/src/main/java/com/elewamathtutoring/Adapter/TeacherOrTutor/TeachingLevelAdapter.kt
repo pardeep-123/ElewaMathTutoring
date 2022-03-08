@@ -50,10 +50,10 @@ class TeachingLevelAdapter(
                 holder.itemView.tick.setImageResource(R.drawable.uncheck)
                 Level_list.remove(list.get(position).id.toString())
             }
-            //  Teacher_level(Level_list)
+              Teacher_level(Level_list)
         }
     }
-  /*  fun Teacher_level(Level_list: ArrayList<String>) {
+    fun Teacher_level(Level_list: ArrayList<String>) {
         teachingInfoActivity.Teachinglevel(Level_list)
-    }*/
+    }
 }

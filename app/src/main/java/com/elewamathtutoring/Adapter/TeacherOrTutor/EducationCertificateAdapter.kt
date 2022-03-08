@@ -9,10 +9,8 @@ import com.bumptech.glide.Glide
 import com.elewamathtutoring.Adapter.ClickCallBack
 import com.elewamathtutoring.Model.ImageModel
 import com.elewamathtutoring.R
-import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.constant.Constants.Companion.IMAGE_URL
 import kotlinx.android.synthetic.main.item_education_certificaate.view.*
-import kotlinx.android.synthetic.main.item_notifications.view.*
 import kotlin.collections.ArrayList
 
 // var teachinglevel: ArrayList<String>,
@@ -36,31 +34,24 @@ class EducationCertificateAdapter(val list: ArrayList<ImageModel>,    var clickC
         //   return list.size
         return list.size + 1
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(position)
     }
-
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(pos: Int) {
             if (pos != 0) {
                 itemView.llCamera.visibility=View.GONE
                 if (list[pos-1].isGalleryAdded){
                     Glide.with(ctn).load(list[pos - 1].image).into(itemView.ivDocuments)
-
                 }else{
-
                     Glide.with(ctn).load(IMAGE_URL+list[pos - 1].image).into(itemView.ivDocuments)
                 }
             } else{
                 itemView.llCamera.visibility=View.VISIBLE
             }
-
             itemView.rvGallery.setOnClickListener {
                 if (pos == 0){
-
                     clickCallBack.onItemClick(pos, "gellery")
-
                 }
             }
         }

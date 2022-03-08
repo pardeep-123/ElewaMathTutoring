@@ -69,6 +69,7 @@
                     android:id="@+id/rlChoose"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <Spinner
                         android:id="@+id/spinnerChoose"
                         android:layout_width="match_parent"

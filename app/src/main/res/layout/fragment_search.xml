@@ -134,12 +134,16 @@
 
         </RelativeLayout>
     </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/rel_filter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll_btns"
-        android:layout_margin="@dimen/_15sdp">
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_15sdp">
 
         <LinearLayout
             android:id="@+id/ll1"
@@ -149,6 +153,7 @@
             android:layout_centerVertical="true"
 
             android:orientation="vertical">
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -160,6 +165,7 @@
                     android:layout_centerVertical="true"
 
                     android:src="@drawable/location" />
+
                 <TextView
                     android:id="@+id/tvloc"
                     android:layout_width="wrap_content"
