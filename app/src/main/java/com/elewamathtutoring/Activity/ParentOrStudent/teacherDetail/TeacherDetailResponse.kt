@@ -35,7 +35,8 @@ data class TeacherDetailResponse(
         val SocialId: String, // 114454975690526584905
         val available_slots: String, // 1,2,4
         val status: Int, // 1
-        val teaching_level: List<TeachingLevel>
+        val teaching_level: List<TeachingLevel>,
+        val time_slots: ArrayList<TimeSlot>
     ):Serializable {
         data class TeachingLevel(
             val id: Int, // 3
@@ -43,6 +44,15 @@ data class TeacherDetailResponse(
             val status: Int, // 1
             val createdAt: String, // 2021-01-22T05:01:00.000Z
             val updatedAt: String // 2021-03-30T13:14:13.000Z
+        ):Serializable
+        data class TimeSlot(
+            val id: Int, // 2
+            val startTime: String, // 1:00 AM
+            val endTime: String, // 2:00 AM
+            val status: Int, // 1
+            val createdAt: Int, // 1610092054
+            val updatedAt: Int ,// 0
+            var check: Boolean = false
         ):Serializable
     }
 }

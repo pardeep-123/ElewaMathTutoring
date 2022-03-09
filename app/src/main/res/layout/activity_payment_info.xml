@@ -11,10 +11,7 @@
         android:id="@+id/rl_toolbar"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@color/textcolor"
-
-        >
-
+        android:background="@color/textcolor">
         <ImageView
             android:id="@+id/ivBack"
             style="@style/backIcon"

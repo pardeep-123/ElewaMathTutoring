@@ -115,7 +115,7 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
          startActivity(intent)
         }
 
-      /*  edtSearch.addTextChangedListener(object : TextWatcher {
+        edtSearch.addTextChangedListener(object : TextWatcher {
                     override fun afterTextChanged(s: Editable?) {
                     }
 
@@ -152,7 +152,7 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
                         Log.e("getDataFromAPI", "----" + currentPage.toString())
                         searchapi("20", "1", selected_certified.toString().replace("[", "").replace("]", "").replace(" ", ""), maxdistance.toString(), Searchtext, "", latitude, longitude,true)
                     }
-                })*/
+                })
     }
 
     override fun onPermissionGranted() {

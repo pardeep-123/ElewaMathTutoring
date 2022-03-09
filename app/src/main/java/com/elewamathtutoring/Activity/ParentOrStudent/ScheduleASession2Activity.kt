@@ -35,11 +35,11 @@ class ScheduleASession2Activity : AppCompatActivity(), View.OnClickListener {
         tvConfirmSession.setOnClickListener(this)
         profile = (intent.getSerializableExtra("teacher_detail") as ArrayList<TeacherDetailResponse.Body>?)!!
 
-       /* for (i in 0 until profile.get(0).time_slots.size) {  // GET TOTAL SELECTED TIMESLOT
+        for (i in 0 until profile.get(0).time_slots.size) {  // GET TOTAL SELECTED TIMESLOT
             if (profile.get(0).time_slots.get(i).check == true) {
                 selected_Timeslot++
             }
-        }*/
+        }
         tvTime.text = selected_Timeslot.toString()+" hour @"+ Constants.Currency+profile.get(0).InPersonRate.toString()+"/hr"
         selectedprice = profile.get(0).InPersonRate
         val total=selected_Timeslot*profile.get(0).InPersonRate
@@ -83,7 +83,6 @@ class ScheduleASession2Activity : AppCompatActivity(), View.OnClickListener {
                 {
                     booking()
                 }
-             //   booking()
             }
         }
     }
@@ -92,7 +91,7 @@ class ScheduleASession2Activity : AppCompatActivity(), View.OnClickListener {
         inten.putExtra("teacher_detail", profile)
         inten.putExtra("aboutdetail", etSchedule.text.toString())
         inten.putExtra("selecteddate", intent.getStringExtra("selecteddate"))
-        inten.putExtra("selected_Session", selected_Session.toString())
+        //inten.putExtra("selected_Session", selected_Session.toString())
         startActivity(inten)
     }
    }

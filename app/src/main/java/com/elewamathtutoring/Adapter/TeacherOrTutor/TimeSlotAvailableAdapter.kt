@@ -69,14 +69,9 @@ class TimeSlotAvailableAdapter(
                 list[position].check=false
                 Selctedarray_time.remove(list[position].id.toString())
             }else{
-
                 list[position].check=true
-
             }
-
             notifyDataSetChanged()
-
-
             /*  if (timeSlotsAvailableModel.check) {
                   timeSlotsAvailableModel.check = !timeSlotsAvailableModel.check
                   Array_time.removeAt(position)

@@ -45,7 +45,6 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
         setContentView(R.layout.activity_teacher_details)
         sharedPrefUtil = SharedPrefUtil(this)
         onClicks()
-
         if (intent.getStringExtra("Type").equals("schedule")) {
             btnScheduleSession.visibility = View.GONE
             btnviewreciept.visibility = View.VISIBLE
@@ -83,7 +82,6 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
             }
             R.id.btnScheduleSession -> {
                 var intent = Intent(this, ScheduleASessionActivity::class.java)
-                intent.putExtra("teacher_detail", teacherdetails)
                 intent.putExtra("teacher_detail", tutordetails)
                 startActivity(intent)
             }
