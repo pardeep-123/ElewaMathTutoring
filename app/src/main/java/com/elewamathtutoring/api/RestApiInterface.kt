@@ -1,5 +1,6 @@
 package com.elewamathtutoring.api
 
+
 import com.elewamathtutoring.Activity.Auth.login.LoginResponse
 import com.elewamathtutoring.Activity.Auth.signup.SignUpResponse
 import com.elewamathtutoring.Activity.Auth.signup.TeacherSignUpResponse
@@ -8,11 +9,10 @@ import com.elewamathtutoring.Activity.ParentOrStudent.addBAnk.AddBankResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.add_card.AddCardResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.editProfile.EditProfileResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.payment.CardListingResponse
+import com.elewamathtutoring.Activity.ParentOrStudent.payment.SesionBookResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.privacy.PrivacyResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResourcesResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword.ChangePasswordResponse
-import com.elewamathtutoring.Activity.ParentOrStudent.session.ScheduleSessionResponse
-
 import com.elewamathtutoring.Activity.ParentOrStudent.teacherDetail.TeacherDetailResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.wallet.BankListingResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.wallet.response.WalletGetResponse
@@ -30,9 +30,9 @@ import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfilResponse
 import com.elewamathtutoring.Fragment.TeacherOrTutor.request.RequestListResponse
 import com.elewamathtutoring.Models.ListView.Model_myschdeullist
 import com.elewamathtutoring.Models.Login.Model_login
-import com.elewamathtutoring.Models.TeacherRequestsList.Model_TeacherRequestList
 import com.elewamathtutoring.Models.Notifications.Model_Notifications
 import com.elewamathtutoring.Models.Search.Model_search
+import com.elewamathtutoring.Models.TeacherRequestsList.Model_TeacherRequestList
 import com.pawskeeper.Modecommon.Commontoall
 import com.pawskeeper.Modecommon.Commontoall2
 import io.reactivex.Observable
@@ -142,7 +142,7 @@ interface RestApiInterface {
     //Total:100
     //cardId:1
     //date:2021-04-28
-    @FormUrlEncoded
+  /*  @FormUrlEncoded
     @POST("book_Session")
     fun book_Session(
         @Field("teacherId") teacherId: String, @Field("availability") availability: String,
@@ -150,7 +150,7 @@ interface RestApiInterface {
         @Field("personVirtual") personVirtual: String, @Field("Hour") Hour: String,
         @Field("perHour") perHour: String, @Field("Total") Total: String,
         @Field("cardId") cardId: String, @Field("date") date: String
-    ): Observable<Commontoall2>
+    ): Observable<Commontoall2>*/
 
     @FormUrlEncoded
     @POST("change_session_status")
@@ -206,11 +206,13 @@ interface RestApiInterface {
     @POST("book_Session")
     fun book_Session(
         @Field("teacherId") teacherId: String,
+        @Field("time") time: String,
         @Field("About") About: String,
+        @Field("cardId") cardId: String,
         @Field("date") date: String,
         @Field("times") times: String,
         @Field("Hour") Hour: String
-    ): Observable<ScheduleSessionResponse>
+    ): Observable<SesionBookResponse>
 
 
 

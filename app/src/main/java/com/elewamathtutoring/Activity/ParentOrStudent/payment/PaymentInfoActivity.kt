@@ -6,6 +6,9 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
+import android.text.SpannableString
+import android.text.TextUtils
 import android.util.Log
 import android.view.Gravity
 import android.view.View
@@ -26,19 +29,23 @@ import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import com.pawskeeper.Modecommon.Commontoall
 import com.pawskeeper.Modecommon.Commontoall2
-import kotlinx.android.synthetic.main.activity_add_card.*
 import kotlinx.android.synthetic.main.activity_payment_info.*
-import kotlinx.android.synthetic.main.activity_payment_info.ivBack
 import kotlinx.android.synthetic.main.dialog_booking_thanks.*
 import kotlinx.android.synthetic.main.dialog_delete.*
+
 import java.io.StringWriter
 
-class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<RestObservable> {
+class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<RestObservable>,
+    CardsListAdapter.TimeSlot {
+    val timeList : ArrayList<String> = ArrayList()
+    var cardId = ""
 
     var profile = java.util.ArrayList<TeacherDetailResponse.Body>()
     var selectedprice = 0
     var finalvalue = ""
     var perHour = ""
+    var timeString = ""
+    var hour = ""
     var value = 0
     var cardlist = ArrayList<CardListingResponse.Body>()
     var typescreen = ""
@@ -51,6 +58,8 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
             (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
         window.statusBarColor = Color.TRANSPARENT;
         App.getinstance().getmydicomponent().inject(this)
+        timeString = intent.getStringExtra("time").toString()
+        hour = intent.getStringExtra("hour").toString()
         try {
             profile =
                 ((intent.getSerializableExtra("teacher_detail") as java.util.ArrayList<TeacherDetailResponse.Body>?)!!)
@@ -79,6 +88,7 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
     private fun onClicks() {
         rl_addCard.setOnClickListener(this)
         ivBack.setOnClickListener(this)
+        btnPayNow.setOnClickListener(this)
     }
 
     override fun onChanged(liveData: RestObservable?) {
@@ -92,7 +102,8 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
                         cardlist,
                         this@PaymentInfoActivity,
                         typescreen,
-                        teachinglevel
+                        teachinglevel,
+                        this
                     )
 
                     if (cardlist.size == 0) {
@@ -148,6 +159,9 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
             }
             R.id.ivBack -> {
                 finish()
+            }
+            R.id.btnPayNow -> {
+                ThanksForBookingDialog1()
             }
         }
     }
@@ -283,18 +297,18 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
             "checkmylog",
             "--" + selectedfinalvalue + "=perhour=" + selectedperHour + "=time=" + selecteddat + "cardid" + cardid + "---hr-" + selectedHours
         )
+
         baseViewModel.book_Session(
             this,
             profile.get(0).id.toString(),
             "" + profile.get(0).time_slots.size.toString(),
-            selecteddat,
             intent.getStringExtra("aboutdetail").toString(),
-            intent.getStringExtra("selected_Session").toString(),
-            selectedHours,
-            selectedperHour,
-            selectedfinalvalue,
             cardid,
             intent.getStringExtra("selecteddate").toString(),
+            timeString,
+            hour,
+
+
             true
         )
         baseViewModel.getCommonResponse().observe(this, this)
@@ -302,4 +316,56 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
 
     }
 
+    fun  apis(){
+
+        baseViewModel.book_Session(
+            this,
+            profile.get(0).id.toString(),
+            "" + profile.get(0).time_slots.size.toString(),
+            intent.getStringExtra("aboutdetail").toString(),
+            cardId,
+            intent.getStringExtra("selecteddate").toString(),
+            timeString,
+            hour,
+
+            true
+        )
+        baseViewModel.getCommonResponse().observe(this, this)
+    }
+
+    override fun ondate(id: String) {
+        if (timeList.contains(id)){
+            timeList.remove(id)
+        }else{
+            timeList.add(id)
+        }
+        timeString = TextUtils.join(",",timeList)
+        cardId =id.toString()
+    }
+
+    private fun ThanksForBookingDialog1() {
+
+        val filterDialog = Dialog(this)
+        filterDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        filterDialog.setContentView(R.layout.dialog_booking_thanks)
+        filterDialog.window!!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
+        filterDialog.window!!.setGravity(Gravity.CENTER)
+        filterDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        filterDialog.setCancelable(false)
+        filterDialog.setCanceledOnTouchOutside(false)
+
+        val colorText =
+            Html.fromHtml("We've let Ryan know that you are interested.Once they have confirmed your session, your card on file will be debited for <b> <font color=\"#918CE2\">\$100.00</font> </b")
+        filterDialog.edPromoCode.text = (colorText.toString())
+
+        val ss = SpannableString(colorText)
+
+        filterDialog.edPromoCode.text = ss
+
+        filterDialog.btnThanksContinue.setOnClickListener {
+            filterDialog.dismiss()
+            apis()
+        }
+        filterDialog.show()
+    }
 }

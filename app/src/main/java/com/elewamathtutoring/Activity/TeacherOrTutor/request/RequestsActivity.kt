@@ -92,11 +92,11 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
              //   0=pending,1=accepted,2=complete,3 =cancelbyteacher , 5 = deny session , 6= UserCompleted
                 if(btnAcceptOffer.text.toString().equals("Complete Offer"))
                 {
-                    change_oderstatus("2")
+                    apiAccept("2")
                 }
                 else
                 {
-                    change_oderstatus("1")
+                    apiAccept("1")
                 }
             }
           /*  R.id.btnDenyOffer -> {
@@ -117,6 +117,11 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
             }
         }
     }
+    fun apiAccept(status:String){
+        baseViewModel.requestAccept(this,  status,intent.getStringExtra("id").toString(),true)
+        baseViewModel.getCommonResponse().observe(this, this)
+    }
+
     private fun Logout_Alert() {
 
         val builder = let { AlertDialog.Builder(it) }
@@ -130,11 +135,11 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
                     dialog.cancel()
                     if(btnAcceptOffer.text.toString().equals("Cancel Session"))
                     {
-                        change_oderstatus("3")
+                        apiAccept("3")
                     }
                     else
                     {
-                        change_oderstatus("4")
+                        apiAccept("4")
                     }
 
                 }
@@ -242,7 +247,7 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
 
                     tv_requesteddate.text=Orderstatus(liveData.data.body.status)+" "+ConvertTimeStampToDate(liveData.data.body.updated.toLong(),"MM/dd/YY")
                     tv_inq.text=liveData.data.body.about
-                    Glide.with(this).load(Constants.IMAGE_URL+liveData.data.body.Student.image).placeholder(R.drawable.profile_unselected).into(ivProfileSignUp)
+                    Glide.with(this).load(liveData.data.body.Student.image).placeholder(R.drawable.profile_unselected).into(ivProfileSignUp)
                     tv_requested_startendtime.text=liveData.data.body.timeslot.get(0).startTime+" - "+ liveData.data.body.timeslot.get(0).endTime
                 }
               else if (liveData.data is Commontoall) {

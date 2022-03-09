@@ -34,13 +34,14 @@ data class EditTeachingInfoResponse(
         val SocialType: Int, // 2
         val SocialId: String, // 104176091516440845425
         val status: Int, // 1
-        val hourlyPrice: Int, // 0
-        val majors: String,
+
         val educationLevel: String, // gdsdfs
         val isapproval: Int, // 2
         val free_slots: String, // 1,2
         val isTechingInfo: Int, // 0
         val IsAvailable: Int, // 0
+        val hourlyPrice: Int, // 12
+        val majors: String, // ww
         val teaching_level: List<TeachingLevel>
     ) {
         data class TeachingLevel(

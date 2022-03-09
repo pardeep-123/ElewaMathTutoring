@@ -152,8 +152,7 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
         Array_date.addAll(date)
     }
 
-    fun Selected_time(time: ArrayList<String>)
-    {
+    fun Selected_time(time: ArrayList<String>) {
         Array_time.clear()
         Array_time.addAll(time)
     }

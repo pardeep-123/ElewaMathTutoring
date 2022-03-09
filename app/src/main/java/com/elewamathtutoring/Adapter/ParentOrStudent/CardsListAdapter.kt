@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.*
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.chauthai.swipereveallayout.ViewBinderHelper
 import com.elewamathtutoring.Activity.ParentOrStudent.add_card.AddCardActivity
@@ -12,16 +13,19 @@ import com.elewamathtutoring.Activity.ParentOrStudent.payment.PaymentInfoActivit
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.AppUtils.Companion.getCardType
 import kotlinx.android.synthetic.main.item_cards.view.*
-import kotlinx.android.synthetic.main.item_filteroptions.view.*
-import java.lang.Exception
+
 import kotlin.collections.ArrayList
 
 class CardsListAdapter(var ctn: Context,
                        var cardlist: ArrayList<CardListingResponse.Body>,
                        var paymentInfoActivity: PaymentInfoActivity,
                        var typescreen: String,
-                       var teachinglevel: ArrayList<String>) :
+                       var teachinglevel: ArrayList<String>, 
+                       var timeSlot: TimeSlot) :
     RecyclerView.Adapter<CardsListAdapter.ViewHolder>() {
+    interface TimeSlot{
+        fun ondate(timeId:String)
+    }
     var Level_list = ArrayList<String>()
     private val viewBinderHelper = ViewBinderHelper()
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -76,9 +80,30 @@ class CardsListAdapter(var ctn: Context,
             intent.putExtra("expiry_year",cardlist.get(position).expiry_year.toString())
             ctn.startActivity(intent)
         }
+        if(cardlist[position].check == true)
+        {
+            holder.itemView.ivCheck.setImageResource(R.drawable.payment_checkfill)
+            Level_list.add(cardlist.get(position).id.toString())
+          //  holder.itemView.dayofweek.setTextColor(ContextCompat.getColor(ctn,R.color.white))
+          //  holder.itemView.rlDatesAvailable.background  = ContextCompat.getDrawable(ctn,R.drawable.background_blue)
+        }
+        else {
+            holder.itemView.ivCheck.setImageResource(R.drawable.payment_checkunfill)
+            Level_list.remove(cardlist.get(position).id.toString())
+        }
+        holder.itemView.llSelect.setOnClickListener {
+            if (cardlist[position].check) {
+                cardlist[position].check= false
+                timeSlot.ondate(cardlist[position].id.toString())
+                notifyDataSetChanged()
+            } else {
+                cardlist[position].check = true
+                timeSlot.ondate(cardlist[position].id.toString())
+                notifyDataSetChanged()
+            }
+        }
 
-
-        try {
+      /*  try {
             for (i in 0 until teachinglevel.size) {
                 if (teachinglevel.get(i).equals(cardlist[position].id.toString())) {
                     holder.itemView.ivCheck.setImageResource(R.drawable.payment_checkfill)
@@ -98,6 +123,6 @@ class CardsListAdapter(var ctn: Context,
                 Level_list.remove(cardlist.get(position).id.toString())
             }
             //  Teacher_level(Level_list)
-        }
+        }*/
     }
 }

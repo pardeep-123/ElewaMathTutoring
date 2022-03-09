@@ -84,12 +84,11 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
 
     private fun handel_add_Edit() {
         if (intent.getStringExtra("signup")!!.equals("editrofile")) {
-            profilelist =
-                intent.extras?.get("list_model") as ArrayList<EditResponse.Body>
+            profilelist = intent.extras?.get("list_model") as ArrayList<EditResponse.Body>
             edSpeacialities.setText(profilelist[0].specialties)
             certifiedChoose = profilelist[0].isCertifiedOrtutor!!
-            etMajors.setText(profilelist[0].InPersonRate.toString())
-            edPrice.setText(profilelist[0].virtualRate.toString())
+            etMajors.setText(profilelist[0].majors)
+            edPrice.setText(profilelist[0].hourlyPrice.toString())
             edCancelationPolicy.setText(profilelist[0].cancellationPolicy)
             latitude = profilelist.get(0).latitude
             longitude = profilelist.get(0).longitude
@@ -111,8 +110,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
                     it.isGalleryAdded = false
                 })
             }
-            val data =
-                spinnerlist.filter { it.educationName.toString() == profilelist[0].educationLevel }
+            val data = spinnerlist.filter { it.educationName.toString() == profilelist[0].educationLevel }
             spinnerChoose.setSelection(spinnerlist.indexOf(data[0]))
             educationCertificateAdapter!!.notifyDataSetChanged()
         }

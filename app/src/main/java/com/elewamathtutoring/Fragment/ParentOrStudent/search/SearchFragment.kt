@@ -39,17 +39,16 @@ import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import com.riseball.interface_base.Teachinglevel_interface
-import kotlinx.android.synthetic.main.activity_teaching_info.*
 import kotlinx.android.synthetic.main.dialog_filter.*
 import kotlinx.android.synthetic.main.fragment_search.*
+
 import java.util.*
 import kotlin.collections.ArrayList
 
 
 class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teachinglevel_interface {
     var teacherlevel = ArrayList<MathChatResponse.Body>()
-    var Search_teacher = ArrayList<com.elewamathtutoring.Models.Search.Body>()
-    var Search_data = ArrayList<com.elewamathtutoring.Models.Search.Body>()
+
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     var selected_level = ArrayList<String>()
     var selected_certified = ArrayList<String>()
@@ -116,43 +115,63 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
         }
 
         edtSearch.addTextChangedListener(object : TextWatcher {
-                    override fun afterTextChanged(s: Editable?) {
-                    }
+            override fun afterTextChanged(s: Editable?) {
 
-                    override fun beforeTextChanged(
-                        s: CharSequence?,
-                        start: Int,
-                        count: Int,
-                        after: Int
-                    ) {
-                    }
+                filterServices(s.toString())
+            }
 
-                    override fun onTextChanged(
-                        s: CharSequence?,
-                        start: Int,
-                        before: Int,
-                        count: Int
-                    ) {
-                        Searchtext = s.toString()
-                        if (Searchtext.length == 0) {
-                            recycler_searchdata.visibility = View.GONE
-                        }
-                        else {
-                            recycler_searchdata.visibility = View.VISIBLE
-                            searchapi("20", "1", selected_certified.toString().replace("[", "").replace(
-                                    "]", "").replace(" ", ""), maxdistance.toString(), Searchtext, "", latitude, longitude,false)
-                        }
-                    }
-                })
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+        })
 
 
-                idNestedSVideo.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-                    if (scrollY == v.getChildAt(0).measuredHeight - v.measuredHeight) {
-                        currentPage++
-                        Log.e("getDataFromAPI", "----" + currentPage.toString())
-                        searchapi("20", "1", selected_certified.toString().replace("[", "").replace("]", "").replace(" ", ""), maxdistance.toString(), Searchtext, "", latitude, longitude,true)
-                    }
-                })
+
+
+
+        /*  edtSearch.addTextChangedListener(object : TextWatcher {
+                      override fun afterTextChanged(s: Editable?) {
+                      }
+
+                      override fun beforeTextChanged(
+                          s: CharSequence?,
+                          start: Int,
+                          count: Int,
+                          after: Int
+                      ) {
+                      }
+
+                      override fun onTextChanged(
+                          s: CharSequence?,
+                          start: Int,
+                          before: Int,
+                          count: Int
+                      ) {
+                          Searchtext = s.toString()
+                          if (Searchtext.length == 0) {
+                              recycler_searchdata.visibility = View.GONE
+                          }
+                          else {
+                              recycler_searchdata.visibility = View.VISIBLE
+                              searchapi("20", "1", selected_certified.toString().replace("[", "").replace(
+                                      "]", "").replace(" ", ""), maxdistance.toString(), Searchtext, "", latitude, longitude,false)
+                          }
+                      }
+                  })
+
+
+                  idNestedSVideo.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+                      if (scrollY == v.getChildAt(0).measuredHeight - v.measuredHeight) {
+                          currentPage++
+                          Log.e("getDataFromAPI", "----" + currentPage.toString())
+                          searchapi("20", "1", selected_certified.toString().replace("[", "").replace("]", "").replace(" ", ""), maxdistance.toString(), Searchtext, "", latitude, longitude,true)
+                      }
+                  })*/
     }
 
     override fun onPermissionGranted() {
@@ -302,7 +321,8 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
                     teacherlevel = ArrayList()
                     teacherlevel.addAll(liveData.data.body)
                     tvloc.setText(teacherlevel[0].address)
-                    recycler_Homesearch.adapter = SearchHomeAdapter(requireContext(), teacherlevel)
+                         searchHomeAdapter = SearchHomeAdapter(requireContext(),teacherlevel)
+                           recycler_Homesearch.adapter = searchHomeAdapter
                    // rv_filterOptions1.adapter = TeachingLevelAdapter(requireContext(), teacherlevel, getdata_toselected_level,this)
                 }
               /*  else if (liveData.data is Model_search) {
@@ -373,4 +393,29 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
         apiTeacherList("2")
         viewType = "1"
     }
+    private fun filterServices(text: String) {
+        //new array list that will hold the filtered data
+        val filterServicesList = ArrayList<MathChatResponse.Body>()
+
+        //looping through existing elements
+        for (s in teacherlevel) {
+            //if the existing elements contains the search input
+            if (s.name.lowercase().contains(text.lowercase()) || s.teachingLevel.lowercase().contains(text.lowercase())) {
+                //adding the element to filtered list
+                filterServicesList.add(s)
+            }
+        }
+
+
+        if (filterServicesList.size > 0) {
+            when_nodatavideo.visibility = View.GONE
+        } else {
+            when_nodatavideo.visibility = View.VISIBLE
+        }
+
+        //calling a method of the adapter class and passing the filtered list
+        searchHomeAdapter.notifyData(filterServicesList)
+
+    }
+
 }

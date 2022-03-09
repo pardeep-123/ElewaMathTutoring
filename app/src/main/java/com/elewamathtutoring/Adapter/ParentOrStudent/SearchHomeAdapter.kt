@@ -55,4 +55,8 @@ class SearchHomeAdapter(
     class MyHolder(v: View) : RecyclerView.ViewHolder(v) {
 
     }
+    fun notifyData(filterServiceList: ArrayList<MathChatResponse.Body>) {
+        list = filterServiceList
+        notifyDataSetChanged()
+    }
 }

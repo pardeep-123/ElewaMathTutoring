@@ -1,4 +1,4 @@
-package com.elewamathtutoring.Activity
+package com.elewamathtutoring.Activity.ParentOrStudent.session
 
 import android.content.Intent
 import android.graphics.Color
@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.elewamathtutoring.Activity.ParentOrStudent.payment.PaymentInfoActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.teacherDetail.TeacherDetailResponse
-import com.elewamathtutoring.Models.Teacher_details.Body
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
@@ -91,7 +90,8 @@ class ScheduleASession2Activity : AppCompatActivity(), View.OnClickListener {
         inten.putExtra("teacher_detail", profile)
         inten.putExtra("aboutdetail", etSchedule.text.toString())
         inten.putExtra("selecteddate", intent.getStringExtra("selecteddate"))
-        //inten.putExtra("selected_Session", selected_Session.toString())
+        intent.putExtra("time", intent.getStringExtra("time"))
+        intent.putExtra("hour", intent.getStringExtra("hour"))
         startActivity(inten)
     }
    }

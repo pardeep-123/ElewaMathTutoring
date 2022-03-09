@@ -107,7 +107,7 @@
             android:name=".Activity.NotificationsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.ScheduleASession2Activity"
+            android:name=".Activity.ParentOrStudent.session.ScheduleASession2Activity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.ParentOrStudent.session.ScheduleASessionActivity"

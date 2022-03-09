@@ -45,7 +45,7 @@ class SchedulePendingAdapter(c: Context, s: ArrayList<RequestListResponse.Body>,
         holder.itemView.setOnClickListener {
             val intent = Intent(ctn, RequestsActivity::class.java)
             intent.putExtra("from", "request")
-             intent.putExtra("id",list.get(position).id.toString())
+             intent.putExtra("id", list[position].id.toString())
             ctn.startActivity(intent)
         }
         holder.itemView.btnAccept.setOnClickListener {

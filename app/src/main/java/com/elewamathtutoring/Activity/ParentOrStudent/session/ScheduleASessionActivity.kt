@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import com.elewamathtutoring.Activity.ParentOrStudent.teacherDetail.TeacherDetailResponse
-import com.elewamathtutoring.Activity.ScheduleASession2Activity
 import com.elewamathtutoring.Activity.TeacherOrTutor.request.RequestDetailResponse
 import com.elewamathtutoring.Adapter.ChooseTimeAdapter
 import com.elewamathtutoring.R
@@ -142,6 +141,8 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener,
                     val intent = Intent(this, ScheduleASession2Activity::class.java)
                     intent.putExtra("teacher_detail", profile)
                     intent.putExtra("selecteddate", selectedDate)
+                    intent.putExtra("time", timeString)
+                    intent.putExtra("hour", hour)
                     startActivity(intent)
                 }
             }

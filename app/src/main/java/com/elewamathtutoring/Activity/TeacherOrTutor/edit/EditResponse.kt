@@ -20,6 +20,8 @@ data class EditResponse(
         val isBuyPlan: Int, // 0
         val teachingLevel: String, // 2,5
         val educationLevel: String, // ree
+        val majors: String, // aaa
+        val hourlyPrice: Int, // 12
         val specialties: String, // bjfbj,fbb
         val InPersonRate: Int, // 0
         val virtualRate: Int, // 0

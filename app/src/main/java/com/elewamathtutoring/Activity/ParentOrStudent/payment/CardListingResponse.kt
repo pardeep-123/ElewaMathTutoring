@@ -16,6 +16,7 @@ data class CardListingResponse(
         val cvv: Int, // 111
         val isSave: Int, // 1
         val createdAt: String, // 2022-03-02T05:49:46.000Z
-        val updatedAt: String // 2022-03-02T05:49:46.000Z
+        val updatedAt: String, // 2022-03-02T05:49:46.000Z
+        var check:Boolean = false
     )
 }
