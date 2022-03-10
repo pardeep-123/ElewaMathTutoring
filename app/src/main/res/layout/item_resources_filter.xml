@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_10sdp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tvBooks"
+        style="@style/MatchTextView"
+        android:text="Books"
+        android:paddingStart="@dimen/_10sdp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="@dimen/_3sdp"
+        android:textSize="@dimen/_10sdp" />
+
+
+</LinearLayout>

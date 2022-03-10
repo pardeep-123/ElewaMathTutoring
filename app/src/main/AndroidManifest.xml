@@ -22,7 +22,7 @@
         android:theme="@style/Theme.default"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Activity.ParentOrStudent.FilterActivity"
+            android:name=".Activity.ParentOrStudent.filter.FilterActivity"
             android:launchMode="singleTop"
             android:exported="true" />
         <activity

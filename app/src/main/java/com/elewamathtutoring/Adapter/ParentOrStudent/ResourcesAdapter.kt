@@ -10,8 +10,9 @@ import com.elewamathtutoring.R
 import kotlinx.android.synthetic.main.item_resources.view.*
 
 //, listNotifications: ArrayList<Body>
-class ResourcesAdapter(var ctn: Context,
-                     var  list: ResourcesResponse
+class ResourcesAdapter(
+    var ctn: Context,
+    var list: ArrayList<ResourcesResponse.Body>
 ) :
     RecyclerView.Adapter<ResourcesAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
@@ -22,15 +23,14 @@ class ResourcesAdapter(var ctn: Context,
     }
 
     override fun getItemCount(): Int {
-     return list.body.size
-        //return 3
+     return list.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemView.tvDescription.setText(list.body[position].text)
-        holder.itemView.tvlink.setText(list.body[position].link)
-        holder.itemView.tvCategory.setText(list.body[position].categoryName)
-        holder.itemView.tvAuthorName.setText(list.body[position].authname)
+        holder.itemView.tvDescription.setText(list[position].text)
+        holder.itemView.tvlink.setText(list[position].link)
+        holder.itemView.tvCategory.setText(list[position].categoryName)
+        holder.itemView.tvAuthorName.setText(list[position].authname)
 
     }
 }

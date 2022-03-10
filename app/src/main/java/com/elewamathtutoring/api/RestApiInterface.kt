@@ -8,9 +8,11 @@ import com.elewamathtutoring.Activity.Chat.mathChat.MathChatResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.addBAnk.AddBankResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.add_card.AddCardResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.editProfile.EditProfileResponse
+import com.elewamathtutoring.Activity.ParentOrStudent.filter.SubjectsResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.payment.CardListingResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.payment.SesionBookResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.privacy.PrivacyResponse
+import com.elewamathtutoring.Activity.ParentOrStudent.resources.CategoriesResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResourcesResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword.ChangePasswordResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.teacherDetail.TeacherDetailResponse
@@ -385,6 +387,9 @@ interface RestApiInterface {
     @GET("get_profile")
     fun getProfile(): Observable<EditResponse>
 
+    @GET("getsubjects")
+    fun getsubjects(): Observable<SubjectsResponse>
+
 
 
 
@@ -400,14 +405,23 @@ interface RestApiInterface {
   @FormUrlEncoded
     @PUT("cancelBooking")
     fun requestReject(
-                      @Field("sessionId") sessionId: String,
+      @Field("sessionId") sessionId: String,
       @Field("status") status: String
   ):
             Observable<Commontoall?>
 
 
   @GET("resources")
-    fun get_resources(): Observable<ResourcesResponse>
+    fun get_resources(
+      @Query ("category_id")category_id : String)
+    : Observable<ResourcesResponse>
+
+
+  @GET("getcategories")
+    fun getcategories(): Observable<CategoriesResponse>
+
+
+
 
     @FormUrlEncoded
     @POST("forgotPassword")

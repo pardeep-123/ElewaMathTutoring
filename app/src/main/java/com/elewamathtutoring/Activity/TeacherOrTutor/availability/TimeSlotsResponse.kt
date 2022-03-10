@@ -17,6 +17,8 @@ data class TimeSlotsResponse(
         val updatedAt: Int, // 0
         var check: Boolean = false
     ):Serializable {
-
+        override fun toString(): String {
+            return startTime
+        }
     }
 }

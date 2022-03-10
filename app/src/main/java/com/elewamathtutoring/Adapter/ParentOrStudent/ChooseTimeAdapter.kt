@@ -35,8 +35,7 @@ class ChooseTimeAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.dayofweek.text = list[position].startTime+"-"+list[position].endTime
 
-        if(list[position].check == true)
-        {
+        if(list[position].check == true) {
             holder.itemView.dayofweek.setTextColor(ContextCompat.getColor(ctn,R.color.white))
             holder.itemView.rlDatesAvailable.background  = ContextCompat.getDrawable(ctn,R.drawable.background_blue)
         }

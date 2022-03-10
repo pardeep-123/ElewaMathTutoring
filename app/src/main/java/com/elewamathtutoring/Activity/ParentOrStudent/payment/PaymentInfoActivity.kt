@@ -39,7 +39,6 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
     CardsListAdapter.TimeSlot {
     val timeList : ArrayList<String> = ArrayList()
     var cardId = ""
-
     var profile = java.util.ArrayList<TeacherDetailResponse.Body>()
     var selectedprice = 0
     var finalvalue = ""

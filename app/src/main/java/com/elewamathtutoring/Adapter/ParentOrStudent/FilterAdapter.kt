@@ -1,24 +1,28 @@
 package com.elewamathtutoring.Adapter.ParentOrStudent
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.elewamathtutoring.Activity.Chat.mathChat.MathPersonChatActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.filter.FilterActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.filter.SubjectsResponse
+import com.elewamathtutoring.Adapter.ChooseTimeAdapter
 import com.elewamathtutoring.R
-import kotlinx.android.synthetic.main.item_add_participants.view.*
-import kotlinx.android.synthetic.main.item_filteroptions.view.*
+import kotlinx.android.synthetic.main.item_dates_available.view.*
+import kotlinx.android.synthetic.main.item_filter.view.*
 
-
-//, listNotifications: ArrayList<Body>
-class FilterAdapter(c: Context) :
+class FilterAdapter(
+    var ctn: Context,
+    var list: ArrayList<SubjectsResponse.Body>,
+    var timeSlot: FilterAdapter.TimeSlot
+) :
     RecyclerView.Adapter<FilterAdapter.ViewHolder>() {
-    var ctn = c
-   // var list = listNotifications
-   class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
+    interface TimeSlot{
+        fun ondate(timeId:String)
+    }
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,25 +31,31 @@ class FilterAdapter(c: Context) :
     }
 
     override fun getItemCount(): Int {
-       // return list.size
-        return 10
+        return list.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.itemView.tvSubjects.setText(list[position].name)
 
-        /*holder.itemView.setOnClickListener {
-            if (holder.itemView.tick.getDrawable().getConstantState() == ctn.getResources().getDrawable( R.drawable.uncheck).getConstantState()) {
-                holder.itemView.tick.setImageResource(R.drawable.checkbox)
-                //  Level_list.add(list.get(position).id.toString())
+
+        if(list[position].check == true) {
+            holder.itemView.ivOn.background  = ContextCompat.getDrawable(ctn,R.drawable.checkbox)
+        }
+        else {
+            holder.itemView.ivOn.background = ContextCompat.getDrawable(ctn,R.drawable.uncheck)
+        }
+
+
+        holder.itemView.ivOn.setOnClickListener {
+            if (list[position].check) {
+                list[position].check= false
+                timeSlot.ondate(list[position].id.toString())
+                notifyDataSetChanged()
+            } else {
+                list[position].check = true
+                timeSlot.ondate(list[position].id.toString())
+                notifyDataSetChanged()
             }
-            else {
-                holder.itemView.tick.setImageResource(R.drawable.uncheck)
-                // Level_list.remove(list.get(position).id.toString())
-            }
-        }*/
-     /*   holder.itemView.rlLayout.setOnClickListener {
-            var intent = Intent(ctn, MathPersonChatActivity::class.java)
-            ctn.startActivity(intent)
-        }*/
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.elewamathtutoring.Activity.TeacherOrTutor.availability
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -12,8 +13,13 @@ import android.view.Gravity
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.elewamathtutoring.Activity.TeacherOrTutor.MainTeacherActivity
@@ -22,9 +28,7 @@ import com.elewamathtutoring.Adapter.TeacherOrTutor.DatesAvailableAdapter
 import com.elewamathtutoring.Adapter.TeacherOrTutor.TimeSlotAvailableAdapter
 import com.elewamathtutoring.Model.DatesAvailableModel
 import com.elewamathtutoring.R
-import com.elewamathtutoring.Util.App
-import com.elewamathtutoring.Util.SharedPrefUtil
-import com.elewamathtutoring.Util.Validator
+import com.elewamathtutoring.Util.*
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.Util.helper.extensions.savePrefrence
@@ -53,7 +57,8 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
     var Selctedarray_time = ArrayList<String>()
     var Array_time = ArrayList<String>()
     lateinit var shared: SharedPrefUtil
-
+    var categorylist = ""
+    var categoryId = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_availablity)
@@ -116,7 +121,6 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
             finishAffinity()
         }
     }
-
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.btnConfirmSignUp -> {
@@ -146,17 +150,14 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
             }
         }
     }
-
     fun Selected_date(date: ArrayList<String>) {
         Array_date.clear()
         Array_date.addAll(date)
     }
-
     fun Selected_time(time: ArrayList<String>) {
         Array_time.clear()
         Array_time.addAll(time)
     }
-
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
@@ -170,17 +171,26 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
                     savePrefrence(Constants.Social_login, "False")
                     savePrefrence(Constants.user_type, liveData.data.body.userType.toString())
                     dialogAdmin()
+
+
                 } else if (liveData.data is EditResponse) {
                     Helper.showSuccessToast(this, liveData.data.message)
                     finish()
                 } else if (liveData.data is EditAvailabilityResponse) {
+
                     Helper.showSuccessToast(this, liveData.data.message)
+
                     finish()
                 }
                  if (liveData.data is TimeSlotsResponse) {
-                    timeSlotList.addAll(liveData.data.body)
+                     val response: TimeSlotsResponse = liveData.data
+
+                     timeSlotList.addAll(liveData.data.body)
                     rv_timeSlotsAvailable.adapter = TimeSlotAvailableAdapter(timeSlotList, Selctedarray_time, this@AvailablityActivity)
-                }
+                     categorySpinner(response.body as ArrayList<TimeSlotsResponse.Body>)
+
+
+                 }
             }
             Status.ERROR -> {
                 if (liveData.error is AvailabilityResponse) {
@@ -204,4 +214,62 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
         address = addres
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    private fun categorySpinner(categoryList: ArrayList<TimeSlotsResponse.Body>) {
+       spinnerFreeSlot.setOnTouchListener { view, motionEvent ->
+            AppUtils.hideSoftKeyboard(this)
+            false
+        }
+
+
+        categoryList.add(0, TimeSlotsResponse.Body(0, "", "Select a Category",0,0,0,false))
+
+        val adapterCategory = ArrayAdapter(
+            this, R.layout.item_spinner,
+            R.id.tvSpinner, categoryList
+        )
+        adapterCategory.setDropDownViewResource(R.layout.item_spinner)
+
+       spinnerFreeSlot.adapter = adapterCategory
+      spinnerFreeSlot.post {
+            spinnerFreeSlot.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                    }
+
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        pos: Int,
+                        id: Long
+                    ) {
+
+                        val relativeLayout = (parent?.getChildAt(0) as View)
+                        val tvSpinner = relativeLayout.findViewById<TextView>(R.id.tvSpinner)
+
+
+                        if (pos == 0) {
+                            tvSpinner.setTextColor(
+                                ContextCompat.getColor(
+                                    this@AvailablityActivity,
+                                    R.color.black
+                                )
+                            )
+                        } else {
+                            tvSpinner.setTextColor(
+                                ContextCompat.getColor(
+                                    this@AvailablityActivity,
+                                    R.color.black
+                                )
+                            )
+                            categoryId = categoryList[pos].id
+
+                        }
+
+                    }
+
+                }
+        }
+    }
 }

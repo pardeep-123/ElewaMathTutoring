@@ -135,11 +135,13 @@
                 android:id="@+id/rlChoose"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
-                android:layout_marginTop="@dimen/_5sdp">
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/background_grey">
+
                 <Spinner
                     android:id="@+id/spinnerFreeSlot"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:layout_toStartOf="@+id/ivChoose"
                     android:background="@android:color/transparent" />
@@ -153,14 +155,6 @@
                     android:layout_marginRight="@dimen/_10sdp"
                     android:src="@drawable/down_arrow" />
             </RelativeLayout>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvFreeSlot"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:visibility="gone"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <Button
                 android:id="@+id/btnConfirmSignUp"

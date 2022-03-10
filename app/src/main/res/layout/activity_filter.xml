@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context=".Activity.ParentOrStudent.FilterActivity">
+    tools:context=".Activity.ParentOrStudent.filter.FilterActivity">
     <RelativeLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"

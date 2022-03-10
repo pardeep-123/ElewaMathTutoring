@@ -64,7 +64,7 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
     }
     private fun calenderView() {
         v.rootView.calenderView.setOnDayClickListener(object : OnDayClickListener {
-            @SuppressLint("SimpleDateFormat")
+            @SuppressLint("SimpleDateFormat", "SetTextI18n")
             override fun onDayClick(eventDay: EventDay) {
                 val clickedDayCalendar = eventDay.calendar
                 val dateParser = SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy")
@@ -75,17 +75,14 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
                 val sdfDestinationdd = SimpleDateFormat("dd")
                 val sdfDestinationyyyy = SimpleDateFormat("yyyy")
                 val Monthdate = sdfDestinationMM.format(date)
-                v.rootView.calenderDate.text = Monthdate.toString() + " " + sdfDestinationdd.format(date)
-                        .toString() + ", " + sdfDestinationyyyy.format(date).toString()
-
+                v.rootView.calenderDate.text = Monthdate.toString() + " " + sdfDestinationdd.format(date).toString() + ", " + sdfDestinationyyyy.format(date).toString()
                calenderClickApi(sdfDestinationyyyy.format(date).toString() + "-" + sdfDestinationMMonth.format(date).toString() + "-" + sdfDestinationdd.format(date).toString())
             }
         })
         DatePickerBuilder(requireContext(), this)
             .pagesColor(R.color.textcolor)
     }
-    private fun calenderClickApi(date: String)
-    {
+    private fun calenderClickApi(date: String) {
         if(date.equals(""))
         {
              apitype="withoutdate"
@@ -143,7 +140,6 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
-
                 if (liveData.data is Model_myschdeullist) {
                     if(apitype.equals("withdate"))
                     {
@@ -151,9 +147,7 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
                         {
                             tv_whennodata.visibility=View.GONE
                             setCalenderAdapter(liveData.data.body as ArrayList<Body>)
-                        }
-                        else
-                        {
+                        } else {
                             tv_whennodata.visibility=View.VISIBLE
                         }
                     }
@@ -164,7 +158,6 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
                     val c = Calendar.getInstance().time
                     val df = SimpleDateFormat("EEE, MMM yyyy", Locale.getDefault())
                     val formattedDate = df.format(c)
-
                     for (i in 0 until liveData.data.body.size) {
                         // date
                         if(Constants.ConvertTimeStampToDate(liveData.data.body.get(i).createdAt.toLong(), "EEE, MMM yyyy").toString().equals(formattedDate)) {
@@ -176,8 +169,7 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
                             upcomming.add(liveData.data.body.get(i))
                         }
                     }
-                    if(today.size!=0)
-                    {
+                    if(today.size!=0) {
                         title.add("TODAY'S SESSIONS")
                     }
                     if(today.size==0&&upcomming.size==0) {
@@ -186,8 +178,7 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
                     else {
                         tv_whennodata.visibility=View.GONE
                     }
-                    if(upcomming.size!=0)
-                    {
+                    if(upcomming.size!=0) {
                         title.add("UPCOMING SESSIONS")
                     }
                         Log.e("checkbody","----upcomming"+upcomming.size+"---"+today.size)
@@ -206,5 +197,4 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
     private fun setCalenderAdapter(listSession: ArrayList<Body>) {
        v.rootView.rv_calenderViewList.adapter = SessionsAdapter(requireContext(), listSession)
     }
-
 }

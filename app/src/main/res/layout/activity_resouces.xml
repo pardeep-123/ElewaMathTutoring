@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".Activity.ParentOrStudent.resources.ResoucesActivity">
+
     <RelativeLayout
         android:id="@+id/rlToolbar"
         android:layout_width="match_parent"
@@ -42,37 +43,39 @@
             android:layout_centerInParent="true"
             android:padding="@dimen/_5sdp"
             android:src="@drawable/filter_icon" />
-          </RelativeLayout>
+    </RelativeLayout>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/rlToolbar"
         android:fillViewport="true">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:orientation="vertical">
-        <androidx.recyclerview.widget.RecyclerView
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:orientation="vertical"
-            android:id="@+id/rvResources"/>
-        <TextView
-            android:id="@+id/tvNoData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/_14sdp"
-            android:textColor="@color/black"
-            android:text="No data found!"
-          android:layout_gravity="center"
-            android:visibility="gone"
-            android:gravity="center"
-            android:layout_centerInParent="true">
-        </TextView>
-    </LinearLayout>
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvResources"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <TextView
+                android:id="@+id/tvNoData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="No data found!"
+      android:visibility="gone"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp"/>
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

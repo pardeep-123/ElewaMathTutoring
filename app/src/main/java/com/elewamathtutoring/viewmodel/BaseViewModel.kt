@@ -1189,6 +1189,33 @@ class BaseViewModel : ViewModel() {
 
 
 
+     @SuppressLint("CheckResult")
+    fun getsubjects(activity: Activity, isDialogShow: Boolean) {
+        if (Helper.isNetworkConnected(activity)) {
+            apiService.getsubjects()
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    {
+                        mResponse.value = RestObservable.error(activity, it)
+                    })
+        } else {
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        getsubjects(activity, isDialogShow)
+                    }
+                })
+        }
+    }
+
+
+
 
 
 
@@ -1220,9 +1247,9 @@ class BaseViewModel : ViewModel() {
     }
 
     @SuppressLint("CheckResult")
-    fun get_resources(activity: Activity, isDialogShow: Boolean) {
+    fun get_resources(activity: Activity, isDialogShow: Boolean,category_id:String) {
         if (Helper.isNetworkConnected(activity)) {
-            apiService.get_resources()
+            apiService.get_resources(category_id)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -1239,7 +1266,34 @@ class BaseViewModel : ViewModel() {
                 activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
-                        get_resources(activity, isDialogShow)
+                        get_resources(activity, isDialogShow,category_id)
+                    }
+                })
+        }
+    }
+
+
+   @SuppressLint("CheckResult")
+    fun getcategories(activity: Activity, isDialogShow: Boolean) {
+        if (Helper.isNetworkConnected(activity)) {
+            apiService.getcategories()
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    {
+
+                        mResponse.value = RestObservable.error(activity, it)
+                    })
+        } else {
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        getcategories(activity, isDialogShow)
                     }
                 })
         }

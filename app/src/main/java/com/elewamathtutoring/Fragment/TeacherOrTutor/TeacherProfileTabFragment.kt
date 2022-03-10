@@ -45,7 +45,6 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener, Observer<Res
         return v
     }
     private fun api() {
-
         baseViewModel.getProfile(requireActivity(), true)
         baseViewModel.getCommonResponse().observe(requireActivity(), this)
     }
@@ -80,7 +79,6 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener, Observer<Res
             }
         }
     }
-
     @SuppressLint("SetTextI18n")
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {

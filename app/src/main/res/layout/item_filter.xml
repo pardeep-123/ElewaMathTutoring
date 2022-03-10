@@ -13,17 +13,12 @@
             android:id="@+id/ivOn"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/checkbox" />
+            android:src="@drawable/uncheck" />
 
-        <ImageView
-            android:id="@+id/ivOf"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:visibility="gone"
-            android:src="@drawable/checkbox" />
 
     </RelativeLayout>
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvSubjects"
       style="@style/WrapTextView"
         android:text="Elementary Algebra"
         android:fontFamily="@font/medium"

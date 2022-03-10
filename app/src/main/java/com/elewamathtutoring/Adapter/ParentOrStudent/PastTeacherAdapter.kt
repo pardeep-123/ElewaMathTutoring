@@ -38,7 +38,7 @@ class PastTeacherAdapter(
     }
 
     override fun getItemCount(): Int {
-        // return listdata.size
+
         return list.size
     }
 

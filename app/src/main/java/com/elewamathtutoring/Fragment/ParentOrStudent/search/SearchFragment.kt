@@ -15,14 +15,13 @@ import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
-import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.elewamathtutoring.Activity.Chat.mathChat.MathChatActivity
 import com.elewamathtutoring.Activity.Chat.mathChat.MathChatResponse
 import com.elewamathtutoring.Activity.NotificationsActivity
-import com.elewamathtutoring.Activity.ParentOrStudent.FilterActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.filter.FilterActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResoucesActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
 import com.elewamathtutoring.Adapter.FilterOptions2Adapter
