@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/_10sdp"
@@ -7,19 +8,22 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_3sdp">
 
         <ImageView
             android:id="@+id/ivOn"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/uncheck" />
+            android:src="@drawable/uncheck"
+            app:tint="@color/black" />
 
 
     </RelativeLayout>
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvSubjects"
       style="@style/WrapTextView"
+        android:padding="@dimen/_3sdp"
         android:text="Elementary Algebra"
         android:fontFamily="@font/medium"
         android:textSize="@dimen/_12sdp"

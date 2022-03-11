@@ -2,6 +2,7 @@ package com.elewamathtutoring.Fragment.ParentOrStudent.search
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -65,8 +66,14 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
     var longitude = ""
     var address = ""
     var viewType = ""
+    var visitCount = ""
 
     private val requestCodes = 11
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        visitCount=""
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -108,6 +115,7 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
         rlFilter.setOnClickListener {
 //            startActivity(Intent(context, FilterActivity::class.java))
             val intent = Intent(context,FilterActivity::class.java)
+//            intent.putExtra("visitCount",visitCount)
 //            FilterActivity.launch(intent)
             startActivityForResult(intent,101)
         }
@@ -164,6 +172,7 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
             }
             else if (resrequestCode == 101){
                   val name =  data.getStringExtra("id").toString()
+//                visitCount=  data.getStringExtra("visitCount").toString()
                 baseViewModel.getTeacherStudentList(requireActivity(), "2", name,false)
                 baseViewModel.getCommonResponse().observe(requireActivity(), this)
 
@@ -178,7 +187,7 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
 //                    teacherlevel = ArrayList()
                     teacherlevel.clear()
                     teacherlevel.addAll(liveData.data.body)
-                    tvloc.setText(teacherlevel[0].address)
+//                    tvloc.setText(teacherlevel[0].address)
                     when_nodatavideo.visibility = View.GONE
                          searchHomeAdapter = SearchHomeAdapter(requireContext(),teacherlevel)
                            recycler_Homesearch.adapter = searchHomeAdapter

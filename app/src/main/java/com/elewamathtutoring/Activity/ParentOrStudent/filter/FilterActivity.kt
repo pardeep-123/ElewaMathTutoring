@@ -28,12 +28,15 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener, Observer<RestO
     var hour = ""
     var selectedId = ""
     val selectedItems : ArrayList<String> = ArrayList()
-
+    var getdata_toselected_certified = ArrayList<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_filter)
         ivBack.setOnClickListener(this)
         btnApply.setOnClickListener(this)
+//        if (intent.getStringExtra("visitCount")!=null&&intent.getStringExtra("visitCount")=="1"){
+//
+//        }
         apiFilter()
     }
 
@@ -46,6 +49,7 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener, Observer<RestO
 
                 val output = Intent()
                 output.putExtra("id", selectedId)
+//                output.putExtra("visitCount", "1")
                 setResult(101, output)
                 finish()
 
