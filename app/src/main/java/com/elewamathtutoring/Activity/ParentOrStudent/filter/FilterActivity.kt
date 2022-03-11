@@ -1,5 +1,7 @@
 package com.elewamathtutoring.Activity.ParentOrStudent.filter
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -24,10 +26,14 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener, Observer<RestO
     val timeList : ArrayList<String> = ArrayList()
     var timeString = ""
     var hour = ""
+    var selectedId = ""
+    val selectedItems : ArrayList<String> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_filter)
         ivBack.setOnClickListener(this)
+        btnApply.setOnClickListener(this)
         apiFilter()
     }
 
@@ -36,6 +42,17 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener, Observer<RestO
             R.id.ivBack -> {
               finish()
             }
+            R.id.btnApply -> {
+
+                val output = Intent()
+                output.putExtra("id", selectedId)
+                setResult(101, output)
+                finish()
+
+//                setResult(101,selectedId)
+
+            }
+
         }
     }
 
@@ -68,7 +85,8 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener, Observer<RestO
             timeList.add(timeId)
         }
         hour = timeList.size.toString()
-        Toast.makeText(this,hour, Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this,hour, Toast.LENGTH_SHORT).show()
+        selectedId = TextUtils.join(",",timeList)
     }
 
 

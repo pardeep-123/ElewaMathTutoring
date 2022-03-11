@@ -52,7 +52,6 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
         v = inflater.inflate(R.layout.fragment_schedule_tab, container, false)
         onClicks()
         calenderView()
-       // v.rootView.rv_listView.adapter = SessionsAdapter(requireContext())
         v.rootView.rlResources.setOnClickListener {
             startActivity(Intent(context, ResoucesActivity::class.java))
         }

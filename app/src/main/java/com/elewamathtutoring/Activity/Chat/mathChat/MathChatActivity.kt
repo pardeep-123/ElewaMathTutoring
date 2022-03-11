@@ -75,7 +75,7 @@ class MathChatActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
     }
 
     fun apiTeacherStudentList(userType: String) {
-        baseViewModel.getTeacherStudentList(this, userType, true)
+        baseViewModel.getTeacherStudentList(this, userType,"", true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
 

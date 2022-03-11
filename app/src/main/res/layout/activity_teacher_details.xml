@@ -61,7 +61,7 @@
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:layout_centerVertical="true"
-                android:src="@drawable/profile"
+                android:src="@drawable/profile_unselected"
                 app:civ_border_color="@color/text"
                 app:civ_border_width="0.5dp"
                 app:civ_circle_background_color="#f6f6f6" />

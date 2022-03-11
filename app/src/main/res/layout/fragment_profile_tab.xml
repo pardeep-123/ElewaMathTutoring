@@ -96,6 +96,8 @@
                     android:fontFamily="@font/aenirlsttd_black"
                     android:text="Dr. Nanad"
                     android:textColor="@color/white"
+                    android:drawableEnd="@drawable/check"
+                    android:drawablePadding="@dimen/_10sdp"
                     android:textSize="16sp" />
 
                 <TextView

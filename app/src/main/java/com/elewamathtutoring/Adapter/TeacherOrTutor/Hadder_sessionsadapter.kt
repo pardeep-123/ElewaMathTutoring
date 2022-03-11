@@ -28,17 +28,17 @@ class Hadder_sessionsadapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.tv_titleSession.text = title.get(position)
-        if(title.get(position).equals("TODAY'S SESSIONS")) {
+        if (title[position].equals("TODAY'S SESSIONS")) {
             upcomming.reverse()
-          holder.itemView.recycler_data.adapter = SessionsAdapter(ctn, today)
+            holder.itemView.recycler_data.adapter = SessionsAdapter(ctn, today)
         } else {
             upcomming.reverse()
-      holder.itemView.recycler_data.adapter = SessionsAdapter(ctn, upcomming)
+            holder.itemView.recycler_data.adapter = SessionsAdapter(ctn, upcomming)
         }
-      //holder.itemView.tvItemType.text = list.get(0).body.get(position).
     }
+
     override fun getItemCount(): Int {
-       return title.size
+        return title.size
 
     }
 }

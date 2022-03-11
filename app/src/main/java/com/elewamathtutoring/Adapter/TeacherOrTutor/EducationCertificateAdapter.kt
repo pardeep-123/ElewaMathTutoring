@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.elewamathtutoring.Adapter.ClickCallBack
 import com.elewamathtutoring.Model.ImageModel
 import com.elewamathtutoring.R
-import com.elewamathtutoring.Util.constant.Constants.Companion.IMAGE_URL
+import com.elewamathtutoring.Util.constant.Constants
 import kotlinx.android.synthetic.main.item_education_certificaate.view.*
 import kotlin.collections.ArrayList
 
@@ -21,9 +21,7 @@ class EducationCertificateAdapter(val list: ArrayList<ImageModel>,    var clickC
    // val itemClick: ((Pos: Int):Unit)? = null
 
 
-    override
-
-    fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         ctn = parent.context
         val view =
             LayoutInflater.from(ctn).inflate(R.layout.item_education_certificaate, parent, false)
@@ -42,9 +40,9 @@ class EducationCertificateAdapter(val list: ArrayList<ImageModel>,    var clickC
             if (pos != 0) {
                 itemView.llCamera.visibility=View.GONE
                 if (list[pos-1].isGalleryAdded){
-                    Glide.with(ctn).load(list[pos - 1].image).into(itemView.ivDocuments)
+                    Glide.with(ctn).load(Constants.IMAGE_URL+list[pos - 1].image).into(itemView.ivDocuments)
                 }else{
-                    Glide.with(ctn).load(IMAGE_URL+list[pos - 1].image).into(itemView.ivDocuments)
+                    Glide.with(ctn).load(Constants.IMAGE_URL+list[pos - 1].image).into(itemView.ivDocuments)
                 }
             } else{
                 itemView.llCamera.visibility=View.VISIBLE

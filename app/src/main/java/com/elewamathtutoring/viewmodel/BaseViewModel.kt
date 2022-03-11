@@ -654,7 +654,6 @@ class BaseViewModel : ViewModel() {
         activity: Activity,
         availability: String,
         timeslot: String,
-
         isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
 
@@ -712,9 +711,10 @@ class BaseViewModel : ViewModel() {
  @SuppressLint("CheckResult")
     fun getTeacherStudentList(activity: Activity,
                               userType: String,
+                              subjects_id: String,
                               isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
-            apiService.getTeacherStudentList(userType)
+            apiService.getTeacherStudentList(userType,subjects_id)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -729,7 +729,7 @@ class BaseViewModel : ViewModel() {
                 activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
-                        getTeacherStudentList(activity,userType, isDialogShow)
+                        getTeacherStudentList(activity,userType,subjects_id, isDialogShow)
                     }
                 })
         }

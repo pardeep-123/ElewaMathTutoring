@@ -18,7 +18,7 @@ data class TimeSlotsResponse(
         var check: Boolean = false
     ):Serializable {
         override fun toString(): String {
-            return startTime
+            return startTime + "-" + endTime
         }
     }
 }

@@ -52,40 +52,42 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"
         android:layout_above="@+id/btnApply"
+        android:layout_below="@id/toolbar"
         android:fillViewport="true">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:orientation="vertical">
-        <androidx.appcompat.widget.AppCompatTextView
-           style="@style/WrapTextView"
-            android:text="Subjects"
-            android:fontFamily="@font/aenirlsttd_black"
-            android:textSize="@dimen/_14sdp"
-            android:textColor="@color/black"
-            android:layout_marginTop="@dimen/_20sdp"/>
-
-        <androidx.recyclerview.widget.RecyclerView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rvFilter"
-            android:layout_marginTop="10dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:orientation="vertical"/>
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/WrapTextView"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/aenirlsttd_black"
+                android:text="Subjects"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        </LinearLayout>
     </ScrollView>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnApply"
         style="@style/Button"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_20sdp"
         android:layout_marginBottom="@dimen/_15sdp"
         android:background="@drawable/bg_btn"

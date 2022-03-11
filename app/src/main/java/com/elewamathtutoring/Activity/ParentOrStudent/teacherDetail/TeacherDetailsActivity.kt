@@ -147,7 +147,7 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
             Status.SUCCESS -> {
                 if (liveData.data is RequestDetailResponse) {
                     teacherdetails.addAll(listOf(liveData.data.body))
-                    Glide.with(this).load(liveData.data.body.Teacher.image)
+                    Glide.with(this).load(Constants.IMAGE_URL+liveData.data.body.Teacher.image)
                         .placeholder(R.drawable.profile_unselected).into(ivtecher_image)
                     tv_techername.setText(liveData.data.body.Teacher.name)
                     tvparentSpecialized.text = liveData.data.body.Teacher.specialties

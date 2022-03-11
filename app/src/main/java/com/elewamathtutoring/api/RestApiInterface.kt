@@ -390,9 +390,6 @@ interface RestApiInterface {
     @GET("getsubjects")
     fun getsubjects(): Observable<SubjectsResponse>
 
-
-
-
      @GET("TeacherRequestList")
     fun TeacherRequestList(): Observable<RequestListResponse>
 
@@ -465,7 +462,8 @@ interface RestApiInterface {
     fun getTeacherStudentList(): Observable<MathChatResponse>*/
 
     @GET("getTeacherStudentList")
-    fun getTeacherStudentList(@Query ("userType")userType : String): Observable<MathChatResponse?>?
+    fun getTeacherStudentList(@Query ("userType")userType : String,
+                              @Query ("subjects_id")subjects_id : String): Observable<MathChatResponse?>?
 
 
 

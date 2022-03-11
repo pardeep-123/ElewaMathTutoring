@@ -38,7 +38,7 @@ class SchedulePendingAdapter(c: Context, s: ArrayList<RequestListResponse.Body>,
         }catch (e:Exception)
         { }
 
-        Glide.with(ctn).load(Constants.IMAGE_URL+list.get(position).Student.image)
+        Glide.with(ctn).load(list.get(position).Student.image)
             .placeholder(R.drawable.profile_unselected).into(holder.itemView.ivImage)
       //   holder.itemView.tvItemDate.text=AppUtils.secondsToTimeStamp(list.get(position).date.toLong(),"EEE, MMM dd")
 

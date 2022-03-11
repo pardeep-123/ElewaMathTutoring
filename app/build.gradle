@@ -71,8 +71,17 @@ dependencies {
 
     implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
     implementation 'com.romandanylyk:pageindicatorview:1.0.2'
+//    implementation 'com.github.bumptech.glide:glide:4.13.1'
+//    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+//    implementation 'com.github.bumptech.glide:glide:4.12.0'
+//    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+  //  implementation "com.squareup.okhttp3:okhttp:3.14.0"
+//    implementation ('com.github.bumptech.glide:okhttp3-integration:4.7.1'){
+//        exclude group: 'glide-parent'
+//    }
     implementation 'com.github.bumptech.glide:glide:4.12.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    kapt 'com.github.bumptech.glide:compiler:4.12.0'
+
     implementation 'com.google.android.gms:play-services-location:18.0.0'
 
     implementation "com.google.android.gms:play-services-places:17.0.0"
@@ -117,8 +126,7 @@ dependencies {
     implementation 'com.google.android.libraries.places:places:2.4.0'
     //easyutil
     implementation 'com.github.Piashsarker:AndroidEasyUtils:1.0.0'
-    //glide
-    implementation 'com.github.bumptech.glide:glide:4.12.0'
+
     //camera-gallery open
     implementation 'com.yanzhenjie:album:2.1.3'
     //Dagger 2
@@ -139,4 +147,11 @@ dependencies {
     implementation 'com.github.Piashsarker:AndroidEasyUtils:1.0.0'
     //calander
     implementation 'com.applandeo:material-calendar-view:1.7.0'
+
+
 }
+
+kapt {
+    correctErrorTypes = true
+}
+
