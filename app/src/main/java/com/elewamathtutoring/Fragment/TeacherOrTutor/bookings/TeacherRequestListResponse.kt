@@ -39,7 +39,6 @@ data class TeacherRequestListResponse(
             val createdAt: Int, // 1610092025
             val updatedAt: Int // 0
         )
-
         data class Teacher1(
             val id: Int, // 234
             val name: String, // rg
@@ -74,7 +73,8 @@ data class TeacherRequestListResponse(
             val isapproval: Int, // 0
             val free_slots: String, // 1,2
             val isTechingInfo: Int, // 0
-            val IsAvailable: Int // 0
+            val IsAvailable: Int, // 0
+            val occupiedStatus: Int // 1
         )
 
         data class Student1(

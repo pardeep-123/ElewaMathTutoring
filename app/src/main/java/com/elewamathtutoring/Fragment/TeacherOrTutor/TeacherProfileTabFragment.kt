@@ -84,6 +84,7 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener, Observer<Res
         when (liveData!!.status) {
             Status.SUCCESS -> {
                 if (liveData.data is EditResponse) {
+                    profilelist.clear()
                     profilelist.addAll(listOf(liveData.data.body))
                     text_teacher_name.text = liveData.data.body.name
                     text_parent_spicilty.text = liveData.data.body.specialties

@@ -248,6 +248,7 @@
                 android:textColor="@color/black"
                 android:text="No data Found!"
                 android:layout_marginTop="@dimen/_80sdp"
+                android:visibility="gone"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/when_nodatavideo">
             </TextView>

@@ -49,7 +49,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teachinglevel_interface {
+class SearchFragment : CheckLocationActivity(), Observer<RestObservable>, Teachinglevel_interface {
     var teacherlevel = ArrayList<MathChatResponse.Body>()
 
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
@@ -72,8 +72,9 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        visitCount=""
+        visitCount = ""
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -106,23 +107,24 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
             startActivity(Intent(context, NotificationsActivity::class.java))
         }
         rlMathChatRoom.setOnClickListener {
-            startActivity(Intent(context, MathChatActivity::class.java)
-                .putExtra("user","mathChatRoom"))
+            startActivity(
+                Intent(context, MathChatActivity::class.java)
+                    .putExtra("user", "mathChatRoom")
+            )
         }
         rlResources.setOnClickListener {
             startActivity(Intent(context, ResoucesActivity::class.java))
         }
         rlFilter.setOnClickListener {
-//            startActivity(Intent(context, FilterActivity::class.java))
-            val intent = Intent(context,FilterActivity::class.java)
-//            intent.putExtra("visitCount",visitCount)
+            val intent = Intent(context, FilterActivity::class.java)
+            intent.putExtra("visitCount", visitCount)
 //            FilterActivity.launch(intent)
-            startActivityForResult(intent,101)
+            startActivityForResult(intent, 101)
         }
         ivSetting = view.findViewById(R.id.ivSetting)
         ivSetting.setOnClickListener {
-         val intent = Intent(requireContext(), SettingActivity::class.java)
-         startActivity(intent)
+            val intent = Intent(requireContext(), SettingActivity::class.java)
+            startActivity(intent)
         }
 
         edtSearch.addTextChangedListener(object : TextWatcher {
@@ -140,21 +142,21 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
             }
 
         })
-
         apiTeacherList("2")
         viewType = "1"
     }
 
     override fun onPermissionGranted() {
-        Log.e("checkmylog","ooo")
+        Log.e("checkmylog", "ooo")
     }
 
     override fun onLocationGet(latitu: String?, longitu: String?) {
         latitude = latitu.toString()
         longitude = longitu.toString()
         val geocoder = Geocoder(requireActivity(), Locale.getDefault())
-        Log.e("checkmylog","cccc")
-        val addresses: List<Address> = geocoder.getFromLocation(latitude.toDouble(), longitude.toDouble(), 1)
+        Log.e("checkmylog", "cccc")
+        val addresses: List<Address> =
+            geocoder.getFromLocation(latitude.toDouble(), longitude.toDouble(), 1)
         val cityName = addresses[0].locality
         tvloc.setText(cityName)
 
@@ -168,12 +170,11 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
                 address = data.getStringExtra("address").toString()
                 latitude = data.getStringExtra("latitude").toString()
                 longitude = data.getStringExtra("longitude").toString()
-                tv_selectlocation.text =address
-            }
-            else if (resrequestCode == 101){
-                  val name =  data.getStringExtra("id").toString()
+                tv_selectlocation.text = address
+            } else if (resrequestCode == 101) {
+                val name = data.getStringExtra("id").toString()
 //                visitCount=  data.getStringExtra("visitCount").toString()
-                baseViewModel.getTeacherStudentList(requireActivity(), "2", name,false)
+                baseViewModel.getTeacherStudentList(requireActivity(), "2", name, false)
                 baseViewModel.getCommonResponse().observe(requireActivity(), this)
 
             }
@@ -187,10 +188,11 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
 //                    teacherlevel = ArrayList()
                     teacherlevel.clear()
                     teacherlevel.addAll(liveData.data.body)
+
 //                    tvloc.setText(teacherlevel[0].address)
                     when_nodatavideo.visibility = View.GONE
-                         searchHomeAdapter = SearchHomeAdapter(requireContext(),teacherlevel)
-                           recycler_Homesearch.adapter = searchHomeAdapter
+                    searchHomeAdapter = SearchHomeAdapter(requireContext(), teacherlevel)
+                    recycler_Homesearch.adapter = searchHomeAdapter
                 } else {
 
                 }
@@ -206,16 +208,19 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
             }
         }
     }
+
     override fun Teachinglevel(level: ArrayList<String>) {
         selected_level.clear()
         selected_level.addAll(level)
     }
-   fun cartified_as(cetcfied: ArrayList<String>) {
-      selected_certified.clear()
-      selected_certified.addAll(cetcfied)
+
+    fun cartified_as(cetcfied: ArrayList<String>) {
+        selected_certified.clear()
+        selected_certified.addAll(cetcfied)
     }
+
     fun apiTeacherList(userType: String) {
-        baseViewModel.getTeacherStudentList(requireActivity(), userType, "",true)
+        baseViewModel.getTeacherStudentList(requireActivity(), userType, "", true)
         baseViewModel.getCommonResponse().observe(requireActivity(), this)
     }
 
@@ -223,18 +228,22 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
         baseViewModel.teacher_level(requireActivity(), false)
         baseViewModel.getCommonResponse().observe(requireActivity(), this)
     }
+
     override fun onResume() {
         super.onResume()
 //        apiTeacherList("2")
 //        viewType = "1"
     }
+
     private fun filterServices(text: String) {
         //new array list that will hold the filtered data
         val filterServicesList = ArrayList<MathChatResponse.Body>()
         //looping through existing elements
         for (s in teacherlevel) {
             //if the existing elements contains the search input
-            if (s.name.lowercase().contains(text.lowercase()) || s.teachingLevel.lowercase().contains(text.lowercase())) {
+            if (s.name.lowercase().contains(text.lowercase()) || s.teachingLevel.lowercase()
+                    .contains(text.lowercase())
+            ) {
                 //adding the element to filtered list
                 filterServicesList.add(s)
             }
@@ -244,7 +253,6 @@ class SearchFragment : CheckLocationActivity()  , Observer<RestObservable>, Teac
         } else {
             when_nodatavideo.visibility = View.VISIBLE
         }
-
         //calling a method of the adapter class and passing the filtered list
         searchHomeAdapter.notifyData(filterServicesList)
 

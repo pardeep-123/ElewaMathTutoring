@@ -29,6 +29,7 @@ import com.elewamathtutoring.Activity.TeacherOrTutor.editProfile.EditTeacherProf
 import com.elewamathtutoring.Activity.TeacherOrTutor.request.RequestDetailResponse
 import com.elewamathtutoring.Fragment.ParentOrStudent.booking.UserBookingListResponse
 import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfilResponse
+import com.elewamathtutoring.Fragment.TeacherOrTutor.bookings.OccupiedResponse
 import com.elewamathtutoring.Fragment.TeacherOrTutor.request.RequestListResponse
 import com.elewamathtutoring.Models.ListView.Model_myschdeullist
 import com.elewamathtutoring.Models.Login.Model_login
@@ -167,6 +168,14 @@ interface RestApiInterface {
         @Field("notificationStatus") notificationStatus: String,
         @Field("userType") userType: String
     ): Observable<Commontoall2>
+
+
+     @FormUrlEncoded
+    @POST("occupiedStatus")
+    fun occupiedStatus(
+        @Field("occupiedStatus") occupiedStatus: String
+    ): Observable<OccupiedResponse>
+
 
     @FormUrlEncoded
     @POST("bank")

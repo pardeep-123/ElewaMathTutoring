@@ -30,7 +30,9 @@ import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
+import kotlinx.android.synthetic.main.activity_setting2.*
 import kotlinx.android.synthetic.main.fragment_schedule_tab.*
+import kotlinx.android.synthetic.main.fragment_schedule_tab.iv_notification_switch
 import kotlinx.android.synthetic.main.fragment_schedule_tab.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -44,6 +46,7 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
     var title = ArrayList<String>()
     var upcomming = ArrayList<Body>()
     var apitype="withoutdate"
+    var status=""
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,7 +62,25 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
             startActivity(Intent(context, MathChatActivity::class.java)
                 .putExtra("tutor","mathChat"))
         }
+
+
+        v.rootView.iv_notification_switch.setOnClickListener {
+            if (iv_notification_switch!!.isChecked) {
+                iv_notification_switch.setChecked(true);
+                Log.e("checklog", "onnnnnnnnnnnnnn")
+                status="2"
+                apiOccupied("2")
+            } else {
+                status="1"
+                iv_notification_switch.setChecked(false);
+                apiOccupied("1")
+            }
+        }
         return v
+    }
+    fun apiOccupied(status:String) {
+        baseViewModel.occupiedStatus(requireActivity(),  status,  true)
+        baseViewModel.getCommonResponse().observe(requireActivity(), this)
     }
     private fun calenderView() {
         v.rootView.calenderView.setOnDayClickListener(object : OnDayClickListener {
@@ -140,6 +161,11 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
         when (liveData!!.status) {
             Status.SUCCESS -> {
                 if (liveData.data is Model_myschdeullist) {
+                    if(liveData.data.body[0].occupiedStatus ==1){
+                        iv_notification_switch.setChecked(false);
+                    }else{
+                        iv_notification_switch.setChecked(true);
+                    }
                     if(apitype.equals("withdate"))
                     {
                         if(liveData.data.body.size!=0)
@@ -183,6 +209,9 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
                         Log.e("checkbody","----upcomming"+upcomming.size+"---"+today.size)
                     v.rootView.rv_listView.adapter = Hadder_sessionsadapter(requireContext(), today,upcomming,title)
                     }
+                }else if(liveData.data is OccupiedResponse){
+
+
                 }
             }
             Status.ERROR -> {

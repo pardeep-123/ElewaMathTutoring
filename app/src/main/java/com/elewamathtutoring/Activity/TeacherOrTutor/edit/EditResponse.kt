@@ -36,10 +36,18 @@ data class EditResponse(
         val SocialType: Int, // 0
         val SocialId: String,
         val status: Int, // 1
+        val subjects: ArrayList<Subject>,
         val teaching_level: List<TeachingLevel>,
         val time_slots: List<TimeSlot>,
         val certificate_images: List<CertificateImage>
     ) :Serializable{
+
+        data class Subject(
+            val id: Int, // 9
+            val name: String, // punjabi
+            val status: Int // 1
+        ) :Serializable
+
         data class TeachingLevel(
             val id: Int, // 2
             val level: String, // Middle School Level

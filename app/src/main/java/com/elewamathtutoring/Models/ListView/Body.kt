@@ -21,5 +21,6 @@ data class Body(
     val total: Int,
     val updated: Int,
     val updatedAt: Int,
-    val userId: Int
+    val userId: Int,
+    val occupiedStatus: Int // 1
 )

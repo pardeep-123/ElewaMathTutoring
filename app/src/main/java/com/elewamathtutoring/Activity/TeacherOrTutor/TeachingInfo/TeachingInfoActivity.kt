@@ -1,16 +1,19 @@
 package com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -42,6 +45,7 @@ import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 import com.elewamathtutoring.Activity.Chat.chatModel.User
+import com.elewamathtutoring.Activity.ParentOrStudent.filter.FilterActivity
 import com.elewamathtutoring.Model.ImageModel
 
 
@@ -49,7 +53,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
     Teachinglevel_interface, ClickCallBack {
     @Inject
     lateinit var validator: Validator
-    var profilelist : ArrayList<EditResponse.Body> = ArrayList()
+    var profilelist: ArrayList<EditResponse.Body> = ArrayList()
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     val context: Context = this
     var spinnerlist: ArrayList<EducationLevel> = ArrayList()
@@ -60,14 +64,32 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
     var address = ""
     var certifiedChoose = 0
     var teachinglevel = ArrayList<String>()
+    var nameList = ArrayList<String>()
+    var idList = ArrayList<String>()
     var CertifiedAs = ""
     var timeSlot = ""
     var availability = ""
+    var subjectName = ""
+    var subjectId = ""
     private val requestCodes = 11
     var list = ArrayList<TeachingLevelResponse.Body>()
     private var mAlbumFiles: java.util.ArrayList<AlbumFile> = java.util.ArrayList()
     val imageList = ArrayList<ImageModel>()
     var educationCertificateAdapter: EducationCertificateAdapter? = null
+
+    private val filterResult = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == 101) {
+            Log.e("subjectssssssssss", result.data.toString())
+            subjectName = result.data?.getStringExtra("name")!!
+            subjectId = result.data?.getStringExtra("id")!!
+
+            edSpeacialities.setText(subjectName)
+        }
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_teaching_info)
@@ -85,7 +107,15 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
     private fun handel_add_Edit() {
         if (intent.getStringExtra("signup")!!.equals("editrofile")) {
             profilelist = intent.extras?.get("list_model") as ArrayList<EditResponse.Body>
-            edSpeacialities.setText(profilelist[0].specialties)
+
+            // set arraylist of name and id's
+            profilelist[0].subjects.forEach {
+                nameList.add(it.name)
+                idList.add(it.id.toString())
+            }
+            subjectName = TextUtils.join(",",nameList)
+            subjectId = TextUtils.join(",",idList)
+             edSpeacialities.setText(subjectName)
             certifiedChoose = profilelist[0].isCertifiedOrtutor!!
             etMajors.setText(profilelist[0].majors)
             edPrice.setText(profilelist[0].hourlyPrice.toString())
@@ -110,17 +140,21 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
                     it.isGalleryAdded = false
                 })
             }
-            val data = spinnerlist.filter { it.educationName.toString() == profilelist[0].educationLevel }
+            val data =
+                spinnerlist.filter { it.educationName.toString() == profilelist[0].educationLevel }
             spinnerChoose.setSelection(spinnerlist.indexOf(data[0]))
             educationCertificateAdapter!!.notifyDataSetChanged()
         }
     }
+
     private fun onClicks() {
         ivBack.setOnClickListener(this)
         btnNext.setOnClickListener(this)
         edLocation.setOnClickListener(this)
+        edSpeacialities.setOnClickListener(this)
         apiTeacher_level()
     }
+
     private fun spinnerChoose() {
         val spinner1: Spinner = findViewById(R.id.spinnerChoose)
 
@@ -136,7 +170,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
         list.setDropDownViewResource(R.layout.spinner_small)
         spinner1.setAdapter(list)
         try {
-           spinner1.setSelection(certifiedChoose)
+            spinner1.setSelection(certifiedChoose)
             val data =
                 spinnerlist.filter { it.educationName.toString() == profilelist[0].educationLevel }
             spinner1.setSelection(spinnerlist.indexOf(data[0]))
@@ -166,14 +200,31 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             R.id.ivBack -> {
                 finish()
             }
+            R.id.edSpeacialities -> {
+                if(intent.getStringExtra("signup")!!.equals("editrofile")){
+                    val intent = Intent(context, FilterActivity::class.java)
+                    intent.putExtra("editId",subjectId)
+                    intent.putExtra("editName",subjectName)
+                    filterResult.launch(intent)
+
+                }else {
+                    val intent = Intent(context, FilterActivity::class.java)
+                    filterResult.launch(intent)
+                }
+                //      startActivityForResult(intent, 101)
+            }
             R.id.btnNext -> {
                 if (intent.getStringExtra("signup").equals("editrofile")) {
-                    baseViewModel.EditTeacherProfileProfile(this, imageList, teachinglevel.toString().replace("[", "").replace("]", "").replace(
+                    baseViewModel.EditTeacherProfileProfile(
+                        this,
+                        imageList,
+                        teachinglevel.toString().replace("[", "").replace("]", "").replace(
                             " ",
-                            ""),
+                            ""
+                        ),
                         CertifiedAs,
                         etMajors.text.toString(),
-                        edSpeacialities.text.toString(),
+                        subjectId,
                         edCancelationPolicy.text.toString(),
                         edPrice.text.toString(),
                         address,
@@ -230,7 +281,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             CertifiedAs,
             etMajors.text.toString(),
             teachinglevel.toString(),
-            edSpeacialities.text.toString(),
+            subjectId,
             edPrice.text.toString(),
             edCancelationPolicy.text.toString(),
             edLocation.text.toString(),
@@ -274,6 +325,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
         address = addres
         edLocation.text = (addres)
     }
+
     override fun onItemClick(pos: Int, value: String) {
         when (value) {
             "gellery" -> {
@@ -281,6 +333,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             }
         }
     }
+
     @SuppressLint("NotifyDataSetChanged")
     private fun selectImage() {
         Album.image(this).multipleChoice().camera(true).columnCount(4).widget(

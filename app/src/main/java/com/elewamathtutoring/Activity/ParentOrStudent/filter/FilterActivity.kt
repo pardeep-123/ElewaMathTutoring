@@ -20,37 +20,64 @@ import com.elewamathtutoring.viewmodel.BaseViewModel
 import kotlinx.android.synthetic.main.activity_filter.*
 
 class FilterActivity : AppCompatActivity(), View.OnClickListener, Observer<RestObservable>,
-   FilterAdapter.TimeSlot {
+    FilterAdapter.TimeSlot {
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     var list = ArrayList<SubjectsResponse.Body>()
-    val timeList : ArrayList<String> = ArrayList()
-    var timeString = ""
+    var timeList: ArrayList<String> = ArrayList()
+    var listName: ArrayList<String> = ArrayList()
+    var idList = ArrayList<String>()
     var hour = ""
     var selectedId = ""
-    val selectedItems : ArrayList<String> = ArrayList()
-    var getdata_toselected_certified = ArrayList<String>()
+    var selectedName = ""
+   var adapter : FilterAdapter?=null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_filter)
         ivBack.setOnClickListener(this)
         btnApply.setOnClickListener(this)
-//        if (intent.getStringExtra("visitCount")!=null&&intent.getStringExtra("visitCount")=="1"){
-//
-//        }
+        tvClear.setOnClickListener(this)
+    /*    if (intent.getStringExtra("visitCount") != null && intent.getStringExtra("visitCount") == "1") {
+  val name = data.getStringExtra("id").toString()
+        }*/
+        val id= intent.getStringExtra("editId")
+        val name= intent.getStringExtra("editName")
+
+        if(id!== null){
+            if (id.contains(",") && name?.contains(",")!!) {
+                idList = id.split(",") as ArrayList<String>
+                timeList = id.split(",") as ArrayList<String>
+                listName = name.split(",") as ArrayList<String>
+            }else{
+                idList.add(id)
+                timeList.add(id)
+                listName.add(name!!)
+            }
+        }
+
         apiFilter()
     }
 
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.ivBack -> {
-              finish()
+                finish()
+            }
+            R.id.tvClear -> {
+                timeList.clear()
+                listName.clear()
+                list.forEach {
+                    it.check = false
+                }
+                adapter?.notifyDataSetChanged()
             }
             R.id.btnApply -> {
 
-                val output = Intent()
-                output.putExtra("id", selectedId)
-//                output.putExtra("visitCount", "1")
-                setResult(101, output)
+                val i = Intent()
+                i.putExtra("id", selectedId)
+                i.putExtra("name", selectedName)
+//                i.putExtra("visitCount", "1")
+                setResult(101, i)
                 finish()
 
 //                setResult(101,selectedId)
@@ -67,7 +94,15 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener, Observer<RestO
                     list.clear()
                     list.addAll(t.data.body)
                     Helper.showSuccessToast(this, t.data.message)
-                    rvFilter.adapter= FilterAdapter(this,list,this)
+                    list.forEachIndexed { index, body ->
+                            idList.forEach { it2 ->
+                                if (body.id.toString() == it2)
+                                    list[index].check=true
+
+                        }
+                    }
+                    adapter = FilterAdapter(this, list, this)
+                    rvFilter.adapter = adapter
                 }
             }
             Status.ERROR -> {
@@ -75,22 +110,26 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener, Observer<RestO
                     Helper.showSuccessToast(this, t.error.message)
             }
         }
-        
+
     }
-    fun apiFilter(){
+
+    fun apiFilter() {
         baseViewModel.getsubjects(this, true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
 
-    override fun ondate(timeId: String) {
-        if (timeList.contains(timeId)){
+    override fun ondate(timeId: String,name:String) {
+        if (timeList.contains(timeId)) {
             timeList.remove(timeId)
-        }else{
+            listName.remove(name)
+        } else {
             timeList.add(timeId)
+            listName.add(name)
         }
         hour = timeList.size.toString()
 //        Toast.makeText(this,hour, Toast.LENGTH_SHORT).show()
-        selectedId = TextUtils.join(",",timeList)
+        selectedId = TextUtils.join(",", timeList)
+        selectedName = TextUtils.join(",", listName)
     }
 
 

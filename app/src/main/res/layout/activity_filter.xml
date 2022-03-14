@@ -40,6 +40,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
             android:layout_marginEnd="@dimen/_5sdp"
+            android:id="@+id/tvClear"
             android:fontFamily="@font/medium"
             android:gravity="center"
             android:text="@string/clear"

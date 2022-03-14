@@ -31,7 +31,8 @@ data class MathChatResponse(
         val notificationStatus: Int, // 1
         val background_checks: Int, // 0
         val deviceType: Int, // 1
-        val deviceToken: String, // 123
+        val deviceToken: String,
+        val occupiedStatus: Int, // 1// 123
         val SocialType: Int, // 2
         val SocialId: String, // 114454975690526584905
         val about: String, // I am teacher

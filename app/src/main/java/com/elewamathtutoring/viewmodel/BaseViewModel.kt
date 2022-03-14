@@ -453,6 +453,31 @@ class BaseViewModel : ViewModel() {
 
     }
 
+  @SuppressLint("CheckResult")
+    fun occupiedStatus(activity: Activity, occupiedStatus: String, isDialogShow: Boolean) {
+        if (Helper.isNetworkConnected(activity)) {
+            apiService.occupiedStatus(occupiedStatus)
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    { mResponse.value = RestObservable.error(activity, it) }
+                )
+        } else {
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        occupiedStatus(activity, occupiedStatus, true)
+                    }
+                })
+        }
+
+    }
+
 
 
 
