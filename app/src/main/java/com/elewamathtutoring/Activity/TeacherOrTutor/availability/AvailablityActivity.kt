@@ -9,14 +9,12 @@ import android.graphics.drawable.ColorDrawable
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.Gravity
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 
@@ -45,7 +43,8 @@ import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 
-class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<RestObservable> {
+class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<RestObservable>,
+    DatesAvailableAdapter.SendDays,TimeSlotAvailableAdapter.TimeSlot  {
     lateinit var dialog: Dialog
 
     @Inject
@@ -56,12 +55,15 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
     val context: Context = this
     var list = ArrayList<DatesAvailableModel>()
     var timeSlotList = ArrayList<TimeSlotsResponse.Body>()
-    var Array_date = ArrayList<String>()
+    var arrayDateList = ArrayList<String>()
+    var arrayTimeList = ArrayList<String>()
     var Selctedarray_date = ArrayList<String>()
     var Selctedarray_time = ArrayList<String>()
     var Array_time = ArrayList<String>()
     lateinit var shared: SharedPrefUtil
     var categorylist = ""
+    var dayValues = ""
+    var timeValues = ""
     var categoryId = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,11 +76,12 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
                 profilelist =
                     (intent.getSerializableExtra("list_model") as java.util.ArrayList<EditResponse.Body>?)!!
 //              getLocation(profilelist.get(0).latitude,profilelist.get(0).longitude)
-                val data = profilelist[0].availability.toString()
+                val data = profilelist[0].availability
                 val words: ArrayList<String> = data.split(",") as ArrayList<String>
+
                 Selctedarray_date = words
 
-                val data2 = profilelist[0].available_slots.toString()
+                val data2 = profilelist[0].available_slots
                 val words2: ArrayList<String> = data2.split(",") as ArrayList<String>
                 Selctedarray_time = words2
                 btnConfirmSignUp.text = "SAVE"
@@ -97,7 +100,8 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
         list.add(DatesAvailableModel("Saturday"))
         list.add(DatesAvailableModel("Sunday"))
         rv_datesAvailable.adapter =
-            DatesAvailableAdapter(list, Selctedarray_date, this@AvailablityActivity)
+//            DatesAvailableAdapter(list, Selctedarray_date, this@AvailablityActivity)
+            DatesAvailableAdapter(list, this@AvailablityActivity)
     }
 
     private fun onClicks() {
@@ -105,7 +109,7 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
         ivBack.setOnClickListener(this)
     }
 
-    fun apiTimeSlot() {
+    private fun apiTimeSlot() {
         baseViewModel.get_time_slots(this, true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
@@ -134,12 +138,11 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.btnConfirmSignUp -> {
-                if (validator.Teacherdelectdatetime(this, Array_date, Array_time)) {
+                if (validator.Teacherdelectdatetime(this, arrayDateList, Array_time)) {
                     if (intent.getStringExtra("signup").equals("teacher")) {
                         baseViewModel.TeacherAvailability(
                             this,
-                            Array_date.toString().replace("[", "").replace("]", "")
-                                .replace(" ", ""),
+                            dayValues,
                             Array_time.toString().replace("[", "").replace("]", "")
                                 .replace(" ", ""), true
                         )
@@ -147,8 +150,7 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
                     } else {
                         baseViewModel.EditTeacherAvailablity(
                             this,
-                            Array_date.toString().replace("[", "").replace("]", "")
-                                .replace(" ", ""),
+                            dayValues,
                             Array_time.toString().replace("[", "").replace("]", "")
                                 .replace(" ", ""), true
                         )
@@ -162,10 +164,6 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
         }
     }
 
-    fun Selected_date(date: ArrayList<String>) {
-        Array_date.clear()
-        Array_date.addAll(date)
-    }
 
     fun Selected_time(time: ArrayList<String>) {
         Array_time.clear()
@@ -198,9 +196,7 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
                     timeSlotList.clear()
                     timeSlotList.addAll(liveData.data.body)
                     rv_timeSlotsAvailable.adapter = TimeSlotAvailableAdapter(
-                        timeSlotList,
-                        Selctedarray_time,
-                        this@AvailablityActivity
+                        timeSlotList,this@AvailablityActivity
                     )
 
                     categorySpinner(response.body as ArrayList<TimeSlotsResponse.Body>)
@@ -277,5 +273,25 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
 
                 }
         }
+    }
+
+    override fun sendDays(days: String) {
+       if (arrayDateList.contains(days)){
+           arrayDateList.remove(days)
+       }else{
+           arrayDateList.add(days)
+       }
+        dayValues = TextUtils.join(",",arrayDateList)
+        Toast.makeText(this,dayValues,Toast.LENGTH_LONG).show()
+    }
+
+    override fun ondate(timeId: String) {
+        if (arrayTimeList.contains(timeId)){
+            arrayTimeList.remove(timeId)
+        }else{
+            arrayTimeList.add(timeId)
+        }
+        timeValues = TextUtils.join(",",arrayTimeList)
+        Toast.makeText(this,timeValues,Toast.LENGTH_LONG).show()
     }
 }
