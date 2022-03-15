@@ -87,7 +87,8 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener, Observer<Res
                     profilelist.clear()
                     profilelist.addAll(listOf(liveData.data.body))
                     text_teacher_name.text = liveData.data.body.name
-                    text_parent_spicilty.text = liveData.data.body.specialties
+
+                    text_parent_spicilty.text = liveData.data.body.educationLevel
 
                     text_teacher_CancelationPolicy.text = liveData.data.body.cancellationPolicy
                     text_teacher_AboutUser.text = liveData.data.body.about

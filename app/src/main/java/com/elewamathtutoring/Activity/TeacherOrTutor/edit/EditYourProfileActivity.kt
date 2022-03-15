@@ -18,9 +18,8 @@ import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import kotlinx.android.synthetic.main.activity_edit_your_profile.*
 
-class EditYourProfileActivity : AppCompatActivity(), View.OnClickListener,
-    Observer<RestObservable> {
-    var profilelist=ArrayList<EditResponse.Body>()
+class EditYourProfileActivity : AppCompatActivity(), View.OnClickListener{
+   // var profilelist=ArrayList<EditResponse.Body>()
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,27 +55,27 @@ class EditYourProfileActivity : AppCompatActivity(), View.OnClickListener,
             }
         }
     }
-    override fun onChanged(liveData: RestObservable?) {
-        when (liveData!!.status) {
-            Status.SUCCESS -> {
-                if (liveData.data is EditResponse) {
-                    profilelist.clear()
-                    profilelist.addAll(listOf(liveData.data.body))
-                }
-            }
-            Status.ERROR -> {
-                if (liveData.error is EditResponse)
-                {
-                    Helper.showSuccessToast(this, liveData.error.message)
-                }
-            }
-            else -> {
-            }
-        }
-    }
-    override fun onResume() {
-        super.onResume()
-        baseViewModel.get_profile(this, true)
-        baseViewModel.getCommonResponse().observe(this, this)
-    }
+//    override fun onChanged(liveData: RestObservable?) {
+//        when (liveData!!.status) {
+//            Status.SUCCESS -> {
+//                if (liveData.data is EditResponse) {
+//                    profilelist.clear()
+//                    profilelist.addAll(listOf(liveData.data.body))
+//                }
+//            }
+//            Status.ERROR -> {
+//                if (liveData.error is EditResponse)
+//                {
+//                    Helper.showSuccessToast(this, liveData.error.message)
+//                }
+//            }
+//            else -> {
+//            }
+//        }
+//    }
+//    override fun onResume() {
+//        super.onResume()
+//        baseViewModel.get_profile(this, true)
+//        baseViewModel.getCommonResponse().observe(this, this)
+//    }
 }

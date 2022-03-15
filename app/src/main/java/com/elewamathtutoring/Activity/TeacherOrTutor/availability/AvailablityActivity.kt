@@ -6,8 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.location.Address
-import android.location.Geocoder
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.Gravity
@@ -17,7 +15,6 @@ import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.elewamathtutoring.Activity.TeacherOrTutor.MainTeacherActivity
@@ -33,12 +30,8 @@ import com.elewamathtutoring.Util.helper.extensions.savePrefrence
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
-
 import kotlinx.android.synthetic.main.activity_availablity.*
-
 import java.util.*
-import java.util.Locale.filter
-
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
@@ -61,10 +54,10 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
     var Selctedarray_time = ArrayList<String>()
     var Array_time = ArrayList<String>()
     lateinit var shared: SharedPrefUtil
-    var categorylist = ""
+    var freeSlotId = ""
     var dayValues = ""
     var timeValues = ""
-    var categoryId = 0
+    var slotValue = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_availablity)
@@ -76,15 +69,29 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
                 profilelist =
                     (intent.getSerializableExtra("list_model") as java.util.ArrayList<EditResponse.Body>?)!!
 //              getLocation(profilelist.get(0).latitude,profilelist.get(0).longitude)
-                val data = profilelist[0].availability
-                val words: ArrayList<String> = data.split(",") as ArrayList<String>
 
-                Selctedarray_date = words
-
-                val data2 = profilelist[0].available_slots
-                val words2: ArrayList<String> = data2.split(",") as ArrayList<String>
-                Selctedarray_time = words2
+                // to check if availibilty is not empty
+                if(profilelist[0].availability!="") {
+                    // set data to list
+                        dayValues = profilelist[0].availability
+                    val data = profilelist[0].availability
+                    val words = data.split(",") as ArrayList<String>
+                    arrayDateList = words
+                    Selctedarray_date = words
+                }
+                if (profilelist[0].available_slots!="") {
+                    timeValues = profilelist[0].available_slots
+                    val data2 = profilelist[0].available_slots
+                    val words2 = data2.split(",") as ArrayList<String>
+                    Selctedarray_time = words2
+                    arrayTimeList = words2
+                }
                 btnConfirmSignUp.text = "SAVE"
+                if (profilelist[0].free_slots!="") {
+                    freeSlotId = profilelist[0].free_slots
+                    iv_notification_switch.isChecked = true
+                    rlChoose.visibility = View.VISIBLE
+                }
             }
         }
         onClicks()
@@ -92,21 +99,38 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
     }
 
     private fun setAdapters() {
-        list.add(DatesAvailableModel("Monday"))
-        list.add(DatesAvailableModel("Tuesday"))
-        list.add(DatesAvailableModel("Wednesday"))
-        list.add(DatesAvailableModel("Thursday"))
-        list.add(DatesAvailableModel("Friday"))
-        list.add(DatesAvailableModel("Saturday"))
-        list.add(DatesAvailableModel("Sunday"))
-        rv_datesAvailable.adapter =
-//            DatesAvailableAdapter(list, Selctedarray_date, this@AvailablityActivity)
-            DatesAvailableAdapter(list, this@AvailablityActivity)
+        list.add(DatesAvailableModel("Monday","1"))
+        list.add(DatesAvailableModel("Tuesday","2"))
+        list.add(DatesAvailableModel("Wednesday","3"))
+        list.add(DatesAvailableModel("Thursday","4"))
+        list.add(DatesAvailableModel("Friday","5"))
+        list.add(DatesAvailableModel("Saturday","6"))
+        list.add(DatesAvailableModel("Sunday","7"))
+
+        // check the days selected and set them blue
+        list.forEachIndexed { index, _ ->
+            Selctedarray_date.forEach {
+                if (list[index].id==it)
+                    list[index].check = true
+            }
+        }
+        rv_datesAvailable.adapter = DatesAvailableAdapter(list, this@AvailablityActivity)
     }
 
     private fun onClicks() {
         btnConfirmSignUp.setOnClickListener(this)
         ivBack.setOnClickListener(this)
+        iv_notification_switch.setOnClickListener {
+            if (iv_notification_switch!!.isChecked) {
+                iv_notification_switch.isChecked = true
+                rlChoose.visibility = View.VISIBLE
+            } else {
+                rlChoose.visibility = View.GONE
+                iv_notification_switch.isChecked = false
+                freeSlotId = ""
+                spinnerFreeSlot.setSelection(0)
+            }
+        }
     }
 
     private fun apiTimeSlot() {
@@ -138,36 +162,37 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.btnConfirmSignUp -> {
-                if (validator.Teacherdelectdatetime(this, arrayDateList, Array_time)) {
-                    if (intent.getStringExtra("signup").equals("teacher")) {
-                        baseViewModel.TeacherAvailability(
-                            this,
-                            dayValues,
-                            Array_time.toString().replace("[", "").replace("]", "")
-                                .replace(" ", ""), true
-                        )
-                        baseViewModel.getCommonResponse().observe(this, this)
-                    } else {
-                        baseViewModel.EditTeacherAvailablity(
-                            this,
-                            dayValues,
-                            Array_time.toString().replace("[", "").replace("]", "")
-                                .replace(" ", ""), true
-                        )
-                        baseViewModel.getCommonResponse().observe(this, this)
+                // check time slot is match with free slot, if match then show toast
+                slotValue = false
+                arrayTimeList.forEach {
+                    if (it == freeSlotId) {
+                       slotValue = true
                     }
+                }
+                if (validator.Teacherdelectdatetime(this, arrayDateList, arrayTimeList,slotValue)) {
+
+                                if (intent.getStringExtra("signup").equals("teacher")) {
+                                    baseViewModel.TeacherAvailability(
+                                        this,
+                                        dayValues,
+                                        timeValues, freeSlotId, true
+                                    )
+                                    baseViewModel.getCommonResponse().observe(this, this)
+                                } else {
+                                    baseViewModel.EditTeacherAvailablity(
+                                        this,
+                                        dayValues,
+                                        timeValues, freeSlotId, true
+                                    )
+                                    baseViewModel.getCommonResponse().observe(this, this)
+                                }
+
                 }
             }
             R.id.ivBack -> {
                 finish()
             }
         }
-    }
-
-
-    fun Selected_time(time: ArrayList<String>) {
-        Array_time.clear()
-        Array_time.addAll(time)
     }
 
     override fun onChanged(liveData: RestObservable?) {
@@ -195,9 +220,17 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
                     val response: TimeSlotsResponse = liveData.data
                     timeSlotList.clear()
                     timeSlotList.addAll(liveData.data.body)
+
+                    // check the slots selected and set them blue
+                    timeSlotList.forEachIndexed { index, _ ->
+                        Selctedarray_time.forEach {
+                            if (timeSlotList[index].id.toString()==it)
+                                timeSlotList[index].check = true
+                        }
+                    }
+
                     rv_timeSlotsAvailable.adapter = TimeSlotAvailableAdapter(
-                        timeSlotList,this@AvailablityActivity
-                    )
+                        timeSlotList,this@AvailablityActivity)
 
                     categorySpinner(response.body as ArrayList<TimeSlotsResponse.Body>)
 
@@ -206,8 +239,6 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
             Status.ERROR -> {
                 if (liveData.error is AvailabilityResponse) {
                     Helper.showSuccessToast(this, liveData.error.message)
-                } else if (liveData.error is EditResponse) {
-
                 }
             }
             else -> {
@@ -233,31 +264,30 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
         adapterCategory.setDropDownViewResource(R.layout.item_spinner)
 
         spinnerFreeSlot.adapter = adapterCategory
+
+
         spinnerFreeSlot.post {
             spinnerFreeSlot.onItemSelectedListener =
                 object : AdapterView.OnItemSelectedListener {
-                    override fun onNothingSelected(parent: AdapterView<*>?) {
-
-                    }
+                    override fun onNothingSelected(parent: AdapterView<*>?) {}
 
                     override fun onItemSelected(
                         parent: AdapterView<*>?,
                         view: View?,
                         pos: Int,
-                        id: Long
-                    ) {
+                        id: Long) {
 
                         val relativeLayout = (parent?.getChildAt(0) as View)
                         val tvSpinner = relativeLayout.findViewById<TextView>(R.id.tvSpinner)
-
 
                         if (pos == 0) {
                             tvSpinner.setTextColor(
                                 ContextCompat.getColor(
                                     this@AvailablityActivity,
-                                    R.color.black
+                                    R.color.darkgrey
                                 )
                             )
+                            freeSlotId = ""
                         } else {
                             tvSpinner.setTextColor(
                                 ContextCompat.getColor(
@@ -265,13 +295,19 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
                                     R.color.black
                                 )
                             )
-                            categoryId = categoryList[pos].id
+                            freeSlotId = categoryList[pos].id.toString()
 
                         }
 
                     }
 
                 }
+        }
+        // set spinner to the selected position
+        categoryList.forEach {
+            if (it.id.toString() == freeSlotId)
+
+                spinnerFreeSlot.setSelection(it.id)
         }
     }
 

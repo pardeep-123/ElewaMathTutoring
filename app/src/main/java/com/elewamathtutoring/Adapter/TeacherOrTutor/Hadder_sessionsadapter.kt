@@ -6,13 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.elewamathtutoring.Models.ListView.Body
+import com.elewamathtutoring.Models.ListView.Model_myschdeullist
 import com.elewamathtutoring.R
 import kotlinx.android.synthetic.main.item_hadder.view.*
 
 class Hadder_sessionsadapter(
     c: Context,
-    var today: ArrayList<Body>,
-    var upcomming: ArrayList<Body>,
+    var today: ArrayList<Model_myschdeullist.Body>,
+    var upcomming: ArrayList<Model_myschdeullist.Body>,
     var title: ArrayList<String>
 ) :
     RecyclerView.Adapter<Hadder_sessionsadapter.ViewHolder>() {

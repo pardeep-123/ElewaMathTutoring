@@ -30,7 +30,6 @@ import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
-import kotlinx.android.synthetic.main.activity_setting2.*
 import kotlinx.android.synthetic.main.fragment_schedule_tab.*
 import kotlinx.android.synthetic.main.fragment_schedule_tab.iv_notification_switch
 import kotlinx.android.synthetic.main.fragment_schedule_tab.view.*
@@ -42,9 +41,9 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
     lateinit var v: View
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     var selectedTab = "ListView"
-    var today = ArrayList<Body>()
+    var today = ArrayList<Model_myschdeullist.Body>()
     var title = ArrayList<String>()
-    var upcomming = ArrayList<Body>()
+    var upcomming = ArrayList<Model_myschdeullist.Body>()
     var apitype="withoutdate"
     var status=""
     @RequiresApi(Build.VERSION_CODES.N)
@@ -161,17 +160,17 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
         when (liveData!!.status) {
             Status.SUCCESS -> {
                 if (liveData.data is Model_myschdeullist) {
-                    if(liveData.data.body[0].occupiedStatus ==1){
-                        iv_notification_switch.setChecked(false);
+                    if(liveData.data.body[0].teacher.occupiedStatus ==1){
+                        iv_notification_switch.setChecked(false)
                     }else{
-                        iv_notification_switch.setChecked(true);
+                        iv_notification_switch.setChecked(true)
                     }
                     if(apitype.equals("withdate"))
                     {
                         if(liveData.data.body.size!=0)
                         {
                             tv_whennodata.visibility=View.GONE
-                            setCalenderAdapter(liveData.data.body as ArrayList<Body>)
+                            setCalenderAdapter(liveData.data.body as ArrayList<Model_myschdeullist.Body>)
                         } else {
                             tv_whennodata.visibility=View.VISIBLE
                         }
@@ -222,7 +221,7 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
             }
         }
     }
-    private fun setCalenderAdapter(listSession: ArrayList<Body>) {
+    private fun setCalenderAdapter(listSession: ArrayList<Model_myschdeullist.Body>) {
        v.rootView.rv_calenderViewList.adapter = SessionsAdapter(requireContext(), listSession)
     }
 }

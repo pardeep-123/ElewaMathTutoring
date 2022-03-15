@@ -260,6 +260,7 @@ interface RestApiInterface {
     fun EditTeacherAvailablity(
         @Field("availability") availability: String,
         @Field("timeslot") timeslot: String,
+        @Field("free_slots") freeSlots: String
     ): Observable<EditAvailabilityResponse>
 
 /*
@@ -353,7 +354,8 @@ interface RestApiInterface {
     @PUT("TeacherAvailability")
     fun TeacherAvailability(
         @Field("availability") availability: String,
-        @Field("timeSlot") timeSlot: String
+        @Field("timeSlot") timeSlot: String,
+        @Field("free_slots") freeSlots: String
     ): Observable<AvailabilityResponse>
 
   /*  @FormUrlEncoded

@@ -679,11 +679,12 @@ class BaseViewModel : ViewModel() {
         activity: Activity,
         availability: String,
         timeslot: String,
+        freeSlot: String,
         isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
 
             //edit
-            apiService.EditTeacherAvailablity(availability, timeslot)
+            apiService.EditTeacherAvailablity(availability, timeslot,freeSlot)
 
 
                 ?.subscribeOn(Schedulers.io())
@@ -701,7 +702,7 @@ class BaseViewModel : ViewModel() {
                     override fun onRetryApi() {
                         EditTeacherAvailablity(
                             activity,
-                            availability, timeslot,
+                            availability, timeslot,freeSlot,
                             isDialogShow
                         )
                     }
@@ -905,9 +906,9 @@ class BaseViewModel : ViewModel() {
 
 
   @SuppressLint("CheckResult")
-    fun TeacherAvailability(activity: Activity, availability: String,timeSlot: String, isDialogShow: Boolean) {
+    fun TeacherAvailability(activity: Activity, availability: String,timeSlot: String,freeSlot:String, isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
-            apiService.TeacherAvailability(availability,timeSlot)
+            apiService.TeacherAvailability(availability,timeSlot,freeSlot)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -922,7 +923,7 @@ class BaseViewModel : ViewModel() {
                 activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
-                        TeacherAvailability(activity, availability,timeSlot, isDialogShow)
+                        TeacherAvailability(activity, availability,timeSlot, freeSlot,isDialogShow)
                     }
                 })
         }
