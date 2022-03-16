@@ -76,20 +76,24 @@ object Helper {
         locationRequest.interval = 1000
         val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
         builder.setAlwaysShow(true)
-        val result = LocationServices.SettingsApi.checkLocationSettings(
-            googleApiClient,
-            builder.build()
-        )
-        result.setResultCallback { result ->
-            val status = result.status
-            when (status.statusCode) {
-                LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> try {
+        val result = googleApiClient?.let {
+            LocationServices.SettingsApi.checkLocationSettings(
+                it,
+                builder.build()
+            )
+        }
+        if (result != null) {
+            result.setResultCallback { result ->
+                val status = result.status
+                when (status.statusCode) {
+                    LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> try {
 
-                    status.startResolutionForResult(c, REQUEST_GPS_ENABLE)
-                } catch (e: IntentSender.SendIntentException) {
-                    Toast.makeText(c, "Errror", Toast.LENGTH_SHORT).show()
+                        status.startResolutionForResult(c, REQUEST_GPS_ENABLE)
+                    } catch (e: IntentSender.SendIntentException) {
+                        Toast.makeText(c, "Errror", Toast.LENGTH_SHORT).show()
+                    }
+
                 }
-
             }
         }
     }

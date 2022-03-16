@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.elewamathtutoring">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -20,47 +21,48 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/Theme.default"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:ignore="ExtraText">
         <activity
             android:name=".Activity.ParentOrStudent.filter.FilterActivity"
-            android:launchMode="singleTop"
-            android:exported="true" />
+            android:exported="true"
+            android:launchMode="singleTop" />
         <activity
             android:name=".Activity.Auth.SignupTeacher2Activity"
-            android:launchMode="singleTop"
-            android:exported="true" />
+            android:exported="true"
+            android:launchMode="singleTop" />
         <activity
             android:name=".Activity.Auth.SignupTeacherActivity"
-            android:launchMode="singleTop"
-            android:exported="true" />
+            android:exported="true"
+            android:launchMode="singleTop" />
         <activity
             android:name=".Activity.Chat.AddParticipantActivity"
-            android:launchMode="singleTop"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop" />
         <activity
             android:name=".Activity.Chat.StudyGroupActivity"
-            android:launchMode="singleTop"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop" />
         <activity
             android:name=".Activity.ParentOrStudent.resources.ResoucesActivity"
-            android:launchMode="singleTop"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop" />
         <activity
             android:name=".Activity.Chat.mathChat.AudioCallActivity"
-            android:launchMode="singleTop"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop" />
         <activity
             android:name=".Activity.Chat.mathChat.VideoCallActivity"
             android:exported="false"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop" />
         <activity
             android:name=".Activity.Chat.mathChat.MathPersonChatActivity"
             android:exported="false"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop" />
         <activity
             android:name=".Activity.Chat.mathChat.MathChatActivity"
             android:exported="false"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop" />
         <activity
             android:name=".Activity.ParentOrStudent.Viewall_trangection"
             android:screenOrientation="portrait" />
@@ -175,7 +177,6 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -219,7 +220,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
         <service
             android:name=".Util.fcm.MyFirebaseMessagingService"
             android:exported="false">
@@ -227,10 +227,8 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
     </application>
-
 </manifest>

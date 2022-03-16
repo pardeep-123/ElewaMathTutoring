@@ -1,4 +1,5 @@
 package com.elewamathtutoring.Adapter
+
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -25,7 +26,8 @@ class SearchHomeAdapter(
     override fun onBindViewHolder(holder: MyHolder, position: Int) {
         holder.itemView.tvItemName.text = list[position].name
         holder.itemView.tv_level.text = list[position].teachingLevel
-        holder.itemView.tvPostion.text = Constants.isCertifiedOrtutor(list[position].isCertifiedOrtutor)
+        holder.itemView.tvPostion.text =
+            Constants.isCertifiedOrtutor(list[position].isCertifiedOrtutor)
         Glide.with(ctx).load(Constants.IMAGE_URL + list[position].image)
             //.diskCacheStrategy(DiskCacheStrategy.RESOURCE)
             .error(R.drawable.profile)
@@ -36,7 +38,6 @@ class SearchHomeAdapter(
             intent.putExtra("Type", "searchhome")
             ctx.startActivity(intent)
         }
-
         if (list[0].occupiedStatus == 1) {
             holder.itemView.ivStatus.setImageResource(R.drawable.blue_gola)
         } else if (list[0].occupiedStatus == 2) {

@@ -30,6 +30,7 @@
                 android:id="@+id/tvlink"
                 android:fontFamily="@font/medium"
                 android:text="cqlsys.com"
+                android:textColor="@color/app"
                 android:textColorLink="@color/app"
                 android:textSize="@dimen/_10sdp" />
 

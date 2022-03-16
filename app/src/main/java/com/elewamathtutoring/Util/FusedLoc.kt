@@ -109,7 +109,10 @@ class FusedLoc(val c: Context) : GoogleApiClient.ConnectionCallbacks, GoogleApiC
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, getLocationRequest(),listener)
+            getLocationRequest()?.let {
+                LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient,
+                    it,listener)
+            }
 
         }
         return loc
