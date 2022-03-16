@@ -23,6 +23,7 @@ import java.io.IOException
 import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -69,7 +70,17 @@ class Constants {
             return sdf.format(currenTimeZone)
         }
 
+        // to set Date to Rating Date in custom format
+        fun convertDateToRatingTime(timestamp: Long): String? {
+            val cal: Calendar = Calendar.getInstance(Locale.ENGLISH)
+            cal.timeInMillis = timestamp * 1000
+            val outputFormat: DateFormat = SimpleDateFormat("EEE, MMM dd")
+            //outputFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+            return outputFormat.format(cal.time)
+        }
 
+
+        @SuppressLint("ClickableViewAccessibility")
         fun scrollEditText(s: EditText) {
             s.setOnTouchListener(View.OnTouchListener { v, event ->
 

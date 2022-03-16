@@ -105,6 +105,7 @@ class SignupTeacherActivity : AppCompatActivity(), View.OnClickListener , Observ
                             Intent(this, TeachingInfoActivity::class.java)
                                 .putExtra("signup", "teacher")
                         )
+                        finishAffinity()
                     }
                 }
             }

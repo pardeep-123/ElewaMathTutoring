@@ -1,17 +1,13 @@
 package com.elewamathtutoring.Activity.ParentOrStudent.filter
 
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.elewamathtutoring.Adapter.ParentOrStudent.FilterAdapter
-import com.elewamathtutoring.Adapter.ParentOrStudent.ResourcesFilterAdapter
-
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.api.Status

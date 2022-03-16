@@ -257,8 +257,8 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
                 if (liveData.data is LoginResponse) {
                     if (Api_type.equals("login")) {
                         Log.e("DEVICETOCKEN", "" + liveData.data.body.token + " dT--" + liveData.data.body.deviceToken)
-                        savePrefrence(Constants.AUTH_KEY, liveData.data.body.token.toString())
-                        shared.isLogin = true
+                        savePrefrence(Constants.AUTH_KEY, liveData.data.body.token)
+
                         savePrefrence(Constants.USER_ID, liveData.data.body.id.toString())
                         savePrefrence(Constants.notificationStatus, liveData.data.body.notificationStatus.toString())
                       //  savePrefrence(Constants.Social_login, "False")
@@ -276,11 +276,14 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
                                 if(liveData.data.body.isTechingInfo==0){
                                     startActivity(Intent(this, TeachingInfoActivity::class.java)
                                         .putExtra("signup","teacher"))
+                                    finishAffinity()
                                 }else{
                                     if(liveData.data.body.IsAvailable==0){
-                                        startActivity(Intent(this, AvailablityActivity::class.java))
-
+                                        startActivity(Intent(this, AvailablityActivity::class.java)
+                                            .putExtra("signup", "teacher"))
+                                        finishAffinity()
                                     }else{
+                                        shared.isLogin = true
                                         startActivity(Intent(this, MainTeacherActivity::class.java)
                                             .putExtra("signup","teacher"))
                                         finishAffinity()
@@ -291,6 +294,7 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
                             }
                             else
                             {
+                                shared.isLogin = true
                                 startActivity(Intent(this, MainActivity::class.java))
                                 finishAffinity()
                             }

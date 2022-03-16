@@ -30,6 +30,8 @@ import com.elewamathtutoring.viewmodel.BaseViewModel
 import com.pawskeeper.Modecommon.Commontoall
 import com.pawskeeper.Modecommon.Commontoall2
 import kotlinx.android.synthetic.main.activity_payment_info.*
+import kotlinx.android.synthetic.main.activity_payment_info.ivBack
+import kotlinx.android.synthetic.main.activity_schedule_a_session2.*
 import kotlinx.android.synthetic.main.dialog_booking_thanks.*
 import kotlinx.android.synthetic.main.dialog_delete.*
 
@@ -37,7 +39,7 @@ import java.io.StringWriter
 
 class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<RestObservable>,
     CardsListAdapter.TimeSlot {
-    val timeList : ArrayList<String> = ArrayList()
+    val timeList: ArrayList<String> = ArrayList()
     var cardId = ""
     var profile = java.util.ArrayList<TeacherDetailResponse.Body>()
     var selectedprice = 0
@@ -134,6 +136,10 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
                         this.startActivity(Intent(this, MainActivity::class.java))
                     }
                     filterDialog.show()
+                } else if (liveData.data is SesionBookResponse) {
+                    val i = Intent(this, MainActivity::class.java)
+                    i.putExtra("teacher_detail", "payment")
+                    startActivity(i)
                 }
             }
             Status.ERROR -> {
@@ -315,11 +321,10 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
 
     }
 
-    fun  apis(){
+    fun apis() {
 
         baseViewModel.book_Session(
-            this,
-            profile.get(0).id.toString(),
+            this, profile.get(0).id.toString(),
             "" + profile.get(0).time_slots.size.toString(),
             intent.getStringExtra("aboutdetail").toString(),
             cardId,
@@ -333,13 +338,13 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
     }
 
     override fun ondate(id: String) {
-        if (timeList.contains(id)){
+        if (timeList.contains(id)) {
             timeList.remove(id)
-        }else{
+        } else {
             timeList.add(id)
         }
-        timeString = TextUtils.join(",",timeList)
-        cardId =id.toString()
+        timeString = TextUtils.join(",", timeList)
+        cardId = id.toString()
     }
 
     private fun ThanksForBookingDialog1() {
@@ -347,7 +352,10 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
         val filterDialog = Dialog(this)
         filterDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         filterDialog.setContentView(R.layout.dialog_booking_thanks)
-        filterDialog.window!!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
+        filterDialog.window!!.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
         filterDialog.window!!.setGravity(Gravity.CENTER)
         filterDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         filterDialog.setCancelable(false)

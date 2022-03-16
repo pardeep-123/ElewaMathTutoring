@@ -42,6 +42,7 @@ import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import com.riseball.interface_base.Teachinglevel_interface
+import kotlinx.android.synthetic.main.activity_teaching_info.*
 import kotlinx.android.synthetic.main.dialog_filter.*
 import kotlinx.android.synthetic.main.fragment_search.*
 
@@ -67,7 +68,8 @@ class SearchFragment : CheckLocationActivity(), Observer<RestObservable>, Teachi
     var address = ""
     var viewType = ""
     var visitCount = ""
-
+    var subjectId = ""
+    var subjectName = ""
     private val requestCodes = 11
 
     override fun onAttach(context: Context) {
@@ -84,18 +86,18 @@ class SearchFragment : CheckLocationActivity(), Observer<RestObservable>, Teachi
         return v
     }
 
-//    private val FilterResult = registerForActivityResult(
-//        ActivityResultContracts.StartActivityForResult()
-//    ) { result ->
-//        if (result.resultCode == Activity.RESULT_OK) {
-//
-////           Toast.makeText(requireContext(), result.data.toString(), Toast.LENGTH_SHORT).show()
-//            Log.e("tshtjdtshtjd",result.data.toString())
-//
-//
-//        }
-//    }
+    private val filterResult = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == 101) {
+            Log.e("subjectssssssssss", result.data.toString())
+            subjectName = result.data?.getStringExtra("name")!!
+            subjectId = result.data?.getStringExtra("id")!!
 
+            baseViewModel.getTeacherStudentList(requireActivity(), "2", subjectId, false)
+            baseViewModel.getCommonResponse().observe(requireActivity(), this)
+        }
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getdata_toselected_certified.add("1")
@@ -116,10 +118,16 @@ class SearchFragment : CheckLocationActivity(), Observer<RestObservable>, Teachi
             startActivity(Intent(context, ResoucesActivity::class.java))
         }
         rlFilter.setOnClickListener {
+       /*     val intent = Intent(context, FilterActivity::class.java)
+            intent.putExtra("editId",subjectId)
+            intent.putExtra("editName",subjectName)
+            filterResult.launch(intent)
+*/
             val intent = Intent(context, FilterActivity::class.java)
-            intent.putExtra("visitCount", visitCount)
-//            FilterActivity.launch(intent)
-            startActivityForResult(intent, 101)
+            intent.putExtra("editId",subjectId)
+            intent.putExtra("editName",subjectName)
+            filterResult.launch(intent)
+         //   startActivityForResult(intent, 101)
         }
         ivSetting = view.findViewById(R.id.ivSetting)
         ivSetting.setOnClickListener {
@@ -171,13 +179,13 @@ class SearchFragment : CheckLocationActivity(), Observer<RestObservable>, Teachi
                 latitude = data.getStringExtra("latitude").toString()
                 longitude = data.getStringExtra("longitude").toString()
                 tv_selectlocation.text = address
-            } else if (resrequestCode == 101) {
+            } /*else if (resrequestCode == 101) {
                 val name = data.getStringExtra("id").toString()
 //                visitCount=  data.getStringExtra("visitCount").toString()
                 baseViewModel.getTeacherStudentList(requireActivity(), "2", name, false)
                 baseViewModel.getCommonResponse().observe(requireActivity(), this)
 
-            }
+            }*/
         }
     }
 
@@ -220,7 +228,7 @@ class SearchFragment : CheckLocationActivity(), Observer<RestObservable>, Teachi
     }
 
     fun apiTeacherList(userType: String) {
-        baseViewModel.getTeacherStudentList(requireActivity(), userType, "", true)
+        baseViewModel.getTeacherStudentList(requireActivity(), userType, subjectId, true)
         baseViewModel.getCommonResponse().observe(requireActivity(), this)
     }
 

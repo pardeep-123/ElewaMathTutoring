@@ -31,6 +31,7 @@ import com.elewamathtutoring.Fragment.ParentOrStudent.booking.UserBookingListRes
 import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfilResponse
 import com.elewamathtutoring.Fragment.TeacherOrTutor.bookings.OccupiedResponse
 import com.elewamathtutoring.Fragment.TeacherOrTutor.request.RequestListResponse
+import com.elewamathtutoring.Models.Card_listing.AllSessionListResponse
 import com.elewamathtutoring.Models.ListView.Model_myschdeullist
 import com.elewamathtutoring.Models.Login.Model_login
 import com.elewamathtutoring.Models.Notifications.Model_Notifications
@@ -260,6 +261,7 @@ interface RestApiInterface {
     fun EditTeacherAvailablity(
         @Field("availability") availability: String,
         @Field("timeslot") timeslot: String,
+        @Field("free_slots") freeSlots: String
     ): Observable<EditAvailabilityResponse>
 
 /*
@@ -353,7 +355,8 @@ interface RestApiInterface {
     @PUT("TeacherAvailability")
     fun TeacherAvailability(
         @Field("availability") availability: String,
-        @Field("timeSlot") timeSlot: String
+        @Field("timeSlot") timeSlot: String,
+        @Field("free_slots") freeSlots: String
     ): Observable<AvailabilityResponse>
 
   /*  @FormUrlEncoded
@@ -444,7 +447,7 @@ interface RestApiInterface {
 
     @FormUrlEncoded
     @POST("All_Sessions_list")
-    fun listViewSession(@Field("date") date: String): Observable<Model_myschdeullist>
+    fun listViewSession(@Field("date") date: String): Observable<AllSessionListResponse>
 
     @FormUrlEncoded
     @PUT("seach_teachers")

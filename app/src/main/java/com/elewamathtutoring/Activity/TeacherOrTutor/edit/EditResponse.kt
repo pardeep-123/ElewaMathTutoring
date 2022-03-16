@@ -35,6 +35,7 @@ data class EditResponse(
         val deviceToken: String,
         val SocialType: Int, // 0
         val SocialId: String,
+        val free_slots: String,
         val status: Int, // 1
         val subjects: ArrayList<Subject>,
         val teaching_level: List<TeachingLevel>,
@@ -74,3 +75,24 @@ data class EditResponse(
         ):Serializable
     }
 }
+/*
+Body(id=353, name=Cqlsys Technologyj,
+ userType=2, image=http://202.164.42.227:7552/uploads/users/1647261870download (4).jpeg,
+  email=cqlsys60@gmail.com,
+   about=ddddddddddddd,
+   teachingHistory=ddddddddddddddddd,
+    isCertifiedOrtutor=0, isBuyPlan=0,
+    teachingLevel=[3, 3], educationLevel=PHD,
+    specialties=8,10, InPersonRate=0,
+    virtualRate=0, cancellationPolicy=fjjjbs,
+     availability=1,3, available_slots=1,3,
+     notificationStatus=1, latitude=24.9583587,
+      longitude=121.4862086, deviceType=1,
+       deviceToken=dFHPljmDTIiuvCNHgq-54K:APA91bH2fPm
+       -I8ysZOmmt3y0Mb6oub2J-i91N7MJab58ZD8G
+       FAHiVUbW2ughKV3HMNZEAXnKmOMYoxM-JCwL
+       ko1pS0uqfKrEE5ZPzVVFBOX7prx9l4gT-R
+       51noyUjCiODVYouz0YGXC_, SocialType=0,
+        SocialId=, status=1,
+         pastTeacher=null)
+ */

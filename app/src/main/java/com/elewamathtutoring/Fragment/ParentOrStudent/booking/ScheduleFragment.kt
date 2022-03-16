@@ -34,12 +34,8 @@ class ScheduleFragment : Fragment(), Observer<RestObservable> {
         api()
         // v.rootView.ivNotification.setOnClickListener { startActivity(Intent(context,NotificationsActivity::class.java)) }
         v.rootView.ivSetting.setOnClickListener {
-            startActivity(
-                Intent(
-                    context,
-                    SettingActivity::class.java
-                )
-            )
+            startActivity(Intent(context, SettingActivity::class.java
+                ))
         }
     }
     private fun api() {

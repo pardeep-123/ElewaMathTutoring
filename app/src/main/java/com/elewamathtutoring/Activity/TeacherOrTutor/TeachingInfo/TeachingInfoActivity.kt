@@ -209,6 +209,8 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
 
                 }else {
                     val intent = Intent(context, FilterActivity::class.java)
+                    intent.putExtra("editId",subjectId)
+                    intent.putExtra("editName",subjectName)
                     filterResult.launch(intent)
                 }
                 //      startActivityForResult(intent, 101)
@@ -261,6 +263,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
                         Intent(this, AvailablityActivity::class.java)
                             .putExtra("signup", "teacher")
                     )
+                    finishAffinity()
                 }
             }
             Status.ERROR -> {

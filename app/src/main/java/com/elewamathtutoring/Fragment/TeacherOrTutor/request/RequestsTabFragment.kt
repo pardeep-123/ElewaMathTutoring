@@ -20,6 +20,7 @@ import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
+import com.pawskeeper.Modecommon.Commontoall
 import kotlinx.android.synthetic.main.fragment_requests_tab.*
 import kotlinx.android.synthetic.main.fragment_requests_tab.view.*
 import java.text.SimpleDateFormat
@@ -96,6 +97,7 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
                             }
                         }
                     }
+
                     if (Pastreq.size == 0) {
                         tvPastRequests.visibility = View.GONE
                         rv_PastRequests.visibility = View.GONE
@@ -125,6 +127,9 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
                    v.rootView.rv_newRequests.adapter = SchedulePendingAdapter(requireContext(), Newreq,this)
                     v.rootView.rv_PastRequests.adapter = SchedulePendingAdapter(requireContext(), Pastreq,this)
                     v.rootView.recy_watingonans.adapter = SchedulePendingAdapter(requireContext(), Inwaiting,this)
+                }
+                else if (liveData.data is Commontoall){
+                    api()
                 }
             }
             Status.ERROR -> {

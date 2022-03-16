@@ -16,6 +16,7 @@ import com.elewamathtutoring.Activity.ParentOrStudent.teacherDetail.TeacherDetai
 import com.elewamathtutoring.Activity.TeacherOrTutor.request.RequestDetailResponse
 import com.elewamathtutoring.Adapter.ChooseTimeAdapter
 import com.elewamathtutoring.R
+import com.elewamathtutoring.Util.CommonMethods
 import com.elewamathtutoring.Util.helper.Helper
 import kotlinx.android.synthetic.main.activity_schedule_a_session.*
 import kotlinx.android.synthetic.main.activity_schedule_a_session.ivBack
@@ -40,7 +41,7 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener,
     var currentdateDate = ""
     var Currentdate_isdisable_date = false
     val calendarsarray: ArrayList<Calendar> = ArrayList()
-
+    var finalDateAndTimeConvertToTimeStamp = 0L
     val timeList : ArrayList<String> = ArrayList()
     var timeString = ""
     var hour = ""
@@ -107,7 +108,12 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener,
                 val dateParserr = SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy")
                 val Mydate = dateParserr.parse(eventDay.calendar.getTime().toString())
                 val dateFormatterz = SimpleDateFormat("dd-MM-yyyy")
-                selectedDate = dateFormatterz.format(Mydate)
+                val localTime = eventDay.calendar.time.time.div(1000)
+                val gmtTime = localTime+19800
+                selectedDate = gmtTime.toString()
+//                selectedDate = dateFormatterz.format(Mydate)
+
+                //finalDateAndTimeConvertToTimeStamp = CommonMethods.time_to_timestamp(selectedDate, "yyyy-MM-dd" +19080)
             }
         })
     }
@@ -122,10 +128,10 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener,
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.btnConfirmSession -> {
-                val intent = Intent(this, ScheduleASession2Activity::class.java)
-                intent.putExtra("teacher_detail", profile)
-                intent.putExtra("selecteddate", selectedDate)
-                startActivity(intent)
+//                val intent = Intent(this, ScheduleASession2Activity::class.java)
+//                intent.putExtra("teacher_detail", profile)
+//                intent.putExtra("selecteddate", selectedDate)
+//                startActivity(intent)
                 /*   for (i in 0 until profile.get(0).time_slots.size) {
                        if (profile.get(0).time_slots.get(i).check == true) {
                            selectedtme = "true"
@@ -135,7 +141,7 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener,
                     Helper.showErrorAlert(this, "Please select date.")
                 } else if (Currentdate_isdisable_date == true && currentdateDate.equals(selectedDate)) {
                     Helper.showErrorAlert(this, "Please select date.")
-                } else if (selectedtme.equals("false")) {
+                } else if (timeString=="") {
                     Helper.showErrorAlert(this, "Please select atlest one time frame.")
                 } else {
                     val intent = Intent(this, ScheduleASession2Activity::class.java)
@@ -163,6 +169,6 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener,
         timeString = TextUtils.join(",",timeList)
         hour = timeList.size.toString()
       //  Toast.makeText(this,timeString,Toast.LENGTH_SHORT).show()
-        Toast.makeText(this,hour,Toast.LENGTH_SHORT).show()
+        // Toast.makeText(this,hour,Toast.LENGTH_SHORT).show()
     }
 }

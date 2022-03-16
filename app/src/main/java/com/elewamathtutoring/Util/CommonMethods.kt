@@ -18,6 +18,7 @@ import android.widget.EditText
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.String as String1
 
 object CommonMethods {
 
@@ -85,7 +86,7 @@ object CommonMethods {
     }*/
 
 
-    fun getDateFromTimestamp(timestamp: Int, outputFormate: String): String {
+    fun getDateFromTimestamp(timestamp: Int, outputFormate: String1): String1 {
         val calendar = Calendar.getInstance(Locale.ENGLISH)
 
         calendar.timeInMillis = timestamp * 1000L
@@ -93,7 +94,7 @@ object CommonMethods {
         return date.replace("AM", "am").replace("PM", "pm")
     }
 
-    fun getAddedDateFromTimestamp(timestamp: Int, outputFormate: String, min: Int): String {
+    fun getAddedDateFromTimestamp(timestamp: Int, outputFormate: String1, min: Int): String1 {
         val calendar = Calendar.getInstance(Locale.ENGLISH)
 
         calendar.timeInMillis = timestamp * 1000L
@@ -115,7 +116,7 @@ object CommonMethods {
         return date.replace("AM", "am").replace("PM", "pm")
     }*/
 
-    fun getAddedCurrentTime(min: Int): String {
+    fun getAddedCurrentTime(min: Int): String1 {
         /*val calendar = Calendar.getInstance(Locale.ENGLISH)*/
         /*val date = SimpleDateFormat("dd MMMM, yyyy").format(Date())*/
         val sdf = SimpleDateFormat("hh:mma dd MMMM, yyyy")
@@ -129,7 +130,7 @@ object CommonMethods {
         return currentDate.replace("AM", "am").replace("PM", "pm")
     }
 
-    fun getAddedDate(dateTime: String, min: Int): String {
+    fun getAddedDate(dateTime: String1, min: Int): String1 {
         val input = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         /*val output = SimpleDateFormat("hh:mma dd MMMM, yyyy") //"hh:mma dd MMMM, yyyy"*/
         var d: Date? = null
@@ -155,7 +156,7 @@ object CommonMethods {
         return currentTime.replace("AM", "am").replace("PM", "pm")
     }*/
 
-    fun getDate(dateTime: String, outputFormate: String): String {
+    fun getDate(dateTime: String1, outputFormate: String1): String1 {
         val input = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         val output = SimpleDateFormat(outputFormate) //"hh:mma dd MMMM, yyyy"
         var d: Date? = null
@@ -164,20 +165,20 @@ object CommonMethods {
         } catch (e: ParseException) {
             e.printStackTrace()
         }
-        val formatted: String = output.format(d)
+        val formatted: String1 = output.format(d)
         Log.i("DATE", "" + formatted)
         return formatted.replace("AM", "am").replace("PM", "pm")
     }
 
 
-    fun getPercentage(value: Int, total: Int): String {
+    fun getPercentage(value: Int, total: Int): String1 {
         val div = value.toDouble() / total.toDouble()
         val per = div * 100.00
         val total = (100.00 - per).toInt()
         return total.toString()
     }
 
-    fun getBitmap(encodedImage: String): Bitmap? {
+    fun getBitmap(encodedImage: String1): Bitmap? {
         val decodedString = Base64.decode(encodedImage, Base64.DEFAULT)
         val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
         return decodedByte
@@ -185,12 +186,36 @@ object CommonMethods {
     }
 
     //hh:mm a
-    fun convertOneFormatToAnother(eventDay:String,oldDateformat: String, newdateformat:String): String {
+    fun convertOneFormatToAnother(eventDay: String1, oldDateformat: String1, newdateformat: String1): String1 {
         val clickedDayCalendar = eventDay
         val dateParser = SimpleDateFormat(oldDateformat)
         val date = dateParser.parse(clickedDayCalendar.toString())
         val dateFormatter = SimpleDateFormat(newdateformat)
         return  dateFormatter.format(date)
     }
+
+
+    // convert date and time book appointment fragment
+    fun time_to_timestamp(str_date: String1?, pattren: String1?): Long {
+        var time_stamp: Long = 0
+        try {
+            val formatter = SimpleDateFormat(pattren)
+//SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+            formatter.timeZone = TimeZone.getTimeZone("GMT")
+            val date = formatter.parse(str_date) as Date
+            time_stamp = date.time
+        } catch (ex: ParseException) {
+            ex.printStackTrace()
+        } catch (ex: java.lang.Exception) {
+            ex.printStackTrace()
+        }
+        time_stamp /= 1000
+        return time_stamp
+    }
+
+
+
+
+
 
 }

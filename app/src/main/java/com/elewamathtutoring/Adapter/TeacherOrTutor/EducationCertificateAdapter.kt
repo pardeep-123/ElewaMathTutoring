@@ -40,9 +40,9 @@ class EducationCertificateAdapter(val list: ArrayList<ImageModel>,    var clickC
             if (pos != 0) {
                 itemView.llCamera.visibility=View.GONE
                 if (list[pos-1].isGalleryAdded){
-                    Glide.with(ctn).load(Constants.IMAGE_URL+list[pos - 1].image).into(itemView.ivDocuments)
+                    Glide.with(ctn).load(list[pos - 1].image).into(itemView.ivDocuments)
                 }else{
-                    Glide.with(ctn).load(Constants.IMAGE_URL+list[pos - 1].image).into(itemView.ivDocuments)
+                    Glide.with(ctn).load(list[pos - 1].image).into(itemView.ivDocuments)
                 }
             } else{
                 itemView.llCamera.visibility=View.VISIBLE

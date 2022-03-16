@@ -2,6 +2,7 @@ package com.elewamathtutoring.Util
 
 import android.app.Activity
 import android.view.View
+import android.widget.Toast
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.helper.Helper
 import java.util.regex.Pattern
@@ -448,13 +449,20 @@ class Validator {
         }
         return check
     }
-    fun Teacherdelectdatetime(context: Activity, date: ArrayList<String>,time: ArrayList<String>): Boolean {
+    fun Teacherdelectdatetime(context: Activity, date: ArrayList<String>,time: ArrayList<String>
+                             ,slotValue : Boolean): Boolean {
         var check = false
         if (date.isEmpty()) {
             Helper.showErrorAlert(context, context.getString(R.string.Please_select_date))
         }
         else if (time.isEmpty()) {
             Helper.showErrorAlert(context, context.getString(R.string.Please_select_time))
+        }
+         else if (slotValue){
+            Toast.makeText(
+                context, "Free Slot Should not match with Time Slot",
+                Toast.LENGTH_SHORT
+            ).show()
         }
         else
         {

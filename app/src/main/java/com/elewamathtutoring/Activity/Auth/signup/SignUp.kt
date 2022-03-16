@@ -97,10 +97,12 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
                         shared.isLogin = true
                         savePrefrence(Constants.AUTH_KEY, liveData.data.body.token)
                         startActivity(Intent(this, MainActivity::class.java))
+                        finishAffinity()
                     } else {
                         savePrefrence("userType", "2")
                         savePrefrence(Constants.AUTH_KEY, liveData.data.body.token)
                         startActivity(Intent(this, MainTeacherActivity::class.java))
+                        finishAffinity()
                     }
                  /*
                     intent.putExtra("name", edtName.text.toString())

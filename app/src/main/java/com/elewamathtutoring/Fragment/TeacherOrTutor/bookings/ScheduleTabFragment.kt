@@ -22,7 +22,7 @@ import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResoucesActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
 import com.elewamathtutoring.Adapter.TeacherOrTutor.Hadder_sessionsadapter
 import com.elewamathtutoring.Adapter.TeacherOrTutor.SessionsAdapter
-import com.elewamathtutoring.Models.ListView.Body
+import com.elewamathtutoring.Models.Card_listing.AllSessionListResponse
 import com.elewamathtutoring.Models.ListView.Model_myschdeullist
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
@@ -30,7 +30,6 @@ import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
-import kotlinx.android.synthetic.main.activity_setting2.*
 import kotlinx.android.synthetic.main.fragment_schedule_tab.*
 import kotlinx.android.synthetic.main.fragment_schedule_tab.iv_notification_switch
 import kotlinx.android.synthetic.main.fragment_schedule_tab.view.*
@@ -42,11 +41,15 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
     lateinit var v: View
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     var selectedTab = "ListView"
-    var today = ArrayList<Body>()
+    var today = ArrayList<AllSessionListResponse.Body>()
     var title = ArrayList<String>()
-    var upcomming = ArrayList<Body>()
+    var upcomming = ArrayList<AllSessionListResponse.Body>()
+    var calanderList = ArrayList<AllSessionListResponse.Body>()
     var apitype="withoutdate"
     var status=""
+
+    var finalDateAndTimeConvertToTimeStamp = 0L
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -96,13 +99,17 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
                 val sdfDestinationyyyy = SimpleDateFormat("yyyy")
                 val Monthdate = sdfDestinationMM.format(date)
                 v.rootView.calenderDate.text = Monthdate.toString() + " " + sdfDestinationdd.format(date).toString() + ", " + sdfDestinationyyyy.format(date).toString()
-               calenderClickApi(sdfDestinationyyyy.format(date).toString() + "-" + sdfDestinationMMonth.format(date).toString() + "-" + sdfDestinationdd.format(date).toString())
+//               calenderClickApi(sdfDestinationyyyy.format(date).toString() + "-" + sdfDestinationMMonth.format(date).toString() + "-" + sdfDestinationdd.format(date).toString())
+
+              val time =  eventDay.calendar.time.time.div(1000)
+                val gmtTime = time+19800
+                  calenderClickApi(gmtTime.toString())
             }
         })
         DatePickerBuilder(requireContext(), this)
             .pagesColor(R.color.textcolor)
     }
-    private fun calenderClickApi(date: String) {
+     fun calenderClickApi(date: String) {
         if(date.equals(""))
         {
              apitype="withoutdate"
@@ -111,8 +118,22 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
         {
              apitype="withdate"
         }
-        baseViewModel.listViewSession(requireActivity(), true, date)
-        baseViewModel.getCommonResponse().observe(requireActivity(), this)
+        //yyyy-MM-dd HH:mm:ss
+        //1647561600
+        // 1647561600
+        if (date!="") {
+//             finalDateAndTimeConvertToTimeStamp =
+//                CommonMethods.time_to_timestamp(
+//                    date,
+//                    "yyyy-MM-dd"
+//                )
+            baseViewModel.listViewSession(requireActivity(), true, date)
+            baseViewModel.getCommonResponse().observe(requireActivity(), this)
+//   baseViewModel.listViewSession(requireActivity(), true, date+19080)
+        } else {
+            baseViewModel.listViewSession(requireActivity(), true, "")
+            baseViewModel.getCommonResponse().observe(requireActivity(), this)
+        }
     }
     @RequiresApi(Build.VERSION_CODES.N)
     private fun onClicks() {
@@ -139,6 +160,7 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
             )
             selectedTab = "ListView"
         }
+
         v.rootView.schedule_calenderView.setOnClickListener {
             calenderView_rl.visibility = View.VISIBLE
             listView_rl.visibility = View.GONE
@@ -151,7 +173,9 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
             val df = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             calenderClickApi(df.format(c).toString())
         }
+
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         calenderClickApi("")
     }
@@ -160,69 +184,80 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
-                if (liveData.data is Model_myschdeullist) {
-                    if(liveData.data.body[0].occupiedStatus ==1){
-                        iv_notification_switch.setChecked(false);
-                    }else{
-                        iv_notification_switch.setChecked(true);
+                if (liveData.data is AllSessionListResponse) {
+                    if (liveData.data.body.isNotEmpty()){
+                        v.rootView.rv_calenderViewList.visibility = View.VISIBLE
+                        tv_whennodata.visibility = View.GONE
+                    calanderList = liveData.data.body!!
+                    if (liveData.data.body[0].Teacher.occupiedStatus == 1) {
+                        iv_notification_switch.setChecked(false)
+                    } else {
+                        iv_notification_switch.setChecked(true)
                     }
-                    if(apitype.equals("withdate"))
-                    {
-                        if(liveData.data.body.size!=0)
-                        {
-                            tv_whennodata.visibility=View.GONE
-                            setCalenderAdapter(liveData.data.body as ArrayList<Body>)
+                    if (apitype.equals("withdate")) {
+                        if (liveData.data.body.size != 0) {
+                            tv_whennodata.visibility = View.GONE
+                            setCalenderAdapter(liveData.data.body as ArrayList<AllSessionListResponse.Body>)
                         } else {
-                            tv_whennodata.visibility=View.VISIBLE
+                            tv_whennodata.visibility = View.VISIBLE
                         }
                     }
+                    //1647561600
+                    //1648146600
                     else {
-                    upcomming.clear()
-                    today.clear()
-                    title.clear()
-                    val c = Calendar.getInstance().time
-                    val df = SimpleDateFormat("EEE, MMM yyyy", Locale.getDefault())
-                    val formattedDate = df.format(c)
-                    for (i in 0 until liveData.data.body.size) {
-                        // date
-                        if(Constants.ConvertTimeStampToDate(liveData.data.body.get(i).createdAt.toLong(), "EEE, MMM yyyy").toString().equals(formattedDate)) {
-                            Log.e("checkbody","----data")
-                            today.add(liveData.data.body.get(i))
+                        upcomming.clear()
+                        today.clear()
+                        title.clear()
+                        val c = Calendar.getInstance().time
+                        val df = SimpleDateFormat("EEE, MMM yyyy", Locale.getDefault())
+                        val formattedDate = df.format(c)
+                        for (i in 0 until liveData.data.body.size) {
+                            // date
+                            if (Constants.ConvertTimeStampToDate(
+                                    liveData.data.body.get(i).createdAt.toLong(),
+                                    "EEE, MMM yyyy"
+                                ).toString().equals(formattedDate)
+                            ) {
+                                Log.e("checkbody", "----data")
+                                today.add(liveData.data.body.get(i))
+                            } else {
+                                Log.e("checkbody", "----upcomming")
+                                upcomming.add(liveData.data.body.get(i))
+                            }
                         }
-                        else {
-                            Log.e("checkbody","----upcomming")
-                            upcomming.add(liveData.data.body.get(i))
+                        if (today.size != 0) {
+                            title.add("TODAY'S SESSIONS")
                         }
+                        if (today.size == 0 && upcomming.size == 0) {
+                            tv_whennodata.visibility = View.VISIBLE
+                        } else {
+                            tv_whennodata.visibility = View.GONE
+                        }
+                        if (upcomming.size != 0) {
+                            title.add("UPCOMING SESSIONS")
+                        }
+                        Log.e("checkbody", "----upcomming" + upcomming.size + "---" + today.size)
+                        v.rootView.rv_listView.adapter =
+                            Hadder_sessionsadapter(requireContext(), today, upcomming, title)
                     }
-                    if(today.size!=0) {
-                        title.add("TODAY'S SESSIONS")
+                }else{
+                        v.rootView.rv_calenderViewList.visibility = View.GONE
+                        tv_whennodata.visibility = View.VISIBLE
                     }
-                    if(today.size==0&&upcomming.size==0) {
-                        tv_whennodata.visibility=View.VISIBLE
-                    }
-                    else {
-                        tv_whennodata.visibility=View.GONE
-                    }
-                    if(upcomming.size!=0) {
-                        title.add("UPCOMING SESSIONS")
-                    }
-                        Log.e("checkbody","----upcomming"+upcomming.size+"---"+today.size)
-                    v.rootView.rv_listView.adapter = Hadder_sessionsadapter(requireContext(), today,upcomming,title)
-                    }
-                }else if(liveData.data is OccupiedResponse){
-
-
                 }
             }
-            Status.ERROR -> {
-                if (liveData.error is Model_myschdeullist)
-                    Helper.showSuccessToast(requireContext(), liveData.error.message)
+             Status.ERROR -> {
+                if (liveData.data != null) {
+                    Helper.showErrorAlert(requireActivity(), liveData.data.toString())
+                } else {
+                    Helper.showErrorAlert(requireActivity(), liveData.error.toString())
+                }
             }
             else -> {
             }
         }
     }
-    private fun setCalenderAdapter(listSession: ArrayList<Body>) {
-       v.rootView.rv_calenderViewList.adapter = SessionsAdapter(requireContext(), listSession)
+    private fun setCalenderAdapter(listSession: ArrayList<AllSessionListResponse.Body>) {
+       v.rootView.rv_calenderViewList.adapter = SessionsAdapter(requireContext(), listSession!!)
     }
 }
