@@ -117,17 +117,6 @@ class IntroSlider : AppCompatActivity() {
 
     }
 
-
-    fun getitem(i: Int): Int {
-        return mPager!!.getCurrentItem() + i
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
-
 }
 
 

@@ -25,6 +25,8 @@ import com.elewamathtutoring.Adapter.TeacherOrTutor.SessionsAdapter
 import com.elewamathtutoring.Models.ListView.Body
 import com.elewamathtutoring.Models.ListView.Model_myschdeullist
 import com.elewamathtutoring.R
+import com.elewamathtutoring.Util.AppUtils.Companion.getCurrentDate
+import com.elewamathtutoring.Util.CommonMethods
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.api.Status
@@ -44,8 +46,12 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
     var today = ArrayList<Model_myschdeullist.Body>()
     var title = ArrayList<String>()
     var upcomming = ArrayList<Model_myschdeullist.Body>()
+    var calanderList = ArrayList<Model_myschdeullist.Body>()
     var apitype="withoutdate"
     var status=""
+
+    var finalDateAndTimeConvertToTimeStamp = 0L
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -110,7 +116,18 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
         {
              apitype="withdate"
         }
-        baseViewModel.listViewSession(requireActivity(), true, date)
+        //yyyy-MM-dd HH:mm:ss
+        if (date!="") {
+             finalDateAndTimeConvertToTimeStamp =
+                CommonMethods.time_to_timestamp(
+                    date,
+                    "yyyy-MM-dd"
+                )
+            baseViewModel.listViewSession(requireActivity(), true, finalDateAndTimeConvertToTimeStamp.toString())
+
+        }else
+        baseViewModel.listViewSession(requireActivity(), true, "")
+
         baseViewModel.getCommonResponse().observe(requireActivity(), this)
     }
     @RequiresApi(Build.VERSION_CODES.N)
@@ -151,6 +168,7 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
             calenderClickApi(df.format(c).toString())
         }
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         calenderClickApi("")
     }
@@ -160,6 +178,7 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
         when (liveData!!.status) {
             Status.SUCCESS -> {
                 if (liveData.data is Model_myschdeullist) {
+                    calanderList = liveData.data.body
                     if(liveData.data.body[0].teacher.occupiedStatus ==1){
                         iv_notification_switch.setChecked(false)
                     }else{
@@ -208,9 +227,6 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
                         Log.e("checkbody","----upcomming"+upcomming.size+"---"+today.size)
                     v.rootView.rv_listView.adapter = Hadder_sessionsadapter(requireContext(), today,upcomming,title)
                     }
-                }else if(liveData.data is OccupiedResponse){
-
-
                 }
             }
             Status.ERROR -> {

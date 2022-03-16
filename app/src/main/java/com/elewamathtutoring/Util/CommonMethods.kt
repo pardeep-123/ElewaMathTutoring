@@ -193,4 +193,23 @@ object CommonMethods {
         return  dateFormatter.format(date)
     }
 
+
+    // convert date and time book appointment fragment
+    fun time_to_timestamp(str_date: String?, pattren: String?): Long {
+        var time_stamp: Long = 0
+        try {
+            val formatter = SimpleDateFormat(pattren)
+//SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+            formatter.timeZone = TimeZone.getTimeZone("GMT")
+            val date = formatter.parse(str_date) as Date
+            time_stamp = date.time
+        } catch (ex: ParseException) {
+            ex.printStackTrace()
+        } catch (ex: java.lang.Exception) {
+            ex.printStackTrace()
+        }
+        time_stamp /= 1000
+        return time_stamp
+    }
+
 }

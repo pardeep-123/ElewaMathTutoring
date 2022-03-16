@@ -263,6 +263,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
                         Intent(this, AvailablityActivity::class.java)
                             .putExtra("signup", "teacher")
                     )
+                    finishAffinity()
                 }
             }
             Status.ERROR -> {

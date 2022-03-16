@@ -27,6 +27,15 @@ class AppUtils {
             return sdf.format(milliSeconds)
         }
 
+
+        fun getCurrentDate(): String {
+            val c = Calendar.getInstance().time
+            println("Current time => $c")
+
+            val df = SimpleDateFormat("HH:mm:ss")
+            return df.format(c)
+        }
+
         //--------------------------Layout blur ----------------------//
 
 
