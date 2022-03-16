@@ -1,9 +1,7 @@
 package com.elewamathtutoring.Util;
 
-
 import android.content.Context;
 import android.content.SharedPreferences;
-
 
 /**
  * Created by NS on 4/5/2017.
@@ -66,6 +64,7 @@ public class SharedPrefUtil {
         this.mContext = mContext;
         mSharedPreferences = mContext.getSharedPreferences(APP_PREFS_REMEMBER, Context.MODE_PRIVATE);
     }
+
     /**
      * Save a string into shared preference
      *
@@ -224,12 +223,11 @@ public class SharedPrefUtil {
         return mSharedPreferences.getBoolean(LOGGED_IN_PREF, false);
     }
 
-    public void clearAllData(String name)
-    {
+    public void clearAllData(String name) {
         mSharedPreferences = mContext.getSharedPreferences(APP_PREFS, Context.MODE_PRIVATE);
         mEditor = mSharedPreferences.edit();
         setLoggedIn(false);
-        setSharedPrefString(name,"");
+        setSharedPrefString(name, "");
         mEditor.clear().apply();
     }
 
@@ -363,6 +361,7 @@ public class SharedPrefUtil {
         mSharedPreferences = mContext.getSharedPreferences(APP_PREFS, Context.MODE_PRIVATE);
         return mSharedPreferences.getString(LOCATON, "");
     }
+
     public void saveFcmToken(String value) {
         mEditor = mSharedPreferences.edit();
         mEditor.putString(FCM, value);

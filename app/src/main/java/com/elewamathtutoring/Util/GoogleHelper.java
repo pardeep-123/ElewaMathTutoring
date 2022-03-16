@@ -1,4 +1,5 @@
 package com.elewamathtutoring.Util;
+
 import android.content.Intent;
 import android.util.Log;
 
@@ -12,11 +13,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-
-
-/*
- * Created by 123 on 26-09-2017.
- */
 
 public class GoogleHelper implements GoogleApiClient.OnConnectionFailedListener {
 
@@ -68,7 +64,7 @@ public class GoogleHelper implements GoogleApiClient.OnConnectionFailedListener 
     }
 
 
-    public void  stopApiClient(){
+    public void stopApiClient() {
       /*  mGoogleApiClient.stopAutoManage(context);
         mGoogleApiClient.disconnect();*/
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
@@ -78,7 +74,7 @@ public class GoogleHelper implements GoogleApiClient.OnConnectionFailedListener 
     }
 
     private void handleSignInResult(GoogleSignInResult result) {
-     //   Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+        //   Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         Log.d(TAG, "handleSignInResult:" + result.getStatus());
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.

@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "1027448674860",
-    "project_id": "eteacher-2e0ef",
-    "storage_bucket": "eteacher-2e0ef.appspot.com"
+    "project_number": "1009485138386",
+    "project_id": "telemath-5677f",
+    "storage_bucket": "telemath-5677f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1027448674860:android:e19ee0aaa3a138d4c84f89",
+        "mobilesdk_app_id": "1:1009485138386:android:cb230703604577abd8a00b",
         "android_client_info": {
           "package_name": "com.elewamathtutoring"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1027448674860-dvti4m2mr7qss9pdoe404c2b19sbhf3l.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.elewamathtutoring",
-            "certificate_hash": "472a985256e9d5cfb16e6246fea3be6bfab54ad7"
-          }
-        },
-        {
-          "client_id": "1027448674860-98q6j829r43aed5hc5stjcb0fc4mrhq2.apps.googleusercontent.com",
+          "client_id": "1009485138386-im7fhuabv29b9evod7obuam090n2ssif.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBUf2DT9c9MTwuyuV8eRQU2ZySPZgGONI8"
+          "current_key": "AIzaSyBh_r4j7MHcHaVrQydqKNZS_vtMMM43wBY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1027448674860-98q6j829r43aed5hc5stjcb0fc4mrhq2.apps.googleusercontent.com",
+              "client_id": "1009485138386-im7fhuabv29b9evod7obuam090n2ssif.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

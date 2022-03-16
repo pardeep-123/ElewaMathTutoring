@@ -27,18 +27,20 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
     private static int i;
-    String message,user_id,type,job_id;
+    String message, user_id, type, job_id;
     String CHANNEL_ID = "";// The id of the channel.
     String CHANNEL_ONE_NAME = "Channel One";
     NotificationManager notificationManager;
     NotificationChannel notificationChannel;
     Notification notification;
+
     @Override
     public void onNewToken(String refreshedToken) {
         super.onNewToken(refreshedToken);
         Log.d(TAG, "Refreshed token:" + refreshedToken);
         sendRegistrationToServer(refreshedToken);
     }
+
     private void sendRegistrationToServer(String token) {
         Log.e("device_token", token);
     }
@@ -65,16 +67,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         type = remoteMessage.getData().get("type");
         message = remoteMessage.getData().get("body");
         job_id = remoteMessage.getData().get("job_id");
-        Log.e("BodyMyFirebvice",""+user_id+"   -"+type+"   -"+message);
+        Log.e("BodyMyFirebvice", "" + user_id + "   -" + type + "   -" + message);
         sendMessagePush();
     }
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void sendMessagePush()
-    {
+    private void sendMessagePush() {
         //'1=>award_bid, 2=>chat_messages, 3=>review_provider,4=>redeem_points_vouchers,
         // 5=>promocode_added,,8=>subscription_purchased,'
         Intent intent = null;
-        intent=new Intent(getBaseContext(), MainActivity.class);
+        intent = new Intent(getBaseContext(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
         Bitmap icon1 = BitmapFactory.decodeResource(getResources(), R.drawable.app_icon);
@@ -106,6 +108,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private int getNotificationIcon() {
         boolean useWhiteIcon = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP);
-        return useWhiteIcon ? R.drawable.app_icon :  R.drawable.app_icon;
+        return useWhiteIcon ? R.drawable.app_icon : R.drawable.app_icon;
     }
 }
