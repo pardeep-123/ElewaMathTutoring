@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.elewamathtutoring.Activity.Auth.DescSignupScreen
@@ -31,21 +32,24 @@ import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import com.facebook.CallbackManager
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.pawskeeper.Modecommon.Commontoall
 import kotlinx.android.synthetic.main.activity_login_screen.*
 import javax.inject.Inject
 
-class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObservable>{
-  ////  GoogleHelper.GoogleHelperCallback
+class LoginScreen : AppCompatActivity(), View.OnClickListener, Observer<RestObservable> {
+    ////  GoogleHelper.GoogleHelperCallback
     @Inject
-    lateinit var validator:Validator
+    lateinit var validator: Validator
     var mRcSignIn = 0
     private lateinit var googleHelper: GoogleHelper
-    var socialFirstName=""
+    var socialFirstName = ""
     var socialId = ""
     var socialImage = ""
-    var  socialEmail=""
-    var  Api_type="login"
+    var socialEmail = ""
+    var Api_type = "login"
+    var token = ""
     lateinit var context: Context
     var callbackManager: CallbackManager? = null
     lateinit var shared: SharedPrefUtil
@@ -55,20 +59,19 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_screen)
         shared = SharedPrefUtil(this)
-
+        getFirebaseToken()
         App.getinstance().getmydicomponent().inject(this)
-      //  googleHelper = GoogleHelper(this, this)
+        //  googleHelper = GoogleHelper(this, this)
         allClickListeners()
-       // initFbSignin()
-        if(intent.getStringExtra("Name").equals("Tutor")){
-            btnGuest.visibility=View.GONE
+        // initFbSignin()
+        if (intent.getStringExtra("Name").equals("Tutor")) {
+            btnGuest.visibility = View.GONE
 
 
         }
     }
 
-    fun allClickListeners()
-    {
+    fun allClickListeners() {
         btnCreate.setOnClickListener(this)
         googleBtn.setOnClickListener(this)
         fbBtn.setOnClickListener(this)
@@ -79,87 +82,88 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
     }
 
     override fun onClick(v: View) {
-        when(v.id){
-            R.id.btnCreate->
-            {
-                if( intent.getStringExtra("Name").equals("Tutor")){
-                    startActivity(Intent(this, SignUp::class.java)
-                        .putExtra("Name","Tutor"))
-                }else {
+        when (v.id) {
+            R.id.btnCreate -> {
+                if (intent.getStringExtra("Name").equals("Tutor")) {
                     startActivity(
-                        Intent(this, SignUp::class.java))
+                        Intent(this, SignUp::class.java)
+                            .putExtra("Name", "Tutor")
+                    )
+                } else {
+                    startActivity(
+                        Intent(this, SignUp::class.java)
+                    )
                 }
             }
-          /*  R.id.googleBtn-> {
-                progressBar.visibility=View.VISIBLE
-                if (Helper.isNetworkConnected(this)) {
-                    mRcSignIn = 2
-                    googleHelper.signIn()
-                    Log.e("shigsyw", "nde")
-                }
-                else
-                {
-                    Helper.showErrorAlert(this, "Check your internet connection!")
-                }
-            }
-            R.id.fbBtn-> {
+            /*  R.id.googleBtn-> {
+                  progressBar.visibility=View.VISIBLE
+                  if (Helper.isNetworkConnected(this)) {
+                      mRcSignIn = 2
+                      googleHelper.signIn()
+                      Log.e("shigsyw", "nde")
+                  }
+                  else
+                  {
+                      Helper.showErrorAlert(this, "Check your internet connection!")
+                  }
+              }
+              R.id.fbBtn-> {
 
-                if (Helper.isNetworkConnected(this)) {
-                    progressBar.visibility=View.VISIBLE
-                    mRcSignIn = 1
-                    LoginManager.getInstance().logInWithReadPermissions(
-                        this@LoginScreen,
-                        listOf("public_profile", "email"))
-                }
-                else
-                {
-                    Helper.showErrorAlert(this, "Check your internet connection!")
-                }
+                  if (Helper.isNetworkConnected(this)) {
+                      progressBar.visibility=View.VISIBLE
+                      mRcSignIn = 1
+                      LoginManager.getInstance().logInWithReadPermissions(
+                          this@LoginScreen,
+                          listOf("public_profile", "email"))
+                  }
+                  else
+                  {
+                      Helper.showErrorAlert(this, "Check your internet connection!")
+                  }
 
-            }*/
-            R.id.btnLogin-> {
-               /* if( intent.getStringExtra("Name").equals("Tutor")){
-                    startActivity(Intent(this, MainTeacherActivity::class.java))
-                    finishAffinity()
-                }else {
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finishAffinity()
-                }*/
+              }*/
+            R.id.btnLogin -> {
+                /* if( intent.getStringExtra("Name").equals("Tutor")){
+                     startActivity(Intent(this, MainTeacherActivity::class.java))
+                     finishAffinity()
+                 }else {
+                     startActivity(Intent(this, MainActivity::class.java))
+                     finishAffinity()
+                 }*/
                 val email = email_text.text.toString().trim()
                 val password = password_text.text.toString().trim()
                 if (validator.loginValid(this, email, password)) {
-                    baseViewModel.Userlogin(this,  email, password,true)
+                    baseViewModel.Userlogin(this, email, password, true)
                     baseViewModel.getCommonResponse().observe(this, this)
                 }
 
-            // Constants.DEVICE_TYPE_VALUE
+                // Constants.DEVICE_TYPE_VALUE
             }
-            R.id.tvForgotPassword->{
+            R.id.tvForgotPassword -> {
                 startActivity(Intent(this, ForgotPassword::class.java))
             }
-            R.id.btnGuest->{
+            R.id.btnGuest -> {
                 startActivity(Intent(this, LoginGuestActivity::class.java))
             }
 
 
-
         }
     }
-  /*  private fun initFbSignin() {
-        callbackManager = CallbackManager.Factory.create()
-        LoginManager.getInstance().registerCallback(callbackManager, object :
-            FacebookCallback<LoginResult> {
-            override fun onSuccess(loginResult: LoginResult) {
-                GetFBData(loginResult)
-            }
-            override fun onCancel() {
-                progressBar.visibility=View.GONE
-            }
-            override fun onError(exception: FacebookException) {
-                progressBar.visibility=View.GONE
-            }
-        })
-    }*/
+    /*  private fun initFbSignin() {
+          callbackManager = CallbackManager.Factory.create()
+          LoginManager.getInstance().registerCallback(callbackManager, object :
+              FacebookCallback<LoginResult> {
+              override fun onSuccess(loginResult: LoginResult) {
+                  GetFBData(loginResult)
+              }
+              override fun onCancel() {
+                  progressBar.visibility=View.GONE
+              }
+              override fun onError(exception: FacebookException) {
+                  progressBar.visibility=View.GONE
+              }
+          })
+      }*/
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         callbackManager!!.onActivityResult(requestCode, resultCode, data)
@@ -259,53 +263,85 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
                         Log.e("DEVICETOCKEN", "" + liveData.data.body.token + " dT--" + liveData.data.body.deviceToken)
                         savePrefrence(Constants.AUTH_KEY, liveData.data.body.token)
 
-                        savePrefrence(Constants.USER_ID, liveData.data.body.id.toString())
-                        savePrefrence(Constants.notificationStatus, liveData.data.body.notificationStatus.toString())
-                      //  savePrefrence(Constants.Social_login, "False")
+                        savePrefrence(
+                            Constants.notificationStatus,
+                            liveData.data.body.notificationStatus.toString()
+                        )
+
                         savePrefrence(Constants.user_type, liveData.data.body.userType.toString())
-                        Constants.USER_IDValue=liveData.data.body.id.toString()
-                        /*if (liveData.data.body.isBuyPlan == 0&&liveData.data.body.userType == 2)
-                        {
-                            startActivity(Intent(this, SubscriptionsActivity::class.java))
+                  //   Constants.USER_IDValue = liveData.data.body.id.toString()
+
+                        if (liveData.data.body.userType == 2) {
+                            when {
+                                liveData.data.body.isTechingInfo == 0 -> {
+                                    startActivity(
+                                        Intent(this, TeachingInfoActivity::class.java)
+                                            .putExtra("signup", "teacher")
+                                    )
+                                    finishAffinity()
+                                }
+                                liveData.data.body.IsAvailable == 0 -> {
+                                    startActivity(
+                                        Intent(this, AvailablityActivity::class.java)
+                                            .putExtra("signup", "teacher")
+                                    )
+                                    finishAffinity()
+                                }
+                                liveData.data.body.status == 0 -> {
+                                    shared.saveString("isApproved", "0")
+                                    Toast.makeText(
+                                        this,
+                                        "Your request is disapproved",
+                                        Toast.LENGTH_SHORT
+                                    )
+                                        .show()
+                                }
+                                liveData.data.body.status == 1 -> {
+                                    shared.saveString("isApproved", "1")
+
+                                    savePrefrence(Constants.USER_ID, liveData.data.body.id.toString())
+                                    shared.isLogin = true
+
+                                    startActivity(
+                                        Intent(this, MainTeacherActivity::class.java)
+                                            .putExtra("signup", "teacher")
+                                    )
+                                    finishAffinity()
+
+
+                                }
+                                liveData.data.body.status == 2 -> {
+                                    shared.saveString("isApproved", "2")
+                                    Toast.makeText(
+                                        this,
+                                        "Account is not approved from panel. Please wait and contact with admin",
+                                        Toast.LENGTH_SHORT
+                                    )
+                                        .show()
+                                }
+                                else -> {
+                                    savePrefrence(Constants.USER_ID, liveData.data.body.id.toString())
+                                    shared.isLogin = true
+                                    startActivity(
+                                        Intent(this, MainTeacherActivity::class.java)
+                                            .putExtra("signup", "teacher")
+                                    )
+                                    finishAffinity()
+                                }
+                            }
+
+                        } else {
+                            savePrefrence(Constants.USER_ID, liveData.data.body.id.toString())
+                            shared.isLogin = true
+                            startActivity(Intent(this, MainActivity::class.java))
                             finishAffinity()
                         }
-                        else
-                        {*/
-                            if (liveData.data.body.userType == 2)
-                            {
-                                if(liveData.data.body.isTechingInfo==0){
-                                    startActivity(Intent(this, TeachingInfoActivity::class.java)
-                                        .putExtra("signup","teacher"))
-                                    finishAffinity()
-                                }else{
-                                    if(liveData.data.body.IsAvailable==0){
-                                        startActivity(Intent(this, AvailablityActivity::class.java)
-                                            .putExtra("signup", "teacher"))
-                                        finishAffinity()
-                                    }else{
-                                        shared.isLogin = true
-                                        startActivity(Intent(this, MainTeacherActivity::class.java)
-                                            .putExtra("signup","teacher"))
-                                        finishAffinity()
-                                    }
-                                }
-
-
-                            }
-                            else
-                            {
-                                shared.isLogin = true
-                                startActivity(Intent(this, MainActivity::class.java))
-                                finishAffinity()
-                            }
 
                     }
 
-                }
-            else if(liveData.data is Commontoall) {
+                } else if (liveData.data is Commontoall) {
                     savePrefrence(Constants.Social_login, "True")
-                    if(liveData.data.message.equals("Sorry There is no user with this socialId."))
-                    {
+                    if (liveData.data.message.equals("Sorry There is no user with this socialId.")) {
                         if (getPrefrence(Constants.user_type, "").equals("1")) {
                             intent = Intent(this, DescSignupScreen::class.java)
                             intent.putExtra("image", socialImage)
@@ -315,9 +351,7 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
                             intent.putExtra("socialtype", mRcSignIn.toString())
 
                             // student
-                        }
-                        else
-                        {
+                        } else {
                             // Teacher
                             intent = Intent(this, AboutYouActivity::class.java)
                             intent.putExtra("key", "signup")
@@ -325,39 +359,34 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
                             intent.putExtra("Name", socialFirstName)
                             intent.putExtra("email", socialEmail)
                             intent.putExtra("socialId", socialId)
-                            intent.putExtra("socialtype",  mRcSignIn.toString())
+                            intent.putExtra("socialtype", mRcSignIn.toString())
 
                         }
                         startActivity(intent)
-                    }
-                    else
-                    {
+                    } else {
                         if (getPrefrence(Constants.user_type, "").equals("1")) {
                             intent = Intent(this, DescSignupScreen::class.java)
-                        }
-                        else
-                        {
+                        } else {
                             intent = Intent(this, AboutYouActivity::class.java)
                         }
                         startActivity(intent)
                     }
 
-                }
-            else
-            {
+                } else {
 
-            }
+                }
             }
 
             Status.ERROR -> {
-                if (liveData.error is Model_login)
-                {
-                    Helper.showSuccessToast(this, liveData.error.message)
+                when (liveData.error) {
+                    is Model_login -> {
+                        Helper.showSuccessToast(this, liveData.error.message)
+                    }
+                    is Model_login -> {
+                        Helper.showSuccessToast(this, liveData.error.message)
+                    }
+                    else -> Helper.showSuccessToast(this, "Something went wrong. Please try again")
                 }
-               else if (liveData.error is Model_login)
-                                {
-                                    Helper.showSuccessToast(this, liveData.error.message)
-                                }
             }
             else -> {
             }
@@ -365,12 +394,25 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener, Observer<RestObs
     }
 
 
-    fun checksocialId(f_id: String,type:String)
-    {
-        Log.e("checkmybitmapaarray","---"+f_id.toString())
+    fun checksocialId(f_id: String, type: String) {
+        Log.e("checkmybitmapaarray", "---" + f_id.toString())
 
-        Api_type="checksocialId"
-        baseViewModel.checkSocialLoginExists(this,  f_id, type,   true)
+        Api_type = "checksocialId"
+        baseViewModel.checkSocialLoginExists(this, f_id, type, true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
+
+
+    private fun getFirebaseToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.e("Login", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+            // Get new FCM registration token
+            token = task.result.toString()
+            Log.e("Fetching FCM ", token)
+        })
+    }
+
 }

@@ -2,6 +2,8 @@ package com.elewamathtutoring.Activity.Auth.signup
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -21,6 +23,8 @@ import com.elewamathtutoring.Util.helper.extensions.savePrefrence
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import java.util.HashMap
 import javax.inject.Inject
@@ -30,15 +34,19 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
     lateinit var validator: Validator
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     lateinit var shared: SharedPrefUtil
-
+    var token = ""
+    var newPassword = false
+    var confirmPassword = false
+    var message3 = "Terms of Service"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
         shared = SharedPrefUtil(this)
-
+        getFirebaseToken()
         App.getinstance().getmydicomponent().inject(this)
         ivBack.setOnClickListener(this)
         btnNext.setOnClickListener(this)
+        tvTerms.setOnClickListener(this)
         ivOf.setOnClickListener(this)
         ivOn.setOnClickListener(this)
     }
@@ -53,8 +61,14 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
                  }*/
                 if (getPrefrence(Constants.user_type, "").equals("1")) {
                     if (validator.signUpValid(this, edtName.text.toString(), edtEmail.text.toString(), editPassword.text.toString(), editConfirmPassword.text.toString())) {
-                        baseViewModel.signUpApi(this,  edtName.text.toString(),edtEmail.text.toString(), editPassword.text.toString(),"1", true)
-                        baseViewModel.getCommonResponse().observe(this, this)
+                        if(ivOf.visibility == View.VISIBLE){
+                            Helper.showErrorAlert(this, "Please select terms & conidtions")
+                        }else{
+                            baseViewModel.signUpApi(this,  edtName.text.toString(),edtEmail.text.toString(), editPassword.text.toString(),"1", true)
+                            baseViewModel.getCommonResponse().observe(this, this)
+                        }
+
+
                     }
                 } else   if (getPrefrence(Constants.user_type, "").equals("2")){
                     if (validator.signUpValid(this, edtName.text.toString(), edtEmail.text.toString(), editPassword.text.toString(), editConfirmPassword.text.toString())) {
@@ -72,11 +86,27 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
                     }
                 }
             }
+
+            /*R.id.tvShow1 -> {
+                if (newPassword) {
+                    etPassword.setTransformationMethod(PasswordTransformationMethod())
+                    etPassword.setSelection(etPassword.text!!.length)
+                    newPassword = false
+                    tvShow1.setText("Show")
+                } else {
+                    etPassword.setTransformationMethod(null)
+                    etPassword.setSelection(etPassword.text!!.length)
+                    newPassword = true
+                    tvShow1.setText("Hide")
+                }
+            }*/
             R.id.ivBack -> {
                 onBackPressed()
             }
             R.id.tvTerms -> {
-                startActivity(Intent(this, PrivacyPolicy::class.java))
+                startActivity(Intent(this, PrivacyPolicy::class.java)
+                        .putExtra("key", message3)
+                        .putExtra("type", "2"))
             }
             R.id.ivOf -> {
                 ivOn.visibility = View.VISIBLE
@@ -120,4 +150,17 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
             }
         }
     }
+
+    private fun getFirebaseToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.e("Login", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+            // Get new FCM registration token
+            token = task.result.toString()
+            Log.e("Fetching FCM ", token)
+        })
+    }
+
 }

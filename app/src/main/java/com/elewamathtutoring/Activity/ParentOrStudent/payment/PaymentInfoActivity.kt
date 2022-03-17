@@ -15,6 +15,7 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.elewamathtutoring.Activity.ParentOrStudent.add_card.AddCardActivity
@@ -46,6 +47,7 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
     var finalvalue = ""
     var perHour = ""
     var timeString = ""
+    var settings = ""
     var hour = ""
     var value = 0
     var cardlist = ArrayList<CardListingResponse.Body>()
@@ -59,8 +61,12 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
             (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
         window.statusBarColor = Color.TRANSPARENT;
         App.getinstance().getmydicomponent().inject(this)
+        if (intent.getStringExtra("settings").equals("payment")) {
+            btnPayNow.visibility=View.GONE
+        }
         timeString = intent.getStringExtra("time").toString()
         hour = intent.getStringExtra("hour").toString()
+
         try {
             profile =
                 ((intent.getSerializableExtra("teacher_detail") as java.util.ArrayList<TeacherDetailResponse.Body>?)!!)
@@ -75,17 +81,14 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
         }
         onClicks()
     }
-
     override fun onResume() {
         super.onResume()
         api()
     }
-
     private fun api() {
         baseViewModel.card_listing(this, true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
-
     private fun onClicks() {
         rl_addCard.setOnClickListener(this)
         ivBack.setOnClickListener(this)
@@ -153,7 +156,6 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
             }
         }
     }
-
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.rl_addCard -> {
@@ -175,7 +177,6 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
         val deleteDialog = Dialog(this)
         deleteDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         deleteDialog.setContentView(R.layout.dialog_delete)
-
         deleteDialog.window!!.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT
@@ -184,14 +185,12 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
         deleteDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         deleteDialog.setCancelable(true)
         deleteDialog.setCanceledOnTouchOutside(true)
-
         deleteDialog.btnDeleteNo.setOnClickListener {
             deleteDialog.dismiss()
         }
         deleteDialog.btnDeleteYes.setOnClickListener {
             baseViewModel.deletecard(this, cardId, true)
             baseViewModel.getCommonResponse().observe(this, this)
-
             deleteDialog.dismiss()
         }
         deleteDialog.show()
@@ -200,7 +199,6 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
     fun ThanksForBookingDialog(cardid: String) {
         booking(cardid)
     }
-
     fun booking(cardid: String) {
         var selected = ""
         finalvalue = ""
@@ -212,7 +210,6 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
         val selecteddateconcat: StringWriter = StringWriter()
         val price: StringWriter = StringWriter()
         var selecteddate = profile.get(0).time_slots.get(0).endTime
-
 
         for (i in 0 until profile.get(0).time_slots.size) {
             if (profile.get(0).time_slots.get(i).check == true) {
@@ -228,13 +225,10 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
                 selecteddate = profile.get(0).time_slots.get(i).endTime
             }
         }
-
         val s = selecteddateconcat.toString()
         val selecteddat = s.substring(1, s.length)
-
         val sprice = price.toString()
         val selectedpric = sprice.substring(1, sprice.length).toString()
-
         try {
             val words2: java.util.ArrayList<String> =
                 selectedpric.split(",") as java.util.ArrayList<String>
@@ -258,9 +252,7 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
                     finalvalue = finalvalue + words2.get(i)
                     Hours = Hours + "1"
                 }
-
             }
-
         } catch (e: Exception) {
             finalvalue = finalvalue + ","
             Hours = Hours + ","
@@ -312,28 +304,14 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
             intent.getStringExtra("selecteddate").toString(),
             timeString,
             hour,
-
-
             true
         )
-        baseViewModel.getCommonResponse().observe(this, this)
-
-
-    }
+        baseViewModel.getCommonResponse().observe(this, this) }
 
     fun apis() {
-
-        baseViewModel.book_Session(
-            this, profile.get(0).id.toString(),
-            "" + profile.get(0).time_slots.size.toString(),
-            intent.getStringExtra("aboutdetail").toString(),
-            cardId,
-            intent.getStringExtra("selecteddate").toString(),
-            timeString,
-            hour,
-
-            true
-        )
+        baseViewModel.book_Session(this, profile[0].id.toString(), "" + profile[0].time_slots.size.toString(),
+            intent.getStringExtra("aboutdetail").toString(), cardId,
+            intent.getStringExtra("selecteddate").toString(), timeString, hour, true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
 
@@ -344,7 +322,7 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
             timeList.add(id)
         }
         timeString = TextUtils.join(",", timeList)
-        cardId = id.toString()
+        cardId = id
     }
 
     private fun ThanksForBookingDialog1() {
@@ -360,18 +338,20 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
         filterDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         filterDialog.setCancelable(false)
         filterDialog.setCanceledOnTouchOutside(false)
-
         val colorText =
             Html.fromHtml("We've let Ryan know that you are interested.Once they have confirmed your session, your card on file will be debited for <b> <font color=\"#918CE2\">\$100.00</font> </b")
         filterDialog.edPromoCode.text = (colorText.toString())
-
         val ss = SpannableString(colorText)
-
         filterDialog.edPromoCode.text = ss
-
         filterDialog.btnThanksContinue.setOnClickListener {
             filterDialog.dismiss()
-            apis()
+            if(cardId==""){
+                Toast.makeText(this,"Please Select card",Toast.LENGTH_SHORT).show()
+            }
+            else{
+                apis()
+            }
+
         }
         filterDialog.show()
     }

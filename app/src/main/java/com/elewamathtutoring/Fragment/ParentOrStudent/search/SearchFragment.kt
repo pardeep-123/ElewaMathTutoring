@@ -1,11 +1,7 @@
 package com.elewamathtutoring.Fragment.ParentOrStudent.search
 
-import android.app.Activity
-import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
@@ -15,9 +11,7 @@ import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.SeekBar
-import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -28,15 +22,9 @@ import com.elewamathtutoring.Activity.NotificationsActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.filter.FilterActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResoucesActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
-import com.elewamathtutoring.Adapter.FilterOptions2Adapter
-import com.elewamathtutoring.Adapter.ParentOrStudent.FilterOptionsAdapter
 import com.elewamathtutoring.Adapter.SearchHomeAdapter
-import com.elewamathtutoring.Model.FilterOptions2Model
-import com.elewamathtutoring.Model.FilterOptionsModel
-import com.elewamathtutoring.Models.Search.Model_search
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.CheckLocationActivity
-import com.elewamathtutoring.Util.Location.MyNewMapActivity
 import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
@@ -45,12 +33,12 @@ import com.riseball.interface_base.Teachinglevel_interface
 import kotlinx.android.synthetic.main.activity_teaching_info.*
 import kotlinx.android.synthetic.main.dialog_filter.*
 import kotlinx.android.synthetic.main.fragment_search.*
-
 import java.util.*
 import kotlin.collections.ArrayList
 
 
 class SearchFragment : CheckLocationActivity(), Observer<RestObservable>, Teachinglevel_interface {
+
     var teacherlevel = ArrayList<MathChatResponse.Body>()
 
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
@@ -98,6 +86,7 @@ class SearchFragment : CheckLocationActivity(), Observer<RestObservable>, Teachi
             baseViewModel.getCommonResponse().observe(requireActivity(), this)
         }
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getdata_toselected_certified.add("1")
@@ -118,16 +107,16 @@ class SearchFragment : CheckLocationActivity(), Observer<RestObservable>, Teachi
             startActivity(Intent(context, ResoucesActivity::class.java))
         }
         rlFilter.setOnClickListener {
-       /*     val intent = Intent(context, FilterActivity::class.java)
-            intent.putExtra("editId",subjectId)
-            intent.putExtra("editName",subjectName)
-            filterResult.launch(intent)
-*/
+            /*     val intent = Intent(context, FilterActivity::class.java)
+                 intent.putExtra("editId",subjectId)
+                 intent.putExtra("editName",subjectName)
+                 filterResult.launch(intent)
+     */
             val intent = Intent(context, FilterActivity::class.java)
-            intent.putExtra("editId",subjectId)
-            intent.putExtra("editName",subjectName)
+            intent.putExtra("editId", subjectId)
+            intent.putExtra("editName", subjectName)
             filterResult.launch(intent)
-         //   startActivityForResult(intent, 101)
+            //   startActivityForResult(intent, 101)
         }
         ivSetting = view.findViewById(R.id.ivSetting)
         ivSetting.setOnClickListener {

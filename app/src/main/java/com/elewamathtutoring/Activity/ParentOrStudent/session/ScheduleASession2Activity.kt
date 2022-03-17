@@ -1,5 +1,6 @@
 package com.elewamathtutoring.Activity.ParentOrStudent.session
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -23,6 +24,7 @@ class ScheduleASession2Activity : AppCompatActivity(), View.OnClickListener {
     var value=0
     var selected_Session=1
     var selected_Timeslot=0
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_schedule_a_session2)
@@ -34,52 +36,26 @@ class ScheduleASession2Activity : AppCompatActivity(), View.OnClickListener {
         tvConfirmSession.setOnClickListener(this)
         profile = (intent.getSerializableExtra("teacher_detail") as ArrayList<TeacherDetailResponse.Body>?)!!
 
-        for (i in 0 until profile.get(0).time_slots.size) {  // GET TOTAL SELECTED TIMESLOT
-            if (profile.get(0).time_slots.get(i).check == true) {
+        for (i in 0 until profile[0].time_slots.size) {  // GET TOTAL SELECTED TIMESLOT
+            if (profile[0].time_slots.get(i).check == true) {
                 selected_Timeslot++
             }
         }
-        tvTime.text = selected_Timeslot.toString()+" hour @"+ Constants.Currency+profile.get(0).InPersonRate.toString()+"/hr"
-        selectedprice = profile.get(0).InPersonRate
-        val total=selected_Timeslot*profile.get(0).InPersonRate
+        tvTime.text = selected_Timeslot.toString()+" hour @"+ Constants.Currency+profile[0].InPersonRate.toString()+"/hr"
+        selectedprice = profile[0].InPersonRate
+        val total=selected_Timeslot*profile[0].InPersonRate
         tvSessionCost.text = Constants.Currency+total.toString()
-
     }
-
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.ivBack -> {
                 finish()
             }
-          /*  R.id.rlInPerson -> {
-                ivTickInPerson.setImageResource(R.drawable.tick_blue)
-                ivTickVirtualLearning.setImageResource(R.drawable.uncheck)
-                tvSessionName.text = "In-Person Session"
-                selected_Session=1
-                tvTime.text = selected_Timeslot.toString() + " hour @" + Constants.Currency + profile.get(0).InPersonRate.toString() + "/hr"
-                selectedprice = selected_Timeslot * profile.get(0).InPersonRate
-                var total = selected_Timeslot * profile.get(0).InPersonRate
-                tvSessionCost.text = Constants.Currency + total.toString()
-            }
-            R.id.rlVirtualLearning -> {
-                ivTickInPerson.setImageResource(R.drawable.uncheck)
-                ivTickVirtualLearning.setImageResource(R.drawable.tick_blue)
-                tvSessionName.text = "Virtual Session"
-                selected_Session=2
-                tvTime.text =
-                    selected_Timeslot.toString() + " hour @" + Constants.Currency + profile.get(0).virtualRate.toString() + "/hr"
-
-                selectedprice =selected_Timeslot * profile.get(0).virtualRate
-                var total = selected_Timeslot * profile.get(0).virtualRate
-                tvSessionCost.text = Constants.Currency + total.toString()
-            }*/
             R.id.tvConfirmSession -> {
-                if(etSchedule.text.toString().isEmpty())
-                {
+                if(etSchedule.text.toString().isEmpty()) {
                     Helper.showErrorAlert(this, "Please enter what you're looking for?")
                 }
-                else
-                {
+                else {
                     booking()
                 }
             }

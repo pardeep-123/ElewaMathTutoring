@@ -24,7 +24,8 @@ class LoginGuestActivity : AppCompatActivity(), View.OnClickListener  {
                 finish()
             }
             R.id.btnLogin -> {
-                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+              //  startActivity(Intent(this, MainActivity::class.java))
             }
         }
     }

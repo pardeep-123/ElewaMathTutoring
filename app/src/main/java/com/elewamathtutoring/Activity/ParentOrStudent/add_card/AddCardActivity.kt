@@ -1,5 +1,6 @@
 package com.elewamathtutoring.Activity.ParentOrStudent.add_card
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
@@ -50,6 +51,7 @@ class AddCardActivity : AppCompatActivity() ,
     var year = ""
     lateinit var yearArray: Array<String?>
     internal var items = arrayOf<CharSequence>("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_card)

@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/layout/activity_about_you.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/activity_availablity.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/activity_intro_slider.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/activity_login_screen.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/activity_payment_info.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/activity_schedule_a_session.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/activity_schedule_a_session2.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_setting2.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/activity_teacher_details.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/row_image_slider.xml" value="0.18489583333333334" />
+      </map>
+    </option>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

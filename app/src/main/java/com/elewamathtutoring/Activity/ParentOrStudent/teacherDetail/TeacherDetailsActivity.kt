@@ -32,7 +32,6 @@ import kotlinx.android.synthetic.main.activity_teacher_details.*
 import kotlinx.android.synthetic.main.dialog_report.*
 import kotlinx.android.synthetic.main.report_popup.view.*
 
-
 class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observer<RestObservable> {
     var myPopupWindow: PopupWindow? = null
     lateinit var sharedPrefUtil: SharedPrefUtil
@@ -40,12 +39,13 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
     var tutordetails = ArrayList<TeacherDetailResponse.Body>()
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     var id = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_teacher_details)
         sharedPrefUtil = SharedPrefUtil(this)
         onClicks()
-        if (intent.getStringExtra("Type").equals("schedule")) {
+        if(intent.getStringExtra("Type").equals("schedule")) {
             btnScheduleSession.visibility = View.GONE
             btnviewreciept.visibility = View.VISIBLE
             apiTecherdetail()
@@ -58,6 +58,7 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
         } else {
             btnScheduleSession.visibility = View.VISIBLE
             Techerdetailapi()
+
         }
     }
     private fun onClicks() {
@@ -73,18 +74,22 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
             R.id.options -> {
                 setPopUpWindow()
             }
+
             R.id.ivBack -> {
                 finish()
             }
+
             R.id.llChat -> {
                 var intent = Intent(this, MathPersonChatActivity::class.java)
                 startActivity(intent)
             }
+
             R.id.btnScheduleSession -> {
                 var intent = Intent(this, ScheduleASessionActivity::class.java)
                 intent.putExtra("teacher_detail", tutordetails)
                 startActivity(intent)
             }
+
             R.id.btnviewreciept -> {
                 val intentt = Intent(this, ReceiptActivity::class.java)
                 intentt.putExtra("listdata", teacherdetails)
@@ -99,7 +104,6 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
             applicationContext?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.report_popup, null)
         myPopupWindow = PopupWindow(view, 400, RelativeLayout.LayoutParams.WRAP_CONTENT, true)
-
         options.setOnClickListener {
             myPopupWindow?.showAsDropDown(it, -0, -35)
             applyDim(viewGroup, 0.5f)

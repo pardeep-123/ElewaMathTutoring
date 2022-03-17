@@ -29,6 +29,7 @@ public class SharedPrefUtil {
     public static final String CITY = "city";
     public static final String IS_NOTIFICATION = "is_notification";
     public static final String ROLE = "role";
+    public static final String TEACHER_ID = "teacherId";
     public static final String IS_FIRST_TIME = "is_first_time";
     public static final String LOGGED_IN_PREF = "logged_in_status";
 
@@ -77,7 +78,11 @@ public class SharedPrefUtil {
         mEditor.putString(key, value);
         mEditor.apply();
     }
-
+    public void saveTeacherId(String storeId) {
+        mEditor = mSharedPreferences.edit();
+        mEditor.putString(TEACHER_ID, storeId);
+        mEditor.apply();
+    }
     /**
      * Save a int into shared preference
      *

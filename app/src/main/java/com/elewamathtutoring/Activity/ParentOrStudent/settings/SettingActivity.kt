@@ -125,6 +125,7 @@ class SettingActivity : AppCompatActivity(), Observer<RestObservable> {
             viewManagment.visibility=View.VISIBLE
             rlManagePayment.setOnClickListener {
                 val intent = Intent(this, PaymentInfoActivity::class.java)
+                intent.putExtra("settings","payment")
                 startActivity(intent)
             }
         }

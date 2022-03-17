@@ -43,7 +43,7 @@
                 android:fontFamily="@font/aenirlsttd_black"
                 android:gravity="center"
                 android:layout_marginTop="90dp"
-                android:textColor="@color/textcolor"
+                android:textColor="@color/black"
                 android:textSize="30sp" />
 
             <TextView

@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.elewamathtutoring.Activity.Auth.login.LoginScreen
 import com.elewamathtutoring.Activity.TeacherOrTutor.MainTeacherActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.edit.EditResponse
 import com.elewamathtutoring.Adapter.TeacherOrTutor.DatesAvailableAdapter
@@ -154,7 +155,7 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
         val btnOK = dialog.findViewById<Button>(R.id.btnOK)
         btnOK.setOnClickListener {
             dialog.dismiss()
-            startActivity(Intent(this, MainTeacherActivity::class.java))
+            startActivity(Intent(this, LoginScreen::class.java))
             finishAffinity()
         }
     }

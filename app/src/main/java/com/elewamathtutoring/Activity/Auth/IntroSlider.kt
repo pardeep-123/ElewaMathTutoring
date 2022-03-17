@@ -96,6 +96,8 @@ class IntroSlider : AppCompatActivity() {
             ) {
                 if (mPager!!.currentItem==0){
                     tvBack.visibility=View.INVISIBLE
+                    tvSkip.visibility=View.VISIBLE
+
                 }
                else if(mPager!!.currentItem == 2)
                 {
@@ -107,6 +109,7 @@ class IntroSlider : AppCompatActivity() {
                 else{
                     tvBack.visibility=View.VISIBLE
                     btnNext.text = "Next"
+                    tvSkip.visibility=View.VISIBLE
                 }
 
             }
