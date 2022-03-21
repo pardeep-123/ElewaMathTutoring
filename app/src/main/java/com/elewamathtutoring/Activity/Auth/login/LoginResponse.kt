@@ -39,7 +39,7 @@ data class LoginResponse(
         val majors: String, // ee
         val educationLevel: String, // Bachlor's degree
         val isapproval: Int, // 1
-        val free_slots: FreeSlots,
+      //  val free_slots: FreeSlots,
         val isTechingInfo: Int, // 1
         val IsAvailable: Int, // 1
         val occupiedStatus: Int, // 1

@@ -63,10 +63,7 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
             )
         }
     }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-    }
     private fun apiProfile() {
         baseViewModel.get_profile(requireActivity(), true)
         baseViewModel.getCommonResponse().observe(requireActivity(), this)
@@ -78,20 +75,23 @@ class ProfileFragment : Fragment(), Observer<RestObservable> {
             Status.SUCCESS -> {
                 if (liveData.data is ProfilResponse) {
                     list.clear()
-                    list.addAll(listOf(liveData.data.body.pastTeacher[0]))
-                    text_parent_name.text = liveData.data.body.name
-                    text_parent_email.text = liveData.data.body.email
-                    text_parent_about.text = liveData.data.body.about
-                    Glide.with(contex).load(liveData.data.body.image)
-                        .placeholder(R.drawable.profile_unselected).into(image_parent_image)
+                    if (liveData.data.body.pastTeacher.isNotEmpty())
+                        list.addAll(listOf(liveData.data.body.pastTeacher[0]))
+                        text_parent_name.text = liveData.data.body.name
+                        text_parent_email.text = liveData.data.body.email
+                        text_parent_about.text = liveData.data.body.about
+                        Glide.with(contex).load(liveData.data.body.image)
+                            .placeholder(R.drawable.profile_unselected).into(image_parent_image)
 
-                    text_parent_titelname.text = "About " + liveData.data.body.name
+                        text_parent_titelname.text = "About " + liveData.data.body.name
 
-                    name=liveData.data.body.name
-                    about=liveData.data.body.about
-                    image=liveData.data.body.image
+                        name = liveData.data.body.name
+                        about = liveData.data.body.about
+                        image = liveData.data.body.image
 
-                    v.rootView.rv_pastTeachers.adapter = PastTeacherAdapter(requireContext(),this@ProfileFragment,list)
+                        v.rootView.rv_pastTeachers.adapter =
+                            PastTeacherAdapter(requireContext(), this@ProfileFragment, list)
+
                 }
             }
             Status.ERROR -> {

@@ -64,10 +64,20 @@ interface RestApiInterface {
     @POST("signin")
     fun Userlogin(
         @Field("email") email: String,
-        @Field("password") password: String,
+        @Field("password") password: String): Observable<LoginResponse>
 
-        ): Observable<LoginResponse>
-
+    // for social login
+    @FormUrlEncoded
+    @POST("sociallogin")
+    fun sociallogin(
+        @Field("socialId") SocialId: String,
+        @Field("socialType") socialType: String,
+        @Field("userType") userType: String,
+        @Field("email") email: String,
+        @Field("name") name: String,
+        @Field("deviceType") device_type: String,
+        @Field("deviceToken") device_token: String?
+    ): Observable<LoginResponse>
     @FormUrlEncoded
 // @Field("UserType") userType: String,
     @POST("withdrawlAmount")

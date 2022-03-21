@@ -109,8 +109,8 @@
     <string name="error_phonenumber_Notlessthen10">Phone number cannot be less than 10 digit. </string>
     <string name="your_payment_has_been_done_successfully">Your payment has been done successfully</string>
     <string name="google_maps_key">AIzaSyDQWqIXO-sNuMWupJ7cNNItMhR4WOkzXDE</string>
-    <string name="facebook_app_id">581512162846074</string>
-    <string name="fb_login_protocol_scheme">fb581512162846074</string>
+    <string name="facebook_app_id">1415627175534231</string>
+    <string name="fb_login_protocol_scheme">fb1415627175534231</string>
     <string name="add_bank_account">Add Bank Account</string>
 
     <string name="terms_amp_condotions">

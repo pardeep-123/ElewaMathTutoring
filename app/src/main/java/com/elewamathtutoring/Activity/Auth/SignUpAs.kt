@@ -25,8 +25,8 @@ class SignUpAs : AppCompatActivity(),View.OnClickListener {
         val w: Window = window
         w.setFlags(
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-        );
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+
         llStudent.setOnClickListener(this)
         llTeacher.setOnClickListener(this)
     /* l1.setOnClickListener {

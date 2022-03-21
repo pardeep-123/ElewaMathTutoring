@@ -197,7 +197,7 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
                     if (apitype.equals("withdate")) {
                         if (liveData.data.body.size != 0) {
                             tv_whennodata.visibility = View.GONE
-                            setCalenderAdapter(liveData.data.body as ArrayList<AllSessionListResponse.Body>)
+                            setCalenderAdapter(liveData.data.body)
                         } else {
                             tv_whennodata.visibility = View.VISIBLE
                         }

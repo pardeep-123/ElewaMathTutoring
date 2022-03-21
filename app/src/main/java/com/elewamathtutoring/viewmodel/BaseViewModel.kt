@@ -107,6 +107,44 @@ class BaseViewModel : ViewModel() {
         }
     }
 
+    // social login
+
+
+    @SuppressLint("CheckResult")
+    fun sociallogin(
+        activity: Activity,
+        socialId: String,
+        socialType: String,
+        user_type: String,
+        email: String,
+        name: String,
+        type: String,
+        token: String,
+        isDialogShow: Boolean
+    ) {
+        if (Helper.isNetworkConnected(activity)) {
+            apiService.sociallogin(socialId,socialType,user_type,email,name,type,token)
+                .subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    {
+                        mResponse.value = RestObservable.error(activity, it)
+                    })
+        } else {
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        apiService.sociallogin(socialId,socialType,user_type,email,name,type,token)
+                    }
+                })
+        }
+    }
+
     @SuppressLint("CheckResult")
     fun withdrawlAmount(
         activity: Activity,
