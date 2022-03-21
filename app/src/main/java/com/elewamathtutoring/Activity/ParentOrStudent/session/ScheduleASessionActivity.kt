@@ -165,7 +165,6 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener,
             R.id.ivBack -> {
                 finish()
             }
-
         }
     }
 
