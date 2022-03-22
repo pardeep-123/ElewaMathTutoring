@@ -25,7 +25,7 @@ class SearchHomeAdapter(
 
     override fun onBindViewHolder(holder: MyHolder, position: Int) {
         holder.itemView.tvItemName.text = list[position].name
-        holder.itemView.tv_level.text = list[position].teachingLevel
+        holder.itemView.tv_level.text = list[position].educationLevel
         holder.itemView.tvPostion.text =
             Constants.isCertifiedOrtutor(list[position].isCertifiedOrtutor)
         Glide.with(ctx).load(Constants.IMAGE_URL + list[position].image)

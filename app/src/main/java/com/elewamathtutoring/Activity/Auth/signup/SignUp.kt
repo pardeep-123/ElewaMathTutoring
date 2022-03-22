@@ -70,7 +70,7 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
 
 
                     }
-                } else   if (getPrefrence(Constants.user_type, "").equals("2")){
+                } else if (getPrefrence(Constants.user_type, "").equals("2")){
                     if (validator.signUpValid(this, edtName.text.toString(), edtEmail.text.toString(), editPassword.text.toString(), editConfirmPassword.text.toString())) {
                         if(ivOf.visibility == View.VISIBLE){
                             Helper.showErrorAlert(this, "Please select terms & conidtions")
@@ -126,6 +126,7 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
                         savePrefrence("userType", "1")
                         shared.isLogin = true
                         savePrefrence(Constants.AUTH_KEY, liveData.data.body.token)
+                        savePrefrence(Constants.USER_ID, liveData.data.body.id.toString())
                         startActivity(Intent(this, MainActivity::class.java))
                         finishAffinity()
                     } else {

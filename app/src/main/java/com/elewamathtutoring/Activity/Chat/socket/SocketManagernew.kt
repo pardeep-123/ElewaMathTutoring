@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import com.elewamathtutoring.Util.constant.Constants
+import com.elewamathtutoring.Util.helper.extensions.getPrefrence
 import io.socket.client.IO
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
@@ -41,15 +42,15 @@ import java.util.*
         private var mSocketClass: SocketManagernewew? = null
         val CONNECT_USER = "connect_user"
          val SEND_MESSAGE = "send_message"
-         val CHAT_LISTING_EMITTER = "get_chat_list" //chat with all listing
-         val GET_CHAT_EMITTER = "get_chat"
+         val CHAT_LISTING_EMITTER = "chat_listing" //chat with all listing
+         val GET_CHAT_EMITTER = "get_message"
          val GET_READ_UNREAD_EMITTER = "read_message"
         //listener
          val CONNECT_LISTENER = "connect_listener"
-         val SEND_MESSAGE_LISTNER = "new_message" // send message
-         val CHAT_LISTING_LISTNER = "get_list" //chat with all listing outside
-         val GET_CHAT_LISTNER_ONE_TO_ONE = "my_chat" // one to one chat
-         val GET_READDATA_LISTNER = "read_data_status"
+         val SEND_MESSAGE_LISTNER = "sendMessage" // send message
+         val CHAT_LISTING_LISTNER = "chatListing" //chat with all listing outside
+         val GET_CHAT_LISTNER_ONE_TO_ONE = "getMessage" // one to one chat
+         val GET_READDATA_LISTNER = "readMessage"
 
 
         private var observerList: ArrayList<SocketInterface>? = null
@@ -79,9 +80,9 @@ import java.util.*
     }
 
     fun unRegister(observer: SocketInterface) {
-        if (observerList != null) {
-            for (i in observerList!!.indices) {
-                val model = observerList!![i]
+        observerList?.let { list->
+            for (i in 0 until list.size-1) {
+                val model = list[i]
                 if (model === observer) {
                     observerList!!.remove(model)
                 }
@@ -96,23 +97,20 @@ import java.util.*
      */
     private val onConnect =
         Emitter.Listener { args ->
-                  if (!mSocket!!.connected()) {
-                    val user_id: Int = Constants.USER_IDValue.toInt()
+                  if (isConnected()) {
+                    val user_id: Int = getPrefrence(Constants.USER_ID,"").toInt()
                     if (user_id > 0) {
                       val jsonObject = JSONObject()
-                      jsonObject.put("userId", 0)
+                      jsonObject.put("userId", user_id)
                       sendDataToServer(CONNECT_USER, jsonObject)
                       Log.e("Socketdfdfd", "===!connected===Donee=")
-                      for (observer in observerList!!) {
-                        observer.onSocketConnect(*args)
-                      }
+//                      for (observer in observerList!!) {
+//                        observer.onSocketConnect(*args)
+//                      }
                     }
                   } else {
                     Log.e("Socketdfdfd", "===!connected====")
                   }
-
-
-
         }
 
     /**
@@ -182,7 +180,7 @@ import java.util.*
 
             mSocket!!.emit(SEND_MESSAGE, jsonObject)
             mSocket!!.off(SEND_MESSAGE_LISTNER)
-            mSocket!!.on(SEND_MESSAGE_LISTNER, onBodyListener);
+            mSocket!!.on(SEND_MESSAGE_LISTNER, onBodyListener)
 
             Log.e("Socketdfdfd", "SEND_MESSAGE00")
         }

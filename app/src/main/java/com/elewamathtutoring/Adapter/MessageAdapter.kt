@@ -1,4 +1,4 @@
-package com.pawskeeper.Adapter
+package com.elewamathtutoring.Adapter
 
 import android.content.Context
 import android.content.Intent
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.Chat.Chat_Activity
-import com.elewamathtutoring.Activity.Chat.chatModel.chatThreads.GetInboxMessageListResponse
+import com.elewamathtutoring.Activity.Chat.chatModel.chatThreads.GetMessageInboxModel
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.extensions.getPrefrence
@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class MessageAdapter(var context: Context, var orderDetailForMapResponse: ArrayList<GetInboxMessageListResponse>) : RecyclerView.Adapter<MessageAdapter.MessageHolder>() {
+class MessageAdapter(var context: Context, var orderDetailForMapResponse: ArrayList<GetMessageInboxModel.GetMessageInboxModelItem>) : RecyclerView.Adapter<MessageAdapter.MessageHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageHolder {
         return MessageHolder(LayoutInflater.from(context).inflate(R.layout.item_message, parent, false))
     }
@@ -47,11 +47,9 @@ class MessageAdapter(var context: Context, var orderDetailForMapResponse: ArrayL
 
     override fun getItemCount(): Int
     {
-     // return orderDetailForMapResponse.size
- return 3
+      return orderDetailForMapResponse.size
     }
-    inner class MessageHolder(view: View) : RecyclerView.ViewHolder(view) {
-    }
+    inner class MessageHolder(view: View) : RecyclerView.ViewHolder(view) {}
     fun convertTimestampToDate(timestamp: Long, dateFormateStyle: String): String {
         val calendar = Calendar.getInstance()
         val tz = TimeZone.getDefault()

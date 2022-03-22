@@ -9,31 +9,31 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.elewamathtutoring.Activity.Chat.chatModel.Chat_list_bothside
+import com.android.rideandserve.utils.ImagePickerUtility
+import com.elewamathtutoring.Activity.Chat.chatModel.ChatListModel
 import com.elewamathtutoring.Activity.Chat.mathChat.AudioCallActivity
 import com.elewamathtutoring.Activity.Chat.mathChat.VideoCallActivity
-import com.elewamathtutoring.Activity.Chat.socket.SocketManagernewew
-import com.elewamathtutoring.Activity.Chat.socket.SocketManagernewew.Companion.GET_CHAT_LISTNER_ONE_TO_ONE
-import com.elewamathtutoring.Activity.Chat.socket.SocketManagernewew.Companion.SEND_MESSAGE_LISTNER
+import com.elewamathtutoring.Activity.Chat.socket.SocketManager
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.App
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.extensions.getPrefrence
 import com.elewamathtutoring.viewmodel.BaseViewModel
+import com.google.gson.GsonBuilder
 import com.pawskeeper.Adapter.ChatAdapter
 import kotlinx.android.synthetic.main.activity_chat.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-import kotlin.collections.ArrayList
+import java.io.File
+import java.io.FileInputStream
+import java.io.IOException
 
-class Chat_Activity :AppCompatActivity(), View.OnClickListener, SocketManagernewew.SocketInterface {
+class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.Observer {
 
     var receiverId = ""
-    lateinit var c: Chat_Activity
     var dialog:Dialog?=null
     var Mediaimage=""
     var Block=""
@@ -41,25 +41,67 @@ class Chat_Activity :AppCompatActivity(), View.OnClickListener, SocketManagernew
     var bundle:Bundle?=null
     var messageAdapter: ChatAdapter? = null
     var chatUserImage: String = ""
-    var list = ArrayList<Chat_list_bothside>()
-    private var socketManager: SocketManagernewew? = null
+    var extension = ""
+    var list = ArrayList<ChatListModel.ChatListItem>()
+    private var socketManager: SocketManager? = null
+
+    private var linearLayoutManager: LinearLayoutManager? = null
+
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
+    override fun selectedImage(imagePath: String?, code: Int) {
+
+        try {
+            extension =
+                imagePath?.substring(imagePath.lastIndexOf(".") + 1).toString() // Without dot jpg, png
+        } catch (e: Exception) {
+        }
+
+        // send image as bit 64 in socket
+        try {
+            val jsonObject = JSONObject()
+            jsonObject.put("userId", getPrefrence(Constants.USER_ID,""))
+            jsonObject.put("user2Id", receiverId)
+            jsonObject.put("message", getBase64FromPath(imagePath!!))
+            jsonObject.put("messageType", "1")
+            jsonObject.put("extension", extension)
+            socketManager!!.sendMessage(jsonObject)
+
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
-      //  socketManager = App.getinstance().getSocketManagernn()
-       // socketManager!!.init()
+        socketManager = App.instance.getSocketManagernn()
+        if (!socketManager!!.isConnected() || socketManager!!.getmSocket() == null) {
+            socketManager!!.init()
+        }
         ivBack.setOnClickListener(this)
         ivVideoCall.setOnClickListener(this)
         ivVoiceCall.setOnClickListener(this)
+        ivAttachment.setOnClickListener(this)
 
         receiverId=intent.getStringExtra("receiverId").toString()
-      //  MY_CHAT("t")
+
+
+        setAdapter()
+        MY_CHAT("t")
+
+
         init()
     }
 
+    private fun setAdapter(){
+        linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        messageAdapter = ChatAdapter(this, list)
+        rv_chat.layoutManager = linearLayoutManager
+        rv_chat.adapter = messageAdapter
+
+
+    }
   /*  override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         setIntent(intent)
@@ -67,11 +109,10 @@ class Chat_Activity :AppCompatActivity(), View.OnClickListener, SocketManagernew
     }*/
 
     fun init() {
-        c = this
+
         tv_name.text=intent.getStringExtra("chatUserName").toString()
 
-        ivSendBtn.setOnClickListener(View.OnClickListener
-        {
+        ivSendBtn.setOnClickListener {
             Log.e("ececewcrec", "lll" + Mediaimage)
             if (Et_chat_message!!.text.toString().trim().isEmpty()) {
                 Toast.makeText(this, "Please enter a message!!", Toast.LENGTH_LONG).show();
@@ -79,7 +120,7 @@ class Chat_Activity :AppCompatActivity(), View.OnClickListener, SocketManagernew
                 Block = ""
                 try {
                     val jsonObject = JSONObject()
-                    jsonObject.put("userId", Constants.USER_IDValue)
+                    jsonObject.put("userId", getPrefrence(Constants.USER_ID,""))
                     jsonObject.put("user2Id", receiverId)
                     jsonObject.put("message", Et_chat_message!!.text.toString().trim())
                     jsonObject.put("messageType", "0")
@@ -90,20 +131,24 @@ class Chat_Activity :AppCompatActivity(), View.OnClickListener, SocketManagernew
                     e.printStackTrace()
                 }
             }
-        })
-}
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()
         Constants.Notification_chat=""
-    //    socketManager!!.onDisconnect()
+     //   socketManager!!.onDisconnect()
     }
 
-    override fun onStart()
-    {
-        super.onStart()
-      //  socketManager!!.unRegister(this)
-     //   socketManager!!.onRegister(this)
+    override fun onResume() {
+        super.onResume()
+        socketManager!!.unRegister(this)
+        socketManager!!.onRegister(this)
+        if (!socketManager!!.isConnected() || socketManager!!.getmSocket() == null) {
+            socketManager!!.init()
+        }
+
+        socketManager!!.receivedMessageActivate()
     }
 
     override fun onStop() {
@@ -111,80 +156,8 @@ class Chat_Activity :AppCompatActivity(), View.OnClickListener, SocketManagernew
         Constants.Notification_chat=""
     }
 
-    override fun onSocketCall(event: String?, vararg args: Any?) {
-        Log.e("Socketdfdfdn", "onSocketCall")
-    }
 
-    override fun onSocketConnect(vararg args: Any?) {
-        Log.e("Socketdfdfdn", "onSocketConnect123")
-    }
 
-    override fun onSocketDisconnect(vararg args: Any?) {
-        Log.e("Socketdfdfdn", "onSocketDisconnect"+receiverId)
-       // MY_CHAT("f")
-    }
-
-    override fun onError(event: String?, vararg args: Any?) {
-        when(event){
-            "errorSocket" -> {
-                Log.e("Socketdfdfdn", "errorSocket")
-               // MY_CHAT("f")
-            }
-        }
-    }
-
-    override fun onResponse(event: String, vararg args: Any) {
-        when (event) {
-            SEND_MESSAGE_LISTNER ->
-                runOnUiThread(Runnable
-                {
-                    val objects = args[0] as JSONObject
-                    val chat_list_bothside: Chat_list_bothside
-                    chat_list_bothside = Chat_list_bothside()
-                    chat_list_bothside.senderID = objects.getInt("SenderID")
-                    chat_list_bothside.receiverId = objects.getInt("ReceiverId")
-                    chat_list_bothside.createdAt = objects.getString("createdAt")
-                    chat_list_bothside.message = objects.getString("message")
-                    chat_list_bothside.senderImage = objects.getString("SenderImage")
-                    chat_list_bothside.receiverImage = objects.getString("ReceiverImage")
-                    list.add(chat_list_bothside)
-                    val tsLong = System.currentTimeMillis() / 1000
-                    val ts = tsLong.toString()
-                    chat_list_bothside.createdAt = ts
-               //    messageAdapter = ChatAdapter(c, list)
-//                    rv_chat.adapter = messageAdapter
-                    val li = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-                    li.setStackFromEnd(true)
-                    rv_chat.layoutManager = li
-                    messageAdapter!!.notifyDataSetChanged()
-                    Log.e("Socketdfdfd", "GET MASSAGE INSIDE---insider")
-                })
-
-            GET_CHAT_LISTNER_ONE_TO_ONE ->
-                runOnUiThread(Runnable
-                { list.clear()
-                    Log.e("Socketdfdfd", "222--inside-")
-                    val data = args[0] as JSONArray
-                    var chat_list_bothside: Chat_list_bothside
-
-                    for (i in 0 until data.length()) {
-                        val objects = data.getJSONObject(i)
-                        chat_list_bothside = Chat_list_bothside()
-                        chat_list_bothside.senderID = objects.getInt("SenderID")
-                        chat_list_bothside.receiverId = objects.getInt("ReceiverId")
-                        chat_list_bothside.createdAt = objects.getString("createdAt")
-                        chat_list_bothside.message = objects.getString("message")
-                        chat_list_bothside.msgType = objects.getInt("msgType")
-                        chat_list_bothside.senderImage = objects.getString("SenderImage")
-                        chat_list_bothside.receiverImage = objects.getString("ReceiverImage")
-                        list.add(chat_list_bothside)
-                    }
-
-                    messageAdapter = ChatAdapter(c, list)
-                    viewLastMessage()
-                })
-        }
-    }
     @SuppressLint("WrongConstant")
     fun viewLastMessage(){
         runOnUiThread {
@@ -211,10 +184,13 @@ class Chat_Activity :AppCompatActivity(), View.OnClickListener, SocketManagernew
                 onBackPressed()
             }
             R.id.ivVideoCall -> {
-                startActivity(Intent(c,VideoCallActivity::class.java))
+                startActivity(Intent(this,VideoCallActivity::class.java))
             }
             R.id.ivVoiceCall -> {
-                startActivity(Intent(c,AudioCallActivity::class.java))
+                startActivity(Intent(this,AudioCallActivity::class.java))
+            }
+            R.id.ivAttachment ->{
+                getImage(this,0)
             }
         }
     }
@@ -234,8 +210,103 @@ class Chat_Activity :AppCompatActivity(), View.OnClickListener, SocketManagernew
             "Data  me" + getPrefrence(Constants.USER_ID, "") + "  reciver " + receiverId
         )
         val jsonObject = JSONObject()
-        jsonObject.put("userId", Constants.USER_IDValue)
+        jsonObject.put("userId", getPrefrence(Constants.USER_ID,""))
         jsonObject.put("user2Id", receiverId)
-        socketManager!!.Get_chat(jsonObject)
+        socketManager!!.getFriendChat(jsonObject)
+    }
+
+    // function for convert image to bit 64
+
+    fun getBase64FromPath(path: String): String {
+        var base64 = ""
+        try {
+            val file = File(path)
+            val buffer = ByteArray(file.length().toInt() + 100)
+            val length = FileInputStream(file).read(buffer)
+            base64 = android.util.Base64.encodeToString(
+                buffer, 0, length,
+                android.util.Base64.DEFAULT
+            )
+
+        } catch (e: IOException) {
+//e.printStackTrace()
+        }
+        return base64
+    }
+
+    override fun onResponseArray(event: String, args: JSONArray) {
+        when (event) {
+            SocketManager.GET_CHAT_EMITTER ->
+                runOnUiThread {
+                    progresschat.visibility=View.GONE
+                    val objects = args as JSONArray
+
+                    val gson = GsonBuilder().create()
+
+                    val chatListData = gson.fromJson(objects.toString(), ChatListModel::class.java)
+                     list.addAll(chatListData)
+
+                    val tsLong = System.currentTimeMillis() / 1000
+                    val ts = tsLong.toString()
+                  //  chat_list_bothside.createdAt = ts
+//                    messageAdapter = ChatAdapter(c, list)
+//                    rv_chat.adapter = messageAdapter
+//                    val li = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+//                    li.setStackFromEnd(true)
+//                    rv_chat.layoutManager = li
+                    messageAdapter!!.notifyDataSetChanged()
+                    scrollToBottom()
+                    Log.e("Socketdfdfd", "GET MASSAGE INSIDE---insider")
+                }
+        }
+    }
+
+    override fun onResponse(event: String, args: JSONObject) {
+        when(event){
+
+          /*  SocketManager.GET_CHAT_LISTNER_ONE_TO_ONE ->
+                runOnUiThread {
+                    progresschat.visibility=View.GONE
+                    list.clear()
+                    Log.e("Socketdfdfd", "222--inside-")
+                    val data = args as JSONObject
+                    var chat_list_bothside: Chat_list_bothside
+
+                   *//* for (i in 0 until data.length()) {
+                        val objects = data.getJSONObject(i)
+                        chat_list_bothside = Chat_list_bothside()
+                        chat_list_bothside.senderID = objects.getInt("SenderID")
+                        chat_list_bothside.receiverId = objects.getInt("ReceiverId")
+                        chat_list_bothside.createdAt = objects.getString("createdAt")
+                        chat_list_bothside.message = objects.getString("message")
+                        chat_list_bothside.msgType = objects.getInt("msgType")
+                        chat_list_bothside.senderImage = objects.getString("SenderImage")
+                        chat_list_bothside.receiverImage = objects.getString("ReceiverImage")
+                        list.add(chat_list_bothside)
+                    }*//*
+
+                    messageAdapter = ChatAdapter(c, list)
+                    viewLastMessage()
+                }*/
+
+            SocketManager.SEND_MESSAGE ->{
+                val data= args as JSONObject
+                Log.e("=====",data.toString())
+                val gson = GsonBuilder().create()
+                val userToCallList = gson.fromJson(data.toString(), ChatListModel.ChatListItem::class.java)
+                list.add(userToCallList)
+
+                messageAdapter?.notifyDataSetChanged()
+                rv_chat.smoothScrollToPosition(list.size - 1)
+            }
+        }
+
+    }
+
+    override fun onError(event: String, vararg args: Array<*>) {
+    }
+
+    private fun scrollToBottom(){
+        linearLayoutManager?.smoothScrollToPosition(rv_chat, null, messageAdapter?.itemCount!!)
     }
 }

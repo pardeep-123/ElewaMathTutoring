@@ -2,21 +2,21 @@ package com.pawskeeper.Adapter
 
 import android.content.Context
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.elewamathtutoring.Activity.Chat.chatModel.Chat_list_bothside
+import com.elewamathtutoring.Activity.Chat.chatModel.ChatListModel
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.constant.Constants.Companion.convertTimestampToDate
+import com.elewamathtutoring.Util.helper.extensions.getPrefrence
 import kotlinx.android.synthetic.main.item_chat2.view.*
-
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-import kotlin.collections.ArrayList
-
-class ChatAdapter(var context: Context?, var arrayList: ArrayList<Chat_list_bothside>) : RecyclerView.Adapter<ChatAdapter.RecyclerViewHolder>()
+class ChatAdapter(var context: Context?, var arrayList: ArrayList<ChatListModel.ChatListItem>) : RecyclerView.Adapter<ChatAdapter.RecyclerViewHolder>()
 {
     var timeago=""
     inner class RecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -30,7 +30,7 @@ class ChatAdapter(var context: Context?, var arrayList: ArrayList<Chat_list_both
 
     override fun getItemCount(): Int {
        // return arrayList.size
-        return 3
+        return arrayList.size
     }
     override fun getItemViewType(position: Int): Int {
         return position
@@ -38,9 +38,9 @@ class ChatAdapter(var context: Context?, var arrayList: ArrayList<Chat_list_both
 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int)
     {
-            if(arrayList.get(position).senderID.toString().equals(Constants.USER_IDValue))
+            if(arrayList[position].senderID.toString().equals(getPrefrence(Constants.USER_ID,"")))
             {
-                holder.itemView.chatright.text=arrayList.get(position).message
+                holder.itemView.chatright.text= arrayList[position].message
                 holder.itemView.time_right.text=getHourAgoTime(convertTimestampToDate(arrayList.get(position).createdAt.toLong(), "yyyy.MM.dd G 'at' HH:mm:ss"))
                 holder.itemView.layout1.visibility= View.GONE
                 holder.itemView.layout2.visibility=View.VISIBLE

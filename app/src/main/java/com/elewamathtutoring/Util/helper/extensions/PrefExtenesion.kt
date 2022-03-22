@@ -4,7 +4,7 @@ import com.elewamathtutoring.Util.App
 
 
 fun savePrefrence(key: String, value: Any) {
-    val preference = App.application.applicationContext.getSharedPreferences("TeleMath", 0)
+    val preference = App.instance.applicationContext.getSharedPreferences("TeleMath", 0)
     val editor = preference.edit()
 
     when (value) {
@@ -16,7 +16,7 @@ fun savePrefrence(key: String, value: Any) {
 
 }
 fun saveTokenPrefrence(key: String, value: Any) {
-    val preference = App.application.applicationContext.getSharedPreferences("TeleMath", 0)
+    val preference = App.instance.applicationContext.getSharedPreferences("TeleMath", 0)
     val editor = preference.edit()
 
     when (value) {
@@ -30,7 +30,7 @@ fun saveTokenPrefrence(key: String, value: Any) {
 
 fun savePrefrencewelcome(key: String, value: Any) {
     val preference =
-            App.application.applicationContext.getSharedPreferences("TeleMath", 0)
+            App.instance.applicationContext.getSharedPreferences("TeleMath", 0)
     val editor = preference.edit()
 
     when (value) {
@@ -43,7 +43,7 @@ fun savePrefrencewelcome(key: String, value: Any) {
 
 inline fun <reified T> getPrefrencewelcome(key: String, deafultValue: T): T {
     val preference =
-            App.application.applicationContext.getSharedPreferences("TeleMath", 0)
+            App.instance.applicationContext.getSharedPreferences("TeleMath", 0)
     return when (T::class) {
         String::class -> preference.getString(key, deafultValue as String) as T
         Boolean::class -> preference.getBoolean(key, deafultValue as Boolean) as T
@@ -57,14 +57,14 @@ inline fun <reified T> getPrefrencewelcome(key: String, deafultValue: T): T {
 
 //fun defaultPrefs(context: Context): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 fun clearPrefrences() {
-    val preference = App.application.applicationContext.getSharedPreferences("TeleMath", 0)
+    val preference = App.instance.applicationContext.getSharedPreferences("TeleMath", 0)
     val editor = preference.edit()
     editor.clear()
     editor.apply()
 }
 //inline
 inline fun <reified T> getPrefrence(key: String, deafultValue: T): T {
-    val preference = App.application.applicationContext.getSharedPreferences("TeleMath", 0)
+    val preference = App.instance.applicationContext.getSharedPreferences("TeleMath", 0)
     return when (T::class) {
         String::class -> preference.getString(key, deafultValue as String) as T
         Boolean::class -> preference.getBoolean(key, deafultValue as Boolean) as T
@@ -77,7 +77,7 @@ inline fun <reified T> getPrefrence(key: String, deafultValue: T): T {
 }
 
 inline fun <reified T> getTokenPrefrence(key: String, deafultValue: T): T {
-    val preference = App.application.applicationContext.getSharedPreferences("TeleMath", 0)
+    val preference = App.instance.applicationContext.getSharedPreferences("TeleMath", 0)
     return when (T::class) {
         String::class -> preference.getString(key, deafultValue as String) as T
         Boolean::class -> preference.getBoolean(key, deafultValue as Boolean) as T

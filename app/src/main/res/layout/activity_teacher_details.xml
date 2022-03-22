@@ -213,7 +213,7 @@
                 android:fontFamily="@font/bold"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:textAllCaps="false"
-                android:text="gg"
+                android:text=""
                 android:textColor="@color/darkgrey"
                 android:textSize="12sp" />
             <!--

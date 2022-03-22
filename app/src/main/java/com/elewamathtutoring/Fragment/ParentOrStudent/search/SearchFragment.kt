@@ -49,7 +49,7 @@ class SearchFragment : CheckLocationActivity(), Observer<RestObservable>, Teachi
     lateinit var seekbar: SeekBar
     lateinit var tv_selectlocation: TextView
     lateinit var rv_filterOptions1: RecyclerView
-    lateinit var searchHomeAdapter: SearchHomeAdapter
+    private var searchHomeAdapter: SearchHomeAdapter?=null
     lateinit var v: View
     var latitude = ""
     var longitude = ""
@@ -251,7 +251,7 @@ class SearchFragment : CheckLocationActivity(), Observer<RestObservable>, Teachi
             when_nodatavideo.visibility = View.VISIBLE
         }
         //calling a method of the adapter class and passing the filtered list
-        searchHomeAdapter.notifyData(filterServicesList)
+        searchHomeAdapter!!.notifyData(filterServicesList)
 
     }
 

@@ -14,6 +14,7 @@ import android.widget.RelativeLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.elewamathtutoring.Activity.Chat.Chat_Activity
 import com.elewamathtutoring.Activity.Chat.mathChat.MathPersonChatActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.ReceiptActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.session.ScheduleASessionActivity
@@ -38,7 +39,7 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
     var teacherdetails = ArrayList<RequestDetailResponse.Body>()
     var tutordetails = ArrayList<TeacherDetailResponse.Body>()
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
-    var id = ""
+    var receiverId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,7 +81,9 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
             }
 
             R.id.llChat -> {
-                var intent = Intent(this, MathPersonChatActivity::class.java)
+                var intent = Intent(this, Chat_Activity::class.java)
+                intent.putExtra("receiverId",receiverId)
+                intent.putExtra("chatUserName",tv_techername.text.toString())
                 startActivity(intent)
             }
 
@@ -150,6 +153,7 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
         when (liveData!!.status) {
             Status.SUCCESS -> {
                 if (liveData.data is RequestDetailResponse) {
+                    teacherdetails.clear()
                     teacherdetails.addAll(listOf(liveData.data.body))
                     Glide.with(this).load(Constants.IMAGE_URL+liveData.data.body.Teacher.image)
                         .placeholder(R.drawable.profile_unselected).into(ivtecher_image)
@@ -158,8 +162,8 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
                     tv_teachercertified.text = Constants.isCertifiedOrtutor(liveData.data.body.Teacher.isCertifiedOrtutor)
                     tv_about.setText("About " + liveData.data.body.Teacher.name)
                     tv_teacher_AboutUser.setText(liveData.data.body.Teacher.about)
-                    tvTime.text= liveData.data.body.timeslot.get(0).startTime+" - "+liveData.data.body.timeslot.get(0).endTime
-                   tv_teacher_TeachingHistory.text = liveData.data.body.Teacher.teachingHistory
+                    tvTime.text= liveData.data.body.timeslot[0].startTime+" - "+liveData.data.body.timeslot[0].endTime
+                    tv_teacher_TeachingHistory.text = liveData.data.body.Teacher.teachingHistory
 /*
                        for (i in 0 until liveData.data.body.teaching_level.size) {
                            var data = liveData.data.body.teaching_level.get(i).level + ","
@@ -176,7 +180,9 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
                 else if (liveData.data is TeacherDetailResponse) {
                     tutordetails.addAll(listOf(liveData.data.body))
                     tv_techername.setText(liveData.data.body.name)
-                    tv_teachercertified.setText(liveData.data.body.teaching_level[0].level)
+                    receiverId = liveData.data.body.id.toString()
+                   // if (liveData.data.body.teaching_level!="")
+                   // tv_teachercertified.setText(liveData.data.body.teaching_level[0].level)
                     tvparentSpecialized.setText(liveData.data.body.specialties)
                     tvTime.setText("$"+liveData.data.body.InPersonRate.toString()+"/Hr")
                     tv_about.setText("About " + liveData.data.body.name)

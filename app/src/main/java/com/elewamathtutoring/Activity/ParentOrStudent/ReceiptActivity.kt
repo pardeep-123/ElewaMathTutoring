@@ -15,15 +15,7 @@ import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import kotlinx.android.synthetic.main.activity_receipt.*
-import kotlinx.android.synthetic.main.activity_receipt.ivBack
-import kotlinx.android.synthetic.main.activity_receipt.iv_techerprofile
-import kotlinx.android.synthetic.main.activity_receipt.tvDateparent
-import kotlinx.android.synthetic.main.activity_receipt.tvSpecialized
-import kotlinx.android.synthetic.main.activity_receipt.tv_name
-import kotlinx.android.synthetic.main.activity_receipt.tv_requested_startendtimeparent
-import kotlinx.android.synthetic.main.activity_receipt.tv_tutor
 
-import java.text.SimpleDateFormat
 import kotlin.collections.ArrayList
 
 class ReceiptActivity : AppCompatActivity() ,View.OnClickListener, Observer<RestObservable> {
@@ -71,18 +63,22 @@ class ReceiptActivity : AppCompatActivity() ,View.OnClickListener, Observer<Rest
         when (liveData.status) {
             Status.SUCCESS -> {
                 if (liveData.data is RequestDetailResponse) {
-            tv_requested_startendtimeparent.text= liveData.data.body.timeslot.get(0).startTime+" - "+liveData.data.body.timeslot.get(0).endTime
+                    tv_requested_startendtimeparent.text= liveData.data.body.timeslot[0].startTime+" - "+liveData.data.body.timeslot[0].endTime
                     tv_impersonprice.text=Constants.Currency+ liveData.data.body.Teacher.hourlyPrice.toString()+".00"
                     tv_price.text=Constants.Currency+ liveData.data.body.total.toString()+".00"
                     idper_hr.text="1 hour @ "+Constants.Currency+liveData.data.body.perHour+".00/hr"
                 //   val lastFourDigits = PaymentMethod.Type.Card.card_number.substring(liveData.data.body.Card.card_number.length - 4)
                  //  tv_cardnumber.text="Mastercard XXXX-XXXX-XXXX"+lastFourDigits
 
-            val dateParser = SimpleDateFormat("yyyy-MM-dd")
+            /*val dateParser = SimpleDateFormat("yyyy-MM-dd")
             val date = dateParser.parse(liveData.data.body.date)
             val dateFormatter = SimpleDateFormat("EEE, MMM dd yyyy")
-            tvDateparent.text=dateFormatter.format(date).toString()
+            tvDateparent.text=dateFormatter.format(date).toString()*/
+
+                    tvDateparent.text = Constants.convertDateToRatingTime(liveData.data.body.date.toLong())
                 }
+
+
             }
             Status.ERROR -> {
                 if (liveData.error is RequestDetailResponse) {
