@@ -93,7 +93,7 @@ class TeacherProfileTabFragment : Fragment(), View.OnClickListener, Observer<Res
                     text_teacher_CancelationPolicy.text = liveData.data.body.cancellationPolicy
                     text_teacher_AboutUser.text = liveData.data.body.about
                     text_teacher_inprice.text =
-                        Constants.Currency + liveData.data.body.InPersonRate.toString() + ".00/Hr"
+                        Constants.Currency + liveData.data.body.hourlyPrice.toString() + ".00/Hr"
                     Glide.with(contex).load(liveData.data.body.image)
                         .placeholder(R.drawable.profile_unselected).into(image_teacher_image)
 

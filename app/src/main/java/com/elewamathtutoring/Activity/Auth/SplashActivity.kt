@@ -1,26 +1,20 @@
 package com.elewamathtutoring.Activity.Auth
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.Window
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.MainTeacherActivity
 import com.elewamathtutoring.MainActivity
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.SharedPrefUtil
-import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.extensions.getPrefrence
-import com.elewamathtutoring.Util.helper.extensions.savePrefrence
-import com.elewamathtutoring.Util.helper.extensions.savePrefrencewelcome
 
 
 //cqlsystech123@gmail.com	cqlsys123@@@@	new	..

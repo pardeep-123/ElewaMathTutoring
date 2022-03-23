@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.*
 import android.widget.PopupWindow
 import android.widget.RelativeLayout
@@ -40,7 +41,8 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
     var tutordetails = ArrayList<TeacherDetailResponse.Body>()
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     var receiverId = ""
-
+    var subjectList = ArrayList<String>()
+    var subjects = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_teacher_details)
@@ -88,7 +90,7 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
             }
 
             R.id.btnScheduleSession -> {
-                var intent = Intent(this, ScheduleASessionActivity::class.java)
+                val intent = Intent(this, ScheduleASessionActivity::class.java)
                 intent.putExtra("teacher_detail", tutordetails)
                 startActivity(intent)
             }
@@ -155,45 +157,45 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
                 if (liveData.data is RequestDetailResponse) {
                     teacherdetails.clear()
                     teacherdetails.addAll(listOf(liveData.data.body))
-                    Glide.with(this).load(Constants.IMAGE_URL+liveData.data.body.Teacher.image)
+                    Glide.with(this).load(liveData.data.body.Teacher.image)
                         .placeholder(R.drawable.profile_unselected).into(ivtecher_image)
                     tv_techername.setText(liveData.data.body.Teacher.name)
                     tvparentSpecialized.text = liveData.data.body.Teacher.specialties
                     tv_teachercertified.text = Constants.isCertifiedOrtutor(liveData.data.body.Teacher.isCertifiedOrtutor)
                     tv_about.setText("About " + liveData.data.body.Teacher.name)
                     tv_teacher_AboutUser.setText(liveData.data.body.Teacher.about)
+                    tvDate.text = Constants.convertDateToRatingTime(liveData.data.body.date.toLong())
                     tvTime.text= liveData.data.body.timeslot[0].startTime+" - "+liveData.data.body.timeslot[0].endTime
                     tv_teacher_TeachingHistory.text = liveData.data.body.Teacher.teachingHistory
-/*
-                       for (i in 0 until liveData.data.body.teaching_level.size) {
-                           var data = liveData.data.body.teaching_level.get(i).level + ","
-                           tv_parentteacherlevel.text = tv_parentteacherlevel.text.toString() + data
-                       }*/
-                    var s = tv_parentteacherlevel.text.toString()
+
+                    val s = tv_parentteacherlevel.text.toString()
                     tv_parentteacherlevel.text = s.substring(0, s.length - 1)
-                    //  tv_teacher_CancelationPolicy.text=liveData.data.body.cancellationPolicy
-                    //    tv_teacher_virtual.text=(Constants.Currency+liveData.data.body.virtualRate.toString())+".00/Hr"
-                    //   tv_teacher_inprice.text=Constants.Currency+liveData.data.body.InPersonRate.toString()+".00/Hr"
-                } else if (liveData.data is Commontoall) {
+                     } else if (liveData.data is Commontoall) {
                     finish()
                 }
                 else if (liveData.data is TeacherDetailResponse) {
                     tutordetails.addAll(listOf(liveData.data.body))
-                    tv_techername.setText(liveData.data.body.name)
+                    tv_techername.text = liveData.data.body.name
                     receiverId = liveData.data.body.id.toString()
                    // if (liveData.data.body.teaching_level!="")
-                   // tv_teachercertified.setText(liveData.data.body.teaching_level[0].level)
-                    tvparentSpecialized.setText(liveData.data.body.specialties)
-                    tvTime.setText("$"+liveData.data.body.InPersonRate.toString()+"/Hr")
-                    tv_about.setText("About " + liveData.data.body.name)
-                    tv_teacher_AboutUser.setText(liveData.data.body.about)
-                    tv_teacher_TeachingHistory.setText(liveData.data.body.teachingHistory)
+                    tv_teachercertified.text = liveData.data.body.teaching_level[0].level
+                    /**
+                     * @author Pardeep Sharma
+                     *  to set specialties from subjects
+                     */
+                    liveData.data.body.subjects.forEach {
+                     subjectList.add(it.name)
+                    }
+                    subjects = TextUtils.join(",",subjectList)
+                    tvparentSpecialized.text = subjects
+                    tvTime.text = "$"+liveData.data.body.InPersonRate.toString()+"/Hr"
+                    tv_about.text = "About " + liveData.data.body.name
+                    tv_teacher_AboutUser.text = liveData.data.body.about
+                    tv_teacher_TeachingHistory.text = liveData.data.body.teachingHistory
                  /*   Glide.with(this).load(liveData.data.body.image)
                         .placeholder(R.drawable.profile_unselected).into(ivtecher_image)*/
                 }
-                else{
 
-                }
             }
             Status.ERROR -> {
                 if (liveData.error is RequestDetailResponse) {

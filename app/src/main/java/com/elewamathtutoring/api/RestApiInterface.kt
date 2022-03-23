@@ -64,7 +64,9 @@ interface RestApiInterface {
     @POST("signin")
     fun Userlogin(
         @Field("email") email: String,
-        @Field("password") password: String): Observable<LoginResponse>
+        @Field("password") password: String,
+        @Field("deviceType") device_type: String,
+        @Field("deviceToken") device_token: String?): Observable<LoginResponse>
 
     // for social login
     @FormUrlEncoded

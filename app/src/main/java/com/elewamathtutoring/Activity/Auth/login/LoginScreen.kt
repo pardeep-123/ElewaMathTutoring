@@ -108,7 +108,7 @@ class LoginScreen : AppCompatActivity(), View.OnClickListener, Observer<RestObse
                 val email = email_text.text.toString().trim()
                 val password = password_text.text.toString().trim()
                 if (validator.loginValid(this, email, password)) {
-                    baseViewModel.Userlogin(this, email, password, true)
+                    baseViewModel.Userlogin(this, email, password, "1",token,true)
                     baseViewModel.getCommonResponse().observe(this, this)
                 }
 
@@ -269,8 +269,7 @@ class LoginScreen : AppCompatActivity(), View.OnClickListener, Observer<RestObse
                     else -> Helper.showSuccessToast(this, "Something went wrong. Please try again")
                 }
             }
-            else -> {
-            }
+            else -> {}
         }
     }
 

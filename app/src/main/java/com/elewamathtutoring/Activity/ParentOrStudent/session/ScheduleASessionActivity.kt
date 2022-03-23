@@ -66,14 +66,15 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener,
         mCalendarView.setMinimumDate(min)
 
         if(profile.isNotEmpty()){
-            val words2: ArrayList<String> = profile[0].available_slots.split(",") as ArrayList<String>
-            sunday = if (words2.contains("1")) 0 else Calendar.SUNDAY
-            monday = if (words2.contains("2")) 0 else Calendar.MONDAY
-            tuesday = if (words2.contains("3")) 0 else Calendar.TUESDAY
-            wednesday = if (words2.contains("4")) 0 else Calendar.WEDNESDAY
-            thursday = if (words2.contains("5")) 0 else Calendar.THURSDAY
-            friday = if (words2.contains("6")) 0 else Calendar.FRIDAY
-            saturday = if (words2.contains("7")) 0 else Calendar.SATURDAY
+            val words2: ArrayList<String> = profile[0].availability.split(",") as ArrayList<String>
+
+            monday = if (words2.contains("1")) 0 else Calendar.MONDAY
+            tuesday = if (words2.contains("2")) 0 else Calendar.TUESDAY
+            wednesday = if (words2.contains("3")) 0 else Calendar.WEDNESDAY
+            thursday = if (words2.contains("4")) 0 else Calendar.THURSDAY
+            friday = if (words2.contains("5")) 0 else Calendar.FRIDAY
+            saturday = if (words2.contains("6")) 0 else Calendar.SATURDAY
+            sunday = if (words2.contains("7")) 0 else Calendar.SUNDAY
             val cal = Calendar.getInstance()
             cal[Calendar.DAY_OF_MONTH] = 12
             val year = cal[Calendar.YEAR]
@@ -107,6 +108,16 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener,
                 }
         }
 
+            // check if free slot is available or not
+            if (profile[0].free_slots==null) {
+                tvSlot.visibility = View.GONE
+                cardFreeSlot.visibility = View.GONE
+            }else{
+                tvSlot.visibility = View.VISIBLE
+                cardFreeSlot.visibility = View.VISIBLE
+                dayofweek.text = profile[0].free_slots?.startTime+ "-" + profile[0].free_slots?.endTime
+            }
+
         }
         setCalenderView()
         mCalendarView.setOnDayClickListener(object : OnDayClickListener {
@@ -124,6 +135,9 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener,
                 //finalDateAndTimeConvertToTimeStamp = CommonMethods.time_to_timestamp(selectedDate, "yyyy-MM-dd" +19080)
             }
         })
+
+        // set click listner on free slots cards
+
     }
 
     private fun onClicks() {
@@ -136,10 +150,6 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener,
             rv_chooseTime.adapter = ChooseTimeAdapter(this, profile[0].time_slots,this)
 
         }
-    }
-
-    fun freeSlotsAdapter(){
-        rv_freeSlots.adapter = FreeAdapter(this, profile[0].free_slots,this)
     }
 
     override fun onClick(v: View?) {

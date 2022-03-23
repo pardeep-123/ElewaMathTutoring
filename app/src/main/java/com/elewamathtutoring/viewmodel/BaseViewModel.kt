@@ -81,11 +81,13 @@ class BaseViewModel : ViewModel() {
         activity: Activity,
         email: String,
         password: String,
+        type: String,
+        token: String,
         isDialogShow: Boolean
     ) {
         if (Helper.isNetworkConnected(activity)) {
             Log.e("checkmyauth", "----" + FirebaseInstanceId.getInstance().getToken())
-            apiService.Userlogin(email, password)
+            apiService.Userlogin(email, password,type,token)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -101,7 +103,7 @@ class BaseViewModel : ViewModel() {
                 activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
-                        Userlogin(activity, email, password, isDialogShow)
+                        Userlogin(activity, email, password, "1",token,isDialogShow)
                     }
                 })
         }

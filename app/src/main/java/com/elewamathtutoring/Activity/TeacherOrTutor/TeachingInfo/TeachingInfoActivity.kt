@@ -13,6 +13,7 @@ import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -64,6 +65,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
     var address = ""
     var certifiedChoose = 0
     var teachinglevel = ArrayList<String>()
+    var teachingValue = ""
     var nameList = ArrayList<String>()
     var idList = ArrayList<String>()
     var CertifiedAs = ""
@@ -123,8 +125,8 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             latitude = profilelist.get(0).latitude
             longitude = profilelist.get(0).longitude
             availability = profilelist.get(0).availability
-            timeSlot = profilelist.get(0).available_slots
-            val num = profilelist[0].teachingLevel
+            timeSlot = profilelist.get(0).availableSlots
+            val num = profilelist[0].teachingLevelString
             try {
                 val str = num?.split(",")?.toTypedArray()
                 teachinglevel = str?.toList() as ArrayList<String>
@@ -134,7 +136,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             }
             getLocation(latitude, longitude)
             btnNext.text = "SAVE"
-            profilelist[0].certificate_images?.forEach { its ->
+            profilelist[0].certificateImages?.forEach { its ->
                 imageList.add(ImageModel().also {
                     it.image = its.images
                     it.isGalleryAdded = false
@@ -220,10 +222,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
                     baseViewModel.EditTeacherProfileProfile(
                         this,
                         imageList,
-                        teachinglevel.toString().replace("[", "").replace("]", "").replace(
-                            " ",
-                            ""
-                        ),
+                        teachingValue,
                         CertifiedAs,
                         etMajors.text.toString(),
                         subjectId,
@@ -283,7 +282,7 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
             imageList,
             CertifiedAs,
             etMajors.text.toString(),
-            teachinglevel.toString(),
+            teachingValue,
             subjectId,
             edPrice.text.toString(),
             edCancelationPolicy.text.toString(),
@@ -315,6 +314,8 @@ class TeachingInfoActivity : AppCompatActivity(), View.OnClickListener, Observer
     override fun Teachinglevel(level: ArrayList<String>) {
         teachinglevel.clear()
         teachinglevel.addAll(level)
+        teachingValue = TextUtils.join(",",level)
+
     }
 
     fun getLocation(latitude: String, longitude: String) {

@@ -1,5 +1,9 @@
 package com.elewamathtutoring.Activity.TeacherOrTutor.availability
 
+import com.elewamathtutoring.Activity.TeacherOrTutor.edit.EditResponse
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
+
 data class EditAvailabilityResponse(
     val status: Boolean, // true
     val code: Int, // 200
@@ -38,7 +42,7 @@ data class EditAvailabilityResponse(
         val majors: String,
         val educationLevel: String, // wqw
         val isapproval: Int, // 0
-        val free_slots: String, // 1,2
+        val free_slots: FreeSlots?, // 1,2
         val isTechingInfo: Int, // 0
         val IsAvailable: Int, // 0
         val time_slots: List<TimeSlot>
@@ -52,4 +56,18 @@ data class EditAvailabilityResponse(
             val updatedAt: Int // 0
         )
     }
+    data class FreeSlots(
+        @SerializedName("createdAt")
+        val createdAt: Int, // 1610092054
+        @SerializedName("endTime")
+        val endTime: String, // 11:00 PM
+        @SerializedName("id")
+        val id: Int, // 23
+        @SerializedName("startTime")
+        val startTime: String, // 10:00 PM
+        @SerializedName("status")
+        val status: Int, // 1
+        @SerializedName("updatedAt")
+        val updatedAt: Int // 0
+    ) : Serializable
 }

@@ -221,7 +221,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
         <service
-            android:name=".Util.fcm.MyFirebaseMessagingService"
+            android:name=".Util.fcm.FirebaseService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

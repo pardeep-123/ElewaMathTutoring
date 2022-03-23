@@ -1,6 +1,8 @@
 package com.elewamathtutoring.Activity.ParentOrStudent.teacherDetail
 
 import java.io.Serializable
+import com.google.gson.annotations.SerializedName
+
 
 data class TeacherDetailResponse(
     val status: Boolean, // true
@@ -34,10 +36,11 @@ data class TeacherDetailResponse(
         val SocialType: Int, // 2
         val SocialId: String, // 114454975690526584905
         val available_slots: String, // 1,2,4
-        val free_slots:  ArrayList<FreeSlots>,
+        val free_slots:  FreeSlots?,
         val status: Int, // 1
         val teaching_level: List<TeachingLevel>,
-        val time_slots: ArrayList<TimeSlot>
+        val time_slots: ArrayList<TimeSlot>,
+        val subjects: List<Subject>
     ):Serializable {
         data class FreeSlots(
             val id: Int, // 3
@@ -64,5 +67,10 @@ data class TeacherDetailResponse(
             val updatedAt: Int ,// 0
             var check: Boolean = false
         ):Serializable
+        data class Subject(
+            val id: Int, // 8
+            val name: String, // Science
+            val status: Int // 1
+        ): Serializable
     }
 }

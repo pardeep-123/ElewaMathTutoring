@@ -68,7 +68,7 @@ public class GoogleHelper implements GoogleApiClient.OnConnectionFailedListener 
       /*  mGoogleApiClient.stopAutoManage(context);
         mGoogleApiClient.disconnect();*/
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
-            mGoogleApiClient.stopAutoManage((FragmentActivity) context);
+            mGoogleApiClient.stopAutoManage(context);
             mGoogleApiClient.disconnect();
         }
     }

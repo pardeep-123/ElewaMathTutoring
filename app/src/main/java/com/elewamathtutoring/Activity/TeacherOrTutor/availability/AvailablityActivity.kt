@@ -80,16 +80,16 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
                     arrayDateList = words
                     Selctedarray_date = words
                 }
-                if (profilelist[0].available_slots!="") {
-                    timeValues = profilelist[0].available_slots
-                    val data2 = profilelist[0].available_slots
+                if (profilelist[0].availableSlots!="") {
+                    timeValues = profilelist[0].availableSlots
+                    val data2 = profilelist[0].availableSlots
                     val words2 = data2.split(",") as ArrayList<String>
                     Selctedarray_time = words2
                     arrayTimeList = words2
                 }
                 btnConfirmSignUp.text = "SAVE"
-                if (profilelist[0].free_slots!="") {
-                    freeSlotId = profilelist[0].free_slots
+                if (profilelist[0].freeSlots!=null) {
+                    freeSlotId = profilelist[0].freeSlots?.id.toString()
                     iv_notification_switch.isChecked = true
                     rlChoose.visibility = View.VISIBLE
                 }
@@ -319,7 +319,7 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
            arrayDateList.add(days)
        }
         dayValues = TextUtils.join(",",arrayDateList)
-        Toast.makeText(this,dayValues,Toast.LENGTH_LONG).show()
+
     }
 
     override fun ondate(timeId: String) {
@@ -329,6 +329,6 @@ class AvailablityActivity : AppCompatActivity(), View.OnClickListener, Observer<
             arrayTimeList.add(timeId)
         }
         timeValues = TextUtils.join(",",arrayTimeList)
-        Toast.makeText(this,timeValues,Toast.LENGTH_LONG).show()
+
     }
 }
