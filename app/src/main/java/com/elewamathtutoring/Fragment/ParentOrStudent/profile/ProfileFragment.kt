@@ -21,7 +21,7 @@ import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
-import com.pawskeeper.Modecommon.Commontoall
+
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.text_parent_about
 import kotlinx.android.synthetic.main.fragment_profile.view.*

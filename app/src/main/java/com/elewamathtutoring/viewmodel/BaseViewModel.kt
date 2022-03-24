@@ -418,7 +418,7 @@ class BaseViewModel : ViewModel() {
     fun book_Session(
         activity: Activity,
         teacherId: String,
-        time: String,
+      //  time: String,
         About: String,
         cardId: String,
         date: String,
@@ -429,7 +429,7 @@ class BaseViewModel : ViewModel() {
         if (Helper.isNetworkConnected(activity)) {
             apiService.book_Session(
                 teacherId,
-                time,
+               // time,
                 About,
                 cardId,
                 date,
@@ -454,7 +454,7 @@ class BaseViewModel : ViewModel() {
                         book_Session(
                             activity,
                             teacherId,
-                            time,
+                          //  time,
                             About,
                             cardId,
                             date,

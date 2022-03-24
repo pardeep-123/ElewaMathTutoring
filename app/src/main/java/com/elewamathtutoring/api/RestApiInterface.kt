@@ -34,11 +34,12 @@ import com.elewamathtutoring.Fragment.TeacherOrTutor.request.RequestListResponse
 import com.elewamathtutoring.Models.Card_listing.AllSessionListResponse
 import com.elewamathtutoring.Models.ListView.Model_myschdeullist
 import com.elewamathtutoring.Models.Login.Model_login
+import com.elewamathtutoring.Models.Modecommon.Commontoall
+import com.elewamathtutoring.Models.Modecommon.Commontoall2
 import com.elewamathtutoring.Models.Notifications.Model_Notifications
 import com.elewamathtutoring.Models.Search.Model_search
 import com.elewamathtutoring.Models.TeacherRequestsList.Model_TeacherRequestList
-import com.pawskeeper.Modecommon.Commontoall
-import com.pawskeeper.Modecommon.Commontoall2
+
 import io.reactivex.Observable
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -66,7 +67,8 @@ interface RestApiInterface {
         @Field("email") email: String,
         @Field("password") password: String,
         @Field("deviceType") device_type: String,
-        @Field("deviceToken") device_token: String?): Observable<LoginResponse>
+        @Field("deviceToken") device_token: String?
+    ): Observable<LoginResponse>
 
     // for social login
     @FormUrlEncoded
@@ -80,6 +82,7 @@ interface RestApiInterface {
         @Field("deviceType") device_type: String,
         @Field("deviceToken") device_token: String?
     ): Observable<LoginResponse>
+
     @FormUrlEncoded
 // @Field("UserType") userType: String,
     @POST("withdrawlAmount")
@@ -115,9 +118,9 @@ interface RestApiInterface {
     fun Delete_account(
     ): Observable<Commontoall>
 
-   /* @DELETE("delete_account")
-    fun Delete_account(@Field("usertype") usertype: String): Observable<Commontoall>
-*/
+    /* @DELETE("delete_account")
+     fun Delete_account(@Field("usertype") usertype: String): Observable<Commontoall>
+ */
     @FormUrlEncoded
     @PUT("promocode_exist")
     fun promocode_exist(@Field("code") code: String): Observable<Commontoall>
@@ -158,15 +161,15 @@ interface RestApiInterface {
     //Total:100
     //cardId:1
     //date:2021-04-28
-  /*  @FormUrlEncoded
-    @POST("book_Session")
-    fun book_Session(
-        @Field("teacherId") teacherId: String, @Field("availability") availability: String,
-        @Field("time") time: String, @Field("About") About: String,
-        @Field("personVirtual") personVirtual: String, @Field("Hour") Hour: String,
-        @Field("perHour") perHour: String, @Field("Total") Total: String,
-        @Field("cardId") cardId: String, @Field("date") date: String
-    ): Observable<Commontoall2>*/
+    /*  @FormUrlEncoded
+      @POST("book_Session")
+      fun book_Session(
+          @Field("teacherId") teacherId: String, @Field("availability") availability: String,
+          @Field("time") time: String, @Field("About") About: String,
+          @Field("personVirtual") personVirtual: String, @Field("Hour") Hour: String,
+          @Field("perHour") perHour: String, @Field("Total") Total: String,
+          @Field("cardId") cardId: String, @Field("date") date: String
+      ): Observable<Commontoall2>*/
 
     @FormUrlEncoded
     @POST("change_session_status")
@@ -183,7 +186,7 @@ interface RestApiInterface {
     ): Observable<Commontoall2>
 
 
-     @FormUrlEncoded
+    @FormUrlEncoded
     @POST("occupiedStatus")
     fun occupiedStatus(
         @Field("occupiedStatus") occupiedStatus: String
@@ -213,7 +216,8 @@ interface RestApiInterface {
     fun teachersDetails(
         @Field("teacher_id") teacher_id: String
     ): Observable<TeacherDetailResponse>
-   // @Field("bankId") bankId: String,     @Field("bankType") bankType: String?
+
+    // @Field("bankId") bankId: String,     @Field("bankType") bankType: String?
     @FormUrlEncoded
     @POST("bank")
     fun edit_bank(
@@ -226,20 +230,17 @@ interface RestApiInterface {
     ): Observable<AddBankResponse>
 
 
-        @FormUrlEncoded
+    @FormUrlEncoded
     @POST("book_Session")
     fun book_Session(
         @Field("teacherId") teacherId: String,
-        @Field("time") time: String,
+        //@Field("time") time: String,
         @Field("About") About: String,
         @Field("cardId") cardId: String,
         @Field("date") date: String,
         @Field("times") times: String,
         @Field("Hour") Hour: String
     ): Observable<SesionBookResponse>
-
-
-
 
 
     @FormUrlEncoded
@@ -265,7 +266,6 @@ interface RestApiInterface {
         @Field("cvv") cvv: String?,
         @Field("card_id") card_id: String?
     ): Observable<AddCardResponse>
-
 
 
     @FormUrlEncoded
@@ -297,7 +297,7 @@ interface RestApiInterface {
     @Multipart
     @PUT("EditTeacheringinfo")
     fun EditTeacherProfileProfile(
-        @Part certificate_images:  ArrayList<MultipartBody.Part>,
+        @Part certificate_images: ArrayList<MultipartBody.Part>,
         @Part("teachingLevel") teachingLevel: RequestBody,
         @Part("educationLevel") educationLevel: RequestBody,
         @Part("majors") majors: RequestBody,
@@ -348,10 +348,10 @@ interface RestApiInterface {
     ): Observable<TeacherSignUpResponse>
 
 
-  @Multipart
+    @Multipart
     @PUT("TeacherInfo")
     fun teachingInfoApi(
-        @Part certificate_images:  ArrayList<MultipartBody.Part>,
+        @Part certificate_images: ArrayList<MultipartBody.Part>,
         @Part("educationLevel") educationLevel: RequestBody,
         @Part("majors") majors: RequestBody,
         @Part("teachingLevel") teachingLevel: RequestBody,
@@ -371,9 +371,9 @@ interface RestApiInterface {
         @Field("free_slots") freeSlots: String
     ): Observable<AvailabilityResponse>
 
-  /*  @FormUrlEncoded
-    @POST("bank")
-    fun deleteBank(@Field("bankId") bankId: String): Observable<Commontoall>*/
+    /*  @FormUrlEncoded
+      @POST("bank")
+      fun deleteBank(@Field("bankId") bankId: String): Observable<Commontoall>*/
 
     @FormUrlEncoded
     @HTTP(method = "DELETE", path = "bank", hasBody = true)
@@ -395,7 +395,7 @@ interface RestApiInterface {
     ): Observable<Commontoall>
 
     @GET("session_Details")
-    fun sessionDetails( @Query ("sessionId")sessionId : String): Observable<RequestDetailResponse>
+    fun sessionDetails(@Query("sessionId") sessionId: String): Observable<RequestDetailResponse>
 
     @FormUrlEncoded
     @POST("get_content")
@@ -414,34 +414,35 @@ interface RestApiInterface {
     @GET("getsubjects")
     fun getsubjects(): Observable<SubjectsResponse>
 
-     @GET("TeacherRequestList")
+    @GET("TeacherRequestList")
     fun TeacherRequestList(): Observable<RequestListResponse>
 
     @FormUrlEncoded
     @PUT("acceptReject")
-    fun requestAccept(@Field("status") status: String,
-                      @Field("sessionId") sessionId: String):
+    fun requestAccept(
+        @Field("status") status: String,
+        @Field("sessionId") sessionId: String
+    ):
             Observable<Commontoall?>
 
-  @FormUrlEncoded
+    @FormUrlEncoded
     @PUT("cancelBooking")
     fun requestReject(
-      @Field("sessionId") sessionId: String,
-      @Field("status") status: String
-  ):
+        @Field("sessionId") sessionId: String,
+        @Field("status") status: String
+    ):
             Observable<Commontoall?>
 
 
-  @GET("resources")
+    @GET("resources")
     fun get_resources(
-      @Query ("category_id")category_id : String)
-    : Observable<ResourcesResponse>
+        @Query("category_id") category_id: String
+    )
+            : Observable<ResourcesResponse>
 
 
-  @GET("getcategories")
+    @GET("getcategories")
     fun getcategories(): Observable<CategoriesResponse>
-
-
 
 
     @FormUrlEncoded
@@ -486,9 +487,10 @@ interface RestApiInterface {
     fun getTeacherStudentList(): Observable<MathChatResponse>*/
 
     @GET("getTeacherStudentList")
-    fun getTeacherStudentList(@Query ("userType")userType : String,
-                              @Query ("subjects_id")subjects_id : String): Observable<MathChatResponse?>?
-
+    fun getTeacherStudentList(
+        @Query("userType") userType: String,
+        @Query("subjects_id") subjects_id: String
+    ): Observable<MathChatResponse?>?
 
 
     @Multipart

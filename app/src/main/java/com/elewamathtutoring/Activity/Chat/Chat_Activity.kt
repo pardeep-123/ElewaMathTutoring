@@ -20,6 +20,7 @@ import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.App
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.extensions.getPrefrence
+import com.elewamathtutoring.getBase64FromPath
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import com.google.gson.GsonBuilder
 import com.pawskeeper.Adapter.ChatAdapter
@@ -213,25 +214,6 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
         jsonObject.put("userId", getPrefrence(Constants.USER_ID,""))
         jsonObject.put("user2Id", receiverId)
         socketManager!!.getFriendChat(jsonObject)
-    }
-
-    // function for convert image to bit 64
-
-    fun getBase64FromPath(path: String): String {
-        var base64 = ""
-        try {
-            val file = File(path)
-            val buffer = ByteArray(file.length().toInt() + 100)
-            val length = FileInputStream(file).read(buffer)
-            base64 = android.util.Base64.encodeToString(
-                buffer, 0, length,
-                android.util.Base64.DEFAULT
-            )
-
-        } catch (e: IOException) {
-//e.printStackTrace()
-        }
-        return base64
     }
 
     override fun onResponseArray(event: String, args: JSONArray) {

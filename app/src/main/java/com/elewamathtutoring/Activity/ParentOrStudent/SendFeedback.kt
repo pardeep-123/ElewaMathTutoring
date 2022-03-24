@@ -8,6 +8,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.elewamathtutoring.Models.Modecommon.Commontoall
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.App
 import com.elewamathtutoring.Util.Validator
@@ -16,8 +17,6 @@ import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
-import com.pawskeeper.Modecommon.Commontoall
-import com.yanzhenjie.album.Album
 import com.yanzhenjie.album.AlbumFile
 import com.yanzhenjie.album.api.widget.Widget
 import kotlinx.android.synthetic.main.activity_send_feedback.*

@@ -23,11 +23,20 @@ class MessageAdapter(var context: Context, var orderDetailForMapResponse: ArrayL
     }
 
     override fun onBindViewHolder(holder: MessageHolder, position: Int) {
-        holder.itemView.tvMessageUser.text= orderDetailForMapResponse.get(position).userName
-  
-            holder.itemView.tvMessage.text= orderDetailForMapResponse.get(position).lastMessage
+        if (orderDetailForMapResponse[position].groupId!=null) {
+            holder.itemView.tvMessageUser.text = orderDetailForMapResponse[position].groupName
+            Glide.with(context)
+                .load(Constants.SOCKET_BASE_URL_IMAGE + orderDetailForMapResponse.get(position).groupImage)
+                .placeholder(R.drawable.placeholder_image).into(holder.itemView.ivMessageImage)
+        }
+            else {
+            holder.itemView.tvMessageUser.text = orderDetailForMapResponse[position].userName
+            Glide.with(context)
+                .load(Constants.IMAGE_URL + orderDetailForMapResponse.get(position).userImage)
+                .placeholder(R.drawable.placeholder_image).into(holder.itemView.ivMessageImage)
+        }
+            holder.itemView.tvMessage.text= orderDetailForMapResponse[position].lastMessage
         
-        Glide.with(context).load(Constants.IMAGE_URL + orderDetailForMapResponse.get(position).userImage).placeholder(R.drawable.placeholder_image).into(holder.itemView.ivMessageImage)
 
         holder.itemView.setOnClickListener {
             val i = Intent(context, Chat_Activity::class.java)

@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.Chat.Chat_Activity
+import com.elewamathtutoring.Models.Modecommon.Commontoall
 import com.elewamathtutoring.Models.Session_detail.Model_session_detail
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
@@ -27,9 +28,10 @@ import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
-import com.pawskeeper.Modecommon.Commontoall
+
 import kotlinx.android.synthetic.main.activity_requests.*
 import kotlinx.android.synthetic.main.dialog_report.*
+import kotlinx.android.synthetic.main.item_calender.view.*
 import kotlinx.android.synthetic.main.report_popup.view.*
 import java.text.SimpleDateFormat
 
@@ -211,9 +213,10 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
             Status.SUCCESS -> {
                 if (liveData.data is RequestDetailResponse) {
                     tvRequestsName.text=liveData.data.body.Student.name
-                    tvAmount.text=liveData.data.body.Student.name
-                    tvCommision.text=liveData.data.body.Student.name
-                    tvAmtReceived.text=liveData.data.body.Student.name
+                    tvAmountHours.text="Amount ("+liveData.data.body.hours+" hours )"
+                    tvAmount.text=liveData.data.body.perHour.toString()
+                    tvCommision.text=liveData.data.body.adminCommision
+                    tvAmtReceived.text = liveData.data.body.total.toString()
 
                     tv_inquiry.text="About "+liveData.data.body.Student.name
                     tv_inq.text="About "+liveData.data.body.Student.about
@@ -240,11 +243,11 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
                         btnReject.visibility=View.GONE
                     }
 
-                    val dateParser = SimpleDateFormat("yyyy-MM-dd")
+               /*     val dateParser = SimpleDateFormat("yyyy-MM-dd")
                     val date = dateParser.parse(liveData.data.body.date)
                     val dateFormatter = SimpleDateFormat("EEE, MMM dd")
-                    tvDate.text=dateFormatter.format(date).toString()
-
+                    tvDate.text=dateFormatter.format(date).toString()*/
+                    tvDate.text = Constants.convertDateToRatingTime(liveData.data.body.date.toLong())
                     tv_requesteddate.text=Orderstatus(liveData.data.body.status)+" "+ConvertTimeStampToDate(liveData.data.body.updated.toLong(),"MM/dd/YY")
                     tv_inq.text=liveData.data.body.about
                     Glide.with(this).load(liveData.data.body.Student.image).placeholder(R.drawable.profile_unselected).into(ivProfileSignUp)

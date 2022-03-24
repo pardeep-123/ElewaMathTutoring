@@ -14,7 +14,11 @@ class GetMessageInboxModel : ArrayList<GetMessageInboxModel.GetMessageInboxModel
         @SerializedName("deletedId")
         val deletedId: Int, // 0
         @SerializedName("groupId")
-        val groupId: Any, // null
+        val groupId: Int?,
+        @SerializedName("groupImage")
+        val groupImage: String, // 1648122475.jpeg
+        @SerializedName("groupName")
+        val groupName: String?, // Funny// null
         @SerializedName("id")
         val id: Int, // 22
         @SerializedName("lastMessage")

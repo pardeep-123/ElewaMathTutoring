@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-android:id="@+id/rlLayout"
     android:layout_marginBottom="@dimen/_10sdp"
     android:background="@color/white">
+
     <RelativeLayout
         android:id="@+id/rlBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3dp">
+        android:layout_margin="5dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -20,49 +21,46 @@ android:id="@+id/rlLayout"
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivProfile"
-                android:layout_width="@dimen/_60sdp"
-                android:layout_height="@dimen/_60sdp"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:src="@drawable/message_img1" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/name"
                 style="@style/WrapTextView"
+                android:layout_marginStart="@dimen/_8sdp"
                 android:fontFamily="@font/medium"
-                android:text="Jack Jackson (Tutor)"
-                android:layout_marginStart="@dimen/_5sdp"
+                android:textColor="@color/black"
+                android:text=""
                 android:textSize="@dimen/_12sdp" />
+
         </LinearLayout>
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="@dimen/_20sdp">
 
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentEnd="true"
-    android:layout_centerInParent="true"
-    android:layout_marginEnd="@dimen/_10sdp">
-
-    <ImageView
-        android:id="@+id/ivOf"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:src="@drawable/checkbox2"
-       />
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/ivOf"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/checkbox2" />
 
 
-</RelativeLayout>
+        </RelativeLayout>
 
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
-        android:layout_marginTop="@dimen/_5sdp"
         android:layout_below="@id/rlBox"
+        android:layout_marginTop="@dimen/_5sdp"
         android:background="@color/grey" />
-
-
-
 
 
 </RelativeLayout>

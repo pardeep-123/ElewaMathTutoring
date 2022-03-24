@@ -15,14 +15,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.applandeo.materialcalendarview.utils.calendar
 import com.elewamathtutoring.Models.Login.Model_login
+import com.elewamathtutoring.Models.Modecommon.Commontoall
+import com.elewamathtutoring.Models.Modecommon.Commontoall2
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
-import com.pawskeeper.Modecommon.Commontoall
-import com.pawskeeper.Modecommon.Commontoall2
+
 import kotlinx.android.synthetic.main.activity_subscriptions.*
 import kotlinx.android.synthetic.main.dialog_payment_successfull.*
 import kotlinx.android.synthetic.main.dialog_promo_code.btnContinue

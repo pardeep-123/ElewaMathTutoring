@@ -21,6 +21,8 @@ import com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword.C
 import com.elewamathtutoring.Activity.ParentOrStudent.payment.PaymentInfoActivity
 import com.elewamathtutoring.Activity.SendFeedback
 import com.elewamathtutoring.Activity.ParentOrStudent.wallet.WithdrawalActivity
+import com.elewamathtutoring.Models.Modecommon.Commontoall
+import com.elewamathtutoring.Models.Modecommon.Commontoall2
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.SharedPrefUtil
 import com.elewamathtutoring.Util.constant.Constants
@@ -31,8 +33,7 @@ import com.elewamathtutoring.Util.helper.extensions.savePrefrence
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
-import com.pawskeeper.Modecommon.Commontoall
-import com.pawskeeper.Modecommon.Commontoall2
+
 import kotlinx.android.synthetic.main.activity_setting2.*
 import kotlinx.android.synthetic.main.activity_setting2.ivBack
 

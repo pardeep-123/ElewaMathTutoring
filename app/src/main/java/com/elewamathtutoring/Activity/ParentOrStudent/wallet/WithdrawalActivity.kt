@@ -15,13 +15,14 @@ import com.elewamathtutoring.Activity.ParentOrStudent.wallet.response.Body
 import com.elewamathtutoring.Activity.ParentOrStudent.wallet.response.WalletGetResponse
 import com.elewamathtutoring.Adapter.ParentOrStudent.TransactionAdapter
 import com.elewamathtutoring.Models.BankAccountsModel.Model_BankAccount
+import com.elewamathtutoring.Models.Modecommon.Commontoall
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
-import com.pawskeeper.Modecommon.Commontoall
+
 import kotlinx.android.synthetic.main.activity_withdrawal.*
 import kotlinx.android.synthetic.main.item_transfer_to_bank.*
 

@@ -38,6 +38,7 @@ data class TeacherDetailResponse(
         val available_slots: String, // 1,2,4
         val free_slots:  FreeSlots?,
         val status: Int, // 1
+        val hourlyPrice: Int, // 1
         val teaching_level: List<TeachingLevel>,
         val time_slots: ArrayList<TimeSlot>,
         val subjects: List<Subject>

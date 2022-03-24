@@ -24,6 +24,8 @@ class ScheduleASession2Activity : AppCompatActivity(), View.OnClickListener {
     var value=0
     var selected_Session=1
     var selected_Timeslot=0
+    var timeString = ""
+    var hourString = ""
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +37,8 @@ class ScheduleASession2Activity : AppCompatActivity(), View.OnClickListener {
       //  rlVirtualLearning.setOnClickListener(this)
         tvConfirmSession.setOnClickListener(this)
         profile = (intent.getSerializableExtra("teacher_detail") as ArrayList<TeacherDetailResponse.Body>?)!!
-
+        timeString = intent.getStringExtra("time")!!
+        hourString = intent.getStringExtra("hour")!!
         for (i in 0 until profile[0].time_slots.size) {  // GET TOTAL SELECTED TIMESLOT
             if (profile[0].time_slots.get(i).check == true) {
                 selected_Timeslot++
@@ -66,8 +69,8 @@ class ScheduleASession2Activity : AppCompatActivity(), View.OnClickListener {
         inten.putExtra("teacher_detail", profile)
         inten.putExtra("aboutdetail", etSchedule.text.toString())
         inten.putExtra("selecteddate", intent.getStringExtra("selecteddate"))
-        intent.putExtra("time", intent.getStringExtra("time"))
-        intent.putExtra("hour", intent.getStringExtra("hour"))
+        inten.putExtra("time", timeString)
+        inten.putExtra("hour", hourString)
         startActivity(inten)
     }
    }

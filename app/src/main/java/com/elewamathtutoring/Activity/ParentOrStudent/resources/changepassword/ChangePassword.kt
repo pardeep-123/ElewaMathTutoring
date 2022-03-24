@@ -13,7 +13,7 @@ import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
-import com.pawskeeper.Modecommon.Commontoall
+
 import kotlinx.android.synthetic.main.activity_change_password.*
 import javax.inject.Inject
 

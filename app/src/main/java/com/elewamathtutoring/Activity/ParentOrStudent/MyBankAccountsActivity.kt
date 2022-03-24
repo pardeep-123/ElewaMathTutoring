@@ -10,14 +10,15 @@ import androidx.lifecycle.ViewModelProvider
 import com.elewamathtutoring.Activity.ParentOrStudent.addBAnk.AddBankAccountActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.wallet.BankListingResponse
 import com.elewamathtutoring.Adapter.MyBankAccountsAdapter
+import com.elewamathtutoring.Models.Modecommon.Commontoall
+import com.elewamathtutoring.Models.Modecommon.Commontoall2
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 
 import com.elewamathtutoring.viewmodel.BaseViewModel
-import com.pawskeeper.Modecommon.Commontoall
-import com.pawskeeper.Modecommon.Commontoall2
+
 import kotlinx.android.synthetic.main.activity_my_bank_accounts.*
 import kotlin.collections.ArrayList
 

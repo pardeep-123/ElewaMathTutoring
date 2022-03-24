@@ -20,6 +20,7 @@ import com.elewamathtutoring.Activity.Chat.mathChat.MathPersonChatActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.ReceiptActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.session.ScheduleASessionActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.request.RequestDetailResponse
+import com.elewamathtutoring.Models.Modecommon.Commontoall
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.SharedPrefUtil
 import com.elewamathtutoring.Util.constant.Constants
@@ -29,7 +30,7 @@ import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
-import com.pawskeeper.Modecommon.Commontoall
+
 import kotlinx.android.synthetic.main.activity_teacher_details.*
 import kotlinx.android.synthetic.main.dialog_report.*
 import kotlinx.android.synthetic.main.report_popup.view.*
@@ -188,12 +189,12 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
                     }
                     subjects = TextUtils.join(",",subjectList)
                     tvparentSpecialized.text = subjects
-                    tvTime.text = "$"+liveData.data.body.InPersonRate.toString()+"/Hr"
+                    tvTime.text = "$"+liveData.data.body.hourlyPrice.toString()+"/Hr"
                     tv_about.text = "About " + liveData.data.body.name
                     tv_teacher_AboutUser.text = liveData.data.body.about
                     tv_teacher_TeachingHistory.text = liveData.data.body.teachingHistory
-                 /*   Glide.with(this).load(liveData.data.body.image)
-                        .placeholder(R.drawable.profile_unselected).into(ivtecher_image)*/
+                  Glide.with(this).load(liveData.data.body.image)
+                        .placeholder(R.drawable.profile_unselected).into(ivtecher_image)
                 }
 
             }

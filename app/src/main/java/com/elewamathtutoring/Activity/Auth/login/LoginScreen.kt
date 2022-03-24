@@ -19,6 +19,7 @@ import com.elewamathtutoring.Activity.TeacherOrTutor.TeachingInfo.TeachingInfoAc
 import com.elewamathtutoring.Activity.TeacherOrTutor.availability.AvailablityActivity
 import com.elewamathtutoring.MainActivity
 import com.elewamathtutoring.Models.Login.Model_login
+import com.elewamathtutoring.Models.Modecommon.Commontoall
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.*
 import com.elewamathtutoring.Util.constant.Constants
@@ -33,7 +34,7 @@ import com.facebook.FacebookException
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
-import com.pawskeeper.Modecommon.Commontoall
+
 import kotlinx.android.synthetic.main.activity_login_screen.*
 import javax.inject.Inject
 

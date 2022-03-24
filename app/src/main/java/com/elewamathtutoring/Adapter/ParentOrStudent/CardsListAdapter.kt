@@ -57,14 +57,14 @@ class CardsListAdapter(var ctn: Context,
 
         holder.itemView.tvName.text=cardlist.get(position).holder_name.toString()
 
-        holder.itemView.rel_card.setOnClickListener {
-            Log.e("checkmylog","--dmfk")
-          if(typescreen.equals("frombooking"))
-          {
-            paymentInfoActivity.ThanksForBookingDialog(cardlist.get(position).id.toString())
-          }
-
-        }
+//        holder.itemView.rel_card.setOnClickListener {
+//            Log.e("checkmylog","--dmfk")
+//          if(typescreen.equals("frombooking"))
+//          {
+//            paymentInfoActivity.ThanksForBookingDialog(cardlist.get(position).id.toString())
+//          }
+//
+//        }
 
         holder.itemView.rlDeleteCard.setOnClickListener {
             paymentInfoActivity.deleteDialog(cardlist.get(position).id.toString())

@@ -67,7 +67,7 @@
             android:paddingHorizontal="@dimen/_10sdp">
 
             <EditText
-                android:id="@+id/email_text"
+                android:id="@+id/etGroupName"
                 style="@style/Edittext"
                 android:fontFamily="@font/medium"
                 android:gravity="center"

@@ -7,29 +7,54 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
 import android.widget.RelativeLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.elewamathtutoring.Activity.Chat.socket.SocketManager
 import com.elewamathtutoring.Adapter.ParentOrStudent.AddParticipantsAdapter
 import com.elewamathtutoring.MainActivity
+import com.elewamathtutoring.Model.GroupListModel
 
 import com.elewamathtutoring.R
+import com.elewamathtutoring.Util.App
+import com.elewamathtutoring.Util.constant.Constants
+import com.elewamathtutoring.Util.helper.extensions.getPrefrence
+import com.elewamathtutoring.showToast
+import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_add_participant.*
+import kotlinx.android.synthetic.main.activity_add_participant.ivBack
+import org.json.JSONArray
+import org.json.JSONObject
+import java.util.ArrayList
 
-class AddParticipantActivity : AppCompatActivity(), View.OnClickListener {
+class AddParticipantActivity : AppCompatActivity(), View.OnClickListener,SocketManager.Observer
+            ,AddParticipantsAdapter.GroupId{
     lateinit var addParticipantsAdapter: AddParticipantsAdapter
     private var popupWindow: PopupWindow? = null
     var viewGroup: ViewGroup? = null
+    private var socketManager : SocketManager?=null
+    var groupName = ""
+    var extension = ""
+    var image = ""
+    var idArraylist = ArrayList<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_participant)
         ivBack.setOnClickListener(this)
         btnAdd.setOnClickListener(this)
         ivFilter.setOnClickListener(this)
-        addParticipantsAdapter = AddParticipantsAdapter(this)
-        rv_add_participants.adapter = addParticipantsAdapter
+
+        socketManager = App.instance.getSocketManagernn()
+
+        // get data from intent
+        groupName = intent.getStringExtra("groupName")!!
+        image = intent.getStringExtra("image")!!
+        extension = intent.getStringExtra("extension")!!
 
     }
 
@@ -43,15 +68,7 @@ class AddParticipantActivity : AppCompatActivity(), View.OnClickListener {
             popupWindow?.showAsDropDown(it, 150, 48)
             applyDim(viewGroup, 0.5f)
         }
-        /*  view.tvEdit.setOnClickListener {
-              startActivity(
-                  Intent(
-                      this,
-                      EditProductActivity::class.java
-                  )
-              )
-          }*/
-        /*  view.tvDelete.setOnClickListener { dialogDelete() }*/
+
         popupWindow?.setOnDismissListener {
             clearDim(viewGroup)
         }
@@ -77,12 +94,104 @@ class AddParticipantActivity : AppCompatActivity(), View.OnClickListener {
                 finish()
             }
             R.id.btnAdd -> {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
+                //Imagename, name, memberIds, userId
+                val jsonObject = JSONObject()
+                jsonObject.put("userId", getPrefrence(Constants.USER_ID,""))
+                 jsonObject.put("memberIds", idArraylist.toString())
+                 jsonObject.put("imageName", image)
+                 jsonObject.put("extension", extension)
+                 jsonObject.put("name", groupName)
+                socketManager!!.createGroup(jsonObject)
+
             }
             R.id.ivFilter -> {
                 setPopUpWindow()
             }
         }
+    }
+
+    fun groupList(progress: String) // get all chat
+    {
+//        if(progress.equals("f"))
+//        {
+//            progresschat.visibility=View.GONE
+//        }
+//        else
+//        {
+//            progresschat.visibility=View.VISIBLE
+//        }
+
+        val jsonObject = JSONObject()
+        jsonObject.put("userId", getPrefrence(Constants.USER_ID,""))
+       // jsonObject.put("user2Id", receiverId)
+        socketManager!!.getGroupList(jsonObject)
+    }
+
+    override fun onResponseArray(event: String, args: JSONArray) {
+        when (event) {
+            SocketManager.participantsList -> {
+                try {
+                    runOnUiThread {
+
+                        val data = args
+                        Log.e("Socketdfdfd", "mma")
+                        val list = ArrayList<GroupListModel.GroupListModelItem>()
+                        val gson = GsonBuilder().create()
+
+                        val userToCallList =
+                            gson.fromJson(data.toString(), GroupListModel::class.java)
+                        list.addAll(userToCallList)
+
+                        runOnUiThread {
+                            addParticipantsAdapter = AddParticipantsAdapter(this,list,this)
+                            rv_add_participants.adapter = addParticipantsAdapter
+                            rv_add_participants.layoutManager = LinearLayoutManager(
+                                this,
+                                LinearLayoutManager.VERTICAL,
+                                false
+                            )
+
+                        }
+                    }
+
+                }
+                catch (e:Exception) {}
+            }
+            SocketManager.createGroupEmitter->{
+                try {
+                    runOnUiThread {
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                    }
+                }catch (e:Exception){}
+            }
+        }
+    }
+
+    override fun onResponse(event: String, args: JSONObject) {
+
+    }
+
+    override fun onError(event: String, vararg args: Array<*>) {
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        socketManager?.unRegister(this)
+        socketManager?.onRegister(this)
+        if (!socketManager!!.isConnected() || socketManager!!.getmSocket() == null) {
+            socketManager!!.init()
+        }
+
+        groupList("f")
+    }
+
+    override fun groupIds(id: String) {
+        if (idArraylist.contains(id))
+            idArraylist.remove(id)
+        else
+            idArraylist.add(id)
+
     }
 }

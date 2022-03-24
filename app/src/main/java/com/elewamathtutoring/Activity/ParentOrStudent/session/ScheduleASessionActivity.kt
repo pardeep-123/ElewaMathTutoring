@@ -11,6 +11,7 @@ import android.view.View
 
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import com.elewamathtutoring.Activity.ParentOrStudent.teacherDetail.TeacherDetailResponse
@@ -28,6 +29,7 @@ import kotlin.collections.ArrayList
 
 class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener,
     ChooseTimeAdapter.TimeSlot {
+    private var isClick = false
     private var sunday: Int = 0
     private var monday: Int = 0
     private var tuesday: Int = 0
@@ -115,7 +117,7 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener,
             }else{
                 tvSlot.visibility = View.VISIBLE
                 cardFreeSlot.visibility = View.VISIBLE
-                dayofweek.text = profile[0].free_slots?.startTime+ "-" + profile[0].free_slots?.endTime
+                dayofweekSlot.text = profile[0].free_slots?.startTime+ "-" + profile[0].free_slots?.endTime
             }
 
         }
@@ -137,7 +139,17 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener,
         })
 
         // set click listner on free slots cards
+        cardFreeSlot.setOnClickListener {
+            isClick = !isClick
+            if (isClick){
+                dayofweekSlot.setTextColor(ContextCompat.getColor(this,R.color.white))
+                rlFreeSlot.background = ContextCompat.getDrawable(this,R.drawable.background_blue)
+            }else{
+                dayofweekSlot.setTextColor(ContextCompat.getColor(this,R.color.black))
+                rlFreeSlot.background = null
 
+            }
+        }
     }
 
     private fun onClicks() {

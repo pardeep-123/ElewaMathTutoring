@@ -3,6 +3,7 @@ package com.elewamathtutoring.Activity.Chat.socket
 import android.util.Log
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.extensions.getPrefrence
+import io.socket.client.Ack
 import io.socket.client.IO
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
@@ -25,11 +26,14 @@ class SocketManager {
         val CHAT_LISTING_EMITTER = "chat_listing" //chat with all listing
         val GET_CHAT_EMITTER = "get_message"
         val GET_READ_UNREAD_EMITTER = "read_message"
+        val participantsList = "participants_list"
+        val createGroupEmitter = "create_group"
         //listener
         val CONNECT_LISTENER = "connect_listener"
         val SEND_MESSAGE_LISTNER = "sendMessage" // send message
         val CHAT_LISTING_LISTNER = "chatListing" //chat with all listing outside
         val GET_CHAT_LISTNER_ONE_TO_ONE = "getMessage" // one to one chat
+        val groupChatListner = "groupChatListner" // one to one chat
         val GET_READDATA_LISTNER = "readMessage"
 
     }
@@ -294,6 +298,65 @@ class SocketManager {
         }
     }
 
+    // to get group chat list
+    fun getGroupList(jsonObject: JSONObject?) {
+        if (jsonObject != null) {
+            try {
+                if (!mSocket!!.connected()) {
+                    mSocket!!.connect()
+
+                    mSocket!!.emit(participantsList, jsonObject, Ack{ args->
+                        Log.i("Socket", args.toString())
+                    })
+                } else {
+
+                    mSocket!!.emit(participantsList, jsonObject,Ack{ args->
+
+                        val data = args[0] as JSONArray
+                        Log.e("Socket", "onGetFriendChat :::$data")
+                        for (observer in observerList!!) {
+                            observer.onResponseArray(participantsList, data)
+                        }
+                    })
+                }
+            } catch (ex: Exception) {
+                ex.localizedMessage
+            }
+
+            Log.i("Socket", "Send Message Called")
+        }
+    }
+
+    // to create the group
+    // to get group chat list
+    fun createGroup(jsonObject: JSONObject?) {
+        if (jsonObject != null) {
+            try {
+                if (!mSocket!!.connected()) {
+                    mSocket!!.connect()
+
+                    mSocket!!.emit(createGroupEmitter, jsonObject, Ack{ args->
+                        Log.i("Socket", args.toString())
+                    })
+                } else {
+
+                    mSocket!!.emit(createGroupEmitter, jsonObject,Ack{ args->
+
+                        val data = args[0] as JSONArray
+                        Log.e("Socket", "onGetFriendChat :::$data")
+                        for (observer in observerList!!) {
+                            observer.onResponseArray(createGroupEmitter, data)
+                        }
+                    })
+                }
+            } catch (ex: Exception) {
+                ex.localizedMessage
+            }
+
+            Log.i("Socket", "Send Message Called")
+        }
+    }
+
     private val onGetFriendChat = Emitter.Listener { args ->
         try {
             val data = args[0] as JSONArray
@@ -306,6 +369,17 @@ class SocketManager {
         }
     }
 
+    private val onGroupChat = Emitter.Listener { args ->
+        try {
+            val data = args[0] as JSONArray
+            Log.e("Socket", "onGetFriendChat :::$data")
+            for (observer in observerList!!) {
+                observer.onResponseArray(participantsList, data)
+            }
+        } catch (ex: Exception) {
+            ex.localizedMessage
+        }
+    }
 
 
   /*  fun sendMessageForChat(jsonObject: JSONObject?) {

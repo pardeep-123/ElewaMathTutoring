@@ -34,6 +34,8 @@ class Constants {
        // const val BASE_URL = "http://3.141.207.49/api/"//live Eteacher
         const val BASE_URL = "http://202.164.42.227:7552/api/"//live
         const val SOCKET_BASE_URL = "http://202.164.42.227:7552"//live
+        const val SOCKET_BASE_URL_IMAGE = "http://202.164.42.227:7552/uploads/chat/"//live
+        const val SOCKET_BASE_URL_IMAGE_USER = "http://202.164.42.227:7552/uploads/users/"//live
 
         //const val BASE_URL = "http://localhost:7552/api/"  local Math Tutoring
         const val SECURITY_KEY = "securitykey"

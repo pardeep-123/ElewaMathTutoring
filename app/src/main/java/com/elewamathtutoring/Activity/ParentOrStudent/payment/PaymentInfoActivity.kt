@@ -22,14 +22,15 @@ import com.elewamathtutoring.Activity.ParentOrStudent.add_card.AddCardActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.teacherDetail.TeacherDetailResponse
 import com.elewamathtutoring.Adapter.ParentOrStudent.CardsListAdapter
 import com.elewamathtutoring.MainActivity
+import com.elewamathtutoring.Models.Modecommon.Commontoall
+import com.elewamathtutoring.Models.Modecommon.Commontoall2
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.App
 import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
-import com.pawskeeper.Modecommon.Commontoall
-import com.pawskeeper.Modecommon.Commontoall2
+
 import kotlinx.android.synthetic.main.activity_payment_info.*
 import kotlinx.android.synthetic.main.activity_payment_info.ivBack
 import kotlinx.android.synthetic.main.activity_schedule_a_session2.*
@@ -140,9 +141,8 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
                     }
                     filterDialog.show()
                 } else if (liveData.data is SesionBookResponse) {
-                    val i = Intent(this, MainActivity::class.java)
-                    i.putExtra("teacher_detail", "payment")
-                    startActivity(i)
+                    ThanksForBookingDialog1()
+
                 }
             }
             Status.ERROR -> {
@@ -168,7 +168,13 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
                 finish()
             }
             R.id.btnPayNow -> {
-                ThanksForBookingDialog1()
+                if(cardId==""){
+                    Toast.makeText(this,"Please Select card",Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    apis()
+                }
+
             }
         }
     }
@@ -298,7 +304,7 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
         baseViewModel.book_Session(
             this,
             profile.get(0).id.toString(),
-            "" + profile.get(0).time_slots.size.toString(),
+            //"" + profile.get(0).time_slots.size.toString(),
             intent.getStringExtra("aboutdetail").toString(),
             cardid,
             intent.getStringExtra("selecteddate").toString(),
@@ -309,19 +315,14 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
         baseViewModel.getCommonResponse().observe(this, this) }
 
     fun apis() {
-        baseViewModel.book_Session(this, profile[0].id.toString(), "" + profile[0].time_slots.size.toString(),
+        baseViewModel.book_Session(this, profile[0].id.toString(),
             intent.getStringExtra("aboutdetail").toString(), cardId,
             intent.getStringExtra("selecteddate").toString(), timeString, hour, true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
 
     override fun ondate(id: String) {
-        if (timeList.contains(id)) {
-            timeList.remove(id)
-        } else {
-            timeList.add(id)
-        }
-        timeString = TextUtils.join(",", timeList)
+
         cardId = id
     }
 
@@ -345,12 +346,9 @@ class PaymentInfoActivity : AppCompatActivity(), View.OnClickListener, Observer<
         filterDialog.edPromoCode.text = ss
         filterDialog.btnThanksContinue.setOnClickListener {
             filterDialog.dismiss()
-            if(cardId==""){
-                Toast.makeText(this,"Please Select card",Toast.LENGTH_SHORT).show()
-            }
-            else{
-                apis()
-            }
+            val i = Intent(this, MainActivity::class.java)
+            i.putExtra("teacher_detail", "payment")
+            startActivity(i)
 
         }
         filterDialog.show()

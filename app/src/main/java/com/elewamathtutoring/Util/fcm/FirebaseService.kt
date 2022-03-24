@@ -14,6 +14,8 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import com.elewamathtutoring.Activity.ParentOrStudent.teacherDetail.TeacherDetailsActivity
+import com.elewamathtutoring.Activity.TeacherOrTutor.request.RequestsActivity
 import com.elewamathtutoring.MainActivity
 import com.elewamathtutoring.R
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -54,12 +56,17 @@ class FirebaseService : FirebaseMessagingService() {
             PushNotificationModel::class.java
         )
 
-        title = notificationModel.name
+      //  title = notificationModel.name
         message = notificationModel.message
+        val intent: Intent?
 
-        val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("pushNotificationModel", notificationModel)
-
+        if (notificationModel.push_type=="1"){
+             intent = Intent(this,RequestsActivity::class.java)
+             intent.putExtra("id",notificationModel.userId)
+        }else {
+             intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("pushNotificationModel", notificationModel)
+        }
       //  if (Constants.User2Id!= notificationModel.id || !Constants.OnMessageScreen)
         makePush(intent)
 

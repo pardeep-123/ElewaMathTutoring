@@ -334,6 +334,7 @@
                     style="@style/WrapTextView"
                     android:layout_alignParentStart="true"
                     android:fontFamily="@font/light"
+                    android:id="@+id/tvAmountHours"
                     android:text="Amount (2 hours)"
                     android:textColor="@color/black" />
 
