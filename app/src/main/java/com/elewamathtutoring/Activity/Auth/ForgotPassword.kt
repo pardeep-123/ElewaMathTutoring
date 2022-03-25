@@ -41,7 +41,6 @@ class ForgotPassword : AppCompatActivity(), View.OnClickListener, Observer<RestO
             ivBack.setOnClickListener(this)
             btn_forgetPassword.setOnClickListener(this)
         }
-
         override fun onClick(v: View) {
             when(v.id){
                 R.id.ivBack->{

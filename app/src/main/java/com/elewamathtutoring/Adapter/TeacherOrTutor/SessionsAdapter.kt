@@ -32,7 +32,10 @@ class SessionsAdapter(c: Context, sessionlist: ArrayList<AllSessionListResponse.
     @SuppressLint("SimpleDateFormat")
     override fun onBindViewHolder(holder: ViewHolder, position: Int)
     {
-        holder.itemView.tvItemName.text = list.get(position).Student.name
+        if(list[position].Student!=null){
+            holder.itemView.tvItemName.text = list[position].Student.name
+
+
         holder.itemView.tvItemType.setText(Constants.isCertifiedOrtutor(list.get(position).Teacher.isCertifiedOrtutor))
 //      if (list[position].timeslot.isNotEmpty())
 //        holder.itemView.tv_start_endtime.text = list[position].timeslot[0].startTime +"-"+ list[position].timeslot[0].endTime
@@ -40,7 +43,7 @@ class SessionsAdapter(c: Context, sessionlist: ArrayList<AllSessionListResponse.
        // holder.itemView.tvItemDate.text = Constants.ConvertTimeStampToDate(list.get(position).date.toLong(),"EEE, MMM yy")
   holder.itemView.tvItemDate.text = Constants.convertDateToRatingTime(list[position].date.toLong())
 
-
+        }
       //  holder.itemView.tvItemDate.text= AppUtils.getDate(list.get(position).date,"EEE, MMM dd")
 //        holder.itemView.tvItemDate.text= list.get(position).date
         holder.itemView.setOnClickListener {

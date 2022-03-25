@@ -8,11 +8,25 @@
         <entry key="app/src/main/res/layout/activity_intro_slider.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_login_screen.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_payment_info.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/activity_receipt.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_requests.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_resouces.xml" value="0.11666666666666667" />
         <entry key="app/src/main/res/layout/activity_schedule_a_session.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_schedule_a_session2.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_setting2.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_teacher_details.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/dialog_report.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/fragment_messages_tab.xml" value="0.16944444444444445" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_profile_tab.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/fragment_requests_tab.xml" value="0.12037037037037036" />
+        <entry key="app/src/main/res/layout/fragment_schedule.xml" value="0.16" />
+        <entry key="app/src/main/res/layout/fragment_schedule_tab.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/home_list.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/item_calender.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/item_hadder.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/row_image_slider.xml" value="0.18489583333333334" />
       </map>
     </option>
