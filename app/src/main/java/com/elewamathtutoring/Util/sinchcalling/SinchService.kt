@@ -1,5 +1,6 @@
 package com.elewamathtutoring.Util.sinchcalling
 
+import android.annotation.SuppressLint
 import android.app.*
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -142,6 +143,7 @@ class SinchService : Service(), CallClientListener {
     var notificationManager: NotificationManager? = null
     var notificationChannel: NotificationChannel? = null
     var notification: Notification? = null
+    @SuppressLint("WrongConstant")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private fun sendMessagePush(call: Call, friendName: String, friendImage: String) {
         manager

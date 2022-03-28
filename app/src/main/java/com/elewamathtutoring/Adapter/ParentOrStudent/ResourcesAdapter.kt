@@ -7,13 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResourcesResponse
+import com.elewamathtutoring.Adapter.ClickCallBack
 import com.elewamathtutoring.R
 import kotlinx.android.synthetic.main.item_resources.view.*
 
-//, listNotifications: ArrayList<Body>
 class ResourcesAdapter(
     var ctn: Context,
-    var list: ArrayList<ResourcesResponse.Body>
+    var list: ArrayList<ResourcesResponse.Body>,
+    var clickCallBack: ClickCallBack
 ) :
     RecyclerView.Adapter<ResourcesAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
@@ -24,7 +25,7 @@ class ResourcesAdapter(
     }
 
     override fun getItemCount(): Int {
-     return list.size
+        return list.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -34,5 +35,8 @@ class ResourcesAdapter(
         holder.itemView.tvCategory.setText(list[position].categoryName)
         holder.itemView.tvAuthorName.setText(list[position].authname)
 
+        holder.itemView.ivDownload.setOnClickListener {
+            clickCallBack.onItemClick(position, "download")
+        }
     }
 }

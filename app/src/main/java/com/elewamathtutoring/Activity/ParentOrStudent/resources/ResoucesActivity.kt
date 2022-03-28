@@ -1,11 +1,15 @@
 package com.elewamathtutoring.Activity.ParentOrStudent.resources
 
+import android.app.DownloadManager
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +18,7 @@ import android.widget.RelativeLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.elewamathtutoring.Adapter.ClickCallBack
 import com.elewamathtutoring.Adapter.ParentOrStudent.*
 import com.elewamathtutoring.R
 import com.elewamathtutoring.api.Status
@@ -23,7 +28,7 @@ import kotlinx.android.synthetic.main.activity_resouces.*
 
 
 class ResoucesActivity : AppCompatActivity(), View.OnClickListener, Observer<RestObservable>,
-    ResourcesFilterAdapter.Id {
+    ResourcesFilterAdapter.Id,ClickCallBack {
     lateinit var context: Context
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     var list = ArrayList<CategoriesResponse.Body>()
@@ -122,7 +127,7 @@ class ResoucesActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
                     } else {
                         tvNoData.visibility = View.GONE
                         rvResources.visibility = View.VISIBLE
-                        rvResources.adapter = ResourcesAdapter(this, listResources!!)
+                        rvResources.adapter = ResourcesAdapter(this, listResources!!,this)
                     }
                 } else if (it.data is CategoriesResponse) {
 
@@ -149,5 +154,33 @@ class ResoucesActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
         cardId = id
         api()
 
+    }
+
+    fun download(){
+        val downloadmanager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
+        val uri =
+            Uri.parse("http://202.164.42.227:7552/uploads/users/164846515420210922_153633565_2d89da593cd46bde18b1dd2f919b5516.jpg")
+        val request = DownloadManager.Request(uri)
+        request.setTitle("My File")
+        request.setDescription("Downloading")
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+        request.setVisibleInDownloadsUi(false)
+        //request.setDestinationUri(Uri.parse("file://testFile.jpeg"))
+
+        request.setDestinationUri(Uri.parse(Environment.getExternalStorageDirectory().toString() + "/"))
+
+        downloadmanager.enqueue(request)
+    }
+    override fun onItemClick(pos: Int, value: String) {
+        when (value) {
+            "download" -> {
+                if (!listResources[pos].document.isNullOrEmpty()) {
+                    val link =
+                        "http://202.164.42.227:7552/uploads/documents/" + listResources[pos].document
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+                    startActivity(browserIntent)
+                }
+            }
+        }
     }
 }
