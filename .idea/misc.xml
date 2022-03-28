@@ -18,7 +18,7 @@
         <entry key="app/src/main/res/layout/activity_teacher_details.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/dialog_report.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/fragment_messages_tab.xml" value="0.16944444444444445" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_profile_tab.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/fragment_requests_tab.xml" value="0.12037037037037036" />
         <entry key="app/src/main/res/layout/fragment_schedule.xml" value="0.16" />

@@ -37,7 +37,7 @@
                 android:id="@+id/ivNotification"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
                 android:src="@drawable/bell" />
 
             <ImageView
