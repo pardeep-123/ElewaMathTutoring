@@ -13,8 +13,10 @@ import com.elewamathtutoring.Models.Login.Model_login
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.App
 import com.elewamathtutoring.Util.Validator
+import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.constant.Constants.Companion.scrollEditText
 import com.elewamathtutoring.Util.helper.Helper
+import com.elewamathtutoring.Util.helper.extensions.savePrefrence
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
@@ -112,6 +114,8 @@ class AboutYouActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
         when (liveData!!.status) {
             Status.SUCCESS -> {
                 if (liveData.data is EditTeacherProfileResponse) {
+                    savePrefrence(Constants.name, liveData.data.body.name)
+
                     Helper.showSuccessToast(this, liveData.data.message)
                     finish()
                 }

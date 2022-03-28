@@ -16,11 +16,11 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.elewamathtutoring.Activity.Auth.SignUpAs
+import com.elewamathtutoring.Activity.ParentOrStudent.payment.PaymentInfoActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.privacy.PrivacyPolicy
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.changepassword.ChangePassword
-import com.elewamathtutoring.Activity.ParentOrStudent.payment.PaymentInfoActivity
-import com.elewamathtutoring.Activity.SendFeedback
 import com.elewamathtutoring.Activity.ParentOrStudent.wallet.WithdrawalActivity
+import com.elewamathtutoring.Activity.SendFeedback
 import com.elewamathtutoring.Models.Modecommon.Commontoall
 import com.elewamathtutoring.Models.Modecommon.Commontoall2
 import com.elewamathtutoring.R
@@ -29,13 +29,13 @@ import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.Util.helper.extensions.clearPrefrences
 import com.elewamathtutoring.Util.helper.extensions.getPrefrence
+import com.elewamathtutoring.Util.helper.extensions.isMyServiceRunning
 import com.elewamathtutoring.Util.helper.extensions.savePrefrence
+import com.elewamathtutoring.Util.sinchcalling.SinchService
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
-
 import kotlinx.android.synthetic.main.activity_setting2.*
-import kotlinx.android.synthetic.main.activity_setting2.ivBack
 
 class SettingActivity : AppCompatActivity(), Observer<RestObservable> {
     var message1 = "About Us"
@@ -187,6 +187,7 @@ class SettingActivity : AppCompatActivity(), Observer<RestObservable> {
                 if (liveData.data is Commontoall) {
                     clearPrefrences()
                     shared.isLogin = false
+                    stopService()
                     startActivity(Intent(this, SignUpAs::class.java))
                 }
                 else if (liveData.data is Commontoall2)
@@ -205,6 +206,16 @@ class SettingActivity : AppCompatActivity(), Observer<RestObservable> {
             }
         }
     }
+
+    private fun stopService() {
+        try {
+            if (isMyServiceRunning(this, SinchService::class.java)) {
+                stopService(Intent(this, SinchService::class.java))
+            }
+        } catch (e: Exception) {
+        }
+    }
+
     fun call_notification_on_offApi(status:String) {
         baseViewModel.call_notification_on_offApi(this,  status,  true)
         baseViewModel.getCommonResponse().observe(this, this)

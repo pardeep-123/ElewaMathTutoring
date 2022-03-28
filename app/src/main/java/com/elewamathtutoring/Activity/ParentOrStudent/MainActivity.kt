@@ -1,7 +1,9 @@
 package com.elewamathtutoring
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -9,11 +11,15 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfileFragment
-import com.elewamathtutoring.Fragment.ParentOrStudent.booking.ScheduleFragment
-import com.elewamathtutoring.Fragment.ParentOrStudent.search.SearchFragment
 import com.elewamathtutoring.Activity.Chat.MessagesTabFragment
-
+import com.elewamathtutoring.Fragment.ParentOrStudent.booking.ScheduleFragment
+import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfileFragment
+import com.elewamathtutoring.Fragment.ParentOrStudent.search.SearchFragment
+import com.elewamathtutoring.Util.App
+import com.elewamathtutoring.Util.constant.Constants
+import com.elewamathtutoring.Util.helper.extensions.getPrefrence
+import com.elewamathtutoring.Util.helper.extensions.isMyServiceRunning
+import com.elewamathtutoring.Util.sinchcalling.SinchService
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -27,6 +33,30 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         bottomBar = findViewById(R.id.bottomNav)
         bottomBar.setOnNavigationItemSelectedListener(this)
         switchFragment(R.id.rframe, SearchFragment())
+
+
+        var userId= getPrefrence(Constants.USER_ID,"")
+        App.callClientSetup(userId)
+
+
+        /* startService(new Intent(this, SinchService.class));*/
+
+
+        /* startService(new Intent(this, SinchService.class));*/
+        val mServiceIntent = Intent(this, SinchService::class.java)
+        if (!isMyServiceRunning(this, SinchService::class.java)) {
+            // startService(mServiceIntent);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+               // startService(mServiceIntent)
+                startForegroundService(mServiceIntent);
+            } else {
+                startService(mServiceIntent)
+            }
+        }
+        if (App.Companion.callClient != null && App.Companion.sinchClient!!.isStarted) {
+            Log.e("sinchClient", "Client Connected, ready to use!")
+            App.Companion.sinchClient!!.audioController.disableSpeaker()
+        }
     }
 
 

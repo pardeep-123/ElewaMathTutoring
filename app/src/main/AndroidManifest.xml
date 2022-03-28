@@ -11,6 +11,12 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <application
         android:name=".Util.App"
         android:allowBackup="true"
@@ -23,6 +29,21 @@
         android:theme="@style/Theme.default"
         android:usesCleartextTraffic="true"
         tools:ignore="ExtraText">
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_noti" />
+
+        <activity android:name=".Util.sinchcalling.SinchIncomingCallActivity"
+            android:theme="@style/Theme.default.NoActionBar" android:excludeFromRecents="true" />
+
+        <service
+            android:name=".Util.sinchcalling.SinchService"
+            android:enabled="true"
+            android:exported="true"
+            android:foregroundServiceType="phoneCall"
+            android:stopWithTask="false" />
+
         <activity
             android:name=".Activity.ParentOrStudent.filter.FilterActivity"
             android:exported="true"

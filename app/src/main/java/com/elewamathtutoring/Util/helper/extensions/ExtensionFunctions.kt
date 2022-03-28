@@ -1,6 +1,7 @@
 package com.elewamathtutoring.Util.helper.extensions
 
 import android.app.Activity
+import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -18,6 +19,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import java.util.concurrent.TimeUnit
+
+fun isMyServiceRunning(context: Context, serviceClass: Class<*>): Boolean {
+    val manager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+    for (service in manager.getRunningServices(Int.MAX_VALUE)) {
+        if (serviceClass.name == service.service.className) {
+            Log.d("TAG?", true.toString() + "isMyServiceRunning")
+            return true
+        }
+    }
+    Log.d("TAG?", false.toString() + "isMyServiceRunning")
+    return false
+}
 
 inline fun <reified T : Any> Context.launchActivity(body: Intent.() -> Unit = {}) {
     val intent = Intent(this, T::class.java)

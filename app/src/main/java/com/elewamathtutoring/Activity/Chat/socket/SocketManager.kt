@@ -36,6 +36,9 @@ class SocketManager {
         val groupChatListner = "groupChatListner" // one to one chat
         val GET_READDATA_LISTNER = "readMessage"
 
+        val CALL_TO_USER = "call_to_user"
+        val END_CALL = "end_call"
+
     }
 
 
@@ -219,6 +222,45 @@ class SocketManager {
                 }
             } catch (ex: Exception) {
                 ex.localizedMessage
+            }
+
+            Log.i("Socket", "Send Message Called")
+        }
+    }
+
+
+    fun callToUser(jsonObject: JSONObject?) {
+        if (jsonObject != null) {
+            try {
+                if (!mSocket!!.connected()) {
+                    mSocket!!.connect()
+
+                    mSocket!!.emit(CALL_TO_USER, jsonObject)
+                } else {
+
+                    mSocket!!.emit(CALL_TO_USER, jsonObject)
+                }
+            } catch (ex: Exception) {
+              //  ex.localizedMessage
+            }
+
+            Log.i("Socket", "Send Message Called")
+        }
+    }
+    
+    fun endCallSocket(jsonObject: JSONObject?) {
+        if (jsonObject != null) {
+            try {
+                if (!mSocket!!.connected()) {
+                    mSocket!!.connect()
+
+                    mSocket!!.emit(END_CALL, jsonObject)
+                } else {
+
+                    mSocket!!.emit(END_CALL, jsonObject)
+                }
+            } catch (ex: Exception) {
+              //  ex.localizedMessage
             }
 
             Log.i("Socket", "Send Message Called")

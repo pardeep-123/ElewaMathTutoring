@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="toolbar_text_size">17sp</dimen>
+    <dimen name="regular_text_size">16sp</dimen>
+    <dimen name="large_text_size">18sp</dimen>
+    <dimen name="outside_padding">25dp</dimen>
+    <dimen name="top_margin_edittext">5dp</dimen>
+    <dimen name="edittext_padding">12dp</dimen>
+    <dimen name="top_margin_between_edittext">15dp</dimen>
+    <dimen name="view_line_height">1dp</dimen>
+    <dimen name="small_text_size">12sp</dimen>
+    <dimen name="very_small_text_size">10sp</dimen>
+
+
+    <!--Text margings-->
+    <dimen name="margin_dp1">1dp</dimen>
+    <dimen name="margin_dp2">2dp</dimen>
+    <dimen name="margin_dp3">3dp</dimen>
+    <dimen name="margin_negative_dp3">-3dp</dimen>
+
+    <dimen name="margin_dp5">5dp</dimen>
+    <dimen name="margin_negative_dp5">-5dp</dimen>
+
+    <dimen name="margin_dp6">6dp</dimen>
+    <dimen name="margin_dp7">7dp</dimen>
+    <dimen name="margin_negative_dp7">-7dp</dimen>
+
+    <dimen name="margin_dp8">8dp</dimen>
+    <dimen name="margin_dp9">9dp</dimen>
+    <dimen name="margin_dp10">10dp</dimen>
+    <dimen name="margin_dp11">11dp</dimen>
+    <dimen name="margin_dp12">12dp</dimen>
+    <dimen name="margin_negative_dp12">-12dp</dimen>
+
+    <dimen name="margin_dp13">13dp</dimen>
+    <dimen name="margin_dp15">15dp</dimen>
+    <dimen name="margin_negative_dp15">-15dp</dimen>
+
+    <dimen name="margin_dp16">16dp</dimen>
+    <dimen name="margin_dp18">18dp</dimen>
+    <dimen name="margin_negative_dp18">-18dp</dimen>
+
+    <dimen name="margin_dp20">20dp</dimen>
+    <dimen name="margin_negative_dp20">-20dp</dimen>
+
+    <dimen name="margin_dp22">22dp</dimen>
+    <dimen name="margin_dp25">25dp</dimen>
+    <dimen name="margin_dp28">28dp</dimen>
+    <dimen name="margin_dp30">30dp</dimen>
+    <dimen name="margin_dp31">31dp</dimen>
+    <dimen name="margin_dp32">32dp</dimen>
+    <dimen name="margin_dp33">33dp</dimen>
+    <dimen name="margin_dp35">35dp</dimen>
+    <dimen name="margin_dp36">36dp</dimen>
+    <dimen name="margin_dp38">38dp</dimen>
+    <dimen name="margin_dp40">40dp</dimen>
+    <dimen name="margin_dp42">42dp</dimen>
+    <dimen name="margin_dp44">44dp</dimen>
+    <dimen name="margin_dp45">45dp</dimen>
+    <dimen name="margin_dp48">48dp</dimen>
+    <dimen name="margin_dp50">50dp</dimen>
+    <dimen name="margin_dp52">52dp</dimen>
+    <dimen name="margin_dp55">55dp</dimen>
+    <dimen name="margin_dp57">57dp</dimen>
+    <dimen name="margin_dp58">58dp</dimen>
+    <dimen name="margin_dp60">60dp</dimen>
+    <dimen name="margin_dp62">62dp</dimen>
+    <dimen name="margin_dp64">64dp</dimen>
+    <dimen name="margin_dp65">65dp</dimen>
+    <dimen name="margin_dp68">68dp</dimen>
+    <dimen name="margin_dp70">70dp</dimen>
+    <dimen name="margin_dp72">72dp</dimen>
+    <dimen name="margin_dp75">75dp</dimen>
+    <dimen name="margin_dp78">78dp</dimen>
+    <dimen name="margin_dp80">80dp</dimen>
+    <dimen name="margin_dp82">82dp</dimen>
+    <dimen name="margin_dp85">85dp</dimen>
+    <dimen name="margin_dp90">90dp</dimen>
+    <dimen name="margin_dp95">95dp</dimen>
+    <dimen name="margin_dp100">100dp</dimen>
+    <dimen name="margin_dp105">105dp</dimen>
+    <dimen name="margin_dp108">108dp</dimen>
+    <dimen name="margin_dp110">110dp</dimen>
+    <dimen name="margin_dp115">115dp</dimen>
+    <dimen name="margin_dp120">120dp</dimen>
+    <dimen name="margin_dp125">125dp</dimen>
+    <dimen name="margin_dp130">130dp</dimen>
+    <dimen name="margin_dp135">135dp</dimen>
+    <dimen name="margin_dp140">140dp</dimen>
+    <dimen name="margin_dp150">150dp</dimen>
+    <dimen name="margin_dp160">160dp</dimen>
+    <dimen name="margin_dp170">170dp</dimen>
+    <dimen name="margin_dp180">180dp</dimen>
+    <dimen name="margin_dp190">190dp</dimen>
+    <dimen name="margin_dp200">200dp</dimen>
+    <dimen name="margin_dp220">220dp</dimen>
+    <dimen name="margin_dp230">230dp</dimen>
+    <dimen name="margin_dp240">240dp</dimen>
+    <dimen name="margin_dp250">250dp</dimen>
+    <dimen name="margin_dp300">300dp</dimen>
+    <dimen name="margin_dp350">350dp</dimen>
+
+    <!---      padding       -->
+    <dimen name="padding_dp1">1dp</dimen>
+    <dimen name="padding_dp2">2dp</dimen>
+    <dimen name="padding_dp3">3dp</dimen>
+    <dimen name="padding_dp5">5dp</dimen>
+    <dimen name="padding_dp6">6dp</dimen>
+    <dimen name="padding_dp7">7dp</dimen>
+    <dimen name="padding_dp8">8dp</dimen>
+    <dimen name="padding_dp9">9dp</dimen>
+    <dimen name="padding_dp10">10dp</dimen>
+    <dimen name="padding_dp11">11dp</dimen>
+    <dimen name="padding_dp12">12dp</dimen>
+    <dimen name="padding_dp15">15dp</dimen>
+    <dimen name="padding_dp17">17dp</dimen>
+    <dimen name="padding_dp20">20dp</dimen>
+    <dimen name="padding_dp22">22dp</dimen>
+    <dimen name="padding_dp25">25dp</dimen>
+    <dimen name="padding_dp28">28dp</dimen>
+    <dimen name="padding_dp30">30dp</dimen>
+    <dimen name="padding_dp32">32dp</dimen>
+    <dimen name="padding_dp35">35dp</dimen>
+    <dimen name="padding_dp40">40dp</dimen>
+    <dimen name="padding_dp50">50dp</dimen>
+    <dimen name="padding_dp60">60dp</dimen>
+    <dimen name="padding_dp70">70dp</dimen>
+    <dimen name="padding_dp80">80dp</dimen>
+    <dimen name="padding_dp105">105dp</dimen>
+    <dimen name="padding_dp110">110dp</dimen>
+    <dimen name="padding_dp120">120dp</dimen>
+    <dimen name="padding_dp140">140dp</dimen>
+
+    <!---      Text size      -->
+    <dimen name="textsize_sp1">1sp</dimen>
+    <dimen name="textsize_sp2">2sp</dimen>
+    <dimen name="textsize_sp3">3sp</dimen>
+    <dimen name="textsize_sp4">4sp</dimen>
+    <dimen name="textsize_sp5">5sp</dimen>
+    <dimen name="textsize_sp6">6sp</dimen>
+    <dimen name="textsize_sp7">7sp</dimen>
+    <dimen name="textsize_sp8">8sp</dimen>
+    <dimen name="textsize_sp9">9sp</dimen>
+    <dimen name="textsize_sp10">10sp</dimen>
+    <dimen name="textsize_sp11">11sp</dimen>
+    <dimen name="textsize_sp12">12sp</dimen>
+    <dimen name="textsize_sp13">13sp</dimen>
+    <dimen name="textsize_sp14">14sp</dimen>
+    <dimen name="textsize_sp15">15sp</dimen>
+    <dimen name="textsize_sp16">16sp</dimen>
+    <dimen name="textsize_sp17">17sp</dimen>
+    <dimen name="textsize_sp18">18sp</dimen>
+    <dimen name="textsize_sp19">19sp</dimen>
+    <dimen name="textsize_sp20">20sp</dimen>
+    <dimen name="textsize_sp21">21sp</dimen>
+    <dimen name="textsize_sp22">22sp</dimen>
+    <dimen name="textsize_sp23">23sp</dimen>
+    <dimen name="textsize_sp24">24sp</dimen>
+    <dimen name="textsize_sp25">25sp</dimen>
+    <dimen name="textsize_sp26">26sp</dimen>
+    <dimen name="textsize_sp27">27sp</dimen>
+    <dimen name="textsize_sp28">28sp</dimen>
+    <dimen name="textsize_sp29">29sp</dimen>
+    <dimen name="textsize_sp30">30sp</dimen>
+    <dimen name="textsize_sp32">32sp</dimen>
+    <dimen name="textsize_sp35">35sp</dimen>
+    <dimen name="textsize_sp36">36sp</dimen>
+    <dimen name="textsize_sp37">37sp</dimen>
+    <dimen name="textsize_sp38">38sp</dimen>
+    <dimen name="textsize_sp40">40sp</dimen>
+    <dimen name="textsize_sp42">42sp</dimen>
+    <dimen name="textsize_sp44">44sp</dimen>
+    <dimen name="textsize_sp46">46sp</dimen>
+    <dimen name="textsize_sp48">48sp</dimen>
+    <dimen name="textsize_sp50">50sp</dimen>
+
+    <!-- Various Views Height -->
+    <dimen name="view_size_dp0.5">0.5dp</dimen>
+    <dimen name="view_size_dp20">20dp</dimen>
+
+    <dimen name="view_size_dp1">1dp</dimen>
+    <dimen name="view_size_dp1.5">1.5dp</dimen>
+    <dimen name="view_size_dp2">2dp</dimen>
+    <dimen name="view_size_dp2.5">2.5dp</dimen>
+
+
+    <!--Relative layout Hight-->
+
+    <dimen name="relative_hight_dp25">25dp</dimen>
+    <dimen name="relative_hight_dp30">30dp</dimen>
+    <dimen name="relative_hight_dp35">35dp</dimen>
+    <dimen name="relative_hight_dp40">40dp</dimen>
+    <dimen name="relative_hight_dp45">45dp</dimen>
+    <dimen name="relative_hight_dp48">48dp</dimen>
+    <dimen name="relative_hight_dp50">50dp</dimen>
+    <dimen name="relative_hight_dp52">52dp</dimen>
+    <dimen name="relative_hight_dp55">55dp</dimen>
+    <dimen name="relative_hight_dp58">58dp</dimen>
+    <dimen name="relative_hight_dp60">60dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
+
+</resources>

@@ -1,8 +1,11 @@
 package com.elewamathtutoring.Activity.TeacherOrTutor
 
+import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -12,6 +15,11 @@ import com.elewamathtutoring.Fragment.TeacherOrTutor.TeacherProfileTabFragment
 import com.elewamathtutoring.Fragment.TeacherOrTutor.request.RequestsTabFragment
 import com.elewamathtutoring.Fragment.TeacherOrTutor.bookings.ScheduleTabFragment
 import com.elewamathtutoring.R
+import com.elewamathtutoring.Util.App
+import com.elewamathtutoring.Util.constant.Constants
+import com.elewamathtutoring.Util.helper.extensions.getPrefrence
+import com.elewamathtutoring.Util.helper.extensions.isMyServiceRunning
+import com.elewamathtutoring.Util.sinchcalling.SinchService
 import kotlinx.android.synthetic.main.activity_main_teacher.*
 
 class MainTeacherActivity : AppCompatActivity(), View.OnClickListener {
@@ -26,6 +34,30 @@ class MainTeacherActivity : AppCompatActivity(), View.OnClickListener {
         llMessagesTab.setOnClickListener(this)
         llProfileTab.setOnClickListener(this)
         switchFragment(R.id.container2, ScheduleTabFragment())
+
+
+        var userId= getPrefrence(Constants.USER_ID,"")
+        App.callClientSetup(userId)
+
+
+        /* startService(new Intent(this, SinchService.class));*/
+
+
+        /* startService(new Intent(this, SinchService.class));*/
+        val mServiceIntent = Intent(this, SinchService::class.java)
+        if (!isMyServiceRunning(this, SinchService::class.java)) {
+            // startService(mServiceIntent);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+               // startService(mServiceIntent)
+                 startForegroundService(mServiceIntent);
+            } else {
+                startService(mServiceIntent)
+            }
+        }
+        if (App.Companion.callClient != null && App.Companion.sinchClient!!.isStarted) {
+            Log.e("sinchClient", "Client Connected, ready to use!")
+            App.Companion.sinchClient!!.audioController.disableSpeaker()
+        }
     }
 
     override fun onClick(v: View?) {

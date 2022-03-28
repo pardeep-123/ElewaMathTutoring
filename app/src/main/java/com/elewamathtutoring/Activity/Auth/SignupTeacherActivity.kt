@@ -100,6 +100,8 @@ class SignupTeacherActivity : AppCompatActivity(), View.OnClickListener , Observ
                 if (it.data is TeacherSignUpResponse) {
                     savePrefrence(Constants.AUTH_KEY, it.data.body.token)
                     savePrefrence(Constants.USER_ID, it.data.body.id.toString())
+
+                    savePrefrence(Constants.name, it.data.body.name)
                     if (getPrefrence(Constants.user_type, "").equals("2")) {
                         startActivity(
                             Intent(this, TeachingInfoActivity::class.java)

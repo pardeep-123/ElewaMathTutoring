@@ -154,6 +154,7 @@ class LoginScreen : AppCompatActivity(), View.OnClickListener, Observer<RestObse
                             liveData.data.body.notificationStatus.toString())
 
                         savePrefrence(Constants.user_type, liveData.data.body.userType.toString())
+                        savePrefrence(Constants.name, liveData.data.body.name)
 
                         if (liveData.data.body.userType == 2) {
                             when {
@@ -224,6 +225,8 @@ class LoginScreen : AppCompatActivity(), View.OnClickListener, Observer<RestObse
                     }
 
                 } else if (liveData.data is Commontoall) {
+
+
                     savePrefrence(Constants.Social_login, "True")
                     if (liveData.data.message.equals("Sorry There is no user with this socialId.")) {
                         if (getPrefrence(Constants.user_type, "").equals("1")) {

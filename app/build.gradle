@@ -35,6 +35,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
 }
 
 dependencies {
@@ -153,6 +160,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-iid:21.0.1'
     implementation 'com.google.firebase:firebase-core:18.0.0'
     implementation 'com.google.firebase:firebase-messaging:21.0.1'
+
+    /*sinch audio call*/
+    implementation(name: 'sinch-android-rtc', version: '+', ext: 'aar')
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
 }
 
 kapt {

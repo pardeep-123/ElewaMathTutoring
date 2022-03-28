@@ -20,17 +20,16 @@ import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.App
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.extensions.getPrefrence
+import com.elewamathtutoring.Util.sinchcalling.SinchIncomingCallActivity
 import com.elewamathtutoring.getBase64FromPath
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import com.google.gson.GsonBuilder
 import com.pawskeeper.Adapter.ChatAdapter
+import com.sinch.android.rtc.calling.Call
 import kotlinx.android.synthetic.main.activity_chat.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-import java.io.File
-import java.io.FileInputStream
-import java.io.IOException
 
 class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.Observer {
 
@@ -93,6 +92,49 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
 
 
         init()
+
+        ivVoiceCall.setOnClickListener {
+            if (App.Companion.callClient == null) {
+                Toast.makeText(this@Chat_Activity, "Sinch Client not connected", Toast.LENGTH_SHORT)
+                    .show()
+
+            }else{
+
+
+
+                val hashMap: HashMap<String ,String> = HashMap<String, String>()
+
+                var friendName=intent.getStringExtra("chatUserName").toString()
+                var friendImage=""
+                hashMap["friendName"] = getPrefrence(Constants.name,"")
+                hashMap["friendImage"] = friendImage
+
+                val currentcall: Call = App.Companion.callClient!!.callUser(receiverId, hashMap)
+                val callscreen = Intent(this@Chat_Activity, SinchIncomingCallActivity::class.java)
+                callscreen.putExtra("callid", currentcall.callId)
+                callscreen.putExtra("friendName",friendName )
+                callscreen.putExtra("friendId", receiverId)
+                callscreen.putExtra("friendImage", friendImage)
+                callscreen.putExtra("incomming", false)
+                callscreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+                try {
+                    var userId= getPrefrence(Constants.USER_ID,"")
+                    var jsonObject=JSONObject()
+                    jsonObject.put("userId",userId)
+                    jsonObject.put("friendId",receiverId)
+                    jsonObject.put("type","1")
+                    jsonObject.put("callId",currentcall.callId)
+                    socketManager!!.callToUser(jsonObject)
+                } catch (e: Exception) {
+                }
+
+                startActivity(callscreen)
+            }
+
+
+
+        }
     }
 
     private fun setAdapter(){
