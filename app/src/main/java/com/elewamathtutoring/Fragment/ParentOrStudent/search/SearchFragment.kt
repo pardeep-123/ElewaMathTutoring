@@ -20,6 +20,7 @@ import com.elewamathtutoring.Activity.Chat.mathChat.MathChatActivity
 import com.elewamathtutoring.Activity.Chat.mathChat.MathChatResponse
 import com.elewamathtutoring.Activity.NotificationsActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.filter.FilterActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.PostMathProblemActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResoucesActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
 import com.elewamathtutoring.Adapter.SearchHomeAdapter
@@ -118,6 +119,14 @@ class SearchFragment : CheckLocationActivity(), Observer<RestObservable>, Teachi
             filterResult.launch(intent)
             //   startActivityForResult(intent, 101)
         }
+
+        rlMathProblem.setOnClickListener {
+            val intent = Intent(requireContext(), PostMathProblemActivity::class.java)
+            startActivity(intent)
+        }
+
+
+
         ivSetting = view.findViewById(R.id.ivSetting)
         ivSetting.setOnClickListener {
             val intent = Intent(requireContext(), SettingActivity::class.java)
@@ -251,7 +260,10 @@ class SearchFragment : CheckLocationActivity(), Observer<RestObservable>, Teachi
             when_nodatavideo.visibility = View.VISIBLE
         }
         //calling a method of the adapter class and passing the filtered list
-        searchHomeAdapter!!.notifyData(filterServicesList)
+        if(!teacherlevel.isNotEmpty()){
+            searchHomeAdapter!!.notifyData(filterServicesList)
+        }
+
 
     }
 

@@ -44,9 +44,10 @@ class ScheduleASession2Activity : AppCompatActivity(), View.OnClickListener {
                 selected_Timeslot++
             }
         }
-        tvTime.text = selected_Timeslot.toString()+" hour @"+ Constants.Currency+profile[0].InPersonRate.toString()+"/hr"
-        selectedprice = profile[0].InPersonRate
-        val total=selected_Timeslot*profile[0].InPersonRate
+        tvTime.text = selected_Timeslot.toString()+" hour @"+ Constants.Currency+profile[0].hourlyPrice.toString()+"/hr"
+        selectedprice = profile[0].hourlyPrice
+
+        val total=selected_Timeslot*profile[0].hourlyPrice
         tvSessionCost.text = Constants.Currency+total.toString()
     }
     override fun onClick(v: View?) {

@@ -21,27 +21,6 @@
             android:layout_marginTop="@dimen/_30sdp"
             android:layout_marginRight="15dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:orientation="horizontal">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/WrapTextView"
-                    android:fontFamily="@font/medium"
-                    android:text="Online"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp" />
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/iv_notification_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:thumb="@drawable/notification_thumb_selector"
-                    app:track="@drawable/notification_track_selector" />
-            </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/WrapTextView"

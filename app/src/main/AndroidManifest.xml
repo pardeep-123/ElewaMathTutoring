@@ -10,13 +10,12 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
         android:name=".Util.App"
         android:allowBackup="true"
@@ -29,13 +28,21 @@
         android:theme="@style/Theme.default"
         android:usesCleartextTraffic="true"
         tools:ignore="ExtraText">
+        <activity
+            android:name=".Activity.ParentOrStudent.postMathProblem.DetailActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.ParentOrStudent.postMathProblem.PostMathProblemActivity"
+            android:exported="true" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_noti" />
 
-        <activity android:name=".Util.sinchcalling.SinchIncomingCallActivity"
-            android:theme="@style/Theme.default.NoActionBar" android:excludeFromRecents="true" />
+        <activity
+            android:name=".Util.sinchcalling.SinchIncomingCallActivity"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.default.NoActionBar" />
 
         <service
             android:name=".Util.sinchcalling.SinchService"
@@ -198,6 +205,7 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -241,6 +249,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
         <service
             android:name=".Util.fcm.FirebaseService"
             android:exported="false">
@@ -248,8 +257,10 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
     </application>
+
 </manifest>

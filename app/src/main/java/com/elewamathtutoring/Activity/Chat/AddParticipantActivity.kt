@@ -15,6 +15,7 @@ import android.widget.PopupWindow
 import android.widget.RelativeLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.elewamathtutoring.Activity.Chat.socket.SocketManager
+import com.elewamathtutoring.Activity.TeacherOrTutor.MainTeacherActivity
 import com.elewamathtutoring.Adapter.ParentOrStudent.AddParticipantsAdapter
 import com.elewamathtutoring.MainActivity
 import com.elewamathtutoring.Model.GroupListModel
@@ -160,8 +161,14 @@ class AddParticipantActivity : AppCompatActivity(), View.OnClickListener,SocketM
             SocketManager.createGroupEmitter->{
                 try {
                     runOnUiThread {
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
+                        if (getPrefrence("userType", "").equals("1")){
+                            startActivity(Intent(this, MainActivity::class.java))
+                            finishAffinity()
+                        }else{
+                            startActivity(Intent(this, MainTeacherActivity::class.java))
+                            finishAffinity()
+                        }
+
                     }
                 }catch (e:Exception){}
             }

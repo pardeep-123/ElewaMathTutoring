@@ -136,7 +136,6 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14sdp"
                     android:visibility="gone" />
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_listView"
                     android:layout_width="match_parent"
@@ -145,20 +144,42 @@
                     android:layout_marginTop="10dp"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/rv_listView"
-android:layout_marginTop="@dimen/_250sdp"
+                    android:layout_marginTop="@dimen/_200sdp"
                     android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/rlMathProblem"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:background="@drawable/bg_btn">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:drawableLeft="@drawable/post"
+                            android:drawablePadding="@dimen/_10sdp"
+                            android:fontFamily="@font/medium"
+                            android:text="Math Problems"
+                            android:textColor="@color/white"
+                            android:textSize="16dp"
+                            app:fontFamily="@font/bold" />
+
+                    </RelativeLayout>
 
                     <RelativeLayout
                         android:id="@+id/rlResources"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:layout_marginStart="@dimen/_20sdp"
-                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_20sdp"
                         android:background="@drawable/bg_btn">
 

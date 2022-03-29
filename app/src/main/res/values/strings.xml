@@ -125,4 +125,5 @@
     <string name="edit_your_profile">Edit Your Profile</string>
     <string name="clear"><u>Clear</u></string>
     <string name="error_password_length">Password length should contain at least 6 characters</string>
+    <string name="_24k_comments"><u>24k comments</u></string>
 </resources>

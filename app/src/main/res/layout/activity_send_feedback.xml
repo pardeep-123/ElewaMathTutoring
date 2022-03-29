@@ -157,8 +157,8 @@
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"
         android:layout_marginBottom="20dp"
-        android:textAllCaps="false"
         android:background="@drawable/button_bg_and_shape"
         android:text="Send Feedback"
+        android:textAllCaps="false"
         android:textColor="@color/white" />
 </RelativeLayout>

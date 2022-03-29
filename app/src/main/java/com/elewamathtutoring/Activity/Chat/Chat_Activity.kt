@@ -264,9 +264,7 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
                 runOnUiThread {
                     progresschat.visibility=View.GONE
                     val objects = args as JSONArray
-
                     val gson = GsonBuilder().create()
-
                     val chatListData = gson.fromJson(objects.toString(), ChatListModel::class.java)
                      list.addAll(chatListData)
 

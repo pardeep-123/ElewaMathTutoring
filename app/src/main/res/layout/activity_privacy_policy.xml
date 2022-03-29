@@ -19,9 +19,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:padding="@dimen/_5sdp"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginBottom="8dp"
+            android:padding="@dimen/_5sdp"
             android:src="@drawable/back_arrow_white" />
 
         <TextView

@@ -78,7 +78,7 @@ class SinchService : Service(), CallClientListener {
     }
 
 
-    override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         sinchClient!!.addSinchClientListener(object : SinchClientListener {
             override fun onClientStarted(client: SinchClient) {
                 callClient = client.callClient

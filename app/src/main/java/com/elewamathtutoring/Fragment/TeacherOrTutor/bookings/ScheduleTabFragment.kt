@@ -18,6 +18,7 @@ import com.applandeo.materialcalendarview.builders.DatePickerBuilder
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import com.applandeo.materialcalendarview.listeners.OnSelectDateListener
 import com.elewamathtutoring.Activity.Chat.mathChat.MathChatActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.PostMathProblemActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResoucesActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
 import com.elewamathtutoring.Adapter.TeacherOrTutor.Hadder_sessionsadapter
@@ -63,6 +64,10 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
         }
         v.rootView.rlMathChatRoom.setOnClickListener {
             startActivity(Intent(context, MathChatActivity::class.java)
+                .putExtra("tutor","mathChat"))
+        }
+ v.rootView.rlMathProblem.setOnClickListener {
+            startActivity(Intent(context, PostMathProblemActivity::class.java)
                 .putExtra("tutor","mathChat"))
         }
 

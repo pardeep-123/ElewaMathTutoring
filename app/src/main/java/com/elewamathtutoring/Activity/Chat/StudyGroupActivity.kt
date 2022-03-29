@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.view.View
 import com.android.rideandserve.utils.ImagePickerUtility
 import com.bumptech.glide.Glide
-import com.elewamathtutoring.MainActivity
-import com.elewamathtutoring.R
-import com.elewamathtutoring.getBase64FromPath
-import com.elewamathtutoring.showToast
+import com.elewamathtutoring.*
 import com.yanzhenjie.album.Album
 import com.yanzhenjie.album.AlbumFile
 import com.yanzhenjie.album.api.widget.Widget
@@ -28,7 +25,8 @@ class StudyGroupActivity : ImagePickerUtility(), View.OnClickListener  {
                 imagePath?.substring(imagePath.lastIndexOf(".") + 1).toString() // Without dot jpg, png
         } catch (e: Exception) {
         }
-        image = getBase64FromPath(imagePath!!)
+      //  image = getBase64FromPath(imagePath!!)
+        image = newRetrun(imagePath!!)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
