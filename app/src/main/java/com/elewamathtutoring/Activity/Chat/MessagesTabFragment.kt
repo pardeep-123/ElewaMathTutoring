@@ -127,8 +127,7 @@ class MessagesTabFragment : Fragment() ,View.OnClickListener,  SocketManager.Obs
                             messagenvendor_recycle.layoutManager = LinearLayoutManager(
                                 requireContext(),
                                 LinearLayoutManager.VERTICAL,
-                                false
-                            )
+                                false)
                             messagenvendor_recycle.adapter = messageAdapter
                             //   Progress_chat.visibility=View.GONE
                         }
@@ -145,10 +144,7 @@ class MessagesTabFragment : Fragment() ,View.OnClickListener,  SocketManager.Obs
                     }
 
                 }
-                catch (e:Exception)
-                {
-
-                }
+                catch (e:Exception){}
             }
         }
     }

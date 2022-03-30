@@ -1,4 +1,4 @@
-package com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem
+package com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.mathProblem
 
 import android.content.Context
 import android.content.Intent
@@ -40,10 +40,8 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener , Clic
             R.id.ivBack->{
                 finish()
             }
-
         }
     }
-
     override fun onItemClick(pos: Int, value: String) {
         when (value) {
             "dots" -> {
@@ -57,7 +55,6 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener , Clic
             applicationContext?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.popup_math_problem, null)
         myPopupWindow = PopupWindow(view, 400, RelativeLayout.LayoutParams.WRAP_CONTENT, true)
-
         ivDots.setOnClickListener {
             myPopupWindow?.showAsDropDown(it, -0, -35)
             applyDim(viewGroup, 0.5f)

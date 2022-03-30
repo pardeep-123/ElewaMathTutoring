@@ -18,13 +18,12 @@ import com.applandeo.materialcalendarview.builders.DatePickerBuilder
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import com.applandeo.materialcalendarview.listeners.OnSelectDateListener
 import com.elewamathtutoring.Activity.Chat.mathChat.MathChatActivity
-import com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.PostMathProblemActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.mathProblem.PostMathProblemActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResoucesActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
 import com.elewamathtutoring.Adapter.TeacherOrTutor.Hadder_sessionsadapter
 import com.elewamathtutoring.Adapter.TeacherOrTutor.SessionsAdapter
 import com.elewamathtutoring.Models.Card_listing.AllSessionListResponse
-import com.elewamathtutoring.Models.ListView.Model_myschdeullist
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.Helper

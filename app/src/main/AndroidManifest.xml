@@ -32,7 +32,7 @@
             android:name=".Activity.ParentOrStudent.postMathProblem.DetailActivity"
             android:exported="true" />
         <activity
-            android:name=".Activity.ParentOrStudent.postMathProblem.PostMathProblemActivity"
+            android:name=".Activity.ParentOrStudent.postMathProblem.mathProblem.PostMathProblemActivity"
             android:exported="true" />
 
         <meta-data

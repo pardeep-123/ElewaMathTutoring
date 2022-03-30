@@ -30,6 +30,7 @@ import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
 
 import kotlinx.android.synthetic.main.activity_requests.*
+import kotlinx.android.synthetic.main.activity_schedule_a_session2.*
 import kotlinx.android.synthetic.main.dialog_report.*
 import kotlinx.android.synthetic.main.item_calender.view.*
 import kotlinx.android.synthetic.main.report_popup.view.*
@@ -214,13 +215,17 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
                 if (liveData.data is RequestDetailResponse) {
                     tvRequestsName.text=liveData.data.body.Student.name
                     tvAmountHours.text="Amount ("+liveData.data.body.hours+" hours )"
-                    tvAmount.text=liveData.data.body.perHour.toString()
-                    tvCommision.text=liveData.data.body.adminCommision
-                    tvAmtReceived.text = liveData.data.body.total.toString()
+                    tvAmount.text=Constants.Currency+liveData.data.body.perHour.toString()
+                    tvCommision.text=Constants.Currency+liveData.data.body.adminCommision
+                  tvAmtReceived.text = Constants.Currency+liveData.data.body.total.toString()
 
                     tv_inquiry.text="About "+liveData.data.body.Student.name
                     tv_inq.text="About "+liveData.data.body.Student.about
                     tv_requestemail.text=liveData.data.body.Student.email
+
+
+                  /*  val total=liveData.data.body.perHour*liveData.data.body.adminCommision
+                    tvAmtReceived.text = Constants.Currency+total*/
                   //  tv_aboutparent.text=liveData.data.body.Student.about
                     receiverId= liveData.data.body.userId.toString()
                     chatUserName= liveData.data.body.Student.name.toString()

@@ -23,7 +23,7 @@ class AddParticipantsAdapter(
     var ctn = c
 
     interface GroupId {
-        fun groupIds(id: String)
+        fun groupIds(id: Int)
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
@@ -47,10 +47,10 @@ class AddParticipantsAdapter(
         holder.itemView.ivOf.setOnCheckedChangeListener { _, b ->
             if (b) {
                 list[position].isCheck = true
-                groupId.groupIds(list[position].id.toString())
+                groupId.groupIds(list[position].id)
             } else {
                 list[position].isCheck = false
-                groupId.groupIds(list[position].id.toString())
+                groupId.groupIds(list[position].id)
             }
           //  notifyDataSetChanged()
         }

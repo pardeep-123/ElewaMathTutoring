@@ -28,6 +28,7 @@ class SocketManager {
         val GET_READ_UNREAD_EMITTER = "read_message"
         val participantsList = "participants_list"
         val createGroupEmitter = "create_group"
+        val joinRoomEmitter = "join_room"
         //listener
         val CONNECT_LISTENER = "connect_listener"
         val SEND_MESSAGE_LISTNER = "sendMessage" // send message
@@ -385,7 +386,7 @@ class SocketManager {
                     mSocket!!.emit(createGroupEmitter, jsonObject,Ack{ args->
 
                         val data = args[0] as JSONArray
-                        Log.e("Socket", "onGetFriendChat :::$data")
+                        Log.e("Socket", "onCreateGroup :::$data")
                         for (observer in observerList!!) {
                             observer.onResponseArray(createGroupEmitter, data)
                         }
@@ -395,7 +396,36 @@ class SocketManager {
                 ex.localizedMessage
             }
 
-            Log.i("Socket", "Send Message Called")
+            Log.i("Socket", "Create Group Called")
+        }
+    }
+
+    // method for join room
+    fun joinRoom(jsonObject: JSONObject?) {
+        if (jsonObject != null) {
+            try {
+                if (!mSocket!!.connected()) {
+                    mSocket!!.connect()
+
+                    mSocket!!.emit(joinRoomEmitter, jsonObject, Ack{ args->
+                        Log.i("Socket", args.toString())
+                    })
+                } else {
+
+                    mSocket!!.emit(joinRoomEmitter, jsonObject,Ack{ args->
+
+                        val data = args[0] as JSONObject
+                        Log.e("Socket", "onGetFriendChat :::$data")
+                        for (observer in observerList!!) {
+                            observer.onResponse(joinRoomEmitter, data)
+                        }
+                    })
+                }
+            } catch (ex: Exception) {
+                ex.localizedMessage
+            }
+
+            Log.i("Socket", "joinRoom Called")
         }
     }
 

@@ -20,7 +20,7 @@ import com.elewamathtutoring.Activity.Chat.mathChat.MathChatActivity
 import com.elewamathtutoring.Activity.Chat.mathChat.MathChatResponse
 import com.elewamathtutoring.Activity.NotificationsActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.filter.FilterActivity
-import com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.PostMathProblemActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.mathProblem.PostMathProblemActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResoucesActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
 import com.elewamathtutoring.Adapter.SearchHomeAdapter
@@ -31,8 +31,6 @@ import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import com.riseball.interface_base.Teachinglevel_interface
-import kotlinx.android.synthetic.main.activity_teaching_info.*
-import kotlinx.android.synthetic.main.dialog_filter.*
 import kotlinx.android.synthetic.main.fragment_search.*
 import java.util.*
 import kotlin.collections.ArrayList

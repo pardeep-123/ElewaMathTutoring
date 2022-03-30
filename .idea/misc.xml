@@ -3,10 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-xxhdpi/background_roundedges.xml" value="0.20104166666666667" />
         <entry key="app/src/main/res/layout/activity_about_you.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_availablity.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.16" />
-        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_intro_slider.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_login_screen.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_math_person_chat.xml" value="0.16510416666666666" />
@@ -36,7 +37,7 @@
         <entry key="app/src/main/res/layout/item_calender.xml" value="0.18" />
         <entry key="app/src/main/res/layout/item_detail.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/item_hadder.xml" value="0.18489583333333334" />
-        <entry key="app/src/main/res/layout/item_math_problem.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/item_math_problem.xml" value="0.33" />
         <entry key="app/src/main/res/layout/popup_math_problem.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/report_popup.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/row_image_slider.xml" value="0.18489583333333334" />

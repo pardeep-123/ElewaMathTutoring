@@ -40,22 +40,24 @@ class MessageAdapter(var context: Context, var orderDetailForMapResponse: ArrayL
 
         holder.itemView.setOnClickListener {
             val i = Intent(context, Chat_Activity::class.java)
-            if(getPrefrence(Constants.USER_ID, "").equals(orderDetailForMapResponse.get(position).user2Id.toString()))
-            {
+            if(getPrefrence(Constants.USER_ID, "").equals(orderDetailForMapResponse.get(position).user2Id.toString())) {
                 i.putExtra("receiverId", orderDetailForMapResponse.get(position).userId.toString())
-            }
-            else
-            {
+                i.putExtra("chatUserName", orderDetailForMapResponse.get(position).userName)
+            }else if ( orderDetailForMapResponse.get(position).user2Id==0) {
                 i.putExtra("receiverId", orderDetailForMapResponse.get(position).user2Id.toString())
+                i.putExtra("groupId", orderDetailForMapResponse.get(position).groupId.toString())
+                i.putExtra("chatUserName", orderDetailForMapResponse.get(position).groupName)
+            }else{
+                i.putExtra("receiverId", orderDetailForMapResponse.get(position).user2Id.toString())
+                i.putExtra("chatUserName", orderDetailForMapResponse.get(position).userName)
             }
 
-            i.putExtra("chatUserName", orderDetailForMapResponse.get(position).userName)
+
             context.startActivity(i)
         }
     }
 
-    override fun getItemCount(): Int
-    {
+    override fun getItemCount(): Int {
       return orderDetailForMapResponse.size
     }
     inner class MessageHolder(view: View) : RecyclerView.ViewHolder(view) {}

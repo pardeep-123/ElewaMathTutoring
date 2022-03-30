@@ -41,7 +41,8 @@ class AddParticipantActivity : AppCompatActivity(), View.OnClickListener,SocketM
     var groupName = ""
     var extension = ""
     var image = ""
-    var idArraylist = ArrayList<String>()
+    var groupId = ""
+    var idArraylist = ArrayList<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,7 +99,8 @@ class AddParticipantActivity : AppCompatActivity(), View.OnClickListener,SocketM
                 //Imagename, name, memberIds, userId
                 val jsonObject = JSONObject()
                 jsonObject.put("userId", getPrefrence(Constants.USER_ID,""))
-                 jsonObject.put("memberIds", idArraylist.toString())
+                val list = JSONArray(idArraylist)
+                 jsonObject.put("memberIds", list)
                  jsonObject.put("imageName", image)
                  jsonObject.put("extension", extension)
                  jsonObject.put("name", groupName)
@@ -158,25 +160,37 @@ class AddParticipantActivity : AppCompatActivity(), View.OnClickListener,SocketM
                 }
                 catch (e:Exception) {}
             }
-            SocketManager.createGroupEmitter->{
-                try {
-                    runOnUiThread {
-                        if (getPrefrence("userType", "").equals("1")){
-                            startActivity(Intent(this, MainActivity::class.java))
-                            finishAffinity()
-                        }else{
-                            startActivity(Intent(this, MainTeacherActivity::class.java))
-                            finishAffinity()
-                        }
 
-                    }
-                }catch (e:Exception){}
+
+            SocketManager.createGroupEmitter -> {
+               groupId = (args[0] as JSONObject).getString("groupId")
+                try {
+                    val jsonObject = JSONObject()
+                    jsonObject.put("groupId", groupId)
+                    socketManager!!.joinRoom(jsonObject)
+
+                } catch (e: Exception) {}
             }
         }
     }
 
     override fun onResponse(event: String, args: JSONObject) {
 
+        when(event){
+            // join room
+            SocketManager.joinRoomEmitter ->{
+                    runOnUiThread {
+                        if (getPrefrence("userType", "").equals("1")) {
+                            startActivity(Intent(this, MainActivity::class.java))
+                            finishAffinity()
+                        } else {
+                            startActivity(Intent(this, MainTeacherActivity::class.java))
+                            finishAffinity()
+                        }
+
+                }
+            }
+        }
     }
 
     override fun onError(event: String, vararg args: Array<*>) {
@@ -194,7 +208,7 @@ class AddParticipantActivity : AppCompatActivity(), View.OnClickListener,SocketM
         groupList("f")
     }
 
-    override fun groupIds(id: String) {
+    override fun groupIds(id: Int) {
         if (idArraylist.contains(id))
             idArraylist.remove(id)
         else

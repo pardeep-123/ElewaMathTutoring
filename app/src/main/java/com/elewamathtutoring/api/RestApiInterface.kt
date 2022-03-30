@@ -422,8 +422,7 @@ interface RestApiInterface {
     fun requestAccept(
         @Field("status") status: String,
         @Field("sessionId") sessionId: String
-    ):
-            Observable<Commontoall?>
+    ): Observable<Commontoall?>
 
     @FormUrlEncoded
     @PUT("cancelBooking")

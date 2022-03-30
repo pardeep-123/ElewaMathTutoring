@@ -34,6 +34,7 @@ import org.json.JSONObject
 class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.Observer {
 
     var receiverId = ""
+    var groupId = ""
     var dialog:Dialog?=null
     var Mediaimage=""
     var Block=""
@@ -85,6 +86,7 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
         ivAttachment.setOnClickListener(this)
 
         receiverId=intent.getStringExtra("receiverId").toString()
+        groupId=intent.getStringExtra("groupId").toString()
 
 
         setAdapter()
@@ -238,14 +240,11 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
         }
     }
 
-    fun MY_CHAT(progress: String) // get all chat
-    {
-        if(progress.equals("f"))
-        {
+    fun MY_CHAT(progress: String){
+        if(progress.equals("f")) {
             progresschat.visibility=View.GONE
         }
-        else
-        {
+        else{
             progresschat.visibility=View.VISIBLE
         }
 
@@ -253,9 +252,18 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
             "Data  me" + getPrefrence(Constants.USER_ID, "") + "  reciver " + receiverId
         )
         val jsonObject = JSONObject()
-        jsonObject.put("userId", getPrefrence(Constants.USER_ID,""))
-        jsonObject.put("user2Id", receiverId)
-        socketManager!!.getFriendChat(jsonObject)
+        if (receiverId!="0") {
+            jsonObject.put("userId", getPrefrence(Constants.USER_ID,""))
+            jsonObject.put("user2Id", receiverId)
+            socketManager!!.getFriendChat(jsonObject)
+        }
+        else {
+            jsonObject.put("userId", getPrefrence(Constants.USER_ID,""))
+            jsonObject.put("groupId", groupId)
+            socketManager!!.getFriendChat(jsonObject)
+
+        }
+
     }
 
     override fun onResponseArray(event: String, args: JSONArray) {
@@ -280,6 +288,7 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
                     scrollToBottom()
                     Log.e("Socketdfdfd", "GET MASSAGE INSIDE---insider")
                 }
+
         }
     }
 

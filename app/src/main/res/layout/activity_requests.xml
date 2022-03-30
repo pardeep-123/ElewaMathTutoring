@@ -339,8 +339,8 @@
                     android:textColor="@color/black" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/WrapTextView"
                     android:id="@+id/tvAmount"
+                    style="@style/WrapTextView"
                     android:layout_alignParentEnd="true"
                     android:fontFamily="@font/light"
                     android:text="$20"
@@ -381,8 +381,8 @@
                     android:textColor="@color/app" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/WrapTextView"
                     android:id="@+id/tvAmtReceived"
+                    style="@style/WrapTextView"
                     android:layout_alignParentEnd="true"
                     android:fontFamily="@font/medium"
                     android:text="$15"
