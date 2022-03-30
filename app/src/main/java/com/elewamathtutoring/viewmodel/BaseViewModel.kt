@@ -1280,12 +1280,6 @@ class BaseViewModel : ViewModel() {
         }
     }
 
-
-
-
-
-
-
     @SuppressLint("CheckResult")
     fun TeacherRequestList(activity: Activity, isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
