@@ -29,7 +29,10 @@
         android:usesCleartextTraffic="true"
         tools:ignore="ExtraText">
         <activity
-            android:name=".Activity.ParentOrStudent.postMathProblem.DetailActivity"
+            android:name=".Activity.ParentOrStudent.postMathProblem.EditMathProblemActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.ParentOrStudent.postMathProblem.details.DetailActivity"
             android:exported="true" />
         <activity
             android:name=".Activity.ParentOrStudent.postMathProblem.mathProblem.PostMathProblemActivity"

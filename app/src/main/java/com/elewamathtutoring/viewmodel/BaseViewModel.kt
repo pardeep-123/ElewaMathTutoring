@@ -212,6 +212,73 @@ class BaseViewModel : ViewModel() {
         }
     }
 
+
+    @SuppressLint("CheckResult")
+    fun postMathProblem(
+        activity: Activity,
+        document: String,
+        description: String,
+        isDialogShow: Boolean
+    ) {
+        if (Helper.isNetworkConnected(activity)) {
+            apiService.postMathProblem(document, description)
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    { mResponse.value = RestObservable.error(activity, it) }
+                )
+        } else {
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        postMathProblem(activity, document, description, true)
+                    }
+                })
+        }
+    }
+
+
+    @SuppressLint("CheckResult")
+    fun AddComments(
+        activity: Activity,
+        comment: String,
+        problemId: String,
+        isDialogShow: Boolean) {
+        if (Helper.isNetworkConnected(activity)) {
+            apiService.AddComments(comment, problemId)
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    { mResponse.value = RestObservable.error(activity, it) }
+                )
+        } else {
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        AddComments(activity,comment, problemId, true)
+                    }
+                })
+        }
+    }
+
+
+
+
+
+
+
+
+
     @SuppressLint("CheckResult")
     fun notifications(
         activity: Activity,
@@ -234,6 +301,36 @@ class BaseViewModel : ViewModel() {
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
                         notifications(activity, true)
+                    }
+                })
+        }
+
+    }
+
+
+
+@SuppressLint("CheckResult")
+    fun myMathProblems(
+        activity: Activity,
+        isDialogShow: Boolean
+    ) {
+        if (Helper.isNetworkConnected(activity)) {
+            apiService.myMathProblems()
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    { mResponse.value = RestObservable.error(activity, it) }
+                )
+        } else {
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        myMathProblems(activity, true)
                     }
                 })
         }
@@ -323,6 +420,43 @@ class BaseViewModel : ViewModel() {
         }
 
     }
+
+
+      @SuppressLint("CheckResult")
+    fun editMyMathProblems(activity: Activity,
+                           document: String,
+                           description: String,
+                           id: String,
+                           isDialogShow: Boolean) {
+        if (Helper.isNetworkConnected(activity)) {
+            apiService.editMyMathProblems(document,description,id)
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    { mResponse.value = RestObservable.error(activity, it) }
+                )
+        } else {
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        editMyMathProblems(activity, document,description,id, true)
+                    }
+                })
+        }
+
+    }
+
+
+
+
+
+
+
 
     @SuppressLint("CheckResult")
     fun buy_plan(
@@ -1099,6 +1233,43 @@ class BaseViewModel : ViewModel() {
         }
     }
 
+
+      @SuppressLint("CheckResult")
+    fun deletePostMathProblem(activity: Activity, id: String, isDialogShow: Boolean) {
+        if (Helper.isNetworkConnected(activity)) {
+            apiService.deletePostMathProblem(id)
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    { mResponse.value = RestObservable.error(activity, it) }
+                )
+        } else {
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        deletePostMathProblem(activity, id, isDialogShow)
+                    }
+                })
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
     @SuppressLint("CheckResult")
     fun SetDefault_Bank(activity: Activity, bank_id: String, isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
@@ -1327,6 +1498,31 @@ class BaseViewModel : ViewModel() {
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
                         get_resources(activity, isDialogShow,category_id)
+                    }
+                })
+        }
+    }
+  @SuppressLint("CheckResult")
+    fun get_comments(activity: Activity, isDialogShow: Boolean,problemId:String) {
+        if (Helper.isNetworkConnected(activity)) {
+            apiService.get_comments(problemId)
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    {
+
+                        mResponse.value = RestObservable.error(activity, it)
+                    })
+        } else {
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        get_comments(activity, isDialogShow,problemId)
                     }
                 })
         }

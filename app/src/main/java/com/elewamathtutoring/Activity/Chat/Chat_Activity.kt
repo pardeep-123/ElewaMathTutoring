@@ -61,7 +61,10 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
         try {
             val jsonObject = JSONObject()
             jsonObject.put("userId", getPrefrence(Constants.USER_ID,""))
-            jsonObject.put("user2Id", receiverId)
+            if (receiverId!="0")
+                jsonObject.put("user2Id", receiverId)
+            else
+                jsonObject.put("groupId",groupId)
             jsonObject.put("message", getBase64FromPath(imagePath!!))
             jsonObject.put("messageType", "1")
             jsonObject.put("extension", extension)
@@ -138,14 +141,11 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
 
         }
     }
-
     private fun setAdapter(){
         linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         messageAdapter = ChatAdapter(this, list)
         rv_chat.layoutManager = linearLayoutManager
         rv_chat.adapter = messageAdapter
-
-
     }
   /*  override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
@@ -154,9 +154,7 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
     }*/
 
     fun init() {
-
         tv_name.text=intent.getStringExtra("chatUserName").toString()
-
         ivSendBtn.setOnClickListener {
             Log.e("ececewcrec", "lll" + Mediaimage)
             if (Et_chat_message!!.text.toString().trim().isEmpty()) {
@@ -166,7 +164,10 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
                 try {
                     val jsonObject = JSONObject()
                     jsonObject.put("userId", getPrefrence(Constants.USER_ID,""))
+                    if (receiverId!="0")
                     jsonObject.put("user2Id", receiverId)
+                    else
+                        jsonObject.put("groupId",groupId)
                     jsonObject.put("message", Et_chat_message!!.text.toString().trim())
                     jsonObject.put("messageType", "0")
                     socketManager!!.sendMessage(jsonObject)
@@ -178,7 +179,6 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
             }
         }
     }
-
     override fun onDestroy() {
         super.onDestroy()
         Constants.Notification_chat=""
@@ -199,27 +199,6 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
     override fun onStop() {
         super.onStop()
         Constants.Notification_chat=""
-    }
-
-
-
-    @SuppressLint("WrongConstant")
-    fun viewLastMessage(){
-        runOnUiThread {
-            progresschat.visibility=View.GONE
-            val li = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-            li.setStackFromEnd(true)
-            rv_chat.layoutManager = li
-            rv_chat.adapter = messageAdapter
-
-            if (list.isEmpty()) {
-                rv_chat.visibility = View.GONE
-            }
-            else
-            {
-                rv_chat.visibility = View.VISIBLE
-              }
-        }
     }
 
     override fun onClick(p0: View?)

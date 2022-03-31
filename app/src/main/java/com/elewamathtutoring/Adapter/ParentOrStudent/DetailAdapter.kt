@@ -1,14 +1,11 @@
 package com.elewamathtutoring.Adapter.ParentOrStudent
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.DetailActivity
 import com.elewamathtutoring.R
-import kotlinx.android.synthetic.main.item_math_problem.view.*
 
 
 class DetailAdapter(var ctn: Context) :

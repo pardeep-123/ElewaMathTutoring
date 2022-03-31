@@ -148,14 +148,11 @@ class ResoucesActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
             }
         }
     }
-
     override fun onFilter(id: String) {
         popupWindow?.dismiss()
         cardId = id
         api()
-
     }
-
     fun download(){
         val downloadmanager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
         val uri =

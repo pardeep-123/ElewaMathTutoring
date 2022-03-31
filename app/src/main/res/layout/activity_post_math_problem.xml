@@ -61,8 +61,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:layout_toStartOf="@+id/ivName"
+                    android:layout_toStartOf="@+id/ivFiles"
                     android:background="@null"
+                    android:singleLine="true"
                     android:fontFamily="@font/avenirlstd_roman"
                     android:hint="I need help with"
                     android:imeOptions="actionDone"
@@ -70,8 +71,9 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/editexthint"
                     android:textSize="14sp" />
+
                 <ImageView
-                    android:id="@+id/ivName"
+                    android:id="@+id/ivFiles"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_alignParentEnd="true"
@@ -81,18 +83,27 @@
                     app:tint="@color/black" />
 
             </RelativeLayout>
+
             <LinearLayout
+                android:id="@+id/llSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rlSearch"
                 android:layout_marginHorizontal="@dimen/_15sdp"
-                android:id="@+id/llSubmit"
                 android:orientation="vertical">
                 <LinearLayout
+                    android:id="@+id/llImages"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_70sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:visibility="gone">
+                    <ImageView
+                        android:id="@+id/ivAttachment"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/file"/>
                 </LinearLayout>
+
                 <Button
                     android:id="@+id/btnSubmit"
                     style="@style/Button"

@@ -7,8 +7,11 @@
         <entry key="app/src/main/res/layout/activity_about_you.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_availablity.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.16" />
-        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.16" />
+        <entry key="app/src/main/res/layout/activity_edit_math_problem.xml" value="0.16979166666666667" />
+        <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.18205128205128204" />
         <entry key="app/src/main/res/layout/activity_intro_slider.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/activity_login_guest.xml" value="0.17037037037037037" />
         <entry key="app/src/main/res/layout/activity_login_screen.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_math_person_chat.xml" value="0.16510416666666666" />
         <entry key="app/src/main/res/layout/activity_payment_info.xml" value="0.18489583333333334" />
@@ -25,6 +28,10 @@
         <entry key="app/src/main/res/layout/activity_sign_up_as.xml" value="0.16510416666666666" />
         <entry key="app/src/main/res/layout/activity_teacher_details.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/dialog_booking_thanks.xml" value="0.17962962962962964" />
+        <entry key="app/src/main/res/layout/dialog_delete.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/dialog_delete_post.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/dialog_location.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/dialog_progress.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/dialog_report.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/fragment_messages_tab.xml" value="0.16944444444444445" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.25" />
@@ -37,7 +44,8 @@
         <entry key="app/src/main/res/layout/item_calender.xml" value="0.18" />
         <entry key="app/src/main/res/layout/item_detail.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/item_hadder.xml" value="0.18489583333333334" />
-        <entry key="app/src/main/res/layout/item_math_problem.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_math_problem.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/popup_file_attachment.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/popup_math_problem.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/report_popup.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/row_image_slider.xml" value="0.18489583333333334" />
