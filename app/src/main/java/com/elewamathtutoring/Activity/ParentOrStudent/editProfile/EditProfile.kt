@@ -41,7 +41,6 @@ class EditProfile : ImagePickerUtility(), Observer<RestObservable> {
             Glide.with(this).load(editProfilelist.get(0).image).into(ivProfileSignUp)
 
         }*/
-
         edtName.setText(intent.getStringExtra("name").toString())
         edtAboutYou.setText(intent.getStringExtra("about").toString())
         oldImage = intent.getStringExtra("image").toString()

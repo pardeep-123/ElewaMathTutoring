@@ -36,7 +36,6 @@ import com.elewamathtutoring.Fragment.ParentOrStudent.profile.ProfilResponse
 import com.elewamathtutoring.Fragment.TeacherOrTutor.bookings.OccupiedResponse
 import com.elewamathtutoring.Fragment.TeacherOrTutor.request.RequestListResponse
 import com.elewamathtutoring.Models.Card_listing.AllSessionListResponse
-import com.elewamathtutoring.Models.ListView.Model_myschdeullist
 import com.elewamathtutoring.Models.Login.Model_login
 import com.elewamathtutoring.Models.Modecommon.Commontoall
 import com.elewamathtutoring.Models.Modecommon.Commontoall2
@@ -107,21 +106,17 @@ interface RestApiInterface {
     @GET("NotificationList")
     fun notifications(): Observable<Model_Notifications>
 
-     @GET("myMathProblems")
+    @GET("myMathProblems")
     fun myMathProblems(): Observable<MathProblemListResponse>
 
-    @FormUrlEncoded
-    @POST("myMathProblems")
-    fun postMathProblem(
-        @Field("document") document: String,
-        @Field("description") description: String
-    ): Observable<AddPostResponse>
+    @GET("mathProblems")
+    fun mathProblems(): Observable<MathProblemListResponse>
+
 
     @FormUrlEncoded
     @POST("comments")
     fun AddComments(
-        @Field("comment") comment: String,
-        @Field("problemId") problemId: String
+        @FieldMap hashMap: HashMap<String, String>
     ): Observable<AddCommentResponse>
 
     @GET("get_time_slots")
@@ -145,18 +140,6 @@ interface RestApiInterface {
     @FormUrlEncoded
     @PUT("promocode_exist")
     fun promocode_exist(@Field("code") code: String): Observable<Commontoall>
-
-     @FormUrlEncoded
-    @PUT("myMathProblems")
-    fun editMyMathProblems(
-         @Field("document") document: String,
-         @Field("description") description: String,
-         @Field("id") id: String): Observable<Commontoall>
-
-
-
-
-
 
 
 
@@ -415,12 +398,9 @@ interface RestApiInterface {
     fun deleteBank(@Field("bankId") bankId: String): Observable<Commontoall>
 
 
-      @FormUrlEncoded
+    @FormUrlEncoded
     @HTTP(method = "DELETE", path = "myMathProblems", hasBody = true)
     fun deletePostMathProblem(@Field("id") id: String): Observable<Commontoall>
-
-
-
 
 
     @FormUrlEncoded
@@ -478,12 +458,13 @@ interface RestApiInterface {
 
     @GET("resources")
     fun get_resources(
-        @Query("category_id") category_id: String): Observable<ResourcesResponse>
+        @Query("category_id") category_id: String
+    ): Observable<ResourcesResponse>
 
-     @GET("comments")
+    @GET("comments")
     fun get_comments(
-        @Query("problemId") problemId: String): Observable<CommentListResponse>
-
+        @Query("problemId") problemId: String
+    ): Observable<CommentListResponse>
 
 
     @GET("getcategories")
@@ -570,6 +551,25 @@ interface RestApiInterface {
         @Part("name") name: RequestBody,
         @Part("about") about: RequestBody
     ): Observable<EditProfileResponse>
+
+
+    @Multipart
+    @PUT("myMathProblems")
+    fun editMyMathProblems(
+        @Part document: MultipartBody.Part?,
+        @Part("description") description: RequestBody,
+        @Part("id") id: RequestBody
+    ): Observable<Commontoall>
+
+    @Multipart
+    @POST("myMathProblems")
+    fun postMathProblem(
+        @Part document: MultipartBody.Part?,
+        @Part("description") description: RequestBody,
+        @Part("type") type: RequestBody
+    ): Observable<AddPostResponse>
+
+
 
     @Multipart
     @PUT("EditTeacherBasicProfile")

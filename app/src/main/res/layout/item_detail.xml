@@ -42,7 +42,7 @@
              <androidx.appcompat.widget.AppCompatTextView
                 style="@style/WrapTextView"
                 android:text="John"
-
+                android:id="@+id/tvDescription"
                 android:textColor="@color/black"
                  android:layout_marginTop="@dimen/_3sdp"
                 android:textSize="@dimen/_11sdp"

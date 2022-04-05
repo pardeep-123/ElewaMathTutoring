@@ -43,6 +43,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <RelativeLayout
                 android:id="@+id/rlSearch"
                 android:layout_width="match_parent"
@@ -63,11 +64,11 @@
                     android:layout_marginRight="5dp"
                     android:layout_toStartOf="@+id/ivFiles"
                     android:background="@null"
-                    android:singleLine="true"
                     android:fontFamily="@font/avenirlstd_roman"
                     android:hint="I need help with"
                     android:imeOptions="actionDone"
                     android:inputType="textCapWords"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/editexthint"
                     android:textSize="14sp" />

@@ -31,7 +31,6 @@ import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import kotlinx.android.synthetic.main.fragment_schedule_tab.*
-import kotlinx.android.synthetic.main.fragment_schedule_tab.iv_notification_switch
 import kotlinx.android.synthetic.main.fragment_schedule_tab.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -67,7 +66,7 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
         }
  v.rootView.rlMathProblem.setOnClickListener {
             startActivity(Intent(context, PostMathProblemActivity::class.java)
-                .putExtra("tutor","mathChat"))
+                .putExtra("tutor","postProblem"))
         }
 
 

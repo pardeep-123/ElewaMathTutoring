@@ -16,17 +16,19 @@ data class MathProblemListResponse(
 ):Serializable {
     data class Body(
         @SerializedName("id")
-        val id: Int, // 8
+        val id: Int, // 31
         @SerializedName("userId")
-        val userId: Int, // 383
+        val userId: Int, // 396
         @SerializedName("document")
-        val document: String, // CJ5G16H9KFJ3EC3H67CGKJ37C2B7.pdf
+        val document: String, // 21B5GBD8GJ5DEGF84E87C6E36HK8.jpg
         @SerializedName("description")
-        val description: String, // mona
+        val description: String, // you
+        @SerializedName("type")
+        val type: Int, // 0
         @SerializedName("createdAt")
-        val createdAt: Int, // 1648707267
-        @SerializedName("updatedAt")
-        val updatedAt: Int // 1648707267
+        val createdAt: String, // 1649141649
+        @SerializedName("count")
+        val count: Int // 0
     ):Serializable
 
 }

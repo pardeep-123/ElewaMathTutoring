@@ -87,7 +87,7 @@ class BaseViewModel : ViewModel() {
     ) {
         if (Helper.isNetworkConnected(activity)) {
             Log.e("checkmyauth", "----" + FirebaseInstanceId.getInstance().getToken())
-            apiService.Userlogin(email, password,type,token)
+            apiService.Userlogin(email, password, type, token)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -103,7 +103,7 @@ class BaseViewModel : ViewModel() {
                 activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
-                        Userlogin(activity, email, password, "1",token,isDialogShow)
+                        Userlogin(activity, email, password, "1", token, isDialogShow)
                     }
                 })
         }
@@ -125,7 +125,7 @@ class BaseViewModel : ViewModel() {
         isDialogShow: Boolean
     ) {
         if (Helper.isNetworkConnected(activity)) {
-            apiService.sociallogin(socialId,socialType,user_type,email,name,type,token)
+            apiService.sociallogin(socialId, socialType, user_type, email, name, type, token)
                 .subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -141,7 +141,15 @@ class BaseViewModel : ViewModel() {
                 activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
-                        apiService.sociallogin(socialId,socialType,user_type,email,name,type,token)
+                        apiService.sociallogin(
+                            socialId,
+                            socialType,
+                            user_type,
+                            email,
+                            name,
+                            type,
+                            token
+                        )
                     }
                 })
         }
@@ -157,7 +165,7 @@ class BaseViewModel : ViewModel() {
         if (Helper.isNetworkConnected(activity)) {
             Log.e("checkmyauth", "----" + FirebaseInstanceId.getInstance().getToken())
             apiService.withdrawlAmount(
-               // getPrefrence(Constants.user_type, ""),
+                // getPrefrence(Constants.user_type, ""),
                 amount,
                 bankId
             )
@@ -214,14 +222,13 @@ class BaseViewModel : ViewModel() {
 
 
     @SuppressLint("CheckResult")
-    fun postMathProblem(
+    fun AddComments(
         activity: Activity,
-        document: String,
-        description: String,
+        hashMap: HashMap<String, String>,
         isDialogShow: Boolean
     ) {
         if (Helper.isNetworkConnected(activity)) {
-            apiService.postMathProblem(document, description)
+            apiService.AddComments(hashMap)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -236,47 +243,11 @@ class BaseViewModel : ViewModel() {
                 activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
-                        postMathProblem(activity, document, description, true)
+                        AddComments(activity, hashMap, true)
                     }
                 })
         }
     }
-
-
-    @SuppressLint("CheckResult")
-    fun AddComments(
-        activity: Activity,
-        comment: String,
-        problemId: String,
-        isDialogShow: Boolean) {
-        if (Helper.isNetworkConnected(activity)) {
-            apiService.AddComments(comment, problemId)
-                ?.subscribeOn(Schedulers.io())
-                ?.observeOn(AndroidSchedulers.mainThread())
-                ?.doOnSubscribe {
-                    mResponse.value = RestObservable.loading(activity, isDialogShow)
-                }
-                ?.subscribe(
-                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
-                    { mResponse.value = RestObservable.error(activity, it) }
-                )
-        } else {
-            Helper.showNoInternetAlert(activity,
-                activity.getString(R.string.no_internet_connection),
-                object : OnNoInternetConnectionListener {
-                    override fun onRetryApi() {
-                        AddComments(activity,comment, problemId, true)
-                    }
-                })
-        }
-    }
-
-
-
-
-
-
-
 
 
     @SuppressLint("CheckResult")
@@ -308,8 +279,7 @@ class BaseViewModel : ViewModel() {
     }
 
 
-
-@SuppressLint("CheckResult")
+    @SuppressLint("CheckResult")
     fun myMathProblems(
         activity: Activity,
         isDialogShow: Boolean
@@ -337,14 +307,33 @@ class BaseViewModel : ViewModel() {
 
     }
 
+    @SuppressLint("CheckResult")
+    fun mathProblems(
+        activity: Activity,
+        isDialogShow: Boolean
+    ) {
+        if (Helper.isNetworkConnected(activity)) {
+            apiService.mathProblems()
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    { mResponse.value = RestObservable.error(activity, it) }
+                )
+        } else {
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        mathProblems(activity, true)
+                    }
+                })
+        }
 
-
-
-
-
-
-
-
+    }
 
 
     @SuppressLint("CheckResult")
@@ -420,42 +409,6 @@ class BaseViewModel : ViewModel() {
         }
 
     }
-
-
-      @SuppressLint("CheckResult")
-    fun editMyMathProblems(activity: Activity,
-                           document: String,
-                           description: String,
-                           id: String,
-                           isDialogShow: Boolean) {
-        if (Helper.isNetworkConnected(activity)) {
-            apiService.editMyMathProblems(document,description,id)
-                ?.subscribeOn(Schedulers.io())
-                ?.observeOn(AndroidSchedulers.mainThread())
-                ?.doOnSubscribe {
-                    mResponse.value = RestObservable.loading(activity, isDialogShow)
-                }
-                ?.subscribe(
-                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
-                    { mResponse.value = RestObservable.error(activity, it) }
-                )
-        } else {
-            Helper.showNoInternetAlert(activity,
-                activity.getString(R.string.no_internet_connection),
-                object : OnNoInternetConnectionListener {
-                    override fun onRetryApi() {
-                        editMyMathProblems(activity, document,description,id, true)
-                    }
-                })
-        }
-
-    }
-
-
-
-
-
-
 
 
     @SuppressLint("CheckResult")
@@ -552,7 +505,7 @@ class BaseViewModel : ViewModel() {
     fun book_Session(
         activity: Activity,
         teacherId: String,
-      //  time: String,
+        //  time: String,
         About: String,
         cardId: String,
         date: String,
@@ -563,7 +516,7 @@ class BaseViewModel : ViewModel() {
         if (Helper.isNetworkConnected(activity)) {
             apiService.book_Session(
                 teacherId,
-               // time,
+                // time,
                 About,
                 cardId,
                 date,
@@ -588,7 +541,7 @@ class BaseViewModel : ViewModel() {
                         book_Session(
                             activity,
                             teacherId,
-                          //  time,
+                            //  time,
                             About,
                             cardId,
                             date,
@@ -627,7 +580,7 @@ class BaseViewModel : ViewModel() {
 
     }
 
-  @SuppressLint("CheckResult")
+    @SuppressLint("CheckResult")
     fun occupiedStatus(activity: Activity, occupiedStatus: String, isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
             apiService.occupiedStatus(occupiedStatus)
@@ -651,16 +604,6 @@ class BaseViewModel : ViewModel() {
         }
 
     }
-
-
-
-
-
-
-
-
-
-
 
 
     @SuppressLint("CheckResult")
@@ -810,7 +753,8 @@ class BaseViewModel : ViewModel() {
         issave: String,
         type: String,
         idd: String,
-        isDialogShow: Boolean) {
+        isDialogShow: Boolean
+    ) {
         if (Helper.isNetworkConnected(activity)) {
 
             //edit
@@ -848,17 +792,18 @@ class BaseViewModel : ViewModel() {
         }
     }
 
-@SuppressLint("CheckResult")
+    @SuppressLint("CheckResult")
     fun EditTeacherAvailablity(
         activity: Activity,
         availability: String,
         timeslot: String,
         freeSlot: String,
-        isDialogShow: Boolean) {
+        isDialogShow: Boolean
+    ) {
         if (Helper.isNetworkConnected(activity)) {
 
             //edit
-            apiService.EditTeacherAvailablity(availability, timeslot,freeSlot)
+            apiService.EditTeacherAvailablity(availability, timeslot, freeSlot)
 
 
                 ?.subscribeOn(Schedulers.io())
@@ -871,12 +816,13 @@ class BaseViewModel : ViewModel() {
                     { mResponse.value = RestObservable.error(activity, it) }
                 )
         } else {
-            Helper.showNoInternetAlert(activity, activity.getString(R.string.no_internet_connection),
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
                         EditTeacherAvailablity(
                             activity,
-                            availability, timeslot,freeSlot,
+                            availability, timeslot, freeSlot,
                             isDialogShow
                         )
                     }
@@ -908,13 +854,16 @@ class BaseViewModel : ViewModel() {
                 })
         }
     }
- @SuppressLint("CheckResult")
-    fun getTeacherStudentList(activity: Activity,
-                              userType: String,
-                              subjects_id: String,
-                              isDialogShow: Boolean) {
+
+    @SuppressLint("CheckResult")
+    fun getTeacherStudentList(
+        activity: Activity,
+        userType: String,
+        subjects_id: String,
+        isDialogShow: Boolean
+    ) {
         if (Helper.isNetworkConnected(activity)) {
-            apiService.getTeacherStudentList(userType,subjects_id)
+            apiService.getTeacherStudentList(userType, subjects_id)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -929,7 +878,7 @@ class BaseViewModel : ViewModel() {
                 activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
-                        getTeacherStudentList(activity,userType,subjects_id, isDialogShow)
+                        getTeacherStudentList(activity, userType, subjects_id, isDialogShow)
                     }
                 })
         }
@@ -950,11 +899,11 @@ class BaseViewModel : ViewModel() {
         longitude: String,
         isDialogShow: Boolean
     ) {
-        var imageFileBody:  ArrayList<MultipartBody.Part> ?= ArrayList()
+        var imageFileBody: ArrayList<MultipartBody.Part>? = ArrayList()
 
-        certificate_images.forEach {it->
+        certificate_images.forEach { it ->
             var newFile: File? = null
-            if (it.isGalleryAdded){
+            if (it.isGalleryAdded) {
                 if (it.image != "") {
                     newFile = File(it.image)
                 }
@@ -967,20 +916,34 @@ class BaseViewModel : ViewModel() {
                     }
 
                     val requestBody: RequestBody = newFile.asRequestBody(mediaType)
-                    imageFileBody!!.add(MultipartBody.Part.createFormData("certificate_images", newFile.name, requestBody))
+                    imageFileBody!!.add(
+                        MultipartBody.Part.createFormData(
+                            "certificate_images",
+                            newFile.name,
+                            requestBody
+                        )
+                    )
                 }
             }
 
         }
-        val teachingLevel_value1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), teachingLevel)
-        val education_Level1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), educationLevel)
+        val teachingLevel_value1: RequestBody =
+            RequestBody.create("text/plain".toMediaTypeOrNull(), teachingLevel)
+        val education_Level1: RequestBody =
+            RequestBody.create("text/plain".toMediaTypeOrNull(), educationLevel)
         val majorss1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), majors)
-        val specialties_value1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), specialties)
-        val cancelPolicy_value1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), cancelPolicy)
-        val hourlyPrice1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), hourlyPrice)
-        val address_value1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), address)
-        val latitude_value1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), latitude)
-        val longitude_value1: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), longitude)
+        val specialties_value1: RequestBody =
+            RequestBody.create("text/plain".toMediaTypeOrNull(), specialties)
+        val cancelPolicy_value1: RequestBody =
+            RequestBody.create("text/plain".toMediaTypeOrNull(), cancelPolicy)
+        val hourlyPrice1: RequestBody =
+            RequestBody.create("text/plain".toMediaTypeOrNull(), hourlyPrice)
+        val address_value1: RequestBody =
+            RequestBody.create("text/plain".toMediaTypeOrNull(), address)
+        val latitude_value1: RequestBody =
+            RequestBody.create("text/plain".toMediaTypeOrNull(), latitude)
+        val longitude_value1: RequestBody =
+            RequestBody.create("text/plain".toMediaTypeOrNull(), longitude)
         if (Helper.isNetworkConnected(activity)) {
             if (imageFileBody != null) {
                 apiService.EditTeacherProfileProfile(
@@ -1079,10 +1042,16 @@ class BaseViewModel : ViewModel() {
     }
 
 
-  @SuppressLint("CheckResult")
-    fun TeacherAvailability(activity: Activity, availability: String,timeSlot: String,freeSlot:String, isDialogShow: Boolean) {
+    @SuppressLint("CheckResult")
+    fun TeacherAvailability(
+        activity: Activity,
+        availability: String,
+        timeSlot: String,
+        freeSlot: String,
+        isDialogShow: Boolean
+    ) {
         if (Helper.isNetworkConnected(activity)) {
-            apiService.TeacherAvailability(availability,timeSlot,freeSlot)
+            apiService.TeacherAvailability(availability, timeSlot, freeSlot)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -1097,14 +1066,17 @@ class BaseViewModel : ViewModel() {
                 activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
-                        TeacherAvailability(activity, availability,timeSlot, freeSlot,isDialogShow)
+                        TeacherAvailability(
+                            activity,
+                            availability,
+                            timeSlot,
+                            freeSlot,
+                            isDialogShow
+                        )
                     }
                 })
         }
     }
-
-
-
 
 
     @SuppressLint("CheckResult")
@@ -1113,7 +1085,7 @@ class BaseViewModel : ViewModel() {
         isDialogShow: Boolean
     ) {
         if (Helper.isNetworkConnected(activity)) {
-            apiService.signUpApi( name,email, password,role)
+            apiService.signUpApi(name, email, password, role)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -1128,7 +1100,7 @@ class BaseViewModel : ViewModel() {
                 activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
-                        signUpApi(activity, name,email, password,role, isDialogShow)
+                        signUpApi(activity, name, email, password, role, isDialogShow)
                     }
                 })
         }
@@ -1176,7 +1148,7 @@ class BaseViewModel : ViewModel() {
 
         if (Helper.isNetworkConnected(activity)) {
             apiService.signUpTeacherApi(
-                imageFileBody,  namee, emaill,passwordd, aboutt, teachingHistoryy,
+                imageFileBody, namee, emaill, passwordd, aboutt, teachingHistoryy,
                 device_type_value, token_valuee
             )
                 ?.subscribeOn(Schedulers.io())
@@ -1234,7 +1206,7 @@ class BaseViewModel : ViewModel() {
     }
 
 
-      @SuppressLint("CheckResult")
+    @SuppressLint("CheckResult")
     fun deletePostMathProblem(activity: Activity, id: String, isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
             apiService.deletePostMathProblem(id)
@@ -1257,17 +1229,6 @@ class BaseViewModel : ViewModel() {
                 })
         }
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
     @SuppressLint("CheckResult")
@@ -1398,7 +1359,7 @@ class BaseViewModel : ViewModel() {
         }
     }
 
-      @SuppressLint("CheckResult")
+    @SuppressLint("CheckResult")
     fun getProfile(activity: Activity, isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
             apiService.getProfile()
@@ -1425,8 +1386,7 @@ class BaseViewModel : ViewModel() {
     }
 
 
-
-     @SuppressLint("CheckResult")
+    @SuppressLint("CheckResult")
     fun getsubjects(activity: Activity, isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
             apiService.getsubjects()
@@ -1478,7 +1438,7 @@ class BaseViewModel : ViewModel() {
     }
 
     @SuppressLint("CheckResult")
-    fun get_resources(activity: Activity, isDialogShow: Boolean,category_id:String) {
+    fun get_resources(activity: Activity, isDialogShow: Boolean, category_id: String) {
         if (Helper.isNetworkConnected(activity)) {
             apiService.get_resources(category_id)
                 ?.subscribeOn(Schedulers.io())
@@ -1497,13 +1457,14 @@ class BaseViewModel : ViewModel() {
                 activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
-                        get_resources(activity, isDialogShow,category_id)
+                        get_resources(activity, isDialogShow, category_id)
                     }
                 })
         }
     }
-  @SuppressLint("CheckResult")
-    fun get_comments(activity: Activity, isDialogShow: Boolean,problemId:String) {
+
+    @SuppressLint("CheckResult")
+    fun get_comments(activity: Activity, isDialogShow: Boolean, problemId: String) {
         if (Helper.isNetworkConnected(activity)) {
             apiService.get_comments(problemId)
                 ?.subscribeOn(Schedulers.io())
@@ -1522,14 +1483,14 @@ class BaseViewModel : ViewModel() {
                 activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
-                        get_comments(activity, isDialogShow,problemId)
+                        get_comments(activity, isDialogShow, problemId)
                     }
                 })
         }
     }
 
 
-   @SuppressLint("CheckResult")
+    @SuppressLint("CheckResult")
     fun getcategories(activity: Activity, isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
             apiService.getcategories()
@@ -1607,6 +1568,7 @@ class BaseViewModel : ViewModel() {
                 })
         }
     }
+
     @SuppressLint("CheckResult")
     fun sessionDetails(activity: Activity, isDialogShow: Boolean, sessionId: String) {
         if (Helper.isNetworkConnected(activity)) {
@@ -1634,13 +1596,15 @@ class BaseViewModel : ViewModel() {
     }
 
 
-      @SuppressLint("CheckResult")
-    fun requestAccept(activity: Activity,
-                      status:String,
-                      sessionId: String,
-                      isDialogShow: Boolean) {
+    @SuppressLint("CheckResult")
+    fun requestAccept(
+        activity: Activity,
+        status: String,
+        sessionId: String,
+        isDialogShow: Boolean
+    ) {
         if (Helper.isNetworkConnected(activity)) {
-            apiService.requestAccept(status,sessionId)
+            apiService.requestAccept(status, sessionId)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -1657,19 +1621,21 @@ class BaseViewModel : ViewModel() {
                 activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
-                        requestAccept(activity,status,sessionId, isDialogShow)
+                        requestAccept(activity, status, sessionId, isDialogShow)
                     }
                 })
         }
     }
 
-      @SuppressLint("CheckResult")
-    fun requestReject(activity: Activity,
-                      sessionId: String,
-                      status: String,
-                      isDialogShow: Boolean) {
+    @SuppressLint("CheckResult")
+    fun requestReject(
+        activity: Activity,
+        sessionId: String,
+        status: String,
+        isDialogShow: Boolean
+    ) {
         if (Helper.isNetworkConnected(activity)) {
-            apiService.requestReject(sessionId,status)
+            apiService.requestReject(sessionId, status)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -1686,7 +1652,7 @@ class BaseViewModel : ViewModel() {
                 activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
-                        requestReject(activity,sessionId, status, isDialogShow)
+                        requestReject(activity, sessionId, status, isDialogShow)
                     }
                 })
         }
@@ -1778,7 +1744,7 @@ class BaseViewModel : ViewModel() {
     fun Get_Wallet(activity: Activity, isDialogShow: Boolean) {
         if (Helper.isNetworkConnected(activity)) {
             apiService.Get_Wallet()
-                    //getPrefrence(Constants.user_type, "")
+                //getPrefrence(Constants.user_type, "")
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -2018,8 +1984,135 @@ class BaseViewModel : ViewModel() {
         }
     }
 
+
     @SuppressLint("CheckResult")
-    fun EditTeacherBasicProfile(activity: Activity, imageUrl: String, name: String, about: String, history: String, isDialogShow: Boolean) {
+    fun editMyMathProblems(
+        activity: Activity,
+        imageUrl: String,
+        description: String,
+        id: String,
+        isDialogShow: Boolean
+    ) {
+        var newFile: File? = null
+        var imageFileBody: MultipartBody.Part? = null
+        if (imageUrl != "") {
+            newFile = File(imageUrl)
+        }
+        if (newFile != null && newFile.exists() && !newFile.equals("")) {
+            val mediaType: MediaType?
+            if (imageUrl.endsWith("png")) {
+                mediaType = "image/png".toMediaTypeOrNull()
+            } else {
+                mediaType = "image/jpeg".toMediaTypeOrNull()
+            }
+            val requestBody: RequestBody = newFile.asRequestBody(mediaType)
+            imageFileBody = MultipartBody.Part.createFormData("document", newFile.name, requestBody)
+        }
+        val post_description: RequestBody =
+            RequestBody.create("text/plain".toMediaTypeOrNull(), description)
+        val post_id: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), id)
+        if (Helper.isNetworkConnected(activity)) {
+            apiService.editMyMathProblems(
+                imageFileBody,
+                post_description,
+                post_id
+            )
+                .subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    { mResponse.value = RestObservable.error(activity, it) }
+                )
+        } else {
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        editMyMathProblems(
+                            activity,
+                            imageUrl,
+                            description,
+                            id,
+                            isDialogShow
+                        )
+                    }
+                })
+        }
+    }
+
+
+    @SuppressLint("CheckResult")
+    fun postMathProblem(
+        activity: Activity,
+        imageUrl: String,
+        description: String,
+        type: String,
+        isDialogShow: Boolean
+    ) {
+        var newFile: File? = null
+        var imageFileBody: MultipartBody.Part? = null
+        if (imageUrl != "") {
+            newFile = File(imageUrl)
+        }
+        if (newFile != null && newFile.exists() && !newFile.equals("")) {
+            val mediaType: MediaType?
+            if (imageUrl.endsWith("png")) {
+                mediaType = "image/png".toMediaTypeOrNull()
+            } else {
+                mediaType = "image/jpeg".toMediaTypeOrNull()
+            }
+            val requestBody: RequestBody = newFile.asRequestBody(mediaType)
+            imageFileBody = MultipartBody.Part.createFormData("document", newFile.name, requestBody)
+        }
+        val post_description: RequestBody =
+            RequestBody.create("text/plain".toMediaTypeOrNull(), description)
+        val post_type: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), type)
+
+        if (Helper.isNetworkConnected(activity)) {
+            apiService.postMathProblem(
+                imageFileBody,
+                post_description,
+                post_type
+            )
+                .subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    { mResponse.value = RestObservable.error(activity, it) }
+                )
+        } else {
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        postMathProblem(
+                            activity,
+                            imageUrl,
+                            description,
+                            type,
+                            isDialogShow
+                        )
+                    }
+                })
+        }
+    }
+
+
+    @SuppressLint("CheckResult")
+    fun EditTeacherBasicProfile(
+        activity: Activity,
+        imageUrl: String,
+        name: String,
+        about: String,
+        history: String,
+        isDialogShow: Boolean
+    ) {
 
         var newFile: File? = null
         var imageFileBody: MultipartBody.Part? = null
@@ -2037,9 +2130,11 @@ class BaseViewModel : ViewModel() {
             val requestBody: RequestBody = newFile.asRequestBody(mediaType)
             imageFileBody = MultipartBody.Part.createFormData("image", newFile.name, requestBody)
         }
-        val firstName_value: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), name)
+        val firstName_value: RequestBody =
+            RequestBody.create("text/plain".toMediaTypeOrNull(), name)
         val about_value: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), about)
-        val history_value: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), history)
+        val history_value: RequestBody =
+            RequestBody.create("text/plain".toMediaTypeOrNull(), history)
 
 
         if (Helper.isNetworkConnected(activity)) {
@@ -2216,7 +2311,7 @@ class BaseViewModel : ViewModel() {
 
     @SuppressLint("CheckResult")
     fun teachingInfoApi(
-  activity: Activity,
+        activity: Activity,
         certificate_images: ArrayList<ImageModel>,
         educationLevel: String,
         majors: String,
@@ -2229,12 +2324,12 @@ class BaseViewModel : ViewModel() {
         longitude: String,
         isDialogShow: Boolean
     ) {
-        var imageFileBody:  ArrayList<MultipartBody.Part> ?= ArrayList()
+        var imageFileBody: ArrayList<MultipartBody.Part>? = ArrayList()
 
-        certificate_images.forEach {it->
+        certificate_images.forEach { it ->
             var newFile: File? = null
 
-            if (it.isGalleryAdded){
+            if (it.isGalleryAdded) {
                 if (it.image != "") {
                     newFile = File(it.image)
                 }
@@ -2247,7 +2342,13 @@ class BaseViewModel : ViewModel() {
                     }
 
                     val requestBody: RequestBody = newFile.asRequestBody(mediaType)
-                    imageFileBody!!.add(MultipartBody.Part.createFormData("certificate_images", newFile.name, requestBody))
+                    imageFileBody!!.add(
+                        MultipartBody.Part.createFormData(
+                            "certificate_images",
+                            newFile.name,
+                            requestBody
+                        )
+                    )
                 }
             }
 
@@ -2256,9 +2357,12 @@ class BaseViewModel : ViewModel() {
         val education_Level: RequestBody =
             RequestBody.create("text/plain".toMediaTypeOrNull(), educationLevel)
         val majorss: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), majors)
-        val teachingLevel_value: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), teachingLevel)
-        val specialties_value: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), specialties)
-        val hourly_Price: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), hourlyPrice)
+        val teachingLevel_value: RequestBody =
+            RequestBody.create("text/plain".toMediaTypeOrNull(), teachingLevel)
+        val specialties_value: RequestBody =
+            RequestBody.create("text/plain".toMediaTypeOrNull(), specialties)
+        val hourly_Price: RequestBody =
+            RequestBody.create("text/plain".toMediaTypeOrNull(), hourlyPrice)
         val cancelPolicy_value: RequestBody =
             RequestBody.create("text/plain".toMediaTypeOrNull(), cancelPolicy)
         val address_value: RequestBody =

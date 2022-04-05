@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/_10sdp"
+    android:layout_marginBottom="@dimen/_5sdp"
     android:background="@drawable/rv_background">
 
     <LinearLayout
@@ -40,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
+            android:visibility="gone"
             android:layout_marginBottom="@dimen/_10sdp">
 
             <LinearLayout
@@ -74,16 +75,20 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:visibility="gone">
+            android:layout_marginTop="@dimen/_5sdp"
+           >
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_120sdp"
+                android:layout_height="@dimen/_100sdp"
                 android:id="@+id/rlImg">
+
                 <ImageView
                     android:id="@+id/ivImg"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_120sdp" />
+                    android:layout_height="match_parent"
+
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:scaleType="centerCrop" />
                 <ImageView
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
@@ -96,7 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:orientation="horizontal">
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -106,7 +111,7 @@
                 android:text="1 hr ago"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:drawableStart="@drawable/time"
-                android:drawablePadding="@dimen/_10sdp"
+                android:drawablePadding="@dimen/_5sdp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_9sdp"/>
             <androidx.appcompat.widget.AppCompatTextView

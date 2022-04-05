@@ -43,6 +43,7 @@ class Constants {
         //const val BASE_URL = "http://localhost:7552/api/"  local Math Tutoring
         const val SECURITY_KEY = "securitykey"
         const val IMAGE_URL = "http://202.164.42.227:7552/uploads/users/"
+        const val documents_URL = "http://202.164.42.227:7552/uploads/documents/"
 
         const val AUTH_KEY = "token"
         const val Currency = "$"
@@ -83,8 +84,102 @@ class Constants {
             //outputFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
             return outputFormat.format(cal.time)
         }
+  fun convertTime(timestamp: Long): String? {
+            val cal: Calendar = Calendar.getInstance(Locale.ENGLISH)
+            cal.timeInMillis = timestamp * 1000
+            val outputFormat: DateFormat = SimpleDateFormat("hh")
+            //outputFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+            return outputFormat.format(cal.time)
+        }
+        // automatically date and time formatting by get api
+        fun getNotificationTime(time_stamp: Long): String {
+            var date: Date? = null
+            try {
+                date = Date(time_stamp * 1000)
+            } catch (ex: Exception) {
+                ex.printStackTrace()
+            }
+            println("dateeee" + date.toString())
+            var string_date = ""
+            val current = Calendar.getInstance().time
+            var diffInSeconds = (current.time - date!!.time) / 1000
+            val sec = if (diffInSeconds >= 60) diffInSeconds % 60 else diffInSeconds
+            val min = if ((diffInSeconds / 60).also {
+                    diffInSeconds = it
+                } >= 60) diffInSeconds % 60 else diffInSeconds
+            val hrs = if ((diffInSeconds / 60).also {
+                    diffInSeconds = it
+                } >= 24) diffInSeconds % 24 else diffInSeconds
+            val days = if ((diffInSeconds / 24).also {
+                    diffInSeconds = it
+                } >= 30) diffInSeconds % 30 else diffInSeconds
+            val weeks = days / 7
+            val months = if ((diffInSeconds / 30).also {
+                    diffInSeconds = it
+                } >= 12) diffInSeconds % 12 else diffInSeconds
+            val years = (diffInSeconds / 12).also { diffInSeconds = it }
+            when {
+                years > 0 -> {
+                    string_date = if (years == 1L) {
+                        "1 year"
+                    } else {
+                        "$years years"
+                    }
+                }
+                months > 0 -> {
+                    string_date = if (months == 1L) {
+                        "1 month"
+                    } else {
+                        "$months months"
+                    }
+                }
+                weeks > 0 -> {
+                    string_date = if (weeks == 1L) {
+                        "1 week"
+                    } else {
+                        "$weeks Weeks"
+                    }
+                }
+                days > 0 -> {
+                    string_date = if (days == 1L) {
+                        "1 day"
+                    } else {
+                        "$days days"
+                    }
+                }
+                hrs > 0 -> {
+                    string_date = if (hrs == 1L) {
+                        "1 hour"
+                    } else {
+                        "$hrs hours"
+                    }
+                }
+                min > 0 -> {
+                    string_date = if (min == 1L) {
+                        "1 minute"
+                    } else {
+                        "$min minutes"
+                    }
+                }
+            }
+            string_date = "$string_date ago"
+            if (string_date == " ago") {
+                string_date = "1 sec" + " ago"
+            }
+            return string_date
+        }
 
 
+
+        //hh:mm a
+        fun convertOneFormatToAnother(eventDay:String,oldDateformat: String, newdateformat:String): String
+        {
+            val clickedDayCalendar = eventDay
+            val dateParser = SimpleDateFormat(oldDateformat)
+            val date = dateParser.parse(clickedDayCalendar.toString())
+            val dateFormatter = SimpleDateFormat(newdateformat)
+            return  dateFormatter.format(date)
+        }
         @SuppressLint("ClickableViewAccessibility")
         fun scrollEditText(s: EditText) {
             s.setOnTouchListener(View.OnTouchListener { v, event ->

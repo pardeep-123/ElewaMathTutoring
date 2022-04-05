@@ -30,8 +30,7 @@ class NotificationsAdapter(c: Context, listNotifications: ArrayList<Body>) :
     }
 
     override fun getItemCount(): Int {
-       // return list.size
-        return 3
+        return list.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

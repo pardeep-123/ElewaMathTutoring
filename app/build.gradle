@@ -78,14 +78,7 @@ dependencies {
 
     implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
     implementation 'com.romandanylyk:pageindicatorview:1.0.2'
-//    implementation 'com.github.bumptech.glide:glide:4.13.1'
-//    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
-//    implementation 'com.github.bumptech.glide:glide:4.12.0'
-//    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
-  //  implementation "com.squareup.okhttp3:okhttp:3.14.0"
-//    implementation ('com.github.bumptech.glide:okhttp3-integration:4.7.1'){
-//        exclude group: 'glide-parent'
-//    }
+
     implementation 'com.github.bumptech.glide:glide:4.13.1'
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
 
@@ -164,6 +157,10 @@ dependencies {
     /*sinch audio call*/
     implementation(name: 'sinch-android-rtc', version: '+', ext: 'aar')
     implementation 'org.greenrobot:eventbus:3.1.1'
+
+    implementation 'com.droidninja:filepicker:2.2.1'
+//    implementation project(':filepicker') for pdf or other documents
+
 
 }
 
