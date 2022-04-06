@@ -128,4 +128,7 @@
     <string name="_24k_comments"><u>24k comments</u></string>
     <string name="edit">Edit</string>
     <string name="write_here">Write here</string>
+    <string name="alert">Alert</string>
+    <string name="permissionRequired">Permission Required</string>
+    <string name="openSettings">Open Settings</string>
 </resources>

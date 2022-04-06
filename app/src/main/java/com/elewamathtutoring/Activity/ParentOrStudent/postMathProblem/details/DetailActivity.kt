@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.mathProblem.MathProblemListResponse
 import com.elewamathtutoring.Adapter.ParentOrStudent.DetailAdapter
 import com.elewamathtutoring.R
+import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
@@ -33,9 +34,9 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, Observer<RestO
 
         mathProblemListResponse = intent.getSerializableExtra("comments") as MathProblemListResponse.Body
         tvDescription.setText(mathProblemListResponse!!.description)
-        tvTime.setText(mathProblemListResponse!!.createdAt.toString())
+        tvTime.text = Constants.getNotificationTime(mathProblemListResponse!!.createdAt.toLong())
 
-        Glide.with(this).load(mathProblemListResponse!!.document).placeholder(R.drawable.profile_unselected)
+        Glide.with(this).load(Constants.documents_URL+mathProblemListResponse!!.document).placeholder(R.drawable.profile_unselected)
             .into(ivImg)
 
 

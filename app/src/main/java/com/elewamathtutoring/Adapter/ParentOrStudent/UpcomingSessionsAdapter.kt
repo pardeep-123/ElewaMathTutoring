@@ -64,7 +64,7 @@ class UpcomingSessionsAdapter(
                 holder.itemView.tvItemName.setText(list.get(0).Upcoming_sessions[position].Teacher.name)
                 holder.itemView.tvItemType.setText(Constants.isCertifiedOrtutor(list.get(0).Upcoming_sessions[position].Teacher.isCertifiedOrtutor))
                 Glide.with(ctn)
-                    .load(Constants.IMAGE_URL + list.get(0).Upcoming_sessions[position].Teacher.image)
+                    .load( list.get(0).Upcoming_sessions[position].Teacher.image)
                     .placeholder(R.drawable.profile_unselected).into(holder.itemView.ivImage)
                 holder.itemView.tvItemDate.text = Constants.ConvertTimeStampToDate(
                     list.get(0).Upcoming_sessions[position].createdAt.toLong(),
@@ -79,7 +79,7 @@ class UpcomingSessionsAdapter(
                 holder.itemView.tvItemName.setText(list.get(0).Today_sessions[position].Teacher.name)
                 holder.itemView.tvItemType.setText(Constants.isCertifiedOrtutor(list.get(0).Today_sessions[position].Teacher.isCertifiedOrtutor))
                 Glide.with(ctn)
-                    .load(Constants.IMAGE_URL + list.get(0).Today_sessions[position].Teacher.image)
+                    .load(list.get(0).Today_sessions[position].Teacher.image)
                     .placeholder(R.drawable.profile_unselected).into(holder.itemView.ivImage)
                 holder.itemView.tvItemDate.text = Constants.ConvertTimeStampToDate(
                     list.get(0).Today_sessions[position].updatedAt.toLong(),

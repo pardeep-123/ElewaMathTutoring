@@ -35,11 +35,8 @@ import kotlinx.android.synthetic.main.fragment_search.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-
 class SearchFragment : CheckLocationActivity(), Observer<RestObservable>, Teachinglevel_interface {
-
     var teacherlevel = ArrayList<MathChatResponse.Body>()
-
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     var selected_level = ArrayList<String>()
     var selected_certified = ArrayList<String>()

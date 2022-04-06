@@ -1,8 +1,11 @@
 package com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.mathProblem
 
+import android.Manifest
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -14,12 +17,17 @@ import android.util.Log
 import android.view.*
 import android.widget.PopupWindow
 import android.widget.RelativeLayout
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.EditMathProblemActivity
 import com.elewamathtutoring.Adapter.ParentOrStudent.MathProblemAdapter
+import com.elewamathtutoring.BuildConfig
 import com.elewamathtutoring.Models.Modecommon.Commontoall
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.CommonMethods.applyDim
@@ -47,36 +55,58 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     private var mAlbumFiles: java.util.ArrayList<AlbumFile> = java.util.ArrayList()
     var firstimage = ""
-    var type = ""
+    var type = "1"
     var list = ArrayList<MathProblemListResponse.Body>()
     var pos = -1
-
     private val fileRequestCode = 202
+    private val requestMultiplePermissions =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+
+            if (permissions.isNotEmpty()) {
+                permissions.entries.forEach {
+                    Log.d("permissions", "${it.key} = ${it.value}")
+                }
+
+                val readStorage = permissions[Manifest.permission.READ_EXTERNAL_STORAGE]
+                val writeStorage = permissions[Manifest.permission.WRITE_EXTERNAL_STORAGE]
+                val camera = permissions[Manifest.permission.CAMERA]
+
+                if (readStorage == true && writeStorage == true && camera == true) {
+                    Log.e("permissions", "Permission Granted Successfully")
+                    pdfDialog()
+
+                } else {
+                    Log.e("permissions", "Permission not granted")
+                    checkPermissionDenied(permissions.keys.first())
+                }
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post_math_problem)
         context = this
+
         ivBack.setOnClickListener(this)
         ivFiles.setOnClickListener(this)
         btnSubmit.setOnClickListener(this)
-        mathProblemAdapter = MathProblemAdapter(this, this, list)
-        rvMathProblem.adapter = mathProblemAdapter
     }
-
     override fun onResume() {
         super.onResume()
         if (intent.getStringExtra("tutor").equals("postProblem")) {
             rlSearch.visibility = View.GONE
             llSubmit.visibility = View.GONE
+            mathProblemAdapter = MathProblemAdapter(this, this, list,)
+            rvMathProblem.adapter = mathProblemAdapter
             apiTeacherListProblems()
         } else {
             rlSearch.visibility = View.VISIBLE
             llSubmit.visibility = View.VISIBLE
+            mathProblemAdapter = MathProblemAdapter(this, this, list,)
+            rvMathProblem.adapter = mathProblemAdapter
             apiListProblems()
         }
     }
-
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.ivBack -> {
@@ -116,9 +146,13 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
             myPopupWindow!!.dismiss()
         }
         view.ivFile.setOnClickListener {
-
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                getImage()
+            }else {
+                Toast.makeText(this, "You don't assign permission.", Toast.LENGTH_SHORT).show();
+            }
             ////////
-            pdfDialog()
+
             myPopupWindow!!.dismiss()
         }
         myPopupWindow?.setOnDismissListener {
@@ -175,7 +209,8 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
                     list.addAll(liveData.data.body)
                     mathProblemAdapter.notifyDataSetChanged()
                     //  rvMathProblem.adapter = MathProblemAdapter(this, this, list)
-                } else if (liveData.data is Commontoall) {
+                }
+                else if (liveData.data is Commontoall) {
                     //finish()
                     list.removeAt(pos)
                     mathProblemAdapter.notifyDataSetChanged()
@@ -241,7 +276,6 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
         )
     }
 
-
     private fun pdfDialog() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             if (!Environment.isExternalStorageManager()) {
@@ -262,10 +296,9 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
 
         } else {
             filePicker()
-
         }
-    }
 
+    }
     private fun filePicker() {
 //        val docs = arrayOf("pdf","doc", "docx", "dot", "dotx")
         FilePickerBuilder.instance
@@ -274,17 +307,13 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
             .pickFile(this, fileRequestCode)
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (requestCode == fileRequestCode && resultCode == RESULT_OK) {
-
             try {
                 if (data != null) {
                     val docPaths: java.util.ArrayList<String> = java.util.ArrayList()
                     docPaths.addAll(data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS)!!)
-
                     val pdfPath = docPaths[0]
                     Log.d("PATHGET_file", pdfPath)
                     firstimage = pdfPath
@@ -294,6 +323,87 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
             } catch (e: Exception) {
             }
         }
-
     }
+
+    open fun getImage() {
+
+        if (hasPermissions(permissions)) {
+            Log.e("Permissions", "Permissions Granted")
+          pdfDialog()
+        } else if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            checkPermissionDenied(Manifest.permission.READ_EXTERNAL_STORAGE)
+        } else if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            checkPermissionDenied(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        } else if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+            checkPermissionDenied(Manifest.permission.CAMERA)
+        } else {
+            Log.e("Permissions", "Request for Permissions")
+            requestPermission()
+        }
+    }
+    private val permissions = arrayOf(
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.CAMERA
+    )
+
+    private fun hasPermissions(permissions: Array<String>): Boolean = permissions.all {
+        ActivityCompat.checkSelfPermission(this!!, it) == PackageManager.PERMISSION_GRANTED
+    }
+    private fun checkPermissionDenied(permissions: String) {
+        if (shouldShowRequestPermissionRationale(permissions)) {
+            val mBuilder = AlertDialog.Builder(this)
+            val dialog: AlertDialog =
+                mBuilder.setTitle(R.string.alert).setMessage(R.string.permissionRequired)
+                    .setPositiveButton(
+                        R.string.ok
+                    ) { dialog, which -> requestPermission() }
+                    .setNegativeButton(
+                        R.string.cancel
+                    ) { dialog, which ->
+
+                    }.create()
+            dialog.setOnShowListener {
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(
+                    ContextCompat.getColor(
+                        this!!, R.color.colorPrimary
+                    )
+                )
+            }
+            dialog.show()
+        } else {
+            val builder = AlertDialog.Builder(this)
+            val dialog: AlertDialog =
+                builder.setTitle(R.string.alert).setMessage(R.string.permissionRequired)
+                    .setCancelable(
+                        false
+                    )
+                    .setPositiveButton(R.string.openSettings) { dialog, which ->
+                        //finish()
+                        val intent = Intent(
+                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                            Uri.fromParts(
+                                "package",
+                                BuildConfig.APPLICATION_ID + ".provider",
+                                null
+                            )
+                        )
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivity(intent)
+                    }.create()
+            dialog.setOnShowListener {
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(
+                    ContextCompat.getColor(
+                        this, R.color.colorPrimary
+                    )
+                )
+            }
+            dialog.show()
+        }
+    }
+    private fun requestPermission() {
+        requestMultiplePermissions.launch(permissions)
+    }
+
+
 }

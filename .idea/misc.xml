@@ -45,6 +45,7 @@
         <entry key="app/src/main/res/layout/item_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_hadder.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/item_math_problem.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_message.xml" value="0.17685185185185184" />
         <entry key="app/src/main/res/layout/popup_file_attachment.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/popup_math_problem.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/report_popup.xml" value="0.18489583333333334" />

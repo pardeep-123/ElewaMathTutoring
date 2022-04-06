@@ -220,7 +220,6 @@ class BaseViewModel : ViewModel() {
         }
     }
 
-
     @SuppressLint("CheckResult")
     fun AddComments(
         activity: Activity,

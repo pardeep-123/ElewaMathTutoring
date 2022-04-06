@@ -45,7 +45,7 @@ class PastTeacherAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.tvItemName.setText(list[position].teacher.name)
         holder.itemView.tvItemType.setText(Constants.isCertifiedOrtutor(list[position].teacher.isCertifiedOrtutor))
-        Glide.with(ctn).load(Constants.IMAGE_URL + list[position].teacher.image)
+        Glide.with(ctn).load(list[position].teacher.image)
             .placeholder(R.drawable.profile_unselected).into(holder.itemView.ivImage)
 
         holder.itemView.tvItemDate.text = Constants.ConvertTimeStampToDate(list[position].teacher.updatedAt.toLong(),"EEE, MMM yy")

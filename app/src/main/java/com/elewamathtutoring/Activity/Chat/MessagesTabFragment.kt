@@ -97,12 +97,10 @@ class MessagesTabFragment : Fragment() ,View.OnClickListener,  SocketManager.Obs
         }
         getChatData()
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         socketManager?.unRegister(this)
     }
-
     override fun onResponseArray(event: String, args: JSONArray) {
         when (event) {
             SocketManager.CHAT_LISTING_EMITTER -> {

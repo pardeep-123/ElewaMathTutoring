@@ -28,64 +28,67 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="8dp"
-
             android:fontFamily="@font/medium"
             android:text="Messages"
             android:textColor="@color/white"
             android:textSize="@dimen/_14sdp" />
-
-
     </RelativeLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/messagenvendor_recycle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/schedule_toolbar"
-        android:layout_marginTop="5dp"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/schedule_toolbar"
+    android:fillViewport="true">
     <RelativeLayout
-        android:id="@+id/rel_nomessage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:visibility="visible">
-
-        <TextView
+        android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/messagenvendor_recycle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/medium"
+
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:nestedScrollingEnabled="true"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <RelativeLayout
+            android:id="@+id/rel_nomessage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="No new message right now"
-            android:textColor="@color/black">
+            android:visibility="visible">
 
-        </TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/medium"
+                android:gravity="center"
+                android:text="No new message right now"
+                android:textColor="@color/black" />
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/progresschat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/blue"
+            android:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCreateGroup"
+            style="@style/Button"
+            android:layout_margin="@dimen/_20sdp"
+            android:layout_below="@id/messagenvendor_recycle"
+            android:background="@drawable/bg_btn"
+            android:fontFamily="@font/bold"
+            android:text="Create a Study Group"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
     </RelativeLayout>
+</ScrollView>
 
-    <ProgressBar
-        android:id="@+id/progresschat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:indeterminateTint="@color/blue"
-        android:visibility="gone" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnCreateGroup"
-        style="@style/Button"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="@dimen/_20sdp"
-        android:layout_marginRight="@dimen/_20sdp"
-        android:layout_marginBottom="@dimen/_15sdp"
-        android:background="@drawable/bg_btn"
-        android:fontFamily="@font/bold"
-        android:text="Create a Study Group"
-        android:textAllCaps="false"
-        android:textColor="@color/white" />
 </RelativeLayout>

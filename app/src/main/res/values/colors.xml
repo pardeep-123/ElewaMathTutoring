@@ -7,6 +7,12 @@
     <color name="buttoncolor">#03afef</color>
     <color name="textcolor">#03afef</color>
     <color name="app">#03afef</color>
+
+    <color name="colorPrimary">#03afef</color>
+    <color name="colorPrimaryDark">#03afef</color>
+
+
+
     <color name="barcolor">#03afef</color>
     <color name="editextbg">#f5f5f5</color>
     <color name="editexthint">#F2AFAFAF</color>

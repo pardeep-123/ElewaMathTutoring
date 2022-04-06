@@ -57,6 +57,7 @@
             android:id="@+id/ivImg"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_90sdp"
+            android:scaleType="fitXY"
             android:src="@drawable/profile"
             android:layout_marginTop="@dimen/_10sdp" />
         <androidx.appcompat.widget.AppCompatTextView

@@ -27,13 +27,13 @@ class MessageAdapter(var context: Context, var orderDetailForMapResponse: ArrayL
             holder.itemView.tvMessageUser.text = orderDetailForMapResponse[position].groupName
             Glide.with(context)
                 .load(Constants.SOCKET_BASE_URL_IMAGE + orderDetailForMapResponse.get(position).groupImage)
-                .placeholder(R.drawable.placeholder_image).into(holder.itemView.ivMessageImage)
+                .placeholder(R.drawable.profile_unselected).into(holder.itemView.ivMessageImage)
         }
             else {
             holder.itemView.tvMessageUser.text = orderDetailForMapResponse[position].userName
             Glide.with(context)
-                .load(Constants.IMAGE_URL + orderDetailForMapResponse.get(position).userImage)
-                .placeholder(R.drawable.placeholder_image).into(holder.itemView.ivMessageImage)
+                .load(Constants.SOCKET_BASE_URL_IMAGE_USER + orderDetailForMapResponse.get(position).userImage)
+                .placeholder(R.drawable.profile_unselected).into(holder.itemView.ivMessageImage)
         }
             holder.itemView.tvMessage.text= orderDetailForMapResponse[position].lastMessage
         

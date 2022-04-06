@@ -48,41 +48,38 @@ class MathProblemAdapter(
         Glide.with(ctn).load(Constants.documents_URL+list[position].document).placeholder(R.drawable.profile_unselected)
             .into(holder.itemView.ivImg)
 
-       //
-
-        //
-
         holder.itemView.tvComment.setOnClickListener {
-
             val intent = Intent(ctn, DetailActivity::class.java)
             intent.putExtra("comments",list[position])
             ctn.startActivity(intent)
         }
-        holder.itemView.ivDots.setOnClickListener {
+            holder.itemView.ivDots.setOnClickListener {
 //            clickCallBack.onItemClick(position, "dots")
-
-            val inflater = ctn.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            val view = inflater.inflate(R.layout.popup_math_problem, null)
-            myPopupWindow = PopupWindow(view, RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT, true)
-            view.llDelete.setOnClickListener {
+                val inflater =
+                    ctn.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                val view = inflater.inflate(R.layout.popup_math_problem, null)
+                myPopupWindow = PopupWindow(
+                    view,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT,
+                    true
+                )
+                view.llDelete.setOnClickListener {
 //            clickCallBack.onItemClick(list[position].id, "delete")
-                onClickMath.onClickDelete(list[position].id.toString(),position)
-                myPopupWindow!!.dismiss()
-            }
-            view.llEdit.setOnClickListener {
+                    onClickMath.onClickDelete(list[position].id.toString(), position)
+                    myPopupWindow!!.dismiss()
+                }
+                view.llEdit.setOnClickListener {
 //            clickCallBack.onItemClick(position, "edit")
-                onClickMath.onClickEdit(list[position])
-                myPopupWindow!!.dismiss()
+                    onClickMath.onClickEdit(list[position])
+                    myPopupWindow!!.dismiss()
+                }
+                myPopupWindow?.setOnDismissListener {
+                    CommonMethods.clearDim(viewGroup)
+                    myPopupWindow!!.dismiss()
+                }
+                myPopupWindow?.showAsDropDown(it, -0, -35)
+                CommonMethods.applyDim(viewGroup, 0.5f)
             }
-            myPopupWindow?.setOnDismissListener {
-                CommonMethods.clearDim(viewGroup)
-                myPopupWindow!!.dismiss()
-            }
-
-            myPopupWindow?.showAsDropDown(it, -0, -35)
-            CommonMethods.applyDim(viewGroup, 0.5f)
         }
-    }
-
-
 }

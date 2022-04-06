@@ -10,6 +10,7 @@ import com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.mathProble
 import com.elewamathtutoring.Adapter.ParentOrStudent.MathProblemAdapter
 import com.elewamathtutoring.Models.Modecommon.Commontoall
 import com.elewamathtutoring.R
+import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
@@ -36,19 +37,15 @@ class EditMathProblemActivity : AppCompatActivity(), View.OnClickListener,
         ivBack.setOnClickListener(this)
         btnSubmit.setOnClickListener(this)
         ivCamera.setOnClickListener(this)
-
         if (intent.getSerializableExtra("edit") != null) {
-
             data = (intent.getSerializableExtra("edit") as MathProblemListResponse.Body?)
             postId = data!!.id.toString()
             edaboutyou.setText(data!!.description)
-            oldImage = intent.getStringExtra("edit").toString()
-            Glide.with(this).load(intent.getStringExtra("edit").toString())
+            oldImage = data!!.document
+            Glide.with(this).load(Constants.documents_URL+data!!.document)
                 .placeholder(R.drawable.placeholder_image).into(ivAddImage)
         }
-
     }
-
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.ivBack -> {
