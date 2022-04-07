@@ -18,7 +18,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.elewamathtutoring.Activity.Chat.mathChat.MathChatActivity
 import com.elewamathtutoring.Activity.Chat.mathChat.MathChatResponse
-import com.elewamathtutoring.Activity.NotificationsActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.notification.NotificationsActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.filter.FilterActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.mathProblem.PostMathProblemActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResoucesActivity

@@ -45,6 +45,8 @@ android {
 }
 
 dependencies {
+    def exoPlayerVersion = "2.8.4"
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -161,7 +163,10 @@ dependencies {
     implementation 'com.droidninja:filepicker:2.2.1'
 //    implementation project(':filepicker') for pdf or other documents
 
-
+    // ExoPlayer
+    implementation "com.google.android.exoplayer:exoplayer:$exoPlayerVersion"
+// Better video player
+    implementation 'com.github.halilozercan:BetterVideoPlayer:kotlin-SNAPSHOT'
 }
 
 kapt {

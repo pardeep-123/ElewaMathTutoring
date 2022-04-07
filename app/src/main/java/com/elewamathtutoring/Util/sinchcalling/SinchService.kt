@@ -76,8 +76,6 @@ class SinchService : Service(), CallClientListener {
         notificationManager.createNotificationChannel(channel)
         return channelId
     }
-
-
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         sinchClient!!.addSinchClientListener(object : SinchClientListener {
             override fun onClientStarted(client: SinchClient) {

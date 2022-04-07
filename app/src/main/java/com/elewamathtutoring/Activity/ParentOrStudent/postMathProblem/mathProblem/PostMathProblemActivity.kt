@@ -15,6 +15,7 @@ import android.os.Environment
 import android.provider.Settings
 import android.util.Log
 import android.view.*
+import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.RelativeLayout
 import android.widget.Toast
@@ -35,6 +36,7 @@ import com.elewamathtutoring.Util.CommonMethods.clearDim
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
+import com.halilibo.bvpkotlin.BetterVideoPlayer
 import com.yanzhenjie.album.Album
 import com.yanzhenjie.album.AlbumFile
 import com.yanzhenjie.album.api.widget.Widget
@@ -51,12 +53,14 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
     var myPopupWindow: PopupWindow? = null
     lateinit var context: Context
     lateinit var mathProblemAdapter: MathProblemAdapter
+
     lateinit var dialog: Dialog
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     private var mAlbumFiles: java.util.ArrayList<AlbumFile> = java.util.ArrayList()
     var firstimage = ""
     var type = "1"
-    var list = ArrayList<MathProblemListResponse.Body>()
+    var list = ArrayList<TeacherProblemResponse.Body>()
+
     var pos = -1
     private val fileRequestCode = 202
     private val requestMultiplePermissions =
@@ -66,7 +70,6 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
                 permissions.entries.forEach {
                     Log.d("permissions", "${it.key} = ${it.value}")
                 }
-
                 val readStorage = permissions[Manifest.permission.READ_EXTERNAL_STORAGE]
                 val writeStorage = permissions[Manifest.permission.WRITE_EXTERNAL_STORAGE]
                 val camera = permissions[Manifest.permission.CAMERA]
@@ -74,14 +77,12 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
                 if (readStorage == true && writeStorage == true && camera == true) {
                     Log.e("permissions", "Permission Granted Successfully")
                     pdfDialog()
-
                 } else {
                     Log.e("permissions", "Permission not granted")
                     checkPermissionDenied(permissions.keys.first())
                 }
             }
         }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post_math_problem)
@@ -96,13 +97,13 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
         if (intent.getStringExtra("tutor").equals("postProblem")) {
             rlSearch.visibility = View.GONE
             llSubmit.visibility = View.GONE
-            mathProblemAdapter = MathProblemAdapter(this, this, list,)
+            mathProblemAdapter = MathProblemAdapter(this,this, list,"1")
             rvMathProblem.adapter = mathProblemAdapter
             apiTeacherListProblems()
         } else {
             rlSearch.visibility = View.VISIBLE
             llSubmit.visibility = View.VISIBLE
-            mathProblemAdapter = MathProblemAdapter(this, this, list,)
+            mathProblemAdapter = MathProblemAdapter(this, this, list,"2")
             rvMathProblem.adapter = mathProblemAdapter
             apiListProblems()
         }
@@ -204,7 +205,7 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
     override fun onChanged(liveData: RestObservable?) {
         when (liveData!!.status) {
             Status.SUCCESS -> {
-                if (liveData.data is MathProblemListResponse) {
+                if (liveData.data is TeacherProblemResponse) {
                     list.clear()
                     list.addAll(liveData.data.body)
                     mathProblemAdapter.notifyDataSetChanged()
@@ -221,7 +222,7 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
                 }
             }
             Status.ERROR -> {
-                if (liveData.error is MathProblemListResponse) {
+                if (liveData.error is TeacherProblemResponse) {
 
                 }
             }
@@ -268,7 +269,7 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
         deletePostDialog(deleteId, position)
     }
 
-    override fun onClickEdit(editId: MathProblemListResponse.Body) {
+    override fun onClickEdit(editId: TeacherProblemResponse.Body) {
         startActivity(
             Intent(this, EditMathProblemActivity::class.java)
                 /*.putExtra("edit", list[pos].id.toString())*/
@@ -350,6 +351,7 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
     private fun hasPermissions(permissions: Array<String>): Boolean = permissions.all {
         ActivityCompat.checkSelfPermission(this!!, it) == PackageManager.PERMISSION_GRANTED
     }
+
     private fun checkPermissionDenied(permissions: String) {
         if (shouldShowRequestPermissionRationale(permissions)) {
             val mBuilder = AlertDialog.Builder(this)
@@ -404,6 +406,28 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
     private fun requestPermission() {
         requestMultiplePermissions.launch(permissions)
     }
+    fun showFullScreen(arr: String,type:String) {
+        val dialog = Dialog(this, android.R.style.Theme_Light)
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.dialog_full_screen)
+        dialog.window?.setBackgroundDrawableResource(R.color.app);
+
+        if(type == "1") {
+            val image = dialog.findViewById<View>(R.id.ivShow) as ImageView
+            Glide.with(this).load(arr).placeholder(R.drawable.placeholder_image).into(image)
+        }else {
+            var player=  dialog.findViewById<BetterVideoPlayer>(R.id.player)
+            player.setSource(Uri.parse(arr))
+            player.setAutoPlay(true)
+        }
+        val cutIv = dialog.findViewById<ImageView>(R.id.cutIv) as ImageView
+        cutIv.setOnClickListener { dialog.dismiss() }
+        dialog.show()
+    }
 
 
 }
+
+

@@ -23,7 +23,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:padding="10dp"
-                android:src="@drawable/mig" />
+                android:src="@drawable/profile_unselected" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -64,10 +64,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:orientation="vertical"
                     android:layout_weight="7">
 
                     <TextView
-                        android:id="@+id/tvNotificationsTime"
+                        android:id="@+id/tvDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Sept 10, 2020"
+                        android:textColor="@color/gray969A9D"
+                        android:textSize="10sp" />
+  <TextView
+                        android:id="@+id/tvTime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"

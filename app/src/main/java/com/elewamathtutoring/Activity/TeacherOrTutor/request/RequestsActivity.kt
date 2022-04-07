@@ -144,7 +144,6 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
                     {
                         apiAccept("4")
                     }
-
                 }
                 .setNegativeButton(
                     "Nevermind"
@@ -170,35 +169,26 @@ class RequestsActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
         myPopupWindow?.setOnDismissListener {
             clearDim(viewGroup)
         }
-
     }
-
     private fun dialogReport() {
         val reportDialog = Dialog(this)
         reportDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         reportDialog.setContentView(R.layout.dialog_report)
-
         reportDialog.window!!.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT
         )
-
         reportDialog.report_cancel.setOnClickListener {
             reportDialog.cancel()
             myPopupWindow!!.dismiss()
-
         }
         reportDialog.report_Submit.setOnClickListener {
-
             baseViewModel.report(this, reportDialog.etText.text.toString(), intent.getStringExtra("id").toString(),true)
             baseViewModel.getCommonResponse().observe(this, this)
-
-
             reportDialog.cancel()
             myPopupWindow!!.dismiss()
 
         }
-
         reportDialog.window!!.setGravity(Gravity.CENTER)
         reportDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         reportDialog.setCancelable(true)

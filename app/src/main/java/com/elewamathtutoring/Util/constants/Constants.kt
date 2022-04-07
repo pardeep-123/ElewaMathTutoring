@@ -87,7 +87,7 @@ class Constants {
   fun convertTime(timestamp: Long): String? {
             val cal: Calendar = Calendar.getInstance(Locale.ENGLISH)
             cal.timeInMillis = timestamp * 1000
-            val outputFormat: DateFormat = SimpleDateFormat("hh")
+            val outputFormat: DateFormat = SimpleDateFormat("hh:mm a")
             //outputFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
             return outputFormat.format(cal.time)
         }

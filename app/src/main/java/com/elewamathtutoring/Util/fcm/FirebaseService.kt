@@ -93,7 +93,6 @@ class FirebaseService : FirebaseMessagingService() {
 
       //  if (Constants.User2Id!= notificationModel.id || !Constants.OnMessageScreen)
 
-
     }
 
     private fun makePush(intent: Intent?) {
@@ -107,7 +106,7 @@ class FirebaseService : FirebaseMessagingService() {
 
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(notificationIcon)
-            .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.app_icon))
+            .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.logo))
             .setContentTitle(getString(R.string.app_name))
             .setContentText(message)
             .setStyle(NotificationCompat.BigTextStyle().bigText(message))
@@ -143,7 +142,7 @@ class FirebaseService : FirebaseMessagingService() {
 
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(notificationIcon)
-            .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.app_icon))
+            .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.logo))
             .setContentTitle(title)
             .setContentText(message)
             .setStyle(NotificationCompat.BigTextStyle().bigText(message))
@@ -171,6 +170,6 @@ class FirebaseService : FirebaseMessagingService() {
     private val notificationIcon: Int
         get() {
             val useWhiteIcon = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
-            return if (useWhiteIcon) R.drawable.ic_noti else R.drawable.app_icon
+            return if (useWhiteIcon) R.drawable.ic_noti else R.drawable.logo
         }
 }

@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.mathProblem.MathProblemListResponse
+import com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.mathProblem.TeacherProblemResponse
 import com.elewamathtutoring.Adapter.ParentOrStudent.DetailAdapter
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
@@ -20,9 +21,9 @@ import kotlinx.android.synthetic.main.item_detail.view.*
 class DetailActivity : AppCompatActivity(), View.OnClickListener, Observer<RestObservable> {
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     lateinit var detailAdapter: DetailAdapter
-    var mathProblemListResponse: MathProblemListResponse.Body? = null
+    var mathProblemListResponse: TeacherProblemResponse.Body? = null
 
-    var list = ArrayList<MathProblemListResponse.Body>()
+    var list = ArrayList<TeacherProblemResponse.Body>()
 
     var listComment = ArrayList<CommentListResponse.Body.AllComment>()
 
@@ -32,7 +33,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, Observer<RestO
         ivBack.setOnClickListener(this)
         ivSendBtn.setOnClickListener(this)
 
-        mathProblemListResponse = intent.getSerializableExtra("comments") as MathProblemListResponse.Body
+        mathProblemListResponse = intent.getSerializableExtra("comments") as TeacherProblemResponse.Body
         tvDescription.setText(mathProblemListResponse!!.description)
         tvTime.text = Constants.getNotificationTime(mathProblemListResponse!!.createdAt.toLong())
 

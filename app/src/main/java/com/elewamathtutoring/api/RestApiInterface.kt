@@ -9,12 +9,14 @@ import com.elewamathtutoring.Activity.ParentOrStudent.addBAnk.AddBankResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.add_card.AddCardResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.editProfile.EditProfileResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.filter.SubjectsResponse
+import com.elewamathtutoring.Activity.ParentOrStudent.notification.NotificationModel
 import com.elewamathtutoring.Activity.ParentOrStudent.payment.CardListingResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.payment.SesionBookResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.details.AddCommentResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.details.CommentListResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.mathProblem.AddPostResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.mathProblem.MathProblemListResponse
+import com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.mathProblem.TeacherProblemResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.privacy.PrivacyResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.CategoriesResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.resources.ResourcesResponse
@@ -39,7 +41,6 @@ import com.elewamathtutoring.Models.Card_listing.AllSessionListResponse
 import com.elewamathtutoring.Models.Login.Model_login
 import com.elewamathtutoring.Models.Modecommon.Commontoall
 import com.elewamathtutoring.Models.Modecommon.Commontoall2
-import com.elewamathtutoring.Models.Notifications.Model_Notifications
 import com.elewamathtutoring.Models.Search.Model_search
 import com.elewamathtutoring.Models.TeacherRequestsList.Model_TeacherRequestList
 
@@ -104,13 +105,13 @@ interface RestApiInterface {
 
 
     @GET("NotificationList")
-    fun notifications(): Observable<Model_Notifications>
+    fun notifications(): Observable<NotificationModel>
 
     @GET("myMathProblems")
-    fun myMathProblems(): Observable<MathProblemListResponse>
+    fun myMathProblems(): Observable<TeacherProblemResponse>
 
     @GET("mathProblems")
-    fun mathProblems(): Observable<MathProblemListResponse>
+    fun mathProblems(): Observable<TeacherProblemResponse>
 
 
     @FormUrlEncoded

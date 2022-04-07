@@ -5,17 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.elewamathtutoring.Models.Notifications.Body
+import com.elewamathtutoring.Activity.ParentOrStudent.notification.NotificationModel
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
-import com.elewamathtutoring.Util.helper.extensions.getPrefrence
 import kotlinx.android.synthetic.main.item_notifications.view.*
-import kotlinx.android.synthetic.main.item_notifications.view.tvNotificationsTime
-import java.lang.Exception
+
+
 import kotlin.collections.ArrayList
 
-class NotificationsAdapter(c: Context, listNotifications: ArrayList<Body>) :
+class NotificationsAdapter(c: Context, listNotifications: ArrayList<NotificationModel.Body>) :
     RecyclerView.Adapter<NotificationsAdapter.ViewHolder>() {
     var ctn = c
     var list = listNotifications
@@ -35,17 +33,12 @@ class NotificationsAdapter(c: Context, listNotifications: ArrayList<Body>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.itemView.tvMessages.text = list.get(position).message
-        try {
-            holder.itemView.tvNotificationsTime.text = Constants.ConvertTimeStampToDate(list.get(position).createdAt.toLong(),"EEE dd, yyyy")
+        holder.itemView.tvMessages.text = list[position].message
+        holder.itemView.tvDate.text = Constants.convertDateToRatingTime(list[position].createdAt.toLong())
+        holder.itemView.tvTime.text = Constants.convertTime(list[position].createdAt.toLong())
 
-        }catch (e:Exception)
-        {
-
-        }
-        if (getPrefrence(Constants.user_type, "").toString().equals("1")) {
-            holder.itemView.tvNotificationName.text =
-                list.get(position).sessionDetail.get(0).teacher.name
+     /*   if (getPrefrence(Constants.user_type, "").toString().equals("1")) {
+            holder.itemView.tvNotificationName.text = list[position].
            //holder.itemView.tvMessages.text = list.get(position).message
             Glide.with(ctn).load(Constants.IMAGE_URL+list.get(position).sessionDetail.get(0).teacher.image)
                 .into(holder.itemView.ivNotifications);
@@ -54,7 +47,7 @@ class NotificationsAdapter(c: Context, listNotifications: ArrayList<Body>) :
                 list.get(position).sessionDetail.get(0).student.name
             Glide.with(ctn).load(Constants.IMAGE_URL+list.get(position).sessionDetail.get(0).student.image)
                 .into(holder.itemView.ivNotifications);
-        }
+        }*/
 
     }
 }

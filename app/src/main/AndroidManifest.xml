@@ -138,7 +138,7 @@
             android:name=".Activity.TeacherOrTutor.editProfile.AboutYouActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.NotificationsActivity"
+            android:name=".Activity.ParentOrStudent.notification.NotificationsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.ParentOrStudent.session.ScheduleASession2Activity"

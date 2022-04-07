@@ -15,11 +15,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_8sdp">
+            <LinearLayout
+                android:id="@+id/llProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="horizontal">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:src="@drawable/profile"
+
+                    android:id="@+id/ivProfile"
+                    android:scaleType="centerCrop"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="jihn"
+                    android:id="@+id/tvUserName"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_gravity="center"
+                android:fontFamily="@font/medium"/>
+            </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/llProfile"
                 android:layout_toStartOf="@+id/ivDots"
                 android:fontFamily="@font/medium"
                 android:maxLines="3"
@@ -89,12 +115,14 @@
 
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:scaleType="centerCrop" />
+
                 <ImageView
+                    android:id="@+id/ivVideoPlay"
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
                     android:layout_centerInParent="true"
-                    android:src="@drawable/play"
-                    android:id="@+id/ivVideoPlay" />
+                    android:visibility="gone"
+                    android:src="@drawable/play" />
             </RelativeLayout>
         </RelativeLayout>
         <LinearLayout

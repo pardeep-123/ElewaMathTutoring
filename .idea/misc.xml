@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable-xxhdpi/background_roundedges.xml" value="0.20104166666666667" />
         <entry key="app/src/main/res/layout/activity_about_you.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/activity_add_card.xml" value="0.17962962962962964" />
         <entry key="app/src/main/res/layout/activity_availablity.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.18" />
@@ -30,6 +31,7 @@
         <entry key="app/src/main/res/layout/dialog_booking_thanks.xml" value="0.17962962962962964" />
         <entry key="app/src/main/res/layout/dialog_delete.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/dialog_delete_post.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/dialog_full_screen.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/dialog_location.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/dialog_progress.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/dialog_report.xml" value="0.18489583333333334" />
@@ -44,8 +46,9 @@
         <entry key="app/src/main/res/layout/item_calender.xml" value="0.18" />
         <entry key="app/src/main/res/layout/item_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_hadder.xml" value="0.18489583333333334" />
-        <entry key="app/src/main/res/layout/item_math_problem.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_math_problem.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_message.xml" value="0.17685185185185184" />
+        <entry key="app/src/main/res/layout/item_notifications.xml" value="0.22" />
         <entry key="app/src/main/res/layout/popup_file_attachment.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/popup_math_problem.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/report_popup.xml" value="0.18489583333333334" />

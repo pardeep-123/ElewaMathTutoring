@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.ParentOrStudent.editProfile.EditProfile
-import com.elewamathtutoring.Activity.NotificationsActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.notification.NotificationsActivity
 import com.elewamathtutoring.Activity.ParentOrStudent.settings.SettingActivity
 import com.elewamathtutoring.Adapter.ParentOrStudent.PastTeacherAdapter
 import com.elewamathtutoring.R
