@@ -57,11 +57,9 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener,
             (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
         window.statusBarColor = Color.TRANSPARENT;
         profile = ((intent.getSerializableExtra("teacher_detail") as ArrayList<TeacherDetailResponse.Body>?)!!)
-
         setChooseTimeAdapter()
         onClicks()
         val disable: MutableList<Date> = ArrayList()
-
         val calendar = Calendar.getInstance()
         val min = Calendar.getInstance()
         min.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH) - 1)

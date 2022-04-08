@@ -22,6 +22,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.mathProblem.MathProblemListResponse
+import com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.mathProblem.TeacherProblemResponse
 import com.elewamathtutoring.Adapter.ParentOrStudent.MathProblemAdapter
 import com.elewamathtutoring.Models.Modecommon.Commontoall
 import com.elewamathtutoring.R
@@ -46,7 +47,7 @@ class EditMathProblemActivity : AppCompatActivity(), View.OnClickListener,
     Observer<RestObservable> {
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
 
-    var data: MathProblemListResponse.Body? = null
+    var data: TeacherProblemResponse.Body? = null
     private var mAlbumFiles: java.util.ArrayList<AlbumFile> = java.util.ArrayList()
     var postId = ""
     var firstimage = ""
@@ -62,7 +63,7 @@ class EditMathProblemActivity : AppCompatActivity(), View.OnClickListener,
         btnSubmit.setOnClickListener(this)
         ivCamera.setOnClickListener(this)
         if (intent.getSerializableExtra("edit") != null) {
-            data = (intent.getSerializableExtra("edit") as MathProblemListResponse.Body?)
+            data = (intent.getSerializableExtra("edit") as TeacherProblemResponse.Body?)
             postId = data!!.id.toString()
             edaboutyou.setText(data!!.description)
             oldImage = data!!.document

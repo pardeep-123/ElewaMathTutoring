@@ -16,24 +16,28 @@ data class NotificationModel(
 ):Serializable {
     data class Body(
         @SerializedName("id")
-        val id: Int, // 963
+        val id: Int, // 952
         @SerializedName("type")
-        val type: Int, // 6
+        val type: Int, // 0
         @SerializedName("userType")
         val userType: Int, // 1
         @SerializedName("sessionId")
-        val sessionId: Int, // 56
+        val sessionId: Int, // 53
         @SerializedName("toUserId")
         val toUserId: Int, // 396
         @SerializedName("byUserId")
-        val byUserId: Int, // 67
+        val byUserId: Int, // 398
         @SerializedName("message")
-        val message: String, // Justin Complete session booking
+        val message: String, // deep Request for session booking
         @SerializedName("isRead")
         val isRead: Int, // 1
         @SerializedName("createdAt")
-        val createdAt: Int, // 1616936481
+        val createdAt: Int, // 1616829891
         @SerializedName("updatedAt")
-        val updatedAt: Int // 0
+        val updatedAt: Int, // 0
+        @SerializedName("name")
+        val name: String, // sa
+        @SerializedName("image")
+        val image: String
     ):Serializable
 }

@@ -41,17 +41,15 @@ class MathProblemAdapter(
         val view = LayoutInflater.from(ctn).inflate(R.layout.item_math_problem, parent, false)
         return ViewHolder(view)
     }
-
     override fun getItemCount(): Int {
         return list.size
     }
-
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
           if (typeUser== "1"){
             holder.itemView.ivDots.visibility=View.GONE
             holder.itemView.llProfile.visibility=View.VISIBLE
-              Glide.with(ctn).load(list[position].user.image).placeholder(R.drawable.profile_unselected)
+              Glide.with(ctn).load(Constants.IMAGE_URL+list[position].user.image).placeholder(R.drawable.profile_unselected)
                   .into(holder.itemView.ivProfile)
               holder.itemView.tvUserName.text = list[position].user.name
           }
@@ -70,7 +68,6 @@ class MathProblemAdapter(
         holder.itemView.tvTime.text = Constants.getNotificationTime(list[position].createdAt.toLong())
 
         if(list.get(position).user?.count!=null){
-
              holder.itemView.tvComment.text = list[position].user.count.toString()+" comment"
         }else{
             holder.itemView.tvComment.text = list[position].count.toString()+" comment"

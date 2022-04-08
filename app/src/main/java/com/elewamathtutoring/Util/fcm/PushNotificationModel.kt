@@ -12,6 +12,7 @@ data class PushNotificationModel(
     val userImage: String,
     val friendImage: String,
     val callid: String,
+    val sessionId: String,
 //    val name: String,
 //    val notification_code: String,
 //    val product_id: String,

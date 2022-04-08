@@ -139,6 +139,7 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
         }
     }
     @RequiresApi(Build.VERSION_CODES.N)
+
     private fun onClicks() {
         v.rootView.ivSetting.setOnClickListener {
             startActivity(Intent(context, SettingActivity::class.java)

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.ParentOrStudent.notification.NotificationModel
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
@@ -32,22 +33,11 @@ class NotificationsAdapter(c: Context, listNotifications: ArrayList<Notification
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         holder.itemView.tvMessages.text = list[position].message
+        holder.itemView.tvNotificationName.text = list[position].name
         holder.itemView.tvDate.text = Constants.convertDateToRatingTime(list[position].createdAt.toLong())
         holder.itemView.tvTime.text = Constants.convertTime(list[position].createdAt.toLong())
-
-     /*   if (getPrefrence(Constants.user_type, "").toString().equals("1")) {
-            holder.itemView.tvNotificationName.text = list[position].
-           //holder.itemView.tvMessages.text = list.get(position).message
-            Glide.with(ctn).load(Constants.IMAGE_URL+list.get(position).sessionDetail.get(0).teacher.image)
-                .into(holder.itemView.ivNotifications);
-        } else {
-            holder.itemView.tvNotificationName.text =
-                list.get(position).sessionDetail.get(0).student.name
-            Glide.with(ctn).load(Constants.IMAGE_URL+list.get(position).sessionDetail.get(0).student.image)
-                .into(holder.itemView.ivNotifications);
-        }*/
-
+        Glide.with(ctn).load(Constants.IMAGE_URL+list[position].image)
+            .into(holder.itemView.ivNotifications)
     }
 }

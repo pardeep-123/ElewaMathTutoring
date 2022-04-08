@@ -55,7 +55,6 @@ class FirebaseService : FirebaseMessagingService() {
             (Gson().toJson(remoteMessage.data)).toString(),
             PushNotificationModel::class.java
         )
-
       //  title = notificationModel.name
         message = notificationModel.message
         try {
@@ -63,8 +62,7 @@ class FirebaseService : FirebaseMessagingService() {
         } catch (e: Exception) {
         }
         val intent: Intent?
-
-        if (notificationModel.push_type=="17"){
+        if(notificationModel.push_type=="17"){
             //if (appStatus == "online") {
                 intent = Intent(this, SinchIncomingCallActivity::class.java)
                 intent.putExtra("callid", notificationModel.callid)
@@ -73,40 +71,31 @@ class FirebaseService : FirebaseMessagingService() {
                 intent.putExtra("friendImage", notificationModel.userImage)
                 makePushForCall(intent)
           //  }
-
         } else if (notificationModel.push_type=="18"){
             //if (appStatus == "online") {
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.cancel(-1)
           //  }
-
         }else{
             if (notificationModel.push_type=="1"){
                 intent = Intent(this,RequestsActivity::class.java)
-                intent.putExtra("id",notificationModel.userId)
+                intent.putExtra("id",notificationModel.sessionId)
             }else {
                 intent = Intent(this, MainActivity::class.java)
                 intent.putExtra("pushNotificationModel", notificationModel)
             }
             makePush(intent)
         }
-
       //  if (Constants.User2Id!= notificationModel.id || !Constants.OnMessageScreen)
-
     }
-
     private fun makePush(intent: Intent?) {
-
         val pendingIntent = PendingIntent.getActivity(this, i, intent, PendingIntent.FLAG_ONE_SHOT)
-
         intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-
         val channelId = CHANNEL_ID
         soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(notificationIcon)
-            .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.logo))
+            .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.push_logo))
             .setContentTitle(getString(R.string.app_name))
             .setContentText(message)
             .setStyle(NotificationCompat.BigTextStyle().bigText(message))
@@ -115,7 +104,6 @@ class FirebaseService : FirebaseMessagingService() {
             .setSound(soundUri)
             .setContentIntent(pendingIntent)
             .setDefaults(Notification.DEFAULT_ALL)
-
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -127,22 +115,17 @@ class FirebaseService : FirebaseMessagingService() {
             channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
             notificationManager.createNotificationChannel(channel)
         }
-
         notificationManager.notify(i++, notificationBuilder.build())
     }
     private fun makePushForCall(intent: Intent?) {
-
         val pendingIntent = PendingIntent.getActivity(this, i, intent, PendingIntent.FLAG_ONE_SHOT)
-
         // callscreen.addFlags(FLAG_ACTIVITY_NEW_TASK);
         intent!!.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-
         val channelId = CHANNEL_ID
         soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(notificationIcon)
-            .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.logo))
+            .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.push_logo))
             .setContentTitle(title)
             .setContentText(message)
             .setStyle(NotificationCompat.BigTextStyle().bigText(message))
@@ -163,13 +146,11 @@ class FirebaseService : FirebaseMessagingService() {
             channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
             notificationManager.createNotificationChannel(channel)
         }
-
         notificationManager.notify(-1, notificationBuilder.build())
     }
-
     private val notificationIcon: Int
         get() {
             val useWhiteIcon = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
-            return if (useWhiteIcon) R.drawable.ic_noti else R.drawable.logo
+            return if (useWhiteIcon) R.drawable.ic_noti else R.drawable.push_logo
         }
 }
