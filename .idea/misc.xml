@@ -3,10 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-xxhdpi/background_blue.xml" value="0.19537037037037036" />
         <entry key="app/src/main/res/drawable-xxhdpi/background_roundedges.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/drawable/background_chat2.xml" value="0.19537037037037036" />
+        <entry key="app/src/main/res/drawable/ic_pdf.xml" value="0.20104166666666667" />
         <entry key="app/src/main/res/layout/activity_about_you.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_add_card.xml" value="0.17962962962962964" />
         <entry key="app/src/main/res/layout/activity_availablity.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/activity_change_password.xml" value="0.15462962962962962" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_edit_math_problem.xml" value="0.16979166666666667" />
@@ -28,6 +32,7 @@
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_sign_up_as.xml" value="0.16510416666666666" />
         <entry key="app/src/main/res/layout/activity_teacher_details.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/activity_video_play.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/dialog_booking_thanks.xml" value="0.17962962962962964" />
         <entry key="app/src/main/res/layout/dialog_delete.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/dialog_delete_post.xml" value="0.18489583333333334" />
@@ -35,6 +40,7 @@
         <entry key="app/src/main/res/layout/dialog_location.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/dialog_progress.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/dialog_report.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/exo_player_control_view.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/fragment_messages_tab.xml" value="0.16944444444444445" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_profile_tab.xml" value="0.18489583333333334" />

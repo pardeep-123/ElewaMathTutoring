@@ -18,7 +18,6 @@ import android.view.*
 import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.RelativeLayout
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -27,6 +26,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.EditMathProblemActivity
+import com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.VideoPlayActivity
 import com.elewamathtutoring.Adapter.ParentOrStudent.MathProblemAdapter
 import com.elewamathtutoring.BuildConfig
 import com.elewamathtutoring.Models.Modecommon.Commontoall
@@ -60,7 +60,6 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
     var firstimage = ""
     var type = "1"
     var list = ArrayList<TeacherProblemResponse.Body>()
-
     var pos = -1
     private val fileRequestCode = 202
     private val requestMultiplePermissions =
@@ -83,6 +82,7 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
                 }
             }
         }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post_math_problem)
@@ -92,22 +92,29 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
         ivFiles.setOnClickListener(this)
         btnSubmit.setOnClickListener(this)
     }
+
     override fun onResume() {
         super.onResume()
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+//            if (!Environment.isExternalStorageManager()) {
+//                askStorageManagerPermission()
+//            }
+//        }
         if (intent.getStringExtra("tutor").equals("postProblem")) {
             rlSearch.visibility = View.GONE
             llSubmit.visibility = View.GONE
-            mathProblemAdapter = MathProblemAdapter(this,this, list,"1")
+            mathProblemAdapter = MathProblemAdapter(this, this, list, "1")
             rvMathProblem.adapter = mathProblemAdapter
             apiTeacherListProblems()
         } else {
             rlSearch.visibility = View.VISIBLE
             llSubmit.visibility = View.VISIBLE
-            mathProblemAdapter = MathProblemAdapter(this, this, list,"2")
+            mathProblemAdapter = MathProblemAdapter(this, this, list, "2")
             rvMathProblem.adapter = mathProblemAdapter
             apiListProblems()
         }
     }
+
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.ivBack -> {
@@ -122,7 +129,8 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
             }
         }
     }
-//1=images, 2=videos, 3=others
+
+    //1=images, 2=videos, 3=others
     private fun setPopUpFiles() {
         val viewGroup: ViewGroup = window.decorView.rootView as ViewGroup
         val inflater =
@@ -147,10 +155,15 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
             myPopupWindow!!.dismiss()
         }
         view.ivFile.setOnClickListener {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
                 getImage()
-            }else {
-                Toast.makeText(this, "You don't assign permission.", Toast.LENGTH_SHORT).show();
+            } else {
+                requestPermission()
+//                Toast.makeText(this, "You don't assign permission.", Toast.LENGTH_SHORT).show();
             }
             ////////
 
@@ -198,7 +211,7 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
     }
 
     private fun apiAddProblems() {
-        baseViewModel.postMathProblem(this, firstimage ,edtSearch.text.toString(), type,true)
+        baseViewModel.postMathProblem(this, firstimage, edtSearch.text.toString(), type, true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
 
@@ -210,8 +223,7 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
                     list.addAll(liveData.data.body)
                     mathProblemAdapter.notifyDataSetChanged()
                     //  rvMathProblem.adapter = MathProblemAdapter(this, this, list)
-                }
-                else if (liveData.data is Commontoall) {
+                } else if (liveData.data is Commontoall) {
                     //finish()
                     list.removeAt(pos)
                     mathProblemAdapter.notifyDataSetChanged()
@@ -249,12 +261,10 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
             // startActivity(Intent(this, MainActivity::class.java))
 
         }
-
         filterDialog.btnNo.setOnClickListener {
             filterDialog.dismiss()
             filterDialog.setCancelable(true)
             // startActivity(Intent(this, MainActivity::class.java))
-
             // finish()
         }
         filterDialog.show()
@@ -275,6 +285,12 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
                 /*.putExtra("edit", list[pos].id.toString())*/
                 .putExtra("edit", editId)
         )
+    }
+
+    override fun onCLickViewPost(type: TeacherProblemResponse.Body) {
+      val intent = Intent(this,VideoPlayActivity::class.java)
+        intent.putExtra("teacherProblem",type)
+        startActivity(intent)
     }
 
     private fun pdfDialog() {
@@ -300,6 +316,7 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
         }
 
     }
+
     private fun filePicker() {
 //        val docs = arrayOf("pdf","doc", "docx", "dot", "dotx")
         FilePickerBuilder.instance
@@ -317,6 +334,11 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
                     docPaths.addAll(data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS)!!)
                     val pdfPath = docPaths[0]
                     Log.d("PATHGET_file", pdfPath)
+                    /**
+                     * try to set pdf into imageview
+                     */
+//                    Glide.with(this).load(R.drawable.ic_pdf).into(ivAttachment)
+                    ivAttachment.setImageResource(R.drawable.ic_pdf)
                     firstimage = pdfPath
                     type = "3"
 
@@ -326,11 +348,11 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
         }
     }
 
-    open fun getImage() {
+    private fun getImage() {
 
         if (hasPermissions(permissions)) {
             Log.e("Permissions", "Permissions Granted")
-          pdfDialog()
+            pdfDialog()
         } else if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
             checkPermissionDenied(Manifest.permission.READ_EXTERNAL_STORAGE)
         } else if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
@@ -342,6 +364,7 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
             requestPermission()
         }
     }
+
     private val permissions = arrayOf(
         Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -403,10 +426,12 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
             dialog.show()
         }
     }
+
     private fun requestPermission() {
         requestMultiplePermissions.launch(permissions)
     }
-    fun showFullScreen(arr: String,type:String) {
+
+    fun showFullScreen(arr: String, type: String) {
         val dialog = Dialog(this, android.R.style.Theme_Light)
         dialog.setCanceledOnTouchOutside(true)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -414,11 +439,11 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
         dialog.setContentView(R.layout.dialog_full_screen)
         dialog.window?.setBackgroundDrawableResource(R.color.app);
 
-        if(type == "1") {
+        if (type == "1") {
             val image = dialog.findViewById<View>(R.id.ivShow) as ImageView
             Glide.with(this).load(arr).placeholder(R.drawable.placeholder_image).into(image)
-        }else {
-            var player=  dialog.findViewById<BetterVideoPlayer>(R.id.player)
+        } else {
+            var player = dialog.findViewById<BetterVideoPlayer>(R.id.player)
             player.setSource(Uri.parse(arr))
             player.setAutoPlay(true)
         }
@@ -427,7 +452,27 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
         dialog.show()
     }
 
-
+    /**
+     * @author Pardeep Sharma
+     * set new Permissions for android 11 to read files data
+     */
+    private fun askStorageManagerPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (!Environment.isExternalStorageManager()) {
+                try {
+                    val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
+                    intent.addCategory("android.intent.category.DEFAULT")
+                    intent.data =
+                        Uri.parse(String.format("package:%s", applicationContext.packageName))
+                    startActivityForResult(intent, 456)
+                } catch (e: java.lang.Exception) {
+                    val intent = Intent()
+                    intent.action = Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION
+                    startActivityForResult(intent, 456)
+                }
+            }
+        }
+    }
 }
 
 

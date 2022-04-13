@@ -14,6 +14,7 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import com.elewamathtutoring.Activity.Chat.Chat_Activity
 import com.elewamathtutoring.Activity.TeacherOrTutor.request.RequestsActivity
 import com.elewamathtutoring.MainActivity
 import com.elewamathtutoring.R
@@ -77,12 +78,25 @@ class FirebaseService : FirebaseMessagingService() {
             notificationManager.cancel(-1)
           //  }
         }else{
-            if (notificationModel.push_type=="1"){
-                intent = Intent(this,RequestsActivity::class.java)
-                intent.putExtra("id",notificationModel.sessionId)
-            }else {
-                intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("pushNotificationModel", notificationModel)
+            when (notificationModel.push_type) {
+                "1" -> {
+                    //  intent = Intent(this,RequestsActivity::class.java)
+                    intent = Intent(this,Chat_Activity::class.java)
+        //                intent.putExtra("id",notificationModel.sessionId)
+                    if (notificationModel.groupId!=null)
+                    intent.putExtra("groupId",notificationModel.groupId)
+                    else
+                        intent.putExtra("receiverId",notificationModel.userId)
+                }
+                "2" -> {
+                    intent = Intent(this,RequestsActivity::class.java)
+                    intent.putExtra("id",notificationModel.sessionId)
+
+                }
+                else -> {
+                    intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("pushNotificationModel", notificationModel)
+                }
             }
             makePush(intent)
         }

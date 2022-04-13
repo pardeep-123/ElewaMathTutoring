@@ -114,7 +114,8 @@ class TeacherDetailsActivity : AppCompatActivity(), View.OnClickListener, Observ
             myPopupWindow?.showAsDropDown(it, -0, -35)
             applyDim(viewGroup, 0.5f)
         }
-        view.report_cardview.setOnClickListener { dialogReport() }
+        view.report_cardview.setOnClickListener {
+            dialogReport() }
         myPopupWindow?.setOnDismissListener {
             clearDim(viewGroup)
         }

@@ -20,18 +20,15 @@ class NotificationsAdapter(c: Context, listNotifications: ArrayList<Notification
     var list = listNotifications
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(ctn).inflate(R.layout.item_notifications, parent, false)
         return ViewHolder(view)
     }
-
     override fun getItemCount(): Int {
         return list.size
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.tvMessages.text = list[position].message
         holder.itemView.tvNotificationName.text = list[position].name
@@ -40,4 +37,5 @@ class NotificationsAdapter(c: Context, listNotifications: ArrayList<Notification
         Glide.with(ctn).load(Constants.IMAGE_URL+list[position].image)
             .into(holder.itemView.ivNotifications)
     }
+
 }

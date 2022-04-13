@@ -34,8 +34,6 @@ class IntroSlider : AppCompatActivity() {
         );*/
         mContext = this
         setView()
-
-
     }
 
     private fun setView() {

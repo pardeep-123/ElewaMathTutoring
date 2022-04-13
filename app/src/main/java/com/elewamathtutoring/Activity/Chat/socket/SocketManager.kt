@@ -289,8 +289,6 @@ class SocketManager {
                 mSocket!!.connect()
                 mSocket!!.off(SEND_MESSAGE_LISTNER)
                 mSocket!!.on(SEND_MESSAGE_LISTNER, onReceivedMessage)
-
-
             } else {
                 mSocket!!.off(SEND_MESSAGE_LISTNER)
                 mSocket!!.on(SEND_MESSAGE_LISTNER, onReceivedMessage)
@@ -303,10 +301,6 @@ class SocketManager {
         Log.i("Socket", "received Message Called")
 
     }
-
-
-
-
     private val onReceivedMessage = Emitter.Listener { args ->
         try {
             val data = args[0] as JSONObject
@@ -546,6 +540,34 @@ class SocketManager {
         fun onResponse(event: String, args: JSONObject)
         fun onError(event: String, vararg args: Array<*>)
     }
+    fun receiveMsgListener() {
+        try {
+            if (!mSocket!!.connected()) {
+                mSocket!!.connect()
+                mSocket!!.off(SEND_MESSAGE_LISTNER)
+                mSocket!!.on(SEND_MESSAGE_LISTNER, onReceiverMsgListener)
+
+            } else {
+                mSocket!!.off(SEND_MESSAGE_LISTNER)
+                mSocket!!.on(SEND_MESSAGE_LISTNER, onReceiverMsgListener)
 
 
+            }
+        } catch (ex: Exception) {
+            ex.localizedMessage
+        }
+
+    }
+    private val onReceiverMsgListener = Emitter.Listener { args ->
+        try {
+            val data = args[0] as JSONObject
+            Log.d("SocketListener", "CallStatusList :::$data")
+            for (observer in observerList!!) {
+                observer.onResponse(SEND_MESSAGE_LISTNER, data)
+            }
+        } catch (ex: Exception) {
+            ex.localizedMessage
+        }
+
+    }
 }

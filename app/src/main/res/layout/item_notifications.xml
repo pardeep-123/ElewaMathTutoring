@@ -39,7 +39,6 @@
                     android:layout_weight="3"
                     android:orientation="vertical"
                     android:padding="5dp">
-
                     <TextView
                         android:id="@+id/tvNotificationName"
                         android:layout_width="match_parent"
@@ -49,7 +48,6 @@
                         android:textColor="@color/gray969A9D"
                         android:textSize="13sp"
                         android:textStyle="bold" />
-
                     <TextView
                         android:id="@+id/tvMessages"
                         android:layout_width="match_parent"
@@ -59,7 +57,6 @@
                         android:textColor="@color/text"
                         android:textSize="12dp" />
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -75,7 +72,7 @@
                         android:text="Sept 10, 2020"
                         android:textColor="@color/gray969A9D"
                         android:textSize="10sp" />
-  <TextView
+                    <TextView
                         android:id="@+id/tvTime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -83,11 +80,8 @@
                         android:text="Sept 10, 2020"
                         android:textColor="@color/gray969A9D"
                         android:textSize="10sp" />
-
                 </LinearLayout>
             </LinearLayout>
-
-
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

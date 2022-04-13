@@ -50,13 +50,11 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
 
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     override fun selectedImage(imagePath: String?, code: Int) {
-
         try {
             extension =
                 imagePath?.substring(imagePath.lastIndexOf(".") + 1).toString() // Without dot jpg, png
         } catch (e: Exception) {
         }
-
         // send image as bit 64 in socket
         try {
             val jsonObject = JSONObject()
@@ -74,12 +72,12 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
             e.printStackTrace()
         }
     }
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
         socketManager = App.instance.getSocketManagernn()
+        socketManager?.receiveMsgListener()
         if (!socketManager!!.isConnected() || socketManager!!.getmSocket() == null) {
             socketManager!!.init()
         }
@@ -89,24 +87,16 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
         ivAttachment.setOnClickListener(this)
 
         receiverId=intent.getStringExtra("receiverId").toString()
+        if (receiverId == "null") receiverId = "0"
         groupId=intent.getStringExtra("groupId").toString()
-
-
         setAdapter()
         MY_CHAT("t")
-
-
         init()
-
         ivVoiceCall.setOnClickListener {
             if (App.Companion.callClient == null) {
                 Toast.makeText(this@Chat_Activity, "Sinch Client not connected", Toast.LENGTH_SHORT)
                     .show()
-
             }else{
-
-
-
                 val hashMap: HashMap<String ,String> = HashMap<String, String>()
 
                 var friendName=intent.getStringExtra("chatUserName").toString()

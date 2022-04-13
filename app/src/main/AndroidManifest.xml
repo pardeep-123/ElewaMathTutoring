@@ -30,6 +30,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="ExtraText">
         <activity
+            android:name=".Activity.ParentOrStudent.postMathProblem.VideoPlayActivity"
+            android:exported="true" />
+        <activity
             android:name=".Activity.ParentOrStudent.postMathProblem.EditMathProblemActivity"
             android:exported="true" />
         <activity

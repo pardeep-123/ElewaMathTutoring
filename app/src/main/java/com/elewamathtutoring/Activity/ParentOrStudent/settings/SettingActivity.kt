@@ -63,10 +63,12 @@ class SettingActivity : AppCompatActivity(), Observer<RestObservable> {
             Log.e("checklog", "onnnnnnnnnnnnnn")
             status="0"
             iv_notification_switch.setChecked(true);
-        } else {
+        }
+        else {
             status="1"
             iv_notification_switch.setChecked(false);
         }
+
         iv_notification_switch.setOnClickListener {
             if (iv_notification_switch!!.isChecked) {
                 iv_notification_switch.setChecked(true);

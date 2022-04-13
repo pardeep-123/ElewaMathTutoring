@@ -114,12 +114,12 @@
                 android:id="@+id/rlImg"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_90sdp">
+
                 <ImageView
                     android:id="@+id/ivImg"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginHorizontal="@dimen/_10sdp"
-                    android:scaleType="centerCrop" />
+                    android:layout_marginHorizontal="@dimen/_10sdp" />
                 <ImageView
                     android:id="@+id/ivVideoPlay"
                     android:layout_width="@dimen/_15sdp"
