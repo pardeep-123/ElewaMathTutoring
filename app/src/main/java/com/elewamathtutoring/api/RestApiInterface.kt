@@ -4,6 +4,7 @@ package com.elewamathtutoring.api
 import com.elewamathtutoring.Activity.Auth.login.LoginResponse
 import com.elewamathtutoring.Activity.Auth.signup.SignUpResponse
 import com.elewamathtutoring.Activity.Auth.signup.TeacherSignUpResponse
+import com.elewamathtutoring.Activity.Chat.UploadImageResponse
 import com.elewamathtutoring.Activity.Chat.mathChat.MathChatResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.addBAnk.AddBankResponse
 import com.elewamathtutoring.Activity.ParentOrStudent.add_card.AddCardResponse
@@ -368,6 +369,13 @@ interface RestApiInterface {
 
 
     @Multipart
+    @POST("imageUpload")
+    fun imageUpload(
+        @Part image: MultipartBody.Part?
+    ): Observable<UploadImageResponse>
+
+
+    @Multipart
     @PUT("TeacherInfo")
     fun teachingInfoApi(
         @Part certificate_images: ArrayList<MultipartBody.Part>,
@@ -552,7 +560,6 @@ interface RestApiInterface {
         @Part("name") name: RequestBody,
         @Part("about") about: RequestBody
     ): Observable<EditProfileResponse>
-
 
     @Multipart
     @PUT("myMathProblems")

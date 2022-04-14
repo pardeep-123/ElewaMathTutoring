@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:layout_marginBottom="5dp"
     android:layout_height="wrap_content">
-
-
 
         <RelativeLayout
             android:id="@+id/layout1"
@@ -14,24 +13,22 @@
             android:layout_marginBottom="5dp"
             android:layout_height="wrap_content">
 
-
             <LinearLayout
                 android:id="@+id/chatll1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
-                android:gravity="center_vertical"
                 android:background="@drawable/chat1"
-                >
+                android:gravity="center_vertical">
 
                 <TextView
                     android:id="@+id/chatleft"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/avenirlstd_roman"
-                    android:text=""
-                    android:paddingRight="@dimen/_8sdp"
                     android:layout_marginLeft="@dimen/_25sdp"
+                    android:fontFamily="@font/avenirlstd_roman"
+                    android:paddingRight="@dimen/_8sdp"
+                    android:text=""
                     android:textColor="#FF828587"
                     android:textSize="13sp" />
 
@@ -46,55 +43,114 @@
                 android:layout_alignStart="@+id/chatll1"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:fontFamily="@font/avenirlstd_roman"
-                android:text="18:05"
                 android:paddingLeft="@dimen/_10sdp"
+                android:text="18:05"
                 android:textColor="@color/text"
                 android:textSize="10sp" />
-
     </RelativeLayout>
-
 
     <RelativeLayout
         android:id="@+id/layout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout1"
-        >
+        android:layout_below="@+id/layout1">
 
 
-    <LinearLayout
-        android:id="@+id/chat_ll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:background="@drawable/chatright1"
-        android:gravity="end|center"
-        android:padding="@dimen/_10sdp">
-
-        <TextView
-            android:id="@+id/chatright"
+        <LinearLayout
+            android:id="@+id/chat_ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:fontFamily="@font/avenirlstd_roman"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="13sp" />
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/chatright1"
+            android:gravity="end|center"
+            android:padding="@dimen/_10sdp">
 
-    </LinearLayout>
-    <TextView
-        android:id="@+id/time_right"
-        android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/chatright"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:fontFamily="@font/avenirlstd_roman"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/time_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/chat_ll"
+            android:layout_alignEnd="@+id/chat_ll"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:fontFamily="@font/avenirlstd_roman"
+            android:paddingRight="@dimen/_10sdp"
+            android:text="18:05"
+            android:textColor="@color/text"
+            android:textSize="10sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout3"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/chat_ll"
-        android:layout_alignEnd="@+id/chat_ll"
-        android:layout_marginTop="@dimen/_3sdp"
-        android:fontFamily="@font/avenirlstd_roman"
-        android:text="18:05"
-        android:paddingRight="@dimen/_10sdp"
-        android:textColor="@color/text"
-        android:textSize="10sp" />
+        android:layout_marginTop="@dimen/_5sdp"
+        android:visibility="gone"
+        android:layout_below="@+id/layout2">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/ivLeft"
+            android:layout_width="@dimen/_130sdp"
+            android:layout_height="@dimen/_120sdp"
+            android:src="@drawable/profile"
+            app:riv_corner_radius="@dimen/_4sdp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivLeft"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:fontFamily="@font/avenirlstd_roman"
+            android:paddingLeft="@dimen/_10sdp"
+            android:text="18:05"
+            android:textColor="@color/text"
+            android:textSize="10sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@+id/layout3"
+        android:layout_marginTop="@dimen/_5sdp">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/ivRight"
+            android:layout_width="@dimen/_130sdp"
+            android:layout_height="@dimen/_120sdp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/profile"
+            app:riv_corner_radius="@dimen/_4sdp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivRight"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:fontFamily="@font/avenirlstd_roman"
+            android:paddingEnd="@dimen/_15sdp"
+            android:text="18:05"
+            android:textColor="@color/text"
+            android:textSize="10sp" />
 
     </RelativeLayout>
 

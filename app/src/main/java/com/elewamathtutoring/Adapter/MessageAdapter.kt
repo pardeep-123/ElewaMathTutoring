@@ -17,50 +17,58 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class MessageAdapter(var context: Context, var orderDetailForMapResponse: ArrayList<GetMessageInboxModel.GetMessageInboxModelItem>) : RecyclerView.Adapter<MessageAdapter.MessageHolder>() {
+class MessageAdapter(
+    var context: Context,
+    var orderDetailForMapResponse: ArrayList<GetMessageInboxModel.GetMessageInboxModelItem>
+) : RecyclerView.Adapter<MessageAdapter.MessageHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageHolder {
-        return MessageHolder(LayoutInflater.from(context).inflate(R.layout.item_message, parent, false))
+        return MessageHolder(
+            LayoutInflater.from(context).inflate(R.layout.item_message, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: MessageHolder, position: Int) {
-        if (orderDetailForMapResponse[position].groupId!=null) {
+        if (orderDetailForMapResponse[position].groupId != null) {
             holder.itemView.tvMessageUser.text = orderDetailForMapResponse[position].groupName
             Glide.with(context)
                 .load(Constants.SOCKET_BASE_URL_IMAGE + orderDetailForMapResponse.get(position).groupImage)
                 .placeholder(R.drawable.profile_unselected).into(holder.itemView.ivMessageImage)
-        }
-            else {
+        } else {
             holder.itemView.tvMessageUser.text = orderDetailForMapResponse[position].userName
             Glide.with(context)
                 .load(Constants.SOCKET_BASE_URL_IMAGE_USER + orderDetailForMapResponse.get(position).userImage)
                 .placeholder(R.drawable.profile_unselected).into(holder.itemView.ivMessageImage)
         }
-            holder.itemView.tvMessage.text= orderDetailForMapResponse[position].lastMessage
-        
+        holder.itemView.tvMessage.text = orderDetailForMapResponse[position].lastMessage
+
 
         holder.itemView.setOnClickListener {
             val i = Intent(context, Chat_Activity::class.java)
-            if(getPrefrence(Constants.USER_ID, "").equals(orderDetailForMapResponse.get(position).user2Id.toString())) {
+            if (getPrefrence(
+                    Constants.USER_ID,
+                    ""
+                ).equals(orderDetailForMapResponse.get(position).user2Id.toString())
+            ) {
                 i.putExtra("receiverId", orderDetailForMapResponse.get(position).userId.toString())
                 i.putExtra("chatUserName", orderDetailForMapResponse.get(position).userName)
-            }else if ( orderDetailForMapResponse.get(position).user2Id==0) {
+            } else if (orderDetailForMapResponse.get(position).user2Id == 0) {
                 i.putExtra("receiverId", orderDetailForMapResponse.get(position).user2Id.toString())
                 i.putExtra("groupId", orderDetailForMapResponse.get(position).groupId.toString())
                 i.putExtra("chatUserName", orderDetailForMapResponse.get(position).groupName)
-            }else{
+            } else {
                 i.putExtra("receiverId", orderDetailForMapResponse.get(position).user2Id.toString())
                 i.putExtra("chatUserName", orderDetailForMapResponse.get(position).userName)
             }
-
-
             context.startActivity(i)
         }
     }
 
     override fun getItemCount(): Int {
-      return orderDetailForMapResponse.size
+        return orderDetailForMapResponse.size
     }
+
     inner class MessageHolder(view: View) : RecyclerView.ViewHolder(view) {}
+
     fun convertTimestampToDate(timestamp: Long, dateFormateStyle: String): String {
         val calendar = Calendar.getInstance()
         val tz = TimeZone.getDefault()

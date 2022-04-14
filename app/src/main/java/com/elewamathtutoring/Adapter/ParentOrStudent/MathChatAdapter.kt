@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.elewamathtutoring.Activity.Chat.Chat_Activity
 import com.elewamathtutoring.Activity.Chat.mathChat.MathChatResponse
 import com.elewamathtutoring.Activity.Chat.mathChat.MathPersonChatActivity
 import com.elewamathtutoring.R
@@ -22,23 +23,21 @@ class MathChatAdapter(c: Context, var list: MathChatResponse, var type: String) 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(ctn).inflate(R.layout.item_math_chat, parent, false)
         return ViewHolder(view)
     }
-
     override fun getItemCount(): Int {
         return list.body.size
 
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.home_listcardview.setOnClickListener {
-            var intent = Intent(ctn, MathPersonChatActivity::class.java)
+            var intent = Intent(ctn, Chat_Activity::class.java)
             ctn.startActivity(intent)
         }
         if (type == "1") {
+            holder.itemView.tvName.text = list.body[position].name
             Glide.with(holder.itemView.context)
                 .load(Constants.IMAGE_URL + list.body[position].image)
                 .placeholder(R.drawable.placeholder_image).into(holder.itemView.ivTeacher)

@@ -1,64 +1,135 @@
 package com.elewamathtutoring.Activity.Chat.mathChat
 
+import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class MathChatResponse(
+    @SerializedName("status")
     val status: Boolean, // true
+    @SerializedName("code")
     val code: Int, // 200
+    @SerializedName("message")
     val message: String, // get List successfully
+    @SerializedName("body")
     val body: List<Body>
 ):Serializable {
     data class Body(
-        val id: Int, // 233
+        @SerializedName("id")
+        val id: Int, // 378
+        @SerializedName("userType")
         val userType: Int, // 2
+        @SerializedName("authorization")
         val authorization: String,
-        val image: String, // 1637763798swift_file11_24_21_19:23:15.23.jpeg
-        val name: String, // Tayyab
+        @SerializedName("image")
+        val image: String, // 1648015104IMG-20220220-WA0059.jpg
+        @SerializedName("name")
+        val name: String, // Kv
+        @SerializedName("audioTime")
         val audioTime: String,
+        @SerializedName("videoTime")
         val videoTime: String,
-        val email: String, // aolakh4g@gmail.com
-        val address: String, // Nowhere
-        val latitude: String, // 40.7317696
-        val longitude: String, // -73.9841161
-        val password: String,
-        val createdAt: Int, // 1637763798
-        val updatedAt: Int, // 0
+        @SerializedName("email")
+        val email: String, // kv@yopmail.com
+        @SerializedName("address")
+        val address: String, // Minquan W Rd, Datong District, Taipei City, Taiwan
+        @SerializedName("latitude")
+        val latitude: String, // 25.0630589
+        @SerializedName("longitude")
+        val longitude: String, // 121.5159765
+        @SerializedName("password")
+        val password: String, // $2y$10$1f1F1z/YqVReQSGVWTGtLeqFWgYSCNYwaJsfbwcu/ye0FbLw0j5x6
+        @SerializedName("createdAt")
+        val createdAt: Int, // 1648015104
+        @SerializedName("updatedAt")
+        val updatedAt: Int, // 1648015333
+        @SerializedName("status")
         val status: Int, // 1
-        val isapproval: Int, // 1
-        val isTechingInfo: Int, // 0
-        val IsAvailable: Int, // 0
-        val hourlyPrice: Int, // 0
+        @SerializedName("isapproval")
+        val isapproval: Int, // 2
+        @SerializedName("isTechingInfo")
+        val isTechingInfo: Int, // 1
+        @SerializedName("IsAvailable")
+        val isAvailable: Int, // 1
+        @SerializedName("hourlyPrice")
+        val hourlyPrice: Int, // 12
+        @SerializedName("notificationStatus")
         val notificationStatus: Int, // 1
-        val background_checks: Int, // 0
-        val deviceType: Int, // 1
+        @SerializedName("occupiedStatus")
+        val occupiedStatus: Int, // 1
+        @SerializedName("background_checks")
+        val backgroundChecks: Int, // 0
+        @SerializedName("deviceType")
+        val deviceType: Int, // 0
+        @SerializedName("deviceToken")
         val deviceToken: String,
-        val occupiedStatus: Int, // 1// 123
-        val SocialType: Int, // 2
-        val SocialId: String, // 114454975690526584905
-        val about: String, // I am teacher
-        val teachingHistory: String, // 10 years
+        @SerializedName("SocialType")
+        val socialType: Int, // 0
+        @SerializedName("SocialId")
+        val socialId: String,
+        @SerializedName("about")
+        val about: String, // hindi sahitya ke prati apani jimmedari ka nirvah karte hue use jald h hi ni hai h na mei ni hai k liye h to bus
+        @SerializedName("teachingHistory")
+        val teachingHistory: String, // the winter soldier of fortune to bus stop is the best for the winter soldier of h h e h a h e h e h e
+        @SerializedName("isBuyPlan")
         val isBuyPlan: Int, // 0
+        @SerializedName("planId")
         val planId: Int, // 0
+        @SerializedName("planDuration")
         val planDuration: String,
+        @SerializedName("planExpiryDate")
         val planExpiryDate: String,
+        @SerializedName("location")
         val location: String,
-        val isCertifiedOrtutor: Int, // 2
-        val teachingLevel: String, // 3
-        val specialties: String, // Math
-        val InPersonRate: Int, // 2
-        val virtualRate: Int, // 25
-        val cancellationPolicy: String, // Optional
-        val availability: String, // 1,2,4
-        val available_slots: String, // 1,2,4
-        val free_slots: String, // 4
+        @SerializedName("isCertifiedOrtutor")
+        val isCertifiedOrtutor: Int, // 0
+        @SerializedName("teachingLevel")
+        val teachingLevel: String, // [1]
+        @SerializedName("specialties")
+        val specialties: String, // ,7,8
+        @SerializedName("InPersonRate")
+        val inPersonRate: Int, // 0
+        @SerializedName("virtualRate")
+        val virtualRate: Int, // 0
+        @SerializedName("cancellationPolicy")
+        val cancellationPolicy: String, // canel the policy coz I don't like
+        @SerializedName("availability")
+        val availability: String, // 1,5,2,6,3
+        @SerializedName("available_slots")
+        val availableSlots: String, // 1,2,4,6,8,7,9,11,13,15,18,20,21,24,23,19
+        @SerializedName("free_slots")
+        val freeSlots: String, // 3
+        @SerializedName("forgotPasswordHash")
         val forgotPasswordHash: String,
+        @SerializedName("isbankAdd")
         val isbankAdd: Int, // 0
+        @SerializedName("walletAmount")
         val walletAmount: String,
-        val stripe_customID: String,
-        val stripe_url: String,
-        val isStripe_connected: Int, // 0
-        val stripe_account_id: String,
-        val educationLevel: String, // post graduate
-        val majors: String // majorsss
-    ):Serializable
+        @SerializedName("stripe_customID")
+        val stripeCustomID: String,
+        @SerializedName("stripe_url")
+        val stripeUrl: String,
+        @SerializedName("isStripe_connected")
+        val isStripeConnected: Int, // 0
+        @SerializedName("stripe_account_id")
+        val stripeAccountId: String,
+        @SerializedName("educationLevel")
+        val educationLevel: String, // Master's degree
+        @SerializedName("majors")
+        val majors: String, // there are two different types
+        @SerializedName("subjects")
+        val subjects: List<Subject>
+    ):Serializable {
+        data class Subject(
+            @SerializedName("id")
+            val id: Int, // 7
+            @SerializedName("name")
+            val name: String, // math
+            @SerializedName("status")
+            val status: Int, // 1
+            @SerializedName("createdAt")
+            val createdAt: Int, // 2147483647
+            @SerializedName("updatedAt")
+            val updatedAt: Int // 2147483647
+        ):Serializable
+    }
 }

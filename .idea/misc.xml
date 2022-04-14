@@ -18,6 +18,7 @@
         <entry key="app/src/main/res/layout/activity_intro_slider.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_login_guest.xml" value="0.17037037037037037" />
         <entry key="app/src/main/res/layout/activity_login_screen.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/activity_math_chat.xml" value="0.1712962962962963" />
         <entry key="app/src/main/res/layout/activity_math_person_chat.xml" value="0.16510416666666666" />
         <entry key="app/src/main/res/layout/activity_payment_info.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_post_math_problem.xml" value="0.2" />
@@ -50,10 +51,12 @@
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.22" />
         <entry key="app/src/main/res/layout/home_list.xml" value="0.2" />
         <entry key="app/src/main/res/layout/item_calender.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/item_chat2.xml" value="0.2" />
         <entry key="app/src/main/res/layout/item_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_hadder.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/item_math_chat.xml" value="0.1712962962962963" />
         <entry key="app/src/main/res/layout/item_math_problem.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/item_message.xml" value="0.17685185185185184" />
+        <entry key="app/src/main/res/layout/item_message.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_notifications.xml" value="0.22" />
         <entry key="app/src/main/res/layout/popup_file_attachment.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/popup_math_problem.xml" value="0.18489583333333334" />

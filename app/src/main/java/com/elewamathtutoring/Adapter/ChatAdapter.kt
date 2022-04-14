@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.Chat.chatModel.ChatListModel
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.constant.Constants
@@ -38,23 +39,70 @@ class ChatAdapter(var context: Context?, var arrayList: ArrayList<ChatListModel.
 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int)
     {
-            if(arrayList[position].senderID.toString().equals(getPrefrence(Constants.USER_ID,"")))
-            {
-                holder.itemView.chatright.text= arrayList[position].message
-                holder.itemView.time_right.text=getHourAgoTime(convertTimestampToDate(arrayList.get(position).createdAt.toLong(), "yyyy.MM.dd G 'at' HH:mm:ss"))
-                holder.itemView.layout1.visibility= View.GONE
-                holder.itemView.layout2.visibility=View.VISIBLE
+            if(arrayList[position].senderID.toString().equals(getPrefrence(Constants.USER_ID,""))) {
+                /**
+                 * to check the message type
+                 */
+                if (arrayList[position].msgType==0) {
+                    holder.itemView.chatright.text = arrayList[position].message
+                    holder.itemView.time_right.text = getHourAgoTime(
+                        convertTimestampToDate(
+                            arrayList.get(position).createdAt.toLong(),
+                            "yyyy.MM.dd G 'at' HH:mm:ss"
+                        )
+                    )
+                    holder.itemView.layout1.visibility = View.GONE
+                    holder.itemView.layout3.visibility = View.GONE
+                    holder.itemView.layout4.visibility = View.GONE
+                    holder.itemView.layout2.visibility = View.VISIBLE
+                }else{
+                    Glide.with(context!!).load(Constants.SOCKET_BASE_URL_IMAGE+arrayList[position].message).into(holder.itemView.ivRight)
+                    holder.itemView.time_right.text = getHourAgoTime(
+                        convertTimestampToDate(
+                            arrayList.get(position).createdAt.toLong(),
+                            "yyyy.MM.dd G 'at' HH:mm:ss"
+                        )
+                    )
+                    holder.itemView.layout1.visibility = View.GONE
+                    holder.itemView.layout2.visibility = View.GONE
+                    holder.itemView.layout3.visibility = View.GONE
+                    holder.itemView.layout4.visibility = View.VISIBLE
+                }
             }
             else// reciver side
             {
-                holder.itemView.chatleft.text=arrayList.get(position).message
-                holder.itemView.time1.text=getHourAgoTime(convertTimestampToDate(arrayList.get(position).createdAt.toLong(), "yyyy.MM.dd G 'at' HH:mm:ss"))
-                holder.itemView.layout2.visibility=View.GONE
-                holder.itemView.layout1.visibility=View.VISIBLE
+                if (arrayList[position].msgType==0) {
+                    holder.itemView.chatleft.text = arrayList[position].message
+                    holder.itemView.time1.text = getHourAgoTime(
+                        convertTimestampToDate(
+                            arrayList.get(position).createdAt.toLong(),
+                            "yyyy.MM.dd G 'at' HH:mm:ss"
+                        )
+                    )
+
+                    holder.itemView.layout1.visibility = View.VISIBLE
+                    holder.itemView.layout3.visibility = View.GONE
+                    holder.itemView.layout4.visibility = View.GONE
+                    holder.itemView.layout2.visibility = View.GONE
+                }else{
+                    Glide.with(context!!).load(Constants.SOCKET_BASE_URL_IMAGE+arrayList[position].message).into(holder.itemView.ivRight)
+                /*    holder.itemView.chatleft.text = arrayList.get(position).message*/
+                    holder.itemView.time1.text = getHourAgoTime(
+                        convertTimestampToDate(
+                            arrayList.get(position).createdAt.toLong(),
+                            "yyyy.MM.dd G 'at' HH:mm:ss"
+                        )
+                    )
+                    holder.itemView.layout1.visibility = View.GONE
+                    holder.itemView.layout3.visibility = View.VISIBLE
+                    holder.itemView.layout4.visibility = View.GONE
+                    holder.itemView.layout2.visibility = View.GONE
+
+
+                }
             }
     }
     fun getHourAgoTime(date: String):String {
-
 
         try {
             val format = SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss")

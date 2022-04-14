@@ -97,12 +97,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_70sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:visibility="gone">
-                    <ImageView
+                    android:visibility="gone"
+                 >
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/ivAttachment"
                         android:layout_width="@dimen/_80sdp"
                         android:layout_height="match_parent"
-                        android:src="@drawable/file"/>
+                        android:src="@drawable/place"/>
                 </LinearLayout>
 
                 <Button

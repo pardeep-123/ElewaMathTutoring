@@ -1179,6 +1179,55 @@ class BaseViewModel : ViewModel() {
         }
     }
 
+ @SuppressLint("CheckResult")
+    fun imageUpload(
+        activity: Activity,
+        imageUrl: String,
+        isDialogShow: Boolean
+    ) {
+        var newFile: File? = null
+        var imageFileBody: MultipartBody.Part? = null
+        if (imageUrl != "") {
+            newFile = File(imageUrl)
+        }
+        if (newFile != null && newFile.exists() && !newFile.equals("")) {
+            val mediaType: MediaType?
+            if (imageUrl.endsWith("png")) {
+                mediaType = "image/png".toMediaTypeOrNull()
+            } else {
+                mediaType = "image/jpeg".toMediaTypeOrNull()
+            }
+            val requestBody: RequestBody = newFile.asRequestBody(mediaType)
+            imageFileBody = MultipartBody.Part.createFormData("image", newFile.name, requestBody)
+        }
+        if (Helper.isNetworkConnected(activity)) {
+            apiService.imageUpload(
+                imageFileBody
+            )
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSubscribe {
+                    mResponse.value = RestObservable.loading(activity, isDialogShow)
+                }
+                ?.subscribe(
+                    { mResponse.value = it?.let { it1 -> RestObservable.success(it1) } },
+                    { mResponse.value = RestObservable.error(activity, it) }
+                )
+        } else {
+            Helper.showNoInternetAlert(activity,
+                activity.getString(R.string.no_internet_connection),
+                object : OnNoInternetConnectionListener {
+                    override fun onRetryApi() {
+                        imageUpload(
+                            activity,
+                            imageUrl,
+                            isDialogShow
+                        )
+                    }
+                })
+        }
+    }
+
 
     @SuppressLint("CheckResult")
     fun deleteBank(activity: Activity, bank_id: String, isDialogShow: Boolean) {

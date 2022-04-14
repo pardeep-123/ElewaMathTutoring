@@ -34,8 +34,6 @@ class MathChatActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
         rlTutor.setOnClickListener(this)
         rlStudent.setOnClickListener(this)
 
-
-
         if (intent.getStringExtra("tutor").equals("mathChat")) {
             llBtns.visibility = View.VISIBLE
             apiTeacherStudentList("2")
@@ -46,7 +44,6 @@ class MathChatActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
             viewType = "1"
         }
     }
-
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.ivBack -> {
@@ -73,12 +70,10 @@ class MathChatActivity : AppCompatActivity(), View.OnClickListener, Observer<Res
             }
         }
     }
-
     fun apiTeacherStudentList(userType: String) {
         baseViewModel.getTeacherStudentList(this, userType,"", true)
         baseViewModel.getCommonResponse().observe(this, this)
     }
-
     override fun onChanged(it: RestObservable?) {
         when (it!!.status) {
             Status.SUCCESS -> {

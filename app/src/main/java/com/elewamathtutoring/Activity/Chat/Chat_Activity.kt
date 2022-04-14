@@ -1,6 +1,5 @@
 package com.elewamathtutoring.Activity.Chat
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.os.Build
@@ -9,30 +8,45 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.rideandserve.utils.ImagePickerUtility
+import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.Chat.chatModel.ChatListModel
 import com.elewamathtutoring.Activity.Chat.mathChat.AudioCallActivity
 import com.elewamathtutoring.Activity.Chat.mathChat.VideoCallActivity
 import com.elewamathtutoring.Activity.Chat.socket.SocketManager
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.App
+import com.elewamathtutoring.Util.Validator
 import com.elewamathtutoring.Util.constant.Constants
+import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.Util.helper.extensions.getPrefrence
 import com.elewamathtutoring.Util.sinchcalling.SinchIncomingCallActivity
-import com.elewamathtutoring.getBase64FromPath
+import com.elewamathtutoring.api.Status
+import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
 import com.google.gson.GsonBuilder
 import com.pawskeeper.Adapter.ChatAdapter
 import com.sinch.android.rtc.calling.Call
+import com.yanzhenjie.album.Album
+import com.yanzhenjie.album.AlbumFile
+import com.yanzhenjie.album.api.widget.Widget
+import kotlinx.android.synthetic.main.activity_add_bank_account.*
 import kotlinx.android.synthetic.main.activity_chat.*
+import kotlinx.android.synthetic.main.activity_chat.ivBack
+import kotlinx.android.synthetic.main.activity_edit_profile.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 
-class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.Observer {
-
+class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.Observer ,
+    Observer<RestObservable> {
+    private var mAlbumFiles: java.util.ArrayList<AlbumFile> = java.util.ArrayList()
     var receiverId = ""
     var groupId = ""
     var dialog:Dialog?=null
@@ -44,17 +58,28 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
     var chatUserImage: String = ""
     var extension = ""
     var list = ArrayList<ChatListModel.ChatListItem>()
+    var Imagelist = ArrayList<UploadImageResponse.Body>()
     private var socketManager: SocketManager? = null
-
+    var firstimage = ""
+    var oldImage = ""
     private var linearLayoutManager: LinearLayoutManager? = null
+    lateinit var validator: Validator
 
+    private var activityScope = CoroutineScope(Dispatchers.Main)
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     override fun selectedImage(imagePath: String?, code: Int) {
-        try {
+        /////////// api  imagepath
+        if (imagePath != null) {
+            baseViewModel.imageUpload(this, imagePath,true)
+        }
+        baseViewModel.getCommonResponse().observe(this, this)
+     /*   try {
             extension =
                 imagePath?.substring(imagePath.lastIndexOf(".") + 1).toString() // Without dot jpg, png
         } catch (e: Exception) {
         }
+
+
         // send image as bit 64 in socket
         try {
             val jsonObject = JSONObject()
@@ -63,6 +88,7 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
                 jsonObject.put("user2Id", receiverId)
             else
                 jsonObject.put("groupId",groupId)
+            //response.body.img
             jsonObject.put("message", getBase64FromPath(imagePath!!))
             jsonObject.put("messageType", "1")
             jsonObject.put("extension", extension)
@@ -70,8 +96,9 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
 
         } catch (e: JSONException) {
             e.printStackTrace()
-        }
+        }*/
     }
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -123,12 +150,8 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
                     socketManager!!.callToUser(jsonObject)
                 } catch (e: Exception) {
                 }
-
                 startActivity(callscreen)
             }
-
-
-
         }
     }
     private fun setAdapter(){
@@ -142,7 +165,6 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
         setIntent(intent)
         init()
     }*/
-
     fun init() {
         tv_name.text=intent.getStringExtra("chatUserName").toString()
         ivSendBtn.setOnClickListener {
@@ -208,7 +230,17 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
             }
         }
     }
+    private fun selectImage() {
+        Album.image(this).singleChoice().camera(true).columnCount(4).widget(
+            Widget.newDarkBuilder(this).title(getString(R.string.app_name)).build())
+            .onResult { result ->
+                mAlbumFiles.addAll(result)
+                Glide.with(this).load(result[0].path).into(ivProfileSignUp)
 
+                firstimage = result[0].path
+            }.onCancel {
+            }.start()
+    }
     fun MY_CHAT(progress: String){
         if(progress.equals("f")) {
             progresschat.visibility=View.GONE
@@ -216,7 +248,6 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
         else{
             progresschat.visibility=View.VISIBLE
         }
-
         Log.e("Socketdfdfd",
             "Data  me" + getPrefrence(Constants.USER_ID, "") + "  reciver " + receiverId
         )
@@ -264,41 +295,19 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
     override fun onResponse(event: String, args: JSONObject) {
         when(event){
 
-          /*  SocketManager.GET_CHAT_LISTNER_ONE_TO_ONE ->
-                runOnUiThread {
-                    progresschat.visibility=View.GONE
-                    list.clear()
-                    Log.e("Socketdfdfd", "222--inside-")
-                    val data = args as JSONObject
-                    var chat_list_bothside: Chat_list_bothside
-
-                   *//* for (i in 0 until data.length()) {
-                        val objects = data.getJSONObject(i)
-                        chat_list_bothside = Chat_list_bothside()
-                        chat_list_bothside.senderID = objects.getInt("SenderID")
-                        chat_list_bothside.receiverId = objects.getInt("ReceiverId")
-                        chat_list_bothside.createdAt = objects.getString("createdAt")
-                        chat_list_bothside.message = objects.getString("message")
-                        chat_list_bothside.msgType = objects.getInt("msgType")
-                        chat_list_bothside.senderImage = objects.getString("SenderImage")
-                        chat_list_bothside.receiverImage = objects.getString("ReceiverImage")
-                        list.add(chat_list_bothside)
-                    }*//*
-
-                    messageAdapter = ChatAdapter(c, list)
-                    viewLastMessage()
-                }*/
-
             SocketManager.SEND_MESSAGE ->{
-                val data= args as JSONObject
-                Log.e("=====",data.toString())
-                val gson = GsonBuilder().create()
-                val userToCallList = gson.fromJson(data.toString(), ChatListModel.ChatListItem::class.java)
-                list.add(userToCallList)
+                activityScope.launch {
+            val data = args
+            Log.e("=====", data.toString())
+            val gson = GsonBuilder().create()
+            val userToCallList =
+                gson.fromJson(data.toString(), ChatListModel.ChatListItem::class.java)
+            list.add(userToCallList)
 
-                messageAdapter?.notifyDataSetChanged()
-                rv_chat.smoothScrollToPosition(list.size - 1)
-            }
+            messageAdapter?.notifyDataSetChanged()
+            rv_chat.smoothScrollToPosition(list.size - 1)
+        }
+        }
         }
 
     }
@@ -308,5 +317,35 @@ class Chat_Activity :ImagePickerUtility(), View.OnClickListener, SocketManager.O
 
     private fun scrollToBottom(){
         linearLayoutManager?.smoothScrollToPosition(rv_chat, null, messageAdapter?.itemCount!!)
+    }
+
+    override fun onChanged(t: RestObservable?) {
+        when (t!!.status) {
+            Status.SUCCESS -> {
+                if (t.data is UploadImageResponse) {
+                    // send image as bit 64 in socket
+                    try {
+                        val jsonObject = JSONObject()
+                        jsonObject.put("userId", getPrefrence(Constants.USER_ID,""))
+                        if (receiverId!="0")
+                            jsonObject.put("user2Id", receiverId)
+                        else
+                            jsonObject.put("groupId",groupId)
+                        //response.body.img
+                        jsonObject.put("message",t.data.body.image )
+                        jsonObject.put("messageType", "1")
+                        jsonObject.put("extension", extension)
+                        socketManager!!.sendMessage(jsonObject)
+
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+                }
+            }
+            Status.ERROR -> {
+                if (t.error is UploadImageResponse)
+                    Helper.showSuccessToast(this, t.error.message)
+            }
+        }
     }
 }
