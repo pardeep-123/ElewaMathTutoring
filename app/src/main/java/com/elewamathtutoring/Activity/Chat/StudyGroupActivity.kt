@@ -27,22 +27,23 @@ class StudyGroupActivity : ImagePickerUtility(), View.OnClickListener , Observer
     var firstimage = ""
     var extension = ""
     var image = ""
+
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
 
     override fun selectedImage(imagePath: String?, code: Int) {
         Glide.with(this).load(imagePath).into(group_img)
 
-       /* if (imagePath != null) {
+        if (imagePath != null) {
             baseViewModel.imageUpload(this, imagePath,true)
         }
-        baseViewModel.getCommonResponse().observe(this, this)*/
+        baseViewModel.getCommonResponse().observe(this, this)
         try {
             extension =
                 imagePath?.substring(imagePath.lastIndexOf(".") + 1).toString() // Without dot jpg, png
         } catch (e: Exception) {
         }
       //  image = getBase64FromPath(imagePath!!)
-        image = newRetrun(imagePath!!)
+       // image = imagePath!!
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,7 +85,7 @@ class StudyGroupActivity : ImagePickerUtility(), View.OnClickListener , Observer
             Status.SUCCESS -> {
                 if (t.data is UploadImageResponse) {
                     // send image as bit 64 in socket
-                    var imageList=t.data.body.image
+                    image=t.data.body.image
                 }
             }
             Status.ERROR -> {
