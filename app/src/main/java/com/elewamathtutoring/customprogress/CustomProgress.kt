@@ -14,11 +14,9 @@ import java.util.*
 class CustomProgress : Dialog {
     constructor(context: Context) : super(context) {
     }
-
     constructor(context: Context, theme: Int) : super(context, theme) {}
 
     companion object {
-
         fun create(
             context: Context,
             title: String
@@ -26,7 +24,6 @@ class CustomProgress : Dialog {
             val dialog = CustomProgress(context)
             dialog.setTitle(title)
             dialog.setContentView(R.layout.dialog_progress)
-
             dialog.setCancelable(true)
             Objects.requireNonNull<Window>(dialog.getWindow()).setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.window!!.attributes.gravity = Gravity.CENTER
