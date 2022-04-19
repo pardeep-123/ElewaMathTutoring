@@ -162,8 +162,8 @@ interface RestApiInterface {
     fun checkSocialLoginExists(
         @Field("socialid") socialid: String,
         @Field("socialType") socialType: String,
-        @Field("device_type") device_type: String,
-        @Field("device_token") device_token: String,
+        @Field("deviceType") device_type: String,
+        @Field("deviceToken") device_token: String?,
         @Field("userType") userType: String
     ): Observable<Commontoall>
 
@@ -350,7 +350,9 @@ interface RestApiInterface {
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String,
-        @Field("role") role: String
+        @Field("role") role: String,
+        @Field("deviceType") device_type: String,
+        @Field("deviceToken") device_token: String?
     ): Observable<SignUpResponse>
 
 

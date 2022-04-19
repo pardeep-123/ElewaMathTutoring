@@ -236,10 +236,24 @@ class SocketManager {
                 if (!mSocket!!.connected()) {
                     mSocket!!.connect()
 
-                    mSocket!!.emit(CALL_TO_USER, jsonObject)
+                    mSocket!!.emit(CALL_TO_USER, jsonObject,Ack{args ->
+
+                        val data = args[0] as JSONObject
+                        Log.e("Socket", "onGetFriendChat :::$data")
+                        for (observer in observerList!!) {
+                            observer.onResponse(CALL_TO_USER, data)
+                        }
+                    })
                 } else {
 
-                    mSocket!!.emit(CALL_TO_USER, jsonObject)
+                    mSocket!!.emit(CALL_TO_USER, jsonObject, Ack { args ->
+
+                        val data = args[0] as JSONObject
+                        Log.e("Socket", "onGetFriendChat :::$data")
+                        for (observer in observerList!!) {
+                            observer.onResponse(CALL_TO_USER, data)
+                        }
+                    })
                 }
             } catch (ex: Exception) {
               //  ex.localizedMessage
@@ -255,10 +269,23 @@ class SocketManager {
                 if (!mSocket!!.connected()) {
                     mSocket!!.connect()
 
-                    mSocket!!.emit(END_CALL, jsonObject)
+                    mSocket!!.emit(END_CALL, jsonObject, Ack { args ->
+                        val data = args[0] as JSONObject
+                        Log.e("Socket", "onGetFriendChat :::$data")
+                        for (observer in observerList!!) {
+                            observer.onResponse(END_CALL, data)
+                        }
+                    })
                 } else {
 
-                    mSocket!!.emit(END_CALL, jsonObject)
+                    mSocket!!.emit(END_CALL, jsonObject, Ack { args ->
+                        val data = args[0] as JSONObject
+                        Log.e("Socket", "onGetFriendChat :::$data")
+                        for (observer in observerList!!) {
+                            observer.onResponse(END_CALL, data)
+                        }
+
+                    })
                 }
             } catch (ex: Exception) {
               //  ex.localizedMessage

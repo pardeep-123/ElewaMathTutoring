@@ -19,7 +19,6 @@ import com.elewamathtutoring.Util.App
 import com.elewamathtutoring.Util.constant.Constants
 import com.elewamathtutoring.Util.helper.extensions.getPrefrence
 import com.elewamathtutoring.Util.helper.extensions.isMyServiceRunning
-import com.elewamathtutoring.Util.sinchcalling.SinchService
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -34,29 +33,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         bottomBar.setOnNavigationItemSelectedListener(this)
         switchFragment(R.id.rframe, SearchFragment())
 
-
-        var userId= getPrefrence(Constants.USER_ID,"")
-        App.callClientSetup(userId)
-
-
-        /* startService(new Intent(this, SinchService.class));*/
-
-
-        /* startService(new Intent(this, SinchService.class));*/
-        val mServiceIntent = Intent(this, SinchService::class.java)
-        if (!isMyServiceRunning(this, SinchService::class.java)) {
-            // startService(mServiceIntent);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-               // startService(mServiceIntent)
-                startForegroundService(mServiceIntent);
-            } else {
-                startService(mServiceIntent)
-            }
-        }
-        if (App.Companion.callClient != null && App.Companion.sinchClient!!.isStarted) {
-            Log.e("sinchClient", "Client Connected, ready to use!")
-            App.Companion.sinchClient!!.audioController.disableSpeaker()
-        }
     }
 
 

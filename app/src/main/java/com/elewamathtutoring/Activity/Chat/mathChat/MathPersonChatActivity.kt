@@ -4,7 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.elewamathtutoring.Activity.Auth.SignUpAs
+import com.elewamathtutoring.Activity.Chat.call.AudioCallActivity
+import com.elewamathtutoring.Activity.Chat.call.VideoCallActivity
 import com.elewamathtutoring.R
 import kotlinx.android.synthetic.main.activity_math_person_chat.*
 

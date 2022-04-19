@@ -131,4 +131,5 @@
     <string name="alert">Alert</string>
     <string name="permissionRequired">Permission Required</string>
     <string name="openSettings">Open Settings</string>
+    <string name="agora_app_id">94d43cc0cd50466190e2cb017b6453dd</string>
 </resources>

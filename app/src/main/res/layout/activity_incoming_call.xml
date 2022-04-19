@@ -11,7 +11,7 @@
         android:id="@+id/circleImageView4"
         android:layout_width="160dp"
         android:layout_height="160dp"
-        android:src="@drawable/user"
+        android:src="@drawable/image_placeholder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,11 +36,11 @@
     </TextView>
 
     <TextView
-        android:id="@+id/tvCallTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="03:12"
+        android:fontFamily="@font/medium"
+        android:text="Audio"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,43 +54,29 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginBottom="50dp"
-        android:src="@drawable/circle_cancel_btn"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/cancel_call_btn"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/phone_call_btn"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent">
 
     </ImageView>
 
     <ImageView
-        android:id="@+id/mute_btn"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:id="@+id/phone_call_btn"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginBottom="50dp"
-        android:src="@drawable/audio_mute_btn"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/cancel_call_btn"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cancel_call_btn">
-    </ImageView>
-
-    <ImageView
-        android:id="@+id/speakerBtn"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginBottom="50dp"
-        android:src="@drawable/btnspeaker"
-
+        android:src="@drawable/call_btn"
+        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/cancel_call_btn"
-        app:layout_constraintTop_toTopOf="@+id/cancel_call_btn">
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/cancel_call_btn">
 
     </ImageView>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

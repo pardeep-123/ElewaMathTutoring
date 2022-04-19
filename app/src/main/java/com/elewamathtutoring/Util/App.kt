@@ -3,15 +3,13 @@ package com.elewamathtutoring.Util
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import android.net.ConnectivityManager
 import android.os.StrictMode
 import android.util.Log
 import com.elewamathtutoring.Activity.Chat.AppLifecycleHandler
 import com.elewamathtutoring.Activity.Chat.socket.SocketManager
 import com.elewamathtutoring.dagger.DaggerDicomponent
 import com.elewamathtutoring.dagger.Dicomponent
-import com.sinch.android.rtc.Sinch
-import com.sinch.android.rtc.SinchClient
-import com.sinch.android.rtc.calling.CallClient
 import com.yanzhenjie.album.Album
 import com.yanzhenjie.album.AlbumConfig
 import java.util.*
@@ -26,9 +24,6 @@ class App : Application(), AppLifecycleHandler.AppLifecycleDelegates{
         var appStatus = "offline"
 
         var USER_ID: String? = null
-        public var sinchClient: SinchClient? = null
-        var callClient: CallClient? = null
-
 
         @SuppressLint("StaticFieldLeak")
 
@@ -40,20 +35,6 @@ class App : Application(), AppLifecycleHandler.AppLifecycleDelegates{
 
         fun getinstance(): App {
             return instance
-        }
-
-        fun callClientSetup(userId: String?) {
-            sinchClient = Sinch.getSinchClientBuilder().context(App.instance)
-                .applicationKey("8aa7aa99-aadc-4575-897f-bf5d7d5ba414")
-                .applicationSecret("9nduSrE400CsagsJajQDLQ==")
-                .environmentHost("sandbox.sinch.com")
-                .userId(userId)
-                .build()
-            sinchClient!!.setSupportActiveConnectionInBackground(
-                true
-            )
-            sinchClient!!.startListeningOnActiveConnection()
-            sinchClient!!.setSupportCalling(true)
         }
 
     }
@@ -92,7 +73,15 @@ class App : Application(), AppLifecycleHandler.AppLifecycleDelegates{
 
 
 
+    fun hasNetwork(): Boolean {
+        return instance.checkIfHasNetwork()
+    }
 
+    private fun checkIfHasNetwork(): Boolean {
+        val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = cm.activeNetworkInfo
+        return networkInfo != null && networkInfo.isConnected
+    }
 
     fun getSocketManagernn(): SocketManager? {
         mSocketManager = if (mSocketManager == null) {

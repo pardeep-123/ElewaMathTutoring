@@ -15,10 +15,10 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.elewamathtutoring.Activity.Chat.Chat_Activity
+import com.elewamathtutoring.Activity.Chat.call.IncomingCallActivity
 import com.elewamathtutoring.Activity.TeacherOrTutor.request.RequestsActivity
 import com.elewamathtutoring.MainActivity
 import com.elewamathtutoring.R
-import com.elewamathtutoring.Util.sinchcalling.SinchIncomingCallActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.google.gson.Gson
@@ -65,11 +65,12 @@ class FirebaseService : FirebaseMessagingService() {
         val intent: Intent?
         if(notificationModel.push_type=="17"){
             //if (appStatus == "online") {
-                intent = Intent(this, SinchIncomingCallActivity::class.java)
-                intent.putExtra("callid", notificationModel.callid)
-                intent.putExtra("friendId", notificationModel.userId)
-                intent.putExtra("friendName", notificationModel.userName)
-                intent.putExtra("friendImage", notificationModel.userImage)
+                intent = Intent(this, IncomingCallActivity::class.java)
+                intent.putExtra("friendId", notificationModel.friendId)
+                intent.putExtra("friendName", notificationModel.friendName)
+                intent.putExtra("friendImage", notificationModel.friendImage)
+                intent.putExtra("channelName", notificationModel.channelName)
+                intent.putExtra("token", notificationModel.token)
                 makePushForCall(intent)
           //  }
         } else if (notificationModel.push_type=="18"){
@@ -122,7 +123,7 @@ class FirebaseService : FirebaseMessagingService() {
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel =
-                NotificationChannel(channelId, "Apppointme", NotificationManager.IMPORTANCE_HIGH)
+                NotificationChannel(channelId, "Elewa", NotificationManager.IMPORTANCE_HIGH)
             channel.enableLights(true)
             channel.lightColor = Color.RED
             channel.setShowBadge(true)
@@ -153,7 +154,7 @@ class FirebaseService : FirebaseMessagingService() {
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel =
-                NotificationChannel(channelId, "Apppointme", NotificationManager.IMPORTANCE_HIGH)
+                NotificationChannel(channelId, "Elewa", NotificationManager.IMPORTANCE_HIGH)
             channel.enableLights(true)
             channel.lightColor = Color.RED
             channel.setShowBadge(true)

@@ -31,7 +31,6 @@ import com.elewamathtutoring.Util.helper.extensions.clearPrefrences
 import com.elewamathtutoring.Util.helper.extensions.getPrefrence
 import com.elewamathtutoring.Util.helper.extensions.isMyServiceRunning
 import com.elewamathtutoring.Util.helper.extensions.savePrefrence
-import com.elewamathtutoring.Util.sinchcalling.SinchService
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
@@ -189,7 +188,6 @@ class SettingActivity : AppCompatActivity(), Observer<RestObservable> {
                 if (liveData.data is Commontoall) {
                     clearPrefrences()
                     shared.isLogin = false
-                    stopService()
                     startActivity(Intent(this, SignUpAs::class.java))
                 }
                 else if (liveData.data is Commontoall2)
@@ -206,15 +204,6 @@ class SettingActivity : AppCompatActivity(), Observer<RestObservable> {
             }
             else -> {
             }
-        }
-    }
-
-    private fun stopService() {
-        try {
-            if (isMyServiceRunning(this, SinchService::class.java)) {
-                stopService(Intent(this, SinchService::class.java))
-            }
-        } catch (e: Exception) {
         }
     }
 

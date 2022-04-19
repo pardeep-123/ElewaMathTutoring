@@ -2,6 +2,7 @@ package com.elewamathtutoring.viewmodel
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.service.controls.DeviceTypes
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -1081,10 +1082,10 @@ class BaseViewModel : ViewModel() {
     @SuppressLint("CheckResult")
     fun signUpApi(
         activity: Activity, name: String, email: String, password: String, role: String,
-        isDialogShow: Boolean
+        isDialogShow: Boolean,deviceType : String,deviceToken:String
     ) {
         if (Helper.isNetworkConnected(activity)) {
-            apiService.signUpApi(name, email, password, role)
+            apiService.signUpApi(name, email, password, role,deviceType,deviceToken)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSubscribe {
@@ -1099,7 +1100,7 @@ class BaseViewModel : ViewModel() {
                 activity.getString(R.string.no_internet_connection),
                 object : OnNoInternetConnectionListener {
                     override fun onRetryApi() {
-                        signUpApi(activity, name, email, password, role, isDialogShow)
+                        signUpApi(activity, name, email, password, role, isDialogShow,deviceType,deviceToken)
                     }
                 })
         }

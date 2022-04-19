@@ -288,7 +288,7 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
     }
 
     override fun onCLickViewPost(type: TeacherProblemResponse.Body) {
-      val intent = Intent(this,VideoPlayActivity::class.java)
+      val intent = Intent(this, VideoPlayActivity::class.java)
         intent.putExtra("teacherProblem",type)
         startActivity(intent)
     }

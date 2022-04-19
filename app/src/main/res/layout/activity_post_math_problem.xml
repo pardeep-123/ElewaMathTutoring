@@ -103,7 +103,7 @@
                         android:id="@+id/ivAttachment"
                         android:layout_width="@dimen/_80sdp"
                         android:layout_height="match_parent"
-                        android:src="@drawable/place"/>
+                        android:src="@drawable/placeholder_image"/>
                 </LinearLayout>
 
                 <Button

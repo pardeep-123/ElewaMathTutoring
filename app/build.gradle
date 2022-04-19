@@ -153,8 +153,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:18.0.0'
     implementation 'com.google.firebase:firebase-messaging:21.0.1'
 
-    /*sinch audio call*/
-    implementation(name: 'sinch-android-rtc', version: '+', ext: 'aar')
     implementation 'org.greenrobot:eventbus:3.1.1'
 
     implementation 'com.droidninja:filepicker:2.2.1'
@@ -172,6 +170,9 @@ dependencies {
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
 
+    // agora dependencies
+    implementation 'io.agora.rtc:full-sdk:3.1.0'
+    implementation 'io.agora.rtm:rtm-sdk:1.2.2'
 }
 
 kapt {

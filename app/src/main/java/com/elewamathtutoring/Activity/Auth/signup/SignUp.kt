@@ -38,6 +38,8 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
     var newPassword = false
     var confirmPassword = false
     var message3 = "Terms of Service"
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
@@ -64,7 +66,7 @@ class SignUp : AppCompatActivity(), View.OnClickListener, Observer<RestObservabl
                         if(ivOf.visibility == View.VISIBLE){
                             Helper.showErrorAlert(this, "Please select terms & conidtions")
                         }else{
-                            baseViewModel.signUpApi(this,  edtName.text.toString(),edtEmail.text.toString(), editPassword.text.toString(),"1", true)
+                            baseViewModel.signUpApi(this,  edtName.text.toString(),edtEmail.text.toString(), editPassword.text.toString(),"1", true,"1",token)
                             baseViewModel.getCommonResponse().observe(this, this)
                         }
 
