@@ -75,6 +75,7 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
         override fun onUserJoined(uid: Int, elapsed: Int) {
             super.onUserJoined(uid, elapsed)
             try {
+                startTimer()
                 mCounter!!.cancel()
             } catch (e: Exception) {
             }
@@ -114,17 +115,20 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
     private var mCounter: CountDownTimer? = null
 
     fun startTimer(){
-        mCounter = object : CountDownTimer(45000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-
-                Log.e("Tag", "seconds remaining: " + millisUntilFinished / 1000)
-            }
-
-            override fun onFinish() {
-                gotoHome()
-
-            }
-        }.start()
+        if (timer != null) {
+            timer!!.scheduleAtFixedRate(object : TimerTask() {
+                override fun run() {
+                    runOnUiThread {
+                        val millisUntilFinished1 = timeNew / 1000
+                        val seconds = millisUntilFinished1 % 60
+                        val minutes = millisUntilFinished1 / 60 % 60
+                        val hours = millisUntilFinished1 / 3600 % 24
+                        tvCallTime!!.text = String.format("%02d:%02d:%02d", hours, minutes, seconds)
+                        timeNew += 1000
+                    }
+                }
+            }, 0, 1000)
+        }
 
     }
 
@@ -217,10 +221,6 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
         if (checkSelfPermission(Manifest.permission.RECORD_AUDIO, PERMISSION_REQ_ID_RECORD_AUDIO)) {
             initAgoraEngineAndJoinChannel()
         }
-
-
-
-        startTimer()
 
 //        mAnimator = PortraitAnimator(
 //            findViewById(R.id.anim_layer_1),
@@ -410,20 +410,7 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
         mRtcEngine!!.setChannelProfile(io.agora.rtc.Constants.CHANNEL_PROFILE_COMMUNICATION)
         mRtcEngine!!.joinChannel(accessToken, mChannelName, "",  0)
         Log.d("agora",mChannelName.toString() + token)
-        if (timer != null) {
-            timer!!.scheduleAtFixedRate(object : TimerTask() {
-                override fun run() {
-                    runOnUiThread {
-                        val millisUntilFinished1 = timeNew / 1000
-                        val seconds = millisUntilFinished1 % 60
-                        val minutes = millisUntilFinished1 / 60 % 60
-                        val hours = millisUntilFinished1 / 3600 % 24
-                        tvCallTime!!.text = String.format("%02d:%02d:%02d", hours, minutes, seconds)
-                        timeNew += 1000
-                    }
-                }
-            }, 0, 1000)
-        }
+
 
 
     }

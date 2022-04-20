@@ -95,7 +95,8 @@ class VideoCallActivity: AppCompatActivity(), SocketManager.Observer {
          *     USER_OFFLINE_BECOME_AUDIENCE(2): (Live broadcast only.) The client role switched from the host to the audience.
          */
         override fun onUserOffline(uid: Int, reason: Int) {
-            runOnUiThread { onRemoteUserLeft() }
+            runOnUiThread {
+                onRemoteUserLeft() }
         }
 
         override fun onFirstRemoteVideoDecoded(uid: Int, width: Int, height: Int, elapsed: Int) {
@@ -151,7 +152,7 @@ class VideoCallActivity: AppCompatActivity(), SocketManager.Observer {
         super.onCreate(savedInstanceState)
         binding = ActivityVideoCallBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initialiseSocket()
+        //initialiseSocket()
         try {
             agoraToken = intent?.getStringExtra("agoraToken")!!
             mChannelName = intent?.getStringExtra("channelName")
@@ -159,7 +160,7 @@ class VideoCallActivity: AppCompatActivity(), SocketManager.Observer {
         } catch (e: Exception) {
         }
 
-        activateReceiverListenerSocket()
+
 
         if (checkSelfPermission(
                 Manifest.permission.RECORD_AUDIO,
@@ -473,7 +474,7 @@ class VideoCallActivity: AppCompatActivity(), SocketManager.Observer {
 
     override fun onResume() {
         super.onResume()
-        socketManager.onRegister(this)
+        initialiseSocket()
     }
 
     fun initialiseSocket() {
@@ -483,6 +484,7 @@ class VideoCallActivity: AppCompatActivity(), SocketManager.Observer {
         }
         socketManager.unRegister(this)
         socketManager.onRegister(this)
+        socketManager.declineCallResponse()
     }
 
     override fun onBackPressed() {
@@ -506,7 +508,17 @@ class VideoCallActivity: AppCompatActivity(), SocketManager.Observer {
 
                 }
             }
+            SocketManager.callStatus -> {
+                activityScope.launch {
+                    var data = args as JSONObject
+                    Log.e("callTermination", data.toString())
+                    val intent = Intent(this@VideoCallActivity, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    startActivity(intent)
+                    finish()
 
+                }
+            }
         }
     }
 

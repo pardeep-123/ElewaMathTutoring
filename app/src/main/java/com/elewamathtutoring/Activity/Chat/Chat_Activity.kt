@@ -51,7 +51,7 @@ class Chat_Activity : ImagePickerUtility(), View.OnClickListener, SocketManager.
     var dialog: Dialog? = null
     var Mediaimage = ""
     var Block = ""
-    var type = "1"
+    var type = ""
     var bundle: Bundle? = null
     var messageAdapter: ChatAdapter? = null
     var chatUserImage: String = ""
@@ -96,6 +96,7 @@ class Chat_Activity : ImagePickerUtility(), View.OnClickListener, SocketManager.
         MY_CHAT("t")
         init()
         ivVoiceCall.setOnClickListener {
+            type = "1"
                 try {
                     val userId = getPrefrence(Constants.USER_ID, "")
                     val jsonObject = JSONObject()
@@ -172,6 +173,7 @@ class Chat_Activity : ImagePickerUtility(), View.OnClickListener, SocketManager.
                 onBackPressed()
             }
             R.id.ivVideoCall -> {
+                type = "2"
                 try {
                     val userId = getPrefrence(Constants.USER_ID, "")
                     val jsonObject = JSONObject()
@@ -271,8 +273,11 @@ class Chat_Activity : ImagePickerUtility(), View.OnClickListener, SocketManager.
                     val data = args
                     val gson = GsonBuilder().create()
                     val callResponse = gson.fromJson(data.toString(),IncomingCallModel::class.java)
-
-                    val callscreen = Intent(this@Chat_Activity, VideoCallActivity::class.java)
+                    var callscreen: Intent
+                    if (type == "2")
+                    callscreen = Intent(this@Chat_Activity, VideoCallActivity::class.java)
+                else
+                     callscreen = Intent(this@Chat_Activity, AudioCallActivity::class.java)
 
                     callscreen.putExtra("friendName", callResponse.friendName)
                     callscreen.putExtra("friendId", callResponse.friendId.toString())

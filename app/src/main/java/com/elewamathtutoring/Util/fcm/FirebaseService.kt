@@ -65,12 +65,14 @@ class FirebaseService : FirebaseMessagingService() {
         val intent: Intent?
         if(notificationModel.push_type=="17"){
             //if (appStatus == "online") {
+
                 intent = Intent(this, IncomingCallActivity::class.java)
                 intent.putExtra("friendId", notificationModel.friendId)
-                intent.putExtra("friendName", notificationModel.friendName)
-                intent.putExtra("friendImage", notificationModel.friendImage)
+                intent.putExtra("friendName", notificationModel.userName)
+                intent.putExtra("friendImage", notificationModel.userImage)
                 intent.putExtra("channelName", notificationModel.channelName)
                 intent.putExtra("token", notificationModel.token)
+                intent.putExtra("type", notificationModel.type)
                 makePushForCall(intent)
           //  }
         } else if (notificationModel.push_type=="18"){

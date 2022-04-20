@@ -1,5 +1,6 @@
 package com.elewamathtutoring.Activity.Chat.call
 
+import android.app.NotificationManager
 import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,7 @@ class IncomingCallActivity : AppCompatActivity(), SocketManager.Observer {
     var requestId = ""
     var callerImage = ""
     var receiverId = ""
+    var type = ""
     // private var mAnimator: PortraitAnimator? = null
     private var mPlayer: MediaPlayer? = null
     private var mCounter: CountDownTimer? = null
@@ -54,6 +56,7 @@ token", not
         // requestId = intent.getStringExtra("requestId").toString()
         callerName = intent.getStringExtra("friendName").toString()
         callerImage = intent.getStringExtra("friendImage").toString()
+        type = intent.getStringExtra("type").toString()
         tvUserName.text = callerName
         Glide.with(this).load(Constants.IMAGE_URL+callerImage).into(circleImageView4)
 
@@ -92,39 +95,45 @@ token", not
 //                jsonObject.put("type", VOICE)
 //                jsonObject.put("friendId", receiverId)
 //                socketManager.callStatus(jsonObject)
-
-                val intent = Intent(this@IncomingCallActivity, VideoCallActivity::class.java)
-                // intent.flags = Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
-                intent.putExtra("friendId", receiverId)
-                intent.putExtra("channelName", mChannelName)
-                intent.putExtra("agoraToken", agoraToken)
-                // intentAction.putExtra("requestId", callData.requestId.toString());
-                intent.putExtra("friendName", callerName)
-                intent.putExtra("friendImage", callerImage)
-                startActivity(intent)
-                finish()
-
+           if (type == "2") {
+               val intent = Intent(this@IncomingCallActivity, VideoCallActivity::class.java)
+               // intent.flags = Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+               intent.putExtra("friendId", receiverId)
+               intent.putExtra("channelName", mChannelName)
+               intent.putExtra("agoraToken", agoraToken)
+               // intentAction.putExtra("requestId", callData.requestId.toString());
+               intent.putExtra("friendName", callerName)
+               intent.putExtra("friendImage", callerImage)
+               startActivity(intent)
+               finish()
+           }else{
+               val intent = Intent(this@IncomingCallActivity, AudioCallActivity::class.java)
+               // intent.flags = Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+               intent.putExtra("friendId", receiverId)
+               intent.putExtra("channelName", mChannelName)
+               intent.putExtra("agoraToken", agoraToken)
+               // intentAction.putExtra("requestId", callData.requestId.toString());
+               intent.putExtra("friendName", callerName)
+               intent.putExtra("friendImage", callerImage)
+               startActivity(intent)
+               finish()
+           }
             }
 
         }
         cancel_call_btn.setOnClickListener {
             stopRinging()
-            finish()
-            /* if (AppController.hasNetwork()) {
+             if (App.getinstance().hasNetwork()) {
                  val jsonObject = JSONObject()
-                 jsonObject.put("userType", "1")
-                 jsonObject.put("status", CALL_DECLINE.toString())
+                 jsonObject.put("status", "3")
                  jsonObject.put("channelName", mChannelName)
-                 jsonObject.put("callDuration", "")
-                 jsonObject.put("type", VOICE)
-                 jsonObject.put("friendId", receiverId)
+
                  socketManager.callStatus(jsonObject)
 
                  val notifManager: NotificationManager =
-                     getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                     getSystemService(NOTIFICATION_SERVICE) as NotificationManager
                  notifManager.cancelAll()
-             } else {
-             }*/
+             }
             //   showAlertWithOk(resources.getString(R.string.internet_connection))
         }
     }
@@ -151,6 +160,7 @@ token", not
 
     override fun onResume() {
         super.onResume()
+        socketManager.unRegister(this)
         socketManager.onRegister(this)
     }
 
@@ -306,46 +316,11 @@ token", not
 
         when (event) {
 
-//            call_status_listener -> {
-//                runOnUiThread {
-//
-//                    stopRinging()
-//                    var data = args as JSONObject
-//                    Log.e("callResponse", data.toString())
-//                    val gson = GsonBuilder().create()
-//                    val callData = gson.fromJson(data.toString(), CallConnectResponse::class.java)
-//                    stopService()
-//                    if (callData.status == CALL_DECLINE||callData.status ==CALL_DESCONNECT||callData.status == CALL_MISSCALLED) {
-//                        val intent = Intent(this@IncomingCallActivity, MainActivity::class.java)
-//                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-//                        startActivity(intent)
-//                        finish()
-//                    } else {
-//                        if (callData.type.equals(VOICE.toString())) {
-//                            if (callData.status==CALL_CONNECTED){
-//
-//                                val intent = Intent(this@IncomingCallActivity, VoiceChatViewActivity::class.java)
-//                               // intent.flags = Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
-//                                intent.putExtra("receiverId", receiverId)
-//                                intent.putExtra("channelName", mChannelName)
-//                                intent.putExtra("agoraToken", agoraToken)
-//                                startActivity(intent)
-//                                finish()
-//                            }
-//
-//                        } else {
-////                        val intent = Intent(this@IncomingCallActivity, VideoCallActivity::class.java)
-////                        intent.flags = Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
-////                        intent.putExtra("requestId", requestId.toString())
-////                        intent.putExtra("channelName", mChannelName)
-////                        intent.putExtra("agoraToken", agoraToken)
-////                        startActivity(intent)
-////                        finish()
-//                        }
-//                    }
-//                }
-//
-//            }
+            SocketManager.callStatus -> {
+              runOnUiThread {
+                  finish()
+              }
+            }
 
         }
 
