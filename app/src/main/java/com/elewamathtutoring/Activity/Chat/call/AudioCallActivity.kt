@@ -249,9 +249,10 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
 
     private fun callDisconnect() {
         val jsonObject = JSONObject()
-        jsonObject.put("userId", getPrefrence(Constants.USER_ID, ""))
+        jsonObject.put("channelName", mChannelName)
         jsonObject.put("friendId", receiverId)
-        socketManager!!.endCallSocket(jsonObject)
+        jsonObject.put("status", "3")
+        socketManager!!.callStatus(jsonObject)
 
     }
 
@@ -261,8 +262,8 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
 
     }
 
-    fun activateReceiverListenerSocket() {
-//        socketManager?.call_statusActivate()
+    private fun activateReceiverListenerSocket() {
+        socketManager?.declineCallResponse()
     }
 
     private fun initAgoraEngineAndJoinChannel() {
@@ -492,7 +493,7 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
     override fun onResponse(event: String, args: JSONObject) {
         when (event) {
 
-            SocketManager.END_CALL -> {
+            SocketManager.callStatus -> {
                 activityScope.launch {
                     var data = args as JSONObject
                     Log.e("callTermination", data.toString())
@@ -503,7 +504,17 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
 
                 }
             }
+            SocketManager.acceptReject -> {
+                activityScope.launch {
+                    var data = args as JSONObject
+                    Log.e("callTermination", data.toString())
+                    val intent = Intent(this@AudioCallActivity, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    startActivity(intent)
+                    finish()
 
+                }
+            }
 
 
         }

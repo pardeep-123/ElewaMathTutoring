@@ -122,7 +122,7 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
             }
             R.id.ivFiles -> {
                 setPopUpFiles()
-                llImages.visibility = View.VISIBLE
+
             }
             R.id.btnSubmit -> {
                 apiAddProblems()
@@ -180,6 +180,7 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
         )
             .onResult { result ->
                 mAlbumFiles.addAll(result)
+                llImages.visibility = View.VISIBLE
                 Glide.with(this).load(result[0].path).into(ivAttachment)
                 firstimage = result[0].path
                 type = "1"
@@ -193,6 +194,7 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
         )
             .onResult { result ->
                 mAlbumFiles.addAll(result)
+                llImages.visibility = View.VISIBLE
                 Glide.with(this).load(result[0].path).into(ivAttachment)
                 firstimage = result[0].path
                 type = "2"
@@ -337,6 +339,7 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
                     /**
                      * try to set pdf into imageview
                      */
+                    llImages.visibility = View.VISIBLE
 //                    Glide.with(this).load(R.drawable.ic_pdf).into(ivAttachment)
                     ivAttachment.setImageResource(R.drawable.ic_pdf)
                     firstimage = pdfPath

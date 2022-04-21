@@ -38,8 +38,8 @@ class SocketManager {
         val GET_READDATA_LISTNER = "readMessage"
 
         val CALL_TO_USER = "call_to_user"
-        val END_CALL = "end_call"
         val callStatus = "call_status"
+        val acceptReject = "acceptReject"
 
     }
 
@@ -263,38 +263,7 @@ class SocketManager {
             Log.i("Socket", "Send Message Called")
         }
     }
-    
-    fun endCallSocket(jsonObject: JSONObject?) {
-        if (jsonObject != null) {
-            try {
-                if (!mSocket!!.connected()) {
-                    mSocket!!.connect()
 
-                    mSocket!!.emit(END_CALL, jsonObject, Ack { args ->
-                        val data = args[0] as JSONObject
-                        Log.e("Socket", "onGetFriendChat :::$data")
-                        for (observer in observerList!!) {
-                            observer.onResponse(END_CALL, data)
-                        }
-                    })
-                } else {
-
-                    mSocket!!.emit(END_CALL, jsonObject, Ack { args ->
-                        val data = args[0] as JSONObject
-                        Log.e("Socket", "onGetFriendChat :::$data")
-                        for (observer in observerList!!) {
-                            observer.onResponse(END_CALL, data)
-                        }
-
-                    })
-                }
-            } catch (ex: Exception) {
-              //  ex.localizedMessage
-            }
-
-            Log.i("Socket", "Send Message Called")
-        }
-    }
 
 
     fun callStatus(jsonObject: JSONObject?) {
@@ -348,11 +317,11 @@ class SocketManager {
         try {
             if (!mSocket!!.connected()) {
                 mSocket!!.connect()
-                mSocket!!.off(callStatus)
-                mSocket!!.on(callStatus, ondeclineCallResponse)
+                mSocket!!.off(acceptReject)
+                mSocket!!.on(acceptReject, ondeclineCallResponse)
             } else {
-                mSocket!!.off(callStatus)
-                mSocket!!.on(callStatus, ondeclineCallResponse)
+                mSocket!!.off(acceptReject)
+                mSocket!!.on(acceptReject, ondeclineCallResponse)
 
             }
         } catch (ex: Exception) {
@@ -367,7 +336,7 @@ class SocketManager {
             val data = args[0] as JSONObject
             Log.e("Socket", "onGetFriendChat :::$data")
             for (observer in observerList!!) {
-                observer.onResponse(callStatus, data)
+                observer.onResponse(acceptReject, data)
             }
         } catch (ex: Exception) {
             ex.localizedMessage

@@ -35,24 +35,24 @@ import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONObject
 
-class VideoCallActivity: AppCompatActivity(), SocketManager.Observer {
+class VideoCallActivity : AppCompatActivity(), SocketManager.Observer {
     private lateinit var binding: ActivityVideoCallBinding
 
     var name = ""
     private lateinit var socketManager: SocketManager
     private var mRtcEngine: RtcEngine? = null
     var builder: AlertDialog.Builder? = null
-    var agoraToken=""
+    var agoraToken = ""
     private var isReciever = false
     var requestId = ""
     private var type = ""
     private var groupName = ""
     private val activityScope = CoroutineScope(Dispatchers.Main)
     private var mChannelName: String? = null
-    private var receiverId=""
+    private var receiverId = ""
     private var mPlayer: MediaPlayer? = null
 
-    private var mCounter : CountDownTimer? = null
+    private var mCounter: CountDownTimer? = null
     private val mRtcEventHandler = object : IRtcEngineEventHandler() {
         /**
          * Occurs when a remote user (Communication)/ host (Live Broadcast) joins the channel.
@@ -96,13 +96,14 @@ class VideoCallActivity: AppCompatActivity(), SocketManager.Observer {
          */
         override fun onUserOffline(uid: Int, reason: Int) {
             runOnUiThread {
-                onRemoteUserLeft() }
+                onRemoteUserLeft()
+            }
         }
 
         override fun onFirstRemoteVideoDecoded(uid: Int, width: Int, height: Int, elapsed: Int) {
             runOnUiThread {
                 //                    mLogView.logI("First remote video decoded, uid: " + (uid & 0xFFFFFFFFL));
-                Log.e("callAccepted",uid.toString())
+                Log.e("callAccepted", uid.toString())
                 //  isVideoCallPicked = true
                 if (mCounter != null)
                     mCounter!!.cancel()
@@ -128,12 +129,13 @@ class VideoCallActivity: AppCompatActivity(), SocketManager.Observer {
         mCounter = object : CountDownTimer(45000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
 
-                Log.e("Tag","seconds remaining: " + millisUntilFinished / 1000)
+                Log.e("Tag", "seconds remaining: " + millisUntilFinished / 1000)
 
             }
+
             override fun onFinish() {
                 stopRinging()
-                Log.e("===two","finish")
+                Log.e("===two", "finish")
                 //  finish()
                 // showToast(resources.getString(R.string.no_answer))
             }
@@ -218,7 +220,7 @@ class VideoCallActivity: AppCompatActivity(), SocketManager.Observer {
                     checkSelfPermission(Manifest.permission.CAMERA, PERMISSION_REQ_ID_CAMERA)
                 } else {
                     showLongToast("No permission for " + Manifest.permission.RECORD_AUDIO)
-                    Log.e("===three","finish")
+                    Log.e("===three", "finish")
                     finish()
                 }
             }
@@ -227,7 +229,7 @@ class VideoCallActivity: AppCompatActivity(), SocketManager.Observer {
                     initAgoraEngineAndJoinChannel()
                 } else {
                     showLongToast("No permission for " + Manifest.permission.CAMERA)
-                    Log.e("===four","finish")
+                    Log.e("===four", "finish")
                     finish()
                 }
             }
@@ -241,7 +243,7 @@ class VideoCallActivity: AppCompatActivity(), SocketManager.Observer {
     override fun onDestroy() {
         super.onDestroy()
         val jsonObject = JSONObject()
-        jsonObject.put("status","3")
+        jsonObject.put("status", "3")
 //        socketManager.getCallStatus(jsonObject)
 
         socketManager.unRegister(this)
@@ -263,7 +265,10 @@ class VideoCallActivity: AppCompatActivity(), SocketManager.Observer {
             iv.clearColorFilter()
         } else {
             iv.isSelected = true
-            iv.setColorFilter(resources.getColor(R.color.albumColorPrimary), PorterDuff.Mode.MULTIPLY)
+            iv.setColorFilter(
+                resources.getColor(R.color.albumColorPrimary),
+                PorterDuff.Mode.MULTIPLY
+            )
         }
 
         // Stops/Resumes sending the local video stream.
@@ -289,7 +294,10 @@ class VideoCallActivity: AppCompatActivity(), SocketManager.Observer {
             iv.clearColorFilter()
         } else {
             iv.isSelected = true
-            iv.setColorFilter(resources.getColor(R.color.albumColorPrimary), PorterDuff.Mode.MULTIPLY)
+            iv.setColorFilter(
+                resources.getColor(R.color.albumColorPrimary),
+                PorterDuff.Mode.MULTIPLY
+            )
         }
 
         // Stops/Resumes sending the local audio stream.
@@ -306,11 +314,12 @@ class VideoCallActivity: AppCompatActivity(), SocketManager.Observer {
     fun onEncCallClicked(view: View) {
         if (App.getinstance().hasNetwork()) {
             val jsonObject = JSONObject()
-            jsonObject.put("userId", getPrefrence(Constants.USER_ID, ""))
+            jsonObject.put("channelName", mChannelName)
             jsonObject.put("friendId", receiverId)
-            socketManager!!.endCallSocket(jsonObject)
-            val intent=Intent(this, MainActivity::class.java).also {
-                it.flags= Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            jsonObject.put("status", "3")
+            socketManager.callStatus(jsonObject)
+            val intent = Intent(this, MainActivity::class.java).also {
+                it.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             }
             startActivity(intent)
             finish()
@@ -376,7 +385,7 @@ class VideoCallActivity: AppCompatActivity(), SocketManager.Observer {
         // same channel successfully using the same app id.
         // 2. One token is only valid for the channel name that
         // you use to generate this token.
-        var token= getString(R.string.agora_app_id)
+        var token = getString(R.string.agora_app_id)
         if (agoraToken.isEmpty()) {
             token = ""
         }
@@ -384,13 +393,12 @@ class VideoCallActivity: AppCompatActivity(), SocketManager.Observer {
             startRinging()
             timeCounter()
         }
-        Log.e("channelData",agoraToken)
-        Log.e("channelData",mChannelName!!)
+        Log.e("channelData", agoraToken)
+        Log.e("channelData", mChannelName!!)
         mRtcEngine?.joinChannel(
             agoraToken,
             mChannelName,
-            "Extra Optional Data",
-            0
+            "Extra Optional Data", 0
         )
 
     }
@@ -400,6 +408,7 @@ class VideoCallActivity: AppCompatActivity(), SocketManager.Observer {
         mPlayer = playCalleeRing()
 
     }
+
     private fun playCalleeRing(): MediaPlayer {
         return startRinging(R.raw.basic_tones)
     }
@@ -497,17 +506,6 @@ class VideoCallActivity: AppCompatActivity(), SocketManager.Observer {
 
     override fun onResponse(event: String, args: JSONObject) {
         when (event) {
-            SocketManager.END_CALL -> {
-                activityScope.launch {
-                    var data = args as JSONObject
-                    Log.e("callTermination", data.toString())
-                    val intent = Intent(this@VideoCallActivity, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    startActivity(intent)
-                    finish()
-
-                }
-            }
             SocketManager.callStatus -> {
                 activityScope.launch {
                     var data = args as JSONObject
@@ -519,6 +517,18 @@ class VideoCallActivity: AppCompatActivity(), SocketManager.Observer {
 
                 }
             }
+            SocketManager.acceptReject -> {
+                activityScope.launch {
+                    var data = args as JSONObject
+                    Log.e("callTermination", data.toString())
+                    val intent = Intent(this@VideoCallActivity, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    startActivity(intent)
+                    finish()
+
+                }
+            }
+
         }
     }
 

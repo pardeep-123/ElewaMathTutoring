@@ -67,7 +67,7 @@ class FirebaseService : FirebaseMessagingService() {
             //if (appStatus == "online") {
 
                 intent = Intent(this, IncomingCallActivity::class.java)
-                intent.putExtra("friendId", notificationModel.friendId)
+                intent.putExtra("friendId", notificationModel.userId)
                 intent.putExtra("friendName", notificationModel.userName)
                 intent.putExtra("friendImage", notificationModel.userImage)
                 intent.putExtra("channelName", notificationModel.channelName)
