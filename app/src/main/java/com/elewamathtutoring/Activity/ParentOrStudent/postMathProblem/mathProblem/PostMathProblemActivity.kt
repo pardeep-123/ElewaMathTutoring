@@ -88,8 +88,13 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
         setContentView(R.layout.activity_post_math_problem)
         context = this
 
+        setPopUpFiles()
         ivBack.setOnClickListener(this)
-        ivFiles.setOnClickListener(this)
+        ivFiles.setOnClickListener{
+            myPopupWindow?.showAsDropDown(it, -0, -35)
+//
+
+        }
         btnSubmit.setOnClickListener(this)
     }
 
@@ -120,10 +125,14 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
             R.id.ivBack -> {
                 finish()
             }
-            R.id.ivFiles -> {
-                setPopUpFiles()
-
-            }
+//            R.id.ivFiles -> {
+//
+////                    myPopupWindow?.showAsDropDown(it, -0, -35)
+////                    applyDim(viewGroup, 0.5f)
+////
+////                setPopUpFiles()
+//
+//            }
             R.id.btnSubmit -> {
                 apiAddProblems()
             }
@@ -142,10 +151,7 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
             RelativeLayout.LayoutParams.WRAP_CONTENT,
             true
         )
-        ivFiles.setOnClickListener {
-            myPopupWindow?.showAsDropDown(it, -0, -35)
-            applyDim(viewGroup, 0.5f)
-        }
+//        applyDim(viewGroup, 0.5f)
         view.ivCamera.setOnClickListener {
             selectImage()
             myPopupWindow!!.dismiss()

@@ -84,12 +84,16 @@ class FirebaseService : FirebaseMessagingService() {
             when (notificationModel.push_type) {
                 "1" -> {
                     //  intent = Intent(this,RequestsActivity::class.java)
-                    intent = Intent(this,Chat_Activity::class.java)
-        //                intent.putExtra("id",notificationModel.sessionId)
-                    if (notificationModel.groupId!=null)
-                    intent.putExtra("groupId",notificationModel.groupId)
-                    else
-                        intent.putExtra("receiverId",notificationModel.userId)
+                    intent = Intent(this, Chat_Activity::class.java)
+                    //                intent.putExtra("id",notificationModel.sessionId)
+                    if (notificationModel.groupId != null) {
+                        intent.putExtra("groupId", notificationModel.groupId)
+                        intent.putExtra("chatUserName", notificationModel.userName)
+                    } else {
+                        intent.putExtra("receiverId", notificationModel.userId)
+                        intent.putExtra("chatUserName", notificationModel.userName)
+
+                    }
                 }
                 "2" -> {
                     intent = Intent(this,RequestsActivity::class.java)

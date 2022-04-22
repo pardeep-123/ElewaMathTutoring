@@ -52,10 +52,10 @@ class SchedulePendingAdapter(c: Context, s: ArrayList<RequestListResponse.Body>,
             ctn.startActivity(intent)
         }
         holder.itemView.btnAccept.setOnClickListener {
-            clickCallBack.onItemClick(position, "accept")
+            clickCallBack.onItemClick(list[position].id, "accept")
         }
         holder.itemView.btnReject.setOnClickListener {
-            clickCallBack.onItemClick(position, "reject")
+            clickCallBack.onItemClick(list[position].id, "reject")
         }
     }
 }

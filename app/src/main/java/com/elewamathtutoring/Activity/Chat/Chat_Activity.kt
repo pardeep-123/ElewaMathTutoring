@@ -229,26 +229,7 @@ class Chat_Activity : ImagePickerUtility(), View.OnClickListener, SocketManager.
 
     override fun onResponseArray(event: String, args: JSONArray) {
         when (event) {
-            SocketManager.GET_CHAT_EMITTER ->
-                runOnUiThread {
-                    progresschat.visibility = View.GONE
-                    val objects = args as JSONArray
-                    val gson = GsonBuilder().create()
-                    val chatListData = gson.fromJson(objects.toString(), ChatListModel::class.java)
-                    list.addAll(chatListData)
 
-                    val tsLong = System.currentTimeMillis() / 1000
-                    val ts = tsLong.toString()
-                    //  chat_list_bothside.createdAt = ts
-//                    messageAdapter = ChatAdapter(c, list)
-//                    rv_chat.adapter = messageAdapter
-//                    val li = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-//                    li.setStackFromEnd(true)
-//                    rv_chat.layoutManager = li
-                    messageAdapter!!.notifyDataSetChanged()
-                    scrollToBottom()
-                    Log.e("Socketdfdfd", "GET MASSAGE INSIDE---insider")
-                }
 
         }
     }
@@ -289,6 +270,34 @@ class Chat_Activity : ImagePickerUtility(), View.OnClickListener, SocketManager.
                     //
                 }
             }
+            SocketManager.GET_CHAT_EMITTER ->
+                runOnUiThread {
+                    progresschat.visibility = View.GONE
+                    val objects = args
+                    val gson = GsonBuilder().create()
+                    val chatListData = gson.fromJson(objects.toString(), ChatListModel::class.java)
+                    list.addAll(chatListData.getDataChat!!)
+
+                    val tsLong = System.currentTimeMillis() / 1000
+                    val ts = tsLong.toString()
+                    //  chat_list_bothside.createdAt = ts
+//                    messageAdapter = ChatAdapter(c, list)
+//                    rv_chat.adapter = messageAdapter
+//                    val li = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+//                    li.setStackFromEnd(true)
+//                    rv_chat.layoutManager = li
+                    messageAdapter!!.notifyDataSetChanged()
+                    scrollToBottom()
+
+                    /**
+                     * check is session booked or not
+                     */
+                    if (chatListData.isBooked=="0"){
+                        callLayout.visibility = View.GONE
+                    }else
+                        callLayout.visibility = View.VISIBLE
+                    Log.e("Socketdfdfd", "GET MASSAGE INSIDE---insider")
+                }
         }
 
     }

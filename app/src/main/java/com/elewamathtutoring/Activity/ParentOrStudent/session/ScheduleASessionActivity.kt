@@ -66,8 +66,11 @@ class ScheduleASessionActivity : AppCompatActivity(), View.OnClickListener,
         mCalendarView.setMinimumDate(min)
 
         if(profile.isNotEmpty()){
-            val words2: ArrayList<String> = profile[0].availability.split(",") as ArrayList<String>
-
+            var words2: ArrayList<String> = ArrayList<String>()
+            if (profile[0].availability.contains(","))
+           words2  = profile[0].availability.split(",") as ArrayList<String>
+          else
+             words2.add(profile[0].availability)
             monday = if (words2.contains("1")) 0 else Calendar.MONDAY
             tuesday = if (words2.contains("2")) 0 else Calendar.TUESDAY
             wednesday = if (words2.contains("3")) 0 else Calendar.WEDNESDAY

@@ -332,6 +332,7 @@ class VideoCallActivity : AppCompatActivity(), SocketManager.Observer {
         try {
             mRtcEngine =
                 RtcEngine.create(baseContext, getString(R.string.agora_app_id), mRtcEventHandler)
+
         } catch (e: Exception) {
             Log.e(LOG_TAG, Log.getStackTraceString(e))
 

@@ -486,10 +486,10 @@ class SocketManager {
 
     private val onGetFriendChat = Emitter.Listener { args ->
         try {
-            val data = args[0] as JSONArray
+            val data = args[0] as JSONObject
             Log.e("Socket", "onGetFriendChat :::$data")
             for (observer in observerList!!) {
-                observer.onResponseArray(GET_CHAT_EMITTER, data)
+                observer.onResponse(GET_CHAT_EMITTER, data)
             }
         } catch (ex: Exception) {
             ex.localizedMessage

@@ -45,7 +45,7 @@ class SearchFragment : CheckLocationActivity(), Observer<RestObservable>, Teachi
     lateinit var seekbar: SeekBar
     lateinit var tv_selectlocation: TextView
     lateinit var rv_filterOptions1: RecyclerView
-    private var searchHomeAdapter: SearchHomeAdapter?=null
+    private var searchHomeAdapter: SearchHomeAdapter? = null
     lateinit var v: View
     var latitude = ""
     var longitude = ""
@@ -64,7 +64,7 @@ class SearchFragment : CheckLocationActivity(), Observer<RestObservable>, Teachi
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         v = inflater.inflate(R.layout.fragment_search, container, false)
 
         return v
@@ -186,16 +186,14 @@ class SearchFragment : CheckLocationActivity(), Observer<RestObservable>, Teachi
         when (liveData!!.status) {
             Status.SUCCESS -> {
                 if (liveData.data is MathChatResponse) {
-//                    teacherlevel = ArrayList()
-                    teacherlevel.clear()
-                    teacherlevel.addAll(liveData.data.body)
+                    if (liveData.data.body.isNotEmpty()) {
+                        teacherlevel.clear()
+                        teacherlevel.addAll(liveData.data.body)
 
-//                    tvloc.setText(teacherlevel[0].address)
-                    when_nodatavideo.visibility = View.GONE
-                    searchHomeAdapter = SearchHomeAdapter(requireContext(), teacherlevel)
-                    recycler_Homesearch.adapter = searchHomeAdapter
-                } else {
-
+                        when_nodatavideo.visibility = View.GONE
+                        searchHomeAdapter = SearchHomeAdapter(requireContext(), teacherlevel)
+                        recycler_Homesearch.adapter = searchHomeAdapter
+                    }else when_nodatavideo.visibility = View.VISIBLE
                 }
             }
             Status.ERROR -> {
@@ -230,11 +228,6 @@ class SearchFragment : CheckLocationActivity(), Observer<RestObservable>, Teachi
         baseViewModel.getCommonResponse().observe(requireActivity(), this)
     }
 
-    override fun onResume() {
-        super.onResume()
-//        apiTeacherList("2")
-//        viewType = "1"
-    }
 
     private fun filterServices(text: String) {
         //new array list that will hold the filtered data
@@ -255,7 +248,7 @@ class SearchFragment : CheckLocationActivity(), Observer<RestObservable>, Teachi
             when_nodatavideo.visibility = View.VISIBLE
         }
         //calling a method of the adapter class and passing the filtered list
-        if(!teacherlevel.isNotEmpty()){
+        if (!teacherlevel.isNotEmpty()) {
             searchHomeAdapter!!.notifyData(filterServicesList)
         }
 

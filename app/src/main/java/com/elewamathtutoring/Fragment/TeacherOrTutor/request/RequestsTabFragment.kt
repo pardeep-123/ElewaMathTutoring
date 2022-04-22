@@ -145,10 +145,10 @@ class RequestsTabFragment : Fragment(), View.OnClickListener, Observer<RestObser
     override fun onItemClick(pos: Int, value: String) {
         when (value) {
             "accept" -> {
-                apiAccept("1",aboutResponse!!.body[pos].id.toString())
+                apiAccept("1",pos.toString())
             }
             "reject" -> {
-                apiReject(aboutResponse!!.body[pos].id.toString(),"3")
+                apiReject(pos.toString(),"3")
             }
         }
     }

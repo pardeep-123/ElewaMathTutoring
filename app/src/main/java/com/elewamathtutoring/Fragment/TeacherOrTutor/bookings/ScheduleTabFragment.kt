@@ -246,7 +246,7 @@ class ScheduleTabFragment : Fragment(), OnSelectDateListener, Observer<RestObser
                     }
                 }else{
                         v.rootView.rv_calenderViewList.visibility = View.GONE
-                        tv_whennodata.visibility = View.VISIBLE
+                        tv_whennodata.visibility = View.GONE
                     }
                 }
             }

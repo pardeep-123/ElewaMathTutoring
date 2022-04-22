@@ -21,7 +21,7 @@ data class SesionBookResponse(
         val perHour: Int, // 0
         val createdAt: Int, // 1646812209
         val updated: Int, // 1646812208
-        val adminCommision: Int, // 0
+        val adminCommision: String, // 0
         val total: Int, // 0
         val date: String, // 9
         val cardId: String, // 91

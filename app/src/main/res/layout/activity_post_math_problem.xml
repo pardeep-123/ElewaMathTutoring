@@ -75,11 +75,12 @@
 
                 <ImageView
                     android:id="@+id/ivFiles"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
+                    android:layout_width="25dp"
+                    android:layout_height="20dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
+
                     android:src="@drawable/attachement"
                     app:tint="@color/black" />
 
