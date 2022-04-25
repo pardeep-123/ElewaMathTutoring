@@ -22,6 +22,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.elewamathtutoring.Activity.Chat.socket.SocketManager
+import com.elewamathtutoring.Activity.TeacherOrTutor.MainTeacherActivity
 import com.elewamathtutoring.MainActivity
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.App
@@ -222,6 +223,10 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
             initAgoraEngineAndJoinChannel()
         }
 
+//        if (onPause){
+//            gotoHome()
+//            //  callDisconnect()
+//        }
 //        mAnimator = PortraitAnimator(
 //            findViewById(R.id.anim_layer_1),
 //            findViewById(R.id.anim_layer_2),
@@ -243,7 +248,7 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+       super.onBackPressed()
          callDisconnect()
     }
 
@@ -472,6 +477,8 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
             //  callDisconnect()
         }
     }
+
+
     fun gotoHome(){
           callDisconnect()
 
@@ -497,10 +504,18 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
                 activityScope.launch {
                     var data = args as JSONObject
                     Log.e("callTermination", data.toString())
-                    val intent = Intent(this@AudioCallActivity, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    startActivity(intent)
-                    finish()
+
+                    if (getPrefrence("userType", "").equals("1")){
+                        startActivity(Intent(this@AudioCallActivity, MainActivity::class.java))
+                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        startActivity(intent)
+                        finish()
+                    }else{
+                        startActivity(Intent(this@AudioCallActivity, MainTeacherActivity::class.java))
+                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        startActivity(intent)
+                        finish()
+                    }
 
                 }
             }
@@ -508,10 +523,22 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
                 activityScope.launch {
                     var data = args as JSONObject
                     Log.e("callTermination", data.toString())
-                    val intent = Intent(this@AudioCallActivity, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    startActivity(intent)
-                    finish()
+//                    val intent = Intent(this@AudioCallActivity, MainActivity::class.java)
+//                    intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+//                    startActivity(intent)
+//                    finish()
+
+                    if (getPrefrence("userType", "") == "1"){
+                        startActivity(Intent(this@AudioCallActivity, MainActivity::class.java))
+                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        startActivity(intent)
+                        finish()
+                    }else{
+                        startActivity(Intent(this@AudioCallActivity, MainTeacherActivity::class.java))
+                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        startActivity(intent)
+                        finish()
+                    }
 
                 }
             }

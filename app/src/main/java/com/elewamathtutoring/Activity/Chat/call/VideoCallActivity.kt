@@ -18,6 +18,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.elewamathtutoring.Activity.Chat.socket.SocketManager
+import com.elewamathtutoring.Activity.TeacherOrTutor.MainTeacherActivity
 import com.elewamathtutoring.MainActivity
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.App
@@ -499,6 +500,7 @@ class VideoCallActivity : AppCompatActivity(), SocketManager.Observer {
 
     override fun onBackPressed() {
         finish()
+
     }
 
     override fun onResponseArray(event: String, args: JSONArray) {
@@ -511,10 +513,22 @@ class VideoCallActivity : AppCompatActivity(), SocketManager.Observer {
                 activityScope.launch {
                     var data = args as JSONObject
                     Log.e("callTermination", data.toString())
-                    val intent = Intent(this@VideoCallActivity, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    startActivity(intent)
-                    finish()
+//                    val intent = Intent(this@VideoCallActivity, MainActivity::class.java)
+//                    intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+//                    startActivity(intent)
+//                    finish()
+
+                    if (getPrefrence("userType", "").equals("1")){
+                        startActivity(Intent(this@VideoCallActivity, MainActivity::class.java))
+                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        startActivity(intent)
+                        finish()
+                    }else{
+                        startActivity(Intent(this@VideoCallActivity, MainTeacherActivity::class.java))
+                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        startActivity(intent)
+                        finish()
+                    }
 
                 }
             }
@@ -522,10 +536,22 @@ class VideoCallActivity : AppCompatActivity(), SocketManager.Observer {
                 activityScope.launch {
                     var data = args as JSONObject
                     Log.e("callTermination", data.toString())
-                    val intent = Intent(this@VideoCallActivity, MainActivity::class.java)
+/*                    val intent = Intent(this@VideoCallActivity, MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
                     startActivity(intent)
-                    finish()
+                    finish()*/
+
+                    if (getPrefrence("userType", "").equals("1")){
+                        startActivity(Intent(this@VideoCallActivity, MainActivity::class.java))
+                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        startActivity(intent)
+                        finish()
+                    }else{
+                        startActivity(Intent(this@VideoCallActivity, MainTeacherActivity::class.java))
+                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        startActivity(intent)
+                        finish()
+                    }
 
                 }
             }

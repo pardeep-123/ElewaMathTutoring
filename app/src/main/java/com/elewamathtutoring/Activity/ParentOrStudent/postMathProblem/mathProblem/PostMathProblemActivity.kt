@@ -1,11 +1,14 @@
 package com.elewamathtutoring.Activity.ParentOrStudent.postMathProblem.mathProblem
 
 import android.Manifest
+import android.annotation.TargetApi
 import android.app.AlertDialog
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -31,7 +34,6 @@ import com.elewamathtutoring.Adapter.ParentOrStudent.MathProblemAdapter
 import com.elewamathtutoring.BuildConfig
 import com.elewamathtutoring.Models.Modecommon.Commontoall
 import com.elewamathtutoring.R
-import com.elewamathtutoring.Util.CommonMethods.applyDim
 import com.elewamathtutoring.Util.CommonMethods.clearDim
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
@@ -45,6 +47,11 @@ import droidninja.filepicker.FilePickerConst
 import kotlinx.android.synthetic.main.activity_post_math_problem.*
 import kotlinx.android.synthetic.main.dialog_delete_post.*
 import kotlinx.android.synthetic.main.popup_file_attachment.view.*
+import java.io.File
+import java.text.DecimalFormat
+
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
@@ -198,11 +205,79 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
         Album.video(this).singleChoice().camera(true).columnCount(4).widget(
             Widget.newDarkBuilder(this).title(getString(R.string.app_name)).build()
         )
+
             .onResult { result ->
                 mAlbumFiles.addAll(result)
                 llImages.visibility = View.VISIBLE
+                Log.d("video size" ,"video size "+result[0].size.toString())
+//                val filePath: String =
+//                    SiliCompressor.with(this).compressVideo("123", result[0].path)
                 Glide.with(this).load(result[0].path).into(ivAttachment)
+
+//                val myDirectory = File(Environment.getExternalStorageDirectory(), "Pictures")
+//
+//
+//                if (!myDirectory.exists()) {
+//                    myDirectory.mkdirs()
+//               }
+//                val outPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).absolutePath + File.separator + "VID_" + SimpleDateFormat("yyyyMMdd_HHmmss", getLocale()).format(
+//                    Date()
+//                ) + ".mp4"
+//
+//                val progressDialog = ProgressDialog(this)
+//                progressDialog.setCancelable(false)
+//                progressDialog.setMessage("Compressing video...")
+//                progressDialog.show()
+//
+//                VideoCompress.compressVideoLow(result[0].path, outPath, object :
+//                    VideoCompress.CompressListener {
+//                    override fun onStart() {}
+//                    override fun onSuccess() {
+//                        try {
+//                            if (progressDialog != null && progressDialog.isShowing) progressDialog.dismiss()
+//                        } catch (e: java.lang.Exception) {
+//                            // Handle or log or ignore
+//                        }
+//
+//
+////                        val uploadModel = UploadModel()
+////                        uploadModel.setLoginModel(loginModel)
+////                        uploadModel.setFile(file)
+////                        uploadModel.setImagefile(imagePath)
+////                        uploadModel.setType(messageType)
+////
+////                        val video_task = SendImageVideo()
+////                        video_task.execute(uploadModel)
+//                        firstimage = outPath
+//                        Log.e("pathVideo", outPath)
+//                    }
+
+//                    override fun onFail() {
+//                        try {
+//                            if (progressDialog != null && progressDialog.isShowing) progressDialog.dismiss()
+//                        } catch (e: java.lang.Exception) {
+//                            // Handle or log or ignore
+//                        }
+//                    }
+//
+//                    override fun onProgress(percent: Float) {
+//                        Log.e("Compressing", percent.toString())
+//                        try {
+//                            var value= DecimalFormat("#").format(percent.toDouble())
+//                            progressDialog.setMessage("Compressing video..."+ value.toString()+"%")
+//
+//                        }catch (e:java.lang.Exception){
+//
+//                        }
+//
+//                    }
+           //     })
+
                 firstimage = result[0].path
+
+
+
+
                 type = "2"
             }.onCancel {
             }.start()
@@ -338,6 +413,7 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
         if (requestCode == fileRequestCode && resultCode == RESULT_OK) {
             try {
                 if (data != null) {
+
                     val docPaths: java.util.ArrayList<String> = java.util.ArrayList()
                     docPaths.addAll(data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS)!!)
                     val pdfPath = docPaths[0]
@@ -481,6 +557,26 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
                 }
             }
         }
+    }
+
+    private fun getLocale(): Locale? {
+        val config = resources.configuration
+        var sysLocale: Locale? = null
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            sysLocale =  getSystemLocale(config)
+        } else {
+            sysLocale =  getSystemLocaleLegacy(config)
+        }
+        return sysLocale
+    }
+
+    @TargetApi(Build.VERSION_CODES.N)
+    fun getSystemLocale(config: Configuration): Locale? {
+        return config.locales[0]
+    }
+
+    fun getSystemLocaleLegacy(config: Configuration): Locale? {
+        return config.locale
     }
 }
 

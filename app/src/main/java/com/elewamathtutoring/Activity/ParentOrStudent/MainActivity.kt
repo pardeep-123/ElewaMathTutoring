@@ -42,9 +42,9 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             R.id.menu_search -> if (f !is SearchFragment) {
                 Log.d("CLICKED", "HOME")
 
-                if (f !is SearchFragment) {
+             //   if (f !is SearchFragment) {
                     switchFragment(R.id.rframe, SearchFragment())
-                }
+              //  }
             }
             R.id.menu_profile -> if (f !is ProfileFragment) {
                 Log.d("CLICKED", "PROFILE")

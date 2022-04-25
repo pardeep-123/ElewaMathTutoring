@@ -49,17 +49,17 @@
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_noti" />
 
-        <activity
-            android:name=".Util.sinchcalling.SinchIncomingCallActivity"
-            android:excludeFromRecents="true"
-            android:theme="@style/Theme.default.NoActionBar" />
+<!--        <activity-->
+<!--            android:name=".Util.sinchcalling.SinchIncomingCallActivity"-->
+<!--            android:excludeFromRecents="true"-->
+<!--            android:theme="@style/Theme.default.NoActionBar" />-->
 
-        <service
-            android:name=".Util.sinchcalling.SinchService"
-            android:enabled="true"
-            android:exported="true"
-            android:foregroundServiceType="phoneCall"
-            android:stopWithTask="false" />
+<!--        <service-->
+<!--            android:name=".Util.sinchcalling.SinchService"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="true"-->
+<!--            android:foregroundServiceType="phoneCall"-->
+<!--            android:stopWithTask="false" />-->
 
         <activity
             android:name=".Activity.ParentOrStudent.filter.FilterActivity"

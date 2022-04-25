@@ -19,9 +19,9 @@
         android:background="@color/white"
         app:itemBackground="@android:color/white"
         app:itemIconSize="24dp"
+        app:itemIconTint="@color/botom_selector"
         app:itemTextAppearanceActive="@style/BusinessBottomNavigationViewActive"
         app:itemTextAppearanceInactive="@style/BottomNavigationViewInActive"
-        app:itemIconTint="@color/botom_selector"
         app:itemTextColor="@color/botom_selector"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/menu" />
