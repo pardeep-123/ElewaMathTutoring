@@ -8,7 +8,7 @@ plugins {
 
 android {
     compileSdkVersion 31
-    buildToolsVersion "30.0.3"
+    buildToolsVersion '30.0.2'
     buildFeatures {
         viewBinding true
     }
@@ -21,10 +21,10 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        ndk {
-            abiFilters = []
-            abiFilters.addAll(PROP_APP_ABI.split(':').collect{it as String})
-        }
+//        ndk {
+//            abiFilters = []
+//            abiFilters.addAll(PROP_APP_ABI.split(':').collect{it as String})
+//        }
     }
 
     buildTypes {
@@ -45,6 +45,11 @@ android {
         flatDir {
             dirs 'libs'
         }
+    }
+    ndkVersion '21.4.7075529'
+    dependenciesInfo {
+        includeInBundle false
+        includeInApk false
     }
 
 }
@@ -176,12 +181,16 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
 
     // agora dependencies
-    implementation 'io.agora.rtc:full-sdk:3.1.0'
-    implementation 'io.agora.rtm:rtm-sdk:1.2.2'
+//    implementation 'io.agora.rtc:full-sdk:3.1.0'
+//    implementation 'io.agora.rtm:rtm-sdk:1.2.2'
+
+    implementation 'io.agora.uikit:agorauikit:1.0.2'
+    implementation 'commons-codec:commons-codec:1.11'
 
 
 
-    implementation project(path: ':videocompressor')
+
+//    implementation project(path: ':silicompressor')
 }
 
 kapt {

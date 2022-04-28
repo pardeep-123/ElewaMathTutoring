@@ -4,7 +4,6 @@ import android.Manifest
 import android.annotation.TargetApi
 import android.app.AlertDialog
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -35,6 +34,7 @@ import com.elewamathtutoring.BuildConfig
 import com.elewamathtutoring.Models.Modecommon.Commontoall
 import com.elewamathtutoring.R
 import com.elewamathtutoring.Util.CommonMethods.clearDim
+import com.elewamathtutoring.Util.helper.Helper
 import com.elewamathtutoring.api.Status
 import com.elewamathtutoring.network.RestObservable
 import com.elewamathtutoring.viewmodel.BaseViewModel
@@ -47,11 +47,10 @@ import droidninja.filepicker.FilePickerConst
 import kotlinx.android.synthetic.main.activity_post_math_problem.*
 import kotlinx.android.synthetic.main.dialog_delete_post.*
 import kotlinx.android.synthetic.main.popup_file_attachment.view.*
+import org.bouncycastle.asn1.cms.CompressedData
 import java.io.File
-import java.text.DecimalFormat
-
+import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
@@ -60,7 +59,6 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
     var myPopupWindow: PopupWindow? = null
     lateinit var context: Context
     lateinit var mathProblemAdapter: MathProblemAdapter
-
     lateinit var dialog: Dialog
     val baseViewModel: BaseViewModel by lazy { ViewModelProvider(this).get(BaseViewModel::class.java) }
     private var mAlbumFiles: java.util.ArrayList<AlbumFile> = java.util.ArrayList()
@@ -220,9 +218,7 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
 //                if (!myDirectory.exists()) {
 //                    myDirectory.mkdirs()
 //               }
-//                val outPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).absolutePath + File.separator + "VID_" + SimpleDateFormat("yyyyMMdd_HHmmss", getLocale()).format(
-//                    Date()
-//                ) + ".mp4"
+
 //
 //                val progressDialog = ProgressDialog(this)
 //                progressDialog.setCancelable(false)
@@ -272,15 +268,16 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
 //
 //                    }
            //     })
-
+//            val test=    CompressedData.getInstance(result[0].path)
+//                firstimage = test.toString()
                 firstimage = result[0].path
-
-
 
 
                 type = "2"
             }.onCancel {
             }.start()
+
+
     }
 
     private fun apiListProblems() {
@@ -306,7 +303,8 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
                     list.addAll(liveData.data.body)
                     mathProblemAdapter.notifyDataSetChanged()
                     //  rvMathProblem.adapter = MathProblemAdapter(this, this, list)
-                } else if (liveData.data is Commontoall) {
+                }
+                else if (liveData.data is Commontoall) {
                     //finish()
                     list.removeAt(pos)
                     mathProblemAdapter.notifyDataSetChanged()
@@ -318,7 +316,10 @@ class PostMathProblemActivity : AppCompatActivity(), View.OnClickListener,
             }
             Status.ERROR -> {
                 if (liveData.error is TeacherProblemResponse) {
-
+                    Helper.showSuccessToast(this, liveData.error.message)
+                }
+                else if(liveData.error is AddPostResponse){
+                    Helper.showSuccessToast(this, liveData.error.message)
                 }
             }
         }

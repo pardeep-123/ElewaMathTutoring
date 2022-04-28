@@ -248,7 +248,7 @@ class SearchFragment : CheckLocationActivity(), Observer<RestObservable>, Teachi
             when_nodatavideo.visibility = View.VISIBLE
         }
         //calling a method of the adapter class and passing the filtered list
-        if (!teacherlevel.isNotEmpty()) {
+        if (teacherlevel.isNotEmpty()) {
             searchHomeAdapter!!.notifyData(filterServicesList)
         }
 
