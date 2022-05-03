@@ -104,6 +104,7 @@ token", not
                     // intentAction.putExtra("requestId", callData.requestId.toString());
                     intent.putExtra("friendName", callerName)
                     intent.putExtra("friendImage", callerImage)
+                    intent.putExtra("from_incoming", "YES")
                     startActivity(intent)
                     finish()
                 } else {

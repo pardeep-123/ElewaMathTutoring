@@ -15,10 +15,12 @@
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_edit_math_problem.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.18205128205128204" />
+        <entry key="app/src/main/res/layout/activity_incoming_call.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/activity_intro_slider.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_login_guest.xml" value="0.17037037037037037" />
         <entry key="app/src/main/res/layout/activity_login_screen.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1421875" />
+        <entry key="app/src/main/res/layout/activity_main_teacher.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/activity_math_chat.xml" value="0.1712962962962963" />
         <entry key="app/src/main/res/layout/activity_math_person_chat.xml" value="0.16510416666666666" />
         <entry key="app/src/main/res/layout/activity_payment_info.xml" value="0.18489583333333334" />
@@ -34,6 +36,8 @@
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_sign_up_as.xml" value="0.16510416666666666" />
         <entry key="app/src/main/res/layout/activity_teacher_details.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/activity_teaching_info.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/activity_video_call.xml" value="0.15364583333333334" />
         <entry key="app/src/main/res/layout/activity_video_play.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/dialog_booking_thanks.xml" value="0.17962962962962964" />
         <entry key="app/src/main/res/layout/dialog_delete.xml" value="0.18489583333333334" />

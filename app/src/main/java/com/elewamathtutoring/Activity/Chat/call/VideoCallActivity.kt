@@ -47,6 +47,8 @@ class VideoCallActivity : AppCompatActivity(), SocketManager.Observer {
     private var isReciever = false
     var requestId = ""
     private var type = ""
+    private var from_incoming="NO"
+    var TAG="VideoCallCallbacks"
     private var groupName = ""
     private val activityScope = CoroutineScope(Dispatchers.Main)
     private var mChannelName: String? = null
@@ -70,6 +72,7 @@ class VideoCallActivity : AppCompatActivity(), SocketManager.Observer {
 
         override fun onUserJoined(uid: Int, elapsed: Int) {
             setupRemoteVideo(uid)
+            Log.d(TAG, "onUserJoined: ")
         }
 
         /**
@@ -97,19 +100,21 @@ class VideoCallActivity : AppCompatActivity(), SocketManager.Observer {
          */
         override fun onUserOffline(uid: Int, reason: Int) {
             runOnUiThread {
+                Log.d(TAG, "onUserOffline: ")
                 onRemoteUserLeft()
             }
         }
 
         override fun onFirstRemoteVideoDecoded(uid: Int, width: Int, height: Int, elapsed: Int) {
             runOnUiThread {
+                Log.d(TAG, "onFirstRemoteVideoDecoded: ")
                 //                    mLogView.logI("First remote video decoded, uid: " + (uid & 0xFFFFFFFFL));
                 Log.e("callAccepted", uid.toString())
                 //  isVideoCallPicked = true
                 if (mCounter != null)
                     mCounter!!.cancel()
-                stopRinging()
-                setupRemoteVideo(uid)
+                    stopRinging()
+                    setupRemoteVideo(uid)
             }
         }
 
@@ -122,6 +127,7 @@ class VideoCallActivity : AppCompatActivity(), SocketManager.Observer {
          * false: Resume.
          */
         override fun onUserMuteVideo(uid: Int, muted: Boolean) {
+            Log.d(TAG, "onUserMuteVideo: ")
             runOnUiThread { onRemoteUserVideoMuted(uid, muted) }
         }
     }
@@ -129,13 +135,11 @@ class VideoCallActivity : AppCompatActivity(), SocketManager.Observer {
     private fun timeCounter() {
         mCounter = object : CountDownTimer(45000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-
                 Log.e("Tag", "seconds remaining: " + millisUntilFinished / 1000)
-
             }
-
             override fun onFinish() {
                 stopRinging()
+                endCall()
                 Log.e("===two", "finish")
                 //  finish()
                 // showToast(resources.getString(R.string.no_answer))
@@ -156,10 +160,13 @@ class VideoCallActivity : AppCompatActivity(), SocketManager.Observer {
         binding = ActivityVideoCallBinding.inflate(layoutInflater)
         setContentView(binding.root)
         //initialiseSocket()
+        Log.d("VideoCall",">>>>"+"AgainStartted")
         try {
             agoraToken = intent?.getStringExtra("agoraToken")!!
             mChannelName = intent?.getStringExtra("channelName")
             receiverId = intent?.getStringExtra("friendId")!!
+            from_incoming = intent?.getStringExtra("from_incoming")!!.toString()
+
         } catch (e: Exception) {
         }
 
@@ -313,20 +320,24 @@ class VideoCallActivity : AppCompatActivity(), SocketManager.Observer {
 
     //   (0=>calling,1=> callConnected,2=>call Declined,3=>Call Disconnected,4=>Missed call
     fun onEncCallClicked(view: View) {
+            endCall()
+    }
+
+    private fun endCall(){
+        Log.d("CallCancelled",">>>"+"VideoCall")
         if (App.getinstance().hasNetwork()) {
             val jsonObject = JSONObject()
             jsonObject.put("channelName", mChannelName)
             jsonObject.put("friendId", receiverId)
             jsonObject.put("status", "3")
             socketManager.callStatus(jsonObject)
+
             val intent = Intent(this, MainActivity::class.java).also {
                 it.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             }
             startActivity(intent)
             finish()
-            // finish()
         }
-
     }
 
     private fun initializeAgoraEngine() {
@@ -392,8 +403,10 @@ class VideoCallActivity : AppCompatActivity(), SocketManager.Observer {
             token = ""
         }
         if (!isReciever) {
-            startRinging()
             timeCounter()
+        }
+        if(!from_incoming.equals("YES")){
+            startRinging()
         }
         Log.e("channelData", agoraToken)
         Log.e("channelData", mChannelName!!)
@@ -406,9 +419,7 @@ class VideoCallActivity : AppCompatActivity(), SocketManager.Observer {
     }
 
     private fun startRinging() {
-
         mPlayer = playCalleeRing()
-
     }
 
     private fun playCalleeRing(): MediaPlayer {
@@ -417,7 +428,7 @@ class VideoCallActivity : AppCompatActivity(), SocketManager.Observer {
 
     private fun startRinging(resource: Int): MediaPlayer {
         val player = MediaPlayer.create(this, resource)
-        player.isLooping = false
+        player.isLooping = true
         player.start()
         return player
     }
@@ -454,7 +465,9 @@ class VideoCallActivity : AppCompatActivity(), SocketManager.Observer {
     }
 
     private fun leaveChannel() {
+        Log.d(TAG, "leaveChannel: ")
         mRtcEngine?.leaveChannel()
+        stopRinging()
     }
 
     private fun onRemoteUserLeft() {
@@ -466,9 +479,7 @@ class VideoCallActivity : AppCompatActivity(), SocketManager.Observer {
 
     private fun onRemoteUserVideoMuted(uid: Int, muted: Boolean) {
         val container = findViewById<View>(R.id.remote_video_view_container) as FrameLayout
-
         val surfaceView = container.getChildAt(0) as SurfaceView
-
         val tag = surfaceView.tag
         if (tag != null && tag as Int == uid) {
             surfaceView.visibility = if (muted) View.GONE else View.VISIBLE
@@ -510,29 +521,33 @@ class VideoCallActivity : AppCompatActivity(), SocketManager.Observer {
     override fun onResponse(event: String, args: JSONObject) {
         when (event) {
             SocketManager.callStatus -> {
+                Log.d("VideoCallllllll",">>>>"+SocketManager.callStatus )
                 activityScope.launch {
                     var data = args as JSONObject
-                    Log.e("callTermination", data.toString())
+                    Log.e(TAG, data.toString())
 //                    val intent = Intent(this@VideoCallActivity, MainActivity::class.java)
 //                    intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
 //                    startActivity(intent)
 //                    finish()
 
                     if (getPrefrence("userType", "").equals("1")){
-                        startActivity(Intent(this@VideoCallActivity, MainActivity::class.java))
-                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                        startActivity(intent)
-                        finish()
+                        Log.d(TAG,">>>>"+"IF" )
+                        var intent1=Intent(this@VideoCallActivity, MainActivity::class.java)
+//                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        startActivity(intent1)
+                        finishAffinity()
                     }else{
-                        startActivity(Intent(this@VideoCallActivity, MainTeacherActivity::class.java))
-                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                        startActivity(intent)
-                        finish()
+                        Log.d(TAG,">>>>"+"ELSE"+getPrefrence("userType", "") )
+                        var intent2=Intent(this@VideoCallActivity, MainTeacherActivity::class.java)
+//                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        startActivity(intent2)
+                        finishAffinity()
                     }
 
                 }
             }
             SocketManager.acceptReject -> {
+                Log.d(TAG,">>>>"+ SocketManager.acceptReject )
                 activityScope.launch {
                     var data = args as JSONObject
                     Log.e("callTermination", data.toString())
@@ -542,17 +557,16 @@ class VideoCallActivity : AppCompatActivity(), SocketManager.Observer {
                     finish()*/
 
                     if (getPrefrence("userType", "").equals("1")){
-                        startActivity(Intent(this@VideoCallActivity, MainActivity::class.java))
-                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                        startActivity(intent)
-                        finish()
+                        var intent3=Intent(this@VideoCallActivity, MainActivity::class.java)
+//                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        startActivity(intent3)
+                        finishAffinity()
                     }else{
-                        startActivity(Intent(this@VideoCallActivity, MainTeacherActivity::class.java))
-                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                        startActivity(intent)
-                        finish()
+                       var intent4=Intent(this@VideoCallActivity, MainTeacherActivity::class.java)
+//                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        startActivity(intent4)
+                        finishAffinity()
                     }
-
                 }
             }
 
@@ -562,4 +576,6 @@ class VideoCallActivity : AppCompatActivity(), SocketManager.Observer {
     override fun onError(event: String, vararg args: Array<*>) {
 
     }
+
+
 }

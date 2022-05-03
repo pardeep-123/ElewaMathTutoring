@@ -245,7 +245,6 @@ class Chat_Activity : ImagePickerUtility(), View.OnClickListener, SocketManager.
                     val userToCallList =
                         gson.fromJson(data.toString(), ChatListModel.ChatListItem::class.java)
                     list.add(userToCallList)
-
                     messageAdapter?.notifyDataSetChanged()
                     rv_chat.smoothScrollToPosition(list.size - 1)
                 }
@@ -255,18 +254,26 @@ class Chat_Activity : ImagePickerUtility(), View.OnClickListener, SocketManager.
                     val gson = GsonBuilder().create()
                     val callResponse = gson.fromJson(data.toString(),IncomingCallModel::class.java)
                     var callscreen: Intent
-                    if (type == "2")
-                    callscreen = Intent(this@Chat_Activity, VideoCallActivity::class.java)
-                else
-                     callscreen = Intent(this@Chat_Activity, AudioCallActivity::class.java)
-
-                    callscreen.putExtra("friendName", callResponse.friendName)
-                    callscreen.putExtra("friendId", callResponse.friendId.toString())
-                    callscreen.putExtra("friendImage", callResponse.friendImage)
-                    callscreen.putExtra("agoraToken", callResponse.token)
-                    callscreen.putExtra("channelName", callResponse.channelName)
-                    startActivity(callscreen)
-                    callscreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    if (type == "2"){
+                        callscreen = Intent(this@Chat_Activity, VideoCallActivity::class.java)
+                        callscreen.putExtra("friendName", callResponse.friendName)
+                        callscreen.putExtra("friendId", callResponse.friendId.toString())
+                        callscreen.putExtra("friendImage", callResponse.friendImage)
+                        callscreen.putExtra("agoraToken", callResponse.token)
+                        callscreen.putExtra("channelName", callResponse.channelName)
+                        startActivity(callscreen)
+                        callscreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    }
+                    else{
+                        callscreen = Intent(this@Chat_Activity, AudioCallActivity::class.java)
+                        callscreen.putExtra("friendName", callResponse.friendName)
+                        callscreen.putExtra("friendId", callResponse.friendId.toString())
+                        callscreen.putExtra("friendImage", callResponse.friendImage)
+                        callscreen.putExtra("agoraToken", callResponse.token)
+                        callscreen.putExtra("channelName", callResponse.channelName)
+                        startActivity(callscreen)
+                        callscreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    }
                     //
                 }
             }
@@ -338,4 +345,5 @@ class Chat_Activity : ImagePickerUtility(), View.OnClickListener, SocketManager.
             }
         }
     }
+
 }

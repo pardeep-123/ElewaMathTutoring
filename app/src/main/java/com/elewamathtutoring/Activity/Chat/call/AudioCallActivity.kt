@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.PorterDuff
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -50,6 +51,8 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
     var timer: Timer? = null
     var socketManager: SocketManager? = null
     var timeNew = 0
+    var TAG="AUdioCallStates"
+    private var mPlayer: MediaPlayer? = null
     private val activityScope = CoroutineScope(Dispatchers.Main)
     private val mRtcEventHandler: IRtcEngineEventHandler = object : IRtcEngineEventHandler() {
         /**
@@ -71,12 +74,15 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
          */
         override fun onUserOffline(uid: Int, reason: Int) { // Tutorial Step 4
             runOnUiThread { onRemoteUserLeft(uid, reason) }
+            Log.d(TAG, "onUserOffline: ")
         }
 
         override fun onUserJoined(uid: Int, elapsed: Int) {
             super.onUserJoined(uid, elapsed)
             try {
+                Log.d(TAG, "onUserJoined: ")
                 startTimer()
+                stopRinging()
                 mCounter!!.cancel()
             } catch (e: Exception) {
             }
@@ -86,6 +92,7 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
 
         override fun onJoinChannelSuccess(channel: String?, uid: Int, elapsed: Int) {
             super.onJoinChannelSuccess(channel, uid, elapsed)
+            Log.d(TAG, "onJoinChannelSuccess: ")
             Log.e("CheckJoin","Join channel success")
             Log.e("joinUserId",uid.toString())
 
@@ -93,6 +100,8 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
 
         override fun onLeaveChannel(stats: RtcStats?) {
             super.onLeaveChannel(stats)
+            stopRinging()
+            Log.d(TAG, "onLeaveChannel: ")
             Log.e("leaveChannel",stats.toString())
         }
 
@@ -111,11 +120,13 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
 
         override fun onUserMuteAudio(uid: Int, muted: Boolean) { // Tutorial Step 6
             runOnUiThread { onRemoteUserVoiceMuted(uid, muted) }
+            Log.d(TAG, "onUserMuteAudio: ")
         }
     }
     private var mCounter: CountDownTimer? = null
 
     fun startTimer(){
+        Log.d(TAG, "startTimer: ")
         if (timer != null) {
             timer!!.scheduleAtFixedRate(object : TimerTask() {
                 override fun run() {
@@ -258,7 +269,6 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
         jsonObject.put("friendId", receiverId)
         jsonObject.put("status", "3")
         socketManager!!.callStatus(jsonObject)
-
     }
 
     override fun onStart() {
@@ -369,7 +379,8 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
 
     // Tutorial Step 3
     fun onEncCallClicked(view: View?) {
-           callDisconnect()
+        Log.d("CallCancelled",">>>"+"AudioCall")
+        callDisconnect()
         gotoHome()
     }
 
@@ -390,6 +401,7 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
 
     // Tutorial Step 2
     private fun joinChannel() {
+        Log.d(TAG, "joinChannel: ")
         val intent = intent
 //        mChannel = intent.getStringExtra("channelName")
 //        receiverId = intent.getStringExtra("receiverId").toString()
@@ -413,18 +425,20 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
         ) {
             accessToken = ""
         }
+
+//        mRtcEngine!!.enableAudioVolumeIndication(1000, 3, true)
         mRtcEngine!!.setChannelProfile(io.agora.rtc.Constants.CHANNEL_PROFILE_COMMUNICATION)
         mRtcEngine!!.joinChannel(accessToken, mChannelName, "",  0)
         Log.d("agora",mChannelName.toString() + token)
-
-
-
+        startRinging()
+        timeCounter()
     }
 
 
     // Tutorial Step 3
     private fun leaveChannel() {
         try {
+            Log.d(TAG, "leaveChannel: ")
             mRtcEngine!!.leaveChannel()
 
         } catch (e: Exception) {
@@ -436,6 +450,7 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
     private fun onRemoteUserLeft(uid: Int, reason: Int) {
         //   showLongToast(String.format(Locale.US, "user %d left %d", (uid & 0xFFFFFFFFL), reason));
         Log.e("leftUserId",uid.toString())
+        Log.d(TAG, "onRemoteUserLeft: ")
         try {
             mCounter!!.cancel()
         } catch (e: Exception) {
@@ -481,7 +496,6 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
 
     fun gotoHome(){
           callDisconnect()
-
     }
 
     var onPause=false
@@ -506,15 +520,19 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
                     Log.e("callTermination", data.toString())
 
                     if (getPrefrence("userType", "").equals("1")){
-                        startActivity(Intent(this@AudioCallActivity, MainActivity::class.java))
-                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        Log.d(TAG, "onResponse: "+"IF+callStatus")
+                        stopRinging()
+                        var intent=Intent(this@AudioCallActivity, MainActivity::class.java)
+//                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
                         startActivity(intent)
-                        finish()
+                        finishAffinity()
                     }else{
-                        startActivity(Intent(this@AudioCallActivity, MainTeacherActivity::class.java))
-                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        Log.d(TAG, "onResponse: "+"ELSE+callStatus")
+                        stopRinging()
+                        var intent=Intent(this@AudioCallActivity, MainTeacherActivity::class.java)
+//                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
                         startActivity(intent)
-                        finish()
+                        finishAffinity()
                     }
 
                 }
@@ -529,15 +547,17 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
 //                    finish()
 
                     if (getPrefrence("userType", "") == "1"){
-                        startActivity(Intent(this@AudioCallActivity, MainActivity::class.java))
-                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                        startActivity(intent)
-                        finish()
+                        Log.d(TAG, "onResponse: "+"IF+acceptReject")
+                        var intent=Intent(this@AudioCallActivity, MainActivity::class.java)
+//                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                         startActivity(intent)
+                         finishAffinity()
                     }else{
-                        startActivity(Intent(this@AudioCallActivity, MainTeacherActivity::class.java))
-                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        Log.d(TAG, "onResponse: "+"ELSE+acceptReject")
+                        var intent=Intent(this@AudioCallActivity, MainTeacherActivity::class.java)
+//                        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
                         startActivity(intent)
-                        finish()
+                        finishAffinity()
                     }
 
                 }
@@ -552,8 +572,48 @@ class AudioCallActivity : AppCompatActivity(), SocketManager.Observer {
 
     }
 
+    private fun startRinging() {
+        mPlayer = playCalleeRing()
+    }
+
+    private fun playCalleeRing(): MediaPlayer {
+        return startRinging(R.raw.basic_tones)
+    }
+
+    private fun startRinging(resource: Int): MediaPlayer {
+        val player = MediaPlayer.create(this, resource)
+        player.isLooping = true
+        player.start()
+        return player
+    }
+
+    private fun stopRinging() {
+        if (mPlayer != null && mPlayer!!.isPlaying()) {
+            mPlayer!!.stop()
+            mPlayer!!.release()
+            mPlayer = null
+        }
+    }
+
+    private fun timeCounter() {
+        mCounter = object : CountDownTimer(45000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                Log.e("Tag", "seconds remaining: " + millisUntilFinished / 1000)
+            }
+            override fun onFinish() {
+                stopRinging()
+                callDisconnect()
+                Log.e("===two", "finish")
+                //  finish()
+                // showToast(resources.getString(R.string.no_answer))
+            }
+        }.start()
+    }
+
     companion object {
         private val LOG_TAG = AudioCallActivity::class.java.simpleName
         private const val PERMISSION_REQ_ID_RECORD_AUDIO = 22
     }
+
+
 }

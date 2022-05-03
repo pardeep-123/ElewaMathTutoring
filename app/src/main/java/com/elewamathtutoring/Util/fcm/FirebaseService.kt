@@ -65,7 +65,6 @@ class FirebaseService : FirebaseMessagingService() {
         val intent: Intent?
         if(notificationModel.push_type=="17"){
             //if (appStatus == "online") {
-
                 intent = Intent(this, IncomingCallActivity::class.java)
                 intent.putExtra("friendId", notificationModel.userId)
                 intent.putExtra("friendName", notificationModel.userName)
@@ -92,7 +91,6 @@ class FirebaseService : FirebaseMessagingService() {
                     } else {
                         intent.putExtra("receiverId", notificationModel.userId)
                         intent.putExtra("chatUserName", notificationModel.userName)
-
                     }
                 }
                 "2" -> {
@@ -105,7 +103,7 @@ class FirebaseService : FirebaseMessagingService() {
                     intent.putExtra("pushNotificationModel", notificationModel)
                 }
             }
-            makePush(intent)
+                makePush(intent)
         }
       //  if (Constants.User2Id!= notificationModel.id || !Constants.OnMessageScreen)
     }
@@ -138,6 +136,7 @@ class FirebaseService : FirebaseMessagingService() {
         }
         notificationManager.notify(i++, notificationBuilder.build())
     }
+
     private fun makePushForCall(intent: Intent?) {
         val pendingIntent = PendingIntent.getActivity(this, i, intent, PendingIntent.FLAG_ONE_SHOT)
         // callscreen.addFlags(FLAG_ACTIVITY_NEW_TASK);
